@@ -1,0 +1,13 @@
+{
+    "id": "case_study_corvalta_mobile",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Corvalta Mobile** is a regional mobile network operator with 900 employees, a network of retail stores, and about two million consumer subscribers. The company uses Microsoft Entra ID as its identity platform and Microsoft 365 for collaboration.\n\n**Current Environment:**\n- Subscribers manage their plans through the *My Corvalta* web and mobile app, which today runs its own homegrown username/password database.\n- Corvalta collaborates with device manufacturers and an external advertising agency, whose staff have been invited as guest users over several years; nobody has ever checked whether those guests still need access.\n- Employees juggle separate passwords for the billing platform, the network inventory tool, the HR portal, and a dozen SaaS applications."
+        },
+        {
+            "title": "Identity Modernization Goals",
+            "content": "The Corvalta Mobile identity team has published the following goals for the next two quarters:\n- **Subscriber sign-in**: Retire the homegrown credential store for *My Corvalta*. Subscribers should get self-service sign-up and sign-in, with the option to bring social or email accounts, on a platform built for customer-facing apps.\n- **One sign-in for staff**: Employees should authenticate once and then reach their business applications without being prompted for separate credentials for each one.\n- **Clean up guest access**: Establish a recurring, delegated process that recertifies whether each external guest still needs access, and removes access for guests whose sponsors do not respond."
+        }
+    ]
+}

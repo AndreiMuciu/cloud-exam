@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-02-stonemede-least-privilege",
+    "question": "Every member of the Stonemede Civil IT team currently holds full administrator rights on every system at all times. The steering committee mandates a \"just enough, just in time\" approach instead: each administrator should receive only the rights the current task requires, only for as long as the task lasts.\n\nWhich Zero Trust guiding principle does this mandate implement?",
+    "options": [
+        {
+            "text": "Use least privilege access",
+            "correct": true
+        },
+        {
+            "text": "Verify explicitly",
+            "correct": false
+        },
+        {
+            "text": "Assume breach",
+            "correct": false
+        },
+        {
+            "text": "Shared responsibility",
+            "correct": false
+        }
+    ],
+    "explanation": "**Use least privilege access** is the Zero Trust guiding principle that limits user access with **just-in-time and just-enough-access (JIT/JEA)**, risk-based adaptive policies, and data protection. Replacing standing, all-powerful administrator rights with task-scoped, time-limited access is the textbook application of this principle: it shrinks what any single compromised or misused account can do.\n\n**Why not the other options:**\n- **Verify explicitly** — This principle is about *how authentication and authorization decisions are made*: always authenticate and authorize based on all available data points such as identity, location, and device health. It governs the sign-in decision, not the scope and duration of granted rights.\n- **Assume breach** — This principle drives designs that minimize blast radius when compromise happens — segmentation, end-to-end encryption, and continuous threat detection. Trimming standing admin rights supports resilience, but the specific \"just enough, just in time\" mandate is the definition of least privilege, not of assume breach.\n- **Shared responsibility** — This is a cloud accountability model that divides duties between cloud provider and customer; it is not one of the three Zero Trust guiding principles.",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_stonemede_civil.json"
+}

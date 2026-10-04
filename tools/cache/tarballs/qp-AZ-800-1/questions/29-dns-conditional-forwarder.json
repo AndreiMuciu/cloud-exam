@@ -1,0 +1,24 @@
+{
+    "id": "az800-29-dns-conditional-forwarder",
+    "question": "You want your on-premises DNS server to resolve names for a partner organization's domain (e.g., 'partner.com') by sending all queries for that specific domain to the partner's DNS server (IP: 203.0.113.10). Which DNS feature should you use?",
+    "options": [
+        {
+            "text": "Standard Forwarder",
+            "correct": false
+        },
+        {
+            "text": "Conditional Forwarder",
+            "correct": true
+        },
+        {
+            "text": "Stub Zone",
+            "correct": false
+        },
+        {
+            "text": "Root Hint",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Conditional Forwarder** allows you to specify a particular domain and the target DNS servers to which queries for that domain should be sent. This is more efficient than a broad 'Standard Forwarder' when dealing with specific cross-org resolution.\n\n**Why not the other options:**\n- **Standard Forwarder** — Sends *all* unknown queries (not just for one domain) to another server.\n- **Stub Zone** — Contains only the NS, SOA, and A records of the authoritative servers for a zone. While it can also help with resolution, it is more complex to maintain than a simple conditional forwarder for this scenario.\n- **Root Hint** — Used for resolving names on the public internet when no forwarder matches.",
+    "category": "Implement and manage on-premises and hybrid networking"
+}

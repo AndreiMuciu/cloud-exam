@@ -1,0 +1,24 @@
+{
+    "id": "ai103-29-image-inpainting-mask-edit",
+    "question": "A design tool needs to let a user select a specific region of an existing generated image (for example, just the background) and replace only that region based on a new text description, leaving the rest of the image unchanged.\n\nWhich capability should the tool use?",
+    "options": [
+        {
+            "text": "An inpainting/mask-based editing capability, where the user-selected region is supplied as a mask alongside a new prompt describing the replacement content.",
+            "correct": true
+        },
+        {
+            "text": "Regenerate the entire image from scratch using a new prompt that describes both the parts to keep and the parts to change.",
+            "correct": false
+        },
+        {
+            "text": "Crop the image to remove the selected region entirely, leaving a smaller image with no replacement content.",
+            "correct": false
+        },
+        {
+            "text": "Apply a uniform blur filter over the entire image so the selected region is less noticeable.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Inpainting with a mask** is designed exactly for this: the mask marks which pixels are editable, and the model regenerates only that masked region according to the new prompt, while pixels outside the mask are preserved unchanged.\n\n**Why not the other options:**\n- **Full regeneration from a new prompt** — Cannot guarantee the untouched parts of the image remain pixel-identical to the original; describing \"the parts to keep\" in text is not the same as actually preserving them.\n- **Cropping out the region** — Removes the region entirely rather than replacing it with new content, and changes the image's dimensions/composition, which isn't what was asked.\n- **A uniform blur filter** — A basic image filter, not a generative edit; it doesn't replace the region with new, prompt-driven content at all.",
+    "category": "Implement computer vision solutions"
+}

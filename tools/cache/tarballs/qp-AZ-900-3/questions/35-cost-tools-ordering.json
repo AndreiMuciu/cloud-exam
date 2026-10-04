@@ -1,0 +1,19 @@
+{
+    "id": "az900-s3-35-cost-tools-ordering",
+    "type": "ordering",
+    "question": "A retail cooperative is planning its move to Azure. Arrange the following cost-management activities in the order they would naturally occur, from **earliest** (before any decision is made) to **latest** (after workloads are running).",
+    "items": [
+        "Set budgets and alerts for the new subscription",
+        "Compare the cost of the current on-premises servers with running them in Azure using the TCO Calculator",
+        "Analyze actual spending in Microsoft Cost Management",
+        "Estimate the monthly price of the planned Azure architecture with the Pricing Calculator"
+    ],
+    "correctOrder": [
+        "Compare the cost of the current on-premises servers with running them in Azure using the TCO Calculator",
+        "Estimate the monthly price of the planned Azure architecture with the Pricing Calculator",
+        "Set budgets and alerts for the new subscription",
+        "Analyze actual spending in Microsoft Cost Management"
+    ],
+    "explanation": "Azure's cost tools map onto the phases of an adoption journey:\n\n1. **TCO Calculator (business case)** — Before deciding to migrate at all, compare the full cost of the existing on-premises environment — hardware, power, cooling, IT labor — against the equivalent workloads in Azure to justify the move.\n2. **Pricing Calculator (design estimate)** — Once a target architecture is planned, interactively add the intended services, sizes, and regions to estimate the expected monthly bill before anything is deployed.\n3. **Budgets and alerts (guardrails)** — As the subscription goes live, set spending budgets with alert thresholds so the team is notified before costs run away.\n4. **Microsoft Cost Management analysis (operations)** — With workloads running, analyze actual spending trends, break costs down by service and tag, and feed what you learn back into rightsizing decisions.",
+    "category": "Describe Azure Management and Governance"
+}

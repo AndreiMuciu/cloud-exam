@@ -1,0 +1,30 @@
+{
+    "id": "sc500-06-quillstone-sql-security",
+    "type": "multi",
+    "question": "You need to meet Quillstone Retail Group's database security requirements for the order database: 180-day activity capture, classification of sensitive columns with alerting on anomalous access, and preventing administrators from seeing payment card numbers during routine troubleshooting. Which three actions should you take? (Choose 3)",
+    "options": [
+        {
+            "text": "Configure Azure SQL auditing to send audit logs to a Log Analytics workspace or storage account with at least 180 days of retention",
+            "correct": true
+        },
+        {
+            "text": "Enable Microsoft Defender for Azure SQL to get data discovery and classification support plus Advanced Threat Protection alerts for anomalies such as SQL injection and unusual access",
+            "correct": true
+        },
+        {
+            "text": "Apply dynamic data masking to the payment card number column",
+            "correct": true
+        },
+        {
+            "text": "Enable transparent data encryption (TDE) with a customer-managed key",
+            "correct": false
+        },
+        {
+            "text": "Configure geo-replication of the database to a secondary region",
+            "correct": false
+        }
+    ],
+    "explanation": "The three requirements map to three controls: **Azure SQL auditing** (with retention configured to 180+ days on the storage/Log Analytics destination) captures database events for forensics; **Microsoft Defender for Azure SQL** provides vulnerability assessment, data discovery & classification integration, and Advanced Threat Protection alerts for anomalous patterns like SQL injection or access from unusual locations; **dynamic data masking** obfuscates the card number column in result sets for non-privileged users during routine work, without changing stored data.\n\n**Why not the other options:**\n- **TDE with customer-managed key** — TDE encrypts data at rest to protect against stolen media; it does not audit activity, detect anomalies, or hide column values from users with query access.\n- **Geo-replication** — This is a business-continuity feature; it addresses availability, not any of the three stated security requirements.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_quillstone_retail.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-bcdr-sql-ltr",
+    "question": "A tax-advisory firm stores client filings in an Azure SQL database. Regulators require that a **monthly** database backup be retained for **10 years** and be restorable on demand. Operational recovery (restoring to a point within the last two weeks) must also remain possible.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Keep point-in-time restore (PITR) retention at 14 days or more, and configure a long-term retention (LTR) policy that keeps monthly backups for 10 years",
+            "correct": true
+        },
+        {
+            "text": "Increase the database's point-in-time restore retention period to 10 years",
+            "correct": false
+        },
+        {
+            "text": "Configure active geo-replication to a secondary region and retain the secondary for 10 years",
+            "correct": false
+        },
+        {
+            "text": "Schedule an Azure Automation runbook that exports a BACPAC to blob storage each month",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure SQL Database has two distinct, complementary backup retention mechanisms, and this scenario needs both:\n\n- **PITR (automated backups)** — continuous backups supporting restore to any point within the configured retention window of **1–35 days**. Keeping it at 14+ days covers the operational two-week requirement\n- **Long-term retention (LTR)** — a policy that copies designated full backups to separate storage on a **weekly / monthly / yearly schedule, retained for up to 10 years**. A monthly LTR rule with a 10-year retention satisfies the regulator exactly, with restores available on demand from the LTR set — fully managed, no scripts\n\n**Why not the other options:**\n- **PITR set to 10 years** — Impossible: PITR retention is capped at **35 days**. The platform's answer to years-scale retention *is* LTR; knowing where PITR ends and LTR begins is the point of this design decision\n- **Active geo-replication** — A geo-secondary is a continuously synchronized **live replica for disaster recovery**, not a backup: it replicates every change, including an accidental deletion or corruption, within seconds. It cannot produce \"the database as it was in March five years ago\" and retaining a running replica for a decade is also enormously more expensive than stored backups\n- **Monthly BACPAC exports** — A BACPAC is a logical export, **not a transactionally consistent backup** unless the database is idle or exported from a copy; the runbook is custom infrastructure to secure, monitor, and maintain for ten years; and every restore is a slow full import. LTR provides the same monthly cadence natively, with real backups and verified restorability",
+    "category": "Design Business Continuity Solutions"
+}

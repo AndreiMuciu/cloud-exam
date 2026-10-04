@@ -1,0 +1,29 @@
+{
+    "id": "ai200-s2-17-multi-aca-registry-identity",
+    "type": "multi",
+    "question": "A container app must pull its images from an Azure Container Registry. The security team forbids the registry admin account and any stored username/password credentials, and requires least privilege.\n\nWhich **two** actions should you take? (Select two.)",
+    "options": [
+        {
+            "text": "Grant the container app's system-assigned managed identity the **AcrPull** role on the registry.",
+            "correct": true
+        },
+        {
+            "text": "Configure the app to authenticate to the registry with that identity, for example `az containerapp registry set --server <registry>.azurecr.io --identity system`.",
+            "correct": true
+        },
+        {
+            "text": "Enable the registry's admin account and store its password as a Container Apps secret referenced by the registry configuration.",
+            "correct": false
+        },
+        {
+            "text": "Run `az aks update --attach-acr <registry>` so the platform is granted pull access to the registry.",
+            "correct": false
+        },
+        {
+            "text": "Grant the container app's managed identity the **AcrPush** role on the registry.",
+            "correct": false
+        }
+    ],
+    "explanation": "Credential-free image pulls need two halves that only work together: an **RBAC grant** and a **registry configuration** that tells the app which identity to use. Assigning **AcrPull** to the app's system-assigned managed identity authorizes exactly the one needed operation (pulling images), and `az containerapp registry set --identity system` makes the platform use that identity — instead of a stored secret — when it pulls the image for each revision.\n\n**Why not the other options:**\n- **Admin account + password secret** — Works mechanically, but it is precisely what the security team forbade: a shared, non-auditable username/password credential that must be stored and rotated.\n- **`az aks update --attach-acr`** — That command wires an **AKS cluster's kubelet identity** to a registry. It does not apply to Azure Container Apps.\n- **AcrPush** — Includes push *and* pull, so the runtime identity could overwrite production images. It violates least privilege; AcrPull is sufficient.",
+    "category": "Develop containerized solutions on Azure"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "ai200-25-servicebus-topic-filters",
+    "question": "Order events are published to a single Azure Service Bus topic. Each message carries an application property `region` with values such as `emea`, `apac`, or `amer`. The EMEA fulfillment service must receive *only* messages where `region` equals `emea`, with filtering done by the messaging service — not in consumer code — and with the lowest per-message evaluation cost.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create a subscription for the fulfillment service with a **correlation filter** on the `region` application property set to `emea`.",
+            "correct": true
+        },
+        {
+            "text": "Create a subscription with the default rule and have the consumer call `complete_message()` immediately on any message whose `region` is not `emea`.",
+            "correct": false
+        },
+        {
+            "text": "Create a separate topic per region and require every publisher to choose the correct topic for each order event.",
+            "correct": false
+        },
+        {
+            "text": "Create a subscription with a **SQL filter** `region LIKE '%e%'` to match EMEA messages.",
+            "correct": false
+        }
+    ],
+    "explanation": "Subscription **rules** filter messages inside Service Bus before delivery. For pure equality matches on system or application properties, a **correlation filter** is the right tool: it is matched by hashing rather than by parsing and evaluating an expression, so it is significantly cheaper than a SQL filter while expressing `region = 'emea'` exactly.\n\n**Why not the other options:**\n- **Consumer-side discard** — Every message for every region is still delivered to (and counted against) the subscription; the consumer burns bandwidth, locks, and compute completing messages it never wanted. The requirement explicitly places filtering in the service.\n- **Topic per region** — Pushes routing logic into every publisher, multiplies topology to manage, and breaks any consumer that needs a cross-region view. Subscriptions with filters exist precisely so publishers can stay routing-agnostic.\n- **SQL filter with `LIKE '%e%'`** — Doubly wrong: SQL filters cost more to evaluate than correlation filters for simple equality, and `'%e%'` also matches `amer` (contains \"e\"), so the EMEA service would receive Americas traffic.",
+    "category": "Connect to and consume Azure services"
+}

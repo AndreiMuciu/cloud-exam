@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-09-rowanford-blob-imagery",
+    "question": "Rowanford Growers must store tens of terabytes of drone field imagery per season. The web portal reads the images directly over HTTPS using URLs, and older seasons' imagery should be kept at a lower storage cost.\n\nWhich Azure service should store the imagery?",
+    "options": [
+        {
+            "text": "Azure Blob Storage",
+            "correct": true
+        },
+        {
+            "text": "Azure Files",
+            "correct": false
+        },
+        {
+            "text": "Azure Table Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Database",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Blob Storage** is Azure's object store for massive amounts of unstructured data such as images. Every blob is addressable by an **HTTPS URL**, which is exactly how the web portal wants to fetch the imagery; capacity scales to petabytes; and **access tiers** (Hot, Cool, Cold, Archive) let Rowanford keep current-season imagery readily available while parking older seasons at a much lower per-gigabyte cost.\n\n**Why not the other options:**\n- **Azure Files** — Designed to replace file servers: shares are mounted by machines over **SMB or NFS**. Nothing here needs a mounted drive — the portal wants simple HTTPS object access — and Files does not offer Blob Storage's tiering for cheap long-term retention.\n- **Azure Table Storage** — A key/value store for huge numbers of *small structured entities* (properties per row), not multi-gigabyte binary image files.\n- **Azure SQL Database** — A relational engine; storing tens of terabytes of binary images in database rows would be expensive and slow, and provides no benefit since the images are never queried by their contents.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_rowanford_growers.json"
+}

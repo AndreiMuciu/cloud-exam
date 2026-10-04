@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-32-copilot-studio-runtime-protection",
+  "type": "single",
+  "question": "Business units build customer-facing conversational agents in Microsoft Copilot Studio. A red-team exercise demonstrated that crafted user messages could manipulate an agent into ignoring its instructions (a prompt-injection attack). Security requires that malicious prompts against these agents are detected **and blocked in near real time while the agents run**, with the resulting alerts appearing in Microsoft Defender XDR for SOC investigation. What should you do?",
+  "options": [
+    {
+      "text": "Enable real-time protection for Copilot Studio agents through the Microsoft Defender integration, so prompts are inspected at runtime, malicious ones are blocked, and alerts surface in the Defender portal",
+      "correct": true
+    },
+    {
+      "text": "Create a Power Platform data loss prevention policy that restricts which connectors Copilot Studio agents may use",
+      "correct": false
+    },
+    {
+      "text": "Route each agent's traffic through the AI Gateway in Azure API Management and apply a token-limit policy to the agents' conversations",
+      "correct": false
+    },
+    {
+      "text": "Apply Microsoft Purview sensitivity labels to the knowledge sources the agents reference so labeled content cannot be exfiltrated by injected prompts",
+      "correct": false
+    }
+  ],
+  "explanation": "This maps to the SC-500 skill \"enable and configure real-time protection for Microsoft Copilot Studio agents.\" The **Microsoft Defender integration for Copilot Studio** inspects the prompts an agent receives *while it is running*: suspected prompt-injection and similar attacks are detected in near real time, the malicious message can be **blocked before the agent acts on it**, and each detection generates an alert in the **Defender portal (Defender XDR)** with the context the SOC needs to investigate. That is runtime protection — a fundamentally different control from design-time governance of what an agent is allowed to connect to.\n\n**Why not the other options:**\n- **Power Platform DLP policy** — a governance control that decides *which connectors* agents and apps may use. It reduces what a hijacked agent could reach, but it performs no inspection of conversation content, blocks no malicious prompt, and raises no Defender XDR alert. It complements, not satisfies, the requirement.\n- **AI Gateway in API Management** — the AI gateway fronts model APIs (such as Foundry model deployments) that *your applications call*; Copilot Studio agents' conversations do not route through your APIM instance, and a token-limit policy addresses quota consumption, not prompt injection.\n- **Sensitivity labels on knowledge sources** — labeling classifies and protects documents, and label-aware services can honor access restrictions, but labels do not detect or block a live prompt-injection attempt against the agent, and they produce no runtime alerting for the SOC.",
+  "category": "Secure compute"
+}

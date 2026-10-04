@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-selwyn-frontdoor",
+    "question": "You need to recommend a global entry point for the passenger-facing web application deployed in Southeast Asia and Australia East. The solution must route users to the closest healthy region, fail over automatically, protect against SQL injection and cross-site scripting, and cache static assets close to passengers.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Traffic Manager with performance routing and a network security group on each regional deployment",
+            "correct": false
+        },
+        {
+            "text": "Azure Front Door with a Web Application Firewall (WAF) policy and caching enabled",
+            "correct": true
+        },
+        {
+            "text": "An Azure Application Gateway WAF v2 instance deployed in Southeast Asia serving both regions",
+            "correct": false
+        },
+        {
+            "text": "A cross-region Azure Load Balancer distributing traffic to regional public load balancers",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Front Door with a WAF policy** is the one service that satisfies all four requirements in a single global layer:\n\n1. **Closest healthy region** — Front Door is a global anycast service; passengers connect to the nearest Microsoft edge location and are routed to the lowest-latency healthy origin\n2. **Automatic failover** — Health probes remove an unhealthy regional origin within seconds and send traffic to the surviving region\n3. **OWASP protection** — A WAF policy on Front Door applies managed rule sets that block SQL injection and XSS at the global edge, before traffic reaches either region\n4. **Static asset caching** — Front Door provides edge caching/CDN capabilities, serving seat maps and images from edge locations near passengers\n\n**Why not the other options:**\n- **Traffic Manager + NSGs** — Traffic Manager is DNS-based: it can direct users to the closest region and fail over (subject to DNS TTL delays), but it never sees HTTP traffic, so it cannot provide WAF inspection or caching. NSGs filter by IP/port/protocol and cannot detect SQL injection or XSS payloads\n- **Single Application Gateway in one region** — Application Gateway WAF v2 is a *regional* service. Hosting it only in Southeast Asia adds an ocean round-trip for Australian passengers, provides no edge caching, and becomes a single point of failure — if Southeast Asia is down, the entry point itself is gone\n- **Cross-region Load Balancer** — Operates at Layer 4 (TCP). It can distribute and fail over traffic globally but performs no TLS termination, no WAF inspection, and no caching",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_selwyn_airways.json"
+}

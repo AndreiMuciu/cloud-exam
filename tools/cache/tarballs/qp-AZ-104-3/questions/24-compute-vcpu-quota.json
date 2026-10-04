@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-compute-vcpu-quota",
+    "type": "single",
+    "question": "A deployment of eight additional **Standard_D8s_v5** virtual machines (64 vCPUs total) to the UK South region fails with an error similar to:\n\n```\nOperation could not be completed as it results in exceeding approved\nstandard Dsv5 Family Cores quota. Additional details - Current Limit: 100,\nCurrent Usage: 72, Additional Required: 64.\n```\n\nThe subscription and resource group are otherwise healthy. What should you do to complete the deployment in UK South?",
+    "options": [
+        { "text": "Request an increase of the Dsv5-family vCPU quota for UK South from the subscription's Quotas page", "correct": true },
+        { "text": "Deploy the VMs into a different resource group in UK South", "correct": false },
+        { "text": "Upgrade the subscription to a higher service tier that includes more cores", "correct": false },
+        { "text": "Enable the capacity reservation feature for the Dsv5 family in UK South", "correct": false }
+    ],
+    "explanation": "The error is a **vCPU quota** failure: quotas are enforced **per subscription, per region, per VM family** (here, the Dsv5 family in UK South), plus a regional total. Current usage (72) plus the request (64) exceeds the limit (100), so ARM rejects the deployment. The fix is to **request a quota increase** — in the portal via **Quotas** (or Subscription > Usage + quotas), selecting the Dsv5 family in UK South and the new limit. Many increases are auto-approved within minutes; larger ones route to a support request. Quota is free — it is a limit, not a purchase.\n\n**Why not the other options:**\n- **Different resource group**: resource groups play no part in quota accounting — the counter is per subscription/region/family, so the deployment fails identically in any resource group in UK South.\n- **Higher subscription tier**: there is no \"tier\" of subscription that comes with more cores; vCPU limits are adjusted per-family via quota requests, not by changing the subscription's offer.\n- **Capacity reservation**: capacity reservations guarantee that *physical capacity* is held for you in a region — they still **consume** quota (you would need the quota increase first) and are aimed at protecting against capacity shortages, not at raising subscription limits.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

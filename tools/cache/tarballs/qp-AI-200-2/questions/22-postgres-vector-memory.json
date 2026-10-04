@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-22-postgres-vector-memory",
+    "question": "Building an HNSW index over 20 million 1536-dimension embeddings on Azure Database for PostgreSQL flexible server has run for many hours. Server metrics show heavy disk I/O and memory pressure while the build progresses far more slowly than expected.\n\nWhich configuration change most directly speeds up the index build?",
+    "options": [
+        {
+            "text": "Raise the `maintenance_work_mem` server parameter (scaling to a memory-optimized compute tier if needed) so the graph under construction fits in memory.",
+            "correct": true
+        },
+        {
+            "text": "Raise the `work_mem` server parameter so each backend gets more memory for the build.",
+            "correct": false
+        },
+        {
+            "text": "Add a read replica and run the `CREATE INDEX` statement against the replica.",
+            "correct": false
+        },
+        {
+            "text": "Increase `max_connections` so the index build can use more parallel connections.",
+            "correct": false
+        }
+    ],
+    "explanation": "HNSW index construction is dramatically faster when the graph being built fits in the memory budget PostgreSQL allots to maintenance operations, which is governed by **`maintenance_work_mem`** (used by `CREATE INDEX`). When the graph exceeds it, the build spills and thrashes against disk — exactly the observed symptom. Raising the parameter (and, for tens of millions of vectors, choosing a memory-optimized SKU that allows a large value) is the documented lever for vector index builds.\n\n**Why not the other options:**\n- **`work_mem`** — Budgets memory for *query execution* steps such as sorts and hash joins. `CREATE INDEX` draws from `maintenance_work_mem`, so raising `work_mem` does not help the build.\n- **Read replica** — Replicas are read-only; DDL such as `CREATE INDEX` cannot run there. Indexes are built on the primary and replicated.\n- **`max_connections`** — Controls how many clients may connect. Build parallelism is governed by worker settings such as `max_parallel_maintenance_workers`, not connection count — and the bottleneck here is memory spill, not workers.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

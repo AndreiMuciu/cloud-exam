@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-19-relational-store-choice",
+    "question": "An invoicing application manages customers, orders, and payments — well-defined entities with fixed attributes and relationships between them. Reports must join these entities, the database must enforce integrity rules between them, and multi-row updates must be applied as ACID transactions.\n\nWhich type of data store best fits these requirements?",
+    "options": [
+        {
+            "text": "A relational database",
+            "correct": true
+        },
+        {
+            "text": "An object store for binary files",
+            "correct": false
+        },
+        {
+            "text": "A key/value cache",
+            "correct": false
+        },
+        {
+            "text": "A folder of delimited text files",
+            "correct": false
+        }
+    ],
+    "explanation": "Every stated requirement points at a **relational database**: fixed, well-defined entities map to tables with typed columns; relationships are declared with keys and enforced by the engine (referential integrity); SQL JOINs combine the entities for reporting; and relational engines natively provide ACID transactions spanning multiple rows and tables. When data is tabular, interrelated, and integrity-critical, relational is the natural choice.\n\n**Why not the other options:**\n- **An object store for binary files** — Object stores hold opaque blobs like images and backups; they cannot join entities, enforce relationships, or run multi-row transactions.\n- **A key/value cache** — Key/value stores retrieve one value by its key extremely fast, but they offer no joins, no cross-entity integrity enforcement, and typically no multi-record ACID transactions.\n- **A folder of delimited text files** — Flat files have no engine at all: no enforced types, no constraints, no transactions, and any \"joins\" must be coded by hand.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

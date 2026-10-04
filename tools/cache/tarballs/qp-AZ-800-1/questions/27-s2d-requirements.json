@@ -1,0 +1,24 @@
+{
+    "id": "az800-27-s2d-requirements",
+    "question": "You are planning to deploy Storage Spaces Direct (S2D) on a cluster of four Windows Server 2022 machines. Which of the following is a strict hardware requirement for the drives used in S2D?",
+    "options": [
+        {
+            "text": "Drives must be connected to a hardware RAID controller.",
+            "correct": false
+        },
+        {
+            "text": "Drives must be connected to a non-RAID SAS HBA (Host Bus Adapter) in 'Pass-through' mode.",
+            "correct": true
+        },
+        {
+            "text": "All drives must be NVMe.",
+            "correct": false
+        },
+        {
+            "text": "Drives must be at least 10 TB in size.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Storage Spaces Direct (S2D)** requires direct access to the underlying disks. Therefore, they must be connected via an HBA that does not perform hardware RAID. The S2D software manages the data redundancy itself.\n\n**Why not the other options:**\n- **Hardware RAID** — Strictly forbidden for S2D as it hides the physical disk details from the OS.\n- **NVMe** — While highly recommended for performance, SAS and SATA drives are also supported.\n- **Size** — No strict minimum size of 10 TB exists for the technology to function.",
+    "category": "Manage storage and file services"
+}

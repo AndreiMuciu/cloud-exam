@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-28-storage-account-purpose",
+    "question": "Before a team can create blob containers, file shares, tables, or queues in Azure Storage, they must first create an Azure storage account.\n\nWhat does the storage account provide?",
+    "options": [
+        {
+            "text": "A uniquely named top-level container whose settings — such as redundancy, networking, and access keys — apply to the blob, file, table, and queue services inside it",
+            "correct": true
+        },
+        {
+            "text": "A dedicated physical disk reserved for the team in an Azure datacenter",
+            "correct": false
+        },
+        {
+            "text": "A relational database engine for hosting structured tables with SQL queries",
+            "correct": false
+        },
+        {
+            "text": "A virtual machine that must be sized and patched to serve the stored files",
+            "correct": false
+        }
+    ],
+    "explanation": "An Azure **storage account** is the top-level resource for Azure Storage. Its name is globally unique and forms the base of the service endpoints (for example, `https://<account>.blob.core.windows.net`), and the settings chosen on the account — redundancy option, performance tier, networking rules, and access keys — govern all the data services it contains: blob containers, file shares, tables, and queues.\n\n**Why not the other options:**\n- **A dedicated physical disk** — Storage accounts are a logical abstraction over massively shared, replicated infrastructure; no physical disk is reserved for a customer.\n- **A relational database engine** — Azure Storage holds objects, files, key/attribute entities, and messages. Relational SQL hosting is a separate family of services (such as Azure SQL Database), not something a storage account provides.\n- **A virtual machine to size and patch** — Azure Storage is fully managed and serverless from the customer's perspective; there is no VM to operate, which is a key reason to use it.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

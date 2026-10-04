@@ -1,0 +1,25 @@
+{
+    "id": "sc900-07-bluepeak-nsg",
+    "question": "BluePeak Logistics must filter inbound and outbound traffic to the web-tier and database-tier subnets by source and destination IP address, port, and protocol. The requirement calls for a built-in Azure capability with no additional service cost.\n\nWhich Azure feature should BluePeak use?",
+    "options": [
+        {
+            "text": "Network security groups (NSGs)",
+            "correct": true
+        },
+        {
+            "text": "Azure Firewall",
+            "correct": false
+        },
+        {
+            "text": "Azure DDoS Protection",
+            "correct": false
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": false
+        }
+    ],
+    "explanation": "**Network security groups (NSGs)** contain allow and deny rules that filter traffic by source and destination IP address, port, and protocol. They can be associated with subnets or network interfaces and are included with Azure virtual networking at no extra service charge — matching every stated requirement, including segmenting the web and database tiers.\n\n**Why not the other options:**\n- **Azure Firewall** — A managed, stateful firewall service with advanced features such as threat-intelligence filtering; it is a separately billed service, exceeding the \"no additional service cost\" requirement for simple 5-tuple filtering.\n- **Azure DDoS Protection** — Protects public-facing resources against volumetric denial-of-service attacks; it does not provide rule-based filtering between subnets.\n- **Azure Bastion** — Provides secure RDP/SSH connectivity to virtual machines through the Azure portal; it is not a traffic-filtering mechanism.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_bluepeak_logistics.json"
+}

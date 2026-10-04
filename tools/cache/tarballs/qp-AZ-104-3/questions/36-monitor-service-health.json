@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-monitor-service-health",
+    "type": "single",
+    "question": "Your operations team must be **notified automatically** when Microsoft reports a platform problem — a service issue, planned maintenance, or a health advisory — that affects the **Azure services and regions your subscription actually uses**, so the team can distinguish platform incidents from application bugs.\n\nWhat should you configure?",
+    "options": [
+        { "text": "A Service Health alert scoped to the subscription's services and regions, sent to an action group", "correct": true },
+        { "text": "A Resource Health alert on each production resource", "correct": false },
+        { "text": "A metric alert on the availability metric of each production resource", "correct": false },
+        { "text": "A subscription to the public Azure status page's RSS feed", "correct": false }
+    ],
+    "explanation": "**Azure Service Health** is the personalized view of platform health: it tracks **service issues, planned maintenance, health advisories, and security advisories** that affect the subscriptions, services, and regions *you* use. A **Service Health alert** (an activity log alert on service health events) filtered to your services and regions, wired to an **action group**, notifies the team automatically the moment Microsoft communicates an incident — exactly the platform-versus-application signal the team wants. Planned maintenance notifications are included, which no per-resource mechanism provides ahead of time.\n\n**Why not the other options:**\n- **Resource Health alerts**: Resource Health reports the health of **individual resource instances** (this VM is unavailable). It is valuable, but it does not cover subscription-wide service issues or **planned maintenance announcements**, and configuring per-resource alerts on everything is the noisy, bottom-up version of what Service Health provides top-down.\n- **Availability metric alerts**: a metric alert says a resource stopped responding — it cannot say *why*, and it fires equally for application bugs and platform incidents, which is precisely the ambiguity the team is trying to eliminate. Many services also lack a usable availability metric.\n- **Azure status page RSS**: the public status page shows **broad, global** incidents only; most incidents affecting a single customer's regions or services never appear there. It is not scoped to your subscription and is not an alerting integration with action groups.",
+    "category": "Monitor and Maintain Azure Resources"
+}

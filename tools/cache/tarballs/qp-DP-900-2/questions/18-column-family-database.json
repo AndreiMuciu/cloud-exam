@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-18-column-family-database",
+    "question": "A team is evaluating NoSQL database types. They need the type that stores tabular rows but groups related columns into column families that are physically stored and retrieved together — the model used by Apache Cassandra.\n\nWhich type of NoSQL database is this?",
+    "options": [
+        {
+            "text": "A column-family database",
+            "correct": true
+        },
+        {
+            "text": "A document database",
+            "correct": false
+        },
+        {
+            "text": "A key/value store",
+            "correct": false
+        },
+        {
+            "text": "A graph database",
+            "correct": false
+        }
+    ],
+    "explanation": "A **column-family database** (also called a wide-column store) organizes data into rows and columns like a table, but divides the columns into **column families** — groups of related columns that are stored and retrieved together. Because a query touching one family does not have to read the others, this model efficiently serves sparse, very wide datasets at massive scale. **Apache Cassandra** is the best-known implementation, and Azure Cosmos DB offers a compatible API for it.\n\n**Why not the other options:**\n- **A document database** — Stores each entity as a self-contained, schema-flexible document (typically JSON) and queries fields within documents; it does not organize storage around column families.\n- **A key/value store** — The simplest NoSQL model: an opaque value retrieved by its unique key, with no column structure the database understands.\n- **A graph database** — Models data as **nodes and edges** to answer relationship-traversal queries (for example, friend-of-a-friend); its strength is connections between entities, not wide tabular rows.",
+    "category": "Describe Core Data Concepts"
+}

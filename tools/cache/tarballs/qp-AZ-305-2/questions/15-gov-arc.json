@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-gov-arc",
+    "question": "A company runs 300 Windows and Linux servers on-premises and in another cloud provider. The governance team must apply Azure Policy guest configuration baselines to these servers, view their compliance alongside Azure VMs in a single dashboard, and organize them with Azure RBAC and tags — without migrating the servers.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Onboard the servers to Azure Arc-enabled servers and assign Azure Policy guest configuration definitions at the resource group that contains the Arc machines",
+            "correct": true
+        },
+        {
+            "text": "Install the Azure Monitor Agent on the servers and forward their event logs to a Log Analytics workspace",
+            "correct": false
+        },
+        {
+            "text": "Replicate the servers to Azure with Azure Migrate and manage the replicas with Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Deploy Microsoft Entra Domain Services and join the servers to the managed domain to receive group policies",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Arc-enabled servers** project non-Azure machines into Azure Resource Manager, which is precisely what unlocks Azure-native governance for them:\n\n- Installing the **Connected Machine agent** registers each server as an ARM resource (`Microsoft.HybridCompute/machines`) in a subscription and resource group — so **Azure RBAC and tags** apply to it like any Azure resource\n- **Azure Policy guest configuration** (machine configuration) definitions can then audit or enforce OS-level baselines (password policies, installed software, security settings) on the Arc machines, with compliance results surfacing in the **same Azure Policy compliance dashboard** as Azure VMs\n- The servers stay exactly where they are — no migration\n\n**Why not the other options:**\n- **Azure Monitor Agent + Log Analytics** — Provides log *collection and monitoring*, not governance. AMA alone gives no ARM identity for the machines, so no RBAC, tags, or policy compliance evaluation (in fact, deploying AMA at scale to non-Azure machines itself relies on Arc)\n- **Azure Migrate replicas** — Replicating servers creates Azure copies for *migration*; governing the replicas says nothing about the live on-premises and third-cloud servers, and the requirement explicitly forbids migrating\n- **Entra Domain Services** — Provides a managed AD domain with traditional Group Policy for machines *inside an Azure virtual network*. It does not bring third-cloud or on-premises servers under Azure Policy, RBAC, or tagging, and GPO is not Azure Policy guest configuration",
+    "category": "Design Identity, Governance, and Monitoring"
+}

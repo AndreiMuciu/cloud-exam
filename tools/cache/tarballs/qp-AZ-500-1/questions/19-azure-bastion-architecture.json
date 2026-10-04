@@ -1,0 +1,24 @@
+{
+    "id": "az500-19-azure-bastion-architecture",
+    "question": "Which of the following describes the primary security advantage of using **Azure Bastion** to manage your virtual machines over using typical Jump Servers with Public IPs?",
+    "options": [
+        {
+            "text": "It supports both Windows and Linux VMs",
+            "correct": false
+        },
+        {
+            "text": "It provides RDP and SSH access over SSL (port 443) without exposing public IPs on your VMs",
+            "correct": true
+        },
+        {
+            "text": "It is cheaper than running a small VM",
+            "correct": false
+        },
+        {
+            "text": "It integrates with Azure Backup",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Bastion** is a managed PaaS service that provides secure and seamless RDP/SSH access to your VMs directly through the Azure portal. The key benefit is that your VMs do NOT need public IP addresses, and you don't need to open RDP/SSH ports (3389/22) on your network security groups to the internet.\n\n**Why not the other options:**\n- **VM support** — Jump servers also support both.\n- **Cost** — Bastion can actually be more expensive than a single tiny 'B-series' VM jump server, but its security value is much higher.\n- **Backup** — Not a core differentiator or primary security advantage of the service.",
+    "category": "Secure networking"
+}

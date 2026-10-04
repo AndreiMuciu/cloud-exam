@@ -1,0 +1,14 @@
+{
+    "id": "case_study_brynflux_media",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Brynflux Media** produces short-form advertising creative for retail brands. Its creative team currently hand-designs every image and short video clip used in social ad campaigns, which limits how many campaign variants they can test per week.\n\n**Current Environment:**\n- Brand briefs, product photos, and past campaign assets are stored in an Azure AI Foundry project (`brynflux-creative-foundry`).\n- Editors review every piece of generated creative in a shared review queue before it is scheduled for publication.\n- A small library of finished video ads is stored for reuse and remixing.\n- The legal team has flagged that competitor logos and other brand marks must never appear in published creative."
+
+        },
+        {
+            "title": "Requirements",
+            "content": "**Generation Requirements:**\n- Editors must be able to generate new campaign still images from a text brief plus a reference product photo, so the product itself is preserved in the output.\n- Editors must be able to generate short promotional video clips from a text brief and a reference image.\n- Existing video ads must be re-cut and captioned automatically to fit a new campaign without full regeneration.\n\n**Orchestration Requirements:**\n- A single request such as \"turn this brief into a finished, on-brand video ad\" must be handled by a solution that plans and coordinates the individual generation, captioning, and review steps rather than requiring the editor to invoke each step manually.\n\n**Responsible AI Requirements:**\n- Generated video must be scanned for disallowed content, including embedded competitor logos and other prohibited brand marks, before it reaches the review queue."
+        }
+    ]
+}

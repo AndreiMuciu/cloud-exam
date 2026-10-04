@@ -1,0 +1,24 @@
+{
+    "id": "ai200-20-cosmos-consistency-levels",
+    "question": "A conversational AI backend stores dialog state in Azure Cosmos DB for NoSQL. Within one user's conversation, every read must observe that user's own preceding writes (so the assistant never \"forgets\" the last turn). Across different users, no ordering guarantee is needed. You want the lowest read latency and RU cost that still meets the requirement.\n\nWhich consistency level should you configure?",
+    "options": [
+        {
+            "text": "Session",
+            "correct": true
+        },
+        {
+            "text": "Strong",
+            "correct": false
+        },
+        {
+            "text": "Bounded staleness",
+            "correct": false
+        },
+        {
+            "text": "Eventual",
+            "correct": false
+        }
+    ],
+    "explanation": "**Session consistency** guarantees read-your-own-writes, monotonic reads, and monotonic writes *within a session* (propagated via the session token the SDK manages automatically). That is exactly the per-conversation guarantee needed, and session reads cost half the RUs of strong or bounded-staleness reads while adding no cross-region synchronization latency. It is also the default and the sweet spot for user-centric workloads.\n\n**Why not the other options:**\n- **Strong** — Linearizes all reads and writes globally. It satisfies the requirement but over-delivers: reads cost about twice the RUs and, in multi-region accounts, incur cross-region latency for a guarantee (global ordering across *all* users) that the scenario explicitly does not need.\n- **Bounded staleness** — Allows reads to lag writes by a configured window (K versions or T seconds). Within that window a user could read state that misses their own last turn, violating the requirement — and its reads still cost double RUs.\n- **Eventual** — Provides no ordering guarantee at all; a follow-up read can return older state than a previous read, so the assistant could visibly lose the last turn of the conversation.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az900-34-management-tools",
+    "question": "Which Azure management tool provides a terminal-based, browser-accessible environment that can be used from the Azure portal and includes pre-installed tools like the Azure CLI and Azure PowerShell?",
+    "options": [
+        {
+            "text": "Azure Cloud Shell",
+            "correct": true
+        },
+        {
+            "text": "Azure Resource Manager",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cloud Shell** is an interactive, authenticated, browser-accessible terminal for managing Azure resources. It gives you the flexibility of choosing the shell experience that best suits the way you work, either Bash or PowerShell.\n\n**Why not the other options:**\n- **Azure Resource Manager** — The management layer for deploying and managing resources, not the terminal itself.\n- **Azure Monitor** — For collecting and analyzing telemetry data.\n- **Azure Service Health** — For monitoring the health of Azure services and regions.",
+    "category": "Describe Azure Management and Governance"
+}

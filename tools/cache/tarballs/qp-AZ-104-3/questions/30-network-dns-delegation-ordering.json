@@ -1,0 +1,19 @@
+{
+    "id": "az104-s3-network-dns-delegation-ordering",
+    "type": "ordering",
+    "question": "Your organization owns the domain **orchardlane.com**, currently managed at a third-party registrar. You must host the domain's public DNS in Azure DNS so record management can be automated with Azure tooling.\n\nArrange the steps in the correct order.",
+    "items": [
+        "Create a public DNS zone named orchardlane.com in Azure DNS",
+        "Note the four Azure DNS name servers assigned to the zone",
+        "At the registrar, replace the domain's name server (NS) records with the four Azure DNS name servers",
+        "Verify the delegation by querying the domain's SOA record with a tool such as nslookup"
+    ],
+    "correctOrder": [
+        "Create a public DNS zone named orchardlane.com in Azure DNS",
+        "Note the four Azure DNS name servers assigned to the zone",
+        "At the registrar, replace the domain's name server (NS) records with the four Azure DNS name servers",
+        "Verify the delegation by querying the domain's SOA record with a tool such as nslookup"
+    ],
+    "explanation": "Delegating a domain to Azure DNS follows a strict dependency chain:\n\n1. **Create the public DNS zone** — the zone must exist first, because Azure assigns its authoritative name servers *when the zone is created*. Each zone gets its own set from Azure's name server pools.\n2. **Note the four assigned name servers** — they are displayed on the zone's overview (and in the zone's automatically created NS record set). You cannot know which name servers to delegate to before this point, which is why the registrar step cannot come earlier.\n3. **Update the NS records at the registrar** — the registrar controls the parent zone (`.com`); replacing the domain's NS entries there is the act of delegation that directs the internet's resolvers to Azure DNS. Use all four name servers for resilience, and include the trailing dot if the registrar requires fully qualified names.\n4. **Verify with an SOA query** — after delegation propagates, `nslookup -type=SOA orchardlane.com` should return a response from an `azure-dns` name server, proving the delegation chain works end to end.\n\nRecord sets (A, CNAME, MX, and so on) can be created in the zone at any point after step 1 — but the delegation itself must follow the order above, since each step consumes the previous step's output.",
+    "category": "Implement and Manage Virtual Networking"
+}

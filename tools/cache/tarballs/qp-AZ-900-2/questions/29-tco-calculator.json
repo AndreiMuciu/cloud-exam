@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-29-tco-calculator",
+    "question": "Before approving a migration, a CFO asks for a report comparing the full three-year cost of running the company’s current on-premises servers — including power, cooling, and IT labor — against the cost of running the equivalent workloads in Azure. Which tool is designed to produce this comparison?",
+    "options": [
+        {
+            "text": "The Total Cost of Ownership (TCO) Calculator",
+            "correct": true
+        },
+        {
+            "text": "The Azure Pricing Calculator",
+            "correct": false
+        },
+        {
+            "text": "Azure Cost Management",
+            "correct": false
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        }
+    ],
+    "explanation": "The **TCO Calculator** is built for exactly this pre-migration business case: you describe your on-premises servers, storage, and networking, adjust assumptions such as electricity, virtualization ratios, and **IT labor costs**, and it produces a side-by-side multi-year comparison of on-premises versus Azure costs.\n\n**Why not the other options:**\n- **Azure Pricing Calculator** — Estimates the monthly cost of a *planned Azure configuration*; it does not model existing on-premises costs like power, cooling, or labor, so it cannot produce the comparison.\n- **Azure Cost Management** — Analyzes and controls spending on resources you are *already running* in Azure; it has no on-premises cost model.\n- **Azure Advisor** — Recommends optimizations for deployed Azure resources; it is not a migration business-case tool.",
+    "category": "Describe Azure Management and Governance"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az800-33-proximity-placement-groups",
+    "question": "You are deploying a high-performance application that requires the lowest possible network latency between three virtual machines. Which Azure feature should you use to ensure they are physically located as close as possible to each other in the datacenter?",
+    "options": [
+        {
+            "text": "Availability Sets",
+            "correct": false
+        },
+        {
+            "text": "Availability Zones",
+            "correct": false
+        },
+        {
+            "text": "Proximity Placement Groups",
+            "correct": true
+        },
+        {
+            "text": "Azure Dedicated Hosts",
+            "correct": false
+        }
+    ],
+    "explanation": "**Proximity Placement Groups** (PPGs) are a logical grouping capability used to ensure that Azure compute resources are physically located close to each other. This is critical for applications where low latency is a primary requirement.\n\n**Why not the other options:**\n- **Availability Sets/Zones** — Are designed for *isolation* and high availability (keeping things apart), which is the opposite of proximity (keeping things together).",
+    "category": "Manage virtual machines and containers"
+}

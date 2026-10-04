@@ -1,0 +1,15 @@
+{
+    "id": "az104-s2-storage-files-identity-auth",
+    "type": "multi",
+    "question": "Saltmere Hospitality's storage account **stsaltmerefiles** hosts SMB file shares mounted on front-desk workstations joined to the on-premises AD DS domain, and the account is already configured for identity-based authentication.\n\nAccess must be governed **both** at the share level **and** by NTFS-style permissions on individual folders, using the staff's existing corporate identities.\n\nWhich two actions should you perform? (Choose two. Each correct answer presents part of the solution.)",
+    "options": [
+        { "text": "Assign a share-level Azure RBAC role such as **Storage File Data SMB Share Contributor** to the front-desk staff group, scoped to the file share", "correct": true },
+        { "text": "Mount the share with the storage account key (superuser access) and configure Windows ACLs on the folders by using File Explorer or icacls", "correct": true },
+        { "text": "Distribute the storage account key to the front-desk workstations to use in the daily mount command", "correct": false },
+        { "text": "Generate a service SAS token for each hotel and embed it in the mount command", "correct": false },
+        { "text": "Assign the **Storage Blob Data Contributor** role to the front-desk staff group on the storage account", "correct": false }
+    ],
+    "explanation": "Identity-based SMB access to Azure Files is evaluated in **two layers**, and both must be configured:\n\n1. **Share level** — an Azure RBAC role assignment (Storage File Data SMB Share Reader, Contributor, or Elevated Contributor) on the share grants the staff group permission to access the share at all. This is the coarse gate.\n2. **File/directory level** — Windows (NTFS-style) ACLs on folders and files provide the fine-grained control. An administrator configures these by mounting the share with **storage account key** credentials (which act as superuser, bypassing the RBAC layer) and then using familiar tools such as File Explorer's Security tab or `icacls`.\n\nThe effective permission for a user is the intersection of the two layers, which is exactly the \"share level **and** NTFS-style folder permissions\" governance the scenario requires.\n\n**Why not the other options:**\n- **Distributing the account key to workstations**: This bypasses identity-based authentication entirely — everyone would connect as the same all-powerful key identity, destroying per-user auditing and the layered permission model.\n- **SAS tokens per hotel**: SAS tokens are not used for identity-based SMB mounts; SMB access with Entra/AD DS identities is authenticated with Kerberos, not SAS. SAS is primarily a REST/blob-style authorization mechanism.\n- **Storage Blob Data Contributor**: Blob data roles govern the **Blob service**. They confer no permissions on Azure Files SMB shares — the Files-specific SMB roles must be used.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_saltmere.json"
+}

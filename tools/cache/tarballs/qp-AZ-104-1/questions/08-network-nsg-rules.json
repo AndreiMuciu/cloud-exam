@@ -1,0 +1,25 @@
+{
+    "id": "az104-network-nsg-rules",
+    "question": "Ridgepoint Financial has an Azure VM named **VM-WebFront** that hosts a secure web application. The VM's network interface has an NSG named **NSG-WebFront** with the following custom inbound security rules:\n\n| Priority | Name | Port | Protocol | Source | Action |\n|---|---|---|---|---|---|\n| 100 | Allow-HTTPS | 443 | TCP | Any | Allow |\n| 200 | Allow-RDP-Internal | 3389 | TCP | 10.10.0.0/16 | Allow |\n| 300 | Deny-All-Inbound | * | Any | Any | Deny |\n\nThe subnet containing VM-WebFront has an NSG named **NSG-Subnet** with only the default inbound rules.\n\nA user on the internet attempts to connect to the web application on TCP port 443.\n\nCan the user connect?",
+    "options": [
+        {
+            "text": "No, because NSG-Subnet does not have a rule allowing TCP 443",
+            "correct": true
+        },
+        {
+            "text": "No, because the Deny-All-Inbound rule at priority 300 blocks all traffic",
+            "correct": false
+        },
+        {
+            "text": "Yes, because NSG-WebFront allows TCP 443 from Any source",
+            "correct": false
+        },
+        {
+            "text": "Yes, but only if the user's IP is in the 10.10.0.0/16 range",
+            "correct": false
+        }
+    ],
+    "explanation": "When both a subnet NSG and a NIC NSG are present, traffic must be allowed by **both** NSGs to reach the VM. For inbound traffic, the subnet NSG is evaluated first, followed by the NIC NSG.\n\nEvaluation for internet traffic to port 443:\n\n1. **NSG-Subnet (subnet level):** This NSG has only **default** inbound rules. The three default rules are:\n   - **AllowVNetInBound** (priority 65000): Allows traffic with source and destination of the **VirtualNetwork** service tag. This tag represents VNet address space, peered VNets, and on-premises networks — it does **not** include internet traffic.\n   - **AllowAzureLoadBalancerInBound** (priority 65001): Allows health probe traffic from the Azure Load Balancer only.\n   - **DenyAllInBound** (priority 65500): Denies all other inbound traffic.\n\nInternet traffic to port 443 does not match AllowVNetInBound (the source is the internet, not the VirtualNetwork service tag) or AllowAzureLoadBalancerInBound. Therefore, the default **DenyAllInBound** rule applies and the traffic is blocked at the subnet level. It never reaches the NIC NSG for evaluation.\n\nIf the subnet NSG had a rule allowing port 443, then it would be evaluated at the NIC NSG, where the **Allow-HTTPS** rule would permit it.",
+    "category": "Implement and Manage Virtual Networking",
+    "caseStudy": "scenarios/case_study_ridgepoint.json"
+}

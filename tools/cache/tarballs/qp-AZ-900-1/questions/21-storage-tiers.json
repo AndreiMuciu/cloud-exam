@@ -1,0 +1,24 @@
+{
+    "id": "az900-21-storage-tiers",
+    "question": "A company has regulatory data that must be retained for seven years but is rarely accessed. They want to minimize storage costs and can tolerate access delays of several hours when data retrieval is needed. Which Azure Blob Storage access tier should they use?",
+    "options": [
+        {
+            "text": "Hot",
+            "correct": false
+        },
+        {
+            "text": "Cool",
+            "correct": false
+        },
+        {
+            "text": "Cold",
+            "correct": false
+        },
+        {
+            "text": "Archive",
+            "correct": true
+        }
+    ],
+    "explanation": "The **Archive** tier is the lowest-cost storage tier in Azure Blob Storage, designed for data that is rarely accessed and stored for at least 180 days. It is ideal for long-term retention (like seven-year regulatory holds) where access latency of hours is acceptable.\n\n**Why not the other options:**\n- **Hot** — Optimized for data that is accessed frequently; highest storage cost but lowest access cost.\n- **Cool** — For data that is infrequently accessed and stored for at least 30 days; lower cost than Hot but higher than Archive.\n- **Cold** — For data that is infrequently accessed and stored for at least 90 days; lower cost than Cool but higher than Archive.",
+    "category": "Describe Azure Architecture and Services"
+}

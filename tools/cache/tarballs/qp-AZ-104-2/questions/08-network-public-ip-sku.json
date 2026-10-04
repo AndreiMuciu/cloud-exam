@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-network-public-ip-sku",
+    "type": "single",
+    "question": "Copperbeck Energy needs a public IP address for the SD-WAN concentrator in VNet-Hub (North Europe). The concentrator is business-critical and must remain reachable at the same address **if a single availability zone fails**, per the board's security mandate.\n\nWhich public IP address configuration should you create?",
+    "options": [
+        { "text": "A Standard SKU public IP address with static assignment, configured as zone-redundant", "correct": true },
+        { "text": "A Basic SKU public IP address with dynamic assignment", "correct": false },
+        { "text": "A Standard SKU public IP address pinned to availability zone 1", "correct": false },
+        { "text": "Three Basic SKU public IP addresses, one in each availability zone", "correct": false }
+    ],
+    "explanation": "A **zone-redundant Standard SKU public IP** is advertised from multiple availability zones simultaneously, so it survives the failure of any single zone while keeping the same address — exactly the resilience the concentrator requires. Standard SKU public IPs always use **static** allocation, which also suits firewall rules and SD-WAN peer configuration that reference a fixed address. Zone-redundant IPs can be created in regions with three live availability zones, which North Europe has.\n\n**Why not the other options:**\n- **Basic SKU dynamic**: Basic SKU public IPs were **retired on September 30, 2025** and never supported availability zones at all — they are non-zonal and provide no zone resilience. New designs must use Standard SKU.\n- **Standard SKU pinned to zone 1**: A *zonal* IP shares fate with its zone. If zone 1 fails, the address becomes unreachable — the opposite of the requirement.\n- **Three Basic IPs, one per zone**: Basic SKU IPs cannot be placed in availability zones (and the SKU is retired). Even conceptually, three different addresses do not make a single endpoint zone-redundant — the SD-WAN fabric peers with one address.",
+    "category": "Implement and Manage Virtual Networking",
+    "caseStudy": "scenarios/case_study_copperbeck.json"
+}

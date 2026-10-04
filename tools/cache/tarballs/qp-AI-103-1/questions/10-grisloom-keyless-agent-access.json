@@ -1,0 +1,25 @@
+{
+    "id": "ai103-10-grisloom-keyless-agent-access",
+    "question": "Grisloom Commerce's agents must reach the order-management API and the Foundry project without relying on any secret stored in application settings or source control.\n\nWhat should the team configure?",
+    "options": [
+        {
+            "text": "Assign a system-assigned managed identity to the agents' hosting compute and grant it RBAC roles on the Foundry project and the order-management API's Microsoft Entra ID app registration, removing any client secrets.",
+            "correct": true
+        },
+        {
+            "text": "Store the API key and Foundry connection string in the application's environment variables instead of in source control.",
+            "correct": false
+        },
+        {
+            "text": "Rotate a single shared API key on a monthly schedule and distribute the new value to the team over chat.",
+            "correct": false
+        },
+        {
+            "text": "Use HTTP Basic authentication with a username and password pair stored in an Azure Storage table.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **managed identity with RBAC role assignments** eliminates secrets entirely — Microsoft Entra ID issues short-lived tokens automatically, so nothing resembling a client secret ever needs to exist in application settings, source control, or anywhere else the agents run.\n\n**Why not the other options:**\n- **Environment variables** — Still a stored secret; it is only relocated, not removed, and environment variables are routinely leaked through logs, crash dumps, or misconfigured deployment pipelines.\n- **A shared key rotated monthly and shared over chat** — Still a long-lived secret in the meantime, and distributing it over chat is itself a credential-leakage risk; this is the opposite of a keyless design.\n- **Basic auth against a storage table** — Trades one stored secret (API key) for two stored secrets (username and password) sitting in another data store; it does not remove secret-based authentication at all.",
+    "category": "Plan and manage an Azure AI solution",
+    "caseStudy": "scenarios/case_study_grisloom_commerce.json"
+}

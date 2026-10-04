@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-01-stonemede-iaas-shared-responsibility",
+    "question": "Stonemede Civil Group is moving its project-costing system from its own server room onto Azure virtual machines — an Infrastructure as a Service (IaaS) deployment. The steering committee asks which operational duty transfers to Microsoft, and which stays with Stonemede.\n\nIn the IaaS model, which pairing correctly assigns the responsibilities?",
+    "options": [
+        {
+            "text": "Microsoft maintains the physical hosts, network, and data center; Stonemede patches and hardens the operating systems running inside its virtual machines",
+            "correct": true
+        },
+        {
+            "text": "Microsoft patches the operating systems inside Stonemede's virtual machines; Stonemede maintains the physical hosts",
+            "correct": false
+        },
+        {
+            "text": "Microsoft manages Stonemede's user accounts and directory; Stonemede secures the physical network",
+            "correct": false
+        },
+        {
+            "text": "Microsoft assumes every responsibility, including Stonemede's data and identities, once the workload runs in Azure",
+            "correct": false
+        }
+    ],
+    "explanation": "In the shared responsibility model, **Infrastructure as a Service transfers the least responsibility to the cloud provider** of the three cloud service models. Microsoft takes over what it physically controls — the **physical data center, physical network, and physical hosts** — because Stonemede's virtual machines run on Microsoft's hardware. Everything from the operating system upward stays with Stonemede: **patching and hardening the guest OS**, the applications installed on it, network controls it configures, and — as in every model — its data, accounts, identities, and devices.\n\n**Why not the other options:**\n- **Microsoft patches the OS / Stonemede maintains the hosts** — This inverts the model. Guest operating system maintenance is a *customer* duty in IaaS (it shifts to the provider only in PaaS and SaaS), and the customer never maintains the provider's physical hosts.\n- **Microsoft manages user accounts / Stonemede secures the physical network** — Accounts and identities *always* remain the customer's responsibility in every cloud service model, and the physical network is always the cloud provider's responsibility.\n- **Microsoft assumes every responsibility** — No cloud model transfers everything. Information and data, devices, and accounts and identities are always retained by the customer, regardless of the service model.",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_stonemede_civil.json"
+}

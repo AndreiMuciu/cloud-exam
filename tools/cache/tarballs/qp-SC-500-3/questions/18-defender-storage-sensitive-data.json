@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-18-defender-storage-sensitive-data",
+    "question": "Microsoft Defender for Storage is enabled across your subscriptions. The data protection office now asks for two additions: (1) know **which storage accounts actually contain sensitive data** (such as passport numbers and payment data) so those accounts can be prioritized, and (2) receive **higher-fidelity alerts** when threat activity — like an unusually large download from an unfamiliar location — touches a container that holds sensitive data. What should you do?",
+    "options": [
+        {
+            "text": "Enable the sensitive data threat detection (sensitive data discovery) feature of Defender for Storage, which scans accounts for sensitive information types and enriches threat alerts on resources that hold sensitive data",
+            "correct": true
+        },
+        {
+            "text": "Enable on-upload malware scanning on every storage account, since malware scanning also classifies the sensitivity of scanned blobs",
+            "correct": false
+        },
+        {
+            "text": "Turn on Azure Storage inventory reports and have the SOC review the produced blob lists weekly for sensitive file names",
+            "correct": false
+        },
+        {
+            "text": "Apply Microsoft Purview sensitivity labels manually to each container and configure an alert rule on label creation events",
+            "correct": false
+        }
+    ],
+    "explanation": "**Sensitive data threat detection** is a distinct, toggleable capability of the Defender for Storage plan. It uses an agentless discovery engine that samples and scans storage accounts for **sensitive information types** (built-in SITs and, with Purview integration, custom types and labels), producing posture visibility — which accounts and containers hold sensitive data — that feeds prioritization in Defender for Cloud (including attack paths and the resource's risk level). The same knowledge **enriches threat detection**: when suspicious activity such as anomalous mass download hits a resource known to contain sensitive data, the alert is elevated/enriched accordingly, giving the SOC the higher-fidelity signal requested. It is enabled as part of the Defender for Storage plan settings — no agents and no code changes.\n\n**Why not the other options:**\n- **On-upload malware scanning** — scans blob content for *malware* with Microsoft Defender Antivirus engines; it performs no sensitive-data classification whatsoever. It answers 'is this file malicious,' not 'is this data sensitive.'\n- **Storage inventory reports + weekly review** — inventory lists blobs and metadata; file *names* say nothing reliable about contents, weekly human review does not scale, and nothing enriches real-time alerts.\n- **Manual Purview labels + alert on labeling events** — manual labeling of unknown estates is exactly the problem discovery solves; an alert on label-creation events fires when someone labels a container, not when a threat touches sensitive data.",
+    "category": "Secure storage, databases, and networking"
+}

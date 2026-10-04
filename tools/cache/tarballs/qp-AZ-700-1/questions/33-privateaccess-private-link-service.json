@@ -1,0 +1,24 @@
+{
+    "id": "az700-privateaccess-private-link-service",
+    "question": "A software vendor runs a multi-tenant application behind a Standard Load Balancer in its own VNet and wants to offer secure, private connectivity to that application for customer VNets — including customers in other Azure subscriptions and tenants — without peering any of the customer VNets to the vendor's VNet.\n\nWhat should the vendor create?",
+    "options": [
+        {
+            "text": "A Private Link service, associated with the vendor's Standard Load Balancer, that customers connect to using a private endpoint in their own VNet",
+            "correct": true
+        },
+        {
+            "text": "A VNet peering connection to every customer VNet",
+            "correct": false
+        },
+        {
+            "text": "A service endpoint policy scoped to each customer's subscription",
+            "correct": false
+        },
+        {
+            "text": "A public Azure Front Door profile with IP-based access restrictions per customer",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Private Link service** is created by a service provider on top of their own **Standard Load Balancer**, generating an alias that customers can use to create a **private endpoint** in their own VNet — establishing one-way, private connectivity from the consumer's VNet to the provider's service. This works across subscriptions and tenants and specifically avoids the need for any VNet peering (and the address space, transitivity, and trust implications that peering would bring) between the vendor and each customer.\n\n**Why not the other options:**\n- **VNet peering to every customer** — Would require non-overlapping address spaces and a direct trust relationship with every customer VNet, doesn't scale for a multi-tenant SaaS-style offering, and exposes far more of the VNet than just the intended service.\n- **Service endpoint policy per customer subscription** — Service endpoints and their policies apply to the consuming subnet's outbound access to a small set of first-party/Azure PaaS resource types; they aren't a mechanism for a third party to expose their own custom service to other tenants.\n- **Public Front Door with IP restrictions** — This still exposes the service over a public endpoint (only access-restricted by source IP, which can be spoofed or shared), rather than providing genuinely private, non-internet connectivity the way a Private Link service does.",
+    "category": "Design and Implement Private Access to Azure Services"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az900-14-cloud-elasticity",
+    "question": "A company's web application experiences significant traffic spikes during Black Friday sales but has very low traffic during the rest of the year. Which cloud feature allows the application to automatically add resources during the peak and remove them when they are no longer needed?",
+    "options": [
+        {
+            "text": "Economies of Scale",
+            "correct": false
+        },
+        {
+            "text": "Elasticity",
+            "correct": true
+        },
+        {
+            "text": "Disaster Recovery",
+            "correct": false
+        },
+        {
+            "text": "Predictability",
+            "correct": false
+        }
+    ],
+    "explanation": "**Elasticity** is the ability of cloud resources to automatically scale up or out during high demand and scale back down when demand decreases. This helps ensure performance while optimizing costs.\n\n**Why not the other options:**\n- **Economies of Scale** — The cost advantage cloud providers have by purchasing hardware in massive quantities.\n- **Disaster Recovery** — Restoring services after a major failure.\n- **Predictability** — Knowing how much a system will cost or how it will perform in advance.",
+    "category": "Describe Cloud Concepts"
+}

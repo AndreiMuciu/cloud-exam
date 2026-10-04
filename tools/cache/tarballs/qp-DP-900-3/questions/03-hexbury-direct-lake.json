@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-03-hexbury-direct-lake",
+    "question": "Hexbury Interactive's Power BI reports over the lakehouse's Delta tables must reflect newly landed data quickly, must not rely on scheduled refreshes that copy data into the semantic model, and must keep fast interactive performance.\n\nWhich Power BI semantic model storage mode should the team use?",
+    "options": [
+        {
+            "text": "Direct Lake mode",
+            "correct": true
+        },
+        {
+            "text": "Import mode with an hourly scheduled refresh",
+            "correct": false
+        },
+        {
+            "text": "DirectQuery mode against a relational database",
+            "correct": false
+        },
+        {
+            "text": "A live connection to an Analysis Services server",
+            "correct": false
+        }
+    ],
+    "explanation": "**Direct Lake** is a Fabric-specific semantic model mode in which Power BI loads column data straight from the Delta tables in OneLake into memory on demand. Because the model reads the lakehouse files directly, new data becomes visible shortly after it lands — no scheduled refresh copies the data into the model — while query performance remains close to import mode because the data is still served from memory.\n\n**Why not the other options:**\n- **Import mode with an hourly scheduled refresh** — Import mode copies the data into the semantic model and only reflects new data after each refresh completes, which violates both the no-copy and the freshness requirements.\n- **DirectQuery mode against a relational database** — DirectQuery avoids copying data by translating every visual interaction into source queries, but each interaction pays the round-trip cost, so interactive performance is typically noticeably slower than an in-memory model.\n- **A live connection to an Analysis Services server** — A live connection targets an external Analysis Services model, which is not where the data lives; the team's tables are Delta tables in a Fabric lakehouse.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_hexbury_interactive.json"
+}

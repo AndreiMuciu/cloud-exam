@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-11-quarrymoor-iac",
+    "question": "Quarrymoor’s three plant environments were configured by hand in the Azure portal and have drifted apart, causing \"works in plant A, fails in plant B\" incidents. The company wants the environments to be identical, with infrastructure changes reviewed like application code. Which practice should they adopt?",
+    "options": [
+        {
+            "text": "Define the environments as infrastructure as code (IaC) in declarative template files kept in version control, and deploy every change from those templates",
+            "correct": true
+        },
+        {
+            "text": "Grant more engineers Owner access so portal changes can be made in all three plants at once",
+            "correct": false
+        },
+        {
+            "text": "Document the portal configuration steps in a wiki and require engineers to follow them exactly",
+            "correct": false
+        },
+        {
+            "text": "Apply CanNotDelete locks to every resource in all three environments",
+            "correct": false
+        }
+    ],
+    "explanation": "**Infrastructure as code** (for example, ARM templates or Bicep files) describes the desired end state of an environment declaratively. Because the templates live in **version control**, changes go through pull-request review just like application code, every deployment is repeatable, and redeploying the same template to all three plants eliminates configuration drift.\n\n**Why not the other options:**\n- **More Owner access** — Increases the volume of manual, unreviewed portal changes, which is the root cause of the drift (and violates least-privilege principles).\n- **A wiki of portal steps** — Manual runbooks depend on humans performing every step perfectly every time; drift creeps back in with the first missed step, and there is no automated enforcement.\n- **CanNotDelete locks** — Prevent deletion but do nothing to make three environments identical or to keep their configurations aligned.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_quarrymoor_manufacturing.json"
+}

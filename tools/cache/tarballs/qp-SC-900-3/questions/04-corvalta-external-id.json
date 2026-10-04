@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-04-corvalta-external-id",
+    "question": "Corvalta Mobile wants to retire the homegrown username/password database behind its *My Corvalta* subscriber app. The replacement must be an identity platform designed for consumer-facing applications: subscribers should get branded self-service sign-up and sign-in, and be able to use social or email accounts.\n\nWhich Microsoft Entra capability is designed for this scenario?",
+    "options": [
+        {
+            "text": "Microsoft Entra External ID for customer identity and access management (CIAM)",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra B2B collaboration guest accounts for each subscriber",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Privileged Identity Management (PIM)",
+            "correct": false
+        },
+        {
+            "text": "Creating a standard employee account for every subscriber in the corporate directory",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra External ID** provides **customer identity and access management (CIAM)**: it lets organizations publish consumer- and business-customer-facing apps with **self-service sign-up, branded sign-in experiences, and support for social and email identities**, while keeping customer identities in a tenant separate from the workforce directory. That is exactly the replacement Corvalta needs for its two million subscribers.\n\n**Why not the other options:**\n- **B2B collaboration guest accounts** — B2B collaboration is for *business partners* who need to work on your corporate resources (documents, Teams, apps) as guests in your workforce tenant. It is a partner-collaboration mechanism, not a platform for millions of consumers signing in to a retail-style app.\n- **Privileged Identity Management (PIM)** — PIM governs just-in-time activation of *privileged administrative roles*. It has nothing to do with how customers sign in to an application.\n- **Standard employee accounts for every subscriber** — Filling the workforce directory with two million customer accounts would mix consumers with employees, complicate licensing and governance, and provide none of the self-service sign-up or social identity features a consumer app needs.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_corvalta_mobile.json"
+}

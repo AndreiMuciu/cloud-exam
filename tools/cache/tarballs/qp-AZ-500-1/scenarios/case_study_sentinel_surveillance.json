@@ -1,0 +1,13 @@
+{
+    "id": "case_study_sentinel_surveillance",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Sentinel Surveillance** provides real-time security monitoring for large industrial complexes. They use Microsoft Sentinel to ingest logs from various sources, including Azure resources and on-premises servers. The SOC team operates 24/7 across two shifts."
+        },
+        {
+            "title": "Monitoring Requirements",
+            "content": "- Detect and respond to brute-force attacks on virtual machines in real-time, with geographic visualization of attack sources.\n- Automate the response to common security incidents using Playbooks (e.g., automatically block attacker IPs in NSGs).\n- Ensure that all security logs are retained for a minimum of 365 days for compliance auditing, using the most cost-effective retention strategy."
+        }
+    ]
+}

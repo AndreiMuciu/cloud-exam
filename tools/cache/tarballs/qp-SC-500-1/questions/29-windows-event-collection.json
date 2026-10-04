@@ -1,0 +1,24 @@
+{
+    "id": "sc500-29-windows-event-collection",
+    "question": "You must stream Windows Security events from Azure VMs and Azure Arc-enabled on-premises servers into Microsoft Sentinel. To control ingestion cost, only a specific set of security event IDs may be collected. Which approach should you use?",
+    "options": [
+        {
+            "text": "Use the Windows Security Events via AMA connector and create a data collection rule with a Custom event set that filters to the required event IDs using XPath queries",
+            "correct": true
+        },
+        {
+            "text": "Install the legacy Log Analytics (MMA) agent on all machines and select the Minimal tier in the workspace settings",
+            "correct": false
+        },
+        {
+            "text": "Use the Syslog via AMA connector with a data collection rule scoped to the Security facility",
+            "correct": false
+        },
+        {
+            "text": "Use the Windows Security Events via AMA connector with the All security events set, then delete unneeded records from the workspace nightly",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Windows Security Events via AMA** connector uses the Azure Monitor Agent, which works uniformly for Azure VMs and **Arc-enabled servers**. A **data collection rule (DCR)** defines what is collected; choosing the **Custom** event set lets you supply **XPath queries** so only the required event IDs are sent — filtering happens *at the source*, which is what actually reduces ingestion cost.\n\n**Why not the other options:**\n- **Legacy MMA agent** — The Log Analytics agent is deprecated and retired; new collection designs must use AMA with DCRs, and MMA's fixed tiers offer far less precise filtering than XPath.\n- **Syslog via AMA** — Syslog collects from *Linux* machines; Windows Security events are Windows event log data, and the syslog \"security\" facility is unrelated to Windows event IDs.\n- **Collect all, delete later** — Ingestion charges apply when data enters the workspace, so post-ingestion deletion saves nothing (and selective deletion isn't a practical workspace operation); filtering must occur before ingestion.",
+    "category": "Manage and monitor security posture"
+}

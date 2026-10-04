@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-02-orenfall-key-rotation",
+    "question": "You need to meet Orenfall Energy's key and certificate lifecycle requirements for `kv-orenfall-billing`: automatic 90-day rotation of the customer-managed keys with no application changes, and automated notification 30 days before any certificate expires. What should you configure?",
+    "options": [
+        {
+            "text": "Set a key rotation policy on each key that creates a new key version every 90 days, and create an Event Grid subscription on the vault that routes the CertificateNearExpiry event to a notification workflow",
+            "correct": true
+        },
+        {
+            "text": "Create an Azure Automation runbook that exports each key, generates a replacement offline, and re-imports it every 90 days, and have the runbook also email a certificate inventory monthly",
+            "correct": false
+        },
+        {
+            "text": "Enable soft delete and purge protection on the vault so that keys and certificates are refreshed automatically by the platform",
+            "correct": false
+        },
+        {
+            "text": "Convert the keys to secrets with a 90-day expiration date, because only secrets support expiry metadata and automatic renewal",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Key Vault supports **key auto-rotation**: a rotation policy on a key (for example, \"rotate 90 days after creation\") makes the vault generate a new key version automatically. Services that use customer-managed keys with versionless key URIs pick up the new version without application changes. For certificates, Key Vault emits lifecycle events to **Azure Event Grid** — subscribing to `Microsoft.KeyVault.CertificateNearExpiry` (fired based on the certificate's lifetime action window, by default 30 days before expiry) lets you trigger a Logic App, Function, or other workflow that notifies operations.\n\n**Why not the other options:**\n- **Automation runbook that exports and re-imports keys** — exporting private key material defeats the purpose of an HSM-backed vault (and non-exportable keys cannot be exported at all); native rotation policies do this without custom code or key material leaving the vault. A monthly inventory email also does not guarantee a 30-day pre-expiry warning.\n- **Soft delete and purge protection** — these protect *deleted* objects from loss and permanent purging; they have nothing to do with rotation or expiry notification.\n- **Converting keys to secrets** — keys natively support rotation policies, and secrets are the wrong object type for cryptographic keys: a secret is just a stored value, and the encryption services consuming customer-managed keys require Key Vault *keys*.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_orenfall_energy.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-01-hexbury-kql-database",
+    "question": "Hexbury Interactive's live-ops engineers must store billions of timestamped game-server log events and explore them interactively with a query language that is purpose-built for time-series and log analytics.\n\nWhich Microsoft Fabric item should the team use?",
+    "options": [
+        {
+            "text": "A KQL database in Real-Time Intelligence",
+            "correct": true
+        },
+        {
+            "text": "A warehouse queried with T-SQL",
+            "correct": false
+        },
+        {
+            "text": "A Dataflow Gen2",
+            "correct": false
+        },
+        {
+            "text": "A paginated report",
+            "correct": false
+        }
+    ],
+    "explanation": "A **KQL database** (hosted in a Real-Time Intelligence eventhouse) is Fabric's store for high-volume telemetry, logs, and time-series data. It indexes timestamped events as they arrive and is queried with **Kusto Query Language (KQL)**, which was designed specifically for interactive exploration of log and time-series data — filtering by time ranges, aggregating over intervals, and searching billions of rows in seconds.\n\n**Why not the other options:**\n- **A warehouse queried with T-SQL** — A Fabric warehouse is a relational analytical store for modeled, tabular data queried with T-SQL. It is not optimized for interactively exploring billions of raw, timestamped log events, and T-SQL is not a purpose-built log-analytics language.\n- **A Dataflow Gen2** — Dataflow Gen2 is a low-code data preparation tool for connecting to and transforming data with Power Query. It is an ingestion/transformation capability, not a queryable store for log exploration.\n- **A paginated report** — Paginated reports render fixed-layout, print-ready output; they are a reporting format, not a data store or an exploration tool.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_hexbury_interactive.json"
+}

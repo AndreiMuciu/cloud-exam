@@ -1,0 +1,24 @@
+{
+    "id": "sc500-27-defender-cspm-attack-paths",
+    "question": "Your CISO wants to know which combinations of weaknesses an attacker could actually chain together — for example, an internet-exposed VM with a critical vulnerability whose managed identity can reach a storage account containing sensitive data. The team is drowning in individual recommendations and needs the exploitable chains prioritized. Which Defender for Cloud capability should you use?",
+    "options": [
+        {
+            "text": "Enable the Defender CSPM plan and review attack path analysis, using the cloud security explorer for custom risk queries across the environment",
+            "correct": true
+        },
+        {
+            "text": "Sort the recommendations list by severity and remediate all high-severity items first",
+            "correct": false
+        },
+        {
+            "text": "Enable Defender for Servers and wait for security alerts on the exposed VMs",
+            "correct": false
+        },
+        {
+            "text": "Export the secure score to a spreadsheet and review the lowest-scoring controls each week",
+            "correct": false
+        }
+    ],
+    "explanation": "**Attack path analysis**, part of the **Defender CSPM** plan, builds a graph of the environment (exposure, vulnerabilities, permissions, data sensitivity) and surfaces the *chains* an attacker could traverse — like internet exposure → vulnerable VM → identity with access → sensitive storage — ranked by risk so you fix the paths that matter first. The **cloud security explorer** runs custom graph queries over the same data for proactive hunting of risky combinations.\n\n**Why not the other options:**\n- **Sorting recommendations by severity** — A flat list scores each finding in isolation; it cannot show that two medium findings *combine* into a critical path, which is precisely the CISO's question.\n- **Defender for Servers alerts** — Alerts are reactive runtime detections that fire when something suspicious already happened; the requirement is proactive posture analysis before compromise.\n- **Secure score spreadsheet** — Secure score is an aggregate posture metric; exporting it adds no cross-resource reasoning about exploitability.",
+    "category": "Manage and monitor security posture"
+}

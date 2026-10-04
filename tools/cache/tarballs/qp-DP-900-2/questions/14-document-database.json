@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-14-document-database",
+    "question": "An application stores each customer as a single self-describing record that contains the customer's profile together with a nested list of their orders. Different customers have different optional fields, and the application queries records by values inside them, such as city or loyalty level.\n\nWhich type of data store is designed for this pattern?",
+    "options": [
+        {
+            "text": "A document database",
+            "correct": true
+        },
+        {
+            "text": "A key/value store",
+            "correct": false
+        },
+        {
+            "text": "A relational database with a normalized schema",
+            "correct": false
+        },
+        {
+            "text": "A graph database",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the textbook use case for a **document database**. Each entity is stored as one **self-contained document** (typically JSON) that can hold **nested structures** (the list of orders) and **varying optional fields** per document — no fixed schema required. Crucially, document databases **index and query values inside the documents**, so lookups by city or loyalty level are natively supported.\n\n**Why not the other options:**\n- **A key/value store** — Retrieves a value only by its key and treats the value as **opaque**; it cannot query by fields *inside* the stored value, so searching customers by city would require scanning everything.\n- **A relational database with a normalized schema** — Would split the customer and orders into separate tables with a fixed set of typed columns; the varying optional fields and nested structure fight the rigid schema, and each read would require joins to reassemble what the document stores naturally as one unit.\n- **A graph database** — Optimized for traversing **relationships between many entities** (nodes and edges), such as social networks; the workload here is retrieving and querying self-contained records, not walking multi-hop relationships.",
+    "category": "Describe Core Data Concepts"
+}

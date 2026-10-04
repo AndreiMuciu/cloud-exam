@@ -1,0 +1,25 @@
+{
+    "id": "dp900-06-veloria-views",
+    "question": "Veloria Health Systems' front-desk scheduling staff must be able to query appointment and contact columns from the patient tables, but must never see diagnosis or billing columns. The solution must not create or maintain duplicate copies of the data.\n\nWhich database object should Veloria create?",
+    "options": [
+        {
+            "text": "A view that selects only the permitted columns",
+            "correct": true
+        },
+        {
+            "text": "A nightly job that copies permitted columns into a separate table",
+            "correct": false
+        },
+        {
+            "text": "A clustered index on the permitted columns",
+            "correct": false
+        },
+        {
+            "text": "A second database containing an export of the patient tables",
+            "correct": false
+        }
+    ],
+    "explanation": "A **view** is a virtual table defined by a query. Veloria can define a view that selects only the appointment and contact columns, grant scheduling staff permission on the view instead of the underlying tables, and staff will see current data with the sensitive columns hidden. Because a view stores no data itself, there is nothing to duplicate or keep in sync.\n\n**Why not the other options:**\n- **A nightly copy job** — Creates a duplicate copy that is up to 24 hours stale and must be maintained, directly violating the no-duplication requirement.\n- **A clustered index** — An index determines how table rows are physically ordered to speed up queries; it cannot restrict which columns a user sees.\n- **A second database with exported tables** — Another form of duplication, with the added burden of refreshing the export and managing a second database.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_veloria_health.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-29-functions-timer-ncrontab",
+    "question": "An Azure Functions app (Python v2 programming model) must run an embedding-refresh job **once per day at 02:30 UTC**:\n\n```python\n@app.schedule(schedule=\"<expression>\", arg_name=\"timer\")\ndef refresh_embeddings(timer: func.TimerRequest) -> None:\n    ...\n```\n\nWhich schedule expression should you use?",
+    "options": [
+        {
+            "text": "0 30 2 * * *",
+            "correct": true
+        },
+        {
+            "text": "0 */30 2 * * *",
+            "correct": false
+        },
+        {
+            "text": "0 0 */2 * * *",
+            "correct": false
+        },
+        {
+            "text": "02:30:00",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Functions timer triggers use **NCRONTAB** expressions with **six fields**: `{second} {minute} {hour} {day} {month} {day-of-week}`. `0 30 2 * * *` reads as second 0, minute 30, hour 2, every day — exactly 02:30:00 UTC daily (timer schedules are evaluated in UTC by default).\n\n**Why not the other options:**\n- **`0 */30 2 * * *`** — `*/30` in the *minute* field means \"every 30th minute\", so this fires at 02:00 **and** 02:30 every day — twice, not once.\n- **`0 0 */2 * * *`** — `*/2` in the *hour* field means every two hours on the hour (00:00, 02:00, 04:00, …) — twelve runs a day, none of them at 02:30.\n- **`02:30:00`** — A `TimeSpan` value, which timer triggers interpret as an *interval*: run every 2 hours and 30 minutes, not at clock time 02:30. It is an easy trap because it looks like a time of day.",
+    "category": "Connect to and consume Azure services"
+}

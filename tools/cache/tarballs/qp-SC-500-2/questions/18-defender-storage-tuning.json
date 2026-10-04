@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-18-defender-storage-tuning",
+  "type": "single",
+  "question": "Microsoft Defender for Storage (with on-upload malware scanning) is enabled at the subscription level. One storage account, `stmediaingest`, receives millions of machine-generated telemetry files per day, and scanning them is projected to dominate the security budget while adding no value. Security requirements state that:\n\n- Malware scanning must stay enabled for every other storage account in the subscription, with a monthly cost ceiling per account.\n- `stmediaingest` must keep activity monitoring and threat detection, but must not have its uploads malware-scanned.\n- Blobs uploaded to the `legal-archive` container **before** Defender for Storage was enabled must be scanned once.\n\nWhat should you do?",
+  "options": [
+    {
+      "text": "Keep the subscription-level plan; configure an override on `stmediaingest` that disables on-upload malware scanning while leaving the plan enabled; set the monthly GB cap for malware scanning on the other accounts; and run an on-demand malware scan against the existing blobs in `legal-archive`",
+      "correct": true
+    },
+    {
+      "text": "Exclude `stmediaingest` from the Defender for Storage plan entirely, and lower the subscription's overall Defender for Cloud spending limit to cap scanning costs",
+      "correct": false
+    },
+    {
+      "text": "Replace on-upload malware scanning with an Azure Automation runbook that downloads each new blob and checks it with a script, and rely on lifecycle management to age out unscanned blobs",
+      "correct": false
+    },
+    {
+      "text": "Route all uploads through Azure Firewall Premium with IDPS enabled so that malware is detected on the network path instead of in the storage service",
+      "correct": false
+    }
+  ],
+  "explanation": "Defender for Storage is designed for exactly this tuning scenario. The plan is enabled at subscription scope, but **per-storage-account overrides** let you change the configuration of an individual account — here, keeping the account protected (activity monitoring, unusual-access and threat detections) while switching off on-upload malware scanning for the high-volume telemetry account. The **monthly GB cap** on malware scanning is a per-account setting that bounds the maximum scanned volume — and therefore the maximum cost — for each remaining account. Finally, on-upload scanning only inspects new uploads; blobs that already existed when the plan was enabled are covered by triggering an **on-demand malware scan**, which is precisely intended for retroactively scanning existing data such as the `legal-archive` container.\n\n**Why not the other options:**\n- **Excluding the account from the plan** — removes activity monitoring and threat detection along with malware scanning, violating the requirement that the account keep its other protections. There is also no \"Defender for Cloud spending limit\" that caps malware scanning; the cap is a per-account malware-scanning setting.\n- **Automation runbook scanning** — a homegrown scanner has no integration with Defender for Cloud security alerts or blob index tag verdicts, must be maintained and scaled by you, and reintroduces the exact cost and latency problem the built-in capability already solves with caps and overrides.\n- **Azure Firewall Premium IDPS** — inspects network traffic signatures in transit; it is not a file malware-scanning service for storage uploads, cannot produce scan verdicts on blobs, and does nothing for the blobs that already sit in `legal-archive`.",
+  "category": "Secure storage, databases, and networking"
+}

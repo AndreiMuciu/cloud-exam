@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-31-keyvault-soft-delete-recover",
+    "question": "An operator accidentally deleted the secret `payments-api-key` from an Azure Key Vault that has soft delete and **purge protection** enabled. Attempts to recreate a secret with the same name fail with a conflict error stating the secret is *deleted but recoverable*. The application must be restored to working order as quickly as possible.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Recover the deleted secret, for example with `az keyvault secret recover --vault-name <vault> --name payments-api-key`, then let the application read it again.",
+            "correct": true
+        },
+        {
+            "text": "Purge the deleted secret to free the name, then create a new secret called `payments-api-key`.",
+            "correct": false
+        },
+        {
+            "text": "Create the secret under a new name such as `payments-api-key-2` and update every consumer to read the new name.",
+            "correct": false
+        },
+        {
+            "text": "Disable soft delete on the vault so deleted secret names become available immediately.",
+            "correct": false
+        }
+    ],
+    "explanation": "With **soft delete**, a deleted secret is retained in a recoverable state for the retention period, and its name stays reserved — which is why recreation conflicts. **Recovering** the deleted secret (`az keyvault secret recover`, or `begin_recover_deleted_secret` in the SDK) restores the object with all of its versions and metadata, and the application resumes reading the same secret. Fastest path, no consumer changes.\n\n**Why not the other options:**\n- **Purge, then recreate** — **Purge protection** is enabled, so purging is blocked outright until the retention period expires. Even where purge is allowed, it permanently destroys the secret's history for no benefit over a simple recover.\n- **New name + update consumers** — Touches every consumer of the secret and leaves the original in the deleted state; far slower and riskier than a one-command recovery.\n- **Disable soft delete** — Not possible: once soft delete is enabled on a vault, it cannot be turned off. It also would not restore the deleted secret.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

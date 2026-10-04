@@ -1,0 +1,13 @@
+{
+    "id": "case_study_harrowfield_logistics",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Harrowfield Logistics** is an international freight and shipping company. Its Azure footprint uses a hub-and-spoke topology: a hub virtual network (`vnet-hub`) and three spoke virtual networks (`vnet-tracking`, `vnet-billing`, `vnet-analytics`) peered to the hub.\n\n**Current Environment:**\n- Each spoke hosts VMs and App Service apps for a business unit; outbound internet traffic currently leaves directly from each spoke.\n- The billing application in `vnet-billing` calls an Azure SQL Database and an Azure Storage account over their public endpoints.\n- Warehouse staff at 40 depots access an internal shipment-tracking web app through a legacy site-to-site VPN into the hub.\n- Remote administrators connect to VMs by using public IP addresses with RDP restricted by source IP in NSG rules."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The network security team has defined the following requirements:\n\n**Traffic Control:**\n- All outbound internet traffic from every spoke must flow through a single, centrally managed inspection point in the hub that supports FQDN-based filtering and threat intelligence-based blocking.\n- East-west traffic between spokes must be deny-by-default and inspected when allowed.\n\n**PaaS Access:**\n- The billing application must reach Azure SQL Database and Azure Storage over private IP addresses only, and the public endpoints of those resources must be disabled.\n- DNS resolution for the private addresses must work for both Azure and on-premises clients.\n\n**Remote Access:**\n- Depot staff access to the internal shipment-tracking app must follow Zero Trust principles: per-application access based on identity and Conditional Access, without placing users on the network.\n- Administrative access to VMs must not require any public IP addresses on the VMs."
+        }
+    ]
+}

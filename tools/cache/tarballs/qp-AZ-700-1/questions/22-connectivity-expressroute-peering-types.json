@@ -1,0 +1,25 @@
+{
+    "id": "az700-connectivity-expressroute-peering-types",
+    "type": "multi",
+    "question": "Cindralux Robotics is planning the peerings for a new ExpressRoute circuit. They need private IP connectivity to VMs in their VNets, and they also need to reach Azure PaaS services and Microsoft 365 over public IP addresses without traversing the internet.\n\nWhich two peering types should Cindralux configure on the circuit? (Choose two.)",
+    "options": [
+        {
+            "text": "Azure Private Peering",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Peering",
+            "correct": true
+        },
+        {
+            "text": "Azure Public Peering",
+            "correct": false
+        },
+        {
+            "text": "Regional Peering",
+            "correct": false
+        }
+    ],
+    "explanation": "A current ExpressRoute circuit supports two routing domains: **Azure Private Peering**, used to connect to Azure compute resources (VMs, PaaS services deployed in a VNet) over private IP addresses; and **Microsoft Peering**, used to reach Azure PaaS services' public endpoints and Microsoft 365 over public IP addresses owned by the customer or their connectivity provider, without using the internet. Cindralux's two stated needs map directly to these two peering types, and a circuit can have both enabled at once.\n\n**Why not the other options:**\n- **Azure Public Peering** — This peering type has been retired; current ExpressRoute circuits only offer Private Peering and Microsoft Peering.\n- **Regional Peering** — This isn't an ExpressRoute peering type; it isn't part of the ExpressRoute circuit peering model at all.",
+    "category": "Design, Implement, and Manage Connectivity Services"
+}

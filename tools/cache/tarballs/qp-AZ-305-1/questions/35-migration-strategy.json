@@ -1,0 +1,24 @@
+{
+    "id": "az305-migration-strategy",
+    "question": "A company is migrating a legacy on-premises application to Azure. The application consists of:\n\n- A .NET Framework 4.8 web application running on IIS\n- A SQL Server 2016 database (500 GB) with stored procedures and CLR assemblies\n- A Windows service that processes background jobs\n\nThe company wants to minimize code changes and complete the migration within 4 weeks.\n\nWhat migration strategy should you recommend?",
+    "options": [
+        {
+            "text": "Rewrite the application using .NET 8, deploy to Azure Container Apps, and migrate the database to Azure SQL Database serverless",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Site Recovery to lift-and-shift all components to Azure VMs, then optimize later",
+            "correct": false
+        },
+        {
+            "text": "Containerize all components using Docker and deploy to Azure Kubernetes Service (AKS)",
+            "correct": false
+        },
+        {
+            "text": "Migrate the web app to Azure App Service, the database to Azure SQL Managed Instance, and the background service to an Azure VM",
+            "correct": true
+        }
+    ],
+    "explanation": "The recommended strategy balances **minimal changes** with **cloud optimizations**:\n\n1. **Web app → Azure App Service** — App Service supports .NET Framework 4.8 on Windows plans. The IIS-based app can be deployed with minimal changes using Web Deploy or ZIP deploy\n\n2. **Database → Azure SQL Managed Instance** — SQL MI provides near-100% compatibility with SQL Server, including stored procedures, CLR assemblies, SQL Agent, and cross-database queries. Azure SQL Database would not support CLR assemblies\n\n3. **Background service → Azure VM** — Windows services require a VM host in Azure (or could be refactored to WebJobs/Functions, but that would require code changes which the company wants to minimize)\n\n**Why not the other options:**\n- **Rewrite in .NET 8** — Requires significant code changes and far exceeds the 4-week timeline. .NET Framework 4.8 apps often need substantial refactoring for .NET 8\n- **Containerize to AKS** — .NET Framework 4.8 requires Windows containers, which have larger image sizes, longer startup times, and added operational complexity. The containerization process itself would also require code changes, violating the minimal-changes constraint\n- **Full lift-and-shift to VMs** — While this minimizes changes, it misses cloud optimization opportunities and doesn't take advantage of PaaS services. The question asks for a recommendation, implying some optimization is expected",
+    "category": "Design Infrastructure Solutions"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-04-emberline-scale-sets",
+    "question": "Emberline Energy needs its simulation capacity to consist of identical, load-balanced virtual machines whose count automatically grows and shrinks with the depth of the job queue. Which Azure service should they use?",
+    "options": [
+        {
+            "text": "A single large Azure virtual machine",
+            "correct": false
+        },
+        {
+            "text": "Azure Virtual Machine Scale Sets",
+            "correct": true
+        },
+        {
+            "text": "An availability set of manually created VMs",
+            "correct": false
+        },
+        {
+            "text": "Azure Virtual Desktop",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Virtual Machine Scale Sets** let you create and manage a group of identical, load-balanced VMs and define autoscale rules that automatically add instances when demand rises (for example, when the job queue deepens) and remove them when demand falls. This matches Emberline’s variable simulation workload exactly.\n\n**Why not the other options:**\n- **A single large VM** — Can only scale vertically by resizing (which requires downtime) and cannot automatically add more machines during storm-season peaks.\n- **An availability set** — Spreads manually created VMs across fault and update domains to improve resilience within a datacenter; it does not provide identical-instance autoscaling.\n- **Azure Virtual Desktop** — Delivers virtualized Windows desktops to end users; it is not a batch/compute scaling service.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_emberline_energy.json"
+}

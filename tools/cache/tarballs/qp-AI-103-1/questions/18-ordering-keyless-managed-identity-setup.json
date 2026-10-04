@@ -1,0 +1,21 @@
+{
+    "id": "ai103-18-ordering-keyless-managed-identity-setup",
+    "type": "ordering",
+    "question": "You need to switch an app hosted on Azure App Service from an API-key connection string to keyless authentication against an Azure AI Foundry project.\n\nPlace the steps in the correct order.",
+    "items": [
+        "Enable a system-assigned managed identity on the App Service instance.",
+        "Assign the managed identity an appropriate RBAC role (for example, Azure AI Developer) scoped to the Foundry project.",
+        "Update the application code to acquire tokens using `DefaultAzureCredential` instead of an API key.",
+        "Remove the API key / connection string from application settings and source control.",
+        "Redeploy the app and verify it can call the Foundry project using only the managed identity."
+    ],
+    "correctOrder": [
+        "Enable a system-assigned managed identity on the App Service instance.",
+        "Assign the managed identity an appropriate RBAC role (for example, Azure AI Developer) scoped to the Foundry project.",
+        "Update the application code to acquire tokens using `DefaultAzureCredential` instead of an API key.",
+        "Remove the API key / connection string from application settings and source control.",
+        "Redeploy the app and verify it can call the Foundry project using only the managed identity."
+    ],
+    "explanation": "Keyless migration has to build the new path fully before removing the old one:\n\n1. **Enable the managed identity** — Without an identity, there is nothing for Microsoft Entra ID to issue tokens for.\n2. **Assign the RBAC role** — The identity exists but has no permissions until a role is granted on the Foundry project.\n3. **Switch the code to `DefaultAzureCredential`** — The application must actually request tokens through the identity before the key can safely go away.\n4. **Remove the key** — Only now is it safe to delete the API key/connection string, since the app no longer depends on it.\n5. **Redeploy and verify** — Confirms the whole chain (identity → role → code → no key) actually works end-to-end in the deployed environment, not just in theory.\n\nRemoving the key before the code switch (or before the role assignment) would take the application down — the classic mistake in this migration.",
+    "category": "Plan and manage an Azure AI solution"
+}

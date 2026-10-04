@@ -1,0 +1,24 @@
+{
+    "id": "sc900-19-entra-id-protection",
+    "question": "A security team wants Microsoft Entra ID to automatically detect when a user's credentials appear in a public data leak or when a sign-in comes from an anonymized network, assign a risk level, and enforce remediation such as a secure password change.\n\nWhich Microsoft Entra capability provides this?",
+    "options": [
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra Password Protection",
+            "correct": false
+        },
+        {
+            "text": "Privileged Identity Management (PIM)",
+            "correct": false
+        },
+        {
+            "text": "Access reviews",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra ID Protection** detects identity-based risks — including **leaked credentials** found in public breaches, sign-ins from anonymizing services, atypical travel, and other anomalies. Each detection contributes to a user-risk or sign-in-risk level, and risk-based policies can automatically require a secure password change or MFA, or block access until an administrator intervenes.\n\n**Why not the other options:**\n- **Microsoft Entra Password Protection** — This feature bans weak passwords at creation time; it does not monitor for leaked credentials or risky sign-in behavior after the fact.\n- **Privileged Identity Management (PIM)** — PIM manages just-in-time activation of privileged roles; it does not detect or score identity risk.\n- **Access reviews** — Access reviews recertify whether users still need access to groups, applications, or roles on a schedule; they are a governance control, not a risk-detection engine.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

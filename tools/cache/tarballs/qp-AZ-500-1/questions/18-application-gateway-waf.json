@@ -1,0 +1,24 @@
+{
+    "id": "az500-18-application-gateway-waf",
+    "question": "You are deploying an Azure Application Gateway to protect your web application from common attacks like SQL Injection and Cross-Site Scripting (XSS). Which tier and mode should you select to actively block these attacks?",
+    "options": [
+        {
+            "text": "Standard Tier, Detection Mode",
+            "correct": false
+        },
+        {
+            "text": "WAF Tier, Detection Mode",
+            "correct": false
+        },
+        {
+            "text": "WAF Tier, Prevention Mode",
+            "correct": true
+        },
+        {
+            "text": "Basic Tier, Monitoring Mode",
+            "correct": false
+        }
+    ],
+    "explanation": "To actively block attacks, you must use the **WAF Tier** (which includes the Web Application Firewall) and set it to **Prevention Mode**. In Detection Mode, it only logs the threats without blocking them.\n\n**Why not the other options:**\n- **Standard Tier** — Lacks WAF capabilities.\n- **Detection Mode** — Only monitors; it doesn't solve the 'active block' requirement.",
+    "category": "Secure networking"
+}

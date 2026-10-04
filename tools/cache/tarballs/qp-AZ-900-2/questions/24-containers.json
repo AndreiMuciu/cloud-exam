@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-24-containers",
+    "question": "A development team packages an application together with its libraries and dependencies into a portable unit that shares the host operating system kernel, starts in seconds, and is much lighter than a virtual machine. Which compute type is the team using?",
+    "options": [
+        {
+            "text": "Containers",
+            "correct": true
+        },
+        {
+            "text": "Virtual machines",
+            "correct": false
+        },
+        {
+            "text": "Azure Functions",
+            "correct": false
+        },
+        {
+            "text": "Availability sets",
+            "correct": false
+        }
+    ],
+    "explanation": "**Containers** bundle an application and its dependencies into a portable image that runs on a shared host OS kernel. Because no per-instance guest operating system boots, containers start in seconds and pack far more densely onto the same hardware than VMs — Azure runs them via services such as Azure Container Instances and Azure Kubernetes Service.\n\n**Why not the other options:**\n- **Virtual machines** — Each VM emulates a complete computer with its own full guest operating system, so VMs are heavier and slower to start than containers.\n- **Azure Functions** — A serverless service that abstracts away even the packaging: you deploy code, not a packaged unit with its dependencies and runtime environment.\n- **Availability sets** — A resiliency grouping for VMs (fault and update domains), not a compute type at all.",
+    "category": "Describe Azure Architecture and Services"
+}

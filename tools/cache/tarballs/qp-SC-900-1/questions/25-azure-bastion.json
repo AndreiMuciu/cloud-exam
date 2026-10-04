@@ -1,0 +1,24 @@
+{
+    "id": "sc900-25-azure-bastion",
+    "question": "Administrators need to open RDP and SSH sessions to Azure virtual machines directly from the Azure portal in a web browser, without assigning public IP addresses to the virtual machines and without installing a VPN client.\n\nWhich Azure service meets this requirement?",
+    "options": [
+        {
+            "text": "Azure VPN Gateway",
+            "correct": false
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": true
+        },
+        {
+            "text": "Azure Front Door",
+            "correct": false
+        },
+        {
+            "text": "Azure ExpressRoute",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Bastion** is a fully managed platform service deployed into a virtual network that brokers RDP and SSH connectivity to virtual machines **over TLS, directly in the browser from the Azure portal**. The target VMs need no public IP addresses, no agent, and no client software, which removes the risk of exposing management ports to the internet.\n\n**Why not the other options:**\n- **Azure VPN Gateway** — A VPN provides encrypted network connectivity to the virtual network, but point-to-site access requires configuring a VPN client on each admin workstation, which the scenario excludes.\n- **Azure Front Door** — Front Door is a global entry point for delivering and accelerating public web applications; it does not provide RDP/SSH connectivity to virtual machines.\n- **Azure ExpressRoute** — ExpressRoute establishes private, dedicated circuits between on-premises networks and Azure; it is a connectivity service for sites, not a browser-based VM management solution.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

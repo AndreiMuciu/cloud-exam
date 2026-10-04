@@ -1,0 +1,13 @@
+{
+    "id": "case_study_talverin_hotels",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Talverin Hotels & Resorts** operates 40 hotels across Europe. Reservations, loyalty-program records, and guest correspondence are handled in Microsoft 365, and the company is subject to data protection regulations in every market where it operates.\n\n**Current Environment:**\n- Guest passport numbers and payment card details appear in booking confirmations, front-desk email, and scanned documents stored in SharePoint Online.\n- Email is currently kept forever in some mailboxes and deleted immediately in others, depending on individual staff habits.\n- After a complaint from a loyalty-program member, the data protection officer could not easily establish which staff members had accessed the guest's records."
+        },
+        {
+            "title": "Compliance Objectives",
+            "content": "The data protection officer at Talverin Hotels has set the following objectives:\n- **Standardize retention**: All Exchange Online mailboxes must automatically keep messages for three years and then delete them, applied organization-wide at the location level rather than item by item.\n- **Know the data**: The compliance team needs a current snapshot showing where documents and emails containing passport numbers and payment card data are located across SharePoint Online, OneDrive, and Exchange Online.\n- **Answer access questions**: When a guest asks who viewed their data, investigators must be able to search a log of user and admin activities — including which items in a mailbox were accessed — going back at least one year."
+        }
+    ]
+}

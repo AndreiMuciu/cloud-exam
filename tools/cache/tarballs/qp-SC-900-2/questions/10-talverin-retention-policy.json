@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-10-talverin-retention-policy",
+    "question": "Talverin Hotels & Resorts must ensure that every Exchange Online mailbox in the organization automatically keeps messages for three years and then deletes them. The rule must be applied broadly at the location (workload) level — covering all mailboxes at once — rather than being applied to individual messages one at a time.\n\nWhich Microsoft Purview capability should the data protection officer configure?",
+    "options": [
+        {
+            "text": "A retention policy",
+            "correct": true
+        },
+        {
+            "text": "Retention labels applied manually by each staff member",
+            "correct": false
+        },
+        {
+            "text": "A sensitivity label with encryption",
+            "correct": false
+        },
+        {
+            "text": "A data loss prevention (DLP) policy",
+            "correct": false
+        }
+    ],
+    "explanation": "A **retention policy** in Microsoft Purview applies retention settings **at the container or location level** — for example, to all Exchange mailboxes, all SharePoint sites, or specific locations — so every item within scope automatically inherits the same retain-and-then-delete behavior. Configuring one retention policy for all Exchange Online mailboxes with a three-year retention period followed by deletion meets Talverin's requirement with no per-item action by staff.\n\n**Why not the other options:**\n- **Retention labels applied manually by each staff member** — Retention labels work at the *item* level and manual application depends on every employee labeling every message correctly — the inconsistent, habit-driven behavior Talverin is trying to eliminate. Labels are the right tool for item-level exceptions (for example, contracts needing seven years), not blanket mailbox coverage.\n- **A sensitivity label with encryption** — Sensitivity labels classify and *protect* content (encryption, watermarks, access restrictions); they do not govern how long content is kept or when it is deleted.\n- **A data loss prevention (DLP) policy** — DLP prevents sensitive information from being overshared or leaked. It does not retain or delete content on a schedule.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_talverin_hotels.json"
+}

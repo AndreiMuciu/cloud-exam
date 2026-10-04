@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-tovana-guests",
+    "question": "You need to recommend a solution for the visiting physicians' guest accounts. Access must be recertified periodically by the sponsoring department, and access must be removed automatically when the reviewer does not respond.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Configure recurring access reviews in Microsoft Entra ID Governance with auto-apply results and a default decision of Deny when reviewers do not respond",
+            "correct": true
+        },
+        {
+            "text": "Configure Microsoft Entra Privileged Identity Management (PIM) to require activation for the guest accounts every 30 days",
+            "correct": false
+        },
+        {
+            "text": "Create a dynamic security group that removes guests whose employeeHireDate attribute is older than 90 days",
+            "correct": false
+        },
+        {
+            "text": "Enable Conditional Access sign-in frequency controls to force guest users to reauthenticate weekly",
+            "correct": false
+        }
+    ],
+    "explanation": "**Recurring access reviews** in Microsoft Entra ID Governance are designed exactly for this lifecycle problem:\n\n- Reviews can target **guest users** in groups, applications, or the whole directory on a recurring schedule (for example, quarterly)\n- The **sponsoring department** (group owners or designated reviewers) recertifies each guest\n- With **auto-apply** enabled and the *If reviewers don't respond* setting configured to **Remove access** (or Deny), guests whose sponsors do not confirm the need are removed automatically — no manual cleanup required\n\n**Why not the other options:**\n- **PIM activation** — PIM governs *privileged role* assignments (just-in-time elevation). It is not a mechanism for recertifying ordinary guest account access to resources, and guests here are not role holders\n- **Dynamic group on an attribute** — A dynamic membership rule can only evaluate attribute values; it involves no human recertification, so a physician whose engagement legitimately continues would be removed while a stale account with a recent attribute value would be kept. It also doesn't disable or remove the guest account itself\n- **Sign-in frequency controls** — Forcing reauthentication verifies the user still holds valid credentials; it does not ask anyone whether the access is still *needed* and never removes access",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_tovana_health.json"
+}

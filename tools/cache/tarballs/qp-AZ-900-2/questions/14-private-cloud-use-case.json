@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-14-private-cloud-use-case",
+    "question": "A defense contractor must run workloads on infrastructure dedicated exclusively to its own organization because its regulator prohibits sharing hardware with other tenants, yet it still wants cloud-style self-service provisioning for its internal teams. Which cloud deployment model fits this requirement?",
+    "options": [
+        {
+            "text": "Private cloud",
+            "correct": true
+        },
+        {
+            "text": "Public cloud",
+            "correct": false
+        },
+        {
+            "text": "Hybrid cloud",
+            "correct": false
+        },
+        {
+            "text": "Software as a service (SaaS)",
+            "correct": false
+        }
+    ],
+    "explanation": "A **private cloud** delivers cloud capabilities — self-service provisioning, pooled resources, elasticity — on infrastructure used **exclusively by one organization**, whether hosted in its own datacenter or by a third party on dedicated hardware. It is the standard choice when regulation forbids multi-tenant infrastructure but the organization still wants cloud operating practices.\n\n**Why not the other options:**\n- **Public cloud** — Runs on shared, multi-tenant infrastructure owned by the provider, which is exactly what the regulator prohibits here.\n- **Hybrid cloud** — Combines private and public environments; because part of the estate would sit on shared public infrastructure, it does not satisfy an exclusive-hardware mandate for these workloads.\n- **SaaS** — Is a service *type* (finished software delivered by a vendor), not a deployment model, and typical SaaS runs multi-tenant.",
+    "category": "Describe Cloud Concepts"
+}

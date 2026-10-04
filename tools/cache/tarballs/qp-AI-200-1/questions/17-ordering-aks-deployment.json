@@ -1,0 +1,21 @@
+{
+    "id": "ai200-17-ordering-aks-deployment",
+    "type": "ordering",
+    "question": "You need to deploy a new containerized scoring service to an existing Azure Kubernetes Service (AKS) cluster. The cluster's kubelet identity already has no access to your registry, and the deployment must use a Kubernetes manifest file.\n\nPlace the steps in the correct order.",
+    "items": [
+        "Build the image and tag it with the registry's login server name, for example `ordoviaacr.azurecr.io/scoring-svc:1.0.0`.",
+        "Push the tagged image to Azure Container Registry with `docker push`.",
+        "Grant the cluster pull access to the registry, for example `az aks update --attach-acr ordoviaacr`.",
+        "Apply the deployment manifest that references the image with `kubectl apply -f scoring-svc.yaml`.",
+        "Verify the rollout completed with `kubectl rollout status deployment/scoring-svc`."
+    ],
+    "correctOrder": [
+        "Build the image and tag it with the registry's login server name, for example `ordoviaacr.azurecr.io/scoring-svc:1.0.0`.",
+        "Push the tagged image to Azure Container Registry with `docker push`.",
+        "Grant the cluster pull access to the registry, for example `az aks update --attach-acr ordoviaacr`.",
+        "Apply the deployment manifest that references the image with `kubectl apply -f scoring-svc.yaml`.",
+        "Verify the rollout completed with `kubectl rollout status deployment/scoring-svc`."
+    ],
+    "explanation": "The pipeline flows from image to registry to cluster:\n\n1. **Tag with the login server name** — Kubernetes pulls images by their fully qualified reference, so the tag must include `ordoviaacr.azurecr.io` before anything else makes sense.\n2. **Push to ACR** — The image must exist in the registry before the cluster can pull it.\n3. **Attach the ACR** — `--attach-acr` assigns the `AcrPull` role to the cluster's kubelet identity. Doing this before `kubectl apply` prevents the pods from failing with `ImagePullBackOff` on their first scheduling attempt.\n4. **`kubectl apply -f`** — Creates the Deployment from the manifest; the scheduler creates pods that pull the now-accessible image.\n5. **`kubectl rollout status`** — Verification is last: it blocks until the Deployment's replicas are updated and available, confirming the release succeeded.\n\nSwapping steps 3 and 4 is the classic mistake — the manifest would apply cleanly, but every pod would sit in `ImagePullBackOff` until pull permission is granted.",
+    "category": "Develop containerized solutions on Azure"
+}

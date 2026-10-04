@@ -1,0 +1,29 @@
+{
+    "id": "dp900-s2-33-azure-databricks-features",
+    "type": "multi",
+    "question": "Which three statements about Azure Databricks are true? (Choose three.)",
+    "options": [
+        {
+            "text": "It is an Azure-integrated analytics platform built on Apache Spark",
+            "correct": true
+        },
+        {
+            "text": "Its notebooks let users combine multiple languages, such as Python, SQL, Scala, and R, in one workspace",
+            "correct": true
+        },
+        {
+            "text": "It supports Delta Lake, which adds ACID transaction guarantees to data stored in a data lake",
+            "correct": true
+        },
+        {
+            "text": "It is a fully managed relational database service for online transaction processing",
+            "correct": false
+        },
+        {
+            "text": "It can read data only from storage located in the same Databricks workspace",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Databricks is the first-party **Apache Spark-based analytics platform** on Azure, aimed at data engineering, data science, and machine learning at scale:\n\n- **Built on Apache Spark** — Databricks provisions and manages Spark clusters, so teams get distributed compute without operating the infrastructure themselves.\n- **Multi-language notebooks** — Collaborative notebooks support **Python, SQL, Scala, and R**, letting engineers and data scientists work together in a single environment (even mixing languages between cells).\n- **Delta Lake** — An open-source storage layer that brings **ACID transactions**, schema enforcement, and time travel to files in a data lake — the foundation of the common medallion (bronze/silver/gold) lakehouse pattern.\n\n**Why not the other options:**\n- **A fully managed relational database service for OLTP** — Databricks is an **analytics** platform, not a transactional database. OLTP workloads on Azure belong to services such as Azure SQL Database.\n- **It can read data only from storage in the same workspace** — Databricks routinely connects to **external storage**, most commonly Azure Data Lake Storage Gen2 and Blob Storage, as well as many other sources. Data does not have to live \"inside\" the workspace.",
+    "category": "Describe an Analytics Workload on Azure"
+}

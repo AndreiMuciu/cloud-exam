@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-06-wexcombe-managed-identity",
+    "question": "The Wexcombe Polytechnic room-booking application runs on Azure virtual machines and currently keeps a database connection string in a configuration file. The identity team wants the application to authenticate to Azure services using an identity that the platform creates and manages automatically, so that no credentials are stored in files or rotated manually.\n\nWhich type of Microsoft Entra identity should the application use?",
+    "options": [
+        {
+            "text": "A managed identity",
+            "correct": true
+        },
+        {
+            "text": "A guest user account",
+            "correct": false
+        },
+        {
+            "text": "A device identity",
+            "correct": false
+        },
+        {
+            "text": "A shared departmental user account with a strong password",
+            "correct": false
+        }
+    ],
+    "explanation": "A **managed identity** is a workload identity in Microsoft Entra ID that Azure **creates and manages automatically** for resources such as virtual machines and app services. The room-booking app can use its managed identity to obtain tokens and access Azure services (for example, a database or Azure Key Vault) — **no credentials appear in code or configuration files, and there is nothing for administrators to rotate**, because the platform handles the credential lifecycle.\n\n**Why not the other options:**\n- **A guest user account** — Guest accounts represent external *people* invited for collaboration. They are interactive human identities, not identities for applications, and they still involve credentials the user manages.\n- **A device identity** — A device identity represents a registered or joined *device* in Microsoft Entra ID so that device state can be evaluated. It is not how an application authenticates to services.\n- **A shared departmental user account with a strong password** — This is the anti-pattern the team is trying to eliminate: a password that must be stored somewhere, shared, and rotated, with no accountability for which process used it.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_wexcombe_polytechnic.json"
+}

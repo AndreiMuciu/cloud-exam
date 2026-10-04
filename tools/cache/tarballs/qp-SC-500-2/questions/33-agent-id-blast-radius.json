@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-33-agent-id-blast-radius",
+  "type": "single",
+  "question": "Your tenant contains hundreds of AI agents registered with Microsoft Entra Agent ID. The SOC suspects that one agent's credentials were compromised. Before responding, the incident commander needs to understand the potential impact: which permissions the agent holds, which sensitive resources and data it can reach, and which other identities or agents it could affect. How should the team perform this analysis?",
+  "options": [
+    {
+      "text": "Use Microsoft Defender XDR to analyze the agent's blast radius — exploring the agent's permissions, connections, and reachable resources from its entity page to scope the potential impact",
+      "correct": true
+    },
+    {
+      "text": "Filter the Microsoft Entra sign-in logs for the agent's ID, because the sign-in history shows everything the agent is able to access",
+      "correct": false
+    },
+    {
+      "text": "Create a Conditional Access policy targeting the agent identity and review the policy's \"what if\" results to enumerate its reachable resources",
+      "correct": false
+    },
+    {
+      "text": "Immediately delete the agent's identity, then restore it after the investigation to see which applications report errors",
+      "correct": false
+    }
+  ],
+  "explanation": "This is the SC-500 skill \"analyze blast radius for security risks related to Entra Agent ID by using Defender XDR.\" Because agents registered with **Entra Agent ID** are first-class identities, Microsoft Defender XDR treats them as entities whose relationships can be explored: from the agent's page the analyst can pivot across the permissions the agent holds, the resources and data those permissions expose, and the connections to other identities and agents. That graph-style **blast radius** view answers the incident commander's question — *if this agent is compromised, what could the attacker reach?* — which is exactly the scoping needed to prioritize containment and response.\n\n**Why not the other options:**\n- **Sign-in logs** — show where the agent *has authenticated*, not what it *could* access. An attacker's value lies in unused permissions and reachable-but-untouched resources; historical sign-ins systematically understate the blast radius.\n- **Conditional Access what-if** — Conditional Access evaluates whether a given sign-in scenario would be allowed or blocked; it is a policy-simulation tool, not an impact-analysis tool. It cannot enumerate resources, permissions, or downstream identities. (Applying CA to agent identities is a *preventive* control, and a separate task.)\n- **Delete and restore the identity** — destructive guesswork: it breaks legitimate workloads to generate error noise, may not be cleanly reversible, tips off an active attacker, and still reveals only what was *actively in use*, not the reachable attack surface.",
+  "category": "Secure compute"
+}

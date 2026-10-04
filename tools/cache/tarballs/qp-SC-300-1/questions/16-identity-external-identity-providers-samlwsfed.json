@@ -1,0 +1,24 @@
+{
+    "id": "sc300-identity-external-identity-providers-samlwsfed",
+    "question": "A partner organization does not use Microsoft Entra ID and cannot be onboarded through Microsoft Entra B2B direct connect. Its employees need to sign in to your shared applications using their own organization's existing identity provider, which supports SAML 2.0.\n\nWhich configuration allows this?",
+    "options": [
+        {
+            "text": "Configure the partner's SAML 2.0 identity provider as an external identity provider for B2B collaboration, so their users can redeem a guest invitation and authenticate using their existing credentials",
+            "correct": true
+        },
+        {
+            "text": "Enable self-service sign-up with a local account and password stored in your tenant for every partner employee",
+            "correct": false
+        },
+        {
+            "text": "Require the partner to deploy Microsoft Entra Connect Sync so their users are synchronized into your tenant",
+            "correct": false
+        },
+        {
+            "text": "Configure a dynamic group rule that automatically federates any user whose email domain matches the partner's domain",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra B2B collaboration supports configuring **external identity providers**, including generic **SAML 2.0 and WS-Fed** identity providers, in addition to Microsoft accounts, Google, and native Azure AD B2B. Once configured, a guest invited from that partner organization can authenticate using their existing SAML-based credentials at their home identity provider, rather than creating any new credential in your tenant.\n\n**Why not the other options:**\n- **Self-service sign-up with a local account/password** — this creates and stores brand-new local credentials in your tenant, which is the opposite of letting users authenticate with their existing partner identity provider.\n- **Requiring Microsoft Entra Connect Sync** — Connect Sync synchronizes an on-premises AD DS forest into your own tenant; it is not a mechanism for federating with an external partner's separate identity provider, and you cannot compel a partner organization to deploy your synchronization infrastructure.\n- **A dynamic group rule based on email domain** — group membership rules only sort existing directory objects into groups; they have no ability to establish federation or authentication trust with an external identity provider.",
+    "category": "Implement and manage user identities"
+}

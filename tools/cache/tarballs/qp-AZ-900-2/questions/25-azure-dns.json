@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-25-azure-dns",
+    "question": "A company wants to host the public DNS records for its internet domain in Azure so the records can be managed with the same Azure credentials, RBAC roles, and tooling as its other resources. Which service should it use?",
+    "options": [
+        {
+            "text": "Azure DNS",
+            "correct": true
+        },
+        {
+            "text": "Azure Virtual Network",
+            "correct": false
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": false
+        },
+        {
+            "text": "Azure ExpressRoute",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure DNS** hosts DNS zones and records on Azure’s global anycast name-server infrastructure. Because zones are ordinary Azure resources, the company manages its records with the same portal, CLI, templates, RBAC roles, and billing as everything else — which is exactly the stated goal.\n\n**Why not the other options:**\n- **Azure Virtual Network** — Provides private network isolation for Azure resources; it does not host public DNS zones for an internet domain.\n- **Azure Bastion** — Provides secure browser-based RDP/SSH access to virtual machines without exposing public IPs; unrelated to DNS.\n- **Azure ExpressRoute** — A private on-premises-to-Azure connectivity service; it does not serve DNS records.",
+    "category": "Describe Azure Architecture and Services"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-compute-vmss-orchestration",
+    "type": "single",
+    "question": "You are designing a Virtual Machine Scale Set for a rendering farm with these requirements:\n\n- **Mix VM sizes** in the same scale set — some memory-optimized and some compute-optimized instances\n- Combine regular (pay-as-you-go) instances with **Spot** instances in one pool\n- Individual VMs in the set must be manageable as **standard, first-class virtual machines**\n\nWhich scale set configuration should you choose?",
+    "options": [
+        { "text": "Flexible orchestration mode", "correct": true },
+        { "text": "Uniform orchestration mode", "correct": false },
+        { "text": "An availability set with managed disks", "correct": false },
+        { "text": "Uniform orchestration mode with a proximity placement group", "correct": false }
+    ],
+    "explanation": "**Flexible orchestration** is the newer scale set model (and Microsoft's recommended default for new workloads) that treats scale set members as **standard Azure VMs** enrolled in the set. Because the members are ordinary VMs, Flexible mode supports capabilities Uniform cannot: **mixing different VM sizes** in one scale set, **mixing Spot and regular priority** instances in the same pool, attaching existing VM types of operations, and full first-class VM management (each instance appears and behaves as a normal `Microsoft.Compute/virtualMachines` resource). All three stated requirements map directly to Flexible-only capabilities.\n\n**Why not the other options:**\n- **Uniform orchestration**: Uniform stamps out **identical** instances from a single model — one size and one priority for the whole set — and its instances are managed through the scale set rather than as first-class VMs. It fails all three requirements.\n- **Availability set**: an availability set is a fault-domain placement construct, not a scale set — it has no autoscaling, no instance model, and no Spot integration. You would be manually creating and managing 100 individual VMs.\n- **Uniform + proximity placement group**: a proximity placement group only co-locates resources for low latency; it does not change Uniform's fundamental one-model limitation, so mixed sizes and mixed priorities remain impossible.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

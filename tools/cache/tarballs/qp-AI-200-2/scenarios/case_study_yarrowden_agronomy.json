@@ -1,0 +1,13 @@
+{
+    "id": "case_study_yarrowden_agronomy",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Yarrowden Agronomy** sells a precision-agriculture platform that turns drone and satellite imagery of farm fields into crop-health insights. The image-analysis services are Python applications that wrap computer-vision inference models.\n\n**Current Environment:**\n- All services are packaged as Linux container images stored in an **Azure Container Registry** named `yarrowdenacr`.\n- The crop-health inference API runs in an **Azure Container Apps** environment named `yagro-env` alongside several internal services.\n- A map-tile rendering service runs on an existing **Azure Kubernetes Service (AKS)** cluster and is deployed with Kubernetes manifest files.\n- A soil-moisture aggregation batch program currently runs on a virtual machine that stays powered on all day."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Batch Requirements:**\n- The soil-moisture aggregation container must run to completion once per night at 02:00, must not expose any network endpoint, and must not incur compute cost while idle. The team does not want to operate any new cluster or virtual machine for it.\n\n**Deployment Requirements:**\n- When a release of the map-tile rendering service degrades latency, the previous version must be restored on AKS as quickly as possible using built-in Kubernetes mechanisms.\n\n**Connectivity Requirements:**\n- The crop-health inference API must be callable over HTTPS by an external partner portal on the public internet. Internal services in `yagro-env` already call the API successfully today.\n- No credentials may be embedded in images, manifests, or source code."
+        }
+    ]
+}

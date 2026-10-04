@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-infra-vwan",
+    "question": "A franchise restaurant group has 40 branch sites and Azure workloads in three regions. Requirements:\n\n- Every branch must reach workloads in all three Azure regions, and branches must communicate with each other through Microsoft's backbone\n- Branch connectivity must use site-to-site VPN today, with some sites moving to ExpressRoute next year\n- Hub routing, VPN gateway scaling, and any-to-any transit must be managed by the platform, not hand-built by the small network team\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Virtual WAN (Standard) with a virtual hub in each of the three regions",
+            "correct": true
+        },
+        {
+            "text": "Azure Virtual WAN (Basic) with a single virtual hub",
+            "correct": false
+        },
+        {
+            "text": "A manually built hub-and-spoke topology in each region with VPN gateways, global VNet peering, and user-defined routes",
+            "correct": false
+        },
+        {
+            "text": "Point-to-site VPN connections from each branch router to a VPN gateway in one region",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Virtual WAN Standard** is Microsoft's managed global transit network — built for the many-branches, multi-region, any-to-any pattern:\n\n- **Any-to-any transit** — Standard Virtual WAN provides automatic hub-to-hub connectivity across regions over the Microsoft backbone, plus branch-to-branch, branch-to-VNet, and VNet-to-VNet transit with routing managed by the service\n- **Scale for 40 branches** — Virtual hub VPN gateways scale to large aggregate throughput and are designed for high site counts, with connections configured per site rather than hand-crafted tunnels and route tables\n- **Mixed connectivity future** — Standard hubs support **site-to-site VPN and ExpressRoute together**, so next year's ExpressRoute sites join the same hubs, and ExpressRoute-to-VPN transit works natively\n\n**Why not the other options:**\n- **Virtual WAN Basic** — Basic supports *only* site-to-site VPN in a single hub: no ExpressRoute, no multiple hubs, no hub-to-hub transit — failing the three-region and ExpressRoute-migration requirements\n- **Manual hub-and-spoke per region** — Achievable, but the team hand-builds and maintains exactly what the requirement says the platform must manage: gateways per region, global peering, UDRs for transit routing, and (because VNet peering is not transitive for gateways across regions in this pattern) careful route engineering for branch-to-branch traffic. Operational cost scales badly with 40 sites × 3 regions\n- **Point-to-site VPN** — P2S is for individual client devices (laptops), not branch routers connecting whole sites; a single-region gateway also concentrates all traffic through one region with no any-to-any design",
+    "category": "Design Infrastructure Solutions"
+}

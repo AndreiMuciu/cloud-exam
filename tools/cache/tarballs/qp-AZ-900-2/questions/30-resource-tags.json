@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-30-resource-tags",
+    "type": "multi",
+    "question": "Which **three** of the following statements about Azure resource tags are true? (Select three.)",
+    "options": [
+        {
+            "text": "A tag consists of a name and a value pair, such as env = production",
+            "correct": true
+        },
+        {
+            "text": "Tags applied to a resource group are not automatically inherited by the resources inside it",
+            "correct": true
+        },
+        {
+            "text": "Azure Policy can be used to require tags and even add or correct them automatically during deployment",
+            "correct": true
+        },
+        {
+            "text": "Every Azure resource must have at least one tag before it can be created",
+            "correct": false
+        }
+    ],
+    "explanation": "Tags are name/value metadata pairs (for example, **env = production** or **costCenter = 4021**) used to organize resources and slice cost and usage reports. Two mechanics are frequently tested: tags do **not** flow down automatically — tagging a resource group does not tag the resources inside it (though policy can copy tags down) — and **Azure Policy** is the enforcement mechanism, able to deny deployments missing a required tag or append/inherit tag values automatically.\n\n**Why not the other option:**\n- **\"Every resource must have at least one tag\"** — Tags are optional by default; resources deploy perfectly well without any. Tagging only becomes mandatory if your organization enforces it through Azure Policy.",
+    "category": "Describe Azure Management and Governance"
+}

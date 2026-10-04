@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-monitor-activity-log-retention",
+    "type": "single",
+    "question": "Your security team requires that subscription **Activity log** events (administrative operations, policy events, service health records) be retained for **one year** and remain **queryable with KQL** for investigations.\n\nWhat should you do?",
+    "options": [
+        { "text": "Create a diagnostic setting on the subscription that sends the activity log to a Log Analytics workspace, and configure the workspace or table retention for 365 days", "correct": true },
+        { "text": "In the Azure portal, increase the activity log retention setting from 90 to 365 days", "correct": false },
+        { "text": "Do nothing; activity log events are retained for one year automatically", "correct": false },
+        { "text": "Stream the activity log to an Azure event hub", "correct": false }
+    ],
+    "explanation": "The platform retains activity log events for **90 days**, and that period is **not configurable**. To keep events longer you export them with a subscription-level **diagnostic setting**. Sending them to a **Log Analytics workspace** lands the events in the `AzureActivity` table, where they are fully queryable with **KQL**, can drive log search alerts and workbooks, and are retained according to the workspace (or per-table) retention setting — set it to 365 days to satisfy the requirement. There is no ingestion charge for routing activity log data into Log Analytics; retention beyond the included period is billed.\n\n**Why not the other options:**\n- **Increase the portal retention setting**: No such setting exists — the 90-day platform retention is fixed. (Long ago a retention slider existed for legacy log profiles, but that mechanism is retired; diagnostic settings are the supported path.)\n- **Automatic one-year retention**: False — events older than 90 days are gone unless they were exported.\n- **Event hub**: Event Hubs is for *streaming* the events onward to external systems (such as a third-party SIEM). An event hub retains messages for only a short window and offers no KQL query capability, so on its own it meets neither requirement.",
+    "category": "Monitor and Maintain Azure Resources"
+}

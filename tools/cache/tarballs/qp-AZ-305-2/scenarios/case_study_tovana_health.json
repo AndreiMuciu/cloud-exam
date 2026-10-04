@@ -1,0 +1,13 @@
+{
+    "id": "case_study_tovana_health",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Tovana Health** operates a network of 14 hospitals and 60 outpatient clinics. The organization uses a single Microsoft Entra ID tenant (tovanahealth.org) and has 22,000 staff members, including clinicians, administrative staff, and a regional IT helpdesk team in each of its three regions.\n\n**Current Environment:**\n- All staff identities are synchronized from on-premises Active Directory using Microsoft Entra Connect\n- Clinical applications are being migrated to Azure across eight subscriptions\n- A central security team manages the tenant; regional helpdesk teams handle password resets and user support for their own region only\n- Visiting physicians from partner research institutes are onboarded as guest users and often retain access long after their engagements end"
+        },
+        {
+            "title": "Identity Requirements",
+            "content": "**Identity and Access Requirements:**\n- Clinicians signing in from hospital-network workstations must not be prompted for MFA on every sign-in, but any sign-in from outside hospital networks must require MFA\n- Users in the Global Administrator and Privileged Role Administrator roles must authenticate with phishing-resistant methods only\n- Regional helpdesk teams must be able to reset passwords **only** for users in their own region — they must have no directory permissions over users in other regions\n- Guest accounts for visiting physicians must be recertified periodically, and access must be removed automatically if the sponsoring department does not confirm it is still needed\n- Administrative solutions must minimize the number of permanently privileged accounts"
+        }
+    ]
+}

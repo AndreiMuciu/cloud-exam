@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-19-cloud-manageability",
+    "question": "An operations lead at a dental clinic network is impressed that her team can administer all of the organization's Azure resources through a web portal, a command-line interface, REST APIs, and PowerShell — whichever interface each engineer prefers. Which cloud benefit does this variety of administration interfaces illustrate?",
+    "options": [
+        {
+            "text": "Management *in* the cloud — the tools and interfaces available for managing your cloud environment and resources",
+            "correct": true
+        },
+        {
+            "text": "Management *of* the cloud — features such as automatic scaling and self-healing that manage the resources themselves",
+            "correct": false
+        },
+        {
+            "text": "Elasticity",
+            "correct": false
+        },
+        {
+            "text": "Economies of scale",
+            "correct": false
+        }
+    ],
+    "explanation": "Manageability in the cloud has two facets, and this scenario describes **management *in* the cloud**: **how you are able to manage your cloud environment and resources** — through a web portal, a command-line interface, APIs, and PowerShell. The benefit is that administrators can choose whichever interface suits the task: a visual portal for exploration, scripts and APIs for automation and repeatability.\n\n**Why not the other options:**\n- **Management *of* the cloud** — This is the *other* facet of manageability: capabilities that manage the resources themselves, such as automatically scaling with demand, deploying from preconfigured templates, monitoring health and automatically replacing failing resources, and alerting. The scenario is about the *interfaces people use*, not about self-managing capabilities.\n- **Elasticity** — The automatic adjustment of resources to match demand; unrelated to the choice of administration tools.\n- **Economies of scale** — Explains why large providers achieve lower per-unit costs; it has nothing to do with management interfaces.",
+    "category": "Describe Cloud Concepts"
+}

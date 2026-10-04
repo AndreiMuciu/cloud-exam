@@ -1,0 +1,13 @@
+{
+    "id": "case_study_aurelia_health",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Aurelia Health Insights** builds a clinical-knowledge assistant that lets hospital staff ask natural-language questions over internal care guidelines and research summaries. The assistant uses a retrieval-augmented generation (RAG) pattern implemented in Python.\n\n**Current Environment:**\n- Care-guideline documents and their vector embeddings are stored in **Azure Cosmos DB for NoSQL**, in a container named `guidelines` partitioned by `/departmentId`.\n- A second corpus of research summaries lives in **Azure Database for PostgreSQL flexible server** with the **pgvector** extension enabled.\n- An embedding model deployed in Azure produces 1536-dimension vectors for both corpora.\n- All data-access code uses the Python SDKs (`azure-cosmos`, `psycopg`)."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Retrieval Requirements:**\n- Semantic search over the `guidelines` container must return the most similar documents by cosine similarity with predictable, low RU consumption at a scale of several million vectors.\n- Research-summary retrieval must support metadata filtering (for example, restrict results to `specialty = 'cardiology'`) combined with vector similarity in a single query.\n\n**Freshness Requirements:**\n- When clinicians update a guideline document, its embedding must be regenerated within minutes, without rescanning the whole container.\n\n**Compliance Requirements:**\n- Retrieval latency and RU charges must be measurable per department.\n- No document text may leave the Azure environment during embedding or retrieval."
+        }
+    ]
+}

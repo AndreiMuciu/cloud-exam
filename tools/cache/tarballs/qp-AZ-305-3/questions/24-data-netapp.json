@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-data-netapp",
+    "question": "An engineering firm is moving a silicon-design workload to Azure. A farm of Linux compute VMs mounts a shared POSIX-compliant NFS file system that must deliver **sub-millisecond latency** and hundreds of thousands of IOPS, and the storage performance tier must be adjustable **without migrating the data** as project phases change.\n\nThe solution must be a fully managed first-party Azure service.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure NetApp Files volumes mounted over NFS",
+            "correct": true
+        },
+        {
+            "text": "Azure Files premium file shares mounted over NFS 4.1",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob Storage with the NFS 3.0 protocol enabled",
+            "correct": false
+        },
+        {
+            "text": "A self-managed NFS server VM backed by Premium SSD v2 managed disks",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure NetApp Files (ANF)** is Azure's high-performance, fully managed file service, built on NetApp storage hardware inside Azure datacenters, and it is the standard recommendation for latency-critical NFS workloads such as EDA/silicon design, HPC, and SAP shared files:\n\n- **Sub-millisecond latency** — ANF is the Azure file service engineered and documented for consistent sub-millisecond latencies; regular Azure Files operates in the low-single-digit-millisecond range\n- **Extreme throughput/IOPS** — volumes scale to hundreds of thousands of IOPS and multiple GiB/s, with large-volume support for the biggest workloads\n- **Non-disruptive performance changes** — a volume can be moved between the Standard, Premium, and Ultra **service levels dynamically, without moving any data**, matching the changing project phases exactly\n- **Fully managed, POSIX NFS** — first-party Azure service exposing NFSv3/NFSv4.1 with full POSIX semantics for the Linux farm\n\n**Why not the other options:**\n- **Azure Files premium (NFS 4.1)** — Supports NFS, but its latency (low single-digit milliseconds) and per-share IOPS ceilings sit well below this workload's sub-millisecond, hundreds-of-thousands-of-IOPS profile; performance scaling is tied to provisioned share size rather than an independently switchable service level\n- **Blob NFS 3.0** — Object storage with an NFS access layer: throughput-oriented for analytics, not a low-latency POSIX file system; features like byte-range locking that engineering tools expect are limited, and latency is object-storage latency\n- **Self-managed NFS VM** — Disqualified by \"fully managed\": the firm would own the VM, OS, NFS tuning, HA, and backups; a single NFS head also becomes the IOPS/network bottleneck long before the required scale, and changing performance means re-engineering the server",
+    "category": "Design Data Storage Solutions"
+}

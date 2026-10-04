@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-32-onelake",
+    "question": "In Microsoft Fabric, what is OneLake?",
+    "options": [
+        {
+            "text": "A single, unified, tenant-wide logical data lake, built on Azure Data Lake Storage Gen2, in which all Fabric workloads store their data",
+            "correct": true
+        },
+        {
+            "text": "A relational database engine used to run T-SQL transactional workloads in Fabric",
+            "correct": false
+        },
+        {
+            "text": "A Power BI visual for displaying geographic data on a map",
+            "correct": false
+        },
+        {
+            "text": "A cluster of virtual machines that customers provision to run Apache Spark jobs",
+            "correct": false
+        }
+    ],
+    "explanation": "**OneLake** is Microsoft Fabric's built-in, **tenant-wide logical data lake** — often described as \"OneDrive for data.\" Every Fabric tenant gets exactly **one** OneLake automatically; it is built on **Azure Data Lake Storage Gen2**, and **all Fabric experiences** (lakehouses, warehouses, real-time intelligence, Power BI) store their data in it, typically in the open **Delta Parquet** format. Because everything lands in one lake, different engines can work over the *same copy* of the data — and *shortcuts* can even surface data from external storage without copying it.\n\n**Why not the other options:**\n- **A relational database engine for T-SQL transactional workloads** — OneLake is **storage**, not a database engine. The Fabric *warehouse* experience provides a T-SQL engine, and it stores its data *in* OneLake.\n- **A Power BI visual for geographic data** — Map visuals are report elements inside Power BI; they have nothing to do with Fabric's storage foundation.\n- **A cluster of virtual machines customers provision for Spark** — Fabric is a **software-as-a-service** platform: customers never provision or manage VM clusters. Spark compute in Fabric is managed by the service, and OneLake is where the data lives, not the compute.",
+    "category": "Describe an Analytics Workload on Azure"
+}

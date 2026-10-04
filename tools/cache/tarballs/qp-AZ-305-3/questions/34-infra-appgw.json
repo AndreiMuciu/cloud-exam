@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-infra-appgw",
+    "question": "A company hosts several internal line-of-business web applications on VM scale sets in a single Azure region. Employees reach them over ExpressRoute; the applications must **never be reachable from the internet**.\n\nThe design requires a single entry point inside the corporate virtual network that provides:\n\n- Path-based HTTP routing (/hr, /finance, /procurement) to different backend pools\n- TLS termination with certificates from Azure Key Vault\n- Web application firewall protection against common web attacks (OWASP rules)\n- Zone redundancy within the region\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Application Gateway v2 (WAF_v2 SKU) with a private frontend IP address",
+            "correct": true
+        },
+        {
+            "text": "Azure Front Door Premium with Private Link origins to the scale sets",
+            "correct": false
+        },
+        {
+            "text": "A zone-redundant internal Azure Standard Load Balancer",
+            "correct": false
+        },
+        {
+            "text": "Azure API Management (internal mode) in front of the applications",
+            "correct": false
+        }
+    ],
+    "explanation": "**Application Gateway v2 in the WAF_v2 SKU** is the regional layer-7 load balancer, and it is the only option that satisfies all four requirements *privately*:\n\n- **Private entry point** — the gateway can be deployed with a **private frontend IP** in the corporate VNet, reachable over ExpressRoute and invisible to the internet\n- **Path-based routing** — URL path maps send `/hr`, `/finance`, `/procurement` to different backend pools natively\n- **TLS + Key Vault** — v2 integrates with **Key Vault** for listener certificates, including automatic rotation pickup\n- **WAF + zones** — the WAF_v2 SKU applies OWASP core rule set policies, and v2 supports **zone-redundant** deployment across availability zones in the region\n\n**Why not the other options:**\n- **Front Door Premium** — Front Door is a **global** edge service whose entry point is, by design, on the public internet; Private Link secures the *origin* connection, not the front end. An internet-facing entry point violates the \"never reachable from the internet\" requirement, and a global CDN/edge layer is architectural overkill for single-region internal apps\n- **Internal Standard Load Balancer** — Operates at **layer 4**: it can be private and zone-redundant, but it cannot route by URL path, terminate TLS, or run a WAF. All the HTTP-level requirements go unmet\n- **API Management (internal mode)** — Internal-mode APIM is private and can front HTTP traffic, but it is an **API gateway** (subscriptions, policies, developer portal) rather than a web application load balancer: it has no built-in WAF engine (guidance is to put Application Gateway WAF *in front of* APIM), making it the wrong primitive for WAF-protected browser applications",
+    "category": "Design Infrastructure Solutions"
+}

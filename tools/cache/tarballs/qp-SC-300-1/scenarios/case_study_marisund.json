@@ -1,0 +1,13 @@
+{
+    "id": "case_study_marisund",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Marisund Logistics** is a global freight-forwarding company running a mix of Azure workloads and third-party SaaS applications used by partner customs brokers.\n\n**Current environment:**\n- An Azure Automation runbook, shared across three separate Azure subscriptions, needs to read shipment manifests from an Azure Storage account and write status updates to an Azure SQL Database in a fourth subscription.\n- A partner customs-clearance SaaS application (\"ClearRoute\") needs to call Marisund's internal shipment API on behalf of signed-in customs brokers, using delegated permissions the brokers consent to individually.\n- A separate nightly batch job (no interactive user) needs application-level access to read shipment records directly from Microsoft Graph, and this access must be approved once by an administrator rather than by each broker."
+        },
+        {
+            "title": "Workload Requirements",
+            "content": "- The Azure Automation identity used by the shared runbook must be reusable across the multiple subscriptions it touches, rather than being tied to the lifecycle of a single Azure resource.\n- A legacy, on-premises customs-documentation portal (no cloud-native authentication support) must become reachable by remote customs brokers without deploying a VPN, while still enforcing Conditional Access.\n- Marisund's security team wants continuous visibility into shadow IT — SaaS apps that employees are using without IT's knowledge — and the ability to apply session controls (such as blocking downloads) to sanctioned but risky apps, without requiring the apps to be reconfigured individually."
+        }
+    ]
+}

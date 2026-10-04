@@ -1,0 +1,25 @@
+{
+    "id": "az500-11-sentinel-playbooks-automation",
+    "question": "Sentinel Surveillance wants to automate the response to identified security incidents. They want to automatically block an IP address in the NSG if it is identified as a source of an attack. Which technology is used to build these **Playbooks** in Microsoft Sentinel?",
+    "options": [
+        {
+            "text": "Azure Functions",
+            "correct": false
+        },
+        {
+            "text": "Azure Logic Apps",
+            "correct": true
+        },
+        {
+            "text": "Azure Automation",
+            "correct": false
+        },
+        {
+            "text": "Kusto Query Language (KQL)",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Sentinel Playbooks are built on **Azure Logic Apps**, which provide a visual designer for orchestrating complex workflows across various services to respond to security events.\n\n**Why not the other options:**\n- **Azure Functions** — While you *can* call a function from a Logic App, the Playbook 'framework' itself is built on Logic Apps.\n- **Azure Automation** — Used for generic resource automation but not the primary engine for Sentinel playbooks.\n- **KQL** — The query language used to *analyze* the data, not to *act* on it via a workflow.",
+    "category": "Manage security operations",
+    "caseStudy": "scenarios/case_study_sentinel_surveillance.json"
+}

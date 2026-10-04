@@ -1,0 +1,13 @@
+{
+    "id": "case_study_foxglove_interactive",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Foxglove Interactive** is a game studio that operates a cross-platform multiplayer title with seasonal tournaments. The back end is a set of Python services.\n\n**Current Environment:**\n- Match telemetry and player data are stored in **Azure Cosmos DB for NoSQL**. A container named `match-events` currently uses `/gameMode` as its partition key; there are only five game modes.\n- Player inventories (owned items, currency) live in a container named `inventories` partitioned by `/playerId`. Several game services update the same inventory document concurrently.\n- An in-game support assistant suggests fixes by finding previously **resolved support tickets** that are semantically similar to a player's new ticket. Ticket text embeddings (1536 dimensions) are produced by an embedding model.\n- **Azure Managed Redis** is already deployed for session caching."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Telemetry Requirements:**\n- During tournaments, writes to `match-events` are throttled with 429 errors even though total provisioned throughput is far above the workload. The dominant read pattern retrieves all events for one match.\n\n**Inventory Requirements:**\n- When two services update the same inventory document at nearly the same time, neither update may silently overwrite the other; the losing writer must detect the conflict and retry against the latest state.\n\n**Support Assistant Requirements:**\n- Similar-ticket lookup must run against the embeddings stored in Azure Managed Redis and return the top 5 most similar resolved tickets by cosine similarity in single-digit milliseconds.\n- All services authenticate with managed identities; no keys in source code."
+        }
+    ]
+}

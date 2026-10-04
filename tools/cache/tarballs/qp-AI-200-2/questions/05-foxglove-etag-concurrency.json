@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-05-foxglove-etag-concurrency",
+    "question": "Two Foxglove services sometimes update the same player-inventory document at nearly the same time, and one update silently overwrites the other. Per the requirements, the losing writer must detect the conflict and retry against the latest state.\n\nHow should you implement the update in the Python SDK?",
+    "options": [
+        {
+            "text": "Read the document, apply the change, and call `replace_item` with `etag=item['_etag']` and `match_condition=MatchConditions.IfNotModified`; on a 412 Precondition Failed response, re-read the document and retry.",
+            "correct": true
+        },
+        {
+            "text": "Change the account's default consistency level to Strong so that concurrent writers always see each other's writes.",
+            "correct": false
+        },
+        {
+            "text": "Wrap each update in a transactional batch so Cosmos DB serializes concurrent batches on the same partition key.",
+            "correct": false
+        },
+        {
+            "text": "Have each service acquire a lock document with a fixed id before updating, and delete it afterward.",
+            "correct": false
+        }
+    ],
+    "explanation": "Cosmos DB supports **optimistic concurrency control** through the `_etag` system property, which changes on every write. Passing the ETag with `match_condition=MatchConditions.IfNotModified` makes the replace succeed only if the document is unchanged since it was read; a concurrent writer's earlier commit causes **HTTP 412 Precondition Failed**, and the loser re-reads and retries. This is exactly the detect-and-retry behavior required, with no locks and no extra round trips on the happy path.\n\n**Why not the other options:**\n- **Strong consistency** — Consistency levels govern what *readers* observe, not write conflicts. Two read-modify-write cycles can still interleave under Strong consistency, so the last writer still silently wins.\n- **Transactional batch** — A batch makes *its own* operations atomic within one partition key; it does not compare the document against the state a service previously read, so a concurrent batch still overwrites blindly.\n- **Lock documents** — Pessimistic locking adds writes and failure modes (a crashed service leaves the inventory locked until some cleanup runs) and still needs conditional logic to be safe. The platform-native ETag check is simpler and lock-free.",
+    "category": "Develop AI solutions by using Azure data management services",
+    "caseStudy": "scenarios/case_study_foxglove_interactive.json"
+}

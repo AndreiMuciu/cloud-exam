@@ -1,0 +1,13 @@
+{
+    "id": "case_study_ruddervane_industrial",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Ruddervane Industrial** is a heavy-equipment manufacturer with factories in Germany, the United States, and Malaysia. The company is midway through a cloud adoption program and has deployed an enterprise-scale landing zone: a management group hierarchy with *Platform* and *Landing Zones* branches, 45 workload subscriptions, and a central platform engineering team.\n\n**Current Environment:**\n- All subscriptions roll up to a single top-level management group beneath the tenant root group\n- Workload subscriptions are vended to product teams through an automated subscription-provisioning pipeline\n- The finance department bills each product team monthly for the Azure resources it consumes (chargeback)\n- Steady-state production workloads include a fleet of always-on virtual machines and several Azure SQL managed instances; engineering teams also run short-lived, variable compute for simulations, and the VM families used for simulations change several times per year"
+        },
+        {
+            "title": "Governance Requirements",
+            "content": "**Governance and Cost Requirements:**\n- All resources must be deployed only to the West Europe, East US, and Southeast Asia regions. One legacy analytics workload in a single resource group must temporarily remain in North Europe until its migration completes next quarter; the compliance team requires that this exception be time-limited, documented, and expire automatically\n- Every resource must carry a `costCenter` tag so that finance can attribute spend; product teams complain when deployments fail due to missing tags, and thousands of existing resources are currently untagged\n- The company will sign a three-year commitment to reduce compute spend. Discounts must be maximized for the always-on VM fleet and the SQL managed instances, while still covering the simulation compute whose VM families and regions change frequently\n- Governance controls must minimize manual, per-subscription administration"
+        }
+    ]
+}

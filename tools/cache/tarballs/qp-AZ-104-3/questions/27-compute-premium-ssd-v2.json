@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-compute-premium-ssd-v2",
+    "type": "single",
+    "question": "A transactional database VM needs a **data disk** with these characteristics:\n\n- Sustained **40,000 IOPS** and high throughput\n- IOPS and throughput must be **tunable independently of the disk's capacity**, so performance can be raised without buying more space\n- The **most cost-effective** disk type that meets the above\n\nWhich disk type should you attach?",
+    "options": [
+        { "text": "Premium SSD v2", "correct": true },
+        { "text": "Ultra Disk", "correct": false },
+        { "text": "Premium SSD with on-demand bursting", "correct": false },
+        { "text": "Standard SSD", "correct": false }
+    ],
+    "explanation": "**Premium SSD v2** decouples the three dimensions that classic managed-disk tiers bundle together: you provision **capacity, IOPS, and throughput independently**, adjusting performance without resizing the disk. It scales to very high performance (up to 80,000 IOPS on a single disk) at a substantially lower price point than Ultra Disk for comparable mid-to-high performance targets — making it the cost-effective answer at 40,000 IOPS. One administrative caveat worth remembering: Premium SSD v2 disks **can be used only as data disks** — not as OS disks — which is fine here since the requirement is a data disk.\n\n**Why not the other options:**\n- **Ultra Disk**: also offers independent IOPS/throughput tuning and even higher ceilings, but it is the premium-priced option aimed at the most extreme workloads (such as SAP HANA). Where Premium SSD v2 meets the numbers — as it does at 40K IOPS — Ultra costs more for no requirement gain, failing the cost-effectiveness test.\n- **Premium SSD with bursting**: classic Premium SSD ties baseline IOPS/throughput to the disk **size** (a P40, P50, and so on), so raising sustained performance means paying for a bigger disk. On-demand bursting only helps with *short spikes*; it cannot deliver *sustained* 40,000 IOPS on a modest-capacity disk.\n- **Standard SSD**: an entry-level tier for light workloads — its IOPS ceilings are far below 40,000, and performance is not independently tunable.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

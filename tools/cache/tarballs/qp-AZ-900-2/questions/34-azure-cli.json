@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-34-azure-cli",
+    "question": "A team of engineers working on macOS and Linux wants to script Azure resource management locally using commands that begin with `az` (for example, `az vm create`) and integrate naturally with Bash. Which management tool are they using?",
+    "options": [
+        {
+            "text": "The Azure CLI",
+            "correct": true
+        },
+        {
+            "text": "Azure PowerShell",
+            "correct": false
+        },
+        {
+            "text": "The Azure portal",
+            "correct": false
+        },
+        {
+            "text": "ARM templates",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Azure CLI** is a cross-platform command-line tool whose commands all start with `az`. It installs natively on Windows, macOS, and Linux and its syntax is designed to compose cleanly with Bash and other POSIX shells, which makes it the natural choice for shell-scripted automation on non-Windows workstations.\n\n**Why not the other options:**\n- **Azure PowerShell** — Also cross-platform, but it uses Verb-Noun cmdlets such as `New-AzVM` inside PowerShell sessions — not `az` commands in Bash.\n- **The Azure portal** — A graphical web interface; excellent for exploration and one-off tasks but not a local scripting tool.\n- **ARM templates** — Declarative JSON files that describe infrastructure to deploy; they are deployment artifacts, not an interactive command-line tool.",
+    "category": "Describe Azure Management and Governance"
+}

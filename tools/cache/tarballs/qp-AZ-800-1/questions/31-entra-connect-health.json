@@ -1,0 +1,24 @@
+{
+    "id": "az800-31-entra-connect-health",
+    "question": "You want to monitor the health and performance of your on-premises Active Directory Domain Controllers and the synchronization process between AD DS and Entra ID from within the Azure portal. Which service should you use?",
+    "options": [
+        {
+            "text": "Microsoft Entra Connect Health",
+            "correct": true
+        },
+        {
+            "text": "Azure Monitor VM Insights",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Identity",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Connect Health** provides a dashboard in the Azure portal for monitoring the health of your identity infrastructure, including AD FS, Entra Connect (Sync), and on-premises AD DS Domain Controllers.\n\n**Why not the other options:**\n- **VM Insights** — Focuses on OS performance (CPU/Disk) and network maps.\n- **Service Health** — Focuses on the status of Azure services themselves (outages, etc.).\n- **Defender for Identity** — Focuses on security threat detection, not 'health/sync performance' monitoring.",
+    "category": "Deploy and manage AD DS in on-premises and cloud environments"
+}

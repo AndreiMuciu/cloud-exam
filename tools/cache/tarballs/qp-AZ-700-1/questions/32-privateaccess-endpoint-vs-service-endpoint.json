@@ -1,0 +1,25 @@
+{
+    "id": "az700-privateaccess-endpoint-vs-service-endpoint",
+    "type": "multi",
+    "question": "A team is deciding between a private endpoint and a service endpoint to reach an Azure PaaS service from a VNet. Which of the following statements correctly describe the difference between the two? (Choose two.)",
+    "options": [
+        {
+            "text": "A private endpoint assigns the PaaS service a private IP address from the consuming VNet's address space; a service endpoint does not",
+            "correct": true
+        },
+        {
+            "text": "A private endpoint can be reached from an on-premises network over VPN or ExpressRoute; a service endpoint's optimized route only applies to traffic originating inside the VNet",
+            "correct": true
+        },
+        {
+            "text": "A service endpoint provides a stronger security boundary than a private endpoint, because it fully removes the service's public endpoint from existence",
+            "correct": false
+        },
+        {
+            "text": "Only a service endpoint can be combined with a private DNS zone for name resolution",
+            "correct": false
+        }
+    ],
+    "explanation": "**Correct statements:**\n- A **private endpoint** creates a network interface with a **private IP address** from the VNet, effectively bringing the service into the VNet; a **service endpoint** doesn't assign any private IP to the service — the service keeps its own public IP, and the service endpoint just changes how traffic to it is routed and, optionally, filtered.\n- Because a private endpoint gives the service a private IP inside the VNet's address space, that private IP is reachable from anywhere that can route to the VNet, including **on-premises networks connected over VPN or ExpressRoute**. A service endpoint's benefit (an optimized route over the Azure backbone plus optional access restriction) applies only to traffic that originates from the VNet's own subnets — on-premises traffic doesn't gain that same path from a service endpoint alone.\n\n**Why not the other options:**\n- **\"Service endpoint provides a stronger security boundary\"** — This is backwards. A service endpoint doesn't remove or replace the service's public endpoint; the resource keeps its public IP and can still be reached from the internet unless separately restricted (for example, with resource firewall rules). A private endpoint is generally considered the stronger isolation model because it gives the resource an actual private IP in the VNet.\n- **\"Only a service endpoint works with private DNS zones\"** — It's private endpoints that are commonly paired with private DNS zones (for example, `privatelink.*` zones) so that the service's FQDN resolves to its private IP; service endpoints don't require or typically use this private-link DNS pattern at all.",
+    "category": "Design and Implement Private Access to Azure Services"
+}

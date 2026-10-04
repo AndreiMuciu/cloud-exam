@@ -1,0 +1,21 @@
+{
+    "id": "ai200-s2-27-ordering-eventgrid-webhook",
+    "type": "ordering",
+    "question": "Tindervale Media must push custom `render.completed` events from its video pipeline to a partner's HTTPS webhook by using an Azure Event Grid custom topic. Nothing has been created yet.\n\nPlace the steps in the correct order.",
+    "items": [
+        "Create the Event Grid custom topic and note its endpoint.",
+        "Deploy the partner webhook with handshake logic that echoes the `validationCode` when it receives a `SubscriptionValidationEvent`.",
+        "Create the event subscription on the topic, targeting the webhook URL with an event-type filter for `render.completed`.",
+        "Publish events to the topic from the pipeline with `EventGridPublisherClient`.",
+        "Verify deliveries succeed by checking the subscription's delivery metrics."
+    ],
+    "correctOrder": [
+        "Create the Event Grid custom topic and note its endpoint.",
+        "Deploy the partner webhook with handshake logic that echoes the `validationCode` when it receives a `SubscriptionValidationEvent`.",
+        "Create the event subscription on the topic, targeting the webhook URL with an event-type filter for `render.completed`.",
+        "Publish events to the topic from the pipeline with `EventGridPublisherClient`.",
+        "Verify deliveries succeed by checking the subscription's delivery metrics."
+    ],
+    "explanation": "The order is driven by Event Grid's **webhook validation handshake**:\n\n1. **Create the custom topic** — Subscriptions and publishers both hang off the topic, so it must exist first.\n2. **Deploy the webhook with handshake logic** — At subscription creation time, Event Grid immediately sends a `SubscriptionValidationEvent` containing a `validationCode`; the endpoint must respond with that code (or expose the validation URL) to prove ownership. If the endpoint is not live and handshake-aware *before* the subscription is created, creation fails.\n3. **Create the event subscription** — Now the handshake can succeed. The event-type filter ensures the partner receives only `render.completed` events rather than everything published to the topic.\n4. **Publish events** — With the delivery path validated, the pipeline can start publishing through `EventGridPublisherClient`.\n5. **Verify with delivery metrics** — Verification is last: matched, delivered, and failed counts on the subscription confirm the end-to-end flow.\n\nThe classic mistake is swapping steps 2 and 3 — creating the subscription before the endpoint can answer the validation event — which fails the handshake and blocks the subscription.",
+    "category": "Connect to and consume Azure services"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc500-35-foundry-agent-guardrails",
+    "question": "A customer-support agent built in Microsoft Foundry retrieves answers from a knowledge base of uploaded documents. A red-team exercise showed that a malicious document containing hidden instructions could hijack the agent's behavior (an indirect prompt-injection attack). You must harden the agent against both direct jailbreak attempts and instructions embedded in retrieved content. What should you do?",
+    "options": [
+        {
+            "text": "Configure guardrails on the agent's model deployment: apply content filters that include Prompt Shields for both jailbreak (user prompt) and indirect (document-borne) attacks, and restrict the agent to approved tools and knowledge sources",
+            "correct": true
+        },
+        {
+            "text": "Strengthen the agent's system prompt with an instruction to ignore any commands found inside retrieved documents",
+            "correct": false
+        },
+        {
+            "text": "Lower the model deployment's temperature setting so the agent behaves more deterministically",
+            "correct": false
+        },
+        {
+            "text": "Run the agent under an identity with Owner rights on the subscription so failed permission checks cannot disrupt its workflow",
+            "correct": false
+        }
+    ],
+    "explanation": "Foundry **guardrails** are enforced at the platform layer: **content filters with Prompt Shields** analyze both the user's prompt (detecting **jailbreak** attempts) and grounding data/documents (detecting **indirect prompt-injection** — exactly the red team's finding) and block flagged interactions before the model acts on them. Limiting the agent to **approved tools and knowledge sources** shrinks the blast radius if an attack ever succeeds. Platform-enforced controls cannot be talked out of by clever input.\n\n**Why not the other options:**\n- **System-prompt instructions** — A system prompt is guidance to the model, not a security boundary; prompt-injection attacks succeed precisely by overriding such instructions, so this is defense theater on its own.\n- **Lowering temperature** — Temperature controls sampling randomness; a deterministic model follows injected instructions just as readily as a creative one.\n- **Owner-rights identity** — This maximizes the damage a hijacked agent can do. Agents should run with least-privilege identities; granting Owner to work around permission errors is the opposite of hardening.",
+    "category": "Secure compute"
+}

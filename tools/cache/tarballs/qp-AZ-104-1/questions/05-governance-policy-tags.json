@@ -1,0 +1,25 @@
+{
+    "id": "az104-governance-policy-tags",
+    "question": "Ridgepoint Financial has a resource group named **RG-Trading** that contains a virtual network named VNET-Trade. You assign the following Azure Policy to RG-Trading:\n\n- **Policy**: Require a tag and its value\n- **Effect**: Deny\n- **Tag name**: CostCenter\n- **Tag value**: Trading\n\nAfter assigning the policy, you apply the tag `CostCenter: Trading` to RG-Trading.\n\nYou then attempt to deploy a new virtual machine named VM-Analytics to RG-Trading **without specifying any tags on the VM**.\n\nWhat is the result?",
+    "options": [
+        {
+            "text": "The deployment succeeds, and VM-Analytics inherits the CostCenter tag from RG-Trading",
+            "correct": false
+        },
+        {
+            "text": "The deployment is denied because VM-Analytics does not have the required CostCenter tag",
+            "correct": true
+        },
+        {
+            "text": "The deployment succeeds, but VM-Analytics has no tags",
+            "correct": false
+        },
+        {
+            "text": "The deployment succeeds, and the policy automatically adds the CostCenter tag to VM-Analytics",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Policy with the **Deny** effect blocks resource creation that does not comply with the policy rules. Since the policy requires every resource in RG-Trading to have the tag `CostCenter: Trading`, deploying a VM without that tag is denied.\n\nKey points:\n- **Tags are NOT inherited** from resource groups to resources. Each resource must have its own tags set explicitly.\n- The **Deny** effect prevents non-compliant resources from being created — it does not remediate or auto-tag.\n- If you wanted automatic tag inheritance, you would use the **Inherit a tag from the resource group** policy with a **Modify** effect instead.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_ridgepoint.json"
+}

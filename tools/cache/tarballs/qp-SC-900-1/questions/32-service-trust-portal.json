@@ -1,0 +1,24 @@
+{
+    "id": "sc900-32-service-trust-portal",
+    "question": "An auditor asks a company for Microsoft's independent audit reports (such as ISO/IEC 27001 and SOC reports) and documentation describing how Microsoft cloud services protect customer data and support privacy and compliance.\n\nWhere can the company obtain this information?",
+    "options": [
+        {
+            "text": "The Microsoft Service Trust Portal",
+            "correct": true
+        },
+        {
+            "text": "The Microsoft Purview portal",
+            "correct": false
+        },
+        {
+            "text": "The Microsoft Defender portal",
+            "correct": false
+        },
+        {
+            "text": "The Microsoft 365 admin center",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Microsoft Service Trust Portal** is Microsoft's public site for **audit reports, certifications, and compliance documentation** about Microsoft's cloud services — including ISO/IEC 27001, SOC 1/2/3 reports, penetration test summaries, and papers on how Microsoft protects customer data, manages privacy, and supports regulatory compliance. It is the standard resource to share with auditors evaluating Microsoft as a cloud provider.\n\n**Why not the other options:**\n- **The Microsoft Purview portal** — This portal is where an organization manages *its own* compliance solutions (DLP, sensitivity labels, eDiscovery, Compliance Manager); it does not publish Microsoft's independent audit reports.\n- **The Microsoft Defender portal** — This is the operational console for Microsoft's XDR security services (incidents, alerts, hunting); it contains no compliance documentation about Microsoft's practices.\n- **The Microsoft 365 admin center** — This is for administering users, licenses, and service settings, not for retrieving Microsoft's audit and compliance evidence.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az700-appdelivery-traffic-manager-routing",
+    "question": "A company has deployed identical application endpoints in three Azure regions using Azure Traffic Manager. They want each user's DNS query to be answered with the endpoint that gives that user the lowest network latency, based on where their DNS queries are coming from.\n\nWhich Traffic Manager routing method should they select?",
+    "options": [
+        {
+            "text": "Priority",
+            "correct": false
+        },
+        {
+            "text": "Performance",
+            "correct": true
+        },
+        {
+            "text": "Geographic",
+            "correct": false
+        },
+        {
+            "text": "Weighted",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Performance** routing method chooses the endpoint that gives the lowest network latency for the region the DNS query appears to originate from, using Traffic Manager's Internet Latency Table that tracks round-trip time between IP address ranges and each Azure datacenter. This directly matches the requirement to minimize latency per user.\n\n**Why not the other options:**\n- **Priority** — Sends all traffic to a primary endpoint and only fails over to backups if the primary becomes unavailable; it doesn't consider latency or user location at all when the primary is healthy.\n- **Geographic** — Routes users to specific endpoints based on their geographic location (for data sovereignty or localization purposes), not based on measured network latency; a user could be routed to a farther endpoint if that's the one mapped to their geographic region.\n- **Weighted** — Distributes traffic across endpoints according to assigned weights (for example, for gradual rollouts); it doesn't consider latency or geography at all.",
+    "category": "Design and Implement Application Delivery Services"
+}

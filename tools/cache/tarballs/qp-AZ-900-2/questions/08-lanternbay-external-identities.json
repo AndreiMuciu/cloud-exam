@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-08-lanternbay-external-identities",
+    "question": "Independent travel agencies need access to Lanternbay’s room-inventory portal, but Lanternbay does not want to create or manage passwords for partner employees. Which approach should Lanternbay use?",
+    "options": [
+        {
+            "text": "Create standard member accounts in Lanternbay’s tenant for every agency employee",
+            "correct": false
+        },
+        {
+            "text": "Invite the partners as guest users with B2B collaboration, so they sign in with their own organizations’ credentials",
+            "correct": true
+        },
+        {
+            "text": "Share a single service account and rotate its password monthly",
+            "correct": false
+        },
+        {
+            "text": "Deploy Microsoft Entra Domain Services and issue domain accounts to the agencies",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra **External ID / B2B collaboration** lets an organization invite external users as **guests** who authenticate with their **own** home-organization credentials (or another supported identity). Lanternbay never stores or resets partner passwords, the agencies keep control of their employees’ identities, and access can be revoked by removing the guest — exactly the low-management partnership model required.\n\n**Why not the other options:**\n- **Member accounts for every agency employee** — Forces Lanternbay to provision, license, and manage credentials for people it does not employ, which is the burden the company explicitly wants to avoid.\n- **A shared service account** — Destroys individual accountability, makes auditing impossible, and shared passwords are a well-known attack vector.\n- **Microsoft Entra Domain Services** — Provides managed domain services (LDAP, Kerberos, domain join) for legacy workloads inside Azure; it is not a mechanism for partner sign-in to a web portal.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_lanternbay_hospitality.json"
+}

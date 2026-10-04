@@ -1,0 +1,20 @@
+{
+    "id": "gen-18-log-forwarding",
+    "question": "You need to ingest logs from Azure VMs and forward them to a Log Analytics workspace. What should you configure to provide the network ingestion endpoint for the Azure Monitor Agent?",
+    "options": [
+        {
+            "text": "A linked storage account for the Log Analytics workspace",
+            "correct": false
+        },
+        {
+            "text": "A private endpoint for the Log Analytics workspace",
+            "correct": false
+        },
+        {
+            "text": "An Azure Monitor data collection endpoint",
+            "correct": true
+        }
+    ],
+    "explanation": "The correct answer is **An Azure Monitor data collection endpoint**.\n\nData Collection Endpoints (DCEs) are the network entry points used by Azure Monitor Agent to send data. They work together with Data Collection Rules (DCRs), which define what data to collect, how to transform it, and where to send it. The DCE handles the ingestion endpoint, while the DCR handles the transformation logic.\n\n- A linked storage account is used for exporting query results or ingesting custom logs, not for VM log ingestion.\n- Private endpoints provide network isolation but don't handle log ingestion or transformation.",
+    "category": "Design Identity, Governance, and Monitoring"
+}

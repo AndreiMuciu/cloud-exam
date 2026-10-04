@@ -1,0 +1,24 @@
+{
+    "id": "dp900-21-stored-procedures",
+    "question": "Which database object is a named block of SQL code that is stored in the database and can be executed on demand, optionally accepting parameters?",
+    "options": [
+        {
+            "text": "A stored procedure",
+            "correct": true
+        },
+        {
+            "text": "A view",
+            "correct": false
+        },
+        {
+            "text": "An index",
+            "correct": false
+        },
+        {
+            "text": "A constraint",
+            "correct": false
+        }
+    ],
+    "explanation": "A **stored procedure** is a named block of SQL statements saved inside the database. Applications execute it by name, passing parameters, which centralizes business logic, reduces repeated query text, and allows permissions to be granted on the procedure rather than the underlying tables.\n\n**Why not the other options:**\n- **A view** — A saved *query* that presents results as a virtual table. It defines what data to show; it is not a general block of executable procedural code and does not take parameters.\n- **An index** — A data structure that speeds up row lookups on specific columns; it contains no executable SQL logic.\n- **A constraint** — A rule the engine enforces on table data (such as primary key, foreign key, unique, or check constraints); it validates data rather than executing on demand.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

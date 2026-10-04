@@ -1,0 +1,24 @@
+{
+    "id": "ai200-29-functions-python-deployment",
+    "question": "You develop an HTTP-triggered API with the Azure Functions Python v2 programming model on a Mac. The app depends on `numpy` and `psycopg2-binary` listed in `requirements.txt`. When you deploy, the function loads locally but fails in Azure with module import errors for the compiled dependencies.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Deploy with `func azure functionapp publish <app-name>` using remote build, so dependencies from `requirements.txt` are resolved and compiled on Azure's Linux build environment.",
+            "correct": true
+        },
+        {
+            "text": "Run `pip install -r requirements.txt` into a local `.venv` folder and include the whole virtual environment in the zip deployment package.",
+            "correct": false
+        },
+        {
+            "text": "Move the function app to a Windows Consumption plan, because compiled Python wheels are only supported on Windows workers.",
+            "correct": false
+        },
+        {
+            "text": "Add `pip install numpy psycopg2-binary` to the function code so packages install on first invocation.",
+            "correct": false
+        }
+    ],
+    "explanation": "Python function apps run on **Linux** workers, so packages with native/compiled components must be built for that platform. The Core Tools **remote build** (the default for `func azure functionapp publish` on Python) uploads your project and runs `pip install` against `requirements.txt` inside Azure's Linux build environment, producing wheels that match the runtime exactly — which resolves the import errors caused by macOS-built binaries.\n\n**Why not the other options:**\n- **Zipping a local `.venv`** — Virtual environments are not portable: they contain macOS (darwin/arm64) binaries and absolute paths, and the Functions runtime does not activate an included venv. The compiled modules would still fail to import on Linux.\n- **Windows Consumption plan** — Backwards: Python is *not supported* on Windows function apps at all; Linux is required.\n- **`pip install` at invocation time** — Function code runs in a sandbox without a guaranteed writable, persistent site-packages location; installing at runtime is slow, unreliable under scale-out, and reruns on every cold start. Dependencies belong in the deployment artifact.",
+    "category": "Connect to and consume Azure services"
+}

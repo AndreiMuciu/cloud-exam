@@ -1,0 +1,24 @@
+{
+    "id": "az800-17-vnet-peering-transit-config",
+    "question": "You have two peered virtual networks: Hub and Spoke. The Hub VNet contains a VPN Gateway. You want VMs in the Spoke VNet to use the VPN Gateway in the Hub VNet to communicate with on-premises resources. Which two settings must be enabled in the peering configuration?",
+    "options": [
+        {
+            "text": "Hub: Allow gateway transit; Spoke: Use remote gateways",
+            "correct": true
+        },
+        {
+            "text": "Hub: Use remote gateways; Spoke: Allow gateway transit",
+            "correct": false
+        },
+        {
+            "text": "Both: Allow forwarded traffic",
+            "correct": false
+        },
+        {
+            "text": "Both: Use remote gateways",
+            "correct": false
+        }
+    ],
+    "explanation": "To allow 'transit' through a gateway in a peered network, the VNet with the gateway (Hub) must have **'Allow gateway transit'** enabled, and the VNet wanting to use that gateway (Spoke) must have **'Use remote gateways'** enabled.\n\n**Why not the other options:**\n- **Forwarded traffic** — Allows traffic *not* originating from within the VNet to pass through, but doesn't handle the gateway logic specifically.\n- **Other combinations** — These are mathematically incorrect for the intended flow direction.",
+    "category": "Implement and manage on-premises and hybrid networking"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-25-defender-for-office365",
+    "question": "Employees at a firm keep receiving convincing spear-phishing emails with malicious attachments and weaponized links, some of which also appear in Microsoft Teams chats. The security team wants messages and attachments detonated in a sandbox before delivery, URLs checked at click time, and attack simulation training for users.\n\nWhich Microsoft Defender XDR service provides these protections?",
+    "options": [
+        {
+            "text": "Microsoft Defender for Office 365",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Endpoint",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud Apps",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender Vulnerability Management",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Office 365** safeguards the organization against threats arriving through **email and collaboration tools** — Exchange Online, Teams, SharePoint, and OneDrive. Its capabilities map directly to the requirements: **Safe Attachments** detonates attachments in a virtual sandbox before delivery, **Safe Links** rewrites and scans URLs at time of click, anti-phishing intelligence detects impersonation, and **Attack simulation training** runs benign phishing campaigns to educate users.\n\n**Why not the other options:**\n- **Microsoft Defender for Endpoint** — Defender for Endpoint protects *devices* (endpoint detection and response, attack surface reduction). It may catch malware that lands on a laptop, but it is not the service that filters email, detonates attachments pre-delivery, or trains users against phishing.\n- **Microsoft Defender for Cloud Apps** — This is a SaaS security solution for discovering and controlling cloud app usage and protecting data in SaaS apps — not an email hygiene and anti-phishing service.\n- **Microsoft Defender Vulnerability Management** — This discovers and prioritizes software vulnerabilities and misconfigurations on devices. It does not process mail flow or links.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

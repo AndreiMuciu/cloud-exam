@@ -1,0 +1,28 @@
+{
+    "id": "az305-s3-mon-matching",
+    "type": "matching",
+    "question": "Match each monitoring requirement to the Azure Monitor capability designed to satisfy it.",
+    "sourceItems": [
+        "Probe a public web application from multiple Azure regions and alert when it becomes unreachable or slow",
+        "Alert when a metric deviates from its machine-learned historical pattern, without maintaining static thresholds",
+        "Suppress alert notifications for a resource group during a planned maintenance window without disabling the alert rules",
+        "Build an interactive, parameterized operational report that combines metric charts and log query results",
+        "Define once, and reuse across many alert rules, the set of email, SMS, and webhook notifications for the on-call team"
+    ],
+    "targetSlots": [
+        "Application Insights availability tests",
+        "Metric alerts with dynamic thresholds",
+        "Alert processing rules",
+        "Azure Workbooks",
+        "Action groups"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "explanation": "- **Application Insights availability tests** — Synthetic probes (standard tests) run against your public endpoint from multiple Azure points of presence on a schedule, measuring reachability and response time and firing alerts on failures — outside-in monitoring that catches problems users would see even when internal telemetry looks healthy\n- **Metric alerts with dynamic thresholds** — Azure Monitor learns the metric's seasonal, historical pattern and alerts on deviations from the expected band. This removes the guesswork and maintenance of static thresholds for metrics whose normal levels vary by hour or day (traffic, queue depth)\n- **Alert processing rules** — Applied at a scope such as a resource group, they can suppress notifications for a time window (or on a schedule) while leaving the underlying alert rules active — the correct mechanism for maintenance windows. Disabling rules instead risks forgetting to re-enable them\n- **Azure Workbooks** — The canvas for interactive operational reporting in Azure Monitor: parameters, tabs, and visualizations over both metrics and Log Analytics (KQL) queries, shareable with the team and usable as investigation runbooks\n- **Action groups** — The reusable notification bundle referenced by alert rules: email, SMS, voice, push, webhooks, Functions, Logic Apps, ITSM. Defining the on-call group once and referencing it from every rule keeps notification targets consistent and maintainable",
+    "category": "Design Identity, Governance, and Monitoring"
+}

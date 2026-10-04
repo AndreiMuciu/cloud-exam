@@ -1,0 +1,25 @@
+{
+    "id": "dp900-07-larchbrook-archive-tier",
+    "question": "Larchbrook Media must retain raw footage in Azure Blob Storage for ten years. The footage is almost never accessed, a retrieval time of several hours is acceptable, and storage cost must be minimized.\n\nWhich blob access tier should Larchbrook use?",
+    "options": [
+        {
+            "text": "Hot",
+            "correct": false
+        },
+        {
+            "text": "Cool",
+            "correct": false
+        },
+        {
+            "text": "Archive",
+            "correct": true
+        },
+        {
+            "text": "Premium",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Archive** tier has the lowest storage cost of all blob access tiers and is designed for rarely accessed data with flexible latency requirements. Archived blobs are stored offline and must be rehydrated before reading, which can take hours — acceptable here, since Larchbrook tolerates a retrieval time of several hours. For ten-year compliance retention of rarely touched footage, Archive minimizes cost.\n\n**Why not the other options:**\n- **Hot** — Optimized for frequently accessed data; it has the highest storage cost, which conflicts with minimizing cost for footage that is almost never read.\n- **Cool** — Cheaper than Hot and suitable for infrequently accessed data that still needs to be available online immediately, but it costs significantly more to store than Archive. Since hours-long retrieval is acceptable, paying for online availability is unnecessary.\n- **Premium** — A high-performance tier backed by SSDs for latency-sensitive workloads; it is the most expensive option and the opposite of what a rarely accessed archive needs.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_larchbrook_media.json"
+}

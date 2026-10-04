@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-storage-access-key-rotation",
+    "type": "single",
+    "question": "A line-of-business application connects to an Azure Storage account by using a connection string that contains **key1**. Security policy now requires the account's access keys to be rotated. The application must keep working with **no downtime** during the rotation.\n\nWhat should you do?",
+    "options": [
+        { "text": "Update the application's connection string to use key2, verify the application works, then regenerate key1", "correct": true },
+        { "text": "Regenerate key1, then quickly update the application's connection string with the new key1 value", "correct": false },
+        { "text": "Regenerate key1 and key2 at the same time so both keys change in a single operation", "correct": false },
+        { "text": "Delete key1 so the application automatically fails over to key2", "correct": false }
+    ],
+    "explanation": "Azure Storage gives every account **two access keys precisely to enable zero-downtime rotation**. The safe sequence is a swap-then-regenerate cycle: point the application at **key2** first, confirm it works, and only then **regenerate key1** — the app never depends on a key at the moment that key is invalidated. (On the next rotation you do the mirror image: move the app back to the new key1, then regenerate key2.) Remember that regenerating a key also invalidates anything derived from it, such as account SAS tokens signed with that key.\n\n**Why not the other options:**\n- **Regenerate key1 first, then update the app**: the instant key1 is regenerated, the old value stops authenticating — every request the application makes until its configuration is updated fails. That gap is exactly the downtime the requirement forbids.\n- **Regenerate both keys at once**: now *neither* key in any deployed configuration is valid — the application is guaranteed to break until it receives a new value. The two-key design only helps if you rotate them one at a time.\n- **Delete key1**: storage account access keys cannot be deleted, only regenerated — and applications do not automatically fail over between keys; they use whatever literal value is in their connection string.",
+    "category": "Implement and Manage Storage"
+}

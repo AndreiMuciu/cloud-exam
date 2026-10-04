@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-23-relational-table-characteristics",
+    "question": "Which statement correctly describes how data is organized in a table in a relational database?",
+    "options": [
+        {
+            "text": "Every row in the table has the same set of columns, and each column stores values of one defined data type",
+            "correct": true
+        },
+        {
+            "text": "Each row can contain a different set of fields, and new fields can be added to individual rows at any time",
+            "correct": false
+        },
+        {
+            "text": "Data is stored as nested documents in which fields can contain arrays and sub-documents",
+            "correct": false
+        },
+        {
+            "text": "Data is stored as nodes and edges that describe entities and the relationships between them",
+            "correct": false
+        }
+    ],
+    "explanation": "A relational table has a **fixed, predefined schema**: the table's columns are declared up front, **every row supplies a value (or NULL) for exactly those columns**, and each column enforces a single **data type** (such as `INT`, `VARCHAR`, or `DECIMAL`). This rigid structure is what makes relational data *structured* data — it enables strong constraints, joins across tables through keys, and predictable SQL queries.\n\n**Why not the other options:**\n- **Each row can contain a different set of fields...** — That is the flexible-schema behavior of **NoSQL stores** (for example, a key-value or document database), where each item can have its own shape. A relational table rejects rows that do not fit its declared columns.\n- **Data is stored as nested documents with arrays and sub-documents** — That describes a **document database** such as Azure Cosmos DB for NoSQL or MongoDB, which stores JSON-like documents. Relational columns hold scalar values, not nested structures.\n- **Data is stored as nodes and edges** — That describes a **graph database** (for example, Azure Cosmos DB for Apache Gremlin), which is optimized for traversing relationships. Relational databases represent relationships with key columns and joins instead.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

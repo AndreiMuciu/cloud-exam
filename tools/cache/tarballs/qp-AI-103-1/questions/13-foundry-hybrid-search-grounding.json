@@ -1,0 +1,24 @@
+{
+    "id": "ai103-13-foundry-hybrid-search-grounding",
+    "question": "You are building a Foundry agent that must ground its answers in roughly 50,000 internal documents. Users expect both exact keyword matches (product codes, error IDs) and semantically similar passages to surface as relevant results.\n\nWhich retrieval backend should you connect to the agent as a knowledge tool?",
+    "options": [
+        {
+            "text": "Azure AI Search configured for hybrid search (vector plus keyword/BM25), connected to the agent as a knowledge tool.",
+            "correct": true
+        },
+        {
+            "text": "Azure Cache for Redis, used purely as a key-value store mapping document IDs to raw text.",
+            "correct": false
+        },
+        {
+            "text": "Azure AI Content Understanding, with no index or search configuration defined.",
+            "correct": false
+        },
+        {
+            "text": "A single very large prompt that includes the full text of every document on every agent request.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Hybrid search in Azure AI Search** combines vector similarity (for semantically related passages) with keyword/BM25 scoring (for exact matches on codes and IDs), and it plugs directly into a Foundry agent as a retrieval/knowledge tool — exactly the mixed retrieval behavior described.\n\n**Why not the other options:**\n- **Redis as a key-value store** — Gives fast lookup by known key, but no relevance ranking, no semantic similarity, and no keyword search across 50,000 documents; you would need to already know which document to fetch.\n- **Content Understanding with no index configured** — Content Understanding extracts and structures content from documents; without any search/index layer behind it, there is nothing for the agent to query for relevance at all.\n- **Full-context prompting** — Does not scale to 50,000 documents (far beyond any practical context window), provides no ranking, and wastes tokens on irrelevant content for every single question.",
+    "category": "Plan and manage an Azure AI solution"
+}

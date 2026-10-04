@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-data-sqlmi",
+    "question": "A company must move an on-premises SQL Server instance hosting 40 interdependent databases to Azure. The databases use **cross-database queries**, **SQL Agent jobs**, **Service Broker**, and linked servers between databases on the same instance.\n\nThe target platform must be a managed service (no OS patching or infrastructure administration) and must accept the databases with near-100% compatibility and minimal application changes.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure SQL Managed Instance",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Database, rewriting cross-database access to use elastic query",
+            "correct": false
+        },
+        {
+            "text": "An Azure SQL Database elastic pool containing the 40 databases",
+            "correct": false
+        },
+        {
+            "text": "SQL Server on an Azure virtual machine",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure SQL Managed Instance** exists precisely for this migration profile: it is a PaaS deployment of the SQL Server *instance* scope, so features that assume databases living together on one instance keep working:\n\n- **Cross-database queries and (instance-scoped) linked servers** — supported natively, because all 40 databases share one managed instance\n- **SQL Agent** — Managed Instance includes SQL Agent for the existing jobs\n- **Service Broker** — supported on Managed Instance (within the instance), unlike Azure SQL Database\n- **Managed service** — Microsoft handles OS, patching, backups, and HA; near-100% compatibility with on-premises SQL Server keeps application changes minimal\n\n**Why not the other options:**\n- **Azure SQL Database + elastic query** — Azure SQL Database is *database-scoped*: no SQL Agent, no Service Broker, no native cross-database queries. Elastic query is an external-table workaround with performance limits, and every cross-database reference, job, and broker conversation would have to be re-engineered — the opposite of \"minimal application changes\"\n- **Elastic pool** — A pool changes only the *resource-sharing and billing* model for Azure SQL databases; the databases remain isolated single databases with all the same feature gaps (no Agent, no Service Broker, no cross-database queries). Pooling does not create an instance\n- **SQL Server on an Azure VM** — Delivers 100% compatibility, but it is IaaS: the company would patch the OS and SQL Server, manage HA and backups, and operate the VM — failing the \"no infrastructure administration\" requirement when a PaaS option satisfies the compatibility needs",
+    "category": "Design Data Storage Solutions"
+}

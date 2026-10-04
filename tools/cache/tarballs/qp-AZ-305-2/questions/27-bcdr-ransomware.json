@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-bcdr-ransomware",
+    "question": "After a ransomware tabletop exercise, a company's security office requires that Azure VM backups cannot be deleted, have their retention reduced, or have their protection stopped by a single compromised administrator account — even one holding Owner rights on the vault.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Enable and lock vault immutability, and require multi-user authorization (MUA) with Resource Guard for critical vault operations",
+            "correct": true
+        },
+        {
+            "text": "Change the vault's storage replication from LRS to GRS so that backup copies exist in a second region",
+            "correct": false
+        },
+        {
+            "text": "Create an Azure Policy assignment with the Deny effect that blocks the deletion of Recovery Services vaults",
+            "correct": false
+        },
+        {
+            "text": "Grant vault access only through a custom RBAC role that omits the delete permissions",
+            "correct": false
+        }
+    ],
+    "explanation": "Defending backups against a *privileged insider or compromised admin* requires controls that operate **above single-admin authority**, which is exactly what these two features provide:\n\n1. **Locked immutable vault** — Immutability blocks operations that could destroy recovery points (deleting backup data before expiry, reducing retention in a policy, stopping protection with delete). **Locking** the setting makes it irreversible, so a compromised admin cannot simply toggle it off first\n2. **Multi-user authorization with Resource Guard** — Critical operations (disabling soft delete, stopping protection, modifying MUA itself) additionally require authorization on a **Resource Guard** resource that lives in a different scope — ideally a different subscription or tenant under a different administrator. One compromised account can no longer perform a destructive sequence alone; a second, independent identity must approve\n\n**Why not the other options:**\n- **GRS replication** — Geo-redundancy protects against *regional disasters*, not malicious deletion: authorized delete operations replicate to the secondary copy just as faithfully as writes do. The attacker's deletion propagates\n- **Azure Policy Deny on vault deletion** — Policy guards ARM deployments of the vault resource; it does not govern data-plane backup operations like shortening retention or stopping protection — and an Owner-level attacker can remove or exempt the policy assignment first\n- **Custom RBAC role without delete** — Helps for day-to-day least privilege, but the threat model is a *compromised administrator*: an account with Owner rights can grant itself any role. RBAC alone cannot stop an identity that controls RBAC",
+    "category": "Design Business Continuity Solutions"
+}

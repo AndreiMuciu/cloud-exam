@@ -1,0 +1,25 @@
+{
+    "id": "az800-05-glacier-file-sync-offline",
+    "question": "If Glacier Logistics experiences a temporary internet outage, which of the following best describes the user experience for those working in the warehouse with a local Azure File Sync server?",
+    "options": [
+        {
+            "text": "Users cannot access any files until the connection is restored.",
+            "correct": false
+        },
+        {
+            "text": "Users can continue to access all files that are currently cached (tiered-in) on the local server.",
+            "correct": true
+        },
+        {
+            "text": "The local server immediately deletes all tiered files to prevent corruption.",
+            "correct": false
+        },
+        {
+            "text": "All files turn into read-only mode until the connection is restored.",
+            "correct": false
+        }
+    ],
+    "explanation": "Because Azure File Sync keeps a local copy of frequently accessed files, those files remain available during a network outage. Only files that exist *only* in the cloud (tiered-out) will be inaccessible until the connection is restored.\n\n**Why not the other options:**\n- **Cannot access any** — Incorrect, cached data is still available locally.\n- **Deletes files / Read-only** — These are not the standard behaviors of the File Sync agent during disconnects.",
+    "category": "Manage storage and file services",
+    "caseStudy": "scenarios/case_study_glacier_logistics.json"
+}

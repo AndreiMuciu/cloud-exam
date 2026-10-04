@@ -1,0 +1,13 @@
+{
+    "id": "case_study_oakhaven_resorts",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Oakhaven Resorts** is a hospitality group that operates 45 hotels and beach resorts. Each property runs its own property-management system (PMS) that handles check-ins, room assignments, and folio charges during the day.\n\n**Current Data Landscape:**\n- **Nightly exports**: at the end of each business day, every property's PMS exports the day's reservations, folio charges, and housekeeping records as files. A central job collects the files from all 45 properties and processes them together in the early morning hours to update company-wide records.\n- **Guest documents**: front desks scan signed paper registration cards, and guests upload vacation photos to a marketing portal. These scanned images and photos arrive as image files with no predefined fields or schema, and they are always retrieved and displayed as whole files.\n- **Reservation systems**: each property's live reservation database must stay responsive for guests booking and checking in throughout the day."
+        },
+        {
+            "title": "Business Goals",
+            "content": "Oakhaven Resorts is planning its data strategy:\n- Understand what kind of data processing the existing overnight consolidation job represents, so the team can pick appropriate cloud services for it later.\n- Choose an appropriate Azure storage approach for the scanned registration cards and guest-submitted photos.\n- Build a new platform where revenue managers can analyze **five years** of occupancy and revenue history across all 45 properties, running large aggregation queries — without putting any load on the live reservation systems."
+        }
+    ]
+}

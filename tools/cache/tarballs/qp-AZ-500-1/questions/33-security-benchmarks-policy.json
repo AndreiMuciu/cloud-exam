@@ -1,0 +1,24 @@
+{
+    "id": "az500-33-security-benchmarks-policy",
+    "question": "Your company wants to ensure that all Azure resources are aligned with the **Microsoft Cloud Security Benchmark**. Which service should you use to assign this benchmark as a set of policies to your entire subscription and track non-compliant resources?",
+    "options": [
+        {
+            "text": "Azure Policy",
+            "correct": true
+        },
+        {
+            "text": "Azure Blueprints",
+            "correct": false
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Policy** is the primary engine for enforcing standards. The 'Microsoft Cloud Security Benchmark' is available as a built-in **policy initiative** that you can assign to your subscription to gain visibility into your compliance posture.\n\n**Why not the other options:**\n- **Blueprints** — Now deprecated. Was used for deploying a standardized set of resources and policies, but Azure Policy is the runtime engine that tracks compliance over time.\n- **Advisor / Service Health** — Provide recommendations and status updates, but not the formal 'policy compliance' tracking of the benchmark set.",
+    "category": "Manage security operations"
+}

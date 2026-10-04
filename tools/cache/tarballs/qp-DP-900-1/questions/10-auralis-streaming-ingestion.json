@@ -1,0 +1,25 @@
+{
+    "id": "dp900-10-auralis-streaming-ingestion",
+    "question": "Auralis Energy must capture the continuous smart-meter telemetry stream in Microsoft Fabric and process readings as they arrive, so grid operators can be alerted to demand spikes within seconds.\n\nWhich Microsoft Fabric capability should Auralis use to ingest and process the stream?",
+    "options": [
+        {
+            "text": "An eventstream in Real-Time Intelligence",
+            "correct": true
+        },
+        {
+            "text": "A Dataflow Gen2 refreshed on a nightly schedule",
+            "correct": false
+        },
+        {
+            "text": "A data warehouse loaded by a daily T-SQL script",
+            "correct": false
+        },
+        {
+            "text": "A Power BI semantic model in import mode with weekly refresh",
+            "correct": false
+        }
+    ],
+    "explanation": "**Eventstreams**, part of Microsoft Fabric's **Real-Time Intelligence** experience, are designed to capture, transform, and route streaming events as they arrive — with no code required. Meter readings can flow into an eventstream, be processed in motion, land in a real-time analytics store (an eventhouse/KQL database), and trigger alerts within seconds, which meets the grid operators' requirement.\n\n**Why not the other options:**\n- **A Dataflow Gen2 refreshed nightly** — Dataflows perform batch data preparation on a schedule. A nightly refresh reproduces the current problem: spikes would be discovered many hours later.\n- **A data warehouse loaded by a daily T-SQL script** — Also batch processing; a once-per-day load cannot provide second-level alerting on a continuous stream.\n- **A Power BI semantic model in import mode with weekly refresh** — Import-mode models hold a snapshot of data at refresh time; a weekly snapshot is the opposite of real-time visibility.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_auralis_energy.json"
+}

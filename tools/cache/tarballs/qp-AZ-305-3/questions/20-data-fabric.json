@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-data-fabric",
+    "question": "A retail group has curated datasets in three Azure Data Lake Storage Gen2 accounts, maintained by existing Synapse pipelines that must keep running unchanged. The company is adopting Microsoft Fabric so that BI analysts and data scientists can work in a single SaaS analytics environment.\n\nThe design must let Fabric workloads (Spark notebooks, SQL queries, Power BI) analyze the existing lake data **without copying or duplicating it** and without building new ingestion pipelines.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Create a Fabric lakehouse and add OneLake shortcuts that point to the existing ADLS Gen2 containers",
+            "correct": true
+        },
+        {
+            "text": "Build Data Factory copy pipelines that replicate the three accounts into OneLake nightly",
+            "correct": false
+        },
+        {
+            "text": "Export the datasets to a Fabric warehouse using CREATE TABLE AS SELECT statements",
+            "correct": false
+        },
+        {
+            "text": "Have Power BI import the data from each storage account into separate semantic models",
+            "correct": false
+        }
+    ],
+    "explanation": "**OneLake shortcuts** are Fabric's mechanism for virtualizing existing data into the unified lake. A shortcut created in a lakehouse points at an external location — including **ADLS Gen2** — and makes that data appear as if it lived in OneLake:\n\n- **No copies** — the data stays exactly where the existing Synapse pipelines write it; Fabric engines read it in place through the shortcut, so there is no second copy to pay for or keep in sync\n- **No new pipelines** — a shortcut is a metadata object, created in minutes; the existing pipelines continue to update the source and Fabric always sees the current data\n- **All Fabric workloads** — Spark notebooks, the lakehouse SQL analytics endpoint, and Power BI (including Direct Lake mode over Delta tables) can all consume the shortcut data as ordinary lakehouse content\n\n**Why not the other options:**\n- **Nightly copy pipelines into OneLake** — Explicitly violates the no-duplication requirement: doubled storage, a new pipeline estate to operate, and data that is stale between runs. It also creates two sources of truth while the Synapse pipelines keep writing to the original accounts\n- **CREATE TABLE AS SELECT into a Fabric warehouse** — CTAS materializes *copies* of the data inside the warehouse. Beyond the duplication, the copies freeze at load time and every refresh becomes a new ETL job to maintain\n- **Power BI imports per account** — Import mode caches yet more copies inside separate semantic models, on a refresh schedule, and serves only the BI analysts — data scientists working in Spark get nothing. Three separate models also fragment the \"single analytics environment\" goal",
+    "category": "Design Data Storage Solutions"
+}

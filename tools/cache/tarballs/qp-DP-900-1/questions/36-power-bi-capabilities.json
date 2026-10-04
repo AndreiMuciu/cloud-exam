@@ -1,0 +1,29 @@
+{
+    "id": "dp900-36-power-bi-capabilities",
+    "type": "multi",
+    "question": "Which three statements about Microsoft Power BI are true? (Choose three.)",
+    "options": [
+        {
+            "text": "Power BI Desktop is a free Windows application used to connect to data, build semantic models, and design reports",
+            "correct": true
+        },
+        {
+            "text": "Reports published to the Power BI service are organized in workspaces and can be shared with other users",
+            "correct": true
+        },
+        {
+            "text": "Dashboards in the Power BI service are built by pinning visuals from one or more reports onto a single page",
+            "correct": true
+        },
+        {
+            "text": "Dashboards can only be created in Power BI Desktop and then uploaded to the service",
+            "correct": false
+        },
+        {
+            "text": "Power BI can only connect to data stored in Microsoft cloud services",
+            "correct": false
+        }
+    ],
+    "explanation": "**Correct statements:**\n- **Power BI Desktop** — The free Windows authoring tool where analysts connect to data sources, transform data with Power Query, define the semantic model, and design report visuals.\n- **Workspaces and sharing** — Publishing sends a report to a workspace in the cloud-based Power BI service, from which it can be shared with colleagues directly or distributed through apps.\n- **Dashboards from pinned visuals** — A dashboard is a single-page canvas in the **service**, assembled by pinning visuals (tiles) from one or more reports, giving a consolidated at-a-glance view.\n\n**Why the other options are wrong:**\n- **Dashboards created in Desktop** — Reversed: Power BI Desktop creates multi-page **reports**; dashboards exist only in the Power BI service. Nothing dashboard-shaped is authored in Desktop and uploaded.\n- **Microsoft-only data sources** — Power BI connects to hundreds of sources: on-premises databases (via gateways), files such as Excel and CSV, and many non-Microsoft services and databases — not just Microsoft cloud services.",
+    "category": "Describe an Analytics Workload on Azure"
+}

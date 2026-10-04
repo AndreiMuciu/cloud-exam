@@ -1,0 +1,13 @@
+{
+    "id": "case_study_kestrelworks_logistics",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Kestrelworks Logistics** is a SaaS company that sells an AI-powered route-optimization platform to regional delivery fleets. The optimization engine is a set of Python microservices that wrap a machine-learning inference model.\n\n**Current Environment:**\n- All services are packaged as Linux container images and stored in a single **Azure Container Registry** (`kestrelworksacr`).\n- The customer-facing REST API and the inference workers run in an **Azure Container Apps** environment.\n- A legacy batch re-planning service runs on an **Azure Kubernetes Service (AKS)** cluster that was created before the Container Apps migration.\n- Route-recalculation jobs are queued as messages in an **Azure Service Bus** queue named `replan-requests`."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Scaling Requirements:**\n- The inference worker container app must scale out based on the number of messages waiting in the `replan-requests` Service Bus queue, and must scale to zero overnight when the queue is empty.\n\n**Deployment Requirements:**\n- New versions of the REST API must be released gradually: the new version initially receives only 10% of production traffic while the current version keeps 90%, with instant rollback if error rates rise.\n- The AKS cluster must pull images from `kestrelworksacr` without storing registry passwords in the cluster.\n\n**Operational Requirements:**\n- Deployment failures must be diagnosable from pod events and container logs.\n- No credentials may be embedded in images, manifests, or source code."
+        }
+    ]
+}

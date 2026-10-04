@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-07-ombrava-cassandra-api",
+    "question": "Ombrava Telecom must move its on-premises Apache Cassandra usage-record cluster into a managed Azure service without rewriting it. The existing applications must keep using their Cassandra Query Language (CQL) drivers with minimal changes, and the team must stop managing cluster infrastructure.\n\nWhich Azure service should Ombrava use?",
+    "options": [
+        {
+            "text": "Azure Cosmos DB for Apache Cassandra",
+            "correct": true
+        },
+        {
+            "text": "Azure Cosmos DB for NoSQL",
+            "correct": false
+        },
+        {
+            "text": "Azure Database for PostgreSQL",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for Apache Gremlin",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cosmos DB for Apache Cassandra** exposes a wire-compatible Cassandra endpoint on top of the fully managed Cosmos DB platform. Existing applications keep using their CQL drivers and queries largely unchanged, while Microsoft handles the nodes, repairs, patching, scaling, and availability that the operations team currently manages by hand.\n\n**Why not the other options:**\n- **Azure Cosmos DB for NoSQL** — This is Cosmos DB's native document API queried with its own SQL-like syntax. Moving to it would force the applications to be rewritten away from their CQL drivers.\n- **Azure Database for PostgreSQL** — PostgreSQL is a relational database engine; it does not speak CQL and would require a full re-design of the data model and application code.\n- **Azure Cosmos DB for Apache Gremlin** — The Gremlin API is for graph data modeled as vertices and edges and queried with graph traversals — not for Cassandra-style wide-row usage records or CQL applications.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_ombrava_telecom.json"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_sablecroft_mutual",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Sablecroft Mutual** is a regional insurance company. Its datacenter lease expires in 14 months, and the board has approved a full datacenter exit to Azure.\n\n**Current Environment:**\n- The datacenter hosts about 400 servers on VMware vSphere: policy administration, claims processing, document management, and dozens of departmental applications\n- Application knowledge is uneven — several systems were built by staff who have since left, and there is no reliable documentation of which servers communicate with each other\n- The security team prohibits installing new agents on the legacy servers during the discovery phase\n- Most on-premises VMs were sized years ago for peak loads that no longer occur; the infrastructure team believes they are heavily overprovisioned\n- Migration will proceed in waves: applications must be moved together with the servers they depend on, validated, and cut over during monthly maintenance windows"
+        },
+        {
+            "title": "Migration Requirements",
+            "content": "**Migration Requirements:**\n- Before any migration, the team must map the network dependencies among all 400 servers so that interdependent servers can be grouped into the same migration wave — without installing agents on the servers\n- Azure cost projections must reflect the servers' **actual observed utilization**, not their allocated hardware, so that target VM sizes are right-sized rather than copied from on-premises specifications\n- Each wave must be tested in Azure without affecting the running production servers, and cutover downtime must fit within a monthly maintenance window\n- On-premises hardware must be decommissioned progressively as waves complete, to stop paying for capacity that has already moved"
+        }
+    ]
+}

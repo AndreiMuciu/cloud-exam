@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-20-primary-key",
+    "question": "A database designer is creating a `Customers` table and must guarantee that every row can be uniquely identified, so that no two customers can ever share the same identifier and the identifier can never be empty.\n\nWhich relational database concept satisfies this requirement?",
+    "options": [
+        {
+            "text": "A primary key on the table",
+            "correct": true
+        },
+        {
+            "text": "A foreign key referencing another table",
+            "correct": false
+        },
+        {
+            "text": "A nonclustered index on the customer name column",
+            "correct": false
+        },
+        {
+            "text": "A default value on the identifier column",
+            "correct": false
+        }
+    ],
+    "explanation": "A **primary key** is the column (or combination of columns) whose value **uniquely identifies each row** in a table. The database engine enforces two rules for it automatically: the value must be **unique** across all rows, and it can **never be NULL**. That is exactly the guarantee the designer needs — every customer gets one identifier, no duplicates, no blanks.\n\n**Why not the other options:**\n- **A foreign key referencing another table** — A foreign key enforces *referential integrity between tables*: a value in the child table must exist as a key in the parent table. It links rows together; it does not make rows in this table uniquely identifiable.\n- **A nonclustered index on the customer name column** — An ordinary index speeds up lookups; unless it is explicitly declared unique it allows duplicate values, and names are a poor identifier anyway because two customers can share a name.\n- **A default value on the identifier column** — A default only supplies a value when none is provided during insert. It does nothing to prevent duplicates or guarantee uniqueness — in fact, every defaulted row would get the *same* value.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

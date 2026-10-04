@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-11-talverin-content-explorer",
+    "question": "The Talverin Hotels compliance team has enabled data classification in Microsoft Purview, and items containing passport numbers and payment card data are being detected by sensitive information types. The team now needs a current snapshot view showing which documents and emails contain this classified data and where those items are located across SharePoint Online, OneDrive, and Exchange Online — with the ability to drill into the items themselves.\n\nWhich Microsoft Purview tool should the team use?",
+    "options": [
+        {
+            "text": "Content explorer",
+            "correct": true
+        },
+        {
+            "text": "Activity explorer",
+            "correct": false
+        },
+        {
+            "text": "Compliance Manager",
+            "correct": false
+        },
+        {
+            "text": "The Microsoft Service Trust Portal",
+            "correct": false
+        }
+    ],
+    "explanation": "**Content explorer** provides a **current snapshot of items that have been classified** — by sensitive information type, trainable classifier, or label — **and shows where those items reside** across locations such as Exchange Online, SharePoint Online, and OneDrive. Authorized reviewers can drill down from a classification to the list of matching items and, with the right permissions, open the content itself. That is exactly the \"know the data\" objective at Talverin.\n\n**Why not the other options:**\n- **Activity explorer** — Activity explorer shows *what is being done* with labeled or classified content over time — activities such as label changes, downgrades, or files copied to removable media. It answers \"what happened to the data,\" not \"where does the data currently live.\"\n- **Compliance Manager** — Compliance Manager tracks progress against regulatory assessments and improvement actions and produces a compliance score. It does not enumerate classified items in the tenant.\n- **The Microsoft Service Trust Portal** — The Service Trust Portal hosts *Microsoft's own* audit reports and compliance documentation about Microsoft services. It contains no information about Talverin's data.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_talverin_hotels.json"
+}

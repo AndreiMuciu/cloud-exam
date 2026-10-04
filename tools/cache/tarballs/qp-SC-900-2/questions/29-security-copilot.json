@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-29-security-copilot",
+    "question": "A small security operations team struggles to keep up with incident volume. The team wants a generative AI-powered assistant that can summarize an incident in plain language, answer natural-language questions during an investigation, suggest guided response steps, and draft an incident report — drawing on the organization's signals from tools such as Microsoft Defender XDR and Microsoft Sentinel.\n\nWhich Microsoft solution provides these capabilities?",
+    "options": [
+        {
+            "text": "Microsoft Security Copilot",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender Vulnerability Management",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender Threat Intelligence",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview Compliance Manager",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Security Copilot** is Microsoft's **generative AI security assistant**. Analysts interact with it in natural language: it can **summarize incidents**, answer follow-up questions during an investigation, provide **guided, step-by-step response recommendations**, generate reports, and even help less-experienced analysts work at a higher level. It draws context through plugins from Microsoft security products — including Microsoft Defender XDR, Microsoft Sentinel, and Microsoft Intune — as well as from Microsoft's global threat intelligence, and it is available both as a standalone experience and embedded inside products such as the Microsoft Defender portal.\n\n**Why not the other options:**\n- **Microsoft Defender Vulnerability Management** — This discovers and prioritizes software vulnerabilities and misconfigurations on devices. It is not a conversational AI assistant and does not summarize incidents or guide investigations.\n- **Microsoft Defender Threat Intelligence** — Defender TI supplies external threat intelligence content such as threat actor profiles and indicators of compromise. It informs analysts but does not answer natural-language prompts about the organization's own incidents.\n- **Microsoft Purview Compliance Manager** — Compliance Manager tracks progress against regulatory assessments. It plays no role in security operations or incident response.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

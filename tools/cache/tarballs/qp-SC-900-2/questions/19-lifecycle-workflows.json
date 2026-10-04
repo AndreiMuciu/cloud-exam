@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-19-lifecycle-workflows",
+    "question": "An HR-driven organization wants joiner-mover-leaver processes automated in Microsoft Entra: new hires should automatically receive the right group memberships and a welcome task sequence before their start date, and departing employees should automatically lose access and have their accounts disabled on their last day.\n\nWhich Microsoft Entra ID Governance capability provides this automation?",
+    "options": [
+        {
+            "text": "Lifecycle workflows",
+            "correct": true
+        },
+        {
+            "text": "Conditional Access",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Password Protection",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        }
+    ],
+    "explanation": "**Lifecycle workflows**, part of Microsoft Entra ID Governance, automate the **joiner-mover-leaver** stages of the identity lifecycle. Administrators build workflows from templates with **triggers** (for example, days before a hire date or after an employment end date) and **tasks** (enable the account, add to groups, send onboarding email, remove access, disable or delete the account). This removes the manual, error-prone steps that leave departed employees with lingering access.\n\n**Why not the other options:**\n- **Conditional Access** — Conditional Access evaluates each *sign-in* and enforces controls like MFA or block. It does not provision, modify, or deprovision accounts on employment events.\n- **Microsoft Entra Password Protection** — This blocks weak and banned passwords when passwords are set. It has no role in onboarding or offboarding automation.\n- **Microsoft Entra ID Protection** — ID Protection responds to *risk signals* (leaked credentials, anomalous sign-ins). A scheduled, HR-driven offboarding is a lifecycle event, not a detected risk.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az800-12-skyline-private-dns-zones",
+    "question": "Skyline Insurance uses Azure DNS Private Zones. They want their on-premises servers to be able to resolve names in an Azure private zone (e.g., 'corp.internal'). Which infrastructure component should they deploy to Azure to bridge the DNS gap between on-premises and the Azure Private Zone?",
+    "options": [
+        {
+            "text": "Azure DNS Private Resolver",
+            "correct": true
+        },
+        {
+            "text": "Azure Public DNS",
+            "correct": false
+        },
+        {
+            "text": "A standard Windows Server DNS server",
+            "correct": false
+        },
+        {
+            "text": "An Azure VPN Gateway",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Azure DNS Private Resolver** is a managed service that allows you to query Azure DNS Private Zones from on-premises environments (and vice-versa) using inbound and outbound endpoints, without the need to manage custom DNS VMs.\n\n**Why not the other options:**\n- **Public DNS** — Cannot access private zones.\n- **Windows Server DNS** — While this *can* work (via conditional forwarding), the 'managed service' approach (Private Resolver) is now the Azure best practice.\n- **VPN Gateway** — Provides the *path* for the traffic, but not the DNS *resolution* logic itself.",
+    "category": "Implement and manage on-premises and hybrid networking",
+    "caseStudy": "scenarios/case_study_skyline_insurance.json"
+}

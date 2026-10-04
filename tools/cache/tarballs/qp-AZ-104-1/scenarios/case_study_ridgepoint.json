@@ -1,0 +1,13 @@
+{
+    "id": "case_study_ridgepoint",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Ridgepoint Financial** is a financial services firm with 2,500 employees and offices in New York, London, and Singapore. The company provides investment advisory and portfolio management services.\n\n**Current Environment:**\n- Microsoft Entra tenant: ridgepointfinancial.com\n- Strict regulatory compliance requirements (SOC 2, PCI-DSS)\n- Two Azure subscriptions: Corporate IT, Trading Platform\n- All production infrastructure is in Azure\n\n**Compliance Requirements:**\n- All resources must be deployed to approved regions only (East US, West Europe)\n- Resource tags are mandatory for cost allocation\n- Network traffic between subnets must be controlled by NSGs\n- All administrative actions must be audited\n- Data at rest must use customer-managed encryption keys"
+        },
+        {
+            "title": "Infrastructure",
+            "content": "**Virtual Networks:**\n- VNet-Corp (10.10.0.0/16) — Corporate workloads, 4 subnets\n- VNet-Trading (10.20.0.0/16) — Trading platform, 3 subnets\n- VNet-DMZ (10.30.0.0/16) — Public-facing services, 2 subnets\n- Peering between VNet-Corp and VNet-Trading\n- ExpressRoute connecting the New York office\n\n**Compute Resources:**\n- 50 Azure VMs across multiple availability sets\n- Azure Load Balancers (Standard SKU) for trading APIs\n- Azure Application Gateway with WAF for web front-ends\n\n**Storage:**\n- 6 Storage Accounts with various replication strategies\n- Azure Blob for document storage and archival\n- Recovery Services vaults in each region\n\n**Identity:**\n- Conditional Access policies enforcing MFA\n- Privileged Identity Management for admin roles\n- 15 custom RBAC roles for granular access control"
+        }
+    ]
+}

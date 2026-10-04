@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-22-vnet-segmentation",
+    "question": "A company deploys its Azure workloads into separate virtual networks and subnets — one segment for internet-facing web servers, another for internal APIs, and another for databases — with traffic between segments allowed only where explicitly required.\n\nWhat is the primary security benefit of this network segmentation?",
+    "options": [
+        {
+            "text": "It contains a compromise within one segment and limits an attacker's ability to move laterally to other workloads",
+            "correct": true
+        },
+        {
+            "text": "It removes the need for identity-based access controls such as MFA",
+            "correct": false
+        },
+        {
+            "text": "It automatically encrypts all data stored in the segmented subnets",
+            "correct": false
+        },
+        {
+            "text": "It guarantees compliance with data residency regulations",
+            "correct": false
+        }
+    ],
+    "explanation": "**Network segmentation** divides an environment into isolated zones with controlled communication paths between them. If the internet-facing web tier is compromised, the attacker cannot freely reach the API tier or the databases — traffic between segments is denied unless explicitly allowed (for example, by network security group rules or a firewall between segments). Segmentation therefore **reduces the blast radius of a breach and impedes lateral movement**, supporting the Zero Trust \"assume breach\" mindset.\n\n**Why not the other options:**\n- **Removing the need for identity controls** — Segmentation is one layer of defense in depth; it complements, never replaces, identity protections such as MFA and Conditional Access.\n- **Automatic encryption of stored data** — Segmentation shapes *traffic flow*; it does not encrypt anything. Encryption at rest is a separate control (storage service encryption, disk encryption).\n- **Guaranteed data residency compliance** — Where data physically resides is governed by region selection and policy, not by how subnets are divided within a network.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

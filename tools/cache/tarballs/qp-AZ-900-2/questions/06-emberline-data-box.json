@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-06-emberline-data-box",
+    "question": "Emberline must move its 400 TB historical SCADA archive into Azure within six weeks, but the site has only a 100 Mbps internet uplink that daily operations also depend on. Which migration option best meets the deadline?",
+    "options": [
+        {
+            "text": "Copy the data over the internet with AzCopy",
+            "correct": false
+        },
+        {
+            "text": "Order Azure Data Box devices and ship the data to Microsoft",
+            "correct": true
+        },
+        {
+            "text": "Install Azure File Sync on the storage arrays",
+            "correct": false
+        },
+        {
+            "text": "Upload the files manually using Azure Storage Explorer",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Data Box** is a rugged physical appliance that Microsoft ships to you; you copy data onto it locally at LAN speed and ship it back, and Microsoft uploads the contents into your storage account. It exists precisely for large offline transfers (tens of terabytes to petabytes) where the network link makes online transfer impractical. Moving 400 TB over a 100 Mbps line would take roughly a year of continuous saturation — far beyond the six-week deadline.\n\n**Why not the other options:**\n- **AzCopy** — An excellent command-line copy tool, but it still moves data over the same 100 Mbps uplink, so the deadline cannot be met.\n- **Azure File Sync** — Keeps an on-premises Windows file server synchronized with Azure Files for ongoing hybrid access; it is not a bulk offline migration mechanism and still relies on the network.\n- **Azure Storage Explorer** — A graphical management tool; manual uploads are constrained by the same bandwidth limit.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_emberline_energy.json"
+}

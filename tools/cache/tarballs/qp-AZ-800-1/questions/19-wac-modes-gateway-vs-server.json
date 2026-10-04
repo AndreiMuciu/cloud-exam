@@ -1,0 +1,24 @@
+{
+    "id": "az800-19-wac-modes-gateway-vs-server",
+    "question": "You are installing Windows Admin Center (WAC) on a dedicated Windows Server that will manage multiple other servers in your network. Which installation mode should you choose?",
+    "options": [
+        {
+            "text": "Desktop mode",
+            "correct": false
+        },
+        {
+            "text": "Gateway mode",
+            "correct": true
+        },
+        {
+            "text": "Agent mode",
+            "correct": false
+        },
+        {
+            "text": "Relay mode",
+            "correct": false
+        }
+    ],
+    "explanation": "When WAC is installed on a server to manage *other* servers (rather than being managed itself), it is installed in **Gateway mode**. This allows users to connect to the WAC server via a web browser and manage any server that the WAC server can reach.\n\n**Why not the other options:**\n- **Desktop mode** — For installation on Windows 10/11 for local or ad-hoc management.\n- **Agent / Relay** — Not standard WAC installation mode names.",
+    "category": "Manage Windows Servers and workloads in a hybrid environment"
+}

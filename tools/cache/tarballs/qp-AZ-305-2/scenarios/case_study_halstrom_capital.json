@@ -1,0 +1,13 @@
+{
+    "id": "case_study_halstrom_capital",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Halstrom Capital** is an asset-management firm that runs a portfolio-risk platform on Azure IaaS. The platform consists of 30 Azure VMs (application and calculation tiers) in the West Europe region and produces end-of-day valuation reports that regulators require the firm to be able to reproduce.\n\n**Current Environment:**\n- All VMs currently run in a single availability zone in West Europe\n- Valuation reports (unstructured files) are written to an Azure Storage account\n- The firm's regulator requires documented, periodically tested disaster recovery procedures\n- A ransomware incident at a competitor has made the board demand protection against malicious destruction of recovery data"
+        },
+        {
+            "title": "Business Continuity Requirements",
+            "content": "**Recovery Requirements:**\n- If the West Europe region becomes unavailable, the risk platform must be recoverable in North Europe with a recovery time objective (RTO) of 2 hours and a recovery point objective (RPO) of 15 minutes\n- DR procedures must be tested quarterly **without** impacting the production environment and without initiating an actual failover\n- Valuation report files must remain **readable** by the reporting team even while the primary storage region is experiencing an outage, and must also survive the loss of a single datacenter within the primary region\n- Recovery infrastructure costs must be minimized — the firm does not want to pay for a continuously running duplicate environment in North Europe"
+        }
+    ]
+}

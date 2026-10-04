@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-sablecroft-waves",
+    "type": "ordering",
+    "question": "You are documenting the end-to-end procedure for migrating one wave of interdependent servers to Azure using Azure Migrate. Arrange the steps in the correct order.",
+    "items": [
+        "Run discovery and a performance-based assessment for the wave's servers",
+        "Group the servers into the wave based on dependency-analysis results",
+        "Enable replication of the wave's servers to Azure",
+        "Run a test migration into an isolated virtual network and validate the applications",
+        "Complete the migration cutover during the monthly maintenance window",
+        "Decommission the on-premises servers for the completed wave"
+    ],
+    "correctOrder": [
+        "Run discovery and a performance-based assessment for the wave's servers",
+        "Group the servers into the wave based on dependency-analysis results",
+        "Enable replication of the wave's servers to Azure",
+        "Run a test migration into an isolated virtual network and validate the applications",
+        "Complete the migration cutover during the monthly maintenance window",
+        "Decommission the on-premises servers for the completed wave"
+    ],
+    "explanation": "The Azure Migrate wave lifecycle follows the **Assess → Plan → Replicate → Test → Migrate → Decommission** sequence:\n\n1. **Discovery and assessment** — The appliance inventories the servers and collects performance data; the assessment produces readiness, right-sized SKUs, and cost projections. Everything downstream depends on this data\n2. **Group by dependencies** — Dependency-analysis results identify which servers communicate, so applications move *together with the servers they depend on*. Grouping before replication prevents cutting a live dependency mid-wave\n3. **Enable replication** — The wave's servers begin replicating their disks to Azure in the background while production keeps running; replication must reach a synchronized state before any migration event\n4. **Test migration** — A test failover spins the servers up in an **isolated VNet** from replicated data, letting the team validate application behavior with zero impact on production. Testing before cutover is the point of the exercise — discovering a broken dependency *after* cutover means an emergency rollback\n5. **Cutover** — The final migration stops the source VMs, completes a last delta replication, and brings the Azure VMs online — scheduled inside the monthly maintenance window to fit the downtime budget\n6. **Decommission** — Only after the wave is validated in production are the on-premises servers retired, progressively freeing datacenter capacity ahead of the lease expiry\n\nAny other order breaks a dependency: you cannot group without assessment data, test without replicated data, or safely decommission before a successful cutover.",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_sablecroft_mutual.json"
+}

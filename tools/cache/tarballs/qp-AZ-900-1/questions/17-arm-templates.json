@@ -1,0 +1,24 @@
+{
+    "id": "az900-17-arm-templates",
+    "question": "A company needs to deploy the same set of Azure resources consistently across multiple environments (development, staging, and production). Which approach allows them to define their infrastructure in a declarative JSON file and deploy it repeatably?",
+    "options": [
+        {
+            "text": "Azure Resource Manager (ARM) templates",
+            "correct": true
+        },
+        {
+            "text": "Azure Advisor recommendations",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health alerts",
+            "correct": false
+        },
+        {
+            "text": "Azure Cost Management budgets",
+            "correct": false
+        }
+    ],
+    "explanation": "**ARM templates** are JSON files that define the infrastructure and configuration for your Azure resources. They use a declarative syntax, meaning you specify *what* you want to deploy, and the template engine handles the *how*. This ensures consistent, repeatable deployments across all environments.\n\n**Why not the other options:**\n- **Azure Advisor** — Provides best-practice recommendations for cost, security, reliability, and performance; it does not deploy resources.\n- **Azure Service Health** — Monitors the health of Azure services and regions.\n- **Azure Cost Management** — Tracks and manages spending; it does not deploy infrastructure.",
+    "category": "Describe Azure Management and Governance"
+}

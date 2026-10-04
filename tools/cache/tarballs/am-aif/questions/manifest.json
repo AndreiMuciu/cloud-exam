@@ -1,0 +1,11 @@
+{
+  "title": "AWS Certified AI Practitioner (AIF-C01) Practice Test",
+  "domains": [
+    "fundamentals-of-ai-and-ml.json",
+    "fundamentals-of-generative-ai.json",
+    "applications-of-foundation-models.json",
+    "guidelines-for-responsible-ai.json",
+    "security-compliance-and-governance.json",
+    "aws-managed-ai-services.json"
+  ]
+}

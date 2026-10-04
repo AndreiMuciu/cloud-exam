@@ -1,0 +1,24 @@
+{
+    "id": "dp900-19-unstructured-data",
+    "question": "Which of the following is an example of unstructured data?",
+    "options": [
+        {
+            "text": "Rows in a relational database table",
+            "correct": false
+        },
+        {
+            "text": "A CSV file with a consistent header row and delimited columns",
+            "correct": false
+        },
+        {
+            "text": "MP4 video files recorded by security cameras",
+            "correct": true
+        },
+        {
+            "text": "JSON documents containing named key/value pairs",
+            "correct": false
+        }
+    ],
+    "explanation": "**Video files are unstructured data**. They have no field-level data model that a database engine can interpret — the content is a binary stream of audio and imagery. Unstructured data (video, audio, images, free-form documents) is typically stored as objects, for example in Azure Blob Storage.\n\n**Why not the other options:**\n- **Rows in a relational table** — Structured data: a fixed schema of typed columns is defined before any data is written.\n- **A CSV file with a consistent header and columns** — Tabular data with a consistent column layout is treated as structured data, even though it lives in a text file.\n- **JSON documents with key/value pairs** — Semi-structured data: the schema is flexible, but each document carries self-describing structure (field names, nesting) that query engines can navigate.",
+    "category": "Describe Core Data Concepts"
+}

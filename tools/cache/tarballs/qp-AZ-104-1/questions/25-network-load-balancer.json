@@ -1,0 +1,29 @@
+{
+    "id": "az104-network-load-balancer",
+    "type": "multi",
+    "question": "You have internal users who connect via VPN and site-to-site connections to access a line-of-business application running on multiple Azure VMs. The VMs are in a virtual network named VNet-Corp.\n\nYou need to ensure that connections to the application are distributed across all the VMs.\n\nWhich two Azure services could you use? (Choose two.)",
+    "options": [
+        {
+            "text": "Azure Traffic Manager",
+            "correct": false
+        },
+        {
+            "text": "Azure Internal Load Balancer",
+            "correct": true
+        },
+        {
+            "text": "Azure Application Gateway",
+            "correct": true
+        },
+        {
+            "text": "Azure Content Delivery Network (CDN)",
+            "correct": false
+        },
+        {
+            "text": "Azure Public Load Balancer",
+            "correct": false
+        }
+    ],
+    "explanation": "For distributing **internal** traffic across VMs accessed via VPN/site-to-site connections:\n\n1. **Azure Internal Load Balancer** ✅ — Operates at Layer 4 (TCP/UDP) and uses a private IP address within the VNet. Ideal for distributing internal traffic from VPN-connected users.\n\n2. **Azure Application Gateway** ✅ — Operates at Layer 7 (HTTP/HTTPS) and can be deployed within the VNet with a private frontend IP. Provides advanced features like URL-based routing and SSL termination.\n\nWhy not the other options:\n- **Traffic Manager** — DNS-based load balancing for distributing traffic across **public** endpoints in different regions. Not suitable for internal VNet traffic.\n- **CDN** — Caches and delivers static content from edge locations. Not a load balancer for application traffic.\n- **Public Load Balancer** — Distributes traffic from the internet. Since users connect via VPN (internal), a public LB is not appropriate.",
+    "category": "Implement and Manage Virtual Networking"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-infra-serverless",
+    "question": "An engineering team of C# developers is designing an order-fulfillment workflow: when an order is placed, the system must call inventory, payment, and shipping services in sequence, fan out to reserve stock across multiple warehouses in parallel, wait for all reservations, then aggregate the results. Workflow state must survive process restarts, and the team wants to express the orchestration in code with unit tests.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Durable Functions with an orchestrator function using the fan-out/fan-in pattern",
+            "correct": true
+        },
+        {
+            "text": "Azure Logic Apps with the designer and built-in connectors",
+            "correct": false
+        },
+        {
+            "text": "Stateless Azure Functions chained through Azure Service Bus queues, with workflow state stored in a database table",
+            "correct": false
+        },
+        {
+            "text": "An always-on Azure VM running a Windows service that executes the workflow steps",
+            "correct": false
+        }
+    ],
+    "explanation": "**Durable Functions** is the code-first orchestration engine for exactly these patterns:\n\n- **Function chaining** (inventory → payment → shipping) and **fan-out/fan-in** (parallel warehouse reservations awaited with `Task.WhenAll`) are the canonical documented Durable Functions patterns, expressed directly in C#\n- **Durable state** — The orchestrator's progress is checkpointed via event sourcing to the task hub storage; if the process restarts mid-workflow, the orchestration replays and resumes exactly where it left off — no state is lost\n- **Testability** — Orchestrator and activity functions are ordinary C# methods that can be unit tested, matching the team's skills and requirement\n\n**Why not the other options:**\n- **Logic Apps** — A first-class workflow service, but it is *designer-first* (JSON workflow definitions edited visually). For a C# team that explicitly wants code-with-unit-tests, Durable Functions is the recommended choice in Microsoft's own comparison of the two; Logic Apps shines when the problem is integration breadth via hundreds of connectors rather than custom code orchestration\n- **Stateless Functions + Service Bus + state table** — Recreates by hand what Durable Functions provides natively: correlation, checkpointing, replay, timeout handling, and fan-in aggregation logic. Substantial custom plumbing, more failure modes, and no orchestration-level test story\n- **Always-on VM with a Windows service** — Pays for idle compute, provides no built-in durability for in-flight workflows (a restart loses in-memory state unless the team builds persistence), and shifts patching and availability onto the team",
+    "category": "Design Infrastructure Solutions"
+}

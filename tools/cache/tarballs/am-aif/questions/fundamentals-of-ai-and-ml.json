@@ -1,0 +1,189 @@
+{
+  "domain": "Fundamentals of AI and ML",
+  "questions": [
+    {
+      "id": 1,
+      "question": "A data scientist explains that their field sits within a broader discipline, and their latest project uses neural networks with dozens of layers. How do these three levels of technology relate to each other?",
+      "options": [
+        { "id": "a", "text": "AI is the broadest discipline, ML is a subset of AI, and Deep Learning is a further specialization within ML" },
+        { "id": "b", "text": "Deep Learning is the broadest category, with ML and AI as its specialized subsets" },
+        { "id": "c", "text": "They are interchangeable terms that vendors use for the same set of algorithms" },
+        { "id": "d", "text": "AI and ML are independent research fields that occasionally share techniques" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "AI is the broadest field encompassing technologies that simulate human intelligence. Machine Learning is a subset focused on learning from data. Deep Learning is a specialized subset of ML using neural networks with multiple layers.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 2,
+      "question": "An e-commerce platform wants to segment its customers into groups based on purchasing behavior, but no one has pre-labeled which group each customer belongs to. Which approach should the team use?",
+      "options": [
+        { "id": "a", "text": "Reinforcement learning with a reward signal tied to purchase amounts" },
+        { "id": "b", "text": "Clustering through unsupervised learning to discover natural groupings" },
+        { "id": "c", "text": "Classification through supervised learning using historical sales labels" },
+        { "id": "d", "text": "Semi-supervised learning combining a small set of group labels with the remaining data" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Unsupervised learning is ideal for finding patterns without predefined labels. Clustering algorithms group similar data points together, making it perfect for customer segmentation without prior categorization.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 3,
+      "question": "A bank needs to approve or decline each credit card transaction within milliseconds to prevent fraud. Which inferencing strategy meets this requirement?",
+      "options": [
+        { "id": "a", "text": "Scheduled batch jobs that process accumulated transactions every hour" },
+        { "id": "b", "text": "Offline analysis of historical transactions to build risk profiles" },
+        { "id": "c", "text": "Nightly ETL pipelines that flag suspicious activity for next-day review" },
+        { "id": "d", "text": "Real-time inference that evaluates each transaction as it arrives" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Real-time inferencing processes data and returns predictions immediately, which is crucial for fraud detection where instant decisions are needed to approve or flag transactions as they occur.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 4,
+      "question": "A game-playing agent starts with random moves, gradually improves by receiving points for winning and losing points for illegal moves. Which paradigm describes this learning process?",
+      "options": [
+        { "id": "a", "text": "An agent optimizing its strategy through rewards and penalties from the environment" },
+        { "id": "b", "text": "A model trained on a labeled dataset of winning and losing board positions" },
+        { "id": "c", "text": "A clustering algorithm grouping similar game states without labels" },
+        { "id": "d", "text": "A pretrained vision model fine-tuned on screenshots of the game board" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Reinforcement learning involves an agent learning through interaction with an environment and receiving feedback. The agent learns to maximize cumulative rewards over time through trial and error.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 5,
+      "question": "A hospital stores patient records in a relational database with clearly defined columns for age, blood pressure, diagnosis code, and treatment outcome. What data category does this represent?",
+      "options": [
+        { "id": "a", "text": "Semi-structured data stored in self-describing formats like JSON or XML" },
+        { "id": "b", "text": "Unstructured data requiring specialized processing pipelines" },
+        { "id": "c", "text": "Tabular data organized in structured rows and columns" },
+        { "id": "d", "text": "Time-series data indexed sequentially by timestamp" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Tabular data is organized in rows and columns like spreadsheets or database tables. This structured format is common in business applications and works well with traditional ML algorithms.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 6,
+      "question": "A model performs extremely well on its training dataset, achieving 99% accuracy, but drops to 60% accuracy when evaluated on new data it has never seen. What problem does this indicate?",
+      "options": [
+        { "id": "a", "text": "The model architecture has too few parameters to learn the patterns" },
+        { "id": "b", "text": "The model has memorized the training data including its noise and does not generalize" },
+        { "id": "c", "text": "The evaluation dataset is corrupted and needs to be cleaned" },
+        { "id": "d", "text": "The training process terminated too early before convergence" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Overfitting occurs when a model learns the training data too well, including noise and random fluctuations. This results in poor generalization to new, unseen data.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 7,
+      "question": "A linear regression model produces nearly identical error rates on both training and test data, but both rates are unacceptably high. What is the most likely issue?",
+      "options": [
+        { "id": "a", "text": "The model has memorized the training examples and cannot generalize" },
+        { "id": "b", "text": "The model is too simple to capture the underlying patterns in the data" },
+        { "id": "c", "text": "The test dataset contains label errors that inflate the error rate" },
+        { "id": "d", "text": "The learning rate was set too high during the optimization process" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Underfitting occurs when a model is too simple to capture the underlying patterns in the data. It performs poorly on both training and test data because it cannot represent the complexity of the relationship.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 8,
+      "question": "A medical imaging team has ten thousand X-rays, each tagged by a radiologist as either 'normal' or 'abnormal.' What makes this dataset distinct from one that lacks those tags?",
+      "options": [
+        { "id": "a", "text": "The tagged dataset is encrypted while the untagged one is stored in plain text" },
+        { "id": "b", "text": "The tagged dataset is smaller because adding labels removes duplicate images" },
+        { "id": "c", "text": "The tagged dataset comes from verified sources while the untagged one does not" },
+        { "id": "d", "text": "The tagged dataset pairs each input with a known output, enabling supervised training" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Labeled data includes both input features and corresponding output labels used in supervised learning. Unlabeled data contains only inputs without corresponding labels.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 9,
+      "question": "An autonomous vehicle collects terabytes of dashcam video, audio recordings from its microphone array, and free-text incident reports from test drivers. What category best describes these data types?",
+      "options": [
+        { "id": "a", "text": "Structured data organized in relational database tables" },
+        { "id": "b", "text": "Tabular data arranged in rows with well-defined column schemas" },
+        { "id": "c", "text": "Time-series data indexed by sequential timestamps" },
+        { "id": "d", "text": "Unstructured data that lacks a predefined format" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Unstructured data lacks a predefined format and includes text documents, images, audio files, and videos. It requires specialized processing techniques for AI applications.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 10,
+      "question": "A robotics startup trains a warehouse picking arm by having it attempt thousands of grasps, receiving a positive signal when it successfully picks up an item and a negative signal when it drops one. Which learning approach is this?",
+      "options": [
+        { "id": "a", "text": "Supervised classification using labeled images of objects" },
+        { "id": "b", "text": "Unsupervised clustering of object shapes and sizes" },
+        { "id": "c", "text": "Optimization through interaction with the environment and feedback signals" },
+        { "id": "d", "text": "Transfer learning from a pretrained language model" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Reinforcement learning involves an agent learning through interaction with an environment, receiving rewards for beneficial actions and penalties for undesirable ones.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 11,
+      "question": "A data engineer transforms raw website clickstream logs into derived columns such as 'average session duration,' 'pages per visit,' and 'time since last purchase.' What is this process called?",
+      "options": [
+        { "id": "a", "text": "Model distillation, which compresses a large model into a smaller one" },
+        { "id": "b", "text": "Data augmentation, which generates synthetic training examples" },
+        { "id": "c", "text": "Hyperparameter tuning, which optimizes model training configuration" },
+        { "id": "d", "text": "Feature engineering, which creates informative input variables from raw data" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Feature engineering uses domain knowledge to create new input features that better represent the underlying problem, potentially improving model performance and interpretability.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 12,
+      "question": "A team is building a CI/CD pipeline that automatically retrains their recommendation model when new data arrives, runs validation tests, and promotes the model to production if metrics improve. What discipline does this describe?",
+      "options": [
+        { "id": "a", "text": "MLOps, which applies DevOps practices to the machine learning lifecycle" },
+        { "id": "b", "text": "Data cataloging, which inventories available datasets for discovery" },
+        { "id": "c", "text": "Model distillation, which compresses large models for deployment" },
+        { "id": "d", "text": "Feature store management, which versions engineered input variables" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "MLOps (Machine Learning Operations) streamlines taking ML models to production and maintaining them. It includes CI/CD for models, monitoring, and governance practices.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 13,
+      "question": "A logistics company needs to predict package volumes for the upcoming holiday season using three years of daily shipment counts. Which inference approach is most appropriate for this non-urgent, large-scale prediction?",
+      "options": [
+        { "id": "a", "text": "On-device edge inference for each package as it is scanned" },
+        { "id": "b", "text": "Real-time inference returning a prediction within milliseconds" },
+        { "id": "c", "text": "Batch inference that processes the full historical dataset on a schedule" },
+        { "id": "d", "text": "Streaming inference that continuously processes a live data feed" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Batch inferencing processes large volumes of data at once on a scheduled basis. It's ideal for non-time-sensitive applications like seasonal demand forecasts or bulk predictions.",
+      "domain": "Fundamentals of AI and ML"
+    },
+    {
+      "id": 14,
+      "question": "Which TWO of the following machine learning paradigms require labeled training examples to learn? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Semi-supervised learning that leverages a small amount of labeled data alongside unlabeled data" },
+        { "id": "b", "text": "Supervised learning for classification and regression using input-output pairs" },
+        { "id": "c", "text": "Reinforcement learning that relies on reward signals from the environment" },
+        { "id": "d", "text": "Unsupervised learning for discovering clusters without predefined labels" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "b"],
+      "explanation": "Supervised learning requires fully labeled data for training. Semi-supervised learning uses a combination of labeled and unlabeled data. Unsupervised learning uses no labels, and reinforcement learning uses reward signals.",
+      "domain": "Fundamentals of AI and ML"
+    }
+  ]
+}

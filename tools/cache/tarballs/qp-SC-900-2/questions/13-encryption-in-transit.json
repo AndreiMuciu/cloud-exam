@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-13-encryption-in-transit",
+    "question": "A customer submits an order on a retailer's website over an HTTPS connection. The payment details are protected while they travel across the internet between the customer's browser and the web server.\n\nWhich form of data protection does this describe?",
+    "options": [
+        {
+            "text": "Encryption of data in transit",
+            "correct": true
+        },
+        {
+            "text": "Encryption of data at rest",
+            "correct": false
+        },
+        {
+            "text": "Encryption of data in use",
+            "correct": false
+        },
+        {
+            "text": "Hashing",
+            "correct": false
+        }
+    ],
+    "explanation": "Data can be protected in three states, and **data in transit** is data actively moving across a network — between a browser and a web server, between services, or between data centers. HTTPS (HTTP over TLS) is the classic example: it **encrypts the data while it travels**, so anyone intercepting the traffic sees only ciphertext.\n\n**Why not the other options:**\n- **Encryption of data at rest** — This protects data stored on physical media — disks, databases, backups. The scenario describes data moving over the internet, not sitting in storage.\n- **Encryption of data in use** — This protects data while it is being processed in memory, for example with confidential computing technologies. The payment details in the scenario are in motion between two endpoints, not being computed on.\n- **Hashing** — Hashing produces a fixed-length, one-way value used to verify integrity or store password verifiers; it is not designed to be reversed, so it cannot deliver the payment details readable to the server. HTTPS relies on encryption, which is reversible by the intended recipient.",
+    "category": "Describe the concepts of security, compliance, and identity"
+}

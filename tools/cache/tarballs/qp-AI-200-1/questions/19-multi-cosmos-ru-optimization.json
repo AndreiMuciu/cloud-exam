@@ -1,0 +1,29 @@
+{
+    "id": "ai200-19-multi-cosmos-ru-optimization",
+    "type": "multi",
+    "question": "An Azure Cosmos DB for NoSQL container stores large document-embedding records. Writes are heavy, most properties are never filtered on, and hot-path reads fetch a known document by its `id` and partition key. You need to reduce the RU consumption of the workload.\n\nWhich three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Customize the indexing policy to exclude property paths that are never used in query filters or ordering.",
+            "correct": true
+        },
+        {
+            "text": "Replace hot-path `SELECT * FROM c WHERE c.id = @id` queries with point reads via `read_item(item=id, partition_key=pk)`.",
+            "correct": true
+        },
+        {
+            "text": "Use session consistency instead of strong consistency for reads that do not require global ordering guarantees.",
+            "correct": true
+        },
+        {
+            "text": "Increase the container's provisioned throughput so each operation consumes fewer RUs.",
+            "correct": false
+        },
+        {
+            "text": "Set `enable_cross_partition_query=True` on all queries so the SDK can parallelize them across partitions.",
+            "correct": false
+        }
+    ],
+    "explanation": "Three changes genuinely lower RU *consumption*:\n- **Excluding unused paths from the indexing policy** — Every indexed path adds RU cost to each write. For write-heavy documents with large embedding arrays and unqueried properties, excluding those paths cuts the per-write charge substantially.\n- **Point reads instead of id queries** — A point read of a 1 KB item costs about 1 RU, while an equivalent query goes through the query engine and costs several times more. When you know `id` + partition key, `read_item` is the cheapest possible operation.\n- **Session instead of strong consistency** — Reads at strong (and bounded staleness) consistency cost roughly **twice** the RUs of reads at session, consistent prefix, or eventual. If the workload doesn't need linearizability, session halves read charges while still guaranteeing read-your-own-writes.\n\n**Why not the other options:**\n- **Increasing provisioned throughput** — Raises the RU/s *budget* (and your bill); it does not change how many RUs each operation consumes.\n- **Forcing cross-partition queries** — Fan-out makes every physical partition process the query, increasing total RU charge; it helps only when the data genuinely spans partitions, and it is never an optimization for single-partition access patterns.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

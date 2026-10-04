@@ -1,0 +1,24 @@
+{
+    "id": "az104-storage-soft-delete",
+    "question": "You have an Azure Storage account with blob soft delete enabled with a retention period of 7 days. A developer accidentally deletes a critical blob named `backup-2024-11.vhd` on Monday.\n\nOn the following Friday (6 days later), you need to recover this blob. What should you do?",
+    "options": [
+        {
+            "text": "The blob cannot be recovered because it was deleted more than 24 hours ago",
+            "correct": false
+        },
+        {
+            "text": "Contact Azure Support to restore the blob from their backup",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Backup to restore the blob from the Recovery Services vault",
+            "correct": false
+        },
+        {
+            "text": "In the Azure portal, navigate to the container, enable 'Show deleted blobs', select the blob, and click 'Undelete'",
+            "correct": true
+        }
+    ],
+    "explanation": "**Blob soft delete** temporarily preserves deleted blobs for a configurable retention period (1-365 days). During this period, deleted blobs can be recovered through the portal or programmatically.\n\nTo recover a soft-deleted blob:\n1. Navigate to the storage account and container in the portal\n2. Enable the 'Show deleted blobs' option in the container view\n3. Select the soft-deleted blob (it will appear with a special icon)\n4. Click 'Undelete' to restore it\n\nSince the blob was deleted 6 days ago and the retention period is 7 days, it's still within the recovery window.\n\n**Key points:**\n- Soft delete is different from backup — it's a built-in storage feature\n- After the retention period expires, the blob is permanently deleted\n- Soft delete also protects blob snapshots and versions\n- Azure Backup can back up blob storage, but soft delete is the simpler recovery method for recent deletions",
+    "category": "Implement and Manage Storage"
+}

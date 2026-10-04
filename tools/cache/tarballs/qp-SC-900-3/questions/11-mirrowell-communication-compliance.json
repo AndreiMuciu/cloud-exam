@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-11-mirrowell-communication-compliance",
+    "question": "Regulators require Mirrowell Biosciences to monitor messages in Microsoft Teams and Exchange Online for conduct violations — such as sharing unpublished trial results or making off-label claims — and to route flagged messages to designated reviewers, who can remediate them and document the outcome.\n\nWhich Microsoft Purview solution meets this requirement?",
+    "options": [
+        {
+            "text": "Communication compliance",
+            "correct": true
+        },
+        {
+            "text": "Insider risk management",
+            "correct": false
+        },
+        {
+            "text": "eDiscovery (Premium)",
+            "correct": false
+        },
+        {
+            "text": "Data loss prevention (DLP)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Purview Communication compliance** detects, captures, and lets designated reviewers act on **inappropriate or non-compliant messages** across Microsoft Teams, Exchange Online, and other channels. Policies can look for regulatory-conduct violations, sensitive information, harassment, or threats; flagged messages enter a review workflow where reviewers investigate, remediate (for example, remove a Teams message or notify the sender), and record the resolution — with privacy safeguards such as pseudonymization for users under review.\n\n**Why not the other options:**\n- **Insider risk management** — This solution correlates *activity* signals (mass downloads, exfiltration to removable media, actions before resignation) to surface risky **users**. It targets data-theft and sabotage risk, not the content-of-communication conduct review that regulators require here.\n- **eDiscovery (Premium)** — eDiscovery identifies, holds, and exports content for **legal cases and investigations** after the fact. It is not an ongoing supervision workflow that continuously flags policy-violating messages to reviewers.\n- **Data loss prevention (DLP)** — DLP prevents *sensitive information* (like ID or payment card numbers) from being overshared, blocking or warning at the moment of sharing. It does not provide a reviewer-driven workflow for judging the *conduct* expressed in messages, such as off-label claims.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_mirrowell_biosciences.json"
+}

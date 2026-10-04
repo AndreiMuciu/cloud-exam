@@ -1,0 +1,21 @@
+{
+    "id": "sc500-s3-34-ai-gateway-deploy-order",
+    "type": "ordering",
+    "question": "Development teams currently call your Microsoft Foundry model deployments directly with API keys. You must put an AI Gateway in front of the models using Azure API Management, so that teams authenticate to the gateway per team, the gateway itself holds no raw model keys, and gateway policies govern all model traffic. Arrange the implementation steps in the correct order.",
+    "items": [
+        "Grant the API Management instance's managed identity the required role on the Foundry (Azure AI services) resource so it can call the model endpoint without an API key",
+        "Deploy an Azure API Management instance (or designate an existing one) with a managed identity enabled",
+        "Import the Foundry model deployment into API Management as an API, configuring the backend to authenticate with the managed identity",
+        "Apply AI Gateway policies to the API — such as token limits per subscription and prompt/usage logging — and publish it through a product",
+        "Issue per-team API Management subscriptions, migrate the teams to the gateway endpoint, and then disable direct key access to the model endpoint"
+    ],
+    "correctOrder": [
+        "Deploy an Azure API Management instance (or designate an existing one) with a managed identity enabled",
+        "Grant the API Management instance's managed identity the required role on the Foundry (Azure AI services) resource so it can call the model endpoint without an API key",
+        "Import the Foundry model deployment into API Management as an API, configuring the backend to authenticate with the managed identity",
+        "Apply AI Gateway policies to the API — such as token limits per subscription and prompt/usage logging — and publish it through a product",
+        "Issue per-team API Management subscriptions, migrate the teams to the gateway endpoint, and then disable direct key access to the model endpoint"
+    ],
+    "explanation": "The dependencies force this sequence. The **API Management instance with a managed identity** must exist first — the identity is created with (or enabled on) the instance and everything later hangs off it. Next, that identity is **granted the role on the Foundry resource** (for example, an Azure AI services user-type role): authorization must exist before any backend call using the identity can succeed. With auth in place, the model deployment is **imported as an API** whose backend authenticates via the managed identity — fulfilling the 'gateway holds no raw model keys' requirement. Then **AI Gateway policies** (token-limit and token-metric policies per subscription, logging of LLM usage) are attached to the API and it is published through a product, so governance is active before anyone migrates. Finally, **per-team subscriptions** are issued, teams switch to the gateway endpoint, and only then is **direct key access to the model disabled** — cutting over last guarantees no team is broken while the gateway is still being assembled, and disabling direct access is what makes the gateway the *only* path.\n\n**Why not other orders:** importing the API before the role grant produces a backend that fails authentication; applying policies before the API exists is impossible; disabling direct model access before teams have migrated causes an outage; and issuing subscriptions before policies are attached would let early callers bypass the token limits and logging the gateway exists to enforce.",
+    "category": "Secure compute"
+}

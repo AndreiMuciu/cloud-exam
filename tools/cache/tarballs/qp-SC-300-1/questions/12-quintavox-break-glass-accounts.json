@@ -1,0 +1,25 @@
+{
+    "id": "sc300-quintavox-break-glass-accounts",
+    "question": "Quintavox Media's emergency (\"break-glass\") Global Administrator accounts must remain usable even during a widespread Conditional Access or MFA service outage, and any use of these accounts must trigger immediate alerting.\n\nWhich combination of configurations meets both requirements?",
+    "options": [
+        {
+            "text": "Exclude the break-glass accounts from all Conditional Access policies, assign them a permanent (not PIM-eligible) Global Administrator role assignment, protect the credentials physically/procedurally, and create a sign-in log alert that fires on their use",
+            "correct": true
+        },
+        {
+            "text": "Require the break-glass accounts to satisfy the same Conditional Access and per-user MFA policies as every other administrator, so they are held to the highest security bar",
+            "correct": false
+        },
+        {
+            "text": "Make the break-glass accounts eligible for Global Administrator through Privileged Identity Management, requiring approval and Conditional Access authentication context on activation",
+            "correct": false
+        },
+        {
+            "text": "Store the break-glass account credentials only in a cloud password manager that itself requires Microsoft Entra ID sign-in and MFA to unlock",
+            "correct": false
+        }
+    ],
+    "explanation": "Break-glass accounts exist specifically to remain accessible when the *rest* of the identity and access system is unavailable. Best practice is to **exclude them from Conditional Access policies** (so a CA outage or misconfiguration can't lock them out), give them a **standing (permanent) Global Administrator assignment** rather than a PIM-eligible one (so activation logic and PIM itself, which could also be affected by an outage, isn't a dependency), protect the credentials through strong procedural/physical controls, and configure **alerting on any sign-in** by these accounts so their use is immediately visible.\n\n**Why not the other options:**\n- **Requiring the same Conditional Access/MFA as everyone else** — this directly defeats the purpose: if Conditional Access or the MFA service is what's down, an account still bound by those policies would be locked out along with everyone else.\n- **Making them PIM-eligible with approval and authentication context** — a break-glass account should not depend on PIM's activation workflow, approvers being reachable, or a Conditional Access authentication context — all of which could be part of the very outage the account is meant to survive.\n- **A cloud password manager requiring Entra ID sign-in/MFA** — gating the break-glass credentials behind the same identity platform that might be down creates a circular dependency, defeating the account's purpose.",
+    "category": "Plan and automate identity governance",
+    "caseStudy": "scenarios/case_study_quintavox.json"
+}

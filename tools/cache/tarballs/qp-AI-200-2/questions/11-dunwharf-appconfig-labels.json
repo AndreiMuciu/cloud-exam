@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-11-dunwharf-appconfig-labels",
+    "question": "Dunwharf keeps `dev`, `staging`, and `prod` settings in one App Configuration store, with identical key names such as `Scoring:Threshold` in every environment. Each deployed instance must load only its own environment's values.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create each key-value once per environment with a **label** (`dev`, `staging`, `prod`), and have each instance load with a label filter, for example:\n\n```python\nconfig = load(endpoint=ENDPOINT, credential=cred,\n              selects=[SettingSelector(key_filter=\"*\",\n                                       label_filter=\"prod\")])\n```",
+            "correct": true
+        },
+        {
+            "text": "Create three App Configuration stores, one per environment, and give each instance a different endpoint.",
+            "correct": false
+        },
+        {
+            "text": "Prefix every key with the environment name (for example `prod:Scoring:Threshold`) and strip the prefix in application code.",
+            "correct": false
+        },
+        {
+            "text": "Create one feature flag per environment and wrap configuration reads in feature-flag checks.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Labels** are App Configuration's built-in dimension for exactly this: the same key can exist multiple times, once per label, so `Scoring:Threshold` has a `dev`, `staging`, and `prod` value side by side in one store. Each deployment passes its environment as the `label_filter` in a `SettingSelector`, and the provider loads only that slice — key names stay identical everywhere and no application code changes per environment.\n\n**Why not the other options:**\n- **Three stores** — Works, but directly violates the single-store requirement and triples the resources, endpoints, and access assignments to manage; drift between stores becomes a new failure mode.\n- **Environment prefixes in key names** — Reinvents labels while breaking the \"identical setting names\" requirement, and every consumer must implement (and agree on) the stripping convention.\n- **Feature flags** — Flags model on/off features and rollout audiences, not per-environment values of ordinary settings; a threshold like `Scoring:Threshold` is configuration data, and wrapping every read in flag checks adds complexity without selecting values by environment.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions",
+    "caseStudy": "scenarios/case_study_dunwharf_energy.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-24-logic-apps-security",
+    "question": "A Consumption Logic App processes employee salary-adjustment requests. A security review finds that: anyone with Reader access on the resource group can open the run history and see the salary figures in each action's inputs and outputs; the workflow's HTTP request trigger URL — which contains its shared access signature — has leaked into a wiki; and the workflow authenticates to Azure SQL with a connection string stored in plain text in a workflow parameter. Which combination of changes fixes all three findings?",
+    "options": [
+        {
+            "text": "Enable secure inputs and secure outputs on the actions that handle salary data; restrict the trigger with an inbound IP range for calls (or require Microsoft Entra ID authorization policies) and regenerate the leaked SAS access key; and replace the connection string with a managed identity connection to the database",
+            "correct": true
+        },
+        {
+            "text": "Move the Logic App to a resource group with no Reader assignments, add a random query parameter to the trigger URL, and base64-encode the connection string in the parameter",
+            "correct": false
+        },
+        {
+            "text": "Enable diagnostic logging to a Log Analytics workspace, rotate the SQL password monthly, and add a comment to the workflow warning against sharing the trigger URL",
+            "correct": false
+        },
+        {
+            "text": "Convert the workflow to a Standard Logic App, since Standard workflows do not record run history or use trigger URLs",
+            "correct": false
+        }
+    ],
+    "explanation": "Each finding has a purpose-built control. **Secure inputs/outputs** is a per-action setting that redacts the action's data from run history — readers of the run see an obfuscation placeholder instead of salary figures, while the workflow still functions. For the leaked trigger URL, two layers apply: **regenerate the access key** (invalidating every URL minted from the old SAS) and constrain future use by **restricting inbound IP ranges for trigger calls** or, stronger, defining **Microsoft Entra ID authorization policies** so callers must present a valid token rather than just possess a URL. For the database, a **managed identity connection** removes the stored connection string entirely — the Logic App obtains tokens at runtime and the SQL side grants the identity least-privilege database roles.\n\n**Why not the other options:**\n- **RBAC shuffling, random query parameter, base64** — removing Readers doesn't fix the underlying exposure model (any future reader sees the data again); a random query parameter adds no authentication; and base64 is encoding, not encryption — the connection string remains readable to anyone who can view the workflow definition.\n- **Diagnostics, monthly rotation, a warning comment** — logging observes rather than protects; rotating a password the workflow still stores in plaintext leaves the same exposure; a comment is not a control. None of the three findings is remediated.\n- **Converting to Standard** — the premise is false: Standard Logic Apps also keep run history and use trigger endpoints. Hosting model changes don't substitute for securing data, endpoint, and credentials.",
+    "category": "Secure compute"
+}

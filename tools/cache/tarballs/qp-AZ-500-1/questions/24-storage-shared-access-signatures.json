@@ -1,0 +1,24 @@
+{
+    "id": "az500-24-storage-shared-access-signatures",
+    "question": "You need to provide a temporary, time-limited link to a third-party vendor to download a single file from an Azure Storage Blob container. You want to ensure the link expires after 4 hours and only allows 'Read' access. Which feature should you use?",
+    "options": [
+        {
+            "text": "Storage Account Access Key",
+            "correct": false
+        },
+        {
+            "text": "Shared Access Signature (SAS)",
+            "correct": true
+        },
+        {
+            "text": "RBAC role assignment",
+            "correct": false
+        },
+        {
+            "text": "Public access on the container",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Shared Access Signature (SAS)** is the best tool for fine-grained, time-limited access. You can specify the exact permissions (Read only), the resource (single file), and the expiry time.\n\n**Why not the other options:**\n- **Access Key** — Provides full control over the entire account and does not expire unless rotated.\n- **RBAC** — Too broad and requires the user to have an identity in your Entra ID tenant.\n- **Public Access** — Insecure; allows *anyone* to access the file without a token.",
+    "category": "Secure compute, storage, and databases"
+}

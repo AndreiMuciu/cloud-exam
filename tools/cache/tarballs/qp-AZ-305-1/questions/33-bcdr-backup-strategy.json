@@ -1,0 +1,24 @@
+{
+    "id": "az305-bcdr-backup-strategy",
+    "question": "You are designing a backup strategy for an Azure environment that contains the following resources:\n\n| Resource | RPO | Retention |\n|---|---|---|\n| Azure VMs | 4 hours | 30 days |\n| Azure SQL Database | 1 hour | 35 days |\n| Azure File Shares | 24 hours | 90 days |\n\nYou need to centralize backup management and monitoring.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Use Azure Site Recovery for all resources with replication to a secondary region",
+            "correct": false
+        },
+        {
+            "text": "Use snapshots for VMs, automated backups for SQL, and Azure File Sync for file shares",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Storage geo-redundant replication (GRS) for all resources",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Backup with a Recovery Services vault and configure backup policies per resource type",
+            "correct": true
+        }
+    ],
+    "explanation": "**Azure Backup with a Recovery Services vault** is the correct recommendation:\n\n- **Centralized management** — A single Recovery Services vault provides a unified dashboard for configuring, monitoring, and managing backups across all resource types\n- **Flexible policies** — You can create separate backup policies for each resource type with different RPO schedules and retention periods:\n  - VMs: Every 4 hours, retain 30 days\n  - SQL Database: Every 1 hour, retain 35 days\n  - Azure Files: Daily, retain 90 days\n- **Built-in monitoring** — Backup Center provides centralized alerting, reporting, and compliance views\n\n**Why not the other options:**\n- **Azure Site Recovery** — Designed for disaster recovery (replication to a secondary region for failover), not for day-to-day backup and retention management\n- **GRS** — Storage redundancy protects against datacenter failures but doesn't provide point-in-time recovery, retention policies, or centralized management\n- **Individual services** — Using separate mechanisms (snapshots, automated backups, File Sync) fragments management across multiple tools and doesn't provide centralized monitoring",
+    "category": "Design Business Continuity Solutions"
+}

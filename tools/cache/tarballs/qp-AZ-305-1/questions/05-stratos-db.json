@@ -1,0 +1,17 @@
+{
+    "id": "gen-02-database-monitoring",
+    "question": "**Proposed Solution:**\n\nProvision an Azure Storage account to collect and store database performance metrics for the OrderTracker SQL Server database.\n\nDoes this meet the goal of enabling database administrators to analyze and optimize performance settings?",
+    "options": [
+        {
+            "text": "Yes",
+            "correct": false
+        },
+        {
+            "text": "No",
+            "correct": true
+        }
+    ],
+    "explanation": "The correct answer is **No**. While Azure Storage can store log files, it does not provide the analytical capabilities needed to optimize database performance.\n\nDatabase performance analysis requires Azure Monitor with Log Analytics or Azure SQL Database built-in monitoring features like Query Performance Insight and Intelligent Insights. These services provide query pattern analysis, bottleneck identification, and performance tuning recommendations—capabilities that raw storage does not offer.",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_enterprise_migration.json"
+}

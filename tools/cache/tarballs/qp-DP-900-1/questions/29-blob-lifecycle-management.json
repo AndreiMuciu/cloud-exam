@@ -1,0 +1,24 @@
+{
+    "id": "dp900-29-blob-lifecycle-management",
+    "question": "A media company uploads video files to Azure Blob Storage. Files are viewed heavily for about 30 days, occasionally for the next few months, and almost never after a year. The company wants blobs to move automatically from Hot to Cool after 30 days, to Archive after 180 days, and to be deleted after 5 years — without writing any custom code.\n\nWhich Azure Storage feature should the company use?",
+    "options": [
+        {
+            "text": "Lifecycle management policies",
+            "correct": true
+        },
+        {
+            "text": "Blob soft delete",
+            "correct": false
+        },
+        {
+            "text": "Read-access geo-redundant storage (RA-GRS)",
+            "correct": false
+        },
+        {
+            "text": "Immutable blob storage policies",
+            "correct": false
+        }
+    ],
+    "explanation": "**Lifecycle management policies** are rule-based configurations built into Azure Blob Storage that automatically transition blobs between access tiers (Hot → Cool → Archive) and delete them, based on conditions such as days since creation or last modification. Defining one policy with the 30-day, 180-day, and 5-year rules meets the requirement with no custom code.\n\n**Why not the other options:**\n- **Blob soft delete** — Protects against accidental deletion by retaining deleted blobs for a recovery period. It does not move blobs between tiers or schedule deletions.\n- **Read-access geo-redundant storage (RA-GRS)** — A redundancy option that replicates data to a secondary region and allows reads from it. It concerns durability and availability, not tiering or retention automation.\n- **Immutable blob storage policies** — Enforce write-once-read-many (WORM) retention so blobs cannot be modified or deleted during a retention period — the opposite of automating tier transitions and deletions.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

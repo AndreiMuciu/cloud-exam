@@ -1,0 +1,29 @@
+{
+    "id": "az104-monitor-action-groups",
+    "type": "multi",
+    "question": "You are configuring Azure Monitor for a production environment. You need to create an alert that notifies the operations team when CPU usage exceeds 80% on any virtual machine in a specific resource group.\n\nWhich two components must you configure? (Choose two.)",
+    "options": [
+        {
+            "text": "A metric alert rule",
+            "correct": true
+        },
+        {
+            "text": "An action group",
+            "correct": true
+        },
+        {
+            "text": "A Log Analytics workspace",
+            "correct": false
+        },
+        {
+            "text": "An activity log alert",
+            "correct": false
+        },
+        {
+            "text": "A service health alert",
+            "correct": false
+        }
+    ],
+    "explanation": "To create an alert for VM CPU usage in Azure Monitor, you need:\n\n1. **A metric alert rule** — This defines the condition to monitor (CPU percentage > 80%) and the scope (VMs in the specific resource group). Metric alerts evaluate metrics at regular intervals.\n\n2. **An action group** — This defines who gets notified when the alert fires and how (email, SMS, webhook, etc.). An alert rule without an action group will fire but won't notify anyone.\n\n**Why not the other options:**\n- **Log Analytics workspace** — Not required for metric alerts on basic VM metrics like CPU, which are platform metrics already available. It's needed for custom log queries.\n- **Activity log alert** — Monitors Azure control plane operations (resource creation, deletion, etc.), not VM performance metrics\n- **Service health alert** — Monitors Azure service status and planned maintenance, not individual resource metrics",
+    "category": "Monitor and Maintain Azure Resources"
+}

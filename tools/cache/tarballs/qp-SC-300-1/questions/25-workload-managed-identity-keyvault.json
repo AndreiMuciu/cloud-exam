@@ -1,0 +1,24 @@
+{
+    "id": "sc300-workload-managed-identity-keyvault",
+    "question": "An application running on a single Azure virtual machine needs to read secrets from an Azure Key Vault. There is no requirement to reuse the identity on any other resource, and the team wants the simplest possible option with nothing to provision, rotate, or clean up separately from the VM itself.\n\nWhich identity should you use?",
+    "options": [
+        {
+            "text": "A system-assigned managed identity enabled directly on the virtual machine",
+            "correct": true
+        },
+        {
+            "text": "A user-assigned managed identity created as a standalone resource and assigned to the virtual machine",
+            "correct": false
+        },
+        {
+            "text": "A service principal with a client secret stored in the VM's application configuration",
+            "correct": false
+        },
+        {
+            "text": "A managed service account created in the on-premises Active Directory domain",
+            "correct": false
+        }
+    ],
+    "explanation": "A **system-assigned managed identity** is created and deleted automatically as part of the resource's own lifecycle — enabling it on the VM requires no separate resource to provision, and deleting the VM automatically cleans up the identity. That matches a single-resource, one-off scenario with no reuse requirement and the least operational overhead.\n\n**Why not the other options:**\n- **User-assigned managed identity** — this is the right choice when an identity must be created independently and shared across multiple resources, but it adds an extra resource to provision and manage, which is unnecessary overhead when there's no reuse requirement.\n- **A service principal with a client secret** — this reintroduces manual credential storage and rotation, exactly what managed identities are designed to remove for Azure-hosted workloads.\n- **A managed service account (gMSA/standalone MSA)** — these are Active Directory Domain Services constructs for on-premises, domain-joined Windows services; they are not used by Azure resources like a VM authenticating to Key Vault.",
+    "category": "Plan and implement workload identities"
+}

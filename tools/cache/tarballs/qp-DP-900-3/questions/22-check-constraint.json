@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-22-check-constraint",
+    "question": "A `Reviews` table has a `Rating` column that must only ever contain whole numbers from 1 to 5. The database engine itself must reject any INSERT or UPDATE that supplies a value outside that range.\n\nWhat should be defined on the column?",
+    "options": [
+        {
+            "text": "A CHECK constraint that limits the value to between 1 and 5",
+            "correct": true
+        },
+        {
+            "text": "A foreign key constraint referencing another table",
+            "correct": false
+        },
+        {
+            "text": "A DEFAULT value of 5 on the column",
+            "correct": false
+        },
+        {
+            "text": "An index on the Rating column",
+            "correct": false
+        }
+    ],
+    "explanation": "A **CHECK constraint** declares a rule that every value in a column (or row) must satisfy — here, `CHECK (Rating BETWEEN 1 AND 5)`. The engine evaluates the rule on every INSERT and UPDATE and rejects any statement that would violate it, so invalid ratings can never enter the table regardless of which application wrote them.\n\n**Why not the other options:**\n- **A foreign key constraint** — A foreign key ensures the value matches a row in a referenced table. That would require maintaining a lookup table of allowed ratings; the standard tool for a simple range rule is CHECK. More importantly, a foreign key expresses a relationship, not a value-range condition.\n- **A DEFAULT value** — A default only supplies a value when none is provided; it does nothing to stop an explicit invalid value like 9 from being inserted.\n- **An index** — Indexes speed up lookups on the column; they do not validate or restrict what values are stored.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

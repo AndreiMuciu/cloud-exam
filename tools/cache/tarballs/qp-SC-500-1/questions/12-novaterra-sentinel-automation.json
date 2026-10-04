@@ -1,0 +1,25 @@
+{
+    "id": "sc500-12-novaterra-sentinel-automation",
+    "question": "You must complete Novaterra Health's security operations design: automatically disable the account and notify the on-call channel when a high-severity credential-compromise incident is created, and let SOC analysts manage incidents without changing analytics rules or connectors. What should you configure?",
+    "options": [
+        {
+            "text": "An automation rule triggered when an incident is created (filtered on severity and relevant analytics rules) that runs a playbook which disables the user via the Microsoft Entra ID connector and posts to the on-call channel; assign the analysts the Microsoft Sentinel Responder role",
+            "correct": true
+        },
+        {
+            "text": "A scheduled analytics rule that runs a KQL query every hour to find compromised users; assign the analysts the Microsoft Sentinel Contributor role",
+            "correct": false
+        },
+        {
+            "text": "A workbook with a button that disables users; assign the analysts the Log Analytics Reader role",
+            "correct": false
+        },
+        {
+            "text": "A hunting query bookmarked for credential compromise; assign the analysts the Owner role on the resource group so they can respond quickly",
+            "correct": false
+        }
+    ],
+    "explanation": "**Automation rules** are Sentinel's central automation mechanism: triggered on incident creation, filtered by conditions (severity, title, rule), they can run **playbooks** (Logic Apps) that take response actions — such as disabling a user account through the Entra ID connector and posting a Teams/Slack message. The **Microsoft Sentinel Responder** role permits managing incidents (assign, change status, classify) but not editing analytics rules, connectors, or automation — exactly the requested separation.\n\n**Why not the other options:**\n- **Hourly scheduled rule + Sentinel Contributor** — A scheduled query creates detections, not automated response; Contributor lets analysts modify analytics rules and connectors, violating the requirement.\n- **Workbook button + Log Analytics Reader** — Workbooks visualize data and cannot reliably serve as response automation; Reader cannot manage incidents at all.\n- **Hunting bookmark + Owner** — Hunting is manual; granting Owner is a gross violation of least privilege.",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_novaterra_health.json"
+}

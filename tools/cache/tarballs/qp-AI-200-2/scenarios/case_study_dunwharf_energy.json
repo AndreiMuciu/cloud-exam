@@ -1,0 +1,13 @@
+{
+    "id": "case_study_dunwharf_energy",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Dunwharf Energy** provides smart-meter analytics to rural electricity cooperatives. A meter-reading ingestion API and an anomaly-detection model run as Python services on Azure Container Apps.\n\n**Current Environment:**\n- An API key for a national grid-data service is stored in an **Azure Key Vault** that uses **Azure role-based access control (RBAC)** for its data plane.\n- Application settings are stored in a single **Azure App Configuration** store. The same setting names (for example `Scoring:Threshold`, `Model:Version`) are needed with different values in the `dev`, `staging`, and `prod` environments.\n- All services send telemetry through the Azure Monitor OpenTelemetry distro to a Log Analytics workspace; ingestion request telemetry lands in the `AppRequests` table with a boolean `Success` column."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Security Requirements:**\n- The ingestion API's managed identity must be able to read secret values from the vault and must not be able to create, modify, or delete secrets, keys, or certificates. Grant the minimum built-in role that satisfies this.\n\n**Configuration Requirements:**\n- All three environments must keep using the single App Configuration store and identical setting names. Each deployed instance must load only the values intended for its own environment.\n\n**Monitoring Requirements:**\n- Operators need the percentage of failed ingestion requests in each 15-minute interval over the last day, so short error bursts are visible even when overall traffic volume fluctuates."
+        }
+    ]
+}

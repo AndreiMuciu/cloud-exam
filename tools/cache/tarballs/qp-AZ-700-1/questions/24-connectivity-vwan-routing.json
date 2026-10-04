@@ -1,0 +1,24 @@
+{
+    "id": "az700-connectivity-vwan-routing",
+    "question": "Cindralux Robotics has a Standard Virtual WAN hub with several VNets and branch VPN sites connected. The security team now requires that all traffic between spoke VNets, and all traffic from branches destined for the internet, be inspected by Azure Firewall deployed inside the hub — without each spoke needing its own UDRs pointing at the firewall.\n\nWhat should Cindralux configure?",
+    "options": [
+        {
+            "text": "A secured virtual hub, deploying Azure Firewall inside the Virtual WAN hub and configuring routing intent/routing policies to direct the relevant traffic through it",
+            "correct": true
+        },
+        {
+            "text": "A user-defined route on each spoke VNet's subnets pointing 0.0.0.0/0 at the firewall's private IP address",
+            "correct": false
+        },
+        {
+            "text": "Network security groups on every spoke subnet, since Virtual WAN hubs cannot host a firewall",
+            "correct": false
+        },
+        {
+            "text": "Downgrade to a Basic Virtual WAN so that all traffic is automatically routed through a single security appliance",
+            "correct": false
+        }
+    ],
+    "explanation": "Deploying Azure Firewall inside a Virtual WAN hub creates a **secured virtual hub**. With **routing intent** and routing policies configured on the hub, Virtual WAN automatically programs the routing needed to send private (VNet-to-VNet/branch-to-VNet) traffic and/or internet-bound traffic through the firewall — without requiring UDRs to be manually created and maintained on every spoke.\n\n**Why not the other options:**\n- **Manual UDRs on every spoke** — This is exactly the traditional hub-and-spoke approach that Virtual WAN's routing intent is designed to replace; it also doesn't scale well as more spokes and branches are added, which is a core reason the company adopted Virtual WAN.\n- **\"NSGs, because hubs cannot host a firewall\"** — This is factually incorrect; Azure Firewall can be deployed directly inside a Virtual WAN hub as a secured virtual hub, and NSGs don't provide the FQDN-based, centrally managed inspection the security team needs.\n- **\"Downgrade to Basic Virtual WAN\"** — Basic Virtual WAN supports only site-to-site VPN and does not support Azure Firewall/NVA integration or routing intent; downgrading would remove the very capability needed here, not enable it.",
+    "category": "Design, Implement, and Manage Connectivity Services"
+}

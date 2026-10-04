@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-infra-natgw",
+    "question": "A data-aggregation platform runs on 60 VMs behind an internal load balancer in one subnet. The VMs open tens of thousands of **outbound** HTTPS connections to third-party market-data APIs. Under load, connections fail intermittently with SNAT port exhaustion.\n\nThe design must:\n\n- Scale outbound connectivity to eliminate SNAT exhaustion\n- Present a small, fixed set of source IP addresses that the third parties can allowlist\n- Require no per-VM configuration and add no inbound exposure\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Associate an Azure NAT Gateway with the subnet, using a public IP prefix",
+            "correct": true
+        },
+        {
+            "text": "Assign an instance-level public IP address to each of the 60 VMs",
+            "correct": false
+        },
+        {
+            "text": "Replace the internal load balancer with a public Standard Load Balancer and use default outbound access",
+            "correct": false
+        },
+        {
+            "text": "Deploy Azure Firewall in the subnet's virtual network and route all outbound traffic through it",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure NAT Gateway** is the purpose-built answer for outbound-heavy workloads:\n\n- **SNAT scale** — NAT Gateway provides ~64,000 SNAT ports **per public IP** and supports up to 16 IPs (over a million ports), with **dynamic, on-demand port allocation** across the subnet — no fixed per-VM port carving, which is the root cause of exhaustion behind load-balancer SNAT\n- **Fixed allowlistable IPs** — attaching a **public IP prefix** gives the third parties a small, contiguous, stable CIDR to allowlist\n- **Zero per-VM configuration, outbound-only** — the gateway is associated with the *subnet*; every VM's outbound traffic uses it automatically, and a NAT gateway is egress-only by design — it accepts no unsolicited inbound connections\n\n**Why not the other options:**\n- **Instance-level public IPs** — Sixty public IPs is the opposite of a \"small, fixed set\" to allowlist, each VM becomes individually internet-exposed (inbound surface that must then be locked down), and the fleet's IP list churns with every scale event — a management and security burden\n- **Public Standard Load Balancer / default outbound** — Load-balancer SNAT **pre-allocates a fixed slice of ports per backend instance**; that static carving is exactly the model that exhausts under bursty many-connection workloads (and implicit/default outbound access is deprecated and even less controllable). It also converts an internal tier into a public-fronted one for no reason\n- **Azure Firewall** — It can SNAT at scale and gives fixed IPs, but it is a full L3–L7 inspection appliance with substantial per-hour and per-GB cost, route-table changes, and rule administration. When the requirements are purely *outbound SNAT scale + static egress IPs*, NAT Gateway delivers them at a fraction of the cost and complexity; the firewall is justified only when traffic *inspection/filtering* is itself a requirement",
+    "category": "Design Infrastructure Solutions"
+}

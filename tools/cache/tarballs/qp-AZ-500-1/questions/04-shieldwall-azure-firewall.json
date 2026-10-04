@@ -1,0 +1,25 @@
+{
+    "id": "az500-04-shieldwall-azure-firewall",
+    "question": "ShieldWall Networks requires all inbound traffic from the internet to be inspected by an Azure Firewall. Which network component should you configure to ensure that traffic destined for the App Tier is first sent to the Azure Firewall's private IP?",
+    "options": [
+        {
+            "text": "Network Security Group (NSG) on the gateway subnet",
+            "correct": false
+        },
+        {
+            "text": "User-Defined Route (UDR) on the DMZ and App Tier subnets",
+            "correct": true
+        },
+        {
+            "text": "Azure Load Balancer at the edge",
+            "correct": false
+        },
+        {
+            "text": "VNet Peering with 'Allow Forwarded Traffic'",
+            "correct": false
+        }
+    ],
+    "explanation": "To force traffic through an NVA (Network Virtual Appliance) like Azure Firewall, you must create a **Route Table** with a **User-Defined Route (UDR)** (typically for the `0.0.0.0/0` prefix) and set the next hop type to 'Virtual Appliance' with the firewall's private IP.\n\n**Why not the other options:**\n- **NSG** — Used for filtering (allowing/denying) traffic, but it cannot change the routing/next-hop of a packet.\n- **Load Balancer** — Distributes traffic to a pool of backend servers but doesn't handle the intermediate routing to a firewall for inspection in the same way UDRs do.\n- **VNet Peering** — Connects networks but doesn't dictate the specific path (like forcing traffic through a firewall) without associated routing rules.",
+    "category": "Secure networking",
+    "caseStudy": "scenarios/case_study_shieldwall_networks.json"
+}

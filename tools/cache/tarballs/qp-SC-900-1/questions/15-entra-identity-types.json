@@ -1,0 +1,24 @@
+{
+    "id": "sc900-15-entra-identity-types",
+    "question": "A company deploys an autonomous AI agent that must authenticate to Microsoft Entra ID with its own identity so that its access to company data can be governed, audited, and revoked independently of any human user.\n\nWhich type of Microsoft Entra identity should be used for the AI agent?",
+    "options": [
+        {
+            "text": "A user identity",
+            "correct": false
+        },
+        {
+            "text": "A device identity",
+            "correct": false
+        },
+        {
+            "text": "An agent ID",
+            "correct": true
+        },
+        {
+            "text": "A group",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra supports several identity types: users, devices, groups, and workload identities such as applications, service principals, managed identities — and, most recently, **agent IDs**, which give AI agents their own first-class identities in the directory. An agent ID lets the organization apply governance, Conditional Access, and auditing to the agent independently of any human account, which is exactly what the scenario requires.\n\n**Why not the other options:**\n- **A user identity** — User accounts represent people. Running an AI agent under a human account blurs accountability and prevents independent revocation of the agent's access.\n- **A device identity** — Device identities represent registered or joined hardware (laptops, phones) so device state can be evaluated; they do not represent autonomous software agents.\n- **A group** — Groups are collections of identities used to simplify access assignment; a group is not itself an identity that can authenticate.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

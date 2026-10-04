@@ -1,0 +1,33 @@
+{
+  "id": "sc500-s2-24-acr-hardening-multi",
+  "type": "multi",
+  "question": "You must harden an Azure Container Registry that serves an AKS cluster and a set of build agents in a dedicated virtual network. Requirements:\n\n1. No shared, static registry credentials may exist — all pushes and pulls must be tied to Microsoft Entra identities.\n2. The registry must not be reachable from the public internet.\n3. The AKS cluster must pull images without any password or pull secret being stored in the cluster.\n\nWhich three actions should you take? (Select three.)",
+  "options": [
+    {
+      "text": "Disable the registry's admin user and authorize pushes and pulls through Microsoft Entra ID with RBAC roles such as AcrPush for the build identities",
+      "correct": true
+    },
+    {
+      "text": "Disable public network access on the registry and create a private endpoint for it in the virtual network used by the build agents and the cluster",
+      "correct": true
+    },
+    {
+      "text": "Grant the AKS cluster's kubelet managed identity the AcrPull role on the registry (attach the registry to the cluster)",
+      "correct": true
+    },
+    {
+      "text": "Enable the registry admin user with a long random password, store the password in Azure Key Vault, and rotate it quarterly",
+      "correct": false
+    },
+    {
+      "text": "Create a Kubernetes image-pull secret containing the registry credentials and reference it from every pod specification",
+      "correct": false
+    },
+    {
+      "text": "Enable anonymous pull access on the registry so the cluster needs no credentials at all",
+      "correct": false
+    }
+  ],
+  "explanation": "The three correct actions map one-to-one to the requirements:\n- **Disable the admin user and use Entra RBAC.** The ACR admin account is a single shared username/password pair with full push/pull rights and no identity attribution — Microsoft's own guidance is to keep it disabled. With it off, every operation authenticates with a Microsoft Entra token, and roles such as `AcrPush` and `AcrPull` grant each build or deployment identity exactly what it needs, with sign-in attribution and Conditional Access applying.\n- **Disable public network access and use a private endpoint.** A private endpoint gives the registry a private IP inside the VNet, so builds and pulls travel over the Microsoft backbone/VNet only; turning off public network access closes the internet-facing endpoint entirely.\n- **Grant the kubelet identity AcrPull.** Attaching the registry to AKS assigns the cluster's kubelet managed identity the `AcrPull` role, so nodes obtain Entra tokens automatically at pull time — no password, no secret object, nothing stored in the cluster to leak or rotate.\n\n**Why not the other options:**\n- **Admin user with rotated Key Vault password** — however well the password is stored, it remains a shared static credential usable by anyone who obtains it, with no per-identity attribution; requirement 1 says such credentials must not exist at all.\n- **Kubernetes image-pull secret** — this stores registry credentials inside cluster secrets (base64-encoded, readable by anyone with secret access in the namespace), violating requirement 3's \"no password or pull secret in the cluster.\"\n- **Anonymous pull** — removes authentication entirely, making images readable by anything that can reach the endpoint; it is the opposite of tying access to Entra identities.",
+  "category": "Secure compute"
+}

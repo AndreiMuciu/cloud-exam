@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-34-bicep",
+    "question": "A platform team at a grain-trading firm manages its infrastructure as code but finds raw ARM template JSON verbose and error-prone. The team wants a **domain-specific language designed by Microsoft for Azure deployments** with a simpler declarative syntax, which is converted into standard ARM template operations when deployed. Which language should the team adopt?",
+    "options": [
+        {
+            "text": "Bicep",
+            "correct": true
+        },
+        {
+            "text": "Azure CLI scripts",
+            "correct": false
+        },
+        {
+            "text": "Azure PowerShell scripts",
+            "correct": false
+        },
+        {
+            "text": "Terraform",
+            "correct": false
+        }
+    ],
+    "explanation": "**Bicep** is Microsoft's **domain-specific language (DSL) for deploying Azure resources declaratively**. It offers a cleaner, more concise syntax than ARM template JSON — with simpler parameters, variables, and modules and no complicated quoting — while remaining fully equivalent: Bicep files are transpiled into ARM template JSON, so anything an ARM template can deploy, Bicep can deploy, with immediate support for new Azure features.\n\n**Why not the other options:**\n- **Azure CLI scripts** — The CLI is an **imperative** command tool: a script lists the commands to run, not a declarative description of the desired end state, and it lacks the idempotent whole-environment semantics of a template.\n- **Azure PowerShell scripts** — The same limitation in PowerShell form: imperative cmdlets rather than a declarative infrastructure definition.\n- **Terraform** — A popular **third-party, multi-cloud** infrastructure-as-code tool using its own configuration language. It is a valid IaC choice, but it is not the Microsoft-designed Azure DSL that converts into ARM template operations described here.",
+    "category": "Describe Azure Management and Governance"
+}

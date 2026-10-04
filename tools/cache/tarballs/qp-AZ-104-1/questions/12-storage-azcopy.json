@@ -1,0 +1,22 @@
+{
+    "id": "az104-storage-azcopy-steps",
+    "type": "ordering",
+    "question": "You need to use AzCopy to copy 15 TB of shipment archive data from an on-premises file server to an Azure Blob storage container. Arrange the steps to perform this operation in the correct order.",
+    "items": [
+        "Run 'azcopy copy' with the source path and destination SAS URL",
+        "Install AzCopy on the on-premises server",
+        "Verify the transfer completed successfully",
+        "Generate a SAS token for the destination blob container with write permissions",
+        "Construct the destination URL by appending the SAS token"
+    ],
+    "correctOrder": [
+        "Install AzCopy on the on-premises server",
+        "Generate a SAS token for the destination blob container with write permissions",
+        "Construct the destination URL by appending the SAS token",
+        "Run 'azcopy copy' with the source path and destination SAS URL",
+        "Verify the transfer completed successfully"
+    ],
+    "explanation": "Using AzCopy with SAS token authentication to transfer data to Azure Blob storage follows this sequence:\n\n1. **Install AzCopy** — Download and install the AzCopy tool on the source system (Windows, Linux, or macOS)\n\n2. **Generate SAS token** — In the Azure portal or using Azure CLI, generate a Shared Access Signature (SAS) token for the destination blob container with **write** permissions and an appropriate expiry time\n\n3. **Construct the destination URL** — Combine the blob container URL with the SAS token: `https://storageaccount.blob.core.windows.net/container?sv=...&sig=...`\n\n4. **Run copy command** — Execute `azcopy copy \"C:\\\\local\\\\path\" \"https://storageaccount.blob.core.windows.net/container?SAS\" --recursive`\n\n5. **Verify** — Check the output for successful transfer and verify the files in the Azure portal or with `azcopy list`\n\n**Note:** An alternative to SAS tokens is `azcopy login` with Microsoft Entra ID, but SAS-based auth is more common for on-premises-to-cloud transfers.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_galewind.json"
+}

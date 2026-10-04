@@ -1,0 +1,25 @@
+{
+    "id": "az104-identity-sspr",
+    "question": "You are the Microsoft Entra administrator for NovaBright Solutions. You enable self-service password reset (SSPR) for all users and configure the following settings:\n\n- **Number of methods required to reset**: 2\n- **Methods available to users**: Mobile phone, Security questions, Email\n- **Number of questions required to register**: 3\n- **Number of questions required to reset**: 3\n\nA user named Raj Mehta has registered the following authentication methods:\n- Mobile phone: +1-555-0199\n- Security questions: 3 questions answered\n\nRaj has **not** registered an email address.\n\nCan Raj successfully reset his password using SSPR?",
+    "options": [
+        {
+            "text": "Yes, because Raj has registered two authentication methods",
+            "correct": true
+        },
+        {
+            "text": "No, because Raj has not registered an email address",
+            "correct": false
+        },
+        {
+            "text": "No, because Raj needs to register all three available methods",
+            "correct": false
+        },
+        {
+            "text": "No, because security questions cannot be combined with mobile phone",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra ID SSPR requires users to satisfy the configured **number of methods required to reset** — in this case, 2 methods. Raj has registered:\n\n1. **Mobile phone** — counts as one method\n2. **Security questions** — counts as one method (answering all 3 registered questions)\n\nSince Raj has 2 registered methods and the policy requires 2, he can successfully reset his password. Users do **not** need to register every available method — they only need to meet the minimum number required. The available methods list defines what options users can choose from, not what they must all complete.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_novabright.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-19-cosmos-request-charge",
+    "question": "During a load test, an Azure Cosmos DB for NoSQL account consumes far more throughput than capacity planning predicted. You must identify which of the application's queries are the expensive ones by capturing the **exact RU cost of each individual operation from inside the Python application**.\n\nWhat should you inspect?",
+    "options": [
+        {
+            "text": "The `x-ms-request-charge` response header the service returns for each operation (in the Python SDK, via the client's `last_response_headers` after the call).",
+            "correct": true
+        },
+        {
+            "text": "The *Total Request Units* metric in Azure Monitor, filtered to the database account.",
+            "correct": false
+        },
+        {
+            "text": "The `_ts` system property on the documents each query returns.",
+            "correct": false
+        },
+        {
+            "text": "The number of documents returned by each query multiplied by the average document size in KB.",
+            "correct": false
+        }
+    ],
+    "explanation": "Every Cosmos DB response — point read, write, or query page — carries the **`x-ms-request-charge`** header with the exact number of RUs that operation consumed. In the Python SDK it is available from the response headers (for example `container.client_connection.last_response_headers['x-ms-request-charge']` after a call). Logging this value per query is the standard way to attribute RU consumption to specific statements and find the outliers.\n\n**Why not the other options:**\n- **Azure Monitor *Total Request Units*** — An *aggregate* across all operations in the time window. It confirms the account is burning RUs but cannot attribute cost to one query issued by one code path.\n- **`_ts`** — The document's last-modified epoch timestamp. It says nothing about cost.\n- **Documents × size** — RU charge depends on much more than payload size: indexing, predicate evaluation, cross-partition fan-out, and consistency level. A query can scan thousands of documents and return two; multiplying results by size wildly underestimates such queries.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

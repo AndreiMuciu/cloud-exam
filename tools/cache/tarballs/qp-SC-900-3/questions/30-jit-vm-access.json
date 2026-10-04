@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-30-jit-vm-access",
+    "question": "A security review finds that the RDP management port on several Azure virtual machines is reachable around the clock, even though administrators actually connect for only a few minutes per week. The team wants the management ports **locked down by default** and opened only when an administrator submits a request — for a limited time window and from an approved source IP — after which the ports close again automatically.\n\nWhich Microsoft Defender for Cloud capability implements this?",
+    "options": [
+        {
+            "text": "Just-in-time (JIT) virtual machine access",
+            "correct": true
+        },
+        {
+            "text": "A network security group rule that permanently allows RDP from the internet",
+            "correct": false
+        },
+        {
+            "text": "Privileged Identity Management (PIM)",
+            "correct": false
+        },
+        {
+            "text": "Azure DDoS Protection",
+            "correct": false
+        }
+    ],
+    "explanation": "**Just-in-time (JIT) virtual machine access**, a capability of Microsoft Defender for Cloud (with the Defender for Servers plan), keeps management ports such as **RDP and SSH blocked by default** and opens them **only on request — for an approved time window, from specified source IP addresses** — then closes them again when the window expires. This shrinks the attack surface that port-scanning and brute-force campaigns rely on, while preserving legitimate administrative access exactly when and where it is needed.\n\n**Why not the other options:**\n- **A permanent NSG allow rule for RDP** — A standing allow rule is the *current problem*, not the fix: the port stays exposed to the internet continuously, inviting brute-force attempts during the vast majority of hours when no administrator is connecting.\n- **Privileged Identity Management (PIM)** — PIM applies just-in-time thinking to *directory and resource roles* — activating an admin role for a limited time. It governs role assignments, not network ports; a VM's RDP port stays open or closed regardless of anyone's PIM activations.\n- **Azure DDoS Protection** — DDoS Protection absorbs volumetric traffic floods against public endpoints. It neither closes management ports nor gates them behind time-boxed access requests.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

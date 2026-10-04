@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-storage-files-snapshots",
+    "type": "single",
+    "question": "Office staff work directly on an Azure Files SMB share mounted as a drive on their Windows workstations. Users occasionally **overwrite or corrupt** documents and ask IT to bring back an earlier version.\n\nYou must let users recover **previous versions of individual files themselves**, using the **Previous Versions** tab in Windows Explorer, without IT involvement.\n\nWhat should you configure on the file share?",
+    "options": [
+        { "text": "Regularly scheduled share snapshots (for example, via an Azure Backup policy for the file share)", "correct": true },
+        { "text": "Soft delete for file shares with a 14-day retention period", "correct": false },
+        { "text": "Blob versioning on the storage account", "correct": false },
+        { "text": "Read-access geo-redundant storage (RA-GRS) so users can read older copies from the secondary region", "correct": false }
+    ],
+    "explanation": "**Share snapshots** are point-in-time, read-only copies of an Azure file share — and they are what Windows surfaces on the **Previous Versions** tab of a file on a mounted SMB share. With snapshots taken on a schedule (most conveniently by protecting the share with **Azure Backup**, which creates and manages snapshots per its policy), a user who mangles a document can right-click it, open Previous Versions, and restore an earlier copy entirely self-service. Snapshots are differential, so regular schedules are storage-efficient.\n\n**Why not the other options:**\n- **Soft delete for file shares**: protects against deletion of the **entire share** — a soft-deleted share can be undeleted during retention. It does nothing for individual files that were overwritten or corrupted, and it surfaces nothing in Previous Versions.\n- **Blob versioning**: a **Blob Storage** feature; it does not apply to Azure Files at all. File shares live in the file service, where the point-in-time mechanism is the share snapshot.\n- **RA-GRS**: the secondary region holds an asynchronously replicated copy of the *current* data for disaster recovery — it is not a version history. Corruption replicates to the secondary; there are no \"older copies\" to browse there (and Azure Files does not offer read access from the secondary the way blobs do).",
+    "category": "Implement and Manage Storage"
+}

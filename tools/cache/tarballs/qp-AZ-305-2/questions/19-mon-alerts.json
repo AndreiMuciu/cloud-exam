@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-mon-alerts",
+    "question": "An operations team must be notified by email and SMS whenever Microsoft announces a service issue, planned maintenance, or a health advisory that affects the Azure services and regions used by the company's subscriptions. The solution must require no custom code and no polling.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Create Azure Service Health alerts scoped to the relevant subscriptions, services, and regions, routed to an action group with email and SMS",
+            "correct": true
+        },
+        {
+            "text": "Create Azure Monitor metric alerts on the availability metric of each Azure resource",
+            "correct": false
+        },
+        {
+            "text": "Build an Azure Function that polls the Azure Status public webpage every five minutes and sends notifications",
+            "correct": false
+        },
+        {
+            "text": "Create a scheduled Log Analytics alert rule that queries the AzureActivity table hourly for failures",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Service Health alerts** are the purpose-built, zero-code answer:\n\n- Service Health tracks **service issues, planned maintenance, health advisories, and security advisories** that affect *your* subscriptions — personalized, unlike the global Azure Status page\n- A Service Health alert is an activity log alert that fires when Microsoft publishes an event matching your chosen subscriptions, services, and regions\n- Routing it to an **action group** delivers email and SMS (plus voice, push, webhooks, ITSM) with no code and no polling\n\n**Why not the other options:**\n- **Metric alerts on resource availability** — Detect symptoms on individual resources *after* they degrade, and say nothing about planned maintenance or advisories. They also require an alert rule per resource/metric, an ongoing maintenance burden that misses the requirement's intent (platform announcements, not resource telemetry)\n- **Function polling the status page** — The public status page shows only broad, global outages (a small fraction of events that affect specific customers), and this approach is exactly the custom code and polling the requirement prohibits\n- **Scheduled AzureActivity query** — The hourly schedule adds up to an hour of latency, and while Service Health events do land in the activity log, a custom log query rule duplicates what the built-in Service Health alert type does natively with better fidelity and simpler configuration",
+    "category": "Design Identity, Governance, and Monitoring"
+}

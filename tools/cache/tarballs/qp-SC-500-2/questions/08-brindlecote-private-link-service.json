@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-08-brindlecote-private-link-service",
+    "question": "You need to design the partner connectivity for Brindlecote Manufacturing's telemetry API: private consumption without VNet peering, unaffected by overlapping IP address spaces, initiated by the partner and approved by Brindlecote, with no new inbound public endpoint. What should you implement?",
+    "options": [
+        {
+            "text": "Place the API behind an internal Standard Load Balancer, create an Azure Private Link service on it, and have the partner create a private endpoint in their own virtual network that Brindlecote approves",
+            "correct": true
+        },
+        {
+            "text": "Establish a site-to-site VPN between the two companies and publish the API's private IP address to the partner",
+            "correct": false
+        },
+        {
+            "text": "Publish the API through Azure Front Door with a web application firewall policy and restrict access to the partner's egress IP addresses",
+            "correct": false
+        },
+        {
+            "text": "Create a private endpoint in Brindlecote's virtual network that points to the partner's analytics platform",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Private Link service** lets you offer *your own* service privately to consumers in other virtual networks and tenants. You front the API with an internal **Standard Load Balancer** and create a Private Link service on it. The partner then creates a **private endpoint** in their VNet referencing that service; the connection request appears on Brindlecote's side for **approval**. Traffic flows over the Microsoft backbone with NAT performed by the Private Link platform, so **overlapping address spaces do not matter**, no peering is created, and no public endpoint is exposed. The consumer (partner) initiates; the provider (Brindlecote) approves — exactly the required workflow.\n\n**Why not the other options:**\n- **Site-to-site VPN** — routed connectivity fails outright with overlapping address spaces unless you add fragile NAT rules, and it grants network-level reachability far broader than one API.\n- **Azure Front Door with WAF and IP allowlisting** — Front Door is a *public* entry point; even IP-restricted, it adds a new inbound public endpoint, which the requirements forbid.\n- **Private endpoint in Brindlecote's VNet toward the partner** — backwards: a private endpoint is created on the *consumer* side pointing at the *provider's* Private Link service. Brindlecote is the provider here, so the endpoint belongs in the partner's network.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_brindlecote_manufacturing.json"
+}

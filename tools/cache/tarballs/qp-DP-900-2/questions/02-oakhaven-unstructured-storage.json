@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-02-oakhaven-unstructured-storage",
+    "question": "Oakhaven Resorts must store the scanned registration cards and guest-submitted photos. These image files have no predefined fields or schema, and they are always retrieved and displayed as whole files.\n\nWhich storage approach is the most appropriate for this data?",
+    "options": [
+        {
+            "text": "Store each image as a binary object in an object store such as Azure Blob Storage",
+            "correct": true
+        },
+        {
+            "text": "Split each image into rows and columns in a relational database table",
+            "correct": false
+        },
+        {
+            "text": "Convert each image into a JSON document and store it in a document database",
+            "correct": false
+        },
+        {
+            "text": "Store each image as a set of key/value entity properties in Azure Table Storage",
+            "correct": false
+        }
+    ],
+    "explanation": "Image files are **unstructured data** — they have no internal schema a database could meaningfully use, and the application only ever reads or writes them as complete files. The natural fit is **object (blob) storage**, which stores each file as a binary object addressed by a URL, scales massively, and costs far less per gigabyte than database storage. Azure Blob Storage is Azure's object store for exactly this use case.\n\n**Why not the other options:**\n- **Relational database table** — Relational tables are designed for structured data with a fixed schema of typed columns. An image has no rows or columns to model; forcing binary files into a database adds cost and complexity with no query benefit.\n- **JSON document database** — Document databases suit **semi-structured** data whose fields you want to query. Encoding a photo as JSON (for example, base64 text) bloats it and provides nothing queryable.\n- **Azure Table Storage** — A key/value store for large numbers of small structured entities with properties, not for multi-megabyte binary files retrieved as a whole.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_oakhaven_resorts.json"
+}

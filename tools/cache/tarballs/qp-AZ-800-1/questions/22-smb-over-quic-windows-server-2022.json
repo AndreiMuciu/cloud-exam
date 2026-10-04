@@ -1,0 +1,24 @@
+{
+    "id": "az800-22-smb-over-quic-windows-server-2022",
+    "question": "Which new feature of Windows Server 2022 Azure Edition allows users to access file shares over the internet securely without needing a VPN by using the HTTPS protocol (port 443)?",
+    "options": [
+        {
+            "text": "SMB Direct",
+            "correct": false
+        },
+        {
+            "text": "SMB over QUIC",
+            "correct": true
+        },
+        {
+            "text": "Azure File Sync",
+            "correct": false
+        },
+        {
+            "text": "BranchCache",
+            "correct": false
+        }
+    ],
+    "explanation": "**SMB over QUIC** (introduced in Windows Server 2022 Datacenter: Azure Edition) provides an alternative to the traditional SMB TCP/445 transport. It uses QUIC (UDP/443), providing a secure, encrypted tunnel that is much easier to transit through firewalls and ISPs than the often-blocked port 445.\n\n**Why not the other options:**\n- **SMB Direct** — Uses RDMA for low-latency, high-speed local network transfers.\n- **Azure File Sync / BranchCache** — These are caching/sync technologies, not a direct 'transport' alternative for the SMB protocol over the internet.",
+    "category": "Manage storage and file services"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc300-zephyron-external-collaboration-licensing",
+    "question": "A small number of Corvale Sensing employees need only occasional access to a single shared SharePoint site at Zephyron Dynamics. Leadership wants confirmation that inviting these individuals as B2B collaboration guest users into `zephyrondynamics.io` will not require Zephyron Dynamics to purchase any additional Microsoft Entra ID licenses for them.\n\nWhich statement is correct?",
+    "options": [
+        {
+            "text": "No paid Microsoft Entra ID license is required in the resource tenant just to invite and authenticate guest users through B2B collaboration; billing only applies if the guests consume premium (for example, governance) features",
+            "correct": true
+        },
+        {
+            "text": "Every guest user must be assigned the same Microsoft Entra ID license SKU as an internal employee before they can be invited",
+            "correct": false
+        },
+        {
+            "text": "Guest users can only be invited if Zephyron Dynamics enables Microsoft Entra ID Governance tenant-wide",
+            "correct": false
+        },
+        {
+            "text": "B2B collaboration guest access is only available to organizations with a Microsoft Entra ID P2 subscription",
+            "correct": false
+        }
+    ],
+    "explanation": "Basic **B2B collaboration** — inviting an external user as a guest and letting them authenticate with their home-tenant or social identity — does not itself require the resource tenant to assign a standard per-user Microsoft Entra ID license to the guest. Premium capabilities that touch guests (for example, Microsoft Entra ID Governance features such as entitlement management or access reviews applied to those guests) instead use a separate **monthly active user (MAU) guest billing model**, which is different from standard seat licensing.\n\n**Why not the other options:**\n- **Same SKU as an internal employee** — guests are not required to hold the same license as internal members; that would defeat the purpose of lightweight external collaboration.\n- **Requiring Entra ID Governance tenant-wide** — Governance is only needed for advanced governance features over guests (like automated access packages or access reviews), not for the basic ability to invite and sign in a guest.\n- **Requiring Entra ID P2** — B2B collaboration guest invitations are a core Microsoft Entra ID capability and are not gated behind a P2 subscription.",
+    "category": "Implement and manage user identities",
+    "caseStudy": "scenarios/case_study_zephyron.json"
+}

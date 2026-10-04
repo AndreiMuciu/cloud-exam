@@ -1,0 +1,24 @@
+{
+    "id": "az700-appdelivery-cross-region-lb",
+    "question": "A company runs identical layer 4 (TCP) workloads behind Standard Load Balancers in three Azure regions and wants a single, stable frontend IP address that automatically fails over to a healthy region if an entire region becomes unavailable — without changing to an HTTP-aware, layer 7 service.\n\nWhich solution best fits this requirement?",
+    "options": [
+        {
+            "text": "A cross-region (global) Load Balancer placed in front of the three regional Standard Load Balancers",
+            "correct": true
+        },
+        {
+            "text": "Azure Front Door Premium",
+            "correct": false
+        },
+        {
+            "text": "A single regional internal Load Balancer shared across all three regions",
+            "correct": false
+        },
+        {
+            "text": "Azure Application Gateway with a multi-region backend pool",
+            "correct": false
+        }
+    ],
+    "explanation": "A **cross-region (global) Load Balancer** sits in front of multiple regional Standard Load Balancers and provides a single, static frontend IP address with automatic regional failover, while still operating at **layer 4** — making it the right fit for a TCP workload that needs global resiliency without moving to an HTTP-aware layer 7 service.\n\n**Why not the other options:**\n- **Azure Front Door Premium** — Operates at layer 7 (HTTP/HTTPS) and is designed for web workloads; it isn't a fit for a requirement to remain layer 4/TCP-based.\n- **A single regional internal Load Balancer shared across regions** — A regional (internal or public) Load Balancer operates within one region only; it can't front backend pools that span multiple regions or provide cross-region failover.\n- **Application Gateway with a multi-region backend pool** — Application Gateway is also a layer 7 (HTTP/HTTPS) service; it isn't designed for generic TCP workloads and doesn't meet the layer 4 requirement.",
+    "category": "Design and Implement Application Delivery Services"
+}

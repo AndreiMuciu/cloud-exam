@@ -1,0 +1,21 @@
+{
+    "id": "az104-compute-arm-deployment",
+    "type": "ordering",
+    "question": "You need to deploy a virtual machine scale set using an Azure Resource Manager (ARM) template that includes a custom script extension to install and configure IIS. Arrange the steps in the correct order.",
+    "items": [
+        "Create the ARM template JSON file with scale set resource definition",
+        "Add the custom script extension resource to the template",
+        "Upload any required scripts to an accessible location (Storage Account or GitHub)",
+        "Deploy the template using Azure CLI or PowerShell",
+        "Verify the scale set instances are running and IIS is installed"
+    ],
+    "correctOrder": [
+        "Create the ARM template JSON file with scale set resource definition",
+        "Upload any required scripts to an accessible location (Storage Account or GitHub)",
+        "Add the custom script extension resource to the template",
+        "Deploy the template using Azure CLI or PowerShell",
+        "Verify the scale set instances are running and IIS is installed"
+    ],
+    "explanation": "Deploying a VM scale set with a custom script extension via ARM template follows this sequence:\n\n1. **Create ARM template** — Start with the base template defining the VM scale set, including VNet, subnet, load balancer, and scale set properties\n\n2. **Upload scripts** — The custom script extension needs to download scripts from a URL. Upload your IIS installation script to Azure Blob Storage (with SAS token) or a public GitHub repository **before** referencing it in the template\n\n3. **Add extension to template** — Add the custom script extension resource as a child of the scale set, referencing the script URL and specifying the command to execute\n\n4. **Deploy template** — Use `az deployment group create` (Azure CLI) or `New-AzResourceGroupDeployment` (PowerShell) to deploy the template\n\n5. **Verify** — Check that instances are created and the extension executed successfully. You can verify by accessing the IIS default page\n\n**Key point:** The script must be uploaded and accessible before being referenced in the template, as the extension downloads it during VM provisioning.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

@@ -1,0 +1,21 @@
+{
+    "id": "sc500-s3-20-storage-cmk-order",
+    "type": "ordering",
+    "question": "A production storage account currently uses Microsoft-managed keys. You must move its encryption at rest to a customer-managed key (CMK) held in Azure Key Vault, with automatic adoption of new key versions. Arrange the implementation steps in the correct order.",
+    "items": [
+        "Grant the managed identity permission to get, wrap, and unwrap keys (for example, the Key Vault Crypto Service Encryption User role)",
+        "Create (or designate) a key vault with soft delete and purge protection enabled, and generate the encryption key in it",
+        "Configure the storage account's encryption settings to use the customer-managed key, referencing the key without a specific version so new versions are adopted automatically",
+        "Assign a managed identity for the storage account to use when it accesses the key vault",
+        "Set a rotation policy on the key so that new key versions are created on schedule"
+    ],
+    "correctOrder": [
+        "Create (or designate) a key vault with soft delete and purge protection enabled, and generate the encryption key in it",
+        "Assign a managed identity for the storage account to use when it accesses the key vault",
+        "Grant the managed identity permission to get, wrap, and unwrap keys (for example, the Key Vault Crypto Service Encryption User role)",
+        "Configure the storage account's encryption settings to use the customer-managed key, referencing the key without a specific version so new versions are adopted automatically",
+        "Set a rotation policy on the key so that new key versions are created on schedule"
+    ],
+    "explanation": "The dependency chain drives the order. **The vault and key must exist first** — and CMK for storage *requires* soft delete and purge protection on the vault, because losing the key means losing the data; Azure enforces this prerequisite. Next comes the **identity**: the storage service accesses Key Vault as a managed identity (system-assigned or user-assigned) on the account's behalf, so that identity must be assigned before it can be authorized. Then the identity is **granted key permissions** — get/wrap/unwrap, packaged in the *Key Vault Crypto Service Encryption User* role under RBAC — because configuring CMK fails if the storage account cannot unwrap the key. Only now can you **switch the account's encryption to the CMK**, and referencing the key **without a version** enables automatic adoption of future versions. Finally, the **rotation policy** delivers those future versions on schedule; combined with version-less referencing, rotation becomes fully hands-off.\n\n**Why not other orders:** granting permissions before an identity exists is impossible — there is no principal to authorize; pointing the storage account at the key before permissions are in place fails validation (the service tests wrap/unwrap); creating the rotation policy first is harmless but pointless if the account then pins a specific key version — the design only works when version-less referencing is configured at step four, making rotation the natural last step.",
+    "category": "Secure storage, databases, and networking"
+}

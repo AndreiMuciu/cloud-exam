@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-22-azure-firewall-idps",
+    "question": "Your hub virtual network runs Azure Firewall Premium. The security team wants exploit attempts and command-and-control callbacks inside **encrypted outbound HTTPS traffic** detected and blocked by signature, while one legacy payroll application's traffic — which breaks when its certificate chain is altered — must keep working and must not be decrypted. What should you configure?",
+    "options": [
+        {
+            "text": "Enable TLS inspection with an intermediate CA certificate from Key Vault, set IDPS to Alert and deny, and exclude the payroll application's destination FQDNs from TLS inspection so its traffic bypasses decryption",
+            "correct": true
+        },
+        {
+            "text": "Set IDPS to Alert and deny without enabling TLS inspection, since IDPS signatures operate on the encrypted stream",
+            "correct": false
+        },
+        {
+            "text": "Enable threat intelligence-based filtering in Deny mode, which decrypts TLS sessions automatically when a signature matches",
+            "correct": false
+        },
+        {
+            "text": "Replace the firewall with an Application Gateway WAF v2, which performs both TLS termination and signature-based intrusion prevention for outbound traffic",
+            "correct": false
+        }
+    ],
+    "explanation": "Signature-based **IDPS** can only match patterns it can read. For HTTPS, that means **TLS inspection** must be enabled: Azure Firewall Premium terminates the outbound TLS session, inspects the plaintext, and re-encrypts toward the destination using an **intermediate CA certificate** it holds (sourced from Key Vault, with clients trusting the issuing chain). With visibility established, setting IDPS mode to **Alert and deny** blocks matching traffic rather than just logging it. The legacy payroll app is handled with the built-in escape hatch: destinations excluded from TLS inspection pass through encrypted and unaltered — IDPS still applies what it can to the encrypted stream (such as network-layer signatures), but the certificate chain the app depends on is untouched.\n\n**Why not the other options:**\n- **IDPS without TLS inspection** — the premise is wrong: payload signatures cannot match inside ciphertext. Without decryption, IDPS on HTTPS is limited to non-payload signals, so exploit patterns and C2 beacons inside TLS would sail through.\n- **Threat intelligence-based filtering** — this feature blocks traffic to/from *known-malicious IPs and domains* from Microsoft's feed; it performs no decryption ever and is not signature-based payload inspection. Complementary, not a substitute.\n- **Application Gateway WAF** — a reverse proxy for *inbound* HTTP(S) to your web apps. It neither sits on the outbound path of arbitrary workloads nor provides IDPS for general egress traffic; using it for outbound C2 detection is an architectural category error.",
+    "category": "Secure storage, databases, and networking"
+}

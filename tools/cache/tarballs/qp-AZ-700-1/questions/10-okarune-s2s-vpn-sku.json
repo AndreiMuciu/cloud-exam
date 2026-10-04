@@ -1,0 +1,25 @@
+{
+    "id": "az700-okarune-s2s-vpn-sku",
+    "question": "Okarune Financial needs a site-to-site VPN gateway on its corporate VNet that is zone-redundant, supports BGP, and provides an aggregate throughput benchmark of at least 1 Gbps, to serve as a backup path if the ExpressRoute circuit fails.\n\nWhich generation-2 gateway SKU is the minimum that meets all of these requirements?",
+    "options": [
+        {
+            "text": "VpnGw1AZ",
+            "correct": false
+        },
+        {
+            "text": "VpnGw2AZ",
+            "correct": true
+        },
+        {
+            "text": "Basic",
+            "correct": false
+        },
+        {
+            "text": "VpnGw2 (non-availability-zone)",
+            "correct": false
+        }
+    ],
+    "explanation": "Among the zone-redundant (`AZ`) VPN Gateway SKUs, the **Generation 2 VpnGw2AZ** SKU provides an aggregate throughput benchmark of **1.25 Gbps** with BGP support and zone redundancy — the smallest AZ SKU that clears the \"at least 1 Gbps\" bar. VpnGw1AZ's benchmark is only 650 Mbps, which falls short of the requirement.\n\n**Why not the other options:**\n- **VpnGw1AZ** — Zone-redundant and BGP-capable, but its aggregate throughput benchmark is only 650 Mbps, below the required 1 Gbps.\n- **Basic** — Doesn't support BGP, isn't zone-redundant, and its throughput benchmark is only 100 Mbps; it also doesn't support IKEv2, IPv6, or RADIUS authentication.\n- **VpnGw2 (non-AZ)** — Meets the throughput and BGP requirements, but this SKU isn't deployed across availability zones, so it fails the zone-redundancy requirement that VpnGw2AZ satisfies.",
+    "category": "Design, Implement, and Manage Connectivity Services",
+    "caseStudy": "scenarios/case_study_okarune.json"
+}

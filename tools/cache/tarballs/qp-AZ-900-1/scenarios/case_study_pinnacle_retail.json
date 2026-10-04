@@ -1,0 +1,13 @@
+{
+    "id": "case_study_pinnacle_retail",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Pinnacle Retail Group** is a mid-size retail company currently operating several brick-and-mortar stores across the region. They manage their own on-premises data centers, which host their inventory management systems, point-of-sale (POS) software, and a legacy customer loyalty database.\n\n**Current Environment:**\n- All infrastructure is managed in-house.\n- Server hardware is aging and requires frequent maintenance.\n- Scaling for holiday sales requires purchasing and installing temporary hardware months in advance."
+        },
+        {
+            "title": "Business Goals",
+            "content": "Pinnacle Retail wants to migrate to Azure to achieve the following:\n- **Agility**: Rapidly deploy new storefronts for pop-up events.\n- **Scalability**: Automatically handle traffic spikes during sales events without manual intervention.\n- **Cost Efficiency**: Shift from a capital expenditure (CapEx) model to an operational expenditure (OpEx) model.\n- **Disaster Recovery**: Ensure business continuity in case of a local data center failure."
+        }
+    ]
+}

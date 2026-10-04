@@ -1,0 +1,21 @@
+{
+    "id": "gen-06-jwt-validation",
+    "question": "The Orders API receives requests from multiple client applications. Where should you configure JWT token validation to ensure only authorized requests reach the backend?",
+    "options": [
+        {
+            "text": "Microsoft Entra ID",
+            "correct": false
+        },
+        {
+            "text": "Azure API Management",
+            "correct": true
+        },
+        {
+            "text": "The Orders API application code",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Azure API Management**.\n\nAzure API Management allows you to configure inbound policies to validate JWT tokens before requests reach your backend APIs. This provides a centralized security layer at the API gateway, which is specifically what the case study requires ('JWT tokens must be validated at the API gateway level').\n\n- Microsoft Entra ID issues and signs JWT tokens but does not validate them at the API level.\n- While backend APIs should also perform their own token validation as a defense-in-depth measure, the question asks about the primary gateway-level configuration, making API Management the correct answer.",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_multi_tenant_app.json"
+}

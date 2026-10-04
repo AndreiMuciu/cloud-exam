@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-identity-rbac-scopes",
+    "type": "single",
+    "question": "In an Azure subscription, a user has the following Azure RBAC role assignments:\n\n- **Reader** — inherited at the subscription scope from an assignment on the parent management group\n- **Contributor** — assigned directly on the resource group **RG-App**\n\nWhat is the user's effective access?",
+    "options": [
+        { "text": "The user can create and manage resources in RG-App, and has read-only access to everything else in the subscription, because RBAC assignments are additive", "correct": true },
+        { "text": "The user has read-only access everywhere, because the assignment at the higher scope takes precedence over the resource group assignment", "correct": false },
+        { "text": "The user is effectively a Contributor on the entire subscription, because the most permissive role always applies at every scope", "correct": false },
+        { "text": "The user has no access to RG-App until the conflicting Reader assignment is removed", "correct": false }
+    ],
+    "explanation": "Azure RBAC evaluates the **union of all role assignments** that apply at a given scope — assignments are purely **additive**. At RG-App, the user holds both Reader (inherited) and Contributor (direct); the union is Contributor-level access, so they can create and manage resources there. Everywhere else in the subscription only the inherited Reader applies, giving view-only access. There is no precedence, override, or conflict mechanism between ordinary role assignments.\n\n**Why not the other options:**\n- **Higher scope takes precedence**: No such rule exists. A broader-scope assignment never *restricts* what a narrower-scope assignment grants; it only adds permissions of its own.\n- **Contributor on the whole subscription**: The Contributor assignment was made at the resource group scope, so its permissions flow *downward* into RG-App and its resources only — never upward or sideways to sibling resource groups.\n- **No access until the \"conflict\" is removed**: Holding two roles is not a conflict, and nothing is blocked. The only construct that can actively block permissions in Azure RBAC is a **deny assignment** (created by services such as managed applications or Blueprint locks), which is not present here.",
+    "category": "Manage Azure Identities and Governance"
+}

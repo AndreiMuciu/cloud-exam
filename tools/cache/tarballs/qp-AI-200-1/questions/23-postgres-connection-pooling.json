@@ -1,0 +1,24 @@
+{
+    "id": "ai200-23-postgres-connection-pooling",
+    "question": "An Azure Functions app written in Python opens a new connection to Azure Database for PostgreSQL flexible server on every invocation. Under load, the database reports `FATAL: remaining connection slots are reserved` errors and query latency spikes, even though CPU on the server stays low.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Enable the built-in PgBouncer on the flexible server and point the app's connection string at port 6432 so short-lived connections are multiplexed over a small pool of server connections.",
+            "correct": true
+        },
+        {
+            "text": "Raise the `max_connections` server parameter to its maximum value so every function instance can hold its own connection.",
+            "correct": false
+        },
+        {
+            "text": "Scale the flexible server up two compute tiers so it can allocate more memory to each incoming connection.",
+            "correct": false
+        },
+        {
+            "text": "Switch the driver to autocommit mode so connections are released back to PostgreSQL immediately after each statement.",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the classic serverless *connection storm* problem: many short-lived clients exhaust connection slots while the database itself is idle. Azure Database for PostgreSQL flexible server ships a **built-in PgBouncer**; enabling it and connecting on **port 6432** multiplexes thousands of client connections onto a few dozen real server connections (transaction pooling), eliminating slot exhaustion and the per-connection setup cost that was inflating latency.\n\n**Why not the other options:**\n- **Maxing out `max_connections`** — Each PostgreSQL connection is a backend process consuming several MB of memory; cranking the limit trades slot errors for memory pressure and context-switch overhead, and elastic Functions scale-out can always outgrow any fixed limit.\n- **Scaling up compute** — Raises the connection ceiling somewhat but at significant cost, and the CPU is already low — the bottleneck is connection churn, not capacity. The storm returns at the next traffic spike.\n- **Autocommit mode** — Controls transaction wrapping, not connection lifetime. The client still holds its TCP connection and backend process; autocommit does nothing to reduce concurrent connection count.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

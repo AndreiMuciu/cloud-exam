@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-30-paginated-reports",
+    "question": "The billing department at Pellamar Financial must produce customer statements with a precise, fixed layout that prints identically every month, flows across multiple pages, and can be exported to PDF for archiving.\n\nWhich Power BI capability is designed for this requirement?",
+    "options": [
+        {
+            "text": "Paginated reports created with Power BI Report Builder",
+            "correct": true
+        },
+        {
+            "text": "An interactive report created in Power BI Desktop",
+            "correct": false
+        },
+        {
+            "text": "A dashboard in the Power BI service",
+            "correct": false
+        },
+        {
+            "text": "A dataflow in the Power BI service",
+            "correct": false
+        }
+    ],
+    "explanation": "**Paginated reports** are Power BI's format for **pixel-perfect, fixed-layout, print-ready documents**. Authored in **Power BI Report Builder**, they are designed to control exactly how content flows across pages — headers, footers, page breaks, and repeated table headers — and they export cleanly to formats such as PDF. Operational documents like invoices, statements, and regulatory forms are their classic use case.\n\n**Why not the other options:**\n- **An interactive report created in Power BI Desktop** — Interactive reports are optimized for on-screen **exploration**: cross-filtering, drill-down, and slicers. Their visuals resize and reflow, so they do not guarantee identical printed output page after page.\n- **A dashboard in the Power BI service** — A dashboard is a **single-page canvas** of visuals pinned from one or more reports, used for at-a-glance monitoring. It has no concept of multi-page, print-formatted output.\n- **A dataflow in the Power BI service** — A dataflow is a reusable, cloud-based **data preparation** (ETL) artifact. It shapes and stores data for reuse; it produces no report output at all.",
+    "category": "Describe an Analytics Workload on Azure"
+}

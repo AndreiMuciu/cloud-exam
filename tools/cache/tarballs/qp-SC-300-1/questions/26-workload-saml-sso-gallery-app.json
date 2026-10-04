@@ -1,0 +1,24 @@
+{
+    "id": "sc300-workload-saml-sso-gallery-app",
+    "question": "You are integrating a third-party SaaS application from the Microsoft Entra application gallery. The application needs users to single sign-on using SAML, and it requires each user's department to be passed as a custom claim in the SAML token so the app can apply role-based access internally.\n\nWhat should you configure on the enterprise application?",
+    "options": [
+        {
+            "text": "Configure single sign-on mode as SAML, set the Identifier and Reply URL to match the app's SAML metadata, and add a custom claim mapping the user's department attribute into the SAML token",
+            "correct": true
+        },
+        {
+            "text": "Configure single sign-on mode as password-based SSO, and store each user's department value in the vault-managed credential entry",
+            "correct": false
+        },
+        {
+            "text": "Configure single sign-on mode as Linked, pointing directly to the application's existing sign-in page",
+            "correct": false
+        },
+        {
+            "text": "Leave single sign-on set to disabled and rely on the application's own local username/password authentication instead",
+            "correct": false
+        }
+    ],
+    "explanation": "**SAML-based single sign-on** on an enterprise application lets an administrator configure the Identifier (Entity ID) and Reply URL (Assertion Consumer Service URL) to match the SaaS app's requirements, and add **custom claims** — including mapping a directory attribute like department — into the SAML assertion sent to the app at sign-in, which is exactly what's needed for the app to read department for its internal authorization.\n\n**Why not the other options:**\n- **Password-based SSO** — this replays a shared username/password into the app's own login form; it has no mechanism to pass custom claims like department, because there's no token being issued.\n- **Linked sign-on** — this simply adds a bookmark/link to the app's existing sign-in page in the My Apps portal; it doesn't establish federated SSO or issue any token/claims at all.\n- **Leaving SSO disabled** — this abandons single sign-on entirely, requiring users to authenticate with the app's own local credentials, and provides no claim-passing capability whatsoever.",
+    "category": "Plan and implement workload identities"
+}

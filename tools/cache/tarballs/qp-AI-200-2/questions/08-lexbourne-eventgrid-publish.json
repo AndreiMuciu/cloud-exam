@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-08-lexbourne-eventgrid-publish",
+    "question": "You are writing the Lexbourne code that publishes `CaseStatusChanged` events to the `lex-case-events` Event Grid custom topic, authenticating with Microsoft Entra ID. The topic uses the default Event Grid schema.\n\nWhich code should you use?",
+    "options": [
+        {
+            "text": "```python\nfrom azure.eventgrid import EventGridPublisherClient, EventGridEvent\nfrom azure.identity import DefaultAzureCredential\n\nclient = EventGridPublisherClient(\n    \"https://lex-case-events.westeurope-1.eventgrid.azure.net/api/events\",\n    DefaultAzureCredential())\nclient.send(EventGridEvent(\n    subject=\"cases/1042\",\n    event_type=\"Lexbourne.CaseStatusChanged\",\n    data={\"caseId\": \"1042\", \"status\": \"InReview\"},\n    data_version=\"1.0\"))\n```",
+            "correct": true
+        },
+        {
+            "text": "```python\nfrom azure.servicebus import ServiceBusClient, ServiceBusMessage\n\nclient = ServiceBusClient(\"lex-case-events.servicebus.windows.net\",\n                          DefaultAzureCredential())\nwith client.get_topic_sender(\"lex-case-events\") as sender:\n    sender.send_messages(ServiceBusMessage('{\"status\": \"InReview\"}'))\n```",
+            "correct": false
+        },
+        {
+            "text": "```python\nimport requests\n\nrequests.post(\n    \"https://lex-case-events.westeurope-1.eventgrid.azure.net/api/events\",\n    json={\"caseId\": \"1042\", \"status\": \"InReview\"})\n```",
+            "correct": false
+        },
+        {
+            "text": "```python\nfrom azure.eventgrid import EventGridPublisherClient, EventGridEvent\n\nclient = EventGridPublisherClient(\n    \"https://lex-case-events.westeurope-1.eventgrid.azure.net/api/events\",\n    DefaultAzureCredential())\nclient.send(EventGridEvent(data={\"caseId\": \"1042\", \"status\": \"InReview\"}))\n```",
+            "correct": false
+        }
+    ],
+    "explanation": "Publishing to a custom topic uses **`EventGridPublisherClient`** pointed at the topic endpoint. Passing `DefaultAzureCredential` authenticates with Microsoft Entra ID (the identity needs the **EventGrid Data Sender** role on the topic). In the Event Grid schema, each event must carry a **`subject`**, an **`event_type`**, a **`data_version`**, and the payload in **`data`** — the SDK fills in `id` and `event_time` automatically. Subscribers can then filter on the subject and event type.\n\n**Why not the other options:**\n- **Service Bus sender** — `lex-case-events` is an Event Grid topic, not a Service Bus topic; the client, protocol, and endpoint are all wrong, and Event Grid subscribers would never receive anything.\n- **Raw `requests.post`** — No authentication (neither an Entra token nor a key header), and the body is a bare payload rather than an array of events in the Event Grid schema; the request is rejected.\n- **`EventGridEvent(data=...)` only** — The Event Grid schema requires `subject`, `event_type`, and `data_version`; constructing the event without them raises an error, and subscribers would have nothing to filter on even if it were sent.",
+    "category": "Connect to and consume Azure services",
+    "caseStudy": "scenarios/case_study_lexbourne_legal.json"
+}

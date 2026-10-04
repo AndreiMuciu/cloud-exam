@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-compute-vm-resize",
+    "type": "single",
+    "question": "A running Azure virtual machine must be resized to **Standard_E16s_v5**. The size is offered in the VM's region and your subscription has sufficient vCPU quota, but when you open the VM's **Size** blade, Standard_E16s_v5 does not appear in the list of available sizes.\n\nWhat should you do?",
+    "options": [
+        { "text": "Stop (deallocate) the virtual machine, and then resize it; a deallocated VM can be resized to any size supported in the region", "correct": true },
+        { "text": "Move the virtual machine to a different resource group, and then retry the resize", "correct": false },
+        { "text": "Delete the virtual machine while keeping its disks, and redeploy it at the new size", "correct": false },
+        { "text": "Open a support ticket to have the size enabled on the VM's current hardware cluster", "correct": false }
+    ],
+    "explanation": "While a VM is **running**, the resize list shows only sizes available on the **hardware cluster that currently hosts the VM**. If the desired size runs on different hardware, it simply doesn't appear. **Deallocating** the VM releases it from that cluster, so when it is restarted Azure can place it on any suitable hardware — which is why the size picker for a deallocated VM shows every size supported in the region (subject to quota). The trade-offs to plan for: brief downtime, release of the dynamic public IP unless it's static, and — if the VM is in an availability set — potentially having to deallocate **all** VMs in the set so they can be placed together on the new hardware.\n\n**Why not the other options:**\n- **Move to a different resource group**: Resource group membership is pure metadata; it has no relationship to physical hardware placement, so the size list would be unchanged.\n- **Delete and redeploy**: This would work, but it is far more disruptive and error-prone (NIC, extensions, identities, and configuration must be reattached) than a simple deallocate-resize-start, so it is not what you *should* do.\n- **Support ticket**: There is no support process to enable a size on a specific cluster; deallocation is the documented self-service path. Support tickets for compute are used for quota increases or capacity issues, which are not the problem here.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

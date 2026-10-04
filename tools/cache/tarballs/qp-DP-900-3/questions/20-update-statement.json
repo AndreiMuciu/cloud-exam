@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-20-update-statement",
+    "question": "A product's price has changed, and the corresponding rows that already exist in the `Products` table must be modified to show the new value in the `Price` column.\n\nWhich SQL statement should be used?",
+    "options": [
+        {
+            "text": "UPDATE with a WHERE clause identifying the product",
+            "correct": true
+        },
+        {
+            "text": "INSERT, to add the new price to the table",
+            "correct": false
+        },
+        {
+            "text": "ALTER TABLE, to change the Price column",
+            "correct": false
+        },
+        {
+            "text": "DELETE followed by re-creating the table",
+            "correct": false
+        }
+    ],
+    "explanation": "**UPDATE** is the Data Manipulation Language (DML) statement that changes values in rows that already exist. `UPDATE Products SET Price = ... WHERE ProductId = ...` modifies exactly the intended rows in place; the WHERE clause is essential so that only the target product's rows change.\n\n**Why not the other options:**\n- **INSERT** — INSERT adds brand-new rows. The product would then appear twice with two different prices instead of having its existing row corrected.\n- **ALTER TABLE** — ALTER TABLE is a DDL statement that changes the table's *structure* (for example, the column's data type or name). It does not change the data values stored in rows.\n- **DELETE followed by re-creating the table** — Destroying and rebuilding the table to change one value would lose all other data and is never the mechanism for modifying row values.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

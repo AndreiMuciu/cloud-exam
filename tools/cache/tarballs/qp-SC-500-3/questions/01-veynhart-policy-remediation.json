@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-01-veynhart-policy-remediation",
+    "question": "You need to meet Veynhart Robotics' logging compliance requirement: every existing and future key vault and SQL logical server must send resource logs to the central Log Analytics workspace, non-compliant resources must be corrected automatically without human intervention, and compliance must be visible in one place. What should you implement?",
+    "options": [
+        {
+            "text": "Assign Azure Policy definitions with the DeployIfNotExists effect that configure diagnostic settings targeting the workspace, grant the assignments' managed identities the required roles, and create remediation tasks to correct the existing non-compliant resources",
+            "correct": true
+        },
+        {
+            "text": "Assign Azure Policy definitions with the Deny effect so that key vaults and SQL logical servers cannot be created without diagnostic settings",
+            "correct": false
+        },
+        {
+            "text": "Assign Azure Policy definitions with the Audit effect and schedule a monthly review of the compliance dashboard so the platform team can fix flagged resources",
+            "correct": false
+        },
+        {
+            "text": "Write an Azure Automation runbook that scans all subscriptions nightly and calls the REST API to add missing diagnostic settings",
+            "correct": false
+        }
+    ],
+    "explanation": "The **DeployIfNotExists (DINE)** effect is designed for exactly this pattern: the policy evaluates each resource, and when the required sub-resource (a diagnostic setting pointing at the workspace) is missing, it **deploys it automatically**. Because policy assignments continuously evaluate new resources, future key vaults and SQL servers are covered the moment they are created. Two supporting pieces make it work: the assignment's **managed identity** must hold the roles needed to create diagnostic settings (DINE deployments run as that identity, not as the person who assigned the policy), and **remediation tasks** apply the deployment to resources that already existed before the assignment — DINE only fires automatically for new or updated resources. The Azure Policy compliance view then shows conformity for the whole estate in one place, satisfying the visibility requirement.\n\n**Why not the other options:**\n- **Deny effect** — Deny can only block a request at creation/update time. A diagnostic setting is a separate child resource created after the parent, so \"a key vault without diagnostic settings\" is not a single deniable request — and Deny does nothing to fix the hundreds of existing non-compliant resources.\n- **Audit effect with monthly review** — Audit only marks resources non-compliant; a human still has to fix each one, which directly violates the requirement that correction happen automatically without a ticket.\n- **Automation runbook** — custom scripts can work but provide no compliance dashboard, no evaluation of new resources between runs, and another credentialed automation surface to maintain. Azure Policy is the platform-native control the requirement describes.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_veynhart_robotics.json"
+}

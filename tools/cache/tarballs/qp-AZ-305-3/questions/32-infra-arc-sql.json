@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-infra-arc-sql",
+    "question": "A national lottery operator is required by its regulator to keep gaming databases **on premises**, in its own datacenter. The engineering team nevertheless wants the databases to run as an **evergreen, always-patched managed SQL service** with cloud-style elastic scaling, deployed onto the company's existing on-premises Kubernetes clusters, and managed and billed through the Azure portal alongside the company's other Azure resources.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "SQL Managed Instance enabled by Azure Arc, deployed on the existing on-premises Kubernetes clusters through Azure Arc-enabled data services",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Managed Instance in the nearest Azure region, connected to the datacenter over ExpressRoute",
+            "correct": false
+        },
+        {
+            "text": "SQL Server 2022 on on-premises VMs, connected to Azure with the Azure Arc Connected Machine agent",
+            "correct": false
+        },
+        {
+            "text": "Deploy an Azure Stack Hub integrated system in the datacenter and run SQL Server VMs on it",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Arc-enabled data services** exist for exactly this tension: *data must stay on premises, but the team wants a managed Azure database service*. **SQL Managed Instance enabled by Azure Arc** runs on any CNCF-conformant Kubernetes cluster — including the operator's existing on-premises clusters:\n\n- **Data residency** — the databases and their storage never leave the operator's datacenter, satisfying the regulator\n- **Evergreen managed service** — the instance is delivered as a continuously updated service (the Arc data controller manages versioned updates), with the SQL MI programming surface, built-in HA options, and elastic scaling of cores/memory on Kubernetes\n- **Azure management plane** — the instances project into the Azure portal as resources: inventory, Azure Policy, RBAC, monitoring, and unified billing next to the company's cloud resources\n\n**Why not the other options:**\n- **Azure SQL MI + ExpressRoute** — The databases would physically reside in the Azure region, which is precisely what the regulator prohibits. Network privacy (ExpressRoute) does not change data *location*\n- **SQL Server 2022 + Arc-enabled servers** — Arc-enabled SQL Server projects self-hosted SQL into Azure for inventory, assessment, and some management features, but it remains a **customer-operated SQL Server**: the team patches it, engineers its HA, and gets no evergreen managed service or Kubernetes-native elastic scaling. It is Arc for *visibility*, not Arc *data services*\n- **Azure Stack Hub** — A major hardware acquisition and operating commitment to run Azure services on premises — and the requirement was to use the **existing Kubernetes clusters**, not to procure an integrated system. Running SQL in VMs on Stack Hub is still self-managed SQL, not a managed evergreen SQL service",
+    "category": "Design Infrastructure Solutions"
+}

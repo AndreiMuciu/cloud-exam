@@ -1,0 +1,13 @@
+{
+    "id": "case_study_lexbourne_legal",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Lexbourne Associates** is a legal-services firm building an AI-assisted case-management platform. Court filings are ingested, analyzed for key clauses, and tracked against court deadlines.\n\n**Current Environment:**\n- Document-processing work items are sent to an **Azure Service Bus** queue named `filing-tasks`.\n- Case lifecycle events (for example `CaseOpened`, `CaseStatusChanged`, `CaseClosed`) are published to an **Azure Event Grid** custom topic named `lex-case-events` from a Python service.\n- Clause extraction runs in an **Azure Functions** app written with the Python v2 programming model. Developers run it locally with Azure Functions Core Tools before deploying.\n- Each case stores hearing dates; paralegals must be reminded of preparation tasks a fixed number of days before each hearing."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Reminder Requirements:**\n- A reminder message must become available on the `filing-tasks` queue at an exact future time (for example, 10 days before a hearing). If the hearing is rescheduled, the pending reminder must be cancellable before it is delivered.\n\n**Eventing Requirements:**\n- The case service must publish `CaseStatusChanged` events to `lex-case-events` by using the Azure SDK for Python, authenticating with Microsoft Entra ID.\n\n**Configuration Requirements:**\n- The clause-extraction function reads settings such as `MODEL_ENDPOINT` and `SERVICEBUS_FQDN` from its environment. Everything works on developer laptops but the deployed function app fails at startup because these settings are missing in Azure.\n- No secrets may be committed to source control."
+        }
+    ]
+}

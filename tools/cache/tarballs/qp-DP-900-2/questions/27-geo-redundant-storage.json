@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-27-geo-redundant-storage",
+    "question": "A company must ensure that the data in its Azure storage account would survive a disaster that takes an entire Azure region offline. The data should be copied automatically to a second region hundreds of miles away.\n\nWhich redundancy option should the storage account use?",
+    "options": [
+        {
+            "text": "Geo-redundant storage (GRS)",
+            "correct": true
+        },
+        {
+            "text": "Locally redundant storage (LRS)",
+            "correct": false
+        },
+        {
+            "text": "Zone-redundant storage (ZRS)",
+            "correct": false
+        },
+        {
+            "text": "Premium performance tier storage",
+            "correct": false
+        }
+    ],
+    "explanation": "**Geo-redundant storage (GRS)** keeps three copies of the data in the primary region and **asynchronously replicates it to a paired secondary region** that is geographically distant. Even if the entire primary region is lost in a disaster, the secondary region still holds the data — which is exactly the requirement stated.\n\n**Why not the other options:**\n- **Locally redundant storage (LRS)** — Stores three copies of the data **within a single datacenter** in one region. It protects against a disk or rack failure, but a disaster affecting that datacenter or region could destroy all copies.\n- **Zone-redundant storage (ZRS)** — Spreads copies across three **availability zones within the same region**. It survives a datacenter (zone) outage, but not a disaster that takes the whole region offline.\n- **Premium performance tier storage** — Premium is a **performance** option (low-latency storage on SSDs), not a redundancy option. It says nothing about where copies of the data are kept.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

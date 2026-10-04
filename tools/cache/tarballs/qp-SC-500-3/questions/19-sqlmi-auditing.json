@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-19-sqlmi-auditing",
+    "question": "Your compliance team requires that an Azure SQL Managed Instance capture an audit trail of database events, retain it for regulatory review, and additionally record the queries executed by Microsoft support engineers if they ever access the instance during a support case. How should you configure auditing?",
+    "options": [
+        {
+            "text": "Create a server audit and audit specifications on the managed instance with T-SQL, targeting an Azure Storage account (or Event Hubs/Log Analytics), and additionally enable auditing of Microsoft support operations",
+            "correct": true
+        },
+        {
+            "text": "Enable the database-level auditing toggle in the Azure portal for each database on the managed instance, exactly as you would for Azure SQL Database",
+            "correct": false
+        },
+        {
+            "text": "Enable SQL Insights on the managed instance, since performance telemetry includes the text of all executed queries",
+            "correct": false
+        },
+        {
+            "text": "Install a third-party database activity monitoring agent on the managed instance's host, since managed instances do not support native auditing",
+            "correct": false
+        }
+    ],
+    "explanation": "Auditing on **Azure SQL Managed Instance** works differently from single Azure SQL Database — an exam-favorite distinction. On a managed instance you create **server audits and server/database audit specifications with T-SQL** (`CREATE SERVER AUDIT ...`), close to on-premises SQL Server, and point the audit at **Azure Blob storage, Event Hubs, or a Log Analytics workspace**. Separately, Managed Instance supports auditing of **Microsoft support operations**, a dedicated capability that records the actions and queries run by Microsoft engineers when they access your instance during support cases — directly satisfying the third requirement and giving the compliance team a complete trail.\n\n**Why not the other options:**\n- **The Azure SQL Database portal toggle per database** — that experience belongs to Azure SQL Database (single databases/elastic pools). Managed Instance does not expose the same per-database portal auditing model; its auditing is configured via T-SQL server audits, and the portal route also has no support-operations capture.\n- **SQL Insights** — a performance monitoring solution (waits, resource usage). It is not a security audit trail, does not capture all statements for compliance, and records nothing about Microsoft support access.\n- **Third-party agent on the host** — customers have no access to the underlying host of a PaaS managed instance, and the premise is false: native auditing is fully supported, just via T-SQL.",
+    "category": "Secure storage, databases, and networking"
+}

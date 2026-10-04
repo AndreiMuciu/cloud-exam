@@ -1,0 +1,13 @@
+{
+    "id": "case_study_brindlecote_manufacturing",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Brindlecote Manufacturing** produces industrial packaging equipment at six plants. Its Azure estate has grown organically to about 30 virtual networks across five subscriptions, each managed by a different application team.\n\n**Current Environment:**\n- Every application team creates and edits its own network security groups (NSGs). Last year an application team deleted an NSG rule that blocked inbound internet traffic to management ports, exposing several VMs for two weeks before it was noticed.\n- A machine-telemetry API used by an external analytics partner is currently published on a public IP address protected only by an IP allowlist.\n- The partner's Azure environment uses address spaces that overlap with Brindlecote's, so virtual network peering has already been ruled out.\n- Field service engineers connect remotely through a legacy SSL VPN appliance that uses a shared credential stored in a team wiki."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The network security team has defined the following requirements:\n\n**Organization-Wide Network Guardrails:**\n- A small set of mandatory security rules (for example, deny inbound internet traffic to RDP/SSH from any source) must apply to all current **and future** virtual networks automatically.\n- The mandatory rules must be evaluated **before** the application teams' NSG rules and must not be overridable or deletable by the application teams.\n- Application teams must keep managing their own NSGs for everything else.\n\n**Partner Connectivity:**\n- The analytics partner must consume the telemetry API privately, without virtual network peering, unaffected by the overlapping IP address spaces.\n- The connection must be initiated from the partner's side, require Brindlecote's explicit approval, and must not expose any additional inbound public endpoint.\n\n**Remote Access:**\n- Field engineers must authenticate to a point-to-site VPN with their individual Microsoft Entra ID accounts, protected by multifactor authentication enforced through Conditional Access.\n- Access for a departing engineer must be revocable centrally and immediately, without redistributing anything to other users."
+        }
+    ]
+}

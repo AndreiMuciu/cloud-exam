@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-25-sentinel-content-hub",
+  "type": "single",
+  "question": "Your SOC is standing up Microsoft Sentinel and wants, for each product it monitors (a third-party firewall, Azure activity, a SaaS HR platform), the vendor's full package — data connector, analytics rules, hunting queries, workbooks, and playbooks — installed together, tracked as one unit, and updated when the publisher ships a new version. How should the team onboard this content?",
+  "options": [
+    {
+      "text": "Install the corresponding solutions from the Microsoft Sentinel content hub, then enable the included connectors and content, and apply solution updates from the content hub as publishers release them",
+      "correct": true
+    },
+    {
+      "text": "Enable each product's data connector individually from the connector gallery — analytics rules, workbooks, and playbooks are provisioned automatically with every connector",
+      "correct": false
+    },
+    {
+      "text": "Clone community GitHub repositories for each product and import the detection YAML files and workbook JSON into the workspace manually",
+      "correct": false
+    },
+    {
+      "text": "Export the analytics rules and workbooks from another Sentinel workspace as ARM templates and redeploy them into the new workspace for each product",
+      "correct": false
+    }
+  ],
+  "explanation": "The **content hub** is Microsoft Sentinel's built-in catalog of packaged, versioned **solutions**. A solution bundles everything a publisher ships for a product — data connectors, analytics rule templates, hunting queries, workbooks, playbooks, parsers — and installs it as a single tracked unit in the workspace. The hub shows the installed version, flags when the publisher releases an update, and lets you update (or bulk-update) solutions in place. That is exactly the requested lifecycle: one package per product, installed together, centrally updated.\n\n**Why not the other options:**\n- **Enabling connectors individually** — a data connector only establishes ingestion. Connectors do not auto-provision analytics rules, workbooks, or playbooks; those are separate content items that ship *inside* the solution package. The team would get data with no detections.\n- **Cloning GitHub repositories** — manual imports produce untracked, unversioned copies: no update notifications, no packaging, and drift the moment the publisher changes anything. The content hub exists precisely to replace this workflow (community content that is in the hub arrives already packaged).\n- **Exporting from another workspace** — redeploying ARM templates copies a point-in-time snapshot of someone else's configuration. It carries over workspace-specific customizations, still lacks any update mechanism, and assumes another workspace already has content for every product — which a new SOC cannot rely on.",
+  "category": "Manage and monitor security posture"
+}

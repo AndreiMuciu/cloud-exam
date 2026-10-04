@@ -1,0 +1,24 @@
+{
+    "id": "dp900-34-azure-databricks",
+    "question": "A data science team needs an Apache Spark-based analytics platform on Azure where data engineers and data scientists can collaborate in shared notebooks, run large-scale data transformations, and train machine learning models on auto-scaling clusters.\n\nWhich Azure service should the team use?",
+    "options": [
+        {
+            "text": "Azure Databricks",
+            "correct": true
+        },
+        {
+            "text": "Azure Data Factory",
+            "correct": false
+        },
+        {
+            "text": "Azure Stream Analytics",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Database",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Databricks** is an Apache Spark-based analytics platform optimized for Azure. It provides collaborative notebooks (supporting Python, Scala, SQL, and R), managed auto-scaling Spark clusters, and integrated machine learning tooling — making it the natural home for teams that combine large-scale data engineering with data science on the same platform.\n\n**Why not the other options:**\n- **Azure Data Factory** — A data integration and orchestration service for building pipelines that move and transform data between stores. It orchestrates work but is not a collaborative Spark notebook environment for data science.\n- **Azure Stream Analytics** — A real-time event processing service that runs SQL-like queries over streaming data. It targets continuous stream queries, not interactive notebooks, batch Spark transformations, or model training.\n- **Azure SQL Database** — A managed relational database engine for transactional and query workloads. It is not a Spark platform and offers no notebook-based collaboration or distributed ML training.",
+    "category": "Describe an Analytics Workload on Azure"
+}

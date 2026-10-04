@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-12-lumetra-fact-table",
+    "question": "Lumetra Retail Group is modeling its sales data for Power BI as a star schema containing the SalesTransactions, Product, Store, and Date tables.\n\nIn this star schema, which table is the fact table?",
+    "options": [
+        {
+            "text": "SalesTransactions, because it holds the numeric measures and one row per checkout line",
+            "correct": true
+        },
+        {
+            "text": "Product, because products are the most important business entity",
+            "correct": false
+        },
+        {
+            "text": "Store, because it lists all 600 physical locations",
+            "correct": false
+        },
+        {
+            "text": "Date, because every analysis slices data by time",
+            "correct": false
+        }
+    ],
+    "explanation": "In a **star schema**, the **fact table** records the *events being measured*: one row per business event, containing **numeric measures** (here, quantity and amount per checkout line) plus **key columns** linking to the dimensions. `SalesTransactions` fits that definition exactly — it is the large, fast-growing table at the center of the star, surrounded by the descriptive tables the business uses to slice the numbers.\n\n**Why not the other options:**\n- **Product** — A **dimension table**: it describes *attributes* of products (name, brand, category) used to group and filter the sales measures. Business importance does not make a table a fact table; its role in the model does.\n- **Store** — Also a dimension: relatively small, slowly changing, and descriptive. It tells you *where* a sale happened, not *how much* was sold.\n- **Date** — The classic time dimension, letting analysts roll measures up by day, month, and year. It contains calendar attributes, not measures of business events.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_lumetra_retail.json"
+}

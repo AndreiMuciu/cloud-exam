@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-governance-deny-assignments",
+    "type": "single",
+    "question": "A user with the **Owner** role on a resource group tries to delete a resource inside it and receives an authorization error. On the resource's **Access control (IAM)** blade, the **Deny assignments** tab shows an entry that was created by a deployment stack and applies to all principals.\n\nWhich statement explains the behavior?",
+    "options": [
+        { "text": "Deny assignments take precedence over role assignments, and they are created by Azure (for example by deployment stacks or managed applications), not directly by users", "correct": true },
+        { "text": "The Owner role only grants read access unless it is combined with the User Access Administrator role", "correct": false },
+        { "text": "The deny assignment is misconfigured and can be edited on the Access control (IAM) blade to exclude the user", "correct": false },
+        { "text": "A CanNotDelete resource lock was applied to the resource by the deployment stack", "correct": false }
+    ],
+    "explanation": "Azure RBAC evaluates **deny assignments before role assignments**, and a matching deny always wins — even against Owner. Deny assignments **cannot be created directly by users**; they are created and managed by Azure on behalf of specific features. **Deployment stacks** use them to protect managed resources (deny-settings modes such as denyDelete or denyWriteAndDelete), and **Azure managed applications** use them to protect publisher-managed resource groups. To delete the resource legitimately, the deployment stack's deny settings must be changed, or the resource must be removed through an update to the stack itself, by a principal excluded from the deny settings.\n\n**Why not the other options:**\n- **Owner needing User Access Administrator**: Owner already includes full data-plane-management and access-management rights (`*` actions). User Access Administrator adds nothing here — the block comes from a deny assignment, not a missing permission.\n- **Editing the deny assignment in IAM**: deny assignments are **read-only** in the portal — you can view them on the Deny assignments tab, but they can only be changed by the owning feature (the deployment stack's deny settings), never edited directly.\n- **CanNotDelete lock**: a resource lock produces a different, lock-specific error and appears on the resource's **Locks** blade, not under Deny assignments. The scenario explicitly shows a deny assignment as the cause.",
+    "category": "Manage Azure Identities and Governance"
+}

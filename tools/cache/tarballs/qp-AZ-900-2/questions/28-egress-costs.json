@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-28-egress-costs",
+    "question": "A data analytics team is surprised by a line item on its Azure invoice after it began exporting large result sets from an Azure region to its on-premises reporting servers every night. Which cost factor most likely explains the charge?",
+    "options": [
+        {
+            "text": "Outbound (egress) network traffic leaving the Azure region",
+            "correct": true
+        },
+        {
+            "text": "Inbound (ingress) data transferred into Azure",
+            "correct": false
+        },
+        {
+            "text": "The number of resource groups in the subscription",
+            "correct": false
+        },
+        {
+            "text": "The number of tags applied to the team’s resources",
+            "correct": false
+        }
+    ],
+    "explanation": "Network traffic is an often-overlooked Azure cost factor: **inbound data transfers are typically free, but outbound (egress) data leaving Azure is billed**, with rates that depend on volume and destination. Nightly bulk exports from an Azure region to on-premises servers generate exactly this kind of egress charge.\n\n**Why not the other options:**\n- **Inbound data** — Data flowing *into* Azure is generally not charged, so imports would not explain the new line item.\n- **Number of resource groups** — Resource groups are free logical containers; you can create many with no direct cost.\n- **Number of tags** — Tags are free metadata used for organization and cost reporting; applying them costs nothing.",
+    "category": "Describe Azure Management and Governance"
+}

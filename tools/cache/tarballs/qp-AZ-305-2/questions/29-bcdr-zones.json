@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-bcdr-zones",
+    "question": "A hospital's admissions system runs on Azure VMs and must satisfy the following within its primary region:\n\n- Remain available if a single datacenter in the region fails\n- Zero data loss (RPO = 0) for committed transactions during such a failure\n- No requirement to survive the loss of the entire region\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Deploy the VMs across availability zones behind a zone-redundant load balancer, with data on synchronously replicated zone-redundant storage",
+            "correct": true
+        },
+        {
+            "text": "Deploy the VMs in an availability set with premium SSD disks",
+            "correct": false
+        },
+        {
+            "text": "Replicate the VMs to a secondary region with Azure Site Recovery and fail over when a datacenter fails",
+            "correct": false
+        },
+        {
+            "text": "Back up the VMs hourly to a Recovery Services vault and restore them if a datacenter fails",
+            "correct": false
+        }
+    ],
+    "explanation": "**Availability zones with zone-redundant storage** are the within-region answer for datacenter-level resilience with zero data loss:\n\n- **Availability** — Each availability zone is a physically separate datacenter. Spreading VM instances across zones behind a **zone-redundant Standard Load Balancer** means the loss of one datacenter leaves instances in other zones serving traffic (99.99% VM SLA)\n- **RPO = 0** — Zone-redundant storage (ZRS disks or ZRS storage services) replicates every write **synchronously across three zones before acknowledging it**, so a committed transaction already exists in surviving datacenters when a zone fails — zero data loss by construction\n- The stated scope (no regional-loss requirement) makes this the complete, lowest-complexity design\n\n**Why not the other options:**\n- **Availability set + premium SSDs** — Fault domains within an availability set are separate racks *inside the same datacenter*. A datacenter-level failure takes down every fault domain simultaneously; disk performance tier is irrelevant to this failure mode\n- **Azure Site Recovery to another region** — ASR replication is **asynchronous**, so the last seconds-to-minutes of writes are lost on failover (RPO > 0), violating the zero-data-loss requirement; it also incurs a failover RTO for a failure the zone design would ride through transparently. ASR addresses the regional-loss scenario that this workload explicitly does not have\n- **Hourly backup and restore** — RPO of up to an hour of lost admissions data and an RTO of hours to restore — backup is for corruption/deletion recovery, not high availability",
+    "category": "Design Business Continuity Solutions"
+}

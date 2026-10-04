@@ -1,0 +1,25 @@
+{
+    "id": "sc900-10-solstice-sensitivity-labels",
+    "question": "Solstice Financial Partners requires that documents and emails containing client financial data be classified, encrypted, and visibly marked with a watermark — and the protection must remain with the file even when it is emailed to external auditors.\n\nWhich Microsoft Purview capability should Solstice Financial use?",
+    "options": [
+        {
+            "text": "Retention labels",
+            "correct": false
+        },
+        {
+            "text": "Sensitivity labels",
+            "correct": true
+        },
+        {
+            "text": "Compliance Manager",
+            "correct": false
+        },
+        {
+            "text": "Content explorer",
+            "correct": false
+        }
+    ],
+    "explanation": "**Sensitivity labels** (part of Microsoft Purview Information Protection) classify content and can enforce protection such as encryption and content markings — headers, footers, and watermarks. Because the label and its encryption are embedded in the file itself, the protection persists wherever the document travels, including outside the organization.\n\n**Why not the other options:**\n- **Retention labels** — These govern how long content is kept or when it is deleted; they do not encrypt or watermark files.\n- **Compliance Manager** — This solution measures progress against regulatory assessments with a compliance score; it does not protect individual documents.\n- **Content explorer** — Content explorer shows *where* labeled and sensitive items exist across the organization; it is a visibility tool, not a protection mechanism.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_solstice_financial.json"
+}

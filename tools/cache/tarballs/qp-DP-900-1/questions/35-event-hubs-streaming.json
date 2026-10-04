@@ -1,0 +1,24 @@
+{
+    "id": "dp900-35-event-hubs-streaming",
+    "question": "A ride-sharing company needs an Azure service that can ingest millions of location events per second from its mobile apps and buffer them reliably so that downstream stream processing jobs can consume them in order.\n\nWhich service is designed for this large-scale event ingestion role?",
+    "options": [
+        {
+            "text": "Azure Event Hubs",
+            "correct": true
+        },
+        {
+            "text": "Azure Blob Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Factory",
+            "correct": false
+        },
+        {
+            "text": "Azure Database for PostgreSQL",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Event Hubs** is a big-data event ingestion service built exactly for this: it can receive millions of events per second, partitions them for ordered, parallel consumption, and retains them so downstream consumers — Azure Stream Analytics jobs, Spark Structured Streaming in Azure Databricks, or Fabric eventstreams — can read the stream at their own pace. It acts as the reliable \"front door\" that decouples fast event producers from stream processors.\n\n**Why not the other options:**\n- **Azure Blob Storage** — An object store for files and blobs. It is a common **destination** for captured event data, but it is not an event broker; it cannot ingest and buffer a high-velocity stream of individual events for ordered consumption.\n- **Azure Data Factory** — A batch-oriented data integration and orchestration service. It schedules and runs pipelines; it is not designed to ingest millions of real-time events per second.\n- **Azure Database for PostgreSQL** — A managed relational database for transactional workloads. Writing every location ping as a database row is neither scalable nor the intended pattern for stream ingestion.",
+    "category": "Describe an Analytics Workload on Azure"
+}

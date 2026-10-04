@@ -1,0 +1,25 @@
+{
+    "id": "az500-36-security-depth-order",
+    "type": "ordering",
+    "question": "Arrange the security layers in the standard 'Defense in Depth' model, starting from the outermost layer (the first line of defense) to the innermost layer (the asset itself).",
+    "items": [
+        "Data",
+        "Physical Security",
+        "Network",
+        "Identity & Access",
+        "Perimeter",
+        "Compute",
+        "Application"
+    ],
+    "correctOrder": [
+        "Physical Security",
+        "Identity & Access",
+        "Perimeter",
+        "Network",
+        "Compute",
+        "Application",
+        "Data"
+    ],
+    "explanation": "The standard Microsoft Defense in Depth model has 7 layers: **Physical Security** (building access) → **Identity & Access** (authentication and authorization) → **Perimeter** (DDoS protection, firewalls) → **Network** (segmentation, NSGs) → **Compute** (securing VMs, patching OS) → **Application** (secure code, no vulnerabilities) → **Data** (encryption, access controls on the asset itself).",
+    "category": "Manage security operations"
+}

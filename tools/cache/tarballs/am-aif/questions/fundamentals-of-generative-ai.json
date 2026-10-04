@@ -1,0 +1,258 @@
+{
+  "domain": "Fundamentals of Generative AI",
+  "questions": [
+    {
+      "id": 15,
+      "question": "When a large language model processes the sentence 'The bank approved the loan,' it first splits the text into smaller pieces before encoding them. What are these pieces called?",
+      "options": [
+        { "id": "a", "text": "Tokens — the fundamental units of text that a model reads and produces" },
+        { "id": "b", "text": "Embeddings — dense vector representations of semantic meaning" },
+        { "id": "c", "text": "Epochs — complete passes through the training dataset" },
+        { "id": "d", "text": "Gradients — partial derivatives used to update model weights" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Tokens are the basic units of text that generative AI models process. They can be words, parts of words, or characters. Understanding tokenization is important as it affects model performance and API costs.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 16,
+      "question": "A search engine needs to find documents that match a user's query by meaning, not just by keywords. To do this it converts every document into a numerical representation in a high-dimensional space. What is this representation called?",
+      "options": [
+        { "id": "a", "text": "A vector embedding that captures semantic relationships between concepts" },
+        { "id": "b", "text": "A TF-IDF score that measures word frequency relative to the corpus" },
+        { "id": "c", "text": "A one-hot encoding that assigns a unique binary position to each word" },
+        { "id": "d", "text": "A hash function that maps text to fixed-length numeric identifiers" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Embeddings are dense vector representations that capture semantic meanings. They allow AI models to understand relationships between text based on meaning rather than exact keyword matches.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 17,
+      "question": "A startup wants to build a generative AI application without training its own model. It needs access to models from Anthropic, Meta, and Amazon through a single managed interface. Which AWS service fits this requirement?",
+      "options": [
+        { "id": "a", "text": "Amazon SageMaker, which provides notebook environments for custom model training" },
+        { "id": "b", "text": "Amazon Comprehend, which offers pre-built NLP capabilities like entity extraction" },
+        { "id": "c", "text": "AWS Lambda, which runs serverless functions triggered by application events" },
+        { "id": "d", "text": "Amazon Bedrock, which offers managed API access to multiple foundation models" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Amazon Bedrock is a fully managed service that provides access to foundation models from AWS and third-party providers through a single API, enabling developers to build generative AI applications.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 18,
+      "question": "A legal team deploys a generative AI tool to draft contract summaries. During review, attorneys discover the tool cited a regulation that does not exist. What limitation does this illustrate?",
+      "options": [
+        { "id": "a", "text": "Model drift, where prediction accuracy degrades after deployment" },
+        { "id": "b", "text": "Hallucination, where the model generates plausible but fabricated content" },
+        { "id": "c", "text": "Underfitting, where the model is too simple to represent legal language" },
+        { "id": "d", "text": "Data poisoning, where malicious examples corrupt the training set" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Generative AI models can produce hallucinations — plausible-sounding but factually incorrect information. Users and developers must be aware of this limitation when deploying these models.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 19,
+      "question": "After pre-training a large language model on internet-scale text, a healthcare company trains it further on millions of de-identified clinical notes. What stage of the model lifecycle is this?",
+      "options": [
+        { "id": "a", "text": "Fine-tuning, where the model is adapted to a specific domain or task" },
+        { "id": "b", "text": "Inference, where the deployed model serves predictions to end users" },
+        { "id": "c", "text": "Data labeling, where annotators tag examples for supervised learning" },
+        { "id": "d", "text": "Quantization, where model weights are compressed for efficient deployment" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Fine-tuning is the process of further training a pre-trained foundation model on specific datasets. This adapts the model's general knowledge to perform well on particular domains or tasks.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 20,
+      "question": "A creative agency uses a single AI system that can read a written brief, generate matching product images, and narrate a voice-over for a video ad. What kind of model supports all three modalities?",
+      "options": [
+        { "id": "a", "text": "A discriminative classifier trained only on structured tabular data" },
+        { "id": "b", "text": "A single-modal model specialized exclusively for text generation" },
+        { "id": "c", "text": "A multi-modal model capable of processing and generating text, images, and audio" },
+        { "id": "d", "text": "A rule-based expert system that follows hard-coded decision trees" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Multi-modal models can process and generate content across different types of data including text, images, and audio. They enable comprehensive AI applications that understand diverse content forms.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 21,
+      "question": "A developer wants their image generator to produce more creative and varied outputs rather than always returning the single most likely image. Which parameter should they increase?",
+      "options": [
+        { "id": "a", "text": "The maximum output length, which caps the number of tokens generated" },
+        { "id": "b", "text": "The temperature, which controls randomness and diversity in generation" },
+        { "id": "c", "text": "The batch size, which determines how many requests process in parallel" },
+        { "id": "d", "text": "The learning rate, which governs how fast model weights update during training" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Temperature controls the randomness of model outputs. Lower values make outputs more focused and deterministic, while higher values increase creativity and variation.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 22,
+      "question": "Instead of using a fixed temperature, a developer configures their text generation to only consider tokens whose cumulative probability adds up to 0.9, dynamically narrowing or widening the candidate pool. What is this technique called?",
+      "options": [
+        { "id": "a", "text": "Beam search, which explores multiple sequence hypotheses in parallel" },
+        { "id": "b", "text": "Greedy decoding, which always picks the single highest-probability token" },
+        { "id": "c", "text": "Top-p (nucleus) sampling, which limits selection to a cumulative probability threshold" },
+        { "id": "d", "text": "Top-k sampling, which restricts candidates to a fixed number of highest-probability tokens" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Top-p sampling dynamically selects tokens whose cumulative probability exceeds threshold p. This balances diversity and quality by limiting which tokens are considered.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 23,
+      "question": "An artist's tool learns to create images by starting with pure random noise and iteratively removing small amounts of noise until a coherent picture emerges. Which generative architecture does this describe?",
+      "options": [
+        { "id": "a", "text": "A recurrent neural network that processes sequences one step at a time" },
+        { "id": "b", "text": "A generative adversarial network that pits a generator against a discriminator" },
+        { "id": "c", "text": "A variational autoencoder that learns a compressed latent space for reconstruction" },
+        { "id": "d", "text": "A diffusion model that generates images through progressive denoising steps" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Diffusion models are particularly effective for image generation. They work by learning to reverse a noise-adding process, gradually transforming random noise into coherent images.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 24,
+      "question": "Inside a transformer model, each output position computes a weighted combination of all input positions to decide which parts of the input are most relevant. What is this mechanism called?",
+      "options": [
+        { "id": "a", "text": "Backpropagation, which computes gradients for updating weights during training" },
+        { "id": "b", "text": "Attention, which dynamically weights the importance of different input positions" },
+        { "id": "c", "text": "Dropout, which randomly deactivates neurons to prevent overfitting" },
+        { "id": "d", "text": "Pooling, which reduces spatial dimensions in convolutional layers" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "The attention mechanism allows transformer models to focus on relevant parts of the input when processing each element. This enables understanding of context and relationships.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 25,
+      "question": "A company wants an AI assistant that can answer employee questions using internal company documents, policies, and HR databases without retraining the underlying model. What is the best approach?",
+      "options": [
+        { "id": "a", "text": "Train a new foundation model from scratch on the company's internal documents" },
+        { "id": "b", "text": "Use Amazon Bedrock Knowledge Bases to connect the model to enterprise data sources for RAG" },
+        { "id": "c", "text": "Increase the temperature parameter so the model generates more varied responses" },
+        { "id": "d", "text": "Use Amazon Rekognition to analyze and index the company's document images" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Bedrock Knowledge Bases enable RAG by connecting foundation models to enterprise data sources. This allows models to retrieve and use company-specific information when generating responses.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 26,
+      "question": "An enterprise needs a generative AI tool that can summarize long reports into executive briefs, extracting key metrics and recommendations. Which capability of generative AI does this scenario highlight?",
+      "options": [
+        { "id": "a", "text": "Image classification for sorting documents by visual layout" },
+        { "id": "b", "text": "Anomaly detection for flagging unusual patterns in numerical data" },
+        { "id": "c", "text": "Regression analysis for predicting future values from historical trends" },
+        { "id": "d", "text": "Text summarization for distilling lengthy content into concise key points" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Summarization is a key generative AI capability that distills large volumes of text into concise summaries. It's valuable for business intelligence, legal review, and news aggregation.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 27,
+      "question": "A small startup with no ML engineers wants to add AI-powered features to their application without managing GPU clusters or model training infrastructure. What is the primary advantage of using Amazon Bedrock for this team?",
+      "options": [
+        { "id": "a", "text": "It guarantees that model outputs will always be 100% factually accurate" },
+        { "id": "b", "text": "It provides unlimited free compute resources for all inference workloads" },
+        { "id": "c", "text": "It removes the need for any prompt design or application logic" },
+        { "id": "d", "text": "It provides managed model access without requiring ML infrastructure expertise" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Amazon Bedrock provides managed access to foundation models without requiring extensive ML expertise or infrastructure, lowering barriers to AI development.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 28,
+      "question": "A product manager asks their engineering team to build an AI coding assistant that suggests code completions, explains existing code, and helps debug errors. Which AWS service was designed for this use case?",
+      "options": [
+        { "id": "a", "text": "Amazon Q Developer, which provides AI-powered coding assistance and software development support" },
+        { "id": "b", "text": "Amazon Q Business, which answers questions using enterprise knowledge bases" },
+        { "id": "c", "text": "Amazon CodeGuru, which reviews code for performance and security issues" },
+        { "id": "d", "text": "AWS Cloud9, which provides a cloud-based integrated development environment" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Amazon Q Developer is an AI-powered coding assistant that helps developers write, debug, and optimize code. It provides code suggestions and can explain existing code.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 29,
+      "question": "A company wants to deploy a generative AI assistant that helps employees find information, generate reports, and automate tasks using the company's internal data and systems. Which AWS offering is purpose-built for this?",
+      "options": [
+        { "id": "a", "text": "Amazon SageMaker, which provides tools for building custom ML models" },
+        { "id": "b", "text": "Amazon Kendra, which offers intelligent enterprise search over document repositories" },
+        { "id": "c", "text": "Amazon Q Business, which is a generative AI assistant for enterprise productivity" },
+        { "id": "d", "text": "Amazon Comprehend, which extracts insights from unstructured text" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Amazon Q Business is a generative AI-powered assistant designed for enterprise productivity. It can answer questions, generate content, and complete tasks using company data.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 30,
+      "question": "A foundation model provider wants to enable enterprises to automate complex workflows — such as looking up a customer record, checking inventory, and placing an order — all from a single natural-language request. Which Amazon Bedrock capability supports this?",
+      "options": [
+        { "id": "a", "text": "Guardrails for Bedrock, which filters model inputs and outputs for safety" },
+        { "id": "b", "text": "Bedrock model evaluation, which benchmarks model accuracy on standard tasks" },
+        { "id": "c", "text": "Bedrock Agents, which autonomously plan and execute multi-step tasks using APIs" },
+        { "id": "d", "text": "Bedrock fine-tuning, which adapts a base model to a company's proprietary data" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Amazon Bedrock Agents can autonomously break down and execute multi-step tasks using foundation models, integrating with APIs and data sources to complete complex workflows.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 31,
+      "question": "Which TWO of the following are genuine advantages of using Amazon Bedrock for building generative AI applications? (Select 2)",
+      "options": [
+        { "id": "a", "text": "It provides access to foundation models from multiple providers through one API" },
+        { "id": "b", "text": "It automatically trains custom models without any data or configuration" },
+        { "id": "c", "text": "It is a fully managed service that removes the need for ML infrastructure expertise" },
+        { "id": "d", "text": "It offers unlimited free inference for all foundation models with no usage fees" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "c"],
+      "explanation": "Amazon Bedrock provides access to multiple foundation models through a single API and is fully managed, eliminating the need for ML infrastructure expertise. It does require data for customization and has usage-based pricing.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 32,
+      "question": "Which TWO of the following are genuine business use cases for generative AI? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Replacing all human judgment and eliminating the need for any oversight" },
+        { "id": "b", "text": "Guaranteeing 100% factual accuracy without any verification step" },
+        { "id": "c", "text": "Drafting personalized marketing copy and product descriptions at scale" },
+        { "id": "d", "text": "Powering intelligent chatbots that handle routine customer service inquiries" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["c", "d"],
+      "explanation": "Generative AI excels at content generation and building chatbots. However, it should augment human decision-making with oversight, and outputs should be verified as AI can produce hallucinations.",
+      "domain": "Fundamentals of Generative AI"
+    },
+    {
+      "id": 33,
+      "question": "Which TWO of the following are stages in the foundation model lifecycle? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Pre-training on large, diverse datasets to develop general language understanding" },
+        { "id": "b", "text": "Skipping evaluation and deploying the model directly to production" },
+        { "id": "c", "text": "Ignoring data quality and using any available text without curation" },
+        { "id": "d", "text": "Fine-tuning on domain-specific data to adapt the model for a particular task" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "d"],
+      "explanation": "Pre-training develops general knowledge from large datasets. Fine-tuning adapts models to specific tasks. Proper evaluation and careful data selection are essential parts of the lifecycle.",
+      "domain": "Fundamentals of Generative AI"
+    }
+  ]
+}

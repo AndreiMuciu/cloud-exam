@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-identity-custom-rbac-role",
+    "type": "multi",
+    "question": "Your operations team must be able to **restart** any virtual machine in an Azure subscription, and view the VMs, but must not be able to start, deallocate, create, or delete VMs or manage any other resource type. No built-in role meets this requirement, so you decide to create a custom Azure RBAC role.\n\nWhich two actions should you perform? (Choose two. Each correct answer presents part of the solution.)",
+    "options": [
+        { "text": "Create a custom role definition whose **Actions** include `Microsoft.Compute/virtualMachines/read` and `Microsoft.Compute/virtualMachines/restart/action`", "correct": true },
+        { "text": "Add the subscription to the role definition's **assignableScopes**, and assign the role to the operations team's group at the subscription scope", "correct": true },
+        { "text": "Add `Microsoft.Compute/virtualMachines/restart/action` to the **DataActions** section of the role definition", "correct": false },
+        { "text": "Create a custom Microsoft Entra directory role that includes the virtual machine restart permission", "correct": false },
+        { "text": "Assign the built-in Virtual Machine Contributor role to the operations team's group at the subscription scope", "correct": false }
+    ],
+    "explanation": "A custom Azure RBAC role is defined by its permitted operations and where it can be assigned. Restarting a VM is a **control-plane (management) operation**, so `Microsoft.Compute/virtualMachines/restart/action` belongs in the **Actions** array, together with `Microsoft.Compute/virtualMachines/read` so the team can see the VMs they operate on. The **assignableScopes** property must list the subscription (or a containing management group) before the role can be assigned there; assigning the role to the operations group at subscription scope then grants restart rights on every VM in the subscription — and nothing more.\n\n**Why not the other options:**\n- **DataActions**: DataActions are for **data-plane** operations, such as reading blobs inside a storage account or sending Service Bus messages. VM lifecycle operations like restart are management-plane and are silently ineffective if placed in DataActions.\n- **Custom Microsoft Entra directory role**: Entra directory roles govern directory objects (users, groups, applications). They cannot carry Azure resource-provider operations such as `Microsoft.Compute/...`, so they cannot control VM restarts.\n- **Virtual Machine Contributor**: This built-in role allows full VM management — create, delete, start, deallocate, resize, and more — vastly exceeding the restart-only requirement and violating least privilege.",
+    "category": "Manage Azure Identities and Governance"
+}

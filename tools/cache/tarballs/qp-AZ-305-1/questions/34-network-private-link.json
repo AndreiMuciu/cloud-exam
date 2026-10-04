@@ -1,0 +1,24 @@
+{
+    "id": "az305-network-private-link",
+    "question": "You are designing a data pipeline that copies data from Azure Blob Storage to Azure SQL Database using Azure Data Factory. The security team requires that:\n\n- No data traverses the public internet\n- The storage account and SQL database must not have public endpoints\n- Azure Data Factory must access both resources through private connectivity\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Use service endpoints on the VNet for both the storage account and SQL database",
+            "correct": false
+        },
+        {
+            "text": "Deploy a self-hosted integration runtime on a VM and use VNet peering",
+            "correct": false
+        },
+        {
+            "text": "Create managed private endpoints in Azure Data Factory's managed VNet for both services",
+            "correct": true
+        },
+        {
+            "text": "Use Azure ExpressRoute with private peering to route traffic through the on-premises network",
+            "correct": false
+        }
+    ],
+    "explanation": "**Managed private endpoints** in Azure Data Factory's **managed VNet** is the correct approach:\n\n- **No public internet** — Managed private endpoints create Private Link connections to the target services, routing all traffic through the Microsoft backbone network\n- **No public endpoints** — Both the storage account and SQL database can have their public endpoints disabled. The private endpoints provide a private IP address within the managed VNet\n- **Native integration** — ADF's managed VNet is a Microsoft-managed virtual network. You create managed private endpoints directly from the ADF portal — no need to manage VMs or networking infrastructure\n\n**Why not the other options:**\n- **Service endpoints** — Keep the public endpoint on the resource (they add a VNet rule to the firewall but the endpoint remains public). The requirement says \"must not have public endpoints\"\n- **Self-hosted IR on a VM** — Works but adds unnecessary infrastructure to manage (VM patching, scaling, availability). The managed VNet with managed private endpoints is a fully managed solution\n- **ExpressRoute** — Over-engineered for this scenario. It requires an on-premises network to route through and doesn't address the requirement for private endpoints on the Azure resources",
+    "category": "Design Infrastructure Solutions"
+}

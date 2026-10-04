@@ -1,0 +1,13 @@
+{
+    "id": "case_study_perrigold",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Perrigold Foods** manufactures packaged foods in four production plants. Every production batch generates quality-assurance records — laboratory test results, inspection photographs, and signed release certificates — that are subject to food-safety regulation.\n\n**Current Environment:**\n- Storage account **stperrigoldqa** (StorageV2, West Europe) stores all quality-assurance records in Blob Storage\n- The container **release-certificates** holds signed batch release documents\n- Older laboratory imagery is moved to the **archive** access tier by a lifecycle management policy after 18 months\n- The corporate security standard requires encryption of the storage account with keys the company controls in Azure Key Vault\n\n**Business Requirements:**\n- Regulatory retention: release certificates must be preserved unchanged for a fixed period of five years\n- Food-safety inspectors occasionally demand archived records at short notice\n- Encryption keys must be protected against accidental or malicious destruction"
+        },
+        {
+            "title": "Compliance and Encryption Detail",
+            "content": "**Release Certificate Retention:**\n- The food-safety regulator requires that release certificates, once written, can be **read but never modified or deleted** for exactly **five years** from creation — this must hold even for storage account administrators and Owners\n- After the five-year period ends, the documents must become deletable again so that data-minimization rules can be applied\n- The protection must be enforced by the storage platform itself, not by procedures or permissions\n\n**Inspector Retrievals:**\n- An inspector can demand a specific archived laboratory file (typically 2–6 GB) and expects to view it in **under one hour**\n- Cost is a secondary concern during an inspection\n\n**Customer-Managed Keys:**\n- Encryption of stperrigoldqa must use a customer-managed key stored in the Azure Key Vault **kv-perrigold-weu**\n- The platform must be able to rotate to new key versions automatically\n- The security team is drafting the list of prerequisites that must be in place on the vault and on the storage account before customer-managed keys can be configured"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-34-priva-subject-rights",
+    "question": "Under privacy regulations such as GDPR, consumers can ask an organization what personal data it holds about them and request that it be exported or deleted. A privacy team wants to manage these requests at scale: automatically gathering the person's personal data across the Microsoft 365 environment, flagging conflicts such as items under legal hold, and supporting review and redaction before the response is delivered — with progress tracked against the regulatory deadline.\n\nWhich Microsoft solution is designed for this?",
+    "options": [
+        {
+            "text": "Microsoft Priva Subject Rights Requests",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Purview eDiscovery",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview Compliance Manager",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview Data Loss Prevention (DLP)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Priva** is Microsoft's privacy solution family, and **Subject Rights Requests** is the capability purpose-built for **data subject requests** (also called DSARs). When a person asks to know, export, or delete their personal data, the solution **automates discovery of that person's data across Microsoft 365**, surfaces potential conflicts (such as items subject to legal hold or containing other people's data), supports **collaboration, review, and redaction**, and tracks each request against its **regulatory response deadline**. Its companion capability, Priva Privacy Risk Management, proactively finds and mitigates privacy risks such as data hoarding, oversharing, and data transfers.\n\n**Why not the other options:**\n- **Microsoft Purview eDiscovery** — eDiscovery identifies, holds, and exports content for *legal and internal investigations*. It is matter-centric litigation tooling, not a privacy workflow with subject-request deadlines, conflict detection, and redaction for responding to individuals.\n- **Microsoft Purview Compliance Manager** — Compliance Manager measures the organization's progress against regulatory assessments and suggests improvement actions. It does not gather or process an individual's personal data.\n- **Microsoft Purview Data Loss Prevention (DLP)** — DLP prevents sensitive information from being overshared. It does not respond to individuals' requests about the data an organization holds on them.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

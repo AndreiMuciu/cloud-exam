@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-05-wexcombe-sspr",
+    "question": "The Wexcombe Polytechnic helpdesk receives about 400 password-reset tickets each month. The identity team wants students to be able to regain access to their own accounts — by proving their identity with previously registered methods such as the Microsoft Authenticator app or a code sent to a registered phone — without contacting the helpdesk at all.\n\nWhich Microsoft Entra ID capability meets this requirement?",
+    "options": [
+        {
+            "text": "Self-service password reset (SSPR)",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra Password Protection",
+            "correct": false
+        },
+        {
+            "text": "Conditional Access",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        }
+    ],
+    "explanation": "**Self-service password reset (SSPR)** lets users **change or reset their own passwords without administrator or helpdesk involvement**. Users first register verification methods (for example, the Authenticator app, a phone number, or an email address); when they are locked out or forget their password, they prove their identity with those methods and reset the password themselves. SSPR directly reduces helpdesk ticket volume — the stated goal at Wexcombe.\n\n**Why not the other options:**\n- **Microsoft Entra Password Protection** — This feature blocks weak or banned passwords (including custom banned lists) at the moment a password is *set*. It improves password quality but does nothing to help a locked-out student recover access.\n- **Conditional Access** — Conditional Access decides whether and how a sign-in is allowed based on signals such as location and device state. It is an access-control gate, not an account-recovery mechanism.\n- **Microsoft Entra ID Protection** — ID Protection detects and remediates identity *risk*, such as leaked credentials or anomalous sign-ins. It can force a secure password change for a risky user, but it is not the self-service recovery capability students would use after simply forgetting a password.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_wexcombe_polytechnic.json"
+}

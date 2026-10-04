@@ -1,0 +1,25 @@
+{
+    "id": "az500-07-cryptovault-hsm-tde",
+    "question": "CryptoVault Banking must use customer-managed keys (CMK) for SQL Database TDE. They have opted for an Azure Key Vault Managed HSM to store the keys. What is the primary security benefit of using a Managed HSM over a standard/premium Azure Key Vault?",
+    "options": [
+        {
+            "text": "Lower cost and higher throughput",
+            "correct": false
+        },
+        {
+            "text": "FIPS 140-2 Level 3 validated hardware in a dedicated, single-tenant environment",
+            "correct": true
+        },
+        {
+            "text": "Support for certificates and secrets",
+            "correct": false
+        },
+        {
+            "text": "Integration with Microsoft Entra ID",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Key Vault Managed HSM** provides FIPS 140-2 Level 3 HSMs in a dedicated, single-tenant environment, offering much higher security and isolation than the multi-tenant standard/premium Key Vault (which is Level 2).\n\n**Why not the other options:**\n- **Lower cost** — Managed HSM is generally *more* expensive than standard/premium Key Vault.\n- **Certificates and secrets** — Standard Key Vault supports these; Managed HSM is specifically focused on *keys*.\n- **Entra ID integration** — Both services integrate fully with Entra ID (Azure AD).",
+    "category": "Secure compute, storage, and databases",
+    "caseStudy": "scenarios/case_study_cryptovault_banking.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-07-lexbourne-scheduled-messages",
+    "question": "You must implement the Lexbourne hearing reminders: a message must become available on the `filing-tasks` Service Bus queue at an exact future time, and a pending reminder must be cancellable if the hearing is rescheduled.\n\nWhat should you do in the Python sender service?",
+    "options": [
+        {
+            "text": "Call `sender.schedule_messages(message, schedule_time_utc)` and persist the returned sequence number with the case; if the hearing moves, call `sender.cancel_scheduled_messages(sequence_number)` and schedule a new message.",
+            "correct": true
+        },
+        {
+            "text": "Send the message immediately with `time_to_live` set to the interval before the hearing, so it expires if it is no longer needed.",
+            "correct": false
+        },
+        {
+            "text": "Run a worker that receives every reminder immediately and calls `time.sleep()` until the reminder time before processing it.",
+            "correct": false
+        },
+        {
+            "text": "Send the message immediately and have the receiver call `receiver.defer_message()` until the reminder time arrives.",
+            "correct": false
+        }
+    ],
+    "explanation": "Service Bus supports **scheduled messages** natively: `schedule_messages` enqueues the message with a future enqueue time, and the broker keeps it invisible until that moment — no consumer sees it early, and no custom timer infrastructure is needed. The call returns a **sequence number**, which is the handle for `cancel_scheduled_messages`, giving exactly the reschedule behavior required: cancel the pending reminder, schedule a replacement.\n\n**Why not the other options:**\n- **`time_to_live`** — TTL is the *opposite* control: the message is visible immediately and *disappears* after the interval. Consumers would process reminders months early, and expiry cannot be targeted at one rescheduled case.\n- **Worker that sleeps until due time** — Holds a message lock far beyond the maximum lock duration (locks are lost after at most 5 minutes), pins a worker per pending reminder, and loses all pending sleeps when the worker restarts.\n- **`defer_message`** — Deferral sets a received message aside for retrieval *by sequence number* later, but something still has to know *when* to fetch it — you would have to build the very scheduler that `schedule_messages` already provides, and deferred messages are only retrievable by explicit sequence-number lookup.",
+    "category": "Connect to and consume Azure services",
+    "caseStudy": "scenarios/case_study_lexbourne_legal.json"
+}

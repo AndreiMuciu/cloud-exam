@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-06-foxglove-redis-vector",
+    "question": "You are implementing the Foxglove similar-ticket lookup in Azure Managed Redis. Each resolved ticket is stored with a 1536-dimension embedding, and a query must return the 5 most similar tickets by cosine similarity in single-digit milliseconds.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create a search index whose schema declares the embedding as a `VECTOR` field (HNSW, `TYPE FLOAT32`, `DIM 1536`, `DISTANCE_METRIC COSINE`), then run a KNN query such as `FT.SEARCH idx \"*=>[KNN 5 @embedding $vec AS score]\" DIALECT 2`.",
+            "correct": true
+        },
+        {
+            "text": "Store each embedding in a sorted set with its cosine similarity as the score and read the top 5 with `ZRANGE ... REV`.",
+            "correct": false
+        },
+        {
+            "text": "Iterate all ticket keys with `SCAN`, load each embedding into the Python service, and compute cosine similarity with NumPy per query.",
+            "correct": false
+        },
+        {
+            "text": "Publish each new ticket embedding to a Redis Stream and let consumers compare it with previous stream entries.",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Managed Redis includes the **search module (RediSearch)**, which supports **vector fields**. You define an index (`FT.CREATE`) over the ticket keys with a `VECTOR` schema field — algorithm HNSW, `FLOAT32`, 1536 dimensions, cosine distance — and query with `FT.SEARCH` using the **KNN syntax** to get the top-k nearest embeddings. The HNSW graph search runs in-memory inside Redis, which is what makes millisecond-level top-5 retrieval realistic.\n\n**Why not the other options:**\n- **Sorted set scored by similarity** — Similarity is *relative to each query vector*; a score computed at insert time is meaningless for future queries. Sorted sets rank by one static scalar, not by distance to an arbitrary query embedding.\n- **`SCAN` + NumPy in the service** — Transfers every embedding over the network on every query and computes similarity client-side; latency grows linearly with the corpus and single-digit milliseconds becomes impossible. It also wastes the cache's purpose.\n- **Redis Streams** — Streams are an append-only log for event consumption, not an index; they provide no similarity search capability at all.",
+    "category": "Develop AI solutions by using Azure data management services",
+    "caseStudy": "scenarios/case_study_foxglove_interactive.json"
+}

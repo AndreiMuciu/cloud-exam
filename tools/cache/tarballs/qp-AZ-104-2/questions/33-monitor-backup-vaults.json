@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-monitor-backup-vaults",
+    "type": "multi",
+    "question": "You are designing data protection for several Azure workloads, and you must decide which vault type each workload requires. Azure Backup uses two vault types: **Recovery Services vaults** and **Backup vaults**.\n\nWhich two data sources are protected by using an **Azure Backup vault**? (Choose two.)",
+    "options": [
+        { "text": "Azure Blobs", "correct": true },
+        { "text": "Azure Database for PostgreSQL servers", "correct": true },
+        { "text": "Azure virtual machines", "correct": false },
+        { "text": "Azure file shares", "correct": false },
+        { "text": "SQL Server running in an Azure virtual machine", "correct": false }
+    ],
+    "explanation": "Azure Backup splits its supported workloads between two vault types, and the exam expects you to know which goes where. The **Backup vault** is the newer, Azure Resource Manager-based vault that houses backup data for the *newer* workloads: **Azure Blobs** (operational and vaulted backup), **Azure Database for PostgreSQL servers**, plus other next-generation datasources such as Azure Disks and AKS. Backup vaults bring capabilities like fine-grained RBAC via managed identities and Cross Region Restore for PostgreSQL.\n\n**Why not the other options:**\n- **Azure virtual machines**: VM backup (including agent-based and snapshot-based protection) is configured through a **Recovery Services vault** — the classic vault type.\n- **Azure file shares**: Azure Files share backup (snapshot-based) is also a **Recovery Services vault** workload.\n- **SQL Server in an Azure VM**: The SQL-in-VM workload backup extension registers with a **Recovery Services vault**, the same as SAP HANA in Azure VMs and on-premises backups via the MARS agent.\n\nA practical way to remember: the long-established IaaS-era workloads (VMs, SQL/SAP in VMs, Azure Files, on-premises agents) live in Recovery Services vaults; the newer PaaS-native datasources (Blobs, Disks, PostgreSQL, AKS) live in Backup vaults.",
+    "category": "Monitor and Maintain Azure Resources"
+}

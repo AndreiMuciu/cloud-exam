@@ -1,0 +1,25 @@
+{
+    "id": "sc900-03-calderbrook-defense-in-depth",
+    "question": "Calderbrook Health adopts a defense-in-depth strategy so that no single failed control exposes patient records. To meet the requirement that medical data remains protected even if storage media or backups are stolen, the team encrypts all patient records at rest.\n\nTo which defense-in-depth layer does this control belong?",
+    "options": [
+        {
+            "text": "The perimeter layer",
+            "correct": false
+        },
+        {
+            "text": "The network layer",
+            "correct": false
+        },
+        {
+            "text": "The application layer",
+            "correct": false
+        },
+        {
+            "text": "The data layer",
+            "correct": true
+        }
+    ],
+    "explanation": "Defense in depth places controls at multiple layers: physical security, identity and access, perimeter, network, compute, application, and **data**. Encrypting stored records protects the data itself — the innermost layer — so the information stays unreadable even when every outer layer, or the physical media, is compromised.\n\n**Why not the other options:**\n- **Perimeter layer** — Perimeter controls, such as DDoS protection and perimeter firewalls, filter large-scale attacks before they reach the network; they do nothing for stolen disks or backups.\n- **Network layer** — Network controls segment and limit connectivity between resources; encryption of stored files is not a network control.\n- **Application layer** — Application-layer controls focus on secure code and eliminating application vulnerabilities, not on protecting stored data directly.",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_calderbrook_health.json"
+}

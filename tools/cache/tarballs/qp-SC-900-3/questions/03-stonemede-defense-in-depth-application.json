@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-03-stonemede-defense-in-depth-application",
+    "question": "The Stonemede Civil security lead is mapping planned controls to defense-in-depth layers. One control requires that the project-costing software be developed and deployed free of known vulnerabilities, and that its database passwords and API keys be kept in a secure store instead of in configuration files or source code.\n\nWhich defense-in-depth layer is this control an example of?",
+    "options": [
+        {
+            "text": "The application layer",
+            "correct": true
+        },
+        {
+            "text": "The physical security layer",
+            "correct": false
+        },
+        {
+            "text": "The identity and access layer",
+            "correct": false
+        },
+        {
+            "text": "The perimeter layer",
+            "correct": false
+        }
+    ],
+    "explanation": "The **application layer** of a defense-in-depth model covers making sure **applications are secure and free of vulnerabilities**, and treating **application secrets — such as database passwords and API keys — as sensitive material stored in a secure medium** rather than embedded in code or configuration files. Security should be a design requirement throughout the application's development lifecycle, which is exactly what Stonemede's control describes.\n\n**Why not the other options:**\n- **The physical security layer** — This is the outermost layer: limiting physical access to buildings, server rooms, and computing hardware. It says nothing about software vulnerabilities or secret handling.\n- **The identity and access layer** — This layer controls *who* can access infrastructure and *what* they can change, using measures like single sign-on, multifactor authentication, and access auditing. Securing application code and its embedded secrets is a property of the application itself, not of user access control.\n- **The perimeter layer** — This layer protects against network-scale attacks arriving at the boundary of the environment, for example with DDoS protection and perimeter firewalls. It does not address vulnerabilities inside an application or where its secrets live.",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_stonemede_civil.json"
+}

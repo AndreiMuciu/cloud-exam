@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-17-entra-connect-sync",
+    "question": "A company with an on-premises Active Directory Domain Services (AD DS) environment is adopting Microsoft 365. The IT team must synchronize on-premises user accounts to Microsoft Entra ID so each employee has a single hybrid identity that exists in both environments.\n\nWhich component establishes this synchronization?",
+    "options": [
+        {
+            "text": "Microsoft Entra Connect",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Intune",
+            "correct": false
+        },
+        {
+            "text": "Azure Arc",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Connect** (and its lighter-weight companion, Microsoft Entra Cloud Sync) is the synchronization technology that **provisions and keeps in sync identities between on-premises AD DS and Microsoft Entra ID**, creating a *hybrid identity*: one user object that works for both on-premises resources and cloud services. It also supports the hybrid authentication methods — password hash synchronization, pass-through authentication, and federation integration.\n\n**Why not the other options:**\n- **Microsoft Entra ID Protection** — ID Protection detects and remediates identity risks such as leaked credentials and atypical sign-ins. It assumes identities already exist in Entra ID; it does not synchronize them from AD DS.\n- **Microsoft Intune** — Intune manages and enforces compliance on *devices* and apps (endpoint management). It does not synchronize directory user accounts.\n- **Azure Arc** — Azure Arc projects on-premises and multicloud *servers and services* into Azure Resource Manager for management. It is infrastructure management, not identity synchronization.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

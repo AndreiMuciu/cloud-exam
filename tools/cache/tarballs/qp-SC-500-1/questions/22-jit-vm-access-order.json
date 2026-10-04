@@ -1,0 +1,19 @@
+{
+    "id": "sc500-22-jit-vm-access-order",
+    "type": "ordering",
+    "question": "Management ports on your Azure VMs must stay closed except when an engineer explicitly needs them, using just-in-time (JIT) VM access. Arrange the steps of implementing and using JIT in the correct order.",
+    "items": [
+        "An engineer requests access to port 22 from their IP address, and the request is validated against their Azure RBAC permissions",
+        "Enable Microsoft Defender for Servers on the subscription that hosts the VMs",
+        "Defender for Cloud creates a temporary allow rule in the network security group, then removes it when the access window expires",
+        "Enable JIT VM access on each VM, defining the protected ports, allowed source IPs, and maximum request duration"
+    ],
+    "correctOrder": [
+        "Enable Microsoft Defender for Servers on the subscription that hosts the VMs",
+        "Enable JIT VM access on each VM, defining the protected ports, allowed source IPs, and maximum request duration",
+        "An engineer requests access to port 22 from their IP address, and the request is validated against their Azure RBAC permissions",
+        "Defender for Cloud creates a temporary allow rule in the network security group, then removes it when the access window expires"
+    ],
+    "explanation": "1. **Enable Defender for Servers** — JIT VM access is a feature of the Defender for Servers plan, so the plan must be active on the subscription first.\n2. **Enable JIT on the VMs with a policy** — you define which ports are protected (e.g., 22, 3389), which source IPs may request access, and the maximum time a request can stay open. Defender for Cloud then places deny rules on those ports in the NSG.\n3. **The engineer requests access** — the request is authorized against their Azure RBAC permissions (they need the JIT access roles/permissions on the VM), keeping the workflow least-privilege.\n4. **Temporary allow rule** — Defender for Cloud opens the port only for the approved source and duration, and automatically reverts to deny when the window ends, so ports never remain open by accident.\n\nThe flow only works in this order: the plan unlocks the feature, the policy defines the guardrails, and each access is an audited, time-boxed exception.",
+    "category": "Secure compute"
+}

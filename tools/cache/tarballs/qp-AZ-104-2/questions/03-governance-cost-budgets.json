@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-governance-cost-budgets",
+    "type": "single",
+    "question": "Fernhollow University's finance office approved a fixed semester budget for **Sub-StudentLabs**. The finance office must receive proactive notification **before** the budget is fully consumed and again **when** it is consumed. Lab workloads must keep running during exam weeks even if spending is high.\n\nWhat should you configure?",
+    "options": [
+        { "text": "A Cost Management **budget** on Sub-StudentLabs with alert conditions such as 80% of actual cost, 100% of forecasted cost, and 100% of actual cost, notifying the finance office by email", "correct": true },
+        { "text": "A subscription **spending limit** that takes effect when the semester allocation is reached", "correct": false },
+        { "text": "An Azure Monitor **metric alert** on the subscription's cost metric with a static threshold", "correct": false },
+        { "text": "An Azure **Advisor** cost recommendation alert that notifies the finance office", "correct": false }
+    ],
+    "explanation": "A Cost Management **budget** is the right tool: you set the budget amount and period, then add alert conditions on **actual** cost (for example 80% and 100%) and on **forecasted** cost (which provides the \"before it happens\" warning). Each condition notifies recipients by email or triggers an action group. Critically, budgets are a *monitoring and alerting* construct — **they never stop, deallocate, or block resources** — so lab workloads keep running during exam weeks no matter how much is spent.\n\n**Why not the other options:**\n- **Spending limit**: When a spending limit is reached, Azure disables the subscription's resources until the next billing period — directly violating the requirement that labs keep running. (Spending limits also exist only on credit-based subscription types, not standard pay-as-you-go or EA subscriptions.)\n- **Azure Monitor metric alert**: Subscription cost is not an Azure Monitor platform metric, so there is no cost signal to build a metric alert on. Cost alerting is done through Cost Management budgets and anomaly alerts.\n- **Azure Advisor**: Advisor produces cost *optimization recommendations* (for example, right-sizing underused VMs). It does not track consumption against a fixed budget amount and cannot notify at spend thresholds.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_fernhollow.json"
+}

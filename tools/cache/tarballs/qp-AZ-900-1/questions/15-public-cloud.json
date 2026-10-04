@@ -1,0 +1,24 @@
+{
+    "id": "az900-15-public-cloud",
+    "question": "Which of the following is a characteristic of a **Public Cloud** deployment model?",
+    "options": [
+        {
+            "text": "Hardware is owned and managed by the end-user organization",
+            "correct": false
+        },
+        {
+            "text": "Infrastructure is shared among multiple organizations (multi-tenant)",
+            "correct": true
+        },
+        {
+            "text": "Resources are only accessible over a private network",
+            "correct": false
+        },
+        {
+            "text": "The provider offers no security for stored data",
+            "correct": false
+        }
+    ],
+    "explanation": "In a **Public Cloud**, the infrastructure (servers, storage, networking) is owned by the cloud provider (like Microsoft) and shared across many different organizations (tenants) over the public internet.\n\n**Why not the other options:**\n- **Hardware owned by user** — This describes a Private Cloud or on-premises environment.\n- **Private network only** — This is more typical of a Private Cloud.\n- **No security** — Public cloud providers invest heavily in security; it's a shared responsibility, but the physical security and basic infrastructure security are handled by the provider.",
+    "category": "Describe Cloud Concepts"
+}

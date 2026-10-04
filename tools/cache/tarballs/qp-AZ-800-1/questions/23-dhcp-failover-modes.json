@@ -1,0 +1,24 @@
+{
+    "id": "az800-23-dhcp-failover-modes",
+    "question": "You are configuring DHCP Failover between two Windows Servers. You want both servers to actively lease IP addresses from the same scope simultaneously to provide load balancing. Which failover mode should you configure?",
+    "options": [
+        {
+            "text": "Hot Standby",
+            "correct": false
+        },
+        {
+            "text": "Load Balance",
+            "correct": true
+        },
+        {
+            "text": "Active-Active Cluster",
+            "correct": false
+        },
+        {
+            "text": "Split-Scope",
+            "correct": false
+        }
+    ],
+    "explanation": "In **Load Balance** mode, both servers in the failover relationship serve IP addresses and options to clients in the subnet simultaneously. You can define the percentage of the load each server handles.\n\n**Why not the other options:**\n- **Hot Standby** — One server is primary/active and the other is secondary/idle until a failure occurs.\n- **Active-Active Cluster** — Not a standard term for DHCP failover (though the concept is similar to Load Balance).\n- **Split-Scope** — An older manual way of providing redundancy by splitting the IP range, but it doesn't provide the same 'failover partner' awareness as the native DHCP Failover feature.",
+    "category": "Implement and manage on-premises and hybrid networking"
+}

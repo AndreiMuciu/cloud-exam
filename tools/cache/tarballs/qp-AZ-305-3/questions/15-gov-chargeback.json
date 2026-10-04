@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-gov-chargeback",
+    "question": "A company's central IT department purchases three-year reserved instances and reserved capacity from a single management subscription, shared by product teams across many subscriptions. Finance runs a monthly chargeback that must bill each product team its **fair share** of Azure spend, including the benefit of the reservations that its workloads actually consumed.\n\nCurrently the chargeback is built from cost reports in which the entire reservation purchase appears as a one-time charge against the central IT subscription in the month of purchase, while the teams' virtual machines show a compute cost of zero.\n\nWhat should you recommend for the chargeback reports?",
+    "options": [
+        {
+            "text": "Use amortized cost data from Microsoft Cost Management, which spreads reservation purchases across their term and attributes the cost to the resources that consumed the benefit",
+            "correct": true
+        },
+        {
+            "text": "Use actual cost data and divide each reservation purchase evenly among all product teams in the month of purchase",
+            "correct": false
+        },
+        {
+            "text": "Recalculate every team's usage at pay-as-you-go list prices and bill those amounts",
+            "correct": false
+        },
+        {
+            "text": "Move the reservation purchases into each product team's subscription so that the charges appear there directly",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Cost Management exposes two cost metrics, and choosing between them is exactly what this scenario tests:\n\n- **Actual cost** shows charges as they were invoiced — a reservation appears as a lump-sum purchase on the day it was bought, against the purchasing scope, while reservation-covered usage shows a cost of zero. Accurate for reconciling the invoice; useless for fair chargeback\n- **Amortized cost** breaks the reservation purchase into **daily slices spread across the reservation term** and **reassigns that cost to the specific resources (and therefore subscriptions and tags) that consumed the reservation benefit** each day. Unused reservation time surfaces separately, so finance can also see waste. This is precisely the \"fair share including reservation benefit\" number the chargeback needs, available in cost analysis and scheduled exports\n\n**Why not the other options:**\n- **Actual cost split evenly** — An even split ignores who actually used the reservations: a team running one small VM subsidizes a team running fifty. It also books three years of cost into a single month, distorting every team's budget in the purchase month and understating costs for the rest of the term\n- **Pay-as-you-go list prices** — This overbills every team by the discount amount; finance would collect more than Azure charges. Chargeback is meant to recover *real* costs, and inflating them destroys trust in the model and hides the savings the reservations deliver\n- **Moving purchases into team subscriptions** — Reservations are purchased centrally exactly so the discount can float to whichever eligible workloads use it (shared scope). Splitting purchases per team fragments that flexibility, risks unused reservations locked to the wrong scope, and still books lump sums rather than spreading cost over the term",
+    "category": "Design Identity, Governance, and Monitoring"
+}

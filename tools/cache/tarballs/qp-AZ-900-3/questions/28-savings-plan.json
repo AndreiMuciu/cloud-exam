@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-28-savings-plan",
+    "question": "A weather-analytics company is willing to commit to spending a **fixed hourly amount on Azure compute for the next three years** in exchange for lower prices — but its engineers frequently change virtual machine families, move workloads between regions, and are experimenting with container and serverless services, so the discount must not be locked to one VM type in one region. Which purchasing option fits?",
+    "options": [
+        {
+            "text": "An Azure savings plan for compute",
+            "correct": true
+        },
+        {
+            "text": "Azure Reservations",
+            "correct": false
+        },
+        {
+            "text": "Azure Spot Virtual Machines",
+            "correct": false
+        },
+        {
+            "text": "Azure Hybrid Benefit",
+            "correct": false
+        }
+    ],
+    "explanation": "An **Azure savings plan for compute** discounts compute in exchange for a commitment to spend a **fixed hourly amount for one or three years** — and the discount **flexibly applies across eligible compute services, VM families, and regions**. Usage up to the committed hourly amount is billed at reduced rates regardless of which qualifying compute service consumed it, which is exactly what a team that keeps changing VM families, regions, and service types needs.\n\n**Why not the other options:**\n- **Azure Reservations** — Also reward a one- or three-year commitment, and typically with deeper discounts, but a reservation is tied to a **specific resource configuration** (such as a VM type in a particular region). Frequent changes of family and region would strand the benefit.\n- **Azure Spot Virtual Machines** — Deeply discounted spare capacity that Azure can **evict at any time**; the discount comes from interruptibility, not from a spend commitment, and it suits fault-tolerant batch work rather than a blanket compute discount.\n- **Azure Hybrid Benefit** — Reduces cost by applying **existing Windows Server or SQL Server licenses** to Azure resources; it is a license benefit, not a commitment-based compute discount.",
+    "category": "Describe Azure Management and Governance"
+}

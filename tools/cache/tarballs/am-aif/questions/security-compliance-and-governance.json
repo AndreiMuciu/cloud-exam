@@ -1,0 +1,176 @@
+{
+  "domain": "Security, Compliance, and Governance",
+  "questions": [
+    {
+      "id": 73,
+      "question": "A cloud architect needs to ensure that only the ML engineering team can invoke SageMaker endpoints and that the data science team can only access training notebooks. Which AWS service provides this granular access control?",
+      "options": [
+        { "id": "a", "text": "AWS IAM, which defines roles, policies, and permission boundaries for users and services" },
+        { "id": "b", "text": "Amazon Macie, which scans S3 buckets for sensitive data like PII" },
+        { "id": "c", "text": "AWS KMS, which creates and manages cryptographic encryption keys" },
+        { "id": "d", "text": "AWS PrivateLink, which provides private connectivity between VPCs and services" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "IAM (Identity and Access Management) is foundational for AWS security, controlling who can access AI services and resources. It uses roles, policies, and permissions boundaries.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 74,
+      "question": "Before training a model on a large S3 data lake, a compliance officer wants to automatically scan the data for credit card numbers, Social Security numbers, and other personally identifiable information. Which service handles this?",
+      "options": [
+        { "id": "a", "text": "Amazon Macie, which uses ML to discover and classify sensitive data in S3" },
+        { "id": "b", "text": "Amazon Inspector, which scans EC2 instances for software vulnerabilities" },
+        { "id": "c", "text": "AWS CloudTrail, which records API calls for audit logging" },
+        { "id": "d", "text": "AWS Config, which tracks resource configuration changes over time" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Amazon Macie uses machine learning to automatically discover, classify, and protect sensitive data including PII. It's valuable for identifying sensitive information in AI training datasets.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 75,
+      "question": "Under the AWS shared responsibility model, a company deploys a custom sentiment analysis model on SageMaker. AWS secures the underlying compute infrastructure. Who is responsible for securing the model artifacts and training data?",
+      "options": [
+        { "id": "a", "text": "The customer is responsible for securing their models, data, and application logic" },
+        { "id": "b", "text": "The responsibility is shared equally with no clear division" },
+        { "id": "c", "text": "AWS is responsible for all security aspects including customer data" },
+        { "id": "d", "text": "A third-party auditor determines security responsibilities on a case-by-case basis" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Customers are responsible for security 'in' the cloud including their AI models, training data, and applications. AWS handles security 'of' the cloud infrastructure.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 76,
+      "question": "An ML team wants to create a standardized document for each deployed model that records its purpose, training data sources, performance metrics, and known limitations. Which AWS feature supports this?",
+      "options": [
+        { "id": "a", "text": "AWS Glue Data Catalog, which stores metadata about ETL jobs and data sources" },
+        { "id": "b", "text": "Amazon Athena, which runs SQL queries on data stored in S3" },
+        { "id": "c", "text": "Amazon SageMaker Model Cards, which provide standardized model documentation" },
+        { "id": "d", "text": "AWS Lake Formation, which manages permissions for data lake resources" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "SageMaker Model Cards document essential ML model information in a standardized format including purpose, training data sources, performance metrics, and ethical considerations.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 77,
+      "question": "A healthcare company needs to encrypt its patient data both when stored in S3 and when transmitted to SageMaker training jobs. Which service manages the encryption keys for this?",
+      "options": [
+        { "id": "a", "text": "Amazon GuardDuty, which provides continuous threat detection and monitoring" },
+        { "id": "b", "text": "Amazon Macie, which discovers and classifies sensitive data" },
+        { "id": "c", "text": "AWS CloudTrail, which logs all API calls for security auditing" },
+        { "id": "d", "text": "AWS KMS, which creates and manages cryptographic keys for encryption" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "AWS Key Management Service (KMS) creates and manages cryptographic keys for encrypting data. For AI workloads, it protects training datasets, model artifacts, and inference results.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 78,
+      "question": "An auditor asks an ML team to show exactly where their training data originated, what transformations were applied, and where each derivative dataset is stored. What does this requirement describe?",
+      "options": [
+        { "id": "a", "text": "Feature engineering, which creates derived input variables from raw data" },
+        { "id": "b", "text": "Data lineage, which tracks the complete lifecycle of data from origin through transformation" },
+        { "id": "c", "text": "Model versioning, which maintains a history of model weights and configurations" },
+        { "id": "d", "text": "Hyperparameter logging, which records training configuration for reproducibility" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Data lineage tracks the complete lifecycle of data including origins, movements, transformations, and destinations. It ensures transparency and helps identify biases or quality issues.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 79,
+      "question": "A financial services company must privately connect their VPC to SageMaker endpoints without any traffic traversing the public internet. Which AWS service enables this?",
+      "options": [
+        { "id": "a", "text": "Amazon VPC peering, which connects two VPCs within the same or different accounts" },
+        { "id": "b", "text": "AWS Direct Connect, which provides dedicated physical network links to AWS" },
+        { "id": "c", "text": "Amazon Route 53, which provides DNS management and traffic routing" },
+        { "id": "d", "text": "AWS PrivateLink, which enables private access to AWS services via VPC endpoints" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "AWS PrivateLink enables private access to AWS services without exposing traffic to the public internet. This securely connects VPCs to SageMaker endpoints and other AI services.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 80,
+      "question": "A data governance team needs to build a central, searchable inventory of all datasets across the organization — documenting quality, ownership, and access policies for each. What is this practice?",
+      "options": [
+        { "id": "a", "text": "Data augmentation, which generates synthetic examples to expand training sets" },
+        { "id": "b", "text": "Data cataloging, which creates an organized inventory of data assets with metadata" },
+        { "id": "c", "text": "Data compression, which reduces storage costs by encoding data more efficiently" },
+        { "id": "d", "text": "Data labeling, which annotates examples with ground truth for supervised learning" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Data cataloging creates an organized inventory of data assets, facilitating discovery, providing context about quality, and enabling governance and access control for AI projects.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 81,
+      "question": "A regulated enterprise needs to centrally manage permissions, data quality, and security for a data lake that feeds multiple ML training pipelines. Which AWS service is designed for this?",
+      "options": [
+        { "id": "a", "text": "Amazon S3, which provides scalable object storage" },
+        { "id": "b", "text": "Amazon DynamoDB, which provides low-latency NoSQL database operations" },
+        { "id": "c", "text": "Amazon RDS, which manages relational database instances" },
+        { "id": "d", "text": "AWS Lake Formation, which builds, secures, and manages data lakes with centralized governance" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "AWS Lake Formation helps build, secure, and manage data lakes. It includes a central catalog for registering data and defining access policies for AI and analytics workloads.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 82,
+      "question": "A security team needs a detailed log of every API call made to their SageMaker endpoints — including who made the call, when, and from which IP address — for compliance auditing. Which service provides this?",
+      "options": [
+        { "id": "a", "text": "Amazon Macie, which discovers sensitive data in S3 buckets" },
+        { "id": "b", "text": "AWS KMS, which manages cryptographic keys for data encryption" },
+        { "id": "c", "text": "AWS CloudTrail, which records API calls and user activities across AWS" },
+        { "id": "d", "text": "Amazon GuardDuty, which uses ML to detect threats and anomalous behavior" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "AWS CloudTrail records API calls and activities in your AWS account, providing audit logs essential for security analysis and compliance requirements.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 83,
+      "question": "A development team wants to protect their generative AI chatbot from prompt injection attacks that embed hidden instructions in user input. Which practice helps defend against this?",
+      "options": [
+        { "id": "a", "text": "Increasing the model's temperature parameter for more creative responses" },
+        { "id": "b", "text": "Using a larger model with more parameters to improve understanding" },
+        { "id": "c", "text": "Implementing input validation and sanitization before passing prompts to the model" },
+        { "id": "d", "text": "Removing all system context so the model relies only on user messages" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Input validation and sanitization help detect and prevent potentially malicious prompts that could manipulate model behavior or bypass intended functionality.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 84,
+      "question": "A compliance team requires that all AI-generated customer communications be checked for PII, profanity, and confidential project names before delivery. What is this post-generation step called?",
+      "options": [
+        { "id": "a", "text": "Token caching, which stores frequent responses for faster retrieval" },
+        { "id": "b", "text": "Output filtering, which screens generated content for policy violations before delivery" },
+        { "id": "c", "text": "Model quantization, which reduces numerical precision for faster inference" },
+        { "id": "d", "text": "Prompt templating, which standardizes input formats across applications" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Output filtering screens AI-generated responses for inappropriate, harmful, or sensitive content before delivery to users, ensuring outputs align with policies and guidelines.",
+      "domain": "Security, Compliance, and Governance"
+    },
+    {
+      "id": 85,
+      "question": "Which TWO AWS services are specifically designed to help secure AI systems and protect sensitive data? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Amazon Personalize, which generates personalized product recommendations" },
+        { "id": "b", "text": "AWS KMS, which manages encryption keys to protect data at rest and in transit" },
+        { "id": "c", "text": "Amazon Forecast, which produces time-series demand predictions" },
+        { "id": "d", "text": "Amazon Macie, which uses ML to discover and protect sensitive data in S3" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["b", "d"],
+      "explanation": "AWS KMS manages encryption keys for protecting data at rest and in transit. Amazon Macie uses ML to discover and protect sensitive data like PII. Personalize and Forecast are AI services, not security services.",
+      "domain": "Security, Compliance, and Governance"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-29-data-lake-storage-gen2",
+    "question": "A data engineering team is building a data lake on Azure. Their Spark-based analytics tools need storage that behaves like a file system — with real directories that can be renamed in one operation and permissions that can be set at the directory and file level.\n\nWhat should the team use?",
+    "options": [
+        {
+            "text": "Azure Data Lake Storage Gen2, by enabling the hierarchical namespace on a storage account",
+            "correct": true
+        },
+        {
+            "text": "A standard Blob Storage account with a flat namespace",
+            "correct": false
+        },
+        {
+            "text": "Azure Table Storage",
+            "correct": false
+        },
+        {
+            "text": "An Azure SQL Database elastic pool",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Data Lake Storage Gen2** is Blob Storage with the **hierarchical namespace** enabled. That single setting turns the flat blob container into a true file system: **real directories** (so renaming or moving a folder is one metadata operation instead of copying every object), **POSIX-style access control lists** on directories and files, and compatibility with the Hadoop-style file APIs that analytics engines such as Spark expect. It is the standard foundation for data lakes on Azure — including the storage underneath Microsoft Fabric's OneLake.\n\n**Why not the other options:**\n- **A standard Blob Storage account with a flat namespace** — Directories in flat blob storage are only a naming illusion (prefixes with `/` in blob names). \"Renaming a folder\" means copying and deleting every blob under it, and permissions cannot be granted per directory.\n- **Azure Table Storage** — A NoSQL **key-value store** for structured entities addressed by partition key and row key. It stores rows of properties, not files and folders, so analytics engines cannot treat it as a file system.\n- **An Azure SQL Database elastic pool** — A way to share compute resources among multiple **relational databases**. It is unrelated to file-oriented lake storage for Spark workloads.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

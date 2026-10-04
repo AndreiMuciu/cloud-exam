@@ -1,0 +1,24 @@
+{
+    "id": "az500-21-entra-id-protection-alerts",
+    "question": "Which signal in Microsoft Entra ID Protection specifically identifies a user as 'High Risk' because their credentials have likely been found on the dark web?",
+    "options": [
+        {
+            "text": "Atypical travel",
+            "correct": false
+        },
+        {
+            "text": "Leaked Credentials",
+            "correct": true
+        },
+        {
+            "text": "Unfamiliar sign-in properties",
+            "correct": false
+        },
+        {
+            "text": "Malware-linked IP address",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Leaked Credentials** risk detection identifies when a user's valid credentials have been shared publicly or found on the 'dark web' by identity security researchers.\n\n**Why not the other options:**\n- **Atypical travel** — Based on geographical distance and time between sign-ins.\n- **Unfamiliar properties** — Based on the browser, device, or OS being different from the user's historical patterns.\n- **Malware IP** — Based on sign-ins coming from known botnets or infected machines.",
+    "category": "Manage identity and access"
+}

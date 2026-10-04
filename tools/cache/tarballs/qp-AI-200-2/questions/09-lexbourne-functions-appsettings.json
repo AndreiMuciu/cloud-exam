@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-09-lexbourne-functions-appsettings",
+    "question": "The Lexbourne clause-extraction function runs correctly on developer laptops, but the deployed function app fails at startup: `MODEL_ENDPOINT` and `SERVICEBUS_FQDN` resolve to `None` in Azure. Locally these values come from the project's `local.settings.json` file. No secrets may be committed to source control.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Define `MODEL_ENDPOINT` and `SERVICEBUS_FQDN` as application settings on the function app, for example with `az functionapp config appsettings set`, and keep `local.settings.json` for local runs only.",
+            "correct": true
+        },
+        {
+            "text": "Remove `local.settings.json` from `.gitignore` and commit it so the deployment pipeline publishes it with the code.",
+            "correct": false
+        },
+        {
+            "text": "Move the two values into the `extensions` section of `host.json`, which is deployed with the app.",
+            "correct": false
+        },
+        {
+            "text": "Hardcode the two values as constants in the function code, since they are not secrets themselves.",
+            "correct": false
+        }
+    ],
+    "explanation": "`local.settings.json` exists **only for local development** with Core Tools — it is never deployed to or read by the Functions host in Azure. In Azure, environment variables come from the function app's **application settings**, so the fix is to define the same keys there (via CLI, portal, or IaC). The code keeps reading plain environment variables and works identically in both places.\n\n**Why not the other options:**\n- **Committing `local.settings.json`** — Even if committed, Azure still ignores the file at runtime, so the app stays broken; and the file typically holds connection strings and keys, so committing it violates the no-secrets-in-source-control rule twice over.\n- **`host.json`** — Configures the Functions *runtime* (logging, extension behavior like batch sizes and retry). It is not a store for your application's own settings and its values are not exposed as environment variables.\n- **Hardcoding** — Bakes environment-specific values into code, forcing a code change and redeploy for every environment or endpoint change; today's \"not secret\" URL also tends to become tomorrow's keyed endpoint.",
+    "category": "Connect to and consume Azure services",
+    "caseStudy": "scenarios/case_study_lexbourne_legal.json"
+}

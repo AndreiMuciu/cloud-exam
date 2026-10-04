@@ -1,0 +1,24 @@
+{
+    "id": "ai103-32-structured-json-extraction-prompting",
+    "question": "You need a chat model to extract a customer's order number, product name, and requested action from a free-form support email, and return the result as JSON your application can parse reliably every time — not just \"most of the time.\"\n\nWhich approach best achieves this?",
+    "options": [
+        {
+            "text": "Define a JSON schema for the expected output and configure the request to use structured/JSON-mode output constrained to that schema.",
+            "correct": true
+        },
+        {
+            "text": "Ask the model in plain English to \"please respond with JSON if possible\" and parse whatever text comes back with a regular expression.",
+            "correct": false
+        },
+        {
+            "text": "Request a free-form paragraph summary and have a person manually re-type the three fields into a form afterward.",
+            "correct": false
+        },
+        {
+            "text": "Lower the max_tokens parameter so the model is forced to produce shorter output.",
+            "correct": false
+        }
+    ],
+    "explanation": "Defining a **JSON schema** and using **structured/JSON-mode output constrained to it** makes the model's output conform to the required shape reliably, rather than hoping free-form generation happens to look like JSON — this is the deterministic path to output your application can parse every time.\n\n**Why not the other options:**\n- **A polite plain-English request** — Provides no enforcement; the model can still produce prose, malformed JSON, or extra commentary around the JSON, breaking a naive regex parser intermittently.\n- **Manual re-typing by a person** — Defeats the purpose of automating extraction and does not scale; it reintroduces a manual step for every single email.\n- **Lowering max_tokens** — Controls response length, not output format or structure; a short response can still fail to be valid, schema-conforming JSON.",
+    "category": "Implement text analysis solutions"
+}

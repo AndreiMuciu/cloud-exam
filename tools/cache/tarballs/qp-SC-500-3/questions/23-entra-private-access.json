@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-23-entra-private-access",
+    "question": "Your company is retiring a legacy full-tunnel VPN. Remote employees need to reach three internal applications (an SMB file server, an intranet site, and an RDP jump host) — and nothing else on the network. Access must be per-application, evaluated by Conditional Access with MFA per app, and must not place users on the corporate network. How should you implement this with Microsoft Entra Private Access?",
+    "options": [
+        {
+            "text": "Install the Global Secure Access client on user devices, deploy private network connectors in front of the applications, publish each application as an enterprise app with its specific FQDNs/IPs and ports, and bind Conditional Access policies requiring MFA to each application individually",
+            "correct": true
+        },
+        {
+            "text": "Configure Quick Access with the entire corporate address space as one application segment, and apply a single Conditional Access policy to the Quick Access app",
+            "correct": false
+        },
+        {
+            "text": "Publish the three applications through Microsoft Entra application proxy, since Private Access only supports HTTP and HTTPS applications",
+            "correct": false
+        },
+        {
+            "text": "Deploy a point-to-site VPN gateway with Entra ID authentication and use NSGs to limit which subnets remote users can reach",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the Zero Trust Network Access (ZTNA) pattern Microsoft Entra Private Access implements. The **Global Secure Access client** on the device intercepts traffic destined for published private resources and tunnels it to the Entra edge; **private network connectors** (outbound-only) deliver it to the applications. Publishing **each application as its own Global Secure Access enterprise app** — defined by specific FQDNs/IPs and ports, including non-web protocols like **SMB and RDP** — is what enables **per-app segmentation** and **per-app Conditional Access**: each app gets its own policy requiring MFA, and users never receive a routable presence on the corporate network. Compromising one app session yields no lateral network access.\n\n**Why not the other options:**\n- **Quick Access with the whole address space** — Quick Access is the coarse, migrate-fast option: one segment covering broad ranges effectively recreates the flat VPN experience with a single policy gate. It fails both the 'nothing else' and the 'per-app Conditional Access' requirements.\n- **Application proxy for all three** — application proxy publishes *web* apps (and has its own place for external inbound publishing), but the premise is backwards: Private Access exists precisely to extend ZTNA to **any TCP/UDP application**, including SMB and RDP. Restricting to app proxy would leave the file server and jump host unservable.\n- **P2S VPN + NSGs** — a VPN drops users onto the network and controls reachability by subnet at best, not by application; Conditional Access applies once at tunnel establishment, not per app. This is the model being retired, not the target architecture.",
+    "category": "Secure storage, databases, and networking"
+}

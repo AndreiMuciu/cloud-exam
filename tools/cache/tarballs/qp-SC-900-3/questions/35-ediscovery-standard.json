@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-35-ediscovery-standard",
+    "question": "A company's legal counsel is handling a straightforward commercial dispute. She needs to create a **case**, place a **hold** on the mailboxes and SharePoint sites of three employees so relevant content cannot be deleted, search that content, and **export** the results for outside counsel. She does not need custodian management, review sets, or analytics such as near-duplicate detection.\n\nWhich Microsoft Purview capability matches these needs at the appropriate tier?",
+    "options": [
+        {
+            "text": "eDiscovery (Standard), which adds cases, legal holds, search, and export",
+            "correct": true
+        },
+        {
+            "text": "Content search, which provides search and export but no cases or holds",
+            "correct": false
+        },
+        {
+            "text": "eDiscovery (Premium), because holds are only available at the top tier",
+            "correct": false
+        },
+        {
+            "text": "Audit (Premium), which retains activity logs for investigations",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Purview offers eDiscovery in tiers of increasing capability. **eDiscovery (Standard)** builds on basic search by adding exactly what this matter needs: **cases** to organize the investigation and control who can access it, **legal holds** to preserve the three employees' mailbox and site content so it cannot be permanently deleted, plus **search and export** of the results. Since counsel explicitly does not need custodian workflows, review sets, or analytics, the Standard tier is the right fit.\n\n**Why not the other options:**\n- **Content search** — The basic search tool can find and export content across Microsoft 365, but it offers **no case management and no holds**. Without a hold, a user could delete relevant messages mid-dispute, defeating the preservation requirement.\n- **eDiscovery (Premium)** — Premium is the tier for complex matters: it adds **custodian management, review sets, advanced analytics (such as near-duplicate detection), and predictive coding**. Holds are *not* exclusive to Premium — they arrive at Standard — and the scenario expressly rules out the Premium-only features.\n- **Audit (Premium)** — Auditing records and retains *user and administrator activity logs* (who did what, when). It does not create legal cases, preserve content under hold, or export documents for a dispute.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

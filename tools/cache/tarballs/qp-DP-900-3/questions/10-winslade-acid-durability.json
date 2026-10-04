@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-10-winslade-acid-durability",
+    "question": "Winslade Provisions requires that once the order-entry database confirms a transaction has committed, the order must still exist after any crash — even a warehouse power failure a moment after the commit.\n\nWhich ACID property guarantees this?",
+    "options": [
+        {
+            "text": "Durability",
+            "correct": true
+        },
+        {
+            "text": "Atomicity",
+            "correct": false
+        },
+        {
+            "text": "Consistency",
+            "correct": false
+        },
+        {
+            "text": "Isolation",
+            "correct": false
+        }
+    ],
+    "explanation": "**Durability** guarantees that once a transaction is committed, its changes are permanent — they are written to non-volatile storage (such as the transaction log on disk) before the commit is acknowledged, so a crash, restart, or power failure immediately afterward cannot erase them. When the database restarts, committed orders are still there.\n\n**Why not the other options:**\n- **Atomicity** — Atomicity ensures a transaction is all-or-nothing: either every step applies or none does. It governs partial completion, not whether a committed result survives a power failure.\n- **Consistency** — Consistency ensures each transaction moves the database from one valid state to another, honoring its rules and constraints. It says nothing about surviving crashes after commit.\n- **Isolation** — Isolation keeps concurrent transactions from interfering with each other's intermediate states. It concerns simultaneous work, not crash survival.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_winslade_provisions.json"
+}

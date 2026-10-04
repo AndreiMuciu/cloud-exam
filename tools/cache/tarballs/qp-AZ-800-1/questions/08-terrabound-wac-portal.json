@@ -1,0 +1,25 @@
+{
+    "id": "az800-08-terrabound-wac-portal",
+    "question": "TerraBound Energy wants to use **Windows Admin Center** (WAC) to manage their Azure Arc-enabled servers directly from the Azure portal. Which of the following is a key networking requirement to enable this feature?",
+    "options": [
+        {
+            "text": "Port 3389 (RDP) must be open from the internet.",
+            "correct": false
+        },
+        {
+            "text": "The Azure Arc-enabled server must be able to communicate with Azure over port 443 (HTTPS).",
+            "correct": true
+        },
+        {
+            "text": "A Site-to-Site VPN is mandatory.",
+            "correct": false
+        },
+        {
+            "text": "The server must have a public IP address.",
+            "correct": false
+        }
+    ],
+    "explanation": "Windows Admin Center in the Azure portal communicates with the Arc-enabled server over the **Azure Arc agent's secure channel (port 443)**. This allows for management without needing public IPs, VPNs, or exposing RDP ports.\n\n**Why not the other options:**\n- **RDP** — Not required for WAC's web-based management interface.\n- **VPN** — Helpful for some management tasks, but not a strict prerequisite for the portal-integrated WAC feature if the Arc agent is connected via the internet.\n- **Public IP** — Strictly not needed, which is one of the main security benefits of Arc.",
+    "category": "Manage virtual machines and containers",
+    "caseStudy": "scenarios/case_study_terrabound_energy.json"
+}

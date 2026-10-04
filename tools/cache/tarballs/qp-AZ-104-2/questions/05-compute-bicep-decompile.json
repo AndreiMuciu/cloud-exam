@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-compute-bicep-decompile",
+    "type": "single",
+    "question": "Ashgrove Retail Group's platform team is migrating its infrastructure-as-code from ARM JSON templates to Bicep. The team has an existing exported ARM template named `webtier.json` and needs to produce a Bicep file from it as a starting point for the new standard.\n\nWhich command should the team run?",
+    "options": [
+        { "text": "az bicep decompile --file webtier.json", "correct": true },
+        { "text": "az bicep build --file webtier.bicep", "correct": false },
+        { "text": "Export-AzResourceGroup -ResourceGroupName rg-web -Path webtier.json", "correct": false },
+        { "text": "az deployment group export --name webtier --resource-group rg-web", "correct": false }
+    ],
+    "explanation": "`az bicep decompile --file webtier.json` converts an existing **ARM JSON template into a Bicep file** (`webtier.bicep`). Decompilation is a best-effort conversion — Microsoft recommends reviewing the generated Bicep for naming, `var`/`param` cleanup, and any warnings — but it is exactly the supported path for migrating a library of exported JSON templates to Bicep. (The equivalent PowerShell experience is `bicep decompile` from the Bicep CLI.)\n\n**Why not the other options:**\n- **az bicep build**: This performs the *opposite* conversion — it compiles a `.bicep` file into an ARM JSON template. It cannot take `webtier.json` as input.\n- **Export-AzResourceGroup**: This exports the current state of a resource group as an **ARM JSON** template. It produces more JSON; it never produces Bicep.\n- **az deployment group export**: This returns the template that was used for a specific *deployment* — again as ARM JSON, not Bicep.",
+    "category": "Deploy and Manage Azure Compute Resources",
+    "caseStudy": "scenarios/case_study_ashgrove.json"
+}

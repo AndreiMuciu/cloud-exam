@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-10-dunmoral-log-retention",
+    "question": "You need to design table plans and retention for Dunmoral Airways' Microsoft Sentinel workspace: booking-platform logs (100 GB/day, rarely queried, 1-year availability) at the lowest cost, and core security tables fully interactive for 90 days with 2 years of total retention. What should you configure?",
+    "options": [
+        {
+            "text": "Ingest the booking logs into a custom table on the Auxiliary (or Basic) table plan with total retention set to 12 months, and keep SigninLogs and SecurityEvent on the Analytics plan with 90 days interactive retention and total retention set to 2 years",
+            "correct": true
+        },
+        {
+            "text": "Ingest everything into Analytics-plan tables with 2-year interactive retention so that all data is always query-ready",
+            "correct": false
+        },
+        {
+            "text": "Continuously export all tables to a storage account, keep only 7 days in the workspace, and have analysts download blobs during investigations",
+            "correct": false
+        },
+        {
+            "text": "Create a second workspace for the booking logs and set the workspace pricing tier to a 100 GB/day commitment tier for a discount",
+            "correct": false
+        }
+    ],
+    "explanation": "Log Analytics offers **table plans** that match data value to cost. High-volume, low-fidelity logs kept for occasional investigation belong on the **Auxiliary** (or Basic) plan: ingestion is dramatically cheaper, and the data stays queryable in a limited way (KQL subset, per-query charges) — acceptable for rare investigations. **Total retention** on the custom table covers the 1-year mandate (interactive period first, long-term retention after). Security tables that analytics rules and analysts hit daily stay on the **Analytics plan** with 90 days of interactive retention, and table-level **total retention of 2 years** keeps older data in long-term retention, recoverable via search jobs or restore for compliance investigations.\n\n**Why not the other options:**\n- **Everything on Analytics with 2-year interactive retention** — pays premium ingestion *and* extended interactive retention on 100 GB/day of rarely used data; it works but is the most expensive possible design, violating the lowest-cost requirement.\n- **Export to storage and keep 7 days** — raw blobs are not searchable with KQL from the SOC tooling, restoring means custom re-ingestion work, and 7 days of workspace data would cripple daily analytics on the security tables.\n- **Second workspace with a commitment tier** — commitment tiers discount Analytics-plan pricing but remain far costlier than Auxiliary/Basic for this profile; a separate workspace also fragments Sentinel visibility without addressing the retention requirements.",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_dunmoral_airways.json"
+}

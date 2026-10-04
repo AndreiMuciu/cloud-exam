@@ -1,0 +1,24 @@
+{
+    "id": "ai103-34-speech-translation-agent-modality",
+    "question": "A voice-based support agent must be able to take a caller's spoken question in Spanish, understand and answer it, and speak the answer back in Spanish as well — without a human interpreter involved at any point.\n\nWhat should the solution implement?",
+    "options": [
+        {
+            "text": "Speech-to-text to transcribe the Spanish audio, the agent's language model to understand and generate the answer, and text-to-speech to read the answer back in Spanish.",
+            "correct": true
+        },
+        {
+            "text": "Speech-to-text into English only, with the caller's original audio discarded immediately after transcription.",
+            "correct": false
+        },
+        {
+            "text": "Text-to-speech only, converting a pre-written English script into Spanish-sounding audio without processing anything the caller says.",
+            "correct": false
+        },
+        {
+            "text": "A fixed touch-tone menu that plays pre-recorded Spanish phrases regardless of what the caller asked.",
+            "correct": false
+        }
+    ],
+    "explanation": "Chaining **speech-to-text** (to transcribe the Spanish input), the **agent's language understanding/generation** (to actually answer the question), and **text-to-speech** (to speak the answer back in Spanish) gives a full closed loop — spoken question in, spoken answer out, in the same language, with no human interpreter.\n\n**Why not the other options:**\n- **Transcribing only into English and discarding the original audio** — Doesn't itself break the interaction, but as described it stops at transcription and never generates or speaks a Spanish answer back, so it doesn't meet the full round-trip requirement.\n- **Text-to-speech of a fixed English script** — Never actually processes what the caller said, so it cannot answer their specific question; it just plays a scripted message.\n- **A fixed touch-tone menu of pre-recorded phrases** — Cannot respond to the specific content of a spoken question; it only offers a small set of pre-recorded, non-adaptive responses.",
+    "category": "Implement text analysis solutions"
+}

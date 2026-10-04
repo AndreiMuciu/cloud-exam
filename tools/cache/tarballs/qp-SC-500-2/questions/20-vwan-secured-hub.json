@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-20-vwan-secured-hub",
+  "type": "single",
+  "question": "Your company is migrating its global network to Azure Virtual WAN with virtual hubs in three regions, each with multiple connected spoke virtual networks. Security requires that **all** spoke-to-spoke (private) traffic and **all** spoke-to-internet traffic is inspected by a firewall in the regional hub — and the design must not depend on maintaining user-defined routes (UDRs) on every spoke subnet. What should you implement?",
+  "options": [
+    {
+      "text": "Deploy Azure Firewall into each virtual hub to make it a secured virtual hub, then configure routing intent with private and internet traffic routing policies that send both traffic types through the hub firewall",
+      "correct": true
+    },
+    {
+      "text": "Deploy a network virtual appliance into one spoke virtual network per region and create UDRs on every spoke subnet pointing 0.0.0.0/0 and the RFC 1918 ranges at the appliance",
+      "correct": false
+    },
+    {
+      "text": "Apply network security groups with deny-by-default rules on every spoke subnet, and enable NAT gateway on each spoke for internet egress",
+      "correct": false
+    },
+    {
+      "text": "Peer all spokes directly with each other and place Azure DDoS Network Protection on the virtual WAN to inspect inter-spoke traffic",
+      "correct": false
+    }
+  ],
+  "explanation": "In Virtual WAN, the platform-native way to force traffic through inspection is a **secured virtual hub**: deploy Azure Firewall (or a supported security partner) into the hub itself, then configure **routing intent and routing policies**. A *private* traffic routing policy steers all VNet-to-VNet and branch traffic through the hub firewall, and an *internet* traffic routing policy steers 0.0.0.0/0 the same way. Because the hub's route tables are programmed by Virtual WAN based on the routing intent, connected spokes inherit the routes automatically — no UDR sprawl on spoke subnets, and the pattern repeats identically per region.\n\n**Why not the other options:**\n- **NVA in a spoke plus UDRs everywhere** — this recreates the classic hub-spoke pattern the migration is leaving behind: every new spoke subnet needs its UDRs created and maintained, which is exactly the operational burden the requirement rules out; it also bypasses Virtual WAN's managed routing.\n- **NSGs plus NAT gateway** — NSGs filter on 5-tuple rules; they perform no centralized *inspection* (no FQDN filtering, no threat intelligence, no IDPS) and cannot satisfy \"inspected by a firewall in the hub.\" NAT gateway provides egress SNAT, not security inspection.\n- **Direct peering plus DDoS Protection** — DDoS Network Protection mitigates volumetric attacks against public IPs; it does not inspect or filter east-west private traffic, and a full spoke-to-spoke peering mesh removes the hub from the traffic path entirely.",
+  "category": "Secure storage, databases, and networking"
+}

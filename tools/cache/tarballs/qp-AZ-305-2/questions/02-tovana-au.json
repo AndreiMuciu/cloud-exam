@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-tovana-au",
+    "question": "You need to recommend a solution that allows each regional helpdesk team to reset passwords only for users in its own region, without granting any directory permissions over users in other regions. The solution must minimize administrative effort.\n\nWhat should you include in the recommendation?",
+    "options": [
+        {
+            "text": "Create one administrative unit per region, populate each with that region's users, and assign the Helpdesk Administrator role to each helpdesk team scoped to its administrative unit",
+            "correct": true
+        },
+        {
+            "text": "Assign the Helpdesk Administrator role at the tenant level to all helpdesk teams and rely on Conditional Access to block cross-region administration",
+            "correct": false
+        },
+        {
+            "text": "Create a custom Azure RBAC role with password reset permissions and assign it at a per-region management group",
+            "correct": false
+        },
+        {
+            "text": "Create a separate Microsoft Entra ID tenant for each region and add helpdesk staff as administrators of their regional tenant",
+            "correct": false
+        }
+    ],
+    "explanation": "**Administrative units (AUs)** are the purpose-built mechanism for restricting the scope of Microsoft Entra directory roles:\n\n- An AU is created for each region and populated with that region's users (dynamic membership rules based on a region attribute can automate this)\n- The **Helpdesk Administrator** role is assigned to each regional team **scoped to its AU**, so the role's permissions (including password reset) apply only to users inside that AU — helpdesk staff have no permissions over users in other regions\n- This keeps a single tenant, a single identity for every user, and minimal ongoing administration\n\n**Why not the other options:**\n- **Tenant-level role + Conditional Access** — A tenant-scoped Helpdesk Administrator can reset passwords for users in *every* region, violating the requirement. Conditional Access governs sign-in conditions; it cannot restrict which directory objects a role can manage\n- **Custom Azure RBAC role at a management group** — Azure RBAC controls access to *Azure resources* (subscriptions, resource groups, resources). Password reset is a *directory* operation governed by Microsoft Entra roles, not Azure RBAC, and management groups do not contain users\n- **Separate tenant per region** — Technically isolates regions but fragments identity: users would need accounts in regional tenants, licensing and Conditional Access would be duplicated, and cross-region collaboration would require B2B guests. This maximizes, rather than minimizes, administrative effort",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_tovana_health.json"
+}

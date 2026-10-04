@@ -1,0 +1,13 @@
+{
+    "id": "case_study_quintavox",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Quintavox Media** operates a streaming platform and works with dozens of external production studios that need temporary access to shared editing tools, asset libraries, and review dashboards.\n\n**Current environment:**\n- Every production project spins up its own mix of Entra groups, SharePoint sites, and internal apps that outside editors, colorists, and studio producers need access to for the life of the project only.\n- The identity governance team is small and cannot manually review every access grant.\n- A handful of on-call engineers are eligible for the Global Administrator role but should activate it only in a genuine emergency, and the activation must never depend on the very systems it is meant to fix (Conditional Access, MFA service, etc.) being available."
+        },
+        {
+            "title": "Governance Requirements",
+            "content": "- External studio staff should be able to request a single bundled set of access (apps, a group, and a SharePoint site) from a self-service catalog, get routed through an approval chain, and have that access expire automatically when the project ends unless it's explicitly extended.\n- Quintavox's compliance team must periodically confirm that studio staff who were granted access still need it, with a mechanism that automatically removes access if nobody responds to the review.\n- Emergency ('break-glass') Global Administrator accounts must remain usable even during a widespread Conditional Access or MFA outage, and any use of these accounts must trigger immediate alerting.\n- Leadership wants a way to periodically prove, with evidence, which external studio partners are configured as trusted collaboration partners and under what terms."
+        }
+    ]
+}

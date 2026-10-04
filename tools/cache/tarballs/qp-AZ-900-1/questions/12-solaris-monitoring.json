@@ -1,0 +1,25 @@
+{
+    "id": "az900-12-solaris-monitoring",
+    "question": "Solaris Education wants a centralized dashboard to monitor the health of all Azure services. Which service should they use to find information about ongoing outages or planned maintenance that might affect the availability of their resources?",
+    "options": [
+        {
+            "text": "Azure Service Health",
+            "correct": true
+        },
+        {
+            "text": "Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Azure Key Vault",
+            "correct": false
+        },
+        {
+            "text": "Azure Arc",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Service Health** provides a personalized view of the health of the Azure services and regions you're using. It includes information on service issues, planned maintenance, and health advisories.\n\n**Why not the other options:**\n- **Azure Policy** — Used to enforce governance and compliance rules.\n- **Azure Key Vault** — A secure store for secrets, keys, and certificates.\n- **Azure Arc** — Extends Azure management to resources outside of Azure (like on-premises servers).",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_solaris_education.json"
+}

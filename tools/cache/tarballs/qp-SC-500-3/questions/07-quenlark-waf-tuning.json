@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-07-quenlark-waf-tuning",
+    "question": "You need to implement the web application firewall for Quenlark Systems' booking site: managed rules against SQL injection and XSS, blocking of known-malicious IPs, and malicious requests ultimately blocked — but only after the promoter HTML workflow's false positives are tuned out with the narrowest possible change. What should you do?",
+    "options": [
+        {
+            "text": "Associate a WAF policy with the Application Gateway that enables the latest managed rule set and the bot-protection rule set; run it in Detection mode while analyzing the WAF logs, add exclusions (or disable the specific offending rules) scoped to the event-description field for the promoter false positives, then switch the policy to Prevention mode",
+            "correct": true
+        },
+        {
+            "text": "Associate a WAF policy in Prevention mode immediately, and instruct the promoters to stop submitting HTML until the tuning is finished",
+            "correct": false
+        },
+        {
+            "text": "Run the WAF policy permanently in Detection mode so that no legitimate request can ever be blocked, and review the logs weekly for attacks",
+            "correct": false
+        },
+        {
+            "text": "Skip the managed rule set and write custom WAF rules that match known SQL injection strings, since custom rules cannot cause false positives",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the standard Application Gateway WAF rollout sequence. A **WAF policy** carries the configuration: the **managed rule set** (Core Rule Set / Default Rule Set) covers SQL injection and XSS, and the **bot-protection rule set** blocks traffic from known-malicious IP addresses using Microsoft threat intelligence. Starting in **Detection mode** logs every match without blocking, which lets the team find exactly which rules the promoters' HTML submissions trip. The tuning is then done with **exclusions** (for example, excluding the specific request body field for the event description from the affected rules) or by disabling only the individual offending rules — the 'narrowest possible change,' as opposed to turning off a whole rule group. Once the logs run clean, flipping the policy to **Prevention mode** makes the WAF actively block attacks, satisfying the 'ultimately blocked' requirement.\n\n**Why not the other options:**\n- **Prevention mode immediately** — this repeats the failed first rollout: legitimate promoters get 403s from day one. Breaking a business workflow to save tuning time is exactly what the requirement prohibits.\n- **Permanent Detection mode** — detection only observes; attacks including the credential-stuffing and injection probes would keep reaching the application. The requirement explicitly says malicious requests must be blocked, not just logged.\n- **Custom rules only** — hand-written match rules cover only the patterns you thought of, receive no updates as attack techniques evolve, and absolutely can cause false positives. Custom rules are meant to *complement* the managed rule set (for things like IP allowlists or geo rules), not replace it.",
+    "category": "Secure compute",
+    "caseStudy": "scenarios/case_study_quenlark_systems.json"
+}

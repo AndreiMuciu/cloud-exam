@@ -1,0 +1,24 @@
+{
+    "id": "az500-34-kv-certificates-issuance",
+    "question": "You are managing certificates in Azure Key Vault. You want the Key Vault to automatically handle the renewal of a certificate from a supported Certificate Authority (CA) like DigiCert or GlobalSign. Which Key Vault feature should you configure?",
+    "options": [
+        {
+            "text": "Self-signed certificate",
+            "correct": false
+        },
+        {
+            "text": "Certificate Issuer integration",
+            "correct": true
+        },
+        {
+            "text": "Secret rotation policy",
+            "correct": false
+        },
+        {
+            "text": "Azure Disk Encryption",
+            "correct": false
+        }
+    ],
+    "explanation": "Key Vault supports **Certificate Issuer** integrations. Once you configure a certificate issuer (a connection to a supported CA like DigiCert or GlobalSign), you can create and manage certificates directly from the vault, including automatic renewal and enrollment.\n\n**Why not the other options:**\n- **Self-signed** — Not issued by a trusted public CA.\n- **Secret rotation** — This is for *secrets* (strings), not for the specialized lifecycle of *certificates* (which involves CSRs and validation).\n- **Azure Disk Encryption** — Related to VM disk encryption, not certificate management.",
+    "category": "Secure compute, storage, and databases"
+}

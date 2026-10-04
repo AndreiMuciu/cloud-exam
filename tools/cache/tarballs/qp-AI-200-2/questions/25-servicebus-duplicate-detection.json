@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-25-servicebus-duplicate-detection",
+    "question": "An upstream payment gateway occasionally submits the same payment command twice within a few minutes because of network retries. Commands flow through an Azure Service Bus queue. Consumers must **never receive the second copy**, and the team wants the broker — not application state — to enforce this. Duplicates never arrive more than 30 minutes apart.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Recreate the queue with duplicate detection enabled and a 30-minute history window, and set each message's `message_id` deterministically from the payment ID.",
+            "correct": true
+        },
+        {
+            "text": "Enable sessions on the queue and set each message's `session_id` to the payment ID.",
+            "correct": false
+        },
+        {
+            "text": "Keep a table of processed payment IDs in the consumer and skip any message whose ID was already handled.",
+            "correct": false
+        },
+        {
+            "text": "Set each message's `time_to_live` to 30 minutes so a duplicate expires before it can be consumed.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Duplicate detection** is the broker-side answer: when enabled (it must be set at queue creation), Service Bus remembers the `message_id` of every message accepted during the configured **history window** and silently discards any new message with the same ID. Making `message_id` a deterministic function of the payment ID turns the gateway's retry into an exact duplicate the broker drops — consumers never see it, and no application state is involved.\n\n**Why not the other options:**\n- **Sessions** — Guarantee *ordering and consumer affinity* per `session_id`; both copies of the message would still be delivered, just in order on the same session.\n- **Consumer-side processed-ID table** — Works, but it is precisely the application-managed state the team ruled out, and it must be transactional with message settlement to avoid races between competing consumers.\n- **`time_to_live`** — TTL expires messages that have *waited too long* in the queue. A duplicate enqueued seconds after the original is well within any TTL and would be delivered normally.",
+    "category": "Connect to and consume Azure services"
+}

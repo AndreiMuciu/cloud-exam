@@ -1,0 +1,25 @@
+{
+    "id": "az900-05-meridian-regions",
+    "question": "Meridian Healthcare Systems needs to replicate data to a secondary region at least 300 miles away. What is the standard term for two Azure regions that are paired in this manner within the same geography?",
+    "options": [
+        {
+            "text": "Region Pairs",
+            "correct": true
+        },
+        {
+            "text": "Sovereign Clouds",
+            "correct": false
+        },
+        {
+            "text": "Availability Sets",
+            "correct": false
+        },
+        {
+            "text": "Azure Resource Manager",
+            "correct": false
+        }
+    ],
+    "explanation": "**Region Pairs** are two regions within the same geography that Microsoft recommends for data residency and disaster recovery. They are typically at least 300 miles apart and receive platform updates sequentially to minimize downtime.\n\n**Why not the other options:**\n- **Sovereign Clouds** — Specialized instances of Azure (like Azure Government) for specific legal or compliance needs.\n- **Availability Sets** — For VM redundancy within a single datacenter.\n- **Azure Resource Manager** — The management layer for deploying and managing resources.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_meridian_healthcare.json"
+}

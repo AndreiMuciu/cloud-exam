@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-32-agent-id-lifecycle",
+    "question": "An audit of your tenant's Microsoft Entra Agent ID inventory finds 240 registered AI agents. Dozens have no identifiable owner, several belong to employees who left the company, and some hold Graph permissions (such as reading all mail) far beyond what their function needs. You must bring agent identities under lifecycle governance: every agent must have an accountable human owner, agents must hold least-privilege permissions, and agents that are orphaned or no longer used must be found and disabled on a recurring basis — not as a one-time cleanup. What should you implement?",
+    "options": [
+        {
+            "text": "Govern the agents through Entra Agent ID: enforce owner assignment for every agent identity, review and trim each agent's permission grants to least privilege, and set up recurring access reviews/inventory checks that flag orphaned or inactive agents for disablement",
+            "correct": true
+        },
+        {
+            "text": "Create a Conditional Access policy that blocks all agent identities from signing in until each agent's owner re-registers it",
+            "correct": false
+        },
+        {
+            "text": "Rotate the credentials of all 240 agents, since agents with fresh credentials are by definition actively maintained",
+            "correct": false
+        },
+        {
+            "text": "Export the agent list to a spreadsheet annually and email department heads asking them to claim their agents",
+            "correct": false
+        }
+    ],
+    "explanation": "**Entra Agent ID** exists so that AI agents are first-class, governable identities rather than anonymous automation. Lifecycle governance for them mirrors what mature tenants already do for applications and service principals, applied to the agent inventory: **accountable ownership** (every agent identity has a named human/team owner, so 'orphaned' is detectable the moment an owner leaves), **least-privilege permissions** (review each agent's delegated/application permissions — an agent that only files tickets has no business reading all mail — and trim or re-consent accordingly), and **recurring review cycles** (access reviews and inventory checks that surface inactive or ownerless agents and drive disablement as an ongoing control, satisfying the 'not one-time' requirement). This identity-lifecycle angle is distinct from other Agent ID controls like Conditional Access for agent sign-ins or blast-radius analysis — those protect and assess agents; this governs their existence and privileges over time.\n\n**Why not the other options:**\n- **Blocking all agents until re-registration** — a tenant-wide outage of every legitimate agent-driven process to solve an inventory problem; Conditional Access is a sign-in control, not a lifecycle or ownership registry.\n- **Rotating all credentials** — rotation is good hygiene but proves nothing about ownership, use, or permission fit; an over-privileged orphaned agent with a fresh credential is *more* dangerous, not governed.\n- **Annual spreadsheet emails** — an unenforced yearly survey is the process that produced 240 ungoverned agents in the first place; governance needs recurring, tooling-driven reviews with disablement as the outcome.",
+    "category": "Secure compute"
+}

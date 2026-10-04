@@ -1,0 +1,24 @@
+{
+    "id": "sc900-20-entra-rbac-roles",
+    "question": "A new IT staff member must be able to create user accounts, manage user profiles, and reset passwords for non-administrators in Microsoft Entra ID. Following the principle of least privilege, which built-in Microsoft Entra role should be assigned?",
+    "options": [
+        {
+            "text": "Global Administrator",
+            "correct": false
+        },
+        {
+            "text": "User Administrator",
+            "correct": true
+        },
+        {
+            "text": "Billing Administrator",
+            "correct": false
+        },
+        {
+            "text": "Helpdesk Administrator",
+            "correct": false
+        }
+    ],
+    "explanation": "The **User Administrator** role can create and manage users and groups, manage user profiles, and reset passwords for users (including other User Administrators and Helpdesk Administrators, but not higher-privileged admins). It covers every task in the scenario without granting unrelated permissions — the essence of least privilege. Microsoft Entra role-based access control also supports custom roles when built-in roles grant too much.\n\n**Why not the other options:**\n- **Global Administrator** — This role can manage every aspect of Microsoft Entra ID and Microsoft 365. Assigning it for routine user management massively over-provisions access and violates least privilege.\n- **Billing Administrator** — This role manages purchases, subscriptions, and support tickets; it cannot create or manage user accounts.\n- **Helpdesk Administrator** — This role can reset passwords for non-administrators but **cannot create user accounts** or fully manage user properties, so it falls short of the requirements.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

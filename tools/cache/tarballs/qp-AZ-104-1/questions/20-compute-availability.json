@@ -1,0 +1,24 @@
+{
+    "id": "az104-compute-availability",
+    "question": "You need to deploy six Azure VMs behind two Azure Load Balancers:\n\n| Load Balancer | SKU | VMs |\n|---|---|---|\n| LB-Internal | Standard | VM1, VM2, VM3 |\n| LB-External | Standard | VM4, VM5, VM6 |\n\nWhich statement correctly describes the backend pool requirements for Standard Load Balancers?",
+    "options": [
+        {
+            "text": "All six VMs must be in the same availability set to be added to any Standard Load Balancer backend pool.",
+            "correct": false
+        },
+        {
+            "text": "Backend pool VMs can be standalone instances, in availability sets, or in virtual machine scale sets. VMs can also be across availability zones.",
+            "correct": true
+        },
+        {
+            "text": "VMs behind both load balancers must be in the same availability set, and each load balancer supports up to 3 fault domains.",
+            "correct": false
+        },
+        {
+            "text": "VMs behind LB-Internal must all be in the same availability zone. VMs behind LB-External must be in a single availability set.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Standard Load Balancer** backend pool membership is highly flexible:\n\n- VMs can be **standalone instances** (not in an availability set or VMSS), in **availability sets**, or in **virtual machine scale sets**.\n- Supports **zone-redundant** and **cross-zone** configurations — VMs can span multiple availability zones.\n- VMs can be in **different virtual networks** (within the same region).\n- Backend pool can be configured by NIC or by IP address.\n\nStandard LB does **not** require VMs to be in the same availability set, the same availability zone, or even the same virtual network. This flexibility is one of the key advantages over the legacy Basic SKU.\n\nNeither availability sets nor VMSS membership is required — standalone VMs work fine. The VMs also do not need to run the same OS or be in the same resource group.\n\n**Note:** Azure Basic Load Balancer was retired on September 30, 2025. All new deployments should use Standard Load Balancer, which is the only supported SKU going forward.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

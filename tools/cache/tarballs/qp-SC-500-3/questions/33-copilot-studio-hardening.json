@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-33-copilot-studio-hardening",
+    "question": "Business units build Copilot Studio agents that use connectors to reach business data. A security review of one HR agent finds that: it answers unauthenticated callers on its public demo channel; makers could add any connector they liked, including personal cloud-storage connectors, without approval; and nobody can say which knowledge sources its answers draw from. You must ensure agents authenticate end users with Microsoft Entra ID, makers can only use approved connectors, and the agent's knowledge sources are reviewed and constrained. What should you do?",
+    "options": [
+        {
+            "text": "Configure the agent's authentication setting to require Microsoft Entra ID sign-in for end users, apply Power Platform data loss prevention (DLP) policies to the environment to allow only approved connectors, and review and restrict the agent's configured knowledge sources in Copilot Studio",
+            "correct": true
+        },
+        {
+            "text": "Enable the Microsoft Defender integration for Copilot Studio, which automatically enforces user authentication and removes unapproved connectors from existing agents",
+            "correct": false
+        },
+        {
+            "text": "Move all Copilot Studio agents into the default Power Platform environment, where Microsoft's baseline security settings cannot be modified by makers",
+            "correct": false
+        },
+        {
+            "text": "Publish the agent only to the Teams channel, since Teams-published agents cannot access connectors or external knowledge sources",
+            "correct": false
+        }
+    ],
+    "explanation": "The three findings map to three *configuration-time* controls in the Copilot Studio / Power Platform governance stack. **End-user authentication** is an agent setting: requiring **Microsoft Entra ID sign-in** means the agent knows who is asking and can honor per-user access to data (and unauthenticated demo-channel access stops). **Connector governance** is enforced by **Power Platform DLP policies** applied to the hosting environment: classifying approved connectors as usable and blocking the rest (like personal cloud storage) constrains every maker in that environment — approval becomes structural rather than social. **Knowledge-source review** happens in the agent's configuration: constraining which sites, files, and data sources the agent grounds on bounds what it can leak or hallucinate from, and gives reviewers an answerable inventory.\n\n**Why not the other options:**\n- **Defender integration as the fix** — the Defender for Cloud Apps / XDR integration provides *runtime* threat detection and blocking of malicious prompts against agents, with alerts for the SOC. It is valuable, but it does not configure authentication and does not rewrite agents' connector usage — prevention-by-configuration and detection-at-runtime are complementary layers, and this question's requirements are the former.\n- **Moving agents to the default environment** — backwards: the default environment is the *least* governable place (every licensed user is a maker there); good practice is dedicated environments with tailored DLP policies, not consolidation into default.\n- **Teams-only publishing** — the premise is false (Teams-published agents still use connectors and knowledge sources), and channel choice is not an access-control or governance mechanism.",
+    "category": "Secure compute"
+}

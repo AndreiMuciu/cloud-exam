@@ -1,0 +1,25 @@
+{
+    "id": "ai200-12-vantorra-kql-latency",
+    "question": "Vantorra on-call engineers need the 95th-percentile scoring latency per operation, per hour, over the last 24 hours, from the Log Analytics workspace that receives the OpenTelemetry request telemetry.\n\nWhich KQL query should you use?",
+    "options": [
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(24h)\n| summarize percentile(DurationMs, 95) by Name, bin(TimeGenerated, 1h)",
+            "correct": true
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(24h)\n| top 95 by DurationMs desc\n| project Name, DurationMs",
+            "correct": false
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(24h)\n| summarize avg(DurationMs) by Name\n| order by avg_DurationMs desc",
+            "correct": false
+        },
+        {
+            "text": "AppRequests\n| extend p95 = DurationMs * 0.95\n| project Name, p95, TimeGenerated",
+            "correct": false
+        }
+    ],
+    "explanation": "`summarize percentile(DurationMs, 95) by Name, bin(TimeGenerated, 1h)` does all three things asked: `percentile(..., 95)` computes the P95 aggregate, `by Name` splits it per operation, and `bin(TimeGenerated, 1h)` buckets results into hourly time bins so the trend over 24 hours is visible.\n\n**Why not the other options:**\n- **`top 95 by DurationMs`** — Returns the 95 slowest individual requests, which is not the 95th percentile; there is also no grouping or time binning.\n- **`avg(DurationMs)`** — Computes the mean, not P95; averages hide tail latency, which is exactly what P95 exists to expose, and there is no hourly bucketing.\n- **`extend p95 = DurationMs * 0.95`** — Multiplies each row's duration by 0.95; that is arithmetic on single rows, not a percentile aggregation over a distribution.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions",
+    "caseStudy": "scenarios/case_study_vantorra_financial.json"
+}

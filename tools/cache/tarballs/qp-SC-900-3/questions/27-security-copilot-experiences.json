@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-27-security-copilot-experiences",
+    "question": "A security team is planning how it will interact with Microsoft Security Copilot day to day. Senior analysts want a dedicated workspace where they can run cross-product investigations with prompts and promptbooks, while product administrators would rather get AI assistance directly inside the tools they already use, such as the Microsoft Defender portal, Microsoft Entra, Microsoft Intune, and Microsoft Purview.\n\nHow does Security Copilot accommodate both groups?",
+    "options": [
+        {
+            "text": "Security Copilot offers a standalone experience — its own portal for prompt-based investigation — and embedded experiences surfaced inside products such as Microsoft Defender XDR, Microsoft Entra, Microsoft Intune, and Microsoft Purview",
+            "correct": true
+        },
+        {
+            "text": "Security Copilot is only available inside Microsoft Defender for Endpoint and nowhere else",
+            "correct": false
+        },
+        {
+            "text": "Security Copilot must be installed as a desktop application on each analyst's workstation",
+            "correct": false
+        },
+        {
+            "text": "Security Copilot replaces the Microsoft Defender portal, so all product consoles are retired once it is enabled",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Security Copilot delivers both interaction modes.** The **standalone experience** is Copilot's own portal, where analysts investigate across products using natural-language prompts, sessions, and **promptbooks** (reusable prompt sequences for common workflows such as incident investigation). The **embedded experiences** surface Copilot *inside* other Microsoft security and management products — including Microsoft Defender XDR, Microsoft Entra, Microsoft Intune, and Microsoft Purview — providing context-aware help such as incident summaries, guided responses, or policy insights right where administrators already work. Organizations commonly use both together.\n\n**Why not the other options:**\n- **Only inside Defender for Endpoint** — Copilot is not confined to one product; it spans a portfolio of embedded experiences and additionally offers its own standalone portal.\n- **A desktop application per workstation** — Security Copilot is a cloud-delivered service reached through the browser; there is no per-machine desktop install requirement.\n- **Replacing the Defender portal** — Copilot *augments* existing consoles with generative-AI assistance; it does not retire or replace the Microsoft Defender portal or any other product console.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

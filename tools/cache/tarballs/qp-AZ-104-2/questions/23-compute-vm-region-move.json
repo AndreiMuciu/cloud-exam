@@ -1,0 +1,21 @@
+{
+    "id": "az104-s2-compute-vm-region-move",
+    "type": "ordering",
+    "question": "You must move an Azure virtual machine, together with its disks, network interface, and virtual network, from the East US region to the West US 2 region by using **Azure Resource Mover**.\n\nArrange the steps in the correct order.",
+    "items": [
+        "Initiate the move, which creates the virtual machine in the target region",
+        "Select the target region and add the virtual machine to a move collection in Azure Resource Mover",
+        "Commit the move, and then delete the source resources",
+        "Prepare the resources, which replicates data and generates the target deployment artifacts",
+        "Validate and resolve the dependencies that Resource Mover identifies, such as disks, NICs, and the virtual network"
+    ],
+    "correctOrder": [
+        "Select the target region and add the virtual machine to a move collection in Azure Resource Mover",
+        "Validate and resolve the dependencies that Resource Mover identifies, such as disks, NICs, and the virtual network",
+        "Prepare the resources, which replicates data and generates the target deployment artifacts",
+        "Initiate the move, which creates the virtual machine in the target region",
+        "Commit the move, and then delete the source resources"
+    ],
+    "explanation": "Azure Resource Mover orchestrates cross-region moves through a fixed workflow:\n\n1. **Add to a move collection** — you choose the source and target regions and select the VM; Resource Mover builds a move collection to track everything.\n2. **Validate and resolve dependencies** — a VM cannot move alone; its disks, NIC, and virtual network must be added to the collection (or mapped to existing target resources) before anything can proceed.\n3. **Prepare** — Resource Mover kicks off replication of the VM's data to the target region and generates the deployment artifacts; the source VM keeps running during this phase.\n4. **Initiate move** — the source VM is stopped briefly and the VM is created in the target region from the replicated data.\n5. **Commit and delete source** — after you verify the VM works in West US 2, committing finalizes the move; the source resources stop being tracked and can then be deleted to avoid double billing. (Until commit, you can instead discard the move and return to the source.)\n\nThe order matters because each stage gates the next: dependencies must be resolved before prepare, prepare must complete before a move can be initiated, and commit/cleanup only makes sense after the target VM has been validated.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

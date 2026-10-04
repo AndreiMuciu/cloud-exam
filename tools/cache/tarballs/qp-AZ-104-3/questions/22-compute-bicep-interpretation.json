@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-compute-bicep-interpretation",
+    "type": "single",
+    "question": "You deploy the following Bicep file to the resource group **RG-Data** (located in West Europe) without providing any parameter values:\n\n```bicep\nparam location string = resourceGroup().location\nparam accountCount int = 3\n\nresource stg 'Microsoft.Storage/storageAccounts@2023-05-01' = [for i in range(0, accountCount): {\n  name: 'stdata${i}${uniqueString(resourceGroup().id)}'\n  location: location\n  sku: {\n    name: 'Standard_LRS'\n  }\n  kind: 'StorageV2'\n}]\n```\n\nWhat is the result of the deployment?",
+    "options": [
+        { "text": "Three StorageV2 accounts are created in West Europe, named stdata0, stdata1, and stdata2 followed by the same deterministic hash suffix", "correct": true },
+        { "text": "Four storage accounts are created, because range(0, 3) produces the values 0 through 3", "correct": false },
+        { "text": "The deployment fails, because the three accounts resolve to the same name", "correct": false },
+        { "text": "The deployment fails, because the location and accountCount parameters were not supplied", "correct": false }
+    ],
+    "explanation": "The `[for i in range(0, accountCount): {...}]` syntax is a Bicep **loop** that deploys one resource per value in the range. `range(0, 3)` produces **3 values — 0, 1, and 2** (the second argument is the *count*, not the end value), so **three** storage accounts are created. Each name interpolates the loop index plus `uniqueString(resourceGroup().id)` — a deterministic 13-character hash of the resource group ID. The hash is identical for all three accounts (same input), but the differing index `${i}` makes each full name unique: `stdata0<hash>`, `stdata1<hash>`, `stdata2<hash>`. Both parameters have **default values** (`resourceGroup().location` — West Europe here — and `3`), so omitting them is fine.\n\n**Why not the other options:**\n- **Four accounts**: `range(start, count)` returns `count` integers starting at `start` — `range(0, 3)` is 0, 1, 2. Reading the second argument as an inclusive end value is the classic mistake this syntax invites.\n- **Name collision**: `uniqueString` alone would collide, but the interpolated loop index differentiates the names — each iteration produces a distinct name.\n- **Missing parameters**: a parameter with a default value (`=` in the declaration) is optional at deployment time. Only parameters without defaults must be supplied.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

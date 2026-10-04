@@ -1,0 +1,25 @@
+{
+    "id": "sc900-06-ironvale-pim",
+    "question": "The five administrators at Ironvale Manufacturing currently hold permanent, highly privileged directory roles. The company wants administrators to activate privileged roles only when needed, for a limited time window, with an approval step and a full audit trail.\n\nWhich Microsoft Entra capability should Ironvale use?",
+    "options": [
+        {
+            "text": "Privileged Identity Management (PIM)",
+            "correct": true
+        },
+        {
+            "text": "Access reviews",
+            "correct": false
+        },
+        {
+            "text": "Conditional Access",
+            "correct": false
+        },
+        {
+            "text": "Entitlement management",
+            "correct": false
+        }
+    ],
+    "explanation": "**Privileged Identity Management (PIM)** provides just-in-time, time-bound activation of privileged roles. Administrators are made *eligible* for a role instead of holding it permanently, and activation can require approval, justification, and MFA — with every activation recorded in an audit history. This directly eliminates standing privilege while preserving accountability.\n\n**Why not the other options:**\n- **Access reviews** — Reviews periodically recertify whether users should keep access; they do not provide on-demand, time-limited role activation with approval.\n- **Conditional Access** — Conditional Access controls the conditions under which users can sign in and access apps; it does not manage when privileged roles are held or activated.\n- **Entitlement management** — Entitlement management bundles resources into access packages for request-based access at scale, typically for employees and external users; it is not designed for just-in-time elevation of privileged directory roles.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_ironvale.json"
+}

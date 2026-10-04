@@ -1,0 +1,13 @@
+{
+    "id": "case_study_bramblewick_retail",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Bramblewick Retail** operates an online marketplace for independent garden-supply sellers. The order pipeline is being rebuilt as an event- and message-driven architecture with AI-assisted fraud screening.\n\n**Current Environment:**\n- Order commands (create, amend, cancel) are sent to an **Azure Service Bus** queue named `order-commands`.\n- Business events such as `OrderPlaced`, `OrderShipped`, and `OrderReturned` are published to an **Azure Event Grid** custom topic named `bw-order-events`.\n- Back-end processing is implemented as **Azure Functions** written in Python using the v2 programming model.\n- Screened orders are stored in **Azure Cosmos DB for NoSQL** in a container named `orders`."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Messaging Requirements:**\n- For any single order, its create, amend, and cancel commands must be processed strictly in the order they were sent, while commands for different orders may be processed in parallel across many workers.\n\n**Eventing Requirements:**\n- The refunds team's webhook must receive only `OrderReturned` events from the `bw-order-events` topic; it must not receive other event types, and the publisher must not be changed.\n\n**Processing Requirements:**\n- The fraud-screening function must be triggered by queue messages and write its verdict document to the `orders` container with as little boilerplate data-access code as possible.\n- All components must use managed identities; no connection strings in source code."
+        }
+    ]
+}

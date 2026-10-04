@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-network-subnet-sizing",
+    "type": "single",
+    "question": "You are planning a subnet for a batch-processing cluster of **60 virtual machines**, each with one network interface that takes one private IP address. No other resources will use the subnet.\n\nWhat is the **smallest** subnet size that can host all 60 VMs?",
+    "options": [
+        { "text": "/25", "correct": true },
+        { "text": "/26", "correct": false },
+        { "text": "/27", "correct": false },
+        { "text": "/24", "correct": false }
+    ],
+    "explanation": "Azure **reserves five IP addresses in every subnet**: the network address, the last (broadcast) address, and three addresses used by the platform — the default gateway plus two addresses for Azure DNS. Usable addresses are therefore *total − 5*:\n\n| Subnet | Total IPs | Usable in Azure |\n|---|---|---|\n| /27 | 32 | 27 |\n| /26 | 64 | **59** |\n| /25 | 128 | 123 |\n| /24 | 256 | 251 |\n\nThe intuitive answer, /26, is the trap: 64 addresses *looks* like enough for 60 NICs, but with only **59 usable** addresses it falls one short. The smallest subnet that fits 60 is **/25** (123 usable).\n\n**Why not the other options:**\n- **/26**: 64 − 5 = 59 usable — one address short of the 60 required. On-premises subnetting habits (64 − 2 = 62) are exactly what this question punishes.\n- **/27**: 32 − 5 = 27 usable — not even half the requirement.\n- **/24**: 251 usable addresses works, but it is four times larger than needed — the question asks for the smallest sufficient subnet, and over-allocating address space squeezes future subnets in the VNet.",
+    "category": "Implement and Manage Virtual Networking"
+}

@@ -1,0 +1,14 @@
+{
+    "id": "case_study_thalvox_health",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Thalvox Health** operates a telehealth platform connecting patients with primary-care clinicians over video and phone visits. Clinicians currently type their own visit notes after each call, and patient-facing after-visit summaries are written in English only.\n\n**Current Environment:**\n- Video and audio visits run through a WebRTC-based calling stack that can stream audio to backend services in real time.\n- An Azure AI Foundry project (`thalvox-visit-foundry`) hosts the platform's generative and speech capabilities.\n- After-visit summaries and patient chat messages are stored in a clinical data store for the care team to review.\n- A meaningful share of patients primarily read and write in Spanish or Vietnamese, but clinicians write only in English."
+
+        },
+        {
+            "title": "Requirements",
+            "content": "**Speech Requirements:**\n- Clinician-patient audio must be transcribed to text in near real time so a drafting agent can prepare a visit note for the clinician to review and sign.\n- The transcription must correctly recognize the clinic's own drug and procedure terminology, which is frequently misrecognized by general-purpose speech models.\n\n**Text Analysis Requirements:**\n- Patient chat messages must be automatically screened for sentiment, urgency, and mentions of self-harm or other safety-critical content so at-risk messages are escalated immediately.\n- After-visit summaries must be reliably translated into the patient's preferred written language before being sent.\n\n**Agent Requirements:**\n- A scheduling agent must be reachable by voice so patients who call in can book, reschedule, or cancel visits without speaking to a human scheduler."
+        }
+    ]
+}

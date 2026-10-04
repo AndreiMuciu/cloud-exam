@@ -1,0 +1,24 @@
+{
+    "id": "az900-18-entra-id-mfa",
+    "question": "An organization wants to require its users to provide a second form of verification (such as a phone notification or authenticator app code) in addition to their password when signing in to cloud applications. Which feature of Microsoft Entra ID should be enabled?",
+    "options": [
+        {
+            "text": "Single Sign-On (SSO)",
+            "correct": false
+        },
+        {
+            "text": "Multi-Factor Authentication (MFA)",
+            "correct": true
+        },
+        {
+            "text": "Role-Based Access Control (RBAC)",
+            "correct": false
+        },
+        {
+            "text": "Azure Resource Locks",
+            "correct": false
+        }
+    ],
+    "explanation": "**Multi-Factor Authentication (MFA)** requires users to provide two or more forms of verification during sign-in, combining something they know (password), something they have (phone or hardware token), or something they are (biometrics). This dramatically reduces the risk of compromised accounts.\n\n**Why not the other options:**\n- **Single Sign-On (SSO)** — Allows users to sign in once and access multiple applications, but does not add a second verification factor.\n- **RBAC** — Controls what actions a user can perform on Azure resources after they are authenticated.\n- **Resource Locks** — Prevents accidental deletion or modification of Azure resources; unrelated to sign-in security.",
+    "category": "Describe Azure Management and Governance"
+}

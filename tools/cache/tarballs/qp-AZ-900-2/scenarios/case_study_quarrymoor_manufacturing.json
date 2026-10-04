@@ -1,0 +1,13 @@
+{
+    "id": "case_study_quarrymoor_manufacturing",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Quarrymoor Manufacturing** builds industrial conveyor systems in three plants, each with its own Azure environment for production-floor analytics. Data is spread across Azure SQL databases, a data lake, and on-premises file shares.\n\n**Pain Points:**\n- Nobody can say with confidence **where customer and supplier data lives** or which datasets contain sensitive information; auditors have asked for a catalog of the data estate.\n- Each plant’s Azure environment was configured **by hand in the Azure portal**, and the three environments have drifted apart, causing \"works in plant A, fails in plant B\" incidents.\n- Operations has no automated warning when analytics virtual machines run hot and no central place to query log data."
+        },
+        {
+            "title": "Goals",
+            "content": "**Governance Goals:**\n- Discover, catalog, and classify data across Azure and on-premises sources, flagging sensitive fields.\n- Make the three plant environments identical and keep them that way, with infrastructure changes reviewed like application code.\n\n**Operations Goals:**\n- Collect metrics and logs from the analytics VMs, raise an alert when CPU usage stays above 90%, and let engineers run ad-hoc queries against the collected logs."
+        }
+    ]
+}

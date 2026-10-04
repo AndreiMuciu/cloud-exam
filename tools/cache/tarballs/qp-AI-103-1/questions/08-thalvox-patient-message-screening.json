@@ -1,0 +1,30 @@
+{
+    "id": "ai103-08-thalvox-patient-message-screening",
+    "type": "multi",
+    "question": "Thalvox must automatically screen patient chat messages for sentiment, urgency, and mentions of self-harm or other safety-critical content, and escalate at-risk messages immediately.\n\nWhich three actions should the team take? (Select three.)",
+    "options": [
+        {
+            "text": "Score each incoming chat message for sentiment and urgency using generative prompting or a classification model.",
+            "correct": true
+        },
+        {
+            "text": "Configure detection specifically for safety-critical content such as self-harm mentions, with automatic escalation when it is triggered.",
+            "correct": true
+        },
+        {
+            "text": "Route any message flagged as safety-critical to a human care-team reviewer immediately, instead of only logging it for later review.",
+            "correct": true
+        },
+        {
+            "text": "Rely on a weekly analytics dashboard to summarize sentiment trends across all messages after the fact.",
+            "correct": false
+        },
+        {
+            "text": "Disable automated screening for messages written in a non-English language and review those manually once a week.",
+            "correct": false
+        }
+    ],
+    "explanation": "Meeting the requirement needs **per-message scoring** (sentiment/urgency), **dedicated safety-critical detection with automatic escalation** (self-harm mentions can't wait for a human to notice them unprompted), and **immediate human routing** for anything flagged — that combination is what turns detection into an actual real-time safety net.\n\n**Why not the other options:**\n- **A weekly dashboard** — Summarizes trends long after the fact; a message mentioning self-harm needs escalation in minutes, not in next week's report.\n- **Disabling screening for non-English messages** — Directly fails the requirement: safety-critical content can appear in any language a patient uses, and a once-a-week manual pass leaves at-risk patients unmonitored for days.",
+    "category": "Implement text analysis solutions",
+    "caseStudy": "scenarios/case_study_thalvox_health.json"
+}

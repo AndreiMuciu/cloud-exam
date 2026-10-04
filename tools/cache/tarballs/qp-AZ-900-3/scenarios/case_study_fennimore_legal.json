@@ -1,0 +1,13 @@
+{
+    "id": "case_study_fennimore_legal",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Fennimore Legal Group** is a mid-sized law firm handling corporate litigation and intellectual-property cases. The firm is building a new Azure environment to host its case-management system: a set of application virtual machines and a document database inside a virtual network.\n\n**Security Posture:**\n- Client confidentiality is paramount; the firm's security committee has ruled that **no virtual machine may have a public IP address**.\n- Paralegals and attorneys access the case-management application only through a private connection from the firm's offices."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Administration:**\n- Systems administrators occasionally need **RDP and SSH sessions** to the application virtual machines for maintenance. Sessions should open **in the Azure portal over TLS**, without exposing any management ports to the internet and without deploying a public IP on the VMs.\n\n**Network Controls:**\n- Within the virtual network, the database subnet must accept traffic **only from the application subnet on the database port**; all other inbound traffic to that subnet must be denied. The firm wants a built-in Azure feature that filters traffic using **rules based on source, destination, port, and protocol**.\n\n**Budgeting:**\n- Before any resources are deployed, the managing partners want an **estimate of the expected monthly Azure charges** for the planned virtual machines, storage, and networking, assembled interactively from the services the firm intends to use."
+        }
+    ]
+}

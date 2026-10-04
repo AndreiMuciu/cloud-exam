@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-04-tallowfen-encryption-scopes",
+    "question": "You need to meet Tallowfen Grocers' partner data encryption requirements: each partner's container in the shared storage account encrypted with a different customer-managed key, per-partner key revocation that affects only that partner, and new blobs in a container forced to use that partner's key. What should you configure?",
+    "options": [
+        {
+            "text": "Create one encryption scope per partner, each backed by a customer-managed key in Tallowfen's key vault; set each scope as the default encryption scope on that partner's container and enable the container setting that denies encryption-scope overrides on upload",
+            "correct": true
+        },
+        {
+            "text": "Require each partner's uploads to supply a customer-provided key (CPK) in the request headers, and have partners send their key with every read and write operation",
+            "correct": false
+        },
+        {
+            "text": "Configure the storage account with a single customer-managed key in the key vault and use Azure RBAC to keep the partners' containers separated",
+            "correct": false
+        },
+        {
+            "text": "Enable infrastructure (double) encryption on the storage account so that each container automatically receives its own key hierarchy",
+            "correct": false
+        }
+    ],
+    "explanation": "**Encryption scopes** are the feature built for per-tenant encryption inside a single storage account. Each scope can be backed by its own **customer-managed key (CMK)** in Key Vault, so you create one scope per partner. Setting the scope as the **default encryption scope on the partner's container** makes every new blob use it, and enabling the container's **deny encryption-scope override** setting (`denyEncryptionScopeOverride`) stops an individual upload from choosing a different scope — that is what makes the control enforced rather than advisory. Because each scope wraps data with a different key, **disabling one partner's key renders only that partner's blobs unreadable** while every other container keeps working, which is exactly the revocation behavior the questionnaire asked about.\n\n**Why not the other options:**\n- **Customer-provided keys (CPK)** — with CPK the *caller* must transmit the encryption key on every request; Azure does not store it. Tallowfen (not the partners) is supposed to hold and revoke the keys centrally in its vault, and forcing partners to manage and send raw keys per request is operationally fragile and provides no central revocation.\n- **Single account-level CMK plus RBAC** — one key for the whole account means revoking it takes *all* partners offline, failing the requirement that revocation affect only one partner. RBAC separates access, not encryption keys.\n- **Infrastructure encryption** — double encryption adds a second layer using platform-managed keys for defense in depth. It does not create per-container keys and gives Tallowfen nothing to revoke.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_tallowfen_grocers.json"
+}

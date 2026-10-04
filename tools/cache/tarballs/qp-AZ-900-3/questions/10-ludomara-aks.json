@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-10-ludomara-aks",
+    "question": "Ludomara Studios wants to move its dozens of containerized microservices to a managed Azure service that orchestrates containers — automatically scaling the number of containers with player demand, restarting failed containers, and rolling out new versions with zero downtime. Which service should the platform team choose?",
+    "options": [
+        {
+            "text": "Azure Kubernetes Service (AKS)",
+            "correct": true
+        },
+        {
+            "text": "Azure Virtual Machines",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure DNS",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Kubernetes Service (AKS)** is Azure's managed **container orchestration** platform, built on Kubernetes. An orchestrator is exactly what a fleet of microservices needs at this scale: AKS schedules containers across a pool of nodes, **scales them out and in automatically**, **restarts or replaces failed containers** (self-healing), and performs **rolling updates** so new versions deploy without downtime. Azure manages the Kubernetes control plane, so the studio operates only its workloads and node pools.\n\n**Why not the other options:**\n- **Azure Virtual Machines** — This is what the studio has today: containers on manually managed VMs, with hand-rolled deployments and no self-healing. VMs alone provide no orchestration.\n- **Azure Blob Storage** — Object storage for unstructured data such as images and files; it cannot run or manage containers.\n- **Azure DNS** — Hosts DNS zones and records; it plays no role in running, scaling, or updating containers.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_ludomara_studios.json"
+}

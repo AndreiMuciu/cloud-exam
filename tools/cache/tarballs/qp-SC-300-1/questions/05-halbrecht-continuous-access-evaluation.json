@@ -1,0 +1,25 @@
+{
+    "id": "sc300-halbrecht-continuous-access-evaluation",
+    "question": "A loan officer's account is flagged by Microsoft Entra ID Protection as high risk while the officer is actively signed in. Halbrecht Financial Group wants the officer's existing session tokens to stop being honored within minutes, instead of waiting up to an hour for natural token expiration.\n\nWhich capability provides this near-real-time revocation, and what is required for it to take effect?",
+    "options": [
+        {
+            "text": "Continuous access evaluation (CAE); no Conditional Access policy is required for this specific critical event, but the client and resource provider must both support CAE",
+            "correct": true
+        },
+        {
+            "text": "Reducing the configurable access token lifetime to 5 minutes tenant-wide using the Configurable Token Lifetime feature",
+            "correct": false
+        },
+        {
+            "text": "Enabling sign-in frequency of 1 hour in a Conditional Access session control",
+            "correct": false
+        },
+        {
+            "text": "Self-service password reset (SSPR), which forces an immediate re-authentication for any risky account",
+            "correct": false
+        }
+    ],
+    "explanation": "**Continuous access evaluation (CAE)** lets CAE-capable resource providers (such as Exchange Online, SharePoint Online, and Teams) subscribe to critical Microsoft Entra events and react in near real time, without waiting for token expiry. **High user risk detected by Microsoft Entra ID Protection** is one of the critical events that triggers CAE's near-real-time revocation, alongside account disablement, password reset, and an administrator explicitly revoking sessions — this is \"critical event evaluation\" and does not depend on a Conditional Access policy existing. It does require that both the client application and the resource provider support CAE (claim-challenge aware clients).\n\n**Why not the other options:**\n- **Shortening the configurable token lifetime to 5 minutes** — this is the \"blunt object\" approach Microsoft explicitly moved away from; it degrades user experience broadly and still leaves a window of validity, whereas CAE reacts to the actual risk event.\n- **Sign-in frequency of 1 hour** — this Conditional Access session control forces periodic re-authentication on a fixed schedule; it does not react instantly to a risk event detected mid-session.\n- **SSPR** — SSPR lets users reset their own forgotten passwords; it has no mechanism to revoke an active session in response to a risk detection.",
+    "category": "Implement authentication and access management",
+    "caseStudy": "scenarios/case_study_halbrecht.json"
+}

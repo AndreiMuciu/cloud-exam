@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-21-pgvector-ef-search",
+    "question": "Your team's retrieval API, backed by Azure Database for PostgreSQL flexible server, queries a table that already has an **HNSW index** with `vector_cosine_ops`. Queries are fast, but evaluation shows poor recall: documents that an exact scan ranks in the top 10 are frequently missing from the results. You must improve recall **without rebuilding the index**, accepting a modest latency increase.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Raise the `hnsw.ef_search` parameter for the query session, for example `SET hnsw.ef_search = 200;`.",
+            "correct": true
+        },
+        {
+            "text": "Rebuild the index with a smaller `m` value so the graph has fewer, higher-quality connections.",
+            "correct": false
+        },
+        {
+            "text": "Replace the HNSW index with an IVFFlat index using the default number of lists.",
+            "correct": false
+        },
+        {
+            "text": "Increase the query's `LIMIT` from 10 to 100 and truncate the extra rows in the application.",
+            "correct": false
+        }
+    ],
+    "explanation": "`hnsw.ef_search` controls the size of the **dynamic candidate list** an HNSW search keeps while walking the graph (default 40). A larger value makes the search examine more neighbors, which directly raises recall at the cost of some latency — and it is a **runtime setting**, so no index rebuild is required. It can be set per session or per query, making it the right knob for tuning the recall/latency trade-off after the index exists.\n\n**Why not the other options:**\n- **Rebuilding with smaller `m`** — Violates the no-rebuild constraint, and it moves recall in the *wrong direction*: fewer graph connections generally means worse recall, not better.\n- **Switching to IVFFlat** — Also a rebuild, and IVFFlat typically delivers *lower* recall than a well-tuned HNSW index at comparable speed; it trades quality for cheaper builds and memory.\n- **Raising `LIMIT`** — The index still explores only `ef_search` candidates regardless of the `LIMIT`; asking for 100 rows from the same shallow search does not recover the near neighbors the walk never visited (and results are capped by the candidate list anyway).",
+    "category": "Develop AI solutions by using Azure data management services"
+}

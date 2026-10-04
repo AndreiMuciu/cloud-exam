@@ -1,0 +1,26 @@
+{
+    "id": "az305-s3-draymont-delivery",
+    "type": "multi",
+    "question": "You need to ensure that no shipment event is lost when a partner webhook endpoint is offline for several hours. Event Grid must keep retrying delivery for as long as possible, and any event that still cannot be delivered must be captured for later reprocessing.\n\nWhich two actions should you include in the recommendation? (Choose two.)",
+    "options": [
+        {
+            "text": "Configure dead-lettering on each partner's event subscription, targeting a blob container in an Azure Storage account",
+            "correct": true
+        },
+        {
+            "text": "Set the retry policy on each event subscription to the maximum event time-to-live of 24 hours",
+            "correct": true
+        },
+        {
+            "text": "Enable geo-disaster recovery on the Event Grid resource to fail events over to a secondary region",
+            "correct": false
+        },
+        {
+            "text": "Increase the batch size on each event subscription so more events are delivered per request",
+            "correct": false
+        }
+    ],
+    "explanation": "Event Grid's delivery durability is governed by two per-subscription settings, and both are needed to satisfy the requirement:\n\n1. **Retry policy / event time-to-live** — Event Grid retries failed deliveries with exponential backoff. The **event TTL** (maximum 1440 minutes = 24 hours) and maximum delivery attempts control how long it keeps trying. Setting TTL to the maximum makes Event Grid ride out multi-hour partner outages on its own — most events are eventually delivered with no intervention\n2. **Dead-lettering** — When the TTL or attempt limit is exhausted, an event with no dead-letter destination is **dropped**. Configuring a dead-letter destination (a **storage account blob container**) captures every undeliverable event, so the integration team can inspect and re-publish them once the partner endpoint recovers — the \"no event may be lost\" backstop\n\n**Why not the other options:**\n- **Geo-disaster recovery** — Regional failover protects against an *Azure region* outage of the Event Grid service itself. The failure mode here is the *partner's endpoint* being down; events would fail delivery from the secondary region just the same. It contributes nothing to per-endpoint delivery durability\n- **Batch size** — Batching is a throughput/efficiency optimization for endpoints that can accept multiple events per request. It has no effect on what happens when the endpoint is unreachable, and does not prevent event loss",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_draymont_logistics.json"
+}

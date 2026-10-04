@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-19-global-secure-access",
+    "question": "A company wants to move beyond its aging VPN concentrator. It is evaluating Microsoft's identity-centric Security Service Edge (SSE) solution, which applies Conditional Access to network traffic itself and comprises two products: one securing access to internet and SaaS destinations (including Microsoft services), and one providing secure access to private corporate applications without a traditional VPN.\n\nWhat is this Microsoft Entra solution called, and what are its two components?",
+    "options": [
+        {
+            "text": "Microsoft Entra Global Secure Access, comprising Microsoft Entra Internet Access and Microsoft Entra Private Access",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra ID Governance, comprising entitlement management and access reviews",
+            "correct": false
+        },
+        {
+            "text": "Azure Bastion, comprising RDP access and SSH access",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud Apps, comprising app discovery and app governance",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Global Secure Access** is Microsoft's **Security Service Edge (SSE)** solution and the unified name for two products: **Microsoft Entra Internet Access**, an identity-centric secure web gateway that protects access to internet, SaaS, and Microsoft services; and **Microsoft Entra Private Access**, which gives remote users Zero Trust-based access to private corporate applications without the broad network access of a legacy VPN. Both extend Conditional Access decisions to network traffic, so access is continuously evaluated against identity, device, and risk signals.\n\n**Why not the other options:**\n- **Microsoft Entra ID Governance** — Governance covers the *lifecycle and certification* of access (entitlement management, access reviews, lifecycle workflows, PIM). It does not carry or secure network traffic.\n- **Azure Bastion** — Bastion provides browser-based RDP/SSH connectivity to Azure virtual machines through the Azure portal. It is an admin-connectivity service for VMs, not an SSE platform replacing user VPNs to apps and the internet.\n- **Microsoft Defender for Cloud Apps** — Defender for Cloud Apps is a cloud access security broker (CASB) for discovering and controlling SaaS app usage. It complements, but is not, the Global Secure Access SSE solution with its Internet Access and Private Access components.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

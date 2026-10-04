@@ -1,0 +1,33 @@
+{
+    "id": "sc500-25-app-service-security-multi",
+    "type": "multi",
+    "question": "An internal line-of-business web app on Azure App Service must meet three requirements:\n\n1. Only signed-in Microsoft Entra ID users may reach the app — unauthenticated requests must be rejected before app code runs.\n2. The app must be reachable **only** from the corporate virtual network, never from the public internet.\n3. The app's outbound calls to an Azure SQL database must traverse the virtual network.\n\nWhich three configurations should you apply? (Select three.)",
+    "options": [
+        {
+            "text": "Enable App Service built-in authentication (Easy Auth) with Microsoft Entra ID as the identity provider, set to require authentication",
+            "correct": true
+        },
+        {
+            "text": "Create a private endpoint for the app in the corporate virtual network and disable public network access on the app",
+            "correct": true
+        },
+        {
+            "text": "Enable regional virtual network integration on the app for its outbound traffic",
+            "correct": true
+        },
+        {
+            "text": "Enable FTP deployment with a strong deployment password",
+            "correct": false
+        },
+        {
+            "text": "Migrate the app to an App Service Environment, because private inbound access is impossible on multi-tenant App Service",
+            "correct": false
+        },
+        {
+            "text": "Enable remote debugging so the security team can inspect live requests",
+            "correct": false
+        }
+    ],
+    "explanation": "- **Built-in authentication (Easy Auth)** enforces Entra ID sign-in at the platform layer, rejecting unauthenticated requests before they reach application code — requirement 1.\n- **Private endpoint + public network access disabled** gives the app a private IP in the VNet and removes internet exposure — requirement 2 (inbound).\n- **Regional VNet integration** routes the app's *outbound* calls into the VNet so traffic to SQL (e.g., via its private endpoint) stays on the private network — requirement 3. Note that private endpoints handle inbound and VNet integration handles outbound; you need both.\n\n**Why not the other options:**\n- **FTP deployment** — FTP is a legacy, weakly secured channel; hardening guidance is to disable it, and it contributes nothing to the three requirements.\n- **App Service Environment migration** — Unnecessary: private endpoints and VNet integration deliver private inbound and outbound on multi-tenant App Service; an ASE is a much heavier, costlier change.\n- **Remote debugging** — Remote debugging opens additional attack surface and should stay off in production; it is a troubleshooting feature, not a security control.",
+    "category": "Secure compute"
+}

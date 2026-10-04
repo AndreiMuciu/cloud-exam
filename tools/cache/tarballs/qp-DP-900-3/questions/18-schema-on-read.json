@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-18-schema-on-read",
+    "question": "A team lands raw data files in a data lake without defining any structure up front. Each consuming query or application applies its own structure to the files at the moment it reads them.\n\nWhich term describes this approach?",
+    "options": [
+        {
+            "text": "Schema-on-read",
+            "correct": true
+        },
+        {
+            "text": "Schema-on-write",
+            "correct": false
+        },
+        {
+            "text": "Referential integrity",
+            "correct": false
+        },
+        {
+            "text": "Normalization",
+            "correct": false
+        }
+    ],
+    "explanation": "**Schema-on-read** means data is stored in its raw form and structure is imposed only when the data is read — each consumer decides how to interpret the files at query time. This is the characteristic approach of data lakes: ingestion is fast and flexible because nothing has to conform to a predefined table structure, and different consumers can read the same files differently.\n\n**Why not the other options:**\n- **Schema-on-write** — The opposite approach: the schema is defined first and data must conform to it *when it is written*, as in a relational database or a data warehouse table. Here, no structure is defined before landing the files.\n- **Referential integrity** — This is the relational guarantee that foreign key values always reference existing rows; it concerns relationships between tables, not when schema is applied.\n- **Normalization** — Normalization is a relational design technique that eliminates data duplication by splitting data into related tables; it presupposes a schema rather than describing when one is applied.",
+    "category": "Describe Core Data Concepts"
+}

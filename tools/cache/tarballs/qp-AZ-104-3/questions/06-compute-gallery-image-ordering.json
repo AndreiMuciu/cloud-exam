@@ -1,0 +1,22 @@
+{
+    "id": "az104-s3-compute-gallery-image-ordering",
+    "type": "ordering",
+    "question": "Thistledown Studios must turn the prepared Windows VM **VM-AgentBase** into a versioned golden image in an Azure Compute Gallery, then rebuild the build-agent pool from it.\n\nArrange the steps in the correct order.",
+    "items": [
+        "Run sysprep with the generalize option inside VM-AgentBase and let the VM shut down",
+        "Deallocate VM-AgentBase and mark it as generalized in Azure",
+        "Create an image definition in the Azure Compute Gallery",
+        "Capture VM-AgentBase as a new image version (for example 1.0.0) under the image definition",
+        "Create the new build-agent VMs from the gallery image version"
+    ],
+    "correctOrder": [
+        "Run sysprep with the generalize option inside VM-AgentBase and let the VM shut down",
+        "Deallocate VM-AgentBase and mark it as generalized in Azure",
+        "Create an image definition in the Azure Compute Gallery",
+        "Capture VM-AgentBase as a new image version (for example 1.0.0) under the image definition",
+        "Create the new build-agent VMs from the gallery image version"
+    ],
+    "explanation": "The generalized-image workflow always starts **inside** the source VM and ends with deployment from the gallery:\n\n1. **Sysprep with /generalize** removes machine-specific state (computer name, SIDs, installed device state) from Windows so that many unique VMs can be created from one image. The VM shuts down when sysprep completes and must not be restarted afterwards — booting it would re-specialize it.\n2. **Deallocate and mark as generalized** — the Azure resource must be stopped (deallocated) and flagged as generalized (`az vm generalize` / `Set-AzVm -Generalized`) so that Azure knows the disk contents are sysprepped. This must happen before capture; you cannot generalize the Azure object before sysprep has run inside the guest.\n3. **Create the image definition** — the gallery object that carries the image's identity (publisher/offer/SKU, OS type, generalized state). Versions live under a definition, so the definition must exist first.\n4. **Capture an image version** (for example **1.0.0**) from the generalized VM under that definition. Each later rebuild of the base VM becomes a new version (1.1.0, …), giving the studio the version history and rollback the requirements demand.\n5. **Create the build-agent VMs** from the gallery image version — only possible once the version has been published.\n\nThe strict dependencies are: sysprep must precede generalization of the Azure object; the VM must be generalized before capture; the definition must exist before a version can be created under it; and VMs can only be created after a version exists.",
+    "category": "Deploy and Manage Azure Compute Resources",
+    "caseStudy": "scenarios/case_study_thistledown.json"
+}

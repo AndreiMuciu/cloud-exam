@@ -1,0 +1,22 @@
+{
+  "id": "sc500-s2-29-sentinel-roles-matching",
+  "type": "matching",
+  "question": "Match each Microsoft Sentinel-related Azure role to the access requirement it satisfies with least privilege.",
+  "sourceItems": [
+    "Microsoft Sentinel Reader",
+    "Microsoft Sentinel Responder",
+    "Microsoft Sentinel Contributor",
+    "Microsoft Sentinel Playbook Operator",
+    "Microsoft Sentinel Automation Contributor"
+  ],
+  "targetSlots": [
+    "Compliance auditors must view incidents, data, and workbooks without changing anything",
+    "Tier-1 analysts must assign, change the severity of, and close incidents, but must not edit analytics rules or workbooks",
+    "Detection engineers must create and edit analytics rules, workbooks, and other Sentinel resources",
+    "Analysts must list and manually run specific playbooks without any broader Logic Apps permissions",
+    "The Microsoft Sentinel service itself must be allowed to run playbooks attached to automation rules"
+  ],
+  "correctMapping": [0, 1, 2, 3, 4],
+  "explanation": "Microsoft Sentinel ships a set of dedicated Azure RBAC roles so that each SOC persona gets only what its job requires:\n- **Microsoft Sentinel Reader** — view-only access to incidents, workbooks, analytics rules, and the underlying data. The right fit for auditors and anyone who consumes but never modifies.\n- **Microsoft Sentinel Responder** — everything Reader has, plus *incident management*: assigning owners, changing severity and status, adding comments. Crucially, it cannot create or edit analytics rules, workbooks, or connectors, which is exactly the boundary wanted for tier-1 triage.\n- **Microsoft Sentinel Contributor** — full create/edit rights over Sentinel resources (analytics rules, workbooks, watchlists, hunting queries). This is the detection-engineering role; giving it to triage analysts would let them alter detections.\n- **Microsoft Sentinel Playbook Operator** — a narrowly scoped role that can list, view, and *manually run* playbooks. It grants no ability to edit the underlying Logic Apps, so analysts can trigger response actions without holding Logic App Contributor.\n- **Microsoft Sentinel Automation Contributor** — not a role for people at all: it is assigned to the Microsoft Sentinel service identity on the resource group containing the playbooks, permitting Sentinel to attach playbooks to automation rules and run them. Without it, automation rules cannot invoke playbooks.\n\nThe recurring exam distinction: Responder manages *incidents* but not *content*; Contributor manages content; the two playbook roles separate *humans running playbooks manually* (Playbook Operator) from *the service running them via automation rules* (Automation Contributor).",
+  "category": "Manage and monitor security posture"
+}

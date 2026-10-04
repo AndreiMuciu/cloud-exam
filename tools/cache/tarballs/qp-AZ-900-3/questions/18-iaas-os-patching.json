@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-18-iaas-os-patching",
+    "question": "A courier company rehosts its parcel-tracking application onto Linux virtual machines in Azure (an IaaS deployment). Under the shared responsibility model, who is responsible for applying security patches to the **operating system running inside** those virtual machines?",
+    "options": [
+        {
+            "text": "The courier company (the customer)",
+            "correct": true
+        },
+        {
+            "text": "Microsoft (the cloud provider)",
+            "correct": false
+        },
+        {
+            "text": "Microsoft for security patches, the customer for feature updates",
+            "correct": false
+        },
+        {
+            "text": "No one — IaaS operating systems are patched automatically by the hypervisor",
+            "correct": false
+        }
+    ],
+    "explanation": "With **infrastructure as a service (IaaS)**, the provider delivers the building blocks — physical hosts, storage, networking, and the virtualization layer — while the **customer controls everything inside the virtual machine**. That includes installing, configuring, and **patching the guest operating system**, as well as the middleware and applications on top of it. The customer's large degree of control in IaaS comes paired with the largest share of management responsibility of any cloud service type.\n\n**Why not the other options:**\n- **Microsoft (the cloud provider)** — Microsoft patches and maintains the *physical infrastructure and hypervisor hosts*, not the guest OS the customer chose to install and run.\n- **Microsoft for security patches, the customer for feature updates** — The responsibility for the guest OS does not split by patch type; everything inside the VM belongs to the customer in IaaS.\n- **No one — patched automatically by the hypervisor** — The hypervisor isolates and runs VMs; it does not reach inside a guest operating system to update it. Unpatched guest systems remain vulnerable until the customer acts (or configures an update-management solution).",
+    "category": "Describe Cloud Concepts"
+}

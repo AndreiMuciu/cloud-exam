@@ -1,0 +1,24 @@
+{
+    "id": "az104-compute-vm-redeploy",
+    "question": "An Azure virtual machine named **VM-Tracker** runs Windows Server 2022 . A developer has performed the following actions on the VM:\n\n- Created log files on the C: drive (OS disk)\n- Created temporary processing files on the D: drive (temporary disk)\n- Changed the desktop wallpaper\n- Installed a third-party tracking agent\n\nThe VM becomes unresponsive and you decide to **redeploy** it to a different Azure host.\n\nWhich change will be lost after redeployment?",
+    "options": [
+        {
+            "text": "Log files on the C: drive",
+            "correct": false
+        },
+        {
+            "text": "The desktop wallpaper change",
+            "correct": false
+        },
+        {
+            "text": "The installed tracking agent",
+            "correct": false
+        },
+        {
+            "text": "Temporary processing files on the D: drive",
+            "correct": true
+        }
+    ],
+    "explanation": "When you redeploy an Azure VM, it is moved to a new physical host within the Azure datacenter. During redeployment:\n\n- **OS disk (C:)** — Persisted. All files, installed software, and user profile changes (including desktop wallpaper) are stored on the managed OS disk, which moves with the VM.\n- **Data disks** — Persisted. Any attached data disks remain intact.\n- **Temporary disk (D:)** — **Lost**. The temporary disk is local to the physical host and is NOT persistent. When the VM moves to a new host, a new temporary disk is provided and the previous data is lost.\n\nThe temporary disk (D: on Windows, /dev/sdb1 on Linux) is designed for temporary data like page files and swap space. Never store important data on the temporary disk.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

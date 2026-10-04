@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-03-orenfall-entitlement-management",
+    "question": "You need to redesign contractor onboarding for Orenfall Energy so that contractors request a predefined bundle of groups and applications, the project manager approves each request, access expires automatically after 90 days, and remaining access is recertified quarterly. What should you implement?",
+    "options": [
+        {
+            "text": "A Microsoft Entra entitlement management access package containing the project's groups and applications, with the project manager as approver, a 90-day expiration on assignments, and a quarterly access review attached to the package",
+            "correct": true
+        },
+        {
+            "text": "A dynamic security group whose membership rule matches the contractors' company name, granted permanent access to the project resources",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Privileged Identity Management, making each contractor eligible for the groups and requiring activation every morning",
+            "correct": false
+        },
+        {
+            "text": "A Conditional Access policy that grants contractors access only for 90 days after their first sign-in and then blocks them",
+            "correct": false
+        }
+    ],
+    "explanation": "**Entitlement management** (Microsoft Entra ID Governance) is built for exactly this pattern: an **access package** bundles groups, applications, and SharePoint sites; external users request it through the My Access portal; a policy defines approvers (the project manager), assignment **expiration** (90 days, with optional extension requests); and an attached **access review** recertifies remaining assignments on a schedule (quarterly). Expired assignments are removed automatically, which also fixes the stale-contractor problem.\n\n**Why not the other options:**\n- **Dynamic group with permanent access** — no request/approval workflow, no expiration, and no recertification; it would perpetuate the current problem of access outliving projects.\n- **PIM with daily activation** — PIM governs *privileged role* activation, not bundles of resource access for guests; daily re-activation is operational friction, and PIM eligibility alone provides neither a self-service request portal for resource bundles nor package-level approval by a project manager.\n- **Conditional Access with a 90-day window** — Conditional Access evaluates sign-in conditions; it has no concept of resource bundles, approval workflows, or access recertification, and it cannot remove group memberships or app assignments when time is up.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_orenfall_energy.json"
+}

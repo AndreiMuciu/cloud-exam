@@ -1,0 +1,25 @@
+{
+    "id": "ai103-11-grisloom-supervisor-agent-handoff",
+    "question": "Grisloom wants three cooperating agents — product discovery, order actions, and a supervisor — to jointly handle one customer conversation, with the supervisor deciding which specialist responds to each customer turn.\n\nWhat should the team implement?",
+    "options": [
+        {
+            "text": "An orchestrated multi-agent solution in which the supervisor agent classifies each turn and hands the conversation off to the product-discovery or order-actions agent as appropriate, resuming control after each specialist responds.",
+            "correct": true
+        },
+        {
+            "text": "One large agent whose system prompt merges all product-discovery and order-actions logic, so a single agent decides everything itself.",
+            "correct": false
+        },
+        {
+            "text": "The product-discovery and order-actions agents running independently with no supervisor, letting the client application choose which one to call.",
+            "correct": false
+        },
+        {
+            "text": "Each specialist agent deciding on its own, without coordination, whether to also answer questions outside its specialty.",
+            "correct": false
+        }
+    ],
+    "explanation": "An **orchestrated multi-agent design with a supervisor/router** is exactly the pattern described: the supervisor inspects each customer turn, hands off to the right specialist, and resumes control afterward — matching the requirement that \"the supervisor decides which specialist agent responds next.\"\n\n**Why not the other options:**\n- **One merged agent** — Contradicts the stated design of three cooperating agents, and loses the separation of concerns (and independent tool scoping) that specialist agents provide.\n- **Independent agents with the client choosing** — Moves the supervisor's job into client code with no shared conversation state, and there is no agent actually making the routing decision as required.\n- **Specialists deciding unilaterally** — Without a supervisor, two specialists could both attempt to answer the same turn (or none could), producing inconsistent behavior instead of coordinated handoff.",
+    "category": "Implement generative AI and agentic solutions",
+    "caseStudy": "scenarios/case_study_grisloom_commerce.json"
+}

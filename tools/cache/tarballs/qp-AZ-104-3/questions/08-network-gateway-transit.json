@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-network-gateway-transit",
+    "type": "single",
+    "question": "Servers at Blythewater Marine's harbor headquarters reach hub resources through the site-to-site tunnel on **VGW-Hub**, but they **cannot** reach the VMs in the peered spoke **VNet-Ops**. The VNet-Hub / VNet-Ops peering uses default settings on both sides.\n\nRecall the constraint: the topology must contain exactly **one** VPN gateway, and spokes must not get their own gateways.\n\nWhat should you configure?",
+    "options": [
+        { "text": "Enable **Allow gateway transit** on the hub side of the peering and **Use remote gateways** on the VNet-Ops side", "correct": true },
+        { "text": "Deploy a VPN gateway into VNet-Ops and create a second site-to-site tunnel from headquarters", "correct": false },
+        { "text": "Enable **Allow forwarded traffic** on both sides of the peering", "correct": false },
+        { "text": "Convert the peering to a global virtual network peering", "correct": false }
+    ],
+    "explanation": "By default, virtual network peering does **not** extend a gateway's reach into peered networks. Two complementary peering settings enable hub-and-spoke gateway sharing: on the **hub** side, **Allow gateway transit** permits VNet-Hub's gateway (VGW-Hub) to carry traffic on behalf of peered networks; on the **spoke** side, **Use remote gateways** tells VNet-Ops to use the hub's gateway for its on-premises routes. Once both are set, the spoke's address space is advertised through the tunnel and headquarters servers can reach the Subnet-Ingest VMs — with the topology still containing exactly one VPN gateway.\n\n**Why not the other options:**\n- **VPN gateway in VNet-Ops**: this would work technically but directly violates the stated constraint of exactly one VPN gateway with no gateways in spokes — and it adds cost and a second tunnel to operate. (A spoke that sets **Use remote gateways** cannot have its own gateway anyway; the two are mutually exclusive.)\n- **Allow forwarded traffic only**: this setting accepts traffic *forwarded by* a network virtual appliance in the peered network — it does not publish the spoke through the hub's VPN gateway. Without gateway transit and remote-gateway settings, headquarters still learns no route to the spoke.\n- **Global peering**: global peering just spans regions. Both VNets are already in North Europe, and the peering already connects them — the missing piece is gateway transit, not the peering's scope.",
+    "category": "Implement and Manage Virtual Networking",
+    "caseStudy": "scenarios/case_study_blythewater.json"
+}

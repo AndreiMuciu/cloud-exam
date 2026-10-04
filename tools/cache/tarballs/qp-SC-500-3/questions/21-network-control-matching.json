@@ -1,0 +1,28 @@
+{
+    "id": "sc500-s3-21-network-control-matching",
+    "type": "matching",
+    "question": "Match each Azure network security control to the requirement it is the right tool for.",
+    "sourceItems": [
+        "Azure Firewall Premium",
+        "Azure Web Application Firewall (WAF)",
+        "Network security groups with application security groups",
+        "Azure DDoS Network Protection",
+        "Azure Bastion"
+    ],
+    "targetSlots": [
+        "Outbound traffic from all workloads must be filtered by FQDN with TLS inspection and signature-based intrusion detection and prevention (IDPS)",
+        "Inbound HTTP requests to a public web application must be inspected for SQL injection and cross-site scripting before reaching the app",
+        "East-west traffic between application tiers must be restricted by rules that reference logical tier groupings instead of IP addresses",
+        "Public-facing endpoints must be protected against volumetric and protocol flood attacks, with adaptive tuning and cost protection during attacks",
+        "Administrators must open RDP/SSH sessions to VMs through the browser or native client without the VMs having any public IP address"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "explanation": "Each control occupies a distinct layer, and the exam loves testing whether you can keep them apart:\n- **Azure Firewall Premium** — the network/transport-layer egress and east-west inspection point. Premium adds what Standard lacks: **TLS inspection**, **signature-based IDPS**, and URL filtering — so 'FQDN filtering + TLS inspection + IDPS' always points at Premium.\n- **Azure WAF** — a layer-7 HTTP inspector attached to Application Gateway, Front Door, or CDN. Its managed rules target the OWASP-style web attack classes (SQL injection, XSS). A firewall or NSG never parses HTTP bodies.\n- **NSGs + ASGs** — ASGs are the abstraction that lets NSG rules say 'web tier → app tier on 443' by attaching NICs to named groups; rules survive redeployments and IP churn. Right tool for tier-to-tier micro-segmentation without appliances.\n- **DDoS Network Protection** — defends *availability* at layers 3/4 against volumetric and protocol floods, with adaptive tuning learned from your traffic patterns, attack telemetry, rapid-response support, and cost protection credits — none of which NSGs, WAF, or Bastion provide.\n- **Azure Bastion** — the managed jump service: RDP/SSH over TLS through the portal or native client to VMs with no public IPs, eliminating the exposed management-port problem entirely.\n\nCommon traps: picking WAF for non-HTTP filtering (it only understands web traffic), picking Azure Firewall for SQL injection (it does not inspect HTTP request bodies for web attack signatures the way WAF managed rules do), and assuming basic platform DDoS protection covers the adaptive-tuning and cost-protection requirements (those are Network Protection tier features).",
+    "category": "Secure storage, databases, and networking"
+}

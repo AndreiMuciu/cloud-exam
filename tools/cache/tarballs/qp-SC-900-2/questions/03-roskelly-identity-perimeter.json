@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-03-roskelly-identity-perimeter",
+    "question": "Roskelly Outfitters' seasonal staff, remote agents, and marketing contractors access company resources from personal devices and home networks, so most sign-ins never touch the office firewall or VPN. The board asks what security should now be built around, given that the traditional network boundary no longer encloses the people and data it is meant to protect.\n\nIn this modern environment, what is considered the primary security perimeter?",
+    "options": [
+        {
+            "text": "Identity",
+            "correct": true
+        },
+        {
+            "text": "The office firewall",
+            "correct": false
+        },
+        {
+            "text": "The corporate VPN concentrator",
+            "correct": false
+        },
+        {
+            "text": "The physical office network",
+            "correct": false
+        }
+    ],
+    "explanation": "When users work from anywhere, on any device, against SaaS and cloud services, the network edge can no longer act as the main line of defense. **Identity becomes the primary security perimeter**: every request — from an employee, contractor, device, application, or service — is authenticated and authorized based on who or what is asking, regardless of where the request comes from. Controls such as MFA, Conditional Access, and identity governance then travel with the user rather than with the building.\n\n**Why not the other options:**\n- **The office firewall** — A firewall only inspects traffic that flows through it. Sign-ins from a contractor's home network to a SaaS service never cross the office firewall, so it cannot be the primary control point.\n- **The corporate VPN concentrator** — A VPN extends the old network perimeter to remote users, but cloud-first work often bypasses it entirely, and it says nothing about *who* is connecting or the health of their device.\n- **The physical office network** — Location on a trusted network is exactly the assumption modern security abandons: being inside the building proves nothing about the legitimacy of a request.",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_roskelly_outfitters.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az104-storage-account-create",
+    "question": "You need to create an Azure Storage account for Galewind Logistics that meets the following requirements:\n\n- Supports hot, cool, and archive blob tiers\n- Provides fault tolerance if the entire Azure region becomes unavailable\n- Minimizes storage costs\n\nWhich storage account type and replication option should you use?",
+    "options": [
+        {
+            "text": "BlobStorage account with Locally-redundant storage (LRS)",
+            "correct": false
+        },
+        {
+            "text": "Storage (general-purpose v1) account with Read-access geo-redundant storage (RA-GRS)",
+            "correct": false
+        },
+        {
+            "text": "StorageV2 (general-purpose v2) account with Geo-redundant storage (GRS)",
+            "correct": true
+        },
+        {
+            "text": "BlockBlobStorage account with Premium LRS",
+            "correct": false
+        }
+    ],
+    "explanation": "The requirements dictate:\n\n1. **Hot, cool, and archive tiers** — Only **StorageV2 (GPv2)** and **BlobStorage** account types support all three access tiers. However, GPv2 is recommended over BlobStorage as it offers all the same capabilities plus additional features.\n\n2. **Region-level fault tolerance** — This requires geo-redundant replication (GRS, RA-GRS, GZRS, or RA-GZRS). LRS and ZRS only protect within a single region.\n\n3. **Minimize costs** — Among the geo-redundant options, **GRS** is the least expensive because it does not provide read access to the secondary region (unlike RA-GRS).\n\n- GPv1 does **not** support blob access tiers\n- **BlockBlobStorage with Premium LRS** provides high-performance block blob storage but does not support geo-redundancy (Premium only supports LRS and ZRS) and does not support hot/cool/archive tiering\n- BlobStorage is a legacy account type superseded by GPv2",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_galewind.json"
+}

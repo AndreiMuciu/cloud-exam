@@ -1,0 +1,13 @@
+{
+    "id": "case_study_tessendale_college",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Tessendale College** is a higher-education institution with roughly 14,000 students and two dozen academic and administrative departments. The college is consolidating its data estate in Azure.\n\n**Current Data Landscape:**\n- **Departmental databases**: departments such as the library, alumni relations, and facilities each run a small, cloud-native relational database. None of these applications use instance-level SQL Server features. Usage is spiky and unpredictable — each database is busy at different times of the academic year (enrollment week, exam periods, alumni campaigns) and nearly idle otherwise.\n- **Student records**: a central relational database holds the `Students`, `Courses`, and `Enrollments` tables that power registration and transcripts.\n- **Registrar reporting**: the registrar's office runs recurring queries against the enrollment data to support planning and accreditation reports."
+        },
+        {
+            "title": "Business Goals",
+            "content": "Tessendale College's IT team has defined the following requirements:\n\n- **Departmental database hosting**: host the two dozen departmental databases in Azure at the lowest practical cost. Because the databases peak at different times, the team wants them to draw from a **shared pool of compute resources** instead of each database being sized for its own peak.\n- **Enrollment reporting**: the registrar needs a single query that returns the **total number of enrolled students for each course** from the `Enrollments` table.\n- **Schema change**: student services wants a new `PreferredName` column added to the existing `Students` table. The table already contains thousands of rows, and the data in the existing columns must be preserved exactly as it is."
+        }
+    ]
+}

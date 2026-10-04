@@ -1,0 +1,24 @@
+{
+    "id": "az104-monitor-diagnostics",
+    "question": "You have an Azure VM named **VM-AppServer** that runs Windows Server 2022. You need to create an alert in Azure Monitor that triggers when more than five **Error** events are logged in the Windows **System** event log on the VM within a one-hour window.\n\nYou need to identify which resource type to specify as the alert source.\n\nWhat should you specify?",
+    "options": [
+        {
+            "text": "The virtual machine (VM-AppServer)",
+            "correct": false
+        },
+        {
+            "text": "A metric alert on the VM resource",
+            "correct": false
+        },
+        {
+            "text": "An Azure Log Analytics workspace",
+            "correct": true
+        },
+        {
+            "text": "A VM extension resource",
+            "correct": false
+        }
+    ],
+    "explanation": "To alert on Windows event log entries, you need to:\n\n1. **Collect the event log data** — The VM must have the **Azure Monitor Agent (AMA)** installed with a data collection rule (DCR) to forward Windows event logs to a **Log Analytics workspace**\n2. **Create the alert** — The alert rule source must be the **Log Analytics workspace** where the event data is stored, not the VM itself\n\nThe alert rule uses a **log search query** (KQL) against the workspace to find Error events from the System log, e.g.:\n```\nEvent | where EventLog == \"System\" and EventLevelName == \"Error\"\n```\n\nWhy not the other options:\n- **Virtual machine** — The VM resource supports **metric** alerts (CPU, memory), not log-based alerts on event log entries\n- **Metric alert** — Metrics track numerical performance data, not discrete event log entries\n- **VM extension** — Extensions provide capabilities to the VM but are not alert sources",
+    "category": "Monitor and Maintain Azure Resources"
+}

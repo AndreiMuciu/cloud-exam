@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-network-asg",
+    "type": "multi",
+    "question": "You plan to use **application security groups (ASGs)** to simplify the network security group (NSG) rules for a multi-tier application, so that rules reference workload roles (web, app, database) instead of IP address ranges.\n\nWhich two statements about application security groups are true? (Choose two.)",
+    "options": [
+        { "text": "An NSG rule can use one ASG as the source and a different ASG as the destination", "correct": true },
+        { "text": "All network interfaces assigned to the same ASG must belong to the same virtual network", "correct": true },
+        { "text": "An ASG can include network interfaces from multiple virtual networks if the networks are peered", "correct": false },
+        { "text": "ASGs are associated with subnets rather than with individual network interfaces", "correct": false },
+        { "text": "Using ASGs removes the need to associate NSGs with subnets or network interfaces", "correct": false }
+    ],
+    "explanation": "ASGs are logical, role-based groupings of **network interfaces** that you can reference in NSG rules instead of maintaining explicit IP lists. Two key facts:\n\n- **ASG-to-ASG rules are supported**: a single rule can say, for example, source = `asg-web`, destination = `asg-db`, port 1433 — expressing intent (\"web tier may reach the database tier on SQL\") that stays correct as VMs are added or removed from the groups.\n- **Single-VNet constraint**: all NICs placed in one ASG must be in the **same virtual network** (specifically, the VNet of the first NIC assigned defines it). Additionally, when a rule uses ASGs for both source and destination, both ASGs must exist in the same VNet.\n\n**Why not the other options:**\n- **NICs from peered VNets**: Peering does not lift the constraint — an ASG cannot span virtual networks, peered or not. Cross-VNet rules must fall back to IP prefixes or service tags.\n- **Associated with subnets**: ASG membership is configured on the **NIC's IP configuration**, not on subnets. (It is NSGs that can be associated with subnets or NICs.)\n- **Removes the need for NSGs**: ASGs are not a filtering mechanism by themselves — they are only *labels used inside NSG rules*. An NSG must still be created and associated with the subnet or NIC for any filtering to occur.",
+    "category": "Implement and Manage Virtual Networking"
+}

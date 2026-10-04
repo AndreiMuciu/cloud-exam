@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-14-ca-authentication-context",
+    "question": "Administrators in your tenant activate their eligible Microsoft Entra roles through Privileged Identity Management (PIM). Security requires that the *moment of activation* — not everyday sign-in — is protected by phishing-resistant MFA and only allowed from compliant devices, without imposing those controls on the administrators' routine, non-privileged work. What should you configure?",
+    "options": [
+        {
+            "text": "Create a Conditional Access authentication context, build a Conditional Access policy targeting that context which requires the phishing-resistant MFA authentication strength and a compliant device, and configure the PIM role settings to require the authentication context on activation",
+            "correct": true
+        },
+        {
+            "text": "Create a Conditional Access policy that targets all cloud apps for the administrators and requires phishing-resistant MFA and a compliant device at every sign-in",
+            "correct": false
+        },
+        {
+            "text": "Enable the 'Require multifactor authentication on activation' option in each role's PIM settings",
+            "correct": false
+        },
+        {
+            "text": "Configure Identity Protection to block all sign-ins by administrators when sign-in risk is anything other than low",
+            "correct": false
+        }
+    ],
+    "explanation": "**Authentication context** is the bridge between Conditional Access and PIM that makes *action-scoped* (rather than app-scoped) policy possible. You define a context (for example, `c1 – Privileged role activation`), create a Conditional Access policy that targets the context and demands the **phishing-resistant MFA authentication strength** plus a **compliant device**, and then set the PIM role's activation settings to require that authentication context. When an administrator activates the role, Entra ID enforces the context's policy at that moment — a step-up specific to activation. Routine sign-ins to mail or Teams never trigger the context, so daily work is untouched, exactly as required.\n\n**Why not the other options:**\n- **Policy on all cloud apps for administrators** — this imposes phishing-resistant MFA and device compliance on *every* sign-in, which the requirement explicitly avoids; it burdens routine work rather than protecting the sensitive action.\n- **PIM's built-in 'require MFA on activation'** — this only requires *some* MFA claim, which may be satisfied by an earlier, weaker MFA during the same session; it cannot demand a specific authentication strength (phishing-resistant) nor a compliant device. Authentication context exists precisely to attach full Conditional Access controls to activation.\n- **Identity Protection risk block** — risk policies react to *detected* risk signals; they neither guarantee phishing-resistant credentials nor check device compliance, and blocking on any non-low risk is an availability hazard unrelated to the activation-hardening requirement.",
+    "category": "Manage identity, access, and governance"
+}

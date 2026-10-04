@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-04-birchstead-azure-sql-database",
+    "question": "Birchstead Mutual's development team needs a relational database for the brand-new, cloud-native claims-tracking application. The app needs only a single database, uses no instance-level SQL Server features, and the team wants the lowest possible administrative effort.\n\nWhich Azure service should the team choose?",
+    "options": [
+        {
+            "text": "Azure SQL Database",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Managed Instance",
+            "correct": false
+        },
+        {
+            "text": "SQL Server on an Azure virtual machine",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for NoSQL",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure SQL Database** is the right fit for a new, cloud-native application that needs a **single relational database** with the **least management overhead**. It is the most fully managed member of the Azure SQL family: Microsoft handles the OS, instance, patching, backups, and high availability, and you provision just the database itself. Because the app uses no instance-scoped features (no SQL Server Agent, no cross-database queries), nothing pushes the team toward a heavier option.\n\n**Why not the other options:**\n- **Azure SQL Managed Instance** — Exists to give near-complete **instance-level compatibility** (SQL Server Agent, cross-database queries) for *migrating existing* SQL Server workloads. Birchstead's app is new and needs none of that, so Managed Instance adds cost and complexity for no benefit.\n- **SQL Server on an Azure virtual machine** — An IaaS option in which the customer manages the operating system and SQL Server installation — the *maximum* administrative effort, the opposite of the requirement.\n- **Azure Cosmos DB for NoSQL** — A non-relational document database. The claims app is explicitly designed around a relational schema (Policies and Claims tables with enforced relationships).",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_birchstead_mutual.json"
+}

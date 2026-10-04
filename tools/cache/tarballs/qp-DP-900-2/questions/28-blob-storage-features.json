@@ -1,0 +1,29 @@
+{
+    "id": "dp900-s2-28-blob-storage-features",
+    "type": "multi",
+    "question": "Which three statements about Azure Blob Storage are true? (Choose three.)",
+    "options": [
+        {
+            "text": "It is an object store designed to hold massive amounts of unstructured data such as documents, images, and video",
+            "correct": true
+        },
+        {
+            "text": "Blobs are organized into containers within a storage account",
+            "correct": true
+        },
+        {
+            "text": "Each blob can be assigned an access tier that balances storage cost against retrieval cost and latency",
+            "correct": true
+        },
+        {
+            "text": "Blob Storage validates every uploaded file against a schema defined on the container",
+            "correct": false
+        },
+        {
+            "text": "Blobs can be accessed only from applications running inside the same virtual network",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Blob Storage is Azure's core **object storage** service:\n\n- **Unstructured data at massive scale** — Blobs are just binary objects; the service imposes no structure, which makes it ideal for documents, media files, backups, and data-lake raw zones.\n- **Containers within a storage account** — The hierarchy is *storage account → container → blob*. Containers group blobs and are the level at which anonymous public access can be configured.\n- **Access tiers per blob** — Hot, cool, cold, and archive tiers let you trade lower storage cost for higher retrieval cost/latency as data is accessed less often, and lifecycle policies can move blobs between tiers automatically.\n\n**Why not the other options:**\n- **Blob Storage validates every uploaded file against a schema defined on the container** — Blob Storage is **schemaless**; it stores whatever bytes you upload without inspecting or validating their structure. Schema enforcement is a database concept, not an object-store concept.\n- **Blobs can be accessed only from inside the same virtual network** — By default blobs are reachable over **HTTP/HTTPS from anywhere**, subject to authorization (keys, shared access signatures, or Microsoft Entra ID). Network restriction to a virtual network is an *optional* hardening choice, not a built-in limitation.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

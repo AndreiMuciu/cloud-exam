@@ -1,0 +1,24 @@
+{
+    "id": "dp900-26-blob-access-tiers",
+    "question": "A company stores monthly compliance reports in Azure Blob Storage. The reports are read frequently during the first few days after upload, then rarely accessed afterward — but when an auditor does request an older report, it must be readable immediately, without any restore delay. The reports are kept for several years.\n\nWhich access tier is the most cost-effective choice for the older, rarely accessed reports?",
+    "options": [
+        {
+            "text": "Hot tier",
+            "correct": false
+        },
+        {
+            "text": "Cool tier",
+            "correct": true
+        },
+        {
+            "text": "Archive tier",
+            "correct": false
+        },
+        {
+            "text": "Premium block blob storage",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Cool tier** is designed for data that is infrequently accessed but must stay **online** — blobs in the Cool tier can be read immediately, just like Hot, while storage costs are significantly lower (in exchange for higher per-access charges, which is fine for rarely read data).\n\n**Why not the other options:**\n- **Hot tier** — Optimized for frequently accessed data. It offers the lowest access costs but the highest storage cost, so paying Hot storage prices for reports that are rarely read wastes money.\n- **Archive tier** — The cheapest storage, but it is an **offline** tier: a blob must first be rehydrated (a process that can take hours) before it can be read. That violates the requirement that auditors can read reports immediately.\n- **Premium block blob storage** — A high-performance, SSD-backed option for workloads needing very low latency and high transaction rates. It is the most expensive choice and the opposite of what rarely accessed archival data needs.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

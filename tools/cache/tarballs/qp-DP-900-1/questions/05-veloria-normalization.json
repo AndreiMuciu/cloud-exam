@@ -1,0 +1,25 @@
+{
+    "id": "dp900-05-veloria-normalization",
+    "question": "At Veloria Health Systems, patient contact details are duplicated in the scheduling, billing, and clinical tables. When a patient's phone number changes, updates in one table are often missed in the others.\n\nWhich database design technique should Veloria apply to fix this problem?",
+    "options": [
+        {
+            "text": "Denormalize the tables to combine all patient data into one wide table",
+            "correct": false
+        },
+        {
+            "text": "Normalize the schema so contact details are stored once and referenced by key",
+            "correct": true
+        },
+        {
+            "text": "Add indexes to the duplicated contact columns",
+            "correct": false
+        },
+        {
+            "text": "Convert the patient tables to JSON documents",
+            "correct": false
+        }
+    ],
+    "explanation": "**Normalization** is the relational design process of organizing data so that each fact is stored exactly once. Moving patient contact details into a single patient table and having scheduling, billing, and clinical tables reference it by a key (foreign key) eliminates the duplication and the update anomalies — a phone number change is made in one place and is immediately consistent everywhere.\n\n**Why not the other options:**\n- **Denormalizing into one wide table** — Goes the wrong direction: it intentionally introduces or keeps redundancy. Denormalization is sometimes used in analytical stores for read performance, not to fix update anomalies in a transactional system.\n- **Adding indexes** — Indexes speed up queries; they do nothing to remove duplicated data or keep copies in sync.\n- **Converting to JSON documents** — Changes the storage format but the contact details would still be duplicated across documents, so the same inconsistency problem remains.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_veloria_health.json"
+}

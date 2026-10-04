@@ -1,0 +1,21 @@
+{
+    "id": "sc900-s2-21-pim-activation-ordering",
+    "type": "ordering",
+    "question": "An organization uses Microsoft Entra Privileged Identity Management (PIM) with approval required for the Exchange Administrator role. Arrange the steps of a just-in-time role activation in the correct order, from first to last.",
+    "items": [
+        "The user requests activation of the role, completing MFA and providing a business justification",
+        "An administrator assigns the user as eligible for the Exchange Administrator role",
+        "The role assignment expires automatically at the end of the activation window",
+        "A designated approver reviews the request and approves it",
+        "The user receives the role's privileges for the configured, time-limited duration"
+    ],
+    "correctOrder": [
+        "An administrator assigns the user as eligible for the Exchange Administrator role",
+        "The user requests activation of the role, completing MFA and providing a business justification",
+        "A designated approver reviews the request and approves it",
+        "The user receives the role's privileges for the configured, time-limited duration",
+        "The role assignment expires automatically at the end of the activation window"
+    ],
+    "explanation": "PIM replaces standing privilege with a **just-in-time activation flow**:\n\n1. **Eligible assignment** — An administrator first makes the user *eligible* for the role. Eligibility grants no privileges by itself; it only entitles the user to request activation.\n2. **Activation request** — When the user actually needs the role, they request activation. PIM can require multifactor authentication and a business justification at this step, creating accountability for every elevation.\n3. **Approval** — Because this role is configured to require approval, a designated approver must review and approve the request before anything changes. (Approval is optional per role; when not required, activation proceeds directly.)\n4. **Time-limited privileges** — Only after approval does the user hold the role's privileges, and only for the configured maximum duration.\n5. **Automatic expiration** — When the activation window ends, the privileges are removed automatically — no one has to remember to revoke them, which is what eliminates standing privileged access.\n\nEvery step is logged, giving auditors a complete trail of who requested, who approved, and how long the privilege existed.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

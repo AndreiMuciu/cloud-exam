@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-storage-object-replication",
+    "type": "single",
+    "question": "Saltmere Hospitality's compliance team wants scanned booking documents in **stsaltmeredocs** (StorageV2, West Europe) copied asynchronously to **stsaltmereuk** (StorageV2, UK South) by using an object replication policy.\n\nThe compliance team asks what must be enabled on the two storage accounts **before** the replication policy can be created.\n\nWhat should you tell them?",
+    "options": [
+        { "text": "Blob versioning must be enabled on both accounts, and the change feed must be enabled on stsaltmeredocs", "correct": true },
+        { "text": "The change feed must be enabled on both accounts, and blob versioning must be enabled on stsaltmereuk only", "correct": false },
+        { "text": "Blob soft delete with an identical retention period must be enabled on both accounts", "correct": false },
+        { "text": "Geo-redundant storage (GRS) must be configured on stsaltmeredocs", "correct": false }
+    ],
+    "explanation": "Object replication has two hard prerequisites: **blob versioning enabled on both the source and destination accounts**, and the **change feed enabled on the source account** (stsaltmeredocs). Azure Storage reads the source account's change feed to discover write and delete operations, and it relies on versioning on both sides to replicate the current version and prior versions correctly. Both accounts must also be general-purpose v2 or premium block blob accounts — which StorageV2 satisfies — and object replication copies **block blobs only**, which suits the scanned document workload.\n\n**Why not the other options:**\n- **Change feed on both / versioning on destination only**: This reverses the requirements. The change feed is needed only on the **source** (it drives replication), while versioning is required on **both** accounts, not just the destination.\n- **Soft delete on both accounts**: Blob soft delete is an accidental-deletion safeguard; it is not a prerequisite for object replication and plays no role in the replication engine.\n- **GRS on the source**: GRS replicates to the fixed Azure *paired region* into the same account's secondary — you cannot choose UK South or a different target account. Object replication is precisely the feature for account-to-account, region-of-your-choice asynchronous copy, and it does not require any particular redundancy SKU.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_saltmere.json"
+}

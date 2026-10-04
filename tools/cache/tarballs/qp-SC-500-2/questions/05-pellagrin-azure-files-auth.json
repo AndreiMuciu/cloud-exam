@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-05-pellagrin-azure-files-auth",
+    "question": "You are planning the Azure Files migration for Pellagrin Insurance. Users on AD DS domain-joined Windows devices must access the shares with their existing AD DS identities, existing NTFS ACLs must keep working at file and folder level, and storage account keys must not be given to users. What should you do?",
+    "options": [
+        {
+            "text": "Enable on-premises Active Directory Domain Services authentication on the storage account, sync the AD DS users to Microsoft Entra ID, assign share-level Azure RBAC roles (such as Storage File Data SMB Share Contributor), and preserve the migrated NTFS ACLs for file and folder-level authorization",
+            "correct": true
+        },
+        {
+            "text": "Mount the shares on each device by using the storage account key stored in a login script, and re-create the permissions as Azure RBAC role assignments per folder",
+            "correct": false
+        },
+        {
+            "text": "Generate a user delegation SAS for each department and embed it in the mapped-drive path, renewing it monthly",
+            "correct": false
+        },
+        {
+            "text": "Migrate the file shares to Azure Blob Storage with hierarchical namespace and grant users Storage Blob Data Reader",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Files supports **identity-based authentication over SMB**. For workforce users on **AD DS domain-joined** devices, you enable **AD DS authentication**: the storage account is registered in the domain, users are synchronized to Microsoft Entra ID, and access is evaluated at two levels — **share-level** permissions via Azure RBAC roles (e.g., Storage File Data SMB Share Reader/Contributor) and **file/directory-level** permissions via **NTFS ACLs**, which are preserved when you migrate with ACL-aware tooling (robocopy /copyall, Azure File Sync). Users authenticate with Kerberos using their existing identities; no account key is involved.\n\n**Why not the other options:**\n- **Account key in a login script** — directly violates the requirement not to distribute account keys; the key grants full access to the entire account and bypasses all per-user authorization. Azure RBAC also cannot express per-folder permissions inside a share.\n- **User delegation SAS** — user delegation SAS applies to **Blob** storage, not Azure Files SMB shares; even a service SAS for Files would be a shared bearer credential, not per-user identity authentication with NTFS enforcement.\n- **Migrate to Blob Storage** — blobs do not enforce NTFS ACLs or provide SMB drive-mapping semantics users depend on; this discards the requirement to keep existing ACLs working.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_pellagrin_insurance.json"
+}

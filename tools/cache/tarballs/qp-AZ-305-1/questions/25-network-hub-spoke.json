@@ -1,0 +1,24 @@
+{
+    "id": "az305-network-hub-spoke",
+    "question": "You are designing the network architecture for a company that has multiple Azure subscriptions. The company has the following requirements:\n\n- Centralized connectivity to an on-premises datacenter via ExpressRoute\n- Network traffic inspection between spoke virtual networks\n- Each business unit must have isolated virtual networks that can communicate through a central point\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Deploy a hub-and-spoke topology with Azure Firewall in the hub VNet",
+            "correct": true
+        },
+        {
+            "text": "Deploy a mesh VNet peering topology where every VNet is peered with every other VNet",
+            "correct": false
+        },
+        {
+            "text": "Deploy all workloads in a single large VNet with subnet-level NSGs for isolation",
+            "correct": false
+        },
+        {
+            "text": "Deploy Azure Virtual WAN with a Basic SKU hub",
+            "correct": false
+        }
+    ],
+    "explanation": "A **hub-and-spoke topology** with **Azure Firewall** meets all three requirements:\n\n1. **Centralized connectivity** — The hub VNet hosts the ExpressRoute gateway, providing a single connection point to on-premises\n2. **Traffic inspection** — Azure Firewall in the hub inspects and controls traffic flowing between spokes via User Defined Routes (UDRs)\n3. **Isolation with connectivity** — Each spoke VNet is isolated but communicates through the hub, providing business unit separation\n\n**Why not the other options:**\n- **Mesh peering** — Does not support centralized traffic inspection between VNets. Each VNet would need its own firewall, which is costly and hard to manage\n- **Single large VNet** — Does not provide true network isolation between business units. NSGs filter traffic but don't provide separate address spaces or routing boundaries\n- **Virtual WAN Basic SKU** — Only supports site-to-site VPN, not ExpressRoute. The Standard SKU would support ExpressRoute but wasn't offered",
+    "category": "Design Infrastructure Solutions"
+}

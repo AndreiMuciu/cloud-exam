@@ -1,0 +1,24 @@
+{
+    "id": "az800-25-fsmo-placement",
+    "question": "You are managing a multi-domain Active Directory forest. You need to ensure that you can perform schema updates and add/remove domains from the forest. On which domain controller(s) must you perform these actions respectively?",
+    "options": [
+        {
+            "text": "Any Domain Controller in the forest",
+            "correct": false
+        },
+        {
+            "text": "Schema Master and Domain Naming Master",
+            "correct": true
+        },
+        {
+            "text": "PDC Emulator and Infrastructure Master",
+            "correct": false
+        },
+        {
+            "text": "RID Master and Schema Master",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Schema Master** and **Domain Naming Master** are forest-wide FSMO roles. Schema updates must happen on the Schema Master, and adding/removing domains must happen on the Domain Naming Master.\n\n**Why not the other options:**\n- **PDC Emulator / Infrastructure / RID** — These are domain-wide roles (though PDC and RID are critical for their respective domains, they don't handle forest-wide structure/schema changes).",
+    "category": "Deploy and manage AD DS in on-premises and cloud environments"
+}

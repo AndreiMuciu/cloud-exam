@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-06-tessendale-alter-table",
+    "question": "Student services needs a new `PreferredName` column added to the existing `Students` table. The table already contains thousands of rows, and all existing data must be preserved exactly as it is.\n\nWhich SQL statement should the database team run?",
+    "options": [
+        {
+            "text": "ALTER TABLE, to add the column to the existing table definition",
+            "correct": true
+        },
+        {
+            "text": "UPDATE, to write the new column into every row",
+            "correct": false
+        },
+        {
+            "text": "CREATE TABLE, to build a new table and reload the data into it",
+            "correct": false
+        },
+        {
+            "text": "INSERT, to add the new column values as additional rows",
+            "correct": false
+        }
+    ],
+    "explanation": "**ALTER TABLE** is the Data Definition Language (DDL) statement that changes an existing table's structure. `ALTER TABLE Students ADD PreferredName ...` adds the new column to the definition in place — the thousands of existing rows are untouched and simply gain the new column (typically NULL or a default value until populated).\n\n**Why not the other options:**\n- **UPDATE** — UPDATE is a DML statement that changes the values in columns that already exist. It cannot add a column to a table's definition.\n- **CREATE TABLE** — Creating a new table and reloading the data would achieve the end state but is unnecessary, riskier, and disruptive; ALTER TABLE modifies the existing table directly without a rebuild.\n- **INSERT** — INSERT adds new rows, not new columns. Modeling a column as extra rows would corrupt the table's design.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_tessendale_college.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az700-core-dns-private-resolver",
+    "question": "Verimark Logistics needs on-premises servers to resolve Azure private DNS zone names, and needs Azure VMs to resolve on-premises DNS names via conditional forwarding — without deploying and patching custom DNS forwarder VMs in Azure.\n\nWhich service should Verimark deploy?",
+    "options": [
+        {
+            "text": "Azure DNS Private Resolver, using an inbound endpoint for on-premises-to-Azure lookups and an outbound endpoint with forwarding rules for Azure-to-on-premises lookups",
+            "correct": true
+        },
+        {
+            "text": "A public Azure DNS zone shared between the on-premises network and Azure",
+            "correct": false
+        },
+        {
+            "text": "Service endpoints configured on every subnet that needs cross-network name resolution",
+            "correct": false
+        },
+        {
+            "text": "Azure Route Server, configured to exchange DNS records over BGP",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure DNS Private Resolver** provides a managed, highly available way to resolve DNS names bidirectionally between on-premises networks and Azure private DNS zones, without operating custom DNS forwarder VMs. An **inbound endpoint** accepts DNS queries from on-premises (over the existing VPN/ExpressRoute connection) and resolves Azure private DNS zone names. An **outbound endpoint**, together with a DNS forwarding ruleset, forwards queries for on-premises domains from Azure VMs to the on-premises DNS servers.\n\n**Why not the other options:**\n- **A shared public DNS zone** — Public DNS zones host internet-resolvable records; private zone names and on-premises internal names generally shouldn't be published there, and a public zone doesn't provide conditional forwarding either direction.\n- **Service endpoints** — Extend a subnet's identity to reach specific Azure PaaS services over the Azure backbone; they have no role in DNS name resolution between networks.\n- **Azure Route Server** — Exchanges BGP **routes** with network virtual appliances; it has no DNS resolution capability at all.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

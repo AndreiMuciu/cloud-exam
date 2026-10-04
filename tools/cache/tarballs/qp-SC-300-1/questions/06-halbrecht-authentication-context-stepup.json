@@ -1,0 +1,25 @@
+{
+    "id": "sc300-halbrecht-authentication-context-stepup",
+    "question": "Halbrecht Financial Group's new online loan-approval application must require strong step-up authentication only at the moment a loan officer approves a loan over $250,000. Browsing the rest of the application must not trigger the extra requirement.\n\nHow should you design this in Conditional Access?",
+    "options": [
+        {
+            "text": "Define a Microsoft Entra authentication context, tag it to the loan-approval action inside the application, and target that authentication context (instead of the whole app) in a Conditional Access policy that requires a stronger authentication strength",
+            "correct": true
+        },
+        {
+            "text": "Create a Conditional Access policy targeting the entire loan-approval application and require multifactor authentication for every sign-in to it",
+            "correct": false
+        },
+        {
+            "text": "Enable continuous access evaluation for the loan-approval application so risky sessions are revoked after the approval is submitted",
+            "correct": false
+        },
+        {
+            "text": "Configure a sign-in frequency of 10 minutes on the application so users are periodically prompted throughout their session",
+            "correct": false
+        }
+    ],
+    "explanation": "**Authentication context** lets a specific sensitive operation inside an application — not just the application as a whole — be tagged and targeted independently in Conditional Access. The application developer (or an admin, for supported apps) associates the loan-approval action with an authentication context value; a Conditional Access policy then targets that authentication context and requires a stronger authentication strength (or other controls) only when that specific action is invoked, leaving ordinary browsing unaffected.\n\n**Why not the other options:**\n- **Requiring MFA for the whole app** — this forces step-up on every use of the application, not just the $250,000 approval action, contradicting the requirement to leave general browsing unaffected.\n- **Continuous access evaluation** — CAE reacts to critical directory events (disablement, risk, revocation) and policy changes; it is not a mechanism for gating a specific in-app business action with step-up authentication.\n- **A 10-minute sign-in frequency** — this re-prompts periodically regardless of what the user is doing, which is both broader than needed and not tied to the specific approval action.",
+    "category": "Implement authentication and access management",
+    "caseStudy": "scenarios/case_study_halbrecht.json"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_shieldwall_networks",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**ShieldWall Networks** provides managed firewall services for financial institutions. They are building a multi-tier application in Azure that requires strict network isolation.\n\n**Network Architecture:**\n- **DMZ Tier**: Contains public-facing jump servers.\n- **App Tier**: Contains internal line-of-business applications.\n- **Data Tier**: Contains Azure SQL Databases with private endpoints."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "- All inbound traffic from the internet must be inspected by a centralized Azure Firewall before reaching any backend resource.\n- Inbound traffic to the App Tier must only be allowed from the DMZ Tier using logical grouping of servers.\n- Direct internet access from the Data Tier must be blocked using a 'zero-trust' approach, and all SQL database connections must resolve through private DNS."
+        }
+    ]
+}

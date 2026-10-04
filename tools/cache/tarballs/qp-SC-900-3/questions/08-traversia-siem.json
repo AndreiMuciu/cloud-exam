@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-08-traversia-siem",
+    "question": "Traversia Rail's logs from Azure, AWS, station networks, and third-party badge readers sit in separate consoles today. The head of security wants a platform that aggregates this log and event data at scale, correlates it, and applies analytics to detect threats that are only visible when evidence from multiple sources is combined.\n\nWhich class of security tool matches this requirement?",
+    "options": [
+        {
+            "text": "Security information and event management (SIEM)",
+            "correct": true
+        },
+        {
+            "text": "Security orchestration, automation, and response (SOAR)",
+            "correct": false
+        },
+        {
+            "text": "Cloud security posture management (CSPM)",
+            "correct": false
+        },
+        {
+            "text": "Extended detection and response (XDR)",
+            "correct": false
+        }
+    ],
+    "explanation": "A **SIEM** (security information and event management) system **collects log and event data from across an organization's entire estate — cloud platforms, on-premises infrastructure, and third-party sources — into one place, then correlates and analyzes it to detect threats**. The defining traits in the requirement are *broad log aggregation from any source* and *analytics-driven detection over the combined data*, which is exactly what a SIEM (such as Microsoft Sentinel) provides.\n\n**Why not the other options:**\n- **SOAR** — A SOAR capability *acts on* alerts: it orchestrates and automates response tasks such as isolating a resource or opening a ticket. Traversia's stated need is collection, correlation, and detection — the input side — not automated response.\n- **CSPM** — Cloud security posture management assesses resource *configurations* against standards and recommends hardening. It works on configuration state, not on aggregating and correlating log/event streams.\n- **XDR** — Extended detection and response delivers integrated, product-native detection and response across specific workloads (endpoints, email, identities, apps). It does not serve as a general-purpose ingestion platform for arbitrary third-party log sources such as badge readers; that breadth is the hallmark of a SIEM.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_traversia_rail.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-09-brindlecote-p2s-vpn",
+    "question": "You need to replace Brindlecote Manufacturing's legacy SSL VPN for field engineers with a point-to-site VPN that authenticates individual Microsoft Entra ID accounts, enforces MFA through Conditional Access, and allows immediate central revocation for a departing engineer. How should you configure the VPN?",
+    "options": [
+        {
+            "text": "Deploy an Azure VPN gateway with OpenVPN and Microsoft Entra ID authentication, have engineers connect with the Azure VPN Client, and target the Azure VPN enterprise application with a Conditional Access policy that requires multifactor authentication",
+            "correct": true
+        },
+        {
+            "text": "Deploy the VPN gateway with certificate authentication, generate one client certificate from the root, and distribute it to all field engineers",
+            "correct": false
+        },
+        {
+            "text": "Deploy the VPN gateway with RADIUS authentication against a local database on the appliance and rotate the shared password quarterly",
+            "correct": false
+        },
+        {
+            "text": "Keep the SSL VPN appliance and place Azure Bastion in front of it to add Microsoft Entra ID authentication",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure VPN Gateway supports **Microsoft Entra ID authentication for point-to-site** connections over the **OpenVPN** protocol, used with the **Azure VPN Client**. Because users authenticate with their own Entra ID accounts against the **Azure VPN** enterprise application, you can attach a **Conditional Access policy** to that application to require MFA (or device compliance). Revocation is immediate and central: disable the user account or revoke their sessions, and no shared material needs redistributing.\n\n**Why not the other options:**\n- **One shared client certificate** — recreates the shared-credential problem: no individual identity, no MFA, and revoking the certificate cuts off *every* engineer at once. (Even per-user certificates would lack Conditional Access/MFA integration.)\n- **RADIUS with a local password database** — local appliance accounts are not Entra ID identities, cannot be targeted by Conditional Access, and a rotated shared password is exactly the anti-pattern being retired.\n- **Azure Bastion in front of the SSL VPN** — Bastion provides browser-based RDP/SSH to Azure VMs; it is not a VPN concentrator and cannot add Entra ID authentication to a third-party appliance.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_brindlecote_manufacturing.json"
+}

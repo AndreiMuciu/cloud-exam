@@ -1,0 +1,25 @@
+{
+    "id": "az900-02-pinnacle-shared-responsibility",
+    "question": "Pinnacle Retail Group is concerned about security responsibilities in Azure. Following the **Shared Responsibility Model**, who is responsible for the physical security of the data center hardware when using Azure Virtual Machines (IaaS)?",
+    "options": [
+        {
+            "text": "Pinnacle Retail Group only",
+            "correct": false
+        },
+        {
+            "text": "Microsoft only",
+            "correct": true
+        },
+        {
+            "text": "Both Pinnacle Retail Group and Microsoft equally",
+            "correct": false
+        },
+        {
+            "text": "The third-party security vendor",
+            "correct": false
+        }
+    ],
+    "explanation": "In the **Shared Responsibility Model**, Microsoft is *always* responsible for the physical security of the Azure data centers, including the hosts, networking, and physical building, regardless of the service type (IaaS, PaaS, or SaaS).\n\n**Why not the other options:**\n- **Pinnacle Retail Group only** — The customer is never responsible for physical security in the public cloud.\n- **Both equally** — While security is shared, *physical* security is a specific task handled entirely by the cloud provider.\n- **Third-party vendor** — While Microsoft may use vendors, the responsibility lies with Microsoft as the cloud provider.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_pinnacle_retail.json"
+}

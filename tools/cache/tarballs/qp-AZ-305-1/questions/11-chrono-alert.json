@@ -1,0 +1,25 @@
+{
+    "id": "gen-15-policy-compliance-alerts",
+    "question": "You need to ensure that the security team is notified in near real-time whenever a resource becomes non-compliant with Azure Policy. What is the most efficient way to achieve this?",
+    "options": [
+        {
+            "text": "Configure an Azure Event Grid system topic for Microsoft.PolicyInsights events and route state change events to an Action Group",
+            "correct": true
+        },
+        {
+            "text": "Schedule a monthly Log Analytics query to find non-compliant resources and email the results",
+            "correct": false
+        },
+        {
+            "text": "Create a custom Azure Function that periodically polls the Policy REST API",
+            "correct": false
+        },
+        {
+            "text": "Configure an Azure Monitor alert rule based on Activity Log administrative operations for policy assignments",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Azure Event Grid system topic for Microsoft.PolicyInsights events**.\n\n- Azure Policy publishes resource compliance state change events (`Microsoft.PolicyInsights.PolicyStateChanged`, `PolicyStateCreated`, `PolicyStateDeleted`) through **Azure Event Grid**. By subscribing to these events and routing them to an Action Group, you can trigger email, SMS, or webhook notifications in near real-time.\n- The **Activity Log** records administrative operations (e.g., policy assignment creation/deletion) but does not contain per-resource compliance state change events, so it cannot be used to detect when a specific resource becomes non-compliant.\n- Scheduling a monthly query is not near real-time.\n- Custom polling with a Function adds unnecessary complexity and latency compared to the built-in Event Grid integration.",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_monitoring_governance.json"
+}

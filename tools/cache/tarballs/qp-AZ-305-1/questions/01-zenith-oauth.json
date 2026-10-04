@@ -1,0 +1,20 @@
+{
+    "id": "gen-08-oauth-flow-automated",
+    "type": "ordering",
+    "question": "The ZenithWorks reporting application needs to authenticate using the **Client Credentials flow** to generate reports automatically. Arrange the steps to configure and use this flow in the correct order.",
+    "items": [
+        "Application requests access token from the Microsoft Entra ID token endpoint",
+        "Configure the application credentials (client secret or certificate) and grant API permissions with admin consent",
+        "Register the application in Microsoft Entra ID",
+        "Application uses the access token to call the Resource Manager API"
+    ],
+    "correctOrder": [
+        "Register the application in Microsoft Entra ID",
+        "Configure the application credentials (client secret or certificate) and grant API permissions with admin consent",
+        "Application requests access token from the Microsoft Entra ID token endpoint",
+        "Application uses the access token to call the Resource Manager API"
+    ],
+    "explanation": "The correct order for implementing the **Client Credentials flow** is:\n\n1. **Register the application**: First, you must create an App Registration in Microsoft Entra ID to represent the reporting tool.\n2. **Configure credentials and permissions**: Generate a client secret (or upload a certificate) and assign the necessary Application permissions with admin consent. These two sub-tasks are independent and can be done in either order, but both must be completed before requesting a token.\n3. **Request token**: The application authenticates by sending its ID and secret to the `/token` endpoint.\n4. **Call API**: Finally, the app uses the returned access token to authenticate requests to the ARM API.",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_arm_reporting.json"
+}

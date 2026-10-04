@@ -1,0 +1,24 @@
+{
+    "id": "az500-27-sql-dynamic-masking",
+    "question": "You need to ensure that non-privileged users cannot see the full credit card numbers in an Azure SQL Database table, while still allowing the application to process the data. Which feature should you implement?",
+    "options": [
+        {
+            "text": "Transparent Data Encryption (TDE)",
+            "correct": false
+        },
+        {
+            "text": "Dynamic Data Masking (DDM)",
+            "correct": true
+        },
+        {
+            "text": "Always Encrypted",
+            "correct": false
+        },
+        {
+            "text": "Row-Level Security (RLS)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Dynamic Data Masking (DDM)** limits sensitive data exposure by masking it to non-privileged users at the query result layer. For example, it can show `XXXX-XXXX-XXXX-1234` instead of the full number.\n\n**Why not the other options:**\n- **TDE** — Encrypts the data *on disk* (at rest) but doesn't affect what the user sees in a query result.\n- **Always Encrypted** — Encrypts the data in the application so that even the database engine cannot see it in plain text.\n- **RLS** — Restricts which *rows* a user can see, not which *columns* or how the data in a column is displayed.",
+    "category": "Secure compute, storage, and databases"
+}

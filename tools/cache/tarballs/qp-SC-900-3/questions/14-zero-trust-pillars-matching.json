@@ -1,0 +1,20 @@
+{
+    "id": "sc900-s3-14-zero-trust-pillars-matching",
+    "question": "The Zero Trust model is applied across six foundational pillars that work together end to end. Match each Zero Trust pillar to the control that belongs to it.",
+    "type": "matching",
+    "sourceItems": [
+        "Identities",
+        "Devices",
+        "Networks",
+        "Data"
+    ],
+    "targetSlots": [
+        "Verify each user, service, or device with strong authentication and enforce least privilege access at sign-in",
+        "Monitor endpoints such as laptops, phones, and IoT hardware for health and compliance before they touch corporate resources",
+        "Segment the environment into smaller zones, use real-time threat protection, and encrypt traffic end to end",
+        "Classify, label, and encrypt sensitive content so protection travels with it wherever it goes"
+    ],
+    "correctMapping": [0, 1, 2, 3],
+    "explanation": "The Zero Trust model extends across six foundational pillars — **identities, devices, applications, data, infrastructure, and networks** — each of which must be secured because an attack can enter through any of them.\n\n- **Identities** — Whether users, services, or devices, every identity must be **verified with strong authentication** and granted only **least privilege** access when it requests a resource.\n- **Devices** — Endpoints create a large attack surface as data flows to laptops, phones, and IoT hardware, so device **health and compliance** must be monitored and enforced.\n- **Networks** — Networks should be **segmented** (including deeper in-network micro-segmentation), protected with real-time threat protection, and use **end-to-end encryption** with monitoring and analytics.\n- **Data** — Data should be **classified, labeled, and encrypted** based on its attributes so that protection stays with the data even when it leaves devices, apps, infrastructure, and networks the organization controls.\n\n**Why not the other pairings:** The identity control is the only one about authentication and privilege at sign-in; device monitoring is specific to endpoint health, not traffic; segmentation and traffic encryption operate on the network fabric rather than on stored content; and classification/labeling attaches protection to content itself rather than to the path it travels — so each control fits exactly one pillar.",
+    "category": "Describe the concepts of security, compliance, and identity"
+}

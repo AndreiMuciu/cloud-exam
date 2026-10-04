@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-bcdr-cosmos",
+    "question": "A global loyalty-points platform uses Azure Cosmos DB for NoSQL. The business continuity requirement states that the platform must continue to accept both reads and writes with no manual intervention and near-zero downtime, even if an entire Azure region hosting the database goes down.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Configure the account with multi-region writes across at least two regions",
+            "correct": true
+        },
+        {
+            "text": "Configure a single write region with service-managed failover enabled",
+            "correct": false
+        },
+        {
+            "text": "Enable continuous backup with point-in-time restore",
+            "correct": false
+        },
+        {
+            "text": "Deploy a second Cosmos DB account in another region and synchronize it with a scheduled Azure Data Factory pipeline",
+            "correct": false
+        }
+    ],
+    "explanation": "**Multi-region writes** give Cosmos DB active-active behavior, which is what \"reads *and writes* continue with near-zero downtime\" demands:\n\n- Every replicated region is a write region. If one region fails, clients' SDKs automatically route writes to the next available region — there is **no failover step at all**, so write availability approaches 99.999% per the SLA\n- Reads were already served locally from every region\n- The trade-off (conflict resolution policies for concurrent cross-region writes) is acceptable for a loyalty-points workload and is handled by last-writer-wins or custom resolution\n\n**Why not the other options:**\n- **Single write region + service-managed failover** — Reads stay available, but when the write region fails, writes are unavailable **until the failover completes** (typically minutes, and service-managed failover requires the platform to detect and act). \"Near-zero downtime for writes with no intervention\" is not met — this is the classic active-passive compromise\n- **Continuous backup / point-in-time restore** — A data *recovery* feature for corruption or accidental deletion. Restoring creates a new account over minutes-to-hours; it does nothing for regional availability\n- **Second account synced by Data Factory** — A scheduled pipeline produces a lagging copy (RPO = pipeline interval), split-brain risk during outages, and a manual client cutover — strictly worse than the native replication Cosmos DB already provides",
+    "category": "Design Business Continuity Solutions"
+}

@@ -1,0 +1,23 @@
+{
+    "id": "az305-s3-bcdr-plan",
+    "type": "ordering",
+    "question": "You are leading the first structured business-continuity design effort for a company whose Azure estate has grown without formal recovery planning. Arrange the steps of the business-continuity planning process in the correct order.",
+    "items": [
+        "Identify the critical business processes and the applications and dependencies that support them",
+        "Perform a business impact analysis to quantify the cost of downtime and data loss for each process",
+        "Define RTO and RPO targets for each workload tier based on the business impact analysis",
+        "Select and implement the resiliency and recovery technologies that meet each tier's targets within budget",
+        "Document the recovery procedures as runbooks and assign operational responsibilities",
+        "Validate the plan with scheduled disaster recovery drills and update it after every test and architecture change"
+    ],
+    "correctOrder": [
+        "Identify the critical business processes and the applications and dependencies that support them",
+        "Perform a business impact analysis to quantify the cost of downtime and data loss for each process",
+        "Define RTO and RPO targets for each workload tier based on the business impact analysis",
+        "Select and implement the resiliency and recovery technologies that meet each tier's targets within budget",
+        "Document the recovery procedures as runbooks and assign operational responsibilities",
+        "Validate the plan with scheduled disaster recovery drills and update it after every test and architecture change"
+    ],
+    "explanation": "Business-continuity design is a **business-first, technology-later** process; each step produces the input the next step needs:\n\n1. **Identify processes and dependencies** — You cannot protect what you have not mapped. Cataloging the business processes and the applications, data, and infrastructure they depend on defines the scope and reveals hidden coupling (a \"low-priority\" service that a critical process silently depends on inherits its criticality)\n2. **Business impact analysis (BIA)** — Quantifies what an hour of downtime or a day of lost data actually *costs* per process (revenue, regulatory, reputational). This turns \"everything is critical\" into a defensible ranking\n3. **Define RTO/RPO per tier** — The BIA numbers justify the targets: recovery investment should never exceed the cost of the outage it prevents. Setting targets *before* the BIA produces arbitrary numbers; setting them after makes them evidence-based\n4. **Select and implement technology** — Only now do patterns and services enter (zones, replication, backup, multi-region). The targets drive the choice — an RTO of minutes buys warm standby; an RTO of a day buys backup-restore — keeping each tier at the cheapest pattern that meets its numbers\n5. **Document runbooks and responsibilities** — A recovery capability that lives in one engineer's head fails at 3 a.m. Runbooks and named roles make recovery executable by whoever is on call\n6. **Drill and maintain** — Untested DR plans fail when first used. Scheduled drills validate the RTO/RPO in practice, and every test result and architecture change feeds back into the plan — the loop that keeps it alive\n\nReversing any pair breaks the chain: choosing technology before targets over- or under-spends; setting targets before the BIA makes them guesses; drilling before documenting tests nothing repeatable.",
+    "category": "Design Business Continuity Solutions"
+}

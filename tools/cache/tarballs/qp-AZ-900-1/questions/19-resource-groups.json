@@ -1,0 +1,24 @@
+{
+    "id": "az900-19-resource-groups",
+    "question": "Which of the following describes the primary purpose of an **Azure Resource Group**?",
+    "options": [
+        {
+            "text": "To serve as a logical container for resources deployed on Azure",
+            "correct": true
+        },
+        {
+            "text": "To provide a physical boundary for resource isolation",
+            "correct": false
+        },
+        {
+            "text": "To manage multiple Azure subscriptions under a single hierarchy",
+            "correct": false
+        },
+        {
+            "text": "To automatically replicate data to a secondary region",
+            "correct": false
+        }
+    ],
+    "explanation": "An **Azure Resource Group** is a logical container that holds related resources for an Azure solution. It allows you to manage resources that share the same lifecycle as a single unit.\n\n**Why not the other options:**\n- **Physical boundary** — Resource groups are logical, not physical; resources within a group can reside in different regions.\n- **Manage multiple subscriptions** — This is the purpose of **Management Groups**.\n- **Automatically replicate data** — This is a feature of storage or database services, not a function of a resource group.",
+    "category": "Describe Azure Architecture and Services"
+}

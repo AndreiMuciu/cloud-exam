@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-data-immutable",
+    "question": "A brokerage must retain trade confirmation documents in Azure Blob Storage for exactly five years in a write-once, read-many (WORM) state. During the retention period, no one — including storage account administrators and users with Owner rights — may modify or delete the documents, and the protection itself must be irreversible once applied.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Apply a time-based immutability retention policy on the container and lock the policy",
+            "correct": true
+        },
+        {
+            "text": "Apply a legal hold on the container and remove it after five years",
+            "correct": false
+        },
+        {
+            "text": "Enable blob soft delete with a five-year retention period on the storage account",
+            "correct": false
+        },
+        {
+            "text": "Create an Azure RBAC deny assignment that blocks delete and write operations on the container for five years",
+            "correct": false
+        }
+    ],
+    "explanation": "A **locked time-based retention policy** is Azure's WORM compliance feature and the only option meeting every stated condition:\n\n- While the policy is in effect, blobs **cannot be modified or deleted by anyone**, regardless of RBAC role — including account owners and Microsoft itself. This is enforced at the storage service layer, not the authorization layer\n- **Locking** the policy makes it irreversible: a locked policy's retention interval can be extended but never shortened or removed, satisfying \"the protection itself must be irreversible\"\n- The five-year interval is exactly what time-based retention expresses: each blob is protected for the interval from its creation, then becomes deletable — matching \"exactly five years\"\n\n**Why not the other options:**\n- **Legal hold** — Also provides WORM, but it is **indefinite by design**: it stays until someone with permission clears the hold. That means the protection is *reversible at any time* by an administrator (failing the requirement) and encodes no five-year term — holds are for litigation events of unknown duration, not fixed regulatory retention\n- **Soft delete** — A recycle-bin mechanism: blobs can still be deleted and modified; deleted data is merely recoverable during the retention window. Administrators can also permanently purge soft-deleted blobs — nothing about it is WORM\n- **RBAC deny assignment** — Deny assignments can currently only be created by Azure through managed constructs (like Blueprints/deployment stacks), and authorization-layer controls can be altered by sufficiently privileged administrators. Regulators require storage-level immutability precisely because access control is changeable",
+    "category": "Design Data Storage Solutions"
+}

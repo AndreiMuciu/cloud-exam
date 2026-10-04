@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-12-ludomara-hybrid-benefit",
+    "question": "Ludomara Studios owns Windows Server licenses with active Software Assurance from its on-premises build farm. The finance team wants to apply those existing licenses to reduce the cost of the Windows virtual machines the studio will run in Azure. Which Azure pricing benefit allows this?",
+    "options": [
+        {
+            "text": "Azure Hybrid Benefit",
+            "correct": true
+        },
+        {
+            "text": "Azure Spot Virtual Machines",
+            "correct": false
+        },
+        {
+            "text": "The Azure free account",
+            "correct": false
+        },
+        {
+            "text": "Locally redundant storage (LRS)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Hybrid Benefit** lets organizations apply their **existing Windows Server and SQL Server licenses with active Software Assurance** (or qualifying subscriptions) to Azure. Instead of paying the bundled license cost inside the VM's hourly rate, the studio pays only the base compute rate — a significant discount on every Windows VM it runs, and it can be combined with reservations for deeper savings.\n\n**Why not the other options:**\n- **Azure Spot Virtual Machines** — Discounted VMs that Azure can **evict whenever it needs the capacity back**; the discount comes from interruptibility, not from license reuse, and eviction risk is unrelated to the finance team's goal.\n- **The Azure free account** — Provides limited trial credits and free service tiers for newcomers; it is not a mechanism for applying owned Windows Server licenses to production VMs.\n- **Locally redundant storage (LRS)** — A storage replication option; it has nothing to do with virtual machine licensing costs.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_ludomara_studios.json"
+}

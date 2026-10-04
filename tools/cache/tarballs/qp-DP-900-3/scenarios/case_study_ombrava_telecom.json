@@ -1,0 +1,13 @@
+{
+    "id": "case_study_ombrava_telecom",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Ombrava Telecom** is a mobile network operator serving about six million subscribers in a single country. The company is moving its data platforms to Azure while complying with national telecommunications regulations.\n\n**Current Data Landscape:**\n- **Usage records**: an on-premises **Apache Cassandra** cluster stores call, messaging, and data-usage records partitioned by subscriber. Several internal applications read and write this cluster using existing Cassandra Query Language (CQL) drivers, and the operations team is tired of managing the cluster's nodes, repairs, and upgrades.\n- **Regulatory documents**: scanned regulatory filings and network-audit files are kept in an Azure storage account. National regulations require that this data **never leave the country's Azure region**, but it must still survive the loss of an entire datacenter.\n- **Legacy self-care portal**: the subscriber self-care portal stores its lookup data in **Azure Table Storage** using the Table Storage SDK. The portal is being expanded to serve roaming subscribers around the world, who currently experience slow lookups, and the team needs guaranteed throughput and single-digit-millisecond reads — without rewriting the portal's data-access code."
+        },
+        {
+            "title": "Business Goals",
+            "content": "Ombrava Telecom has defined the following requirements:\n\n- **Cassandra migration**: move the usage-record cluster to a fully managed Azure service. The existing applications and their CQL drivers must keep working with minimal changes, and the operations team must no longer manage cluster infrastructure.\n- **Regulatory storage resilience**: configure the regulatory storage account so the data is replicated **synchronously across separated facilities inside the home region only** — copying the data to a second region would violate the data-residency rules.\n- **Portal modernization**: give the self-care portal's key/attribute lookup data worldwide distribution close to roaming subscribers, dedicated reserved throughput, and low-latency reads, while continuing to use the Table API programming model the portal is built on."
+        }
+    ]
+}

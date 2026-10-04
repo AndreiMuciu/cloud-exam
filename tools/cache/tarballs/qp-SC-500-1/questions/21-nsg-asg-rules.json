@@ -1,0 +1,24 @@
+{
+    "id": "sc500-21-nsg-asg-rules",
+    "question": "A three-tier application (web, app, database) runs on VMs in one virtual network. VMs are frequently redeployed with new IP addresses. You must enforce that only web-tier VMs reach app-tier VMs on port 443, and only app-tier VMs reach database VMs on port 1433 — **without hardcoding IP addresses in any rule** and with rules that survive VM redeployments. What should you implement?",
+    "options": [
+        {
+            "text": "Create application security groups for each tier, associate the VM NICs with their tier's ASG, and write NSG rules that use the ASGs as source and destination",
+            "correct": true
+        },
+        {
+            "text": "Create one network security group per VM and maintain inbound rules listing the current IP address of every permitted peer",
+            "correct": false
+        },
+        {
+            "text": "Deploy Azure Firewall between the tiers and create DNAT rules translating each tier's public IP to the next tier",
+            "correct": false
+        },
+        {
+            "text": "Place each tier in a separate virtual network and rely on the default deny between virtual networks",
+            "correct": false
+        }
+    ],
+    "explanation": "**Application security groups (ASGs)** let you group VMs by role. NSG rules can then reference ASGs as source and destination (e.g., allow `asg-web` → `asg-app` on 443, `asg-app` → `asg-db` on 1433). When a VM is redeployed, its new NIC simply joins the tier's ASG and every rule keeps working — no IP addresses appear in the rules at all.\n\n**Why not the other options:**\n- **Per-VM NSGs with IP lists** — This is exactly the hardcoding the requirement forbids; every redeployment forces rule edits across multiple NSGs, which is error-prone and unscalable.\n- **Azure Firewall with DNAT** — DNAT rules translate *inbound public* traffic to private addresses; the tiers here communicate privately inside one VNet, and standing up public IPs between tiers would weaken, not strengthen, the design.\n- **Separate VNets relying on default deny** — There is no such implicit control to \"rely on\": traffic between non-peered VNets simply has no route, and once you peer them to make the app work you'd still need NSG rules — plus tier segmentation within a single VNet doesn't require separate VNets.",
+    "category": "Secure storage, databases, and networking"
+}

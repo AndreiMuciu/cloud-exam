@@ -1,0 +1,24 @@
+{
+    "id": "ai103-17-monitor-model-drift-grounding-quality",
+    "question": "A production Foundry application has been live for several months. The team wants ongoing visibility into whether the model's answers are still well-grounded in retrieved content and whether quality is degrading over time, not just a one-time evaluation taken before launch.\n\nWhat should the team configure?",
+    "options": [
+        {
+            "text": "Continuous (online) evaluation of production traffic using groundedness, relevance, and safety evaluators, with results tracked over time.",
+            "correct": true
+        },
+        {
+            "text": "A single offline evaluation run performed once before the initial launch, with no further evaluation afterward.",
+            "correct": false
+        },
+        {
+            "text": "Manual spot-checks of a handful of transcripts, performed only when a customer files a complaint.",
+            "correct": false
+        },
+        {
+            "text": "Application uptime monitoring alone, on the assumption that an application that is up is also grounded and accurate.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Continuous/online evaluation** applies evaluators such as groundedness, relevance, and safety against live production traffic on an ongoing basis, which is what surfaces drift and quality degradation over time rather than only capturing a snapshot before launch.\n\n**Why not the other options:**\n- **A single pre-launch evaluation** — Establishes a baseline but tells you nothing about behavior months later; data, retrieval content, and usage patterns can all drift after launch.\n- **Complaint-driven spot-checks** — Is reactive and biased toward only the failures customers bother to report; it misses silent quality degradation that no one complains about.\n- **Uptime monitoring alone** — Confirms the service is responding, not that its answers are accurate or grounded; an application can be perfectly \"up\" while confidently producing fabricated or ungrounded answers.",
+    "category": "Plan and manage an Azure AI solution"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-31-ddos-protection-tiers",
+    "question": "A small e-commerce startup runs its entire web presence behind a **single public IP address** in Azure. After a competitor suffered an extortion-driven DDoS attack, the startup wants enhanced, tunable DDoS mitigation with telemetry and rapid-response support for that one endpoint — but paying for a tier that covers a whole fleet of protected IP addresses across virtual networks would be hard to justify.\n\nWhich Azure DDoS Protection option best fits this situation?",
+    "options": [
+        {
+            "text": "Azure DDoS IP Protection, which applies enhanced mitigation to individual public IP addresses",
+            "correct": true
+        },
+        {
+            "text": "Azure DDoS Network Protection, designed for organizations protecting many public IP resources across their virtual networks",
+            "correct": false
+        },
+        {
+            "text": "Relying solely on Azure's default infrastructure-level DDoS protection with no additional configuration",
+            "correct": false
+        },
+        {
+            "text": "Azure Web Application Firewall, which absorbs volumetric network floods on its own",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure DDoS Protection is offered in two tiers. **DDoS IP Protection** is the **per-public-IP** option: it brings the enhanced mitigation capabilities — adaptive tuning to the application's traffic patterns, attack telemetry and alerting — to a **single public IP address**, making it the cost-appropriate choice for a startup with one internet-facing endpoint.\n\n**Why not the other options:**\n- **DDoS Network Protection** — This tier is designed to protect **many public IP resources across an organization's virtual networks** and is priced accordingly (it also adds extras such as DDoS rapid response support and cost protection). For exactly one public IP, it is the over-sized option the scenario rules out.\n- **Default infrastructure-level protection only** — Azure's always-on platform protection defends the *Azure infrastructure itself* and offers basic, untuned protection to everyone. It provides no application-aware adaptive tuning, no attack telemetry for the customer, and no dedicated support — the enhanced capabilities the startup asked for require one of the paid tiers.\n- **Azure Web Application Firewall** — WAF inspects HTTP/HTTPS requests for application-layer attacks such as SQL injection and cross-site scripting. It complements DDoS protection but is not built to absorb large-scale volumetric network floods by itself.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

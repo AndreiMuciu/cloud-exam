@@ -1,0 +1,29 @@
+{
+    "id": "sc900-24-nsg-capabilities",
+    "type": "multi",
+    "question": "Which two of the following are capabilities of network security groups (NSGs) in Azure? (Select two.)",
+    "options": [
+        {
+            "text": "Filter inbound traffic to a subnet based on source IP address, port, and protocol",
+            "correct": true
+        },
+        {
+            "text": "Deny outbound traffic from a virtual machine to the internet",
+            "correct": true
+        },
+        {
+            "text": "Inspect the contents of encrypted packets for malware signatures",
+            "correct": false
+        },
+        {
+            "text": "Automatically mitigate volumetric distributed denial-of-service attacks",
+            "correct": false
+        },
+        {
+            "text": "Require multifactor authentication before network connections are allowed",
+            "correct": false
+        }
+    ],
+    "explanation": "Network security groups contain security rules that **allow or deny both inbound and outbound network traffic**, evaluated by the classic 5-tuple: source and destination IP address, source and destination port, and protocol. NSGs can be associated with subnets or individual network interfaces, so filtering inbound subnet traffic and denying outbound internet traffic are both core capabilities.\n\n**Why not the other options:**\n- **Inspect encrypted packet contents for malware** — NSGs make decisions on packet header information only; deep packet inspection and signature matching require services such as Azure Firewall Premium.\n- **Mitigate volumetric DDoS attacks** — DDoS mitigation is provided by Azure DDoS Protection, which absorbs and scrubs flood traffic at scale; static NSG rules cannot counter volumetric attacks.\n- **Require MFA for network connections** — Multifactor authentication is an identity control enforced by Microsoft Entra ID (for example through Conditional Access), not by network-layer filtering rules.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

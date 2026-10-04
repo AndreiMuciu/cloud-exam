@@ -1,0 +1,19 @@
+{
+    "id": "az900-35-resource-lock-process",
+    "type": "ordering",
+    "question": "A team lead needs to delete a Resource Group that has a 'CanNotDelete' lock applied to it. Place the required steps in the correct order to successfully delete the resource.",
+    "items": [
+        "Delete the Resource Group",
+        "Select the Resource Group in the Azure portal",
+        "Select 'Locks' from the resource menu",
+        "Select and delete the lock"
+    ],
+    "correctOrder": [
+        "Select the Resource Group in the Azure portal",
+        "Select 'Locks' from the resource menu",
+        "Select and delete the lock",
+        "Delete the Resource Group"
+    ],
+    "explanation": "To delete a resource with a lock, you must first navigate to the resource, locate the lock settings, remove the lock, and only then proceed with the deletion. Resource locks serve as a protective barrier to prevent accidental deletion.",
+    "category": "Describe Azure Management and Governance"
+}

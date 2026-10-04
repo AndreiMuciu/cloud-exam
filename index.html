@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cert Exam Simulator</title>
+<meta name="description" content="Cloud certification exam simulator for AWS, Azure, Google Cloud, Kubernetes (KCNA, KCSA, CKA hands-on) and HashiCorp Terraform: random questions, real timer, unscored items, detailed review.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f90'/%3E%3Ctext x='16' y='22' font-size='13' font-family='system-ui' font-weight='700' text-anchor='middle' fill='%23161e2d'%3ECX%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand" id="brand">
+    <span class="brand-badge">CX</span>
+    <span>Cert Exam Simulator <span id="brand-exam" class="muted"></span></span>
+  </div>
+  <div class="topbar-right">
+    <div id="exam-status" class="exam-status hidden">
+      <span id="exam-code-pill" class="pill pill-soft"></span>
+      <span id="progress-label" class="pill">Q 1 / 65</span>
+      <span id="timer" class="timer" title="Time remaining">90:00</span>
+    </div>
+    <button id="theme-toggle" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">◐</button>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ================= HOME ================= -->
+  <section id="view-home" class="view">
+    <div class="hero">
+      <h1>Practice like it's the real thing.</h1>
+      <p class="lead">
+        Pick a certification: AWS, Azure, Google Cloud, Kubernetes or Terraform. Every run draws a random set of
+        questions from that exam's bank, runs the <strong>official clock</strong>, and at the end randomly marks the
+        <strong>unscored items</strong> where the real exam has them. Per-exam scoring and passing mark.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Choose your exam</h2>
+        <span id="catalog-stats" class="muted small"></span>
+      </div>
+      <div id="vendor-tabs" class="filters vendor-tabs"></div>
+      <div id="exam-grid" class="exam-grid"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>Exam mode <span id="exam-mode-code" class="pill pill-soft"></span></h2>
+        <p class="muted">Timed. No feedback until you submit. Flag questions, jump around, review everything at the end.</p>
+        <div class="form-row">
+          <label>Questions <input id="opt-count" type="number" min="10" max="200" value="65"></label>
+          <label>Minutes <input id="opt-minutes" type="number" min="5" max="300" value="90"></label>
+          <label>Unscored <input id="opt-unscored" type="number" min="0" max="64" value="15"></label>
+        </div>
+        <div class="form-row">
+          <label class="check"><input id="opt-shuffle" type="checkbox" checked> Shuffle answer order</label>
+          <label class="check"><input id="opt-pause" type="checkbox"> Allow pausing (not allowed in the real exam)</label>
+        </div>
+        <button id="btn-start-exam" class="btn btn-primary btn-lg">Start exam</button>
+        <button id="btn-resume-exam" class="btn btn-ghost btn-lg hidden">Resume unfinished exam</button>
+      </div>
+
+      <div class="card">
+        <h2>Practice mode <span id="prac-mode-code" class="pill pill-soft"></span></h2>
+        <p class="muted">Untimed. Instant feedback after each answer, with the explanation link. Good for drilling.</p>
+        <div class="form-row">
+          <label>Questions <input id="prac-count" type="number" min="5" max="5000" value="30"></label>
+          <label>Source
+            <select id="prac-source">
+              <option value="all">All sources</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label class="check"><input id="prac-wrong-only" type="checkbox"> Only questions I got wrong before</label>
+        </div>
+        <button id="btn-start-practice" class="btn btn-secondary btn-lg">Start practice</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Your history</h2>
+        <div class="stats-row" id="history-stats"></div>
+        <button id="btn-clear-history" class="btn btn-ghost btn-sm">Clear</button>
+      </div>
+      <div id="history-empty" class="muted">No attempts yet. Your results are stored locally in this browser.</div>
+      <div class="table-wrap">
+        <table id="history-table" class="hidden">
+          <thead><tr><th>Date</th><th>Exam</th><th>Mode</th><th>Scaled</th><th>Raw %</th><th>Scored %</th><th>Result</th><th>Time</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="foot muted">
+      Question banks compiled from <span id="source-credits"></span>. Duplicates merged per exam. See README for licences (Ditectrev and sonukkushwaha0801 have none: personal use only).
+      Scaled scores are a linear approximation of the vendors' 100–1000 scales; Kubernetes and Terraform exams are scored as a percentage. Shortcuts: <kbd>A</kbd>–<kbd>E</kbd> or <kbd>1</kbd>–<kbd>5</kbd> select, <kbd>←</kbd> <kbd>→</kbd> navigate, <kbd>F</kbd> flag; hands-on tasks: <kbd>R</kbd> reveal solution, <kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd> grade solved / partial / not solved.
+    </footer>
+  </section>
+
+  <!-- ================= EXAM ================= -->
+  <section id="view-exam" class="view hidden">
+    <div class="exam-layout">
+      <div class="question-pane">
+        <div class="card question-card">
+          <div class="q-meta">
+            <span id="q-number" class="pill">Question 1</span>
+            <span id="q-type" class="pill pill-soft">Single choice</span>
+            <span id="q-source" class="pill pill-soft" title="Where this question comes from"></span>
+            <button id="btn-flag" class="btn btn-ghost btn-sm flag-btn" title="Flag for review (F)">⚑ Flag</button>
+          </div>
+          <p id="q-text" class="q-text"></p>
+          <img id="q-img" class="q-img hidden" alt="Question diagram">
+          <div id="q-options" class="options"></div>
+          <div id="q-feedback" class="feedback hidden"></div>
+        </div>
+        <div class="nav-row">
+          <button id="btn-prev" class="btn btn-ghost">← Previous</button>
+          <div class="nav-mid">
+            <button id="btn-pause" class="btn btn-ghost hidden">⏸ Pause</button>
+            <button id="btn-check" class="btn btn-secondary hidden">Check answer</button>
+          </div>
+          <button id="btn-next" class="btn btn-primary">Next →</button>
+          <button id="btn-finish" class="btn btn-danger hidden">Finish exam</button>
+        </div>
+      </div>
+
+      <aside class="navigator card">
+        <div class="card-head">
+          <h3>Navigator</h3>
+          <button id="btn-finish-side" class="btn btn-danger btn-sm">Finish</button>
+        </div>
+        <div class="legend">
+          <span><i class="dot dot-answered"></i>Answered</span>
+          <span><i class="dot dot-flagged"></i>Flagged</span>
+          <span><i class="dot dot-empty"></i>Unanswered</span>
+        </div>
+        <div id="nav-grid" class="nav-grid"></div>
+        <div id="nav-summary" class="muted small"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section id="view-results" class="view hidden">
+    <div class="card result-hero">
+      <div class="score-ring" id="score-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+          <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="52"></circle>
+        </svg>
+        <div class="ring-label">
+          <div id="res-scaled" class="ring-value">—</div>
+          <div class="ring-sub">/ 1000</div>
+        </div>
+      </div>
+      <div class="result-text">
+        <div id="res-verdict" class="verdict">—</div>
+        <p id="res-summary" class="muted"></p>
+        <div class="stat-tiles">
+          <div class="tile"><div class="tile-label">Raw score (all questions)</div><div id="res-raw" class="tile-value">—</div><div id="res-raw-sub" class="tile-sub"></div></div>
+          <div class="tile tile-accent"><div class="tile-label">Scored questions only</div><div id="res-scored" class="tile-value">—</div><div id="res-scored-sub" class="tile-sub"></div></div>
+          <div class="tile"><div class="tile-label">Time used</div><div id="res-time" class="tile-value">—</div><div id="res-time-sub" class="tile-sub"></div></div>
+          <div class="tile"><div class="tile-label">Unscored items</div><div id="res-unscored" class="tile-value">—</div><div id="res-unscored-sub" class="tile-sub">picked at random</div></div>
+        </div>
+        <div class="btn-row">
+          <button id="btn-home" class="btn btn-ghost">← Home</button>
+          <button id="btn-retry" class="btn btn-primary">New exam</button>
+          <button id="btn-retry-wrong" class="btn btn-secondary">Practice my mistakes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Review</h2>
+        <div class="filters" id="review-filters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="wrong">Wrong</button>
+          <button class="chip" data-filter="correct">Correct</button>
+          <button class="chip" data-filter="unanswered">Unanswered</button>
+          <button class="chip" data-filter="flagged">Flagged</button>
+          <button class="chip" data-filter="unscored">Unscored</button>
+        </div>
+      </div>
+      <div id="review-list" class="review-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- modal -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-box card">
+    <h3 id="modal-title">Finish exam?</h3>
+    <p id="modal-body"></p>
+    <div class="btn-row right">
+      <button id="modal-cancel" class="btn btn-ghost">Cancel</button>
+      <button id="modal-ok" class="btn btn-danger">Finish</button>
+    </div>
+  </div>
+</div>
+
+<div id="pause-overlay" class="modal hidden">
+  <div class="modal-box card center">
+    <h3>Paused</h3>
+    <p class="muted">The clock is stopped. This isn't possible in the real exam.</p>
+    <button id="btn-resume" class="btn btn-primary btn-lg">Resume</button>
+  </div>
+</div>
+
+<script src="vendor/js-yaml.min.js"></script>
+<script src="data/index.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-infra-batch",
+    "question": "An insurance company runs a nightly catastrophe-risk simulation consisting of roughly 10,000 independent, CPU-intensive tasks that each run for a few minutes. The tasks are checkpointed and can tolerate interruption and retry. The job must finish within a six-hour overnight window, and compute costs must be as low as possible.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Batch pools using Spot VMs, with the job scheduled to run nightly",
+            "correct": true
+        },
+        {
+            "text": "A 24×7 Azure Kubernetes Service cluster sized for the nightly peak",
+            "correct": false
+        },
+        {
+            "text": "Azure Functions on the Consumption plan triggered by a nightly timer",
+            "correct": false
+        },
+        {
+            "text": "A single memory-optimized Azure VM that processes the tasks sequentially overnight",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Batch with Spot VMs** is the textbook design for embarrassingly parallel, interruption-tolerant batch computing:\n\n- **Batch** natively handles the hard parts: provisioning a pool of thousands of cores, distributing the 10,000 tasks, retrying failures, and **scaling the pool to zero** when the job completes — you pay for compute only during the run\n- **Spot VMs** offer deep discounts (often 60–90%) versus pay-as-you-go in exchange for possible eviction — a perfect match because the tasks are checkpointed and retryable; Batch automatically requeues tasks from evicted nodes\n- Autoscale formulas or a sized pool ensure enough parallelism to finish 10,000 few-minute tasks well within the six-hour window\n\n**Why not the other options:**\n- **24×7 AKS cluster sized for peak** — Pays for peak capacity around the clock for a job that runs a few hours per night; even with cluster autoscaler the team takes on Kubernetes operations that Batch makes unnecessary for a pure batch workload\n- **Functions Consumption plan** — Designed for short, event-driven executions: default timeouts (and platform limits) are unsuitable for sustained multi-minute CPU-bound work at massive parallel scale, per-GB-second pricing is poor for CPU-heavy simulation, and you get no control over Spot pricing\n- **Single sequential VM** — 10,000 tasks × a few minutes each is roughly 350+ compute-hours; sequential execution would take weeks, missing the six-hour window by orders of magnitude",
+    "category": "Design Infrastructure Solutions"
+}

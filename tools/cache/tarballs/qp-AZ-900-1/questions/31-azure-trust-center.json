@@ -1,0 +1,24 @@
+{
+    "id": "az900-31-azure-trust-center",
+    "question": "Which public-facing website provides comprehensive information about Microsoft's compliance with various regulatory standards (like ISO, HIPAA, and GDPR) and detailed security and privacy practices?",
+    "options": [
+        {
+            "text": "Azure Portal",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Trust Center",
+            "correct": true
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        },
+        {
+            "text": "Azure Support",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Microsoft Trust Center** is a public resource that contains information about security, privacy, and compliance across all Microsoft cloud services. It is the go-to place for documentation on how Microsoft meets regulatory requirements.\n\n**Why not the other options:**\n- **Azure Portal** — The management console for deploying and managing services.\n- **Azure Advisor** — Focuses on your specific resource optimizations.\n- **Azure Support** — For technical issues and billing inquiries.",
+    "category": "Describe Azure Management and Governance"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-04-foxglove-cosmos-partition-key",
+    "question": "During Foxglove tournaments, writes to the `match-events` container return 429 (rate limited) errors even though provisioned throughput far exceeds the total workload. The container is partitioned on `/gameMode`, which has five values, and the dominant read pattern retrieves all events for a single match.\n\nYou are redesigning the container. Which partition key should you choose?",
+    "options": [
+        {
+            "text": "/matchId",
+            "correct": true
+        },
+        {
+            "text": "Keep /gameMode and double the provisioned RU/s until the 429 errors stop.",
+            "correct": false
+        },
+        {
+            "text": "/timestamp, so each write lands in a fresh partition value.",
+            "correct": false
+        },
+        {
+            "text": "/region, because tournaments are hosted in only a few regions.",
+            "correct": false
+        }
+    ],
+    "explanation": "Provisioned throughput is divided across **physical partitions**, and all writes for one popular game mode funnel into a single logical (and therefore physical) partition — a classic **hot partition**. `/matchId` has very high cardinality, so tournament writes spread evenly across partitions, and it matches the dominant read (\"all events for one match\"), which becomes an efficient **single-partition query**. Each match also stays far below the 20 GB logical-partition limit.\n\n**Why not the other options:**\n- **Doubling RU/s on `/gameMode`** — Throughput is split across partitions; a single hot logical partition can still only use its own partition's share (capped at 10,000 RU/s per physical partition). You pay more while the hot partition keeps throttling.\n- **`/timestamp`** — Monotonically increasing keys concentrate *current* writes on the latest value's partition, recreating the hot-write problem, and reading one match would fan out across many partitions.\n- **`/region`** — Low cardinality with skew (a few big regions), so the same bottleneck reappears; it also does not align with the per-match read pattern.",
+    "category": "Develop AI solutions by using Azure data management services",
+    "caseStudy": "scenarios/case_study_foxglove_interactive.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc500-02-vellmore-conditional-access",
+    "question": "You are designing the Conditional Access policies for Vellmore Financial Group's authentication requirements: phishing-resistant MFA for privileged users, geographic blocking for management endpoints, and automatic response to risky sign-ins. Which combination of policy controls should you use?",
+    "options": [
+        {
+            "text": "An authentication strength requiring FIDO2 or certificate-based authentication for directory role members; a policy blocking access to the Windows Azure Service Management API / Microsoft Admin Portals from countries outside named locations; and a risk-based policy using sign-in risk as a condition",
+            "correct": true
+        },
+        {
+            "text": "A policy requiring any MFA method for all users; a policy blocking all access from anonymous IP addresses; and a policy requiring password change every 30 days",
+            "correct": false
+        },
+        {
+            "text": "Per-user MFA enabled on the 14 administrator accounts; an NSG rule blocking foreign IP ranges; and Microsoft Entra ID Protection set to notify administrators by email",
+            "correct": false
+        },
+        {
+            "text": "Security defaults enabled for the tenant, combined with a self-service password reset policy for privileged users",
+            "correct": false
+        }
+    ],
+    "explanation": "Conditional Access **authentication strengths** let you require specific phishing-resistant methods (FIDO2 security keys, passkeys, Windows Hello for Business, certificate-based auth) rather than any MFA. Geographic restrictions are implemented with **named locations** and a block policy scoped to the management endpoints (Microsoft Admin Portals / Azure management). Integrating **sign-in risk** from Microsoft Entra ID Protection as a policy condition provides the required automatic response (e.g., require MFA or block on high risk).\n\n**Why not the other options:**\n- **Any MFA + anonymous IP block + password rotation** — 'Any MFA' does not guarantee phishing resistance (SMS/voice are phishable), and periodic password change does not address risky sign-ins or geo-blocking.\n- **Per-user MFA + NSG + email notifications** — Per-user MFA is legacy and lacks method granularity; NSGs filter network traffic to your VNets, not sign-ins to Entra ID; notifications are not an automatic control.\n- **Security defaults + SSPR** — Security defaults cannot be combined with custom Conditional Access, cannot enforce specific methods, and provide no location or risk-based granularity.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_vellmore_financial.json"
+}

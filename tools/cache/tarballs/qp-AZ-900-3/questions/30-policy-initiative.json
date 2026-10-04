@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-30-policy-initiative",
+    "question": "A compliance officer at a mortgage lender has written a dozen related Azure Policy definitions — allowed locations, required tags, permitted VM SKUs, and mandatory encryption settings. She wants to group them so they can be assigned to scopes and have their compliance tracked **as a single unit**. What should she create?",
+    "options": [
+        {
+            "text": "A policy initiative (initiative definition)",
+            "correct": true
+        },
+        {
+            "text": "A management group",
+            "correct": false
+        },
+        {
+            "text": "A CanNotDelete resource lock",
+            "correct": false
+        },
+        {
+            "text": "A custom RBAC role",
+            "correct": false
+        }
+    ],
+    "explanation": "A **policy initiative** (also called an initiative definition or policy set) **groups related policy definitions into one unit** that is assigned and tracked together. Instead of making twelve separate assignments and reading twelve compliance reports, the officer assigns the initiative once to the desired scope and sees an aggregated compliance view for the whole goal — exactly how Azure's own built-in regulatory-compliance packages are delivered.\n\n**Why not the other options:**\n- **A management group** — A *scope* in the resource hierarchy used to organize subscriptions. It is a place you might assign the initiative **to**, not a way to bundle policy definitions together.\n- **A CanNotDelete resource lock** — Protects individual resources from accidental deletion; it cannot group or enforce policy rules.\n- **A custom RBAC role** — Defines a set of permissions describing what users may *do*; it governs access, not resource-configuration standards, and cannot bundle policy definitions.",
+    "category": "Describe Azure Management and Governance"
+}

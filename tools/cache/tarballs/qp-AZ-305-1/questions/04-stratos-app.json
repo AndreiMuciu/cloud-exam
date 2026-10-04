@@ -1,0 +1,17 @@
+{
+    "id": "gen-01-app-service-storage",
+    "question": "**Proposed Solution:**\n\nProvision a separate **Azure Storage** account to host the static content (HTML, CSS, JavaScript) for the OrderTracker web application.\n\nDoes this meet the goal of deploying web content to Azure App Service?",
+    "options": [
+        {
+            "text": "Yes",
+            "correct": false
+        },
+        {
+            "text": "No",
+            "correct": true
+        }
+    ],
+    "explanation": "The correct answer is **No**. Azure App Service Standard tier includes integrated storage for deploying and hosting web application files. The content can be deployed directly using deployment slots, GitHub Actions, or Azure DevOps pipelines without requiring a separate storage account.\n\nA separate storage account would only be needed for specific scenarios like serving large media files or implementing CDN integration, but it is not the primary way to deploy web apps to App Service.",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_enterprise_migration.json"
+}

@@ -1,0 +1,21 @@
+{
+    "id": "az104-s2-compute-appservice-custom-domain",
+    "type": "ordering",
+    "question": "Ashgrove Retail Group hosts a web app in Azure App Service at its default `*.azurewebsites.net` hostname. You must serve the site at **www.ashgroveretail.com** over HTTPS, using a free App Service managed certificate, and redirect all HTTP requests to HTTPS.\n\nArrange the steps in the correct order.",
+    "items": [
+        "Create a free App Service managed certificate and add the TLS/SSL binding for the custom domain",
+        "Confirm that the App Service plan is Basic tier or higher, so custom domains with managed certificates are supported",
+        "Enable the HTTPS Only setting on the web app",
+        "At the DNS provider, create a CNAME record for www pointing to the app's default hostname and a TXT record named asuid.www containing the domain verification ID",
+        "Add www.ashgroveretail.com on the app's Custom domains blade and validate the DNS records"
+    ],
+    "correctOrder": [
+        "Confirm that the App Service plan is Basic tier or higher, so custom domains with managed certificates are supported",
+        "At the DNS provider, create a CNAME record for www pointing to the app's default hostname and a TXT record named asuid.www containing the domain verification ID",
+        "Add www.ashgroveretail.com on the app's Custom domains blade and validate the DNS records",
+        "Create a free App Service managed certificate and add the TLS/SSL binding for the custom domain",
+        "Enable the HTTPS Only setting on the web app"
+    ],
+    "explanation": "The workflow is strictly ordered by dependencies:\n\n1. **Check the plan tier** — the Free (F1) tier does not support custom domains at all, and the free **App Service managed certificate** requires Basic tier or higher, so the plan must be verified (and scaled if needed) before anything else.\n2. **Create the DNS records** — the CNAME maps `www` to the app's default hostname for traffic routing, while the `asuid.www` TXT record carries the app's **domain verification ID**, proving domain ownership and protecting against subdomain takeover. Azure validates both records in the next step, so they must exist first.\n3. **Add and validate the domain** — on the Custom domains blade, App Service checks the CNAME and TXT records and binds the hostname to the app once validation passes.\n4. **Create the managed certificate and TLS binding** — a certificate can only be issued and bound for a hostname that is already added and validated on the app; the free managed certificate is issued for that specific hostname and auto-renews.\n5. **Enable HTTPS Only** — turning on the HTTP-to-HTTPS redirect last avoids redirecting visitors to an HTTPS endpoint before a valid certificate is in place, which would cause browser trust errors.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

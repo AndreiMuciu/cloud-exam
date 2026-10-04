@@ -1,0 +1,21 @@
+{
+    "id": "sc500-30-cef-ingestion-order",
+    "type": "ordering",
+    "question": "Your perimeter firewall appliance can export logs in Common Event Format (CEF) over syslog, and the SOC needs those events in Microsoft Sentinel. Arrange the implementation steps in the correct order.",
+    "items": [
+        "Configure the firewall appliance to send CEF-formatted syslog messages to the forwarder's IP address and port",
+        "Install the Common Event Format (CEF) via AMA solution from the Microsoft Sentinel content hub",
+        "Verify that firewall records are arriving in the CommonSecurityLog table",
+        "Deploy a Linux virtual machine (or Arc-enabled server) to act as the dedicated log forwarder",
+        "Create a data collection rule for the connector that targets the forwarder, which installs the Azure Monitor Agent and configures syslog collection on it"
+    ],
+    "correctOrder": [
+        "Install the Common Event Format (CEF) via AMA solution from the Microsoft Sentinel content hub",
+        "Deploy a Linux virtual machine (or Arc-enabled server) to act as the dedicated log forwarder",
+        "Create a data collection rule for the connector that targets the forwarder, which installs the Azure Monitor Agent and configures syslog collection on it",
+        "Configure the firewall appliance to send CEF-formatted syslog messages to the forwarder's IP address and port",
+        "Verify that firewall records are arriving in the CommonSecurityLog table"
+    ],
+    "explanation": "1. **Install the content hub solution** — connectors are delivered through the content hub; installing the CEF via AMA solution makes the connector page and its DCR workflow available in the workspace.\n2. **Deploy the log forwarder** — appliances cannot run the Azure Monitor Agent themselves, so a Linux machine (Azure VM or Arc-enabled) acts as the relay.\n3. **Create the data collection rule** — associating the DCR with the forwarder installs/configures AMA on it and defines which syslog facilities are collected and sent to the workspace as CEF.\n4. **Point the appliance at the forwarder** — only now is there something listening; the firewall is configured to ship CEF syslog to the forwarder's address and port.\n5. **Validate in CommonSecurityLog** — CEF events land in the `CommonSecurityLog` table; querying it confirms the pipeline end-to-end.\n\nConfiguring the appliance before the forwarder and DCR exist would send events into the void, and you cannot create the connector's DCR before the solution is installed.",
+    "category": "Manage and monitor security posture"
+}

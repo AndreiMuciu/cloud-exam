@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-halstrom-asr",
+    "question": "Design the disaster recovery approach for the 30 VMs of the risk platform that meets the RTO of 2 hours and RPO of 15 minutes for a West Europe regional outage, while minimizing recovery infrastructure costs.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Replicate the VMs to North Europe with Azure Site Recovery and fail over on demand",
+            "correct": true
+        },
+        {
+            "text": "Back up the VMs to a geo-redundant Recovery Services vault and use cross-region restore in North Europe",
+            "correct": false
+        },
+        {
+            "text": "Deploy a permanently running duplicate of the platform in North Europe behind Azure Traffic Manager",
+            "correct": false
+        },
+        {
+            "text": "Redeploy the VMs across three availability zones in West Europe with zone-redundant load balancing",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Site Recovery (ASR)** is the right cost/recovery trade-off for these objectives:\n\n- **RPO 15 minutes** — ASR continuously replicates VM disk writes to the target region; typical RPO is measured in minutes (crash-consistent recovery points are generated every 5 minutes), comfortably within 15 minutes\n- **RTO 2 hours** — A failover spins up VMs from replicated disks in North Europe in minutes to tens of minutes, well inside a 2-hour RTO\n- **Cost** — While replication is active, you pay for the ASR license per VM, target-region storage, and no running compute. Target VMs are created **only during failover**, so there is no continuously running duplicate environment — matching the cost constraint\n\n**Why not the other options:**\n- **Geo-redundant backup + cross-region restore** — Azure Backup takes point-in-time backups (at most a few per day for VMs), so the achievable RPO is measured in **hours**, not 15 minutes. Restoring 30 VMs from vault backups could also challenge the 2-hour RTO\n- **Permanent duplicate behind Traffic Manager** — An active-active or hot-standby deployment easily beats the objectives but doubles compute costs continuously, directly violating the requirement to avoid paying for a running duplicate\n- **Availability zones in West Europe** — Zones protect against datacenter failures *within* a region. They provide no recovery if the entire West Europe region is unavailable, which is the stated scenario",
+    "category": "Design Business Continuity Solutions",
+    "caseStudy": "scenarios/case_study_halstrom_capital.json"
+}

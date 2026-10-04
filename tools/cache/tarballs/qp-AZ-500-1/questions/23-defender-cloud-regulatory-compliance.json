@@ -1,0 +1,24 @@
+{
+    "id": "az500-23-defender-cloud-regulatory-compliance",
+    "question": "Your company must adhere to the PCI-DSS 3.2.1 standard. Which feature of Microsoft Defender for Cloud can provide you with a real-time dashboard showing your compliance status against this specific standard?",
+    "options": [
+        {
+            "text": "Secure Score",
+            "correct": false
+        },
+        {
+            "text": "Regulatory Compliance dashboard",
+            "correct": true
+        },
+        {
+            "text": "Workflow Automation",
+            "correct": false
+        },
+        {
+            "text": "Asset Inventory",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Regulatory Compliance dashboard** in Defender for Cloud tracks your environment against various industry standards (like PCI-DSS, ISO 27001, SOC2) and provides specific remediation steps to close compliance gaps.\n\n**Why not the other options:**\n- **Secure Score** — A general measure of your security posture across all Azure resources, not mapped to a specific external compliance standard by default.\n- **Workflow Automation** — Used to trigger actions (like logic apps) based on security findings.",
+    "category": "Manage security operations"
+}

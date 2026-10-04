@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-08-fennimore-nsg",
+    "question": "Within Fennimore's virtual network, the database subnet must accept traffic only from the application subnet on the database port, and all other inbound traffic to the subnet must be denied. Which built-in Azure feature filters network traffic using rules based on source, destination, port, and protocol?",
+    "options": [
+        {
+            "text": "A network security group (NSG)",
+            "correct": true
+        },
+        {
+            "text": "Virtual network peering",
+            "correct": false
+        },
+        {
+            "text": "Azure DDoS Protection",
+            "correct": false
+        },
+        {
+            "text": "A CanNotDelete resource lock",
+            "correct": false
+        }
+    ],
+    "explanation": "A **network security group (NSG)** contains an ordered list of **allow and deny rules** that filter traffic by **source, destination, port, and protocol**. Attached to a subnet (or a network interface), an NSG can permit inbound traffic to the database subnet only when it originates from the application subnet on the database port, while a lower-priority rule denies everything else — precisely the control the firm described.\n\n**Why not the other options:**\n- **Virtual network peering** — Connects two virtual networks so they can communicate over the Microsoft backbone; it creates connectivity rather than filtering it, and both subnets here are already in the same virtual network.\n- **Azure DDoS Protection** — Defends against volumetric denial-of-service attacks on public endpoints; it does not implement per-port, per-source traffic rules between internal subnets.\n- **A CanNotDelete resource lock** — Prevents accidental deletion of a resource; locks are a governance control and have no effect on network traffic.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_fennimore_legal.json"
+}

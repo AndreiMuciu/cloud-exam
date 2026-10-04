@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-verdanta-cosmos",
+    "question": "You choose Azure Cosmos DB for NoSQL, replicated to regions in Europe, South America, and Australia, for the cooperatives' configuration documents. You must satisfy the requirement that a cooperative's own users always see their updates immediately (read-your-own-writes), while keeping latency low and throughput cost as small as possible.\n\nWhich default consistency level should you recommend?",
+    "options": [
+        {
+            "text": "Strong",
+            "correct": false
+        },
+        {
+            "text": "Bounded staleness",
+            "correct": false
+        },
+        {
+            "text": "Session",
+            "correct": true
+        },
+        {
+            "text": "Eventual",
+            "correct": false
+        }
+    ],
+    "explanation": "**Session consistency** is the correct trade-off for this requirement:\n\n- Within a client session (propagated via the session token), Cosmos DB guarantees **read-your-own-writes**, monotonic reads, and consistent-prefix semantics — a cooperative that updates its irrigation schedule immediately sees the change on subsequent reads\n- Other sessions (users in other regions) may briefly read older data, which the scenario explicitly permits (\"other regions may lag slightly\")\n- Session is the sweet spot on cost and performance: reads cost the same RUs as eventual-consistency reads (half the cost of strong/bounded-staleness reads) and it imposes no cross-region write latency, unlike stronger levels\n\n**Why not the other options:**\n- **Strong** — Guarantees linearizability globally, but that is far more than the requirement demands. With multiple far-apart regions it significantly increases write latency (writes must be durably committed across replicas) and doubles read RU cost. Strong consistency is also incompatible with multi-region write configurations\n- **Bounded staleness** — Guarantees reads lag by no more than K versions or T time globally, at double the read RU cost. The requirement is per-session (a cooperative sees *its own* writes), not a global staleness bound, so you would pay for a guarantee you don't need\n- **Eventual** — The cheapest level, but it provides **no read-your-own-writes guarantee**: a cooperative could update a schedule, refresh, and see the old version — directly violating the requirement",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_verdanta_agritech.json"
+}

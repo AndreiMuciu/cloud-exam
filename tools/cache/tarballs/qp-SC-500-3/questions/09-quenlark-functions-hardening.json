@@ -1,0 +1,34 @@
+{
+    "id": "sc500-s3-09-quenlark-functions-hardening",
+    "type": "multi",
+    "question": "You need to harden Quenlark Systems' `ops-recalc` Functions app: callers must authenticate with Microsoft Entra ID (making the leaked function keys worthless), the app must be unreachable from the public internet and callable only from the platform's virtual network, and its outbound call to the inventory database must travel over the virtual network to a private endpoint. Which three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Enable App Service authentication (Easy Auth) on the Functions app with Microsoft Entra ID as the provider, require authentication for all requests, and set the HTTP-triggered functions' authorization level so that function keys alone no longer grant access",
+            "correct": true
+        },
+        {
+            "text": "Create a private endpoint for the Functions app in the platform virtual network, then turn off public network access on the app",
+            "correct": true
+        },
+        {
+            "text": "Enable virtual network integration for the app's outbound traffic and route it to a private endpoint for the inventory database, disabling the database's public endpoint",
+            "correct": true
+        },
+        {
+            "text": "Regenerate the function keys and store the new keys in Azure Key Vault so that the repositories no longer contain valid keys",
+            "correct": false
+        },
+        {
+            "text": "Move the Functions app to a Consumption plan, because Consumption apps are not reachable from the internet by default",
+            "correct": false
+        },
+        {
+            "text": "Configure the Functions app to validate calls by checking the caller's source IP address inside the function code",
+            "correct": false
+        }
+    ],
+    "explanation": "The three correct actions map one-to-one to the three requirements. (1) **App Service authentication (Easy Auth)** put in front of the Functions runtime rejects unauthenticated requests before any function code runs; with Entra ID as the provider, callers must present a valid token (internal services use their managed identities), and shared function keys stop being a sufficient credential — the leaked keys become worthless. (2) **Inbound privacy** comes from a **private endpoint for the Functions app** plus disabling public network access, so the app answers only on a private IP inside the platform VNet. (3) **Outbound privacy** is separate plumbing: **regional VNet integration** sends the app's outbound calls into the virtual network, where they can reach the **inventory database's private endpoint**; disabling the database's public endpoint completes the path. Inbound and outbound network features are independent in App Service/Functions — you need both.\n\n**Why not the other options:**\n- **Regenerating keys into Key Vault** — better hygiene, but keys remain a shared-secret authentication model; the requirement is Entra ID authentication, and regenerating does not make the *mechanism* of key-based access stop working.\n- **Consumption plan** — hosting plan choice does not make an app private; Consumption apps get public endpoints like any other, and (classically) the Consumption plan lacks the networking features (VNet integration, private endpoints) that this design needs.\n- **Source IP checks in code** — application-level IP filtering is easily misconfigured, doesn't survive NAT/proxy changes, does nothing for the outbound-privacy requirement, and leaves the app still publicly reachable at the network layer.",
+    "category": "Secure compute",
+    "caseStudy": "scenarios/case_study_quenlark_systems.json"
+}

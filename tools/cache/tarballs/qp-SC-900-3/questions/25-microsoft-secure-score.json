@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-25-microsoft-secure-score",
+    "question": "A newly hired security lead must report a single number that reflects the security posture of the company's **Microsoft 365 environment** — covering identities, devices, and apps — together with a ranked list of improvement actions (such as enabling MFA or hardening mail flow rules) whose completion raises the number. The metric must live in the Microsoft Defender portal.\n\nWhich measurement should the security lead report?",
+    "options": [
+        {
+            "text": "Microsoft Secure Score in the Microsoft Defender portal",
+            "correct": true
+        },
+        {
+            "text": "The Defender for Cloud secure score",
+            "correct": false
+        },
+        {
+            "text": "The compliance score in Microsoft Purview Compliance Manager",
+            "correct": false
+        },
+        {
+            "text": "The number of incidents closed in Microsoft Sentinel this quarter",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Secure Score**, found in the **Microsoft Defender portal**, measures the security posture of the organization's **Microsoft 365 environment** across categories such as **identity, devices, and apps**. It presents recommended **improvement actions** — for example, requiring MFA, or tightening mail-flow and app permissions — and completing them increases the score, so the number doubles as both a posture report and a prioritized to-do list. A higher score indicates more recommended security controls are in place.\n\n**Why not the other options:**\n- **The secure score in Microsoft Defender for Cloud** — Defender for Cloud's secure score rates the posture of **cloud infrastructure resources** — Azure subscriptions and connected AWS/GCP environments — not the Microsoft 365 identities, devices, and apps this report must cover. The two scores are separate features with separate scopes.\n- **The compliance score in Compliance Manager** — The compliance score tracks progress on actions that reduce risks around **data protection and regulatory standards**. It measures compliance obligations, not security posture, and it lives in the Purview ecosystem rather than the Defender portal.\n- **Incidents closed in Microsoft Sentinel** — Operational throughput says how busy the SOC was, not how well the environment is configured. Closing many incidents is compatible with a weak posture that keeps generating them.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

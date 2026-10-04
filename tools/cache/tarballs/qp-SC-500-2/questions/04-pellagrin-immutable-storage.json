@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-04-pellagrin-immutable-storage",
+    "question": "You need to meet Pellagrin Insurance's document retention requirements for the `claims-final` container: documents unmodifiable and undeletable for 7 years even by storage administrators, protection that cannot itself be removed, plus an indefinite case-based hold for documents under litigation. What should you configure?",
+    "options": [
+        {
+            "text": "An immutability policy on the container with a 7-year time-based retention period that you lock after validation, and legal holds with case tags applied when litigation begins",
+            "correct": true
+        },
+        {
+            "text": "Blob soft delete with a 7-year retention period, and a CanNotDelete resource lock on the storage account for litigation cases",
+            "correct": false
+        },
+        {
+            "text": "A lifecycle management rule that moves blobs to the archive tier after upload, because archived blobs cannot be modified",
+            "correct": false
+        },
+        {
+            "text": "Azure RBAC deny assignments that remove write and delete permissions on the container from all users for 7 years",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Blob Storage **immutable storage (WORM)** is the compliance feature for this. A **time-based retention policy** of 7 years prevents modification and deletion of blobs for that interval — enforcement applies to *all* identities, including account administrators. While the policy is *unlocked* it can still be edited, so you must **lock** it; a locked policy can never be shortened or removed (only extended), satisfying \"the protection itself must not be removable.\" A **legal hold** is the second immutability policy type: tag-based, with no expiry, applied and cleared per litigation case independently of the time-based clock.\n\n**Why not the other options:**\n- **Soft delete + resource lock** — soft delete only lets you *recover* deleted or overwritten blobs during retention; it does not *prevent* overwrites or deletions. A CanNotDelete lock protects the Azure resource (the account) from deletion, not individual blob contents, and any Owner can remove the lock.\n- **Lifecycle rule to archive tier** — the archive tier changes access latency and cost, not mutability: archived blobs can still be deleted, and rehydrated blobs can be overwritten.\n- **RBAC deny assignments** — deny assignments cannot be authored directly for this purpose (they are created by the platform, e.g., by deployment stacks or Blueprints), and RBAC changes are reversible by privileged administrators — failing the \"even administrators, not removable\" test.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_pellagrin_insurance.json"
+}

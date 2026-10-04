@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-29-regulatory-compliance-dashboard",
+    "question": "A payments processor must demonstrate to its auditors which of its **Azure resource configurations** pass or fail the technical controls of PCI DSS. The compliance team wants to add the PCI DSS standard to its subscriptions, see resource-level assessments mapped to each control of the standard, and track failing controls until they are fixed.\n\nWhich Microsoft capability provides this view?",
+    "options": [
+        {
+            "text": "The regulatory compliance dashboard in Microsoft Defender for Cloud",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Purview Compliance Manager assessments",
+            "correct": false
+        },
+        {
+            "text": "The Microsoft Service Trust Portal",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Governance access reviews",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Cloud's regulatory compliance dashboard** evaluates the configuration of **cloud infrastructure resources** against compliance standards the organization adds to its subscriptions — such as **PCI DSS**, ISO/IEC 27001, or NIST frameworks — on top of the default Microsoft cloud security benchmark. Each standard is broken into its controls, each control shows the **passing and failing resource assessments** behind it, and the team can drive remediation from the failing items and export the status for auditors. Because the question is about *Azure resource configurations*, the infrastructure-side dashboard is the right tool.\n\n**Why not the other options:**\n- **Microsoft Purview Compliance Manager** — Compliance Manager tracks regulatory posture through **improvement actions and a compliance score**, centered on the Microsoft 365 environment and organizational/documentation controls. It is not the tool that technically assesses individual Azure resource configurations against a standard's controls.\n- **The Microsoft Service Trust Portal** — The Service Trust Portal publishes *Microsoft's own* audit reports and compliance documentation about Microsoft's services. It says nothing about whether *the customer's* resources are configured compliantly.\n- **Microsoft Entra ID Governance access reviews** — Access reviews recertify *who retains access* to groups, apps, and roles. They govern identity entitlements, not resource configuration compliance with PCI DSS.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

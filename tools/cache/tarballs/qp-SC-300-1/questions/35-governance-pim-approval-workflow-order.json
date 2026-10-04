@@ -1,0 +1,21 @@
+{
+    "id": "sc300-governance-pim-approval-workflow-order",
+    "type": "ordering",
+    "question": "An administrator is setting up an approval-gated Privileged Identity Management (PIM) workflow for the Exchange Administrator role. Arrange the sequence of events in the correct order, from initial configuration through a completed activation.",
+    "items": [
+        "The eligible user submits an activation request from the My roles page, providing a business justification",
+        "A designated approver receives a notification and reviews the pending request",
+        "The administrator assigns a user as eligible for the Exchange Administrator role in PIM",
+        "The approver approves the request, and the role becomes active for the configured maximum duration",
+        "The administrator configures the role settings to require approval and designates specific approvers"
+    ],
+    "correctOrder": [
+        "The administrator assigns a user as eligible for the Exchange Administrator role in PIM",
+        "The administrator configures the role settings to require approval and designates specific approvers",
+        "The eligible user submits an activation request from the My roles page, providing a business justification",
+        "A designated approver receives a notification and reviews the pending request",
+        "The approver approves the request, and the role becomes active for the configured maximum duration"
+    ],
+    "explanation": "1. **Assign eligibility** — a user must first be made eligible for the role in PIM before any activation workflow is relevant to them.\n2. **Configure role settings** — the administrator defines the activation requirements for the role, including requiring approval and naming specific approvers, and sets the maximum activation duration.\n3. **Request activation** — the eligible user initiates activation from My roles, supplying a justification (and, if configured, other requirements like MFA or a ticket number).\n4. **Approver reviews** — the designated approver is notified of the pending request and evaluates it.\n5. **Approval and activation** — once approved, the role becomes an active assignment for the configured window, after which it automatically expires back to eligible-only.\n\nApproval requirements and approvers must exist in the role settings before a request can be routed to them, and eligibility must exist before there is anything to activate.",
+    "category": "Plan and automate identity governance"
+}

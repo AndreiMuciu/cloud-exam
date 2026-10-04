@@ -1,0 +1,24 @@
+{
+    "id": "az104-identity-pim-role",
+    "question": "You manage the Microsoft Entra tenant for your organization. The tenant uses Microsoft Entra ID Premium P2 licensing. You need to begin using **Microsoft Entra Privileged Identity Management** (PIM) for the first time in the tenant so that privileged role assignments can be managed with just-in-time access.\n\nThe tenant contains the following administrators:\n\n| User | Role |\n|---|---|\n| AdminA | Global Administrator |\n| AdminB | Security Administrator |\n| AdminC | User Administrator |\n| AdminD | Billing Administrator |\n\nWhich user account can enable and configure PIM for the first time?",
+    "options": [
+        {
+            "text": "AdminB (Security Administrator)",
+            "correct": false
+        },
+        {
+            "text": "AdminA (Global Administrator)",
+            "correct": true
+        },
+        {
+            "text": "AdminC (User Administrator)",
+            "correct": false
+        },
+        {
+            "text": "AdminD (Billing Administrator)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Privileged Identity Management** requires a **Global Administrator** to initially set up and configure PIM in a tenant. The first person to use PIM is automatically assigned the **Privileged Role Administrator** and **Security Administrator** roles in the tenant, and can then delegate PIM management to others.\n\nPIM is built into Microsoft Entra ID for tenants with P2 licensing — it does not need to be installed or added as a separate application. However, a Global Administrator must be the first to access and configure it.\n\nThe Security Administrator role can view PIM data and reports but cannot set up PIM initially. The User Administrator and Billing Administrator roles do not have permissions related to PIM at all.\n\nAfter initial setup, the **Privileged Role Administrator** role is sufficient to manage PIM without needing ongoing Global Administrator access.",
+    "category": "Manage Azure Identities and Governance"
+}

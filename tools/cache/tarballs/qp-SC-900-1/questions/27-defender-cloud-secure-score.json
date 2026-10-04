@@ -1,0 +1,24 @@
+{
+    "id": "sc900-27-defender-cloud-secure-score",
+    "question": "In Microsoft Defender for Cloud, what does an organization's secure score indicate?",
+    "options": [
+        {
+            "text": "The organization's current security posture based on how many security recommendations have been remediated — a higher score indicates a lower identified risk level",
+            "correct": true
+        },
+        {
+            "text": "The organization's progress toward completing regulatory improvement actions for standards such as GDPR and ISO 27001",
+            "correct": false
+        },
+        {
+            "text": "The number of active security incidents currently open in the environment",
+            "correct": false
+        },
+        {
+            "text": "The percentage of purchased licenses that are assigned to users",
+            "correct": false
+        }
+    ],
+    "explanation": "The **secure score** in Microsoft Defender for Cloud aggregates the security findings for your resources into a single percentage that represents your **current security posture**: the more of the prioritized security recommendations you remediate (for example, applying system updates or enabling MFA), the higher the score — and the lower your identified risk. It also lets you track posture across multiple subscriptions.\n\n**Why not the other options:**\n- **Progress on regulatory improvement actions** — That describes the **compliance score** in Microsoft Purview Compliance Manager, a frequent point of confusion; secure score measures technical security posture, not regulatory compliance progress.\n- **Number of active security incidents** — Incident counts appear in alerting and incident views (Defender XDR, Sentinel); secure score reflects configuration posture, not live incident volume.\n- **License assignment percentage** — License utilization is administrative reporting in the Microsoft 365 admin center and is unrelated to security posture.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

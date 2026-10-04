@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-30-dimension-table",
+    "question": "A data warehouse uses a star schema in which a central table of sales measures is surrounded by `Customer`, `Product`, `Store`, and `Date` tables.\n\nWhat do these four surrounding dimension tables contain?",
+    "options": [
+        {
+            "text": "Descriptive attributes of business entities — such as names, categories, and locations — used to filter and group the numeric measures",
+            "correct": true
+        },
+        {
+            "text": "The numeric measurements themselves, with one row recorded for every sales event",
+            "correct": false
+        },
+        {
+            "text": "The raw, unprocessed source files exactly as they were ingested",
+            "correct": false
+        },
+        {
+            "text": "The execution logs of the ETL pipelines that load the warehouse",
+            "correct": false
+        }
+    ],
+    "explanation": "**Dimension tables** hold the descriptive context for analysis: who (customer names, segments), what (product names, categories, brands), where (store locations, regions), and when (dates, months, fiscal periods). Analysts filter, group, and slice the central table's numeric measures *by* these attributes — \"revenue by product category by quarter\" is measures from the middle, described by the dimensions around it.\n\n**Why not the other options:**\n- **The numeric measurements with one row per sales event** — That describes the **fact table** at the center of the star, not the dimensions surrounding it.\n- **Raw, unprocessed source files** — Raw data belongs in a data lake or staging/landing zone; a star schema's tables are curated and modeled, not raw.\n- **ETL execution logs** — Pipeline run logs are operational metadata kept by the orchestration tooling; they are not part of the analytical model at all.",
+    "category": "Describe an Analytics Workload on Azure"
+}

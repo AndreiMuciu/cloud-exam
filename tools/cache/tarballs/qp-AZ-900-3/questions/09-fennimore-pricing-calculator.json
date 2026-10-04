@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-09-fennimore-pricing-calculator",
+    "question": "Before any resources are deployed, Fennimore's managing partners want an estimate of the expected monthly Azure charges for the planned virtual machines, storage, and networking, built interactively by selecting the services, sizes, and regions the firm intends to use. Which tool should the IT team use?",
+    "options": [
+        {
+            "text": "The Azure Pricing Calculator",
+            "correct": true
+        },
+        {
+            "text": "The Total Cost of Ownership (TCO) Calculator",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Cost Management",
+            "correct": false
+        },
+        {
+            "text": "Azure Advisor cost recommendations",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Azure Pricing Calculator** is a free, public web tool for **estimating the cost of Azure services before they are deployed**. You interactively add the products you plan to use — VM sizes, disk types, storage capacity, bandwidth — choose regions and pricing options, and it produces an estimated monthly bill that can be saved and shared with stakeholders such as the managing partners.\n\n**Why not the other options:**\n- **The Total Cost of Ownership (TCO) Calculator** — Compares the full cost of running **existing on-premises infrastructure** (including power, cooling, and labor) against Azure. Fennimore is pricing a *planned new Azure environment*, not comparing it with a datacenter it already operates.\n- **Microsoft Cost Management** — Analyzes and alerts on **actual spending of resources that already exist**; with nothing deployed yet, there is no usage data to analyze.\n- **Azure Advisor cost recommendations** — Suggest savings (like resizing underused VMs) for **deployed** resources; Advisor cannot estimate the cost of a future environment.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_fennimore_legal.json"
+}

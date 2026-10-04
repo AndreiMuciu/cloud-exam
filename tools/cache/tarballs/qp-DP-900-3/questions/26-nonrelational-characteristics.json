@@ -1,0 +1,29 @@
+{
+    "id": "dp900-s3-26-nonrelational-characteristics",
+    "type": "multi",
+    "question": "A team accustomed to relational databases is evaluating non-relational (NoSQL) databases for a new workload.\n\nWhich three statements about non-relational databases are true? (Choose 3)",
+    "options": [
+        {
+            "text": "Entities in the same store can have different fields, because the schema is flexible rather than fixed in advance",
+            "correct": true
+        },
+        {
+            "text": "They typically scale out horizontally across many nodes to handle very large data volumes and request rates",
+            "correct": true
+        },
+        {
+            "text": "They come in several models — key/value, document, column-family, and graph — each optimized for particular data shapes and access patterns",
+            "correct": true
+        },
+        {
+            "text": "They require every entity to conform to a schema that is declared before any data can be loaded",
+            "correct": false
+        },
+        {
+            "text": "They rely on SQL JOINs across normalized tables as their primary query pattern",
+            "correct": false
+        }
+    ],
+    "explanation": "Non-relational stores trade the rigid tabular model for flexibility and scale:\n- **Flexible schema** — Two entities in the same collection can carry different fields; new fields can appear on new records without altering any predefined structure.\n- **Horizontal scale-out** — NoSQL systems are designed to partition data across many nodes, adding capacity by adding nodes rather than by growing a single server.\n- **Multiple models** — \"Non-relational\" is a family: key/value, document, column-family, and graph stores each shape data differently and excel at different access patterns, so the model is chosen to match the workload.\n\n**Why not the other options:**\n- **Schema declared before loading** — That is schema-on-write, the hallmark of relational databases; NoSQL stores generally accept records first and let structure vary (schema-on-read).\n- **SQL JOINs across normalized tables** — Joins over normalized tables are the relational query pattern. Non-relational designs usually avoid joins, instead embedding related data together or modeling relationships natively (as a graph store does).",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

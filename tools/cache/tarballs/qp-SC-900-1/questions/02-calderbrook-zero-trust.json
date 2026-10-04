@@ -1,0 +1,25 @@
+{
+    "id": "sc900-02-calderbrook-zero-trust",
+    "question": "To modernize its security strategy, Calderbrook Health plans to authenticate and authorize every access request based on all available data points — user identity, location, device health, and data sensitivity — instead of trusting anything inside the network by default.\n\nWhich Zero Trust guiding principle does this approach illustrate?",
+    "options": [
+        {
+            "text": "Assume breach",
+            "correct": false
+        },
+        {
+            "text": "Verify explicitly",
+            "correct": true
+        },
+        {
+            "text": "Use least privilege access",
+            "correct": false
+        },
+        {
+            "text": "Defense in depth",
+            "correct": false
+        }
+    ],
+    "explanation": "**Verify explicitly** means always authenticating and authorizing based on all available data points — identity, location, device health, service or workload, data classification, and anomalies — rather than assuming trust because a request originates inside the corporate network. That is exactly what Calderbrook Health is describing.\n\n**Why not the other options:**\n- **Assume breach** — This principle is about minimizing blast radius and segmenting access because you operate as though an attacker is already inside; it is not about evaluating every signal on each request.\n- **Use least privilege access** — This principle limits users to just-in-time and just-enough access; it governs how much access is granted, not how requests are verified.\n- **Defense in depth** — Layered security is a complementary methodology, but it is not one of the three Zero Trust guiding principles (verify explicitly, use least privilege access, assume breach).",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_calderbrook_health.json"
+}

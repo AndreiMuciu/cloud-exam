@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-storage-blob-versioning",
+    "type": "single",
+    "question": "A document management application overwrites blobs in an Azure Blob Storage container whenever users save changes. You have the following requirements:\n\n- Every time a blob is overwritten, its previous state must be preserved **automatically**, without the client taking any action before writing\n- Each preserved state must have its own identifier and remain individually restorable\n\nWhich storage feature should you enable?",
+    "options": [
+        { "text": "Blob versioning", "correct": true },
+        { "text": "Blob snapshots", "correct": false },
+        { "text": "Blob soft delete", "correct": false },
+        { "text": "Container soft delete", "correct": false }
+    ],
+    "explanation": "**Blob versioning** does exactly this: once enabled on the storage account, every write or delete of a blob automatically promotes the current state to a *previous version* with a unique, immutable **version ID**, while the new data becomes the current version. Applications need no changes — preservation is entirely service-side — and any earlier version can be listed, read, or promoted back to be the current version at any time.\n\n**Why not the other options:**\n- **Blob snapshots**: A snapshot is a point-in-time copy that must be **explicitly created by a client** before the overwrite happens. The requirement says clients must take no action, so snapshots don't qualify (versioning is effectively the automatic successor to snapshot-based workflows).\n- **Blob soft delete**: Soft delete is a safety net for accidental deletion — it retains deleted (and, when versioning is off, overwritten) data only for a limited retention window, after which it is permanently removed. It is not a browsable, permanent version history with per-state identifiers.\n- **Container soft delete**: This protects **deleted containers** so an entire container can be undeleted within the retention period. It does nothing for overwrites of individual blobs.",
+    "category": "Implement and Manage Storage"
+}

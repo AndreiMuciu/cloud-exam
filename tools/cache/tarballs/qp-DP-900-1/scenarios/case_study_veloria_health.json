@@ -1,0 +1,13 @@
+{
+    "id": "case_study_veloria_health",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Veloria Health Systems** operates a network of private outpatient clinics. Patient scheduling, billing, and clinical records run on an on-premises Microsoft SQL Server instance that hosts several databases.\n\n**Current Environment:**\n- Nightly maintenance and billing jobs are automated with **SQL Server Agent**.\n- Several reports rely on **cross-database queries** that join billing data with scheduling data.\n- The IT team spends significant time patching Windows Server and SQL Server and wants to stop managing operating systems entirely."
+        },
+        {
+            "title": "Requirements",
+            "content": "Veloria Health Systems plans a migration to Azure with these requirements:\n- **Minimal application changes**: near-complete compatibility with the existing SQL Server instance, including SQL Server Agent jobs and cross-database queries.\n- **Reduced administration**: a platform-as-a-service offering where Microsoft manages the operating system and database patching.\n- **Data quality**: patient contact details are currently duplicated in the scheduling, billing, and clinical tables, and updates in one place are often missed in the others.\n- **Least-privilege access**: front-desk scheduling staff should see appointment and contact columns but never diagnosis or billing columns, without maintaining duplicate copies of the data."
+        }
+    ]
+}

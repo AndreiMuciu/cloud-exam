@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-02-hexbury-onelake-shortcut",
+    "question": "Hexbury Interactive must make the platform team's player-profile and purchase datasets usable from Microsoft Fabric without copying them out of the existing Azure Data Lake Storage Gen2 account, and without changing who owns that account.\n\nWhat should the data engineers create?",
+    "options": [
+        {
+            "text": "A OneLake shortcut that points to the Data Lake Storage Gen2 location",
+            "correct": true
+        },
+        {
+            "text": "A scheduled pipeline that copies the datasets into the lakehouse every night",
+            "correct": false
+        },
+        {
+            "text": "A manual export of the datasets to CSV files uploaded into Fabric",
+            "correct": false
+        },
+        {
+            "text": "A second storage account that mirrors the data with geo-redundant storage",
+            "correct": false
+        }
+    ],
+    "explanation": "A **OneLake shortcut** is a reference (similar to a symbolic link) that makes data stored elsewhere — such as an Azure Data Lake Storage Gen2 account, Amazon S3, or another Fabric location — appear inside a lakehouse as if it were stored there. The data stays in the source account, ownership does not change, no copies are made, and Fabric engines read the data in place. This meets the no-duplication requirement exactly.\n\n**Why not the other options:**\n- **A scheduled pipeline that copies the datasets nightly** — A copy pipeline would work functionally, but it directly violates the requirement: it duplicates the data into the lakehouse and introduces a nightly staleness window.\n- **A manual export to CSV files** — This also copies the data, adds ongoing manual effort, and loses the source datasets' native format and freshness.\n- **A second storage account with geo-redundant storage** — GRS is a redundancy setting that protects a storage account against regional disasters; it does not make external data accessible to Fabric and would still be a duplicate copy.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_hexbury_interactive.json"
+}

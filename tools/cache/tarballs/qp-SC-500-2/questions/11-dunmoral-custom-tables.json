@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-11-dunmoral-custom-tables",
+    "question": "You need to implement the custom ingestion pipeline for Dunmoral Airways' booking logs: a dedicated custom table with a SOC-controlled schema, and the `passengerDocument` field removed before the data is stored in the workspace. What should you build?",
+    "options": [
+        {
+            "text": "Create a data collection rule (DCR)-based custom table (for example, BookingActivity_CL), send the JSON records from the log shipper to the Logs Ingestion API through a data collection endpoint, and add a KQL transformation in the DCR that drops the passengerDocument field at ingestion time",
+            "correct": true
+        },
+        {
+            "text": "Send the records with the legacy HTTP Data Collector API, then schedule a nightly job that overwrites the stored rows to blank out the passengerDocument column",
+            "correct": false
+        },
+        {
+            "text": "Install the Azure Monitor Agent on the booking servers with a Windows event data collection rule, and exclude the passport events by event ID",
+            "correct": false
+        },
+        {
+            "text": "Stream the logs to an event hub and have a scheduled analytics rule in Microsoft Sentinel filter the sensitive field before analysts query the table",
+            "correct": false
+        }
+    ],
+    "explanation": "The modern pipeline for API-based custom ingestion is the **Logs Ingestion API**: you define a **DCR-based custom table** whose schema you control, expose a **data collection endpoint (DCE)**, and reference a **data collection rule** that maps and transforms the incoming stream. The DCR's **ingestion-time transformation** (a KQL statement, e.g. `source | project-away passengerDocument`) removes the passport field *before* anything is written to the workspace — which is the only way to honor \"must not be stored in the SIEM at all.\" The result lands in the custom `_CL` table with the SOC-owned schema.\n\n**Why not the other options:**\n- **Legacy Data Collector API plus nightly scrubbing** — the legacy API creates classic custom tables without ingestion-time transformations, and Log Analytics records are immutable: you cannot overwrite stored rows, and even if purging were scripted, the sensitive data would still have been stored, violating the requirement.\n- **Azure Monitor Agent with a Windows event DCR** — the booking platform emits JSON through a REST-capable shipper, not Windows event logs; an event-ID filter has nothing to filter here and cannot strip a field from JSON records.\n- **Event hub plus an analytics rule** — analytics rules detect threats over data *already stored*; they do not transform or redact incoming records, so the passport numbers would be persisted in the workspace.",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_dunmoral_airways.json"
+}

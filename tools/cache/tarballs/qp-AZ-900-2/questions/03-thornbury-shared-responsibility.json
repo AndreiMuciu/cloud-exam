@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-03-thornbury-shared-responsibility",
+    "question": "Thornbury Logistics will store shipment and customer records in a managed PaaS database service. According to the shared responsibility model, which task remains **Thornbury’s responsibility** after the move?",
+    "options": [
+        {
+            "text": "Patching the underlying database engine and operating system",
+            "correct": false
+        },
+        {
+            "text": "Classifying the shipment data and managing which user accounts can access it",
+            "correct": true
+        },
+        {
+            "text": "Maintaining the physical network inside the Azure datacenter",
+            "correct": false
+        },
+        {
+            "text": "Replacing failed host server hardware",
+            "correct": false
+        }
+    ],
+    "explanation": "In the shared responsibility model, some things **always remain with the customer** regardless of the service type: the data itself (including its classification and protection), the devices that connect to the cloud, and the accounts and identities of the people using the service. Even with a fully managed PaaS database, Thornbury must decide how sensitive its shipment data is and control who can access it.\n\n**Why not the other options:**\n- **Patching the database engine and OS** — With PaaS, the cloud provider manages the operating system and the database engine; this responsibility transfers to Microsoft.\n- **Physical network in the datacenter** — Physical hosts, networks, and datacenter facilities are always Microsoft’s responsibility in the public cloud.\n- **Replacing failed hardware** — Hardware lifecycle management is part of the physical infrastructure Microsoft owns and operates.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_thornbury_logistics.json"
+}

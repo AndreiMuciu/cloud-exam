@@ -1,0 +1,24 @@
+{
+    "id": "ai103-23-evaluate-fabrications-groundedness",
+    "question": "Before releasing a RAG-based application, you need an automated way to measure how often the model's answers include claims not actually supported by the retrieved context, so you can catch fabrications before users do.\n\nWhich evaluation approach should you use?",
+    "options": [
+        {
+            "text": "Run a groundedness evaluator that compares each generated answer against its retrieved source content and scores how well the answer is supported by that content.",
+            "correct": true
+        },
+        {
+            "text": "Measure only the average response latency across a sample of test queries.",
+            "correct": false
+        },
+        {
+            "text": "Count the number of words in each response and flag responses that are unusually short.",
+            "correct": false
+        },
+        {
+            "text": "Ask five colleagues to informally skim ten sample conversations and share their general impression.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **groundedness evaluator** is built specifically to compare a generated answer against its retrieved source content and score how well-supported the answer is — directly measuring the fabrication risk the team wants to catch before release, and it can run automatically across a large test set.\n\n**Why not the other options:**\n- **Latency measurement** — Tells you how fast the system responds, nothing about whether the response content is accurate or fabricated.\n- **Word-count flags** — Response length has no reliable relationship to factual accuracy; a short answer can be perfectly grounded, and a long one can be full of fabrications.\n- **Informal colleague skim** — Not systematic, not repeatable, not scalable, and produces no measurable score to track over time or compare across releases.",
+    "category": "Implement generative AI and agentic solutions"
+}

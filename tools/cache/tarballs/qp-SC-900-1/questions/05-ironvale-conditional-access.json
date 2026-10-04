@@ -1,0 +1,25 @@
+{
+    "id": "sc900-05-ironvale-conditional-access",
+    "question": "Ironvale Manufacturing wants its 80 external contractors to be prompted for multifactor authentication (MFA) only when they sign in from outside the corporate network, while avoiding unnecessary prompts for employees on the factory floor.\n\nWhat should Ironvale configure in Microsoft Entra ID?",
+    "options": [
+        {
+            "text": "A Conditional Access policy",
+            "correct": true
+        },
+        {
+            "text": "Security defaults",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Password Protection",
+            "correct": false
+        },
+        {
+            "text": "An access review",
+            "correct": false
+        }
+    ],
+    "explanation": "**Conditional Access policies** are if-then statements that evaluate signals such as user or group membership and network location, and then apply controls such as requiring MFA. Ironvale can scope a policy to the contractor group and set a condition that excludes the trusted corporate network, so MFA is enforced only for external sign-ins.\n\n**Why not the other options:**\n- **Security defaults** — Security defaults enforce a fixed baseline (including MFA registration) for all users in the tenant and cannot be scoped to specific groups or network locations.\n- **Microsoft Entra Password Protection** — This feature blocks weak and banned passwords; it has nothing to do with when MFA is required.\n- **An access review** — Access reviews recertify whether users still need group memberships or role assignments; they do not control authentication prompts at sign-in.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_ironvale.json"
+}

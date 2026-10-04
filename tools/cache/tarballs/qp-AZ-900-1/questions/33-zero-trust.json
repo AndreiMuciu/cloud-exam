@@ -1,0 +1,24 @@
+{
+    "id": "az900-33-zero-trust",
+    "question": "What is the primary guiding principle of the **Zero Trust** security model?",
+    "options": [
+        {
+            "text": "Trust all users inside the network perimeter",
+            "correct": false
+        },
+        {
+            "text": "Never trust, always verify",
+            "correct": true
+        },
+        {
+            "text": "Trust users who have signed in once today",
+            "correct": false
+        },
+        {
+            "text": "Grant all users administrative access by default",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Zero Trust** model operates on the principle of \"never trust, always verify.\" It assumes every access request is a potential breach and requires verification based on all available data points (user identity, location, device health, service, and workload).\n\n**Why not the other options:**\n- **Trust inside perimeter** — This is the traditional 'Castle-and-Moat' model, which is less secure than Zero Trust.\n- **Trust once today** — Zero Trust requires continuous verification for every access attempt.\n- **Grant admin access** — This violates the principle of Least Privilege Access.",
+    "category": "Describe Azure Management and Governance"
+}

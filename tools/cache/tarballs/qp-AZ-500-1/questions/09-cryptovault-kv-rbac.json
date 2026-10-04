@@ -1,0 +1,25 @@
+{
+    "id": "az500-09-cryptovault-kv-rbac",
+    "question": "CryptoVault Banking wants to restrict access to their Key Vault using Azure Role-Based Access Control (RBAC). Which built-in role would you assign to a security administrator to allow them to manage all aspects of the Key Vault hardware (like HSM settings) but WITHOUT giving them access to the sensitive keys and secrets stored inside?",
+    "options": [
+        {
+            "text": "Key Vault Administrator",
+            "correct": false
+        },
+        {
+            "text": "Key Vault Reader",
+            "correct": false
+        },
+        {
+            "text": "Key Vault Crypto Officer",
+            "correct": false
+        },
+        {
+            "text": "Key Vault Contributor",
+            "correct": true
+        }
+    ],
+    "explanation": "The **Key Vault Contributor** role allows a user to manage the Key Vault service itself (e.g., HSM settings, access policies, resource properties), but it does **not** grant permissions to the data (keys, secrets, or certificates) inside the vault.\n\n**Why not the other options:**\n- **Key Vault Administrator** — Has full control, including reading the keys and secrets.\n- **Key Vault Reader** — Can only read metadata, not manage HSM settings.\n- **Key Vault Crypto Officer** — Specifically for managing and reading keys.",
+    "category": "Secure compute, storage, and databases",
+    "caseStudy": "scenarios/case_study_cryptovault_banking.json"
+}

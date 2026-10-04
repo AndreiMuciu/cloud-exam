@@ -1,0 +1,25 @@
+{
+    "id": "sc300-auth-global-secure-access-matching",
+    "type": "matching",
+    "question": "Match each Global Secure Access traffic forwarding profile (or related Conditional Access target) to the capability it is specifically known for.",
+    "sourceItems": [
+        "Microsoft traffic profile (Entra Internet Access for Microsoft services)",
+        "Internet Access traffic profile",
+        "Private Access traffic profile",
+        "Conditional Access \"All internet resources with Global Secure Access\""
+    ],
+    "targetSlots": [
+        "Provides source IP restoration and Universal Tenant Restrictions for traffic to Microsoft 365 and other Microsoft services",
+        "Provides a Secure Web Gateway with web-content category and FQDN filtering for general internet and SaaS destinations",
+        "Provides Quick Access and per-app TCP/UDP access to private, on-premises/hybrid applications without a traditional VPN",
+        "Lets a Conditional Access policy specifically target internet-bound traffic routed through the Internet Access profile"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- The **Microsoft traffic profile** connects devices directly to Microsoft services, enabling **source IP restoration** in sign-in logs and **Universal Tenant Restrictions** to block exfiltration to unauthorized tenants — it is included with a Microsoft Entra ID P1/P2 license.\n- The **Internet Access profile** is Microsoft's identity-aware Secure Web Gateway (SWG) for general internet and SaaS traffic, adding web-content filtering, FQDN filtering, and threat intelligence.\n- The **Private Access profile** extends Application Proxy-style access to any private TCP/UDP resource (not just HTTP web apps), offering Quick Access to IP ranges/FQDNs without deploying a legacy VPN.\n- Conditional Access can target **\"All internet resources with Global Secure Access\"** specifically to apply policy to traffic flowing through the Internet Access forwarding profile.\n\nEach profile is licensed and scoped differently — the Microsoft traffic profile is bundled with standard Entra ID premium licenses, while the Internet Access and Private Access profiles are separate (or Entra Suite) licenses with distinct capabilities.",
+    "category": "Implement authentication and access management"
+}

@@ -1,0 +1,21 @@
+{
+    "id": "ai200-s2-23-matching-data-services",
+    "type": "matching",
+    "question": "Match each AI-application storage requirement to the Azure service that best fits it.",
+    "sourceItems": [
+        "Globally distributed JSON document store with single-digit-millisecond point reads by key and native vector search over embedded documents",
+        "Relational tables with joins, SQL constraints, and pgvector similarity search filtered by tenant metadata in the same query",
+        "In-memory store for caching LLM answers with sub-millisecond reads, automatic 24-hour key expiry, and vector similarity lookup",
+        "Durable, low-cost storage for the original PDF and image files consumed by the document-ingestion pipeline",
+        "Broker that delivers work-item messages to competing consumers with dead-letter handling for failures"
+    ],
+    "targetSlots": [
+        "Azure Cosmos DB for NoSQL",
+        "Azure Database for PostgreSQL flexible server",
+        "Azure Managed Redis",
+        "Azure Blob Storage"
+    ],
+    "correctMapping": [0, 1, 2, 3],
+    "explanation": "- **Azure Cosmos DB for NoSQL** — Schema-flexible JSON documents, partitioned global distribution, ~1 RU single-digit-millisecond point reads by `id` + partition key, and built-in vector indexing with `VectorDistance` queries. That combination is Cosmos territory.\n- **Azure Database for PostgreSQL flexible server** — When the workload needs *relational* semantics — joins, foreign keys, rich SQL — plus vector similarity, pgvector lets one SQL statement combine `WHERE tenant_id = $1` metadata filters with an `ORDER BY embedding <=> $2` similarity ranking.\n- **Azure Managed Redis** — The in-memory tier: sub-millisecond access, native key expiry (`SET ... EX 86400`) for the 24-hour cache lifetime, and vector fields in its search indexes for semantic cache lookups.\n- **Azure Blob Storage** — Raw source artifacts (PDFs, images) belong in cheap, durable object storage; databases are a poor and expensive place for large binary files.\n\nThe fifth requirement — **competing-consumer work-item delivery with dead-lettering** — is the decoy: that is a messaging broker (Azure Service Bus), not a data-storage service, and none of the four listed services fit it.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

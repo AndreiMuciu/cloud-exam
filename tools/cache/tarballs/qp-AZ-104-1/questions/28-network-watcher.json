@@ -1,0 +1,24 @@
+{
+    "id": "az104-network-watcher",
+    "question": "Your team reports that **VM-Analytics** in VNet-Corp cannot communicate with a backend database server on TCP port 1433. The VM is in a subnet with an NSG applied. You need to verify whether the connectivity issue is caused by the NSG rules.\n\nWhich Azure Network Watcher feature should you use?",
+    "options": [
+        {
+            "text": "Connection monitor",
+            "correct": false
+        },
+        {
+            "text": "Traffic analytics",
+            "correct": false
+        },
+        {
+            "text": "IP flow verify",
+            "correct": true
+        },
+        {
+            "text": "Network performance monitor",
+            "correct": false
+        }
+    ],
+    "explanation": "**IP flow verify** is the correct Network Watcher tool for determining whether an NSG is blocking traffic. It checks whether a packet is allowed or denied to/from a VM by evaluating the NSG rules at both the NIC and subnet level. You specify:\n\n- Direction (inbound/outbound)\n- Protocol (TCP/UDP)\n- Local and remote IP addresses\n- Local and remote port numbers\n\nIP flow verify returns whether the packet is **allowed** or **denied**, and which specific NSG rule caused the decision.\n\nWhy not the other options:\n- **Connection monitor** — Monitors connectivity over time (ongoing), not for one-time diagnostic checks\n- **Traffic analytics** — Analyzes NSG flow logs for traffic patterns and trends, not real-time rule evaluation\n- **Network performance monitor** — Monitors network performance between on-premises and Azure, not NSG rule verification",
+    "category": "Implement and Manage Virtual Networking"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-11-bellcairn-syslog-ama",
+    "question": "You need to ingest authentication and sudo events (auth and authpriv facilities, warning severity and above) from Bellcairn Utilities' 40 Linux VMs into Microsoft Sentinel, exclude all other syslog facilities to control cost, and use the current Microsoft-supported agent deployed centrally. What should you implement?",
+    "options": [
+        {
+            "text": "Enable the Syslog via AMA data connector, create a data collection rule that targets the 40 VMs — deploying the Azure Monitor Agent through the DCR association — and configure the rule to collect only the auth and authpriv facilities at LOG_WARNING level and above, landing the events in the Syslog table",
+            "correct": true
+        },
+        {
+            "text": "Install the legacy Log Analytics (OMS) agent on the VMs and configure the syslog facilities in the workspace's agent configuration blade",
+            "correct": false
+        },
+        {
+            "text": "Deploy a dedicated Linux log forwarder, point all 40 VMs' syslog daemons at it, and use the Common Event Format (CEF) via AMA connector",
+            "correct": false
+        },
+        {
+            "text": "Enable Defender for Servers Plan 2 on the VMs, because it automatically streams all local syslog data to the connected Sentinel workspace",
+            "correct": false
+        }
+    ],
+    "explanation": "For Linux syslog collection into Sentinel, the supported path is the **Syslog via AMA** connector: a **data collection rule (DCR)** defines *what* to collect — here, only the `auth` and `authpriv` **facilities** with minimum severity `LOG_WARNING` — and *from which machines*. Associating the DCR with the 40 Azure VMs deploys and configures the **Azure Monitor Agent** centrally (no per-machine manual edits); the agent also configures the local syslog daemon to forward the selected facilities. Facility/severity filtering happens in the DCR, so mail/cron/daemon noise never reaches the workspace, meeting the cost requirement. Events land in the **Syslog** table, ready for analytics rules.\n\n**Why not the other options:**\n- **Legacy Log Analytics (OMS) agent** — the MMA/OMS agent is retired; it is not the 'current Microsoft-supported collection agent,' and workspace-level facility configuration is the deprecated model that DCRs replaced.\n- **Dedicated forwarder with the CEF via AMA connector** — CEF is for appliances that emit Common Event Format messages and cannot host an agent (firewalls, proxies), which forward to a collector machine. These are ordinary Azure Linux VMs that can run the AMA directly; inserting a forwarder adds a hop and a single point of failure for no benefit, and the events are plain syslog, not CEF.\n- **Defender for Servers Plan 2** — a threat-protection plan; it generates its own alerts and enables agentless scanning but does not ship the guest's raw syslog stream to Sentinel. Log collection is Azure Monitor Agent + DCR territory.",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_bellcairn_utilities.json"
+}

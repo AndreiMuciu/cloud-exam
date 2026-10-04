@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-milvara-purview",
+    "question": "You need to recommend a solution for the compliance team's data-governance requirements: scheduled scans of the Azure SQL databases, the data lake, and the Power BI tenant; automatic classification of columns containing PHI; end-to-end data lineage; and a searchable business glossary.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Microsoft Purview, with registered data sources, scheduled scans, and built-in classification rules",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Cloud with the Defender for Databases plan enabled on all subscriptions",
+            "correct": false
+        },
+        {
+            "text": "Azure Policy assignments that audit storage accounts and SQL servers for sensitive data",
+            "correct": false
+        },
+        {
+            "text": "SQL Database data discovery and classification combined with storage account inventory reports",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Purview** (the unified data-governance service) is the only option that delivers all four requirements as native features:\n\n- **Scheduled, multi-source scans** — Azure SQL Database, ADLS Gen2, and Power BI are all first-class registered source types; scans run on schedules across subscriptions through a single governance account\n- **Automatic classification** — scans apply built-in (and custom) classification rules and sensitivity labels to columns containing identifiers such as medical record numbers and other PHI\n- **End-to-end lineage** — Purview captures lineage (for example from Data Factory/Synapse pipeline runs through datasets to Power BI reports), visualizing how data flows from source to report\n- **Business glossary** — a curated, searchable glossary lets analysts find and understand assets in the data catalog with business terminology\n\n**Why not the other options:**\n- **Defender for Cloud** — A cloud security posture management (CSPM) and workload-protection service. It surfaces vulnerabilities and threats for databases; it does not build a data catalog, map lineage, or provide a business glossary\n- **Azure Policy** — Policy evaluates *resource configuration* (encryption enabled, public access disabled, and so on). It cannot look inside tables and files to classify data content, and it has no catalog, lineage, or glossary capability\n- **Per-service discovery features** — SQL data discovery and classification works only inside each SQL database, and storage inventory lists blobs without content classification. The result is fragmented, per-resource metadata with no organization-wide catalog, no Power BI coverage, no cross-system lineage, and no glossary — exactly the silo problem a governance service exists to solve",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_milvara_health.json"
+}

@@ -1,0 +1,34 @@
+{
+    "id": "sc500-s2-06-pellagrin-database-encryption",
+    "type": "multi",
+    "question": "You need to meet Pellagrin Insurance's three database protection requirements for the claims database: national ID numbers never exposed in plaintext to database administrators (even in query results or server memory), cryptographic tamper-evidence for the `PaymentAdjustments` table, and encryption at rest under a key Pellagrin controls and can revoke. Which three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Configure Always Encrypted on the national ID column, keeping the column master key in Azure Key Vault so only the claims-fraud application can decrypt the values client-side",
+            "correct": true
+        },
+        {
+            "text": "Convert PaymentAdjustments to an updatable ledger table so that all changes are recorded in cryptographically chained history that can be verified against tampering",
+            "correct": true
+        },
+        {
+            "text": "Configure transparent data encryption (TDE) with a customer-managed key stored in Pellagrin's Azure key vault",
+            "correct": true
+        },
+        {
+            "text": "Apply dynamic data masking to the national ID column so administrators see masked values in query results",
+            "correct": false
+        },
+        {
+            "text": "Enable row-level security so administrators cannot query rows that contain national ID numbers",
+            "correct": false
+        },
+        {
+            "text": "Enable active geo-replication of the database to a paired region",
+            "correct": false
+        }
+    ],
+    "explanation": "Each requirement maps to a distinct Azure SQL capability:\n- **Always Encrypted** encrypts the column **client-side**: the database engine only ever holds ciphertext, so plaintext never appears in query results, server memory, or crash dumps. Only clients that can access the column master key (held in Key Vault, granted to the claims-fraud application's identity) decrypt values.\n- **Ledger tables** append every change of an updatable ledger table to an immutable, cryptographically hashed history with database digests, letting auditors *verify* mathematically that historical rows were not altered or deleted.\n- **TDE with a customer-managed key (BYOK)** encrypts data at rest with a key in Pellagrin's own vault; revoking the vault access effectively takes the database offline, giving Pellagrin control over the encryption root of trust.\n\n**Why not the other options:**\n- **Dynamic data masking** — a presentation-layer control: data is stored and processed in plaintext, privileged users can be exempted or can infer values via queries, and memory dumps would contain plaintext. It fails the \"never exposed, even in memory\" requirement.\n- **Row-level security** — filters *which rows* a user sees; it does not encrypt anything, and administrators who manage the security policy can alter it. The requirement is about protecting a column's plaintext, not row visibility.\n- **Geo-replication** — an availability/disaster-recovery feature; it contributes nothing to confidentiality, tamper-evidence, or key control.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_pellagrin_insurance.json"
+}

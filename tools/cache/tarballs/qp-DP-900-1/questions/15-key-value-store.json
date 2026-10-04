@@ -1,0 +1,24 @@
+{
+    "id": "dp900-15-key-value-store",
+    "question": "For which data access pattern is a key/value store optimized?",
+    "options": [
+        {
+            "text": "Retrieving a single value quickly by looking up its unique key",
+            "correct": true
+        },
+        {
+            "text": "Joining multiple entities together in complex queries",
+            "correct": false
+        },
+        {
+            "text": "Enforcing referential integrity between related tables",
+            "correct": false
+        },
+        {
+            "text": "Traversing multi-hop relationships between connected entities",
+            "correct": false
+        }
+    ],
+    "explanation": "A **key/value store** holds each data item as a key paired with an opaque value. It is optimized for **simple, extremely fast lookups and writes by key** — the application supplies the key, and the store returns the value without needing to understand its contents. Azure Table Storage and Azure Cosmos DB for Table are examples.\n\n**Why not the other options:**\n- **Complex joins across entities** — Key/value stores treat values as opaque and provide no join capability; joins are the domain of relational databases.\n- **Enforcing referential integrity** — Foreign-key constraints between related tables are a relational database feature; key/value stores have no schema or relationships to enforce.\n- **Multi-hop relationship traversal** — That is what graph databases (such as Azure Cosmos DB for Apache Gremlin) are built for, using vertices and edges rather than keys and opaque values.",
+    "category": "Describe Core Data Concepts"
+}

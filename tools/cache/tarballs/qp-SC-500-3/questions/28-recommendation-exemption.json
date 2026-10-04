@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-28-recommendation-exemption",
+    "question": "Microsoft Defender for Cloud flags the recommendation \"Management ports should be closed on your virtual machines\" for a set of isolated lab VMs. The lab VMs sit behind a dedicated firewall appliance that already restricts the ports (a compensating control), and the risk owner has accepted the residual risk for these machines only. The finding keeps dragging down the secure score and distracting the operations queue. The recommendation must remain active for every other VM. What should you do?",
+    "options": [
+        {
+            "text": "Create an exemption for the recommendation scoped to the lab VMs (or their resource group), select 'Mitigated' as the reason, document the compensating control and an expiration date, and leave the recommendation evaluating everywhere else",
+            "correct": true
+        },
+        {
+            "text": "Disable the recommendation's underlying policy at the management group so the finding disappears from the portal",
+            "correct": false
+        },
+        {
+            "text": "Assign the lab VMs' recommendation to an owner with a due date using governance rules, and extend the due date every quarter",
+            "correct": false
+        },
+        {
+            "text": "Move the lab VMs to a subscription that is not onboarded to Defender for Cloud",
+            "correct": false
+        }
+    ],
+    "explanation": "**Exemptions** are the sanctioned mechanism for exactly this case: a recommendation that is correct in general but addressed by a **compensating control** (or an accepted risk) for specific resources. An exemption is **scoped** — to individual resources, a resource group, or a subscription — so the lab VMs stop counting against the secure score and drop out of the unhealthy list, while every other VM keeps being evaluated. Choosing the **'Mitigated'** category records *why* (the firewall appliance), and setting an **expiration date** forces periodic re-justification instead of a permanent blind spot. The whole decision is auditable, which is what distinguishes governed risk acceptance from quietly hiding findings.\n\n**Why not the other options:**\n- **Disabling the policy at the management group** — this turns the check off for *every* VM in scope, directly violating the requirement that the recommendation stay active elsewhere. It also erases visibility rather than documenting a decision.\n- **Governance rules with perpetual due-date extensions** — governance rules exist to drive *remediation* accountability (owners, due dates, grace periods). Using them to indefinitely postpone something you have decided not to fix misrepresents the state: this is an accepted/mitigated risk, not overdue work.\n- **Moving VMs off Defender for Cloud** — removing machines from security monitoring to silence one finding throws away threat detection and all other posture assessment for those VMs; the cure is vastly worse than the noise.",
+    "category": "Manage and monitor security posture"
+}

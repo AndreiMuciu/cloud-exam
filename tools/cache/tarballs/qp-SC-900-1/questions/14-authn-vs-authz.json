@@ -1,0 +1,24 @@
+{
+    "id": "sc900-14-authn-vs-authz",
+    "question": "A user signs in to a company portal by entering a username, a password, and a verification code from an authenticator app. The system confirms that the user really is who they claim to be.\n\nWhich identity concept does this process represent?",
+    "options": [
+        {
+            "text": "Authorization",
+            "correct": false
+        },
+        {
+            "text": "Authentication",
+            "correct": true
+        },
+        {
+            "text": "Federation",
+            "correct": false
+        },
+        {
+            "text": "Auditing",
+            "correct": false
+        }
+    ],
+    "explanation": "**Authentication (AuthN)** is the process of proving that a person or service is who they claim to be — verifying identity through credentials such as passwords, verification codes, biometrics, or security keys. Confirming the user's identity at sign-in is exactly authentication.\n\n**Why not the other options:**\n- **Authorization (AuthZ)** — Authorization happens *after* authentication and determines what level of access an authenticated identity has — which data it can see and which actions it can perform.\n- **Federation** — Federation establishes trust between separate identity providers so users in one domain can access resources in another without a second set of credentials; it is not the act of verifying a claim of identity itself.\n- **Auditing** — Auditing records who did what and when for later review; it neither proves identity nor grants access.",
+    "category": "Describe the concepts of security, compliance, and identity"
+}

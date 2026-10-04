@@ -1,0 +1,24 @@
+{
+    "id": "az500-28-frontdoor-vs-appgw",
+    "question": "You are designing a global application that will be accessed by users worldwide. You need to provide WAF protection and global load balancing with SSL termination at the edge (closest to the user). Which service should you choose?",
+    "options": [
+        {
+            "text": "Azure Application Gateway",
+            "correct": false
+        },
+        {
+            "text": "Azure Front Door",
+            "correct": true
+        },
+        {
+            "text": "Azure Traffic Manager",
+            "correct": false
+        },
+        {
+            "text": "Azure Load Balancer",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Front Door** is a global, scalable entry point that uses the Microsoft global edge network to create fast, secure, and widely available web apps. It includes a built-in WAF and handles global traffic management.\n\n**Why not the other options:**\n- **Application Gateway** — A regional service; while you can use it with Traffic Manager, Front Door is the native 'global' L7 solution.\n- **Traffic Manager** — DNS-based only; does not perform SSL termination or WAF inspection.\n- **Load Balancer** — L4 only; no WAF or SSL termination capabilities.",
+    "category": "Secure networking"
+}

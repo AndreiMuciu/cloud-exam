@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-22-defender-portal-unified-secops",
+    "question": "A security operations team currently pivots between two consoles: Microsoft Sentinel in the Azure portal for SIEM data, and a separate console for Defender XDR alerts about endpoints, email, and identities. Analysts want one place where the Sentinel workspace and the Defender XDR workloads share a single unified incident queue, advanced hunting over both data sets, and a common investigation experience.\n\nWhich Microsoft capability delivers this?",
+    "options": [
+        {
+            "text": "The Microsoft Defender portal, where a Microsoft Sentinel workspace can be onboarded to create a unified SIEM and XDR security operations experience",
+            "correct": true
+        },
+        {
+            "text": "The Microsoft Purview portal, which centralizes all security alerts",
+            "correct": false
+        },
+        {
+            "text": "The Microsoft Entra admin center, which unifies incidents across all products",
+            "correct": false
+        },
+        {
+            "text": "Exporting both consoles' alerts to a spreadsheet for combined review",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Microsoft Defender portal** is the home of Microsoft's **unified security operations** experience. Beyond hosting the Defender XDR services, it lets an organization **onboard its Microsoft Sentinel workspace**, bringing SIEM and XDR together: incidents from Sentinel analytics rules and from Defender XDR appear in **one unified incident queue**, advanced hunting can query Sentinel and Defender data side by side, and investigation and response happen in a single console instead of two.\n\n**Why not the other options:**\n- **The Microsoft Purview portal** — The Purview portal is the home of *compliance and data governance* solutions such as data loss prevention, records management, and eDiscovery. It is not a security operations console and does not host Sentinel or Defender XDR incidents.\n- **The Microsoft Entra admin center** — The Entra admin center manages *identity*: users, groups, Conditional Access, and identity governance. It shows identity-related reports but is not a unified incident and hunting platform for SIEM plus XDR.\n- **Exporting alerts to a spreadsheet** — A manual export produces a stale, disconnected copy with no correlation, no entity linking, and no response actions — the exact spreadsheet triage pattern modern security operations tooling exists to replace.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

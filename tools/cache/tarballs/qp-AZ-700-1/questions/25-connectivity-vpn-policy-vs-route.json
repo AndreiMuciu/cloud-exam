@@ -1,0 +1,24 @@
+{
+    "id": "az700-connectivity-vpn-policy-vs-route",
+    "question": "Cindralux Robotics is configuring a new site-to-site VPN gateway. The on-premises device needs to establish tunnels covering multiple distinct traffic selectors (subnet pairs) simultaneously, and Cindralux also wants to enable BGP for dynamic route exchange in the future.\n\nWhich VPN gateway type should Cindralux use?",
+    "options": [
+        {
+            "text": "Policy-based (static routing) VPN gateway",
+            "correct": false
+        },
+        {
+            "text": "Route-based (dynamic routing) VPN gateway",
+            "correct": true
+        },
+        {
+            "text": "Either type, since both support an unlimited number of traffic selectors and BGP equally",
+            "correct": false
+        },
+        {
+            "text": "A Basic SKU gateway configured in policy-based mode, since Basic is required for multiple traffic selectors",
+            "correct": false
+        }
+    ],
+    "explanation": "A **route-based (dynamic routing) VPN gateway** uses IPsec tunnels defined as routes in a routing table, so it can support multiple traffic selectors/subnet combinations over the same tunnel and can support **BGP** for dynamic route exchange. **Policy-based (static routing) gateways** use static, IPsec policy-defined traffic selectors that typically support only a single pairing of on-premises and Azure address prefixes per tunnel, and they don't support BGP — making them unsuitable for Cindralux's requirements.\n\n**Why not the other options:**\n- **Policy-based VPN** — Limited to static, IPsec-policy-based traffic selectors (generally a single prefix pair) and doesn't support BGP; it can't meet either requirement here.\n- **\"Either type works equally\"** — Policy-based gateways are specifically limited in traffic selector flexibility and lack BGP support, so the two types are not interchangeable for this scenario.\n- **\"Basic SKU is required for multiple traffic selectors\"** — This reverses the relationship; the Basic gateway SKU actually has more limitations (no BGP support, for example) and route-based configuration — not policy-based — is what's needed for multiple selectors and BGP.",
+    "category": "Design, Implement, and Manage Connectivity Services"
+}

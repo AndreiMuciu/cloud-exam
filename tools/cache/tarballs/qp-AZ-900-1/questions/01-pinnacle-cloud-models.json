@@ -1,0 +1,25 @@
+{
+    "id": "az900-01-pinnacle-cloud-models",
+    "question": "Pinnacle Retail Group wants to keep its legacy inventory management system running on its existing on-premises servers while using Azure for scalable web storefronts and disaster recovery. Which cloud deployment model best describes this approach?",
+    "options": [
+        {
+            "text": "Public Cloud",
+            "correct": false
+        },
+        {
+            "text": "Private Cloud",
+            "correct": false
+        },
+        {
+            "text": "Hybrid Cloud",
+            "correct": true
+        },
+        {
+            "text": "Community Cloud",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Hybrid Cloud** model allows Pinnacle Retail to maintain their existing on-premises data center (Private Cloud) for maximum control over legacy systems while using the Public Cloud (Azure) for scalability and disaster recovery. This meets the requirement of maintaining control while gaining cloud agility.\n\n**Why not the other options:**\n- **Public Cloud** — Pinnacle would lose direct control over the physical hardware and underlying infrastructure management.\n- **Private Cloud** — Does not inherently provide the rapid scalability and off-site disaster recovery benefits of Azure.\n- **Community Cloud** — Shared between several organizations with similar concerns; not relevant to Pinnacle's specific needs.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_pinnacle_retail.json"
+}

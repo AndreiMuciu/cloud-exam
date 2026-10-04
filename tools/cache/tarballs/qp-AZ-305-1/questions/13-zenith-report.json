@@ -1,0 +1,31 @@
+{
+    "id": "gen-11-arm-reporting-exhibit",
+    "exhibits": [
+        {
+            "title": "ARM Deployment Evidence",
+            "type": "markdown",
+            "content": "### Recent Deployments\n| Resource Name | Deployment Status | Timestamp |\n|---|---|---|\n| order-app-seattle | Succeeded | 2024-05-10 14:00 |\n| order-db-seattle | Succeeded | 2024-05-10 14:05 |\n| order-nsg | Failed | 2024-05-10 14:10 |"
+        }
+    ],
+    "question": "You need to generate a monthly report showing all Azure Resource Manager deployment operations across all subscriptions in your organization management group. What should you recommend?",
+    "options": [
+        {
+            "text": "Query the Microsoft.Resources/deployments scope using Azure Resource Graph",
+            "correct": true
+        },
+        {
+            "text": "Export Activity Log data for each subscription to a central storage account",
+            "correct": false
+        },
+        {
+            "text": "Use the Azure Advisor API to retrieve deployment recommendations",
+            "correct": false
+        },
+        {
+            "text": "Configure an Azure Policy with the 'Audit' effect on all resource groups",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Azure Resource Graph**. \n\n- **Azure Resource Graph** allows you to query at scale across all subscriptions and management groups. It specifically supports querying deployment data from the `Microsoft.Resources/subscriptions/resourceGroups/deployments` or `Microsoft.Resources/deployments` resources, making it the most efficient way to generate cross-subscription reports.\n- Activity Logs only store 90 days of history by default, and querying them across hundreds of subscriptions is less efficient than Resource Graph.- Advisor provides suggestions, not deployment history.- Policy audits configuration state, not deployment operations.",
+    "category": "Design Identity, Governance, and Monitoring"
+}

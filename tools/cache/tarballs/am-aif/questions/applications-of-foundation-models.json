@@ -1,0 +1,340 @@
+{
+  "domain": "Applications of Foundation Models",
+  "questions": [
+    {
+      "id": 34,
+      "question": "A developer asks a model to solve a word problem by first identifying what is given, then setting up an equation, then solving step by step. Which prompting technique structures reasoning this way?",
+      "options": [
+        { "id": "a", "text": "Chain-of-thought prompting, which guides the model through intermediate reasoning steps" },
+        { "id": "b", "text": "Zero-shot prompting, which relies on the model's pre-existing knowledge alone" },
+        { "id": "c", "text": "Few-shot prompting, which demonstrates patterns with multiple examples" },
+        { "id": "d", "text": "Negative prompting, which tells the model what content to exclude from the output" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Chain-of-thought prompting breaks down complex problems into intermediate steps, guiding the AI through logical reasoning. This leads to more accurate and explainable results for multi-step tasks.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 35,
+      "question": "A marketing team asks a generative AI model to write a tagline for a new product, providing only the product name and a one-line description — no examples of good taglines. Which prompting strategy does this represent?",
+      "options": [
+        { "id": "a", "text": "Zero-shot, which relies entirely on the model's training to perform the task" },
+        { "id": "b", "text": "Few-shot, which supplies several example inputs and desired outputs" },
+        { "id": "c", "text": "Chain-of-thought, which walks the model through explicit reasoning steps" },
+        { "id": "d", "text": "Single-shot, which provides exactly one example to set the response format" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Zero-shot learning asks the model to perform tasks without specific examples, leveraging its general knowledge. This is ideal when you want to explore capabilities without providing training examples.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 36,
+      "question": "A research team needs to compare how well different models summarize scientific papers. They generate summaries from each model and compare them against expert-written reference summaries using n-gram recall. Which metric are they using?",
+      "options": [
+        { "id": "a", "text": "BLEU, which measures n-gram precision against reference translations" },
+        { "id": "b", "text": "Perplexity, which evaluates how well a model predicts a held-out test set" },
+        { "id": "c", "text": "ROUGE, which measures n-gram recall between generated and reference summaries" },
+        { "id": "d", "text": "BERTScore, which uses contextual embeddings to capture semantic similarity" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "ROUGE (Recall-Oriented Understudy for Gisting Evaluation) is primarily used for evaluating automatic summarization. It compares generated text against reference texts using n-gram overlap.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 37,
+      "question": "A translation company evaluates its models by measuring how many n-grams in the generated translation also appear in the professional human translation, focusing on precision. Which metric is this?",
+      "options": [
+        { "id": "a", "text": "ROUGE, which is optimized for recall-oriented evaluation of summaries" },
+        { "id": "b", "text": "BERTScore, which computes semantic similarity using contextual embeddings" },
+        { "id": "c", "text": "F1 Score, which balances precision and recall for classification tasks" },
+        { "id": "d", "text": "BLEU, which calculates n-gram precision against reference translations" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "BLEU (Bilingual Evaluation Understudy) is the industry standard for machine translation evaluation. It measures n-gram precision between generated and reference translations.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 38,
+      "question": "Two sentences — 'The cat sat on the mat' and 'A feline rested on the rug' — mean roughly the same thing but share almost no exact words. Which evaluation metric would still recognize their similarity?",
+      "options": [
+        { "id": "a", "text": "BERTScore, which uses contextual embeddings to capture meaning beyond exact word matches" },
+        { "id": "b", "text": "ROUGE, which measures overlapping n-gram sequences" },
+        { "id": "c", "text": "BLEU, which counts matching n-grams between the two texts" },
+        { "id": "d", "text": "Word error rate, which counts the number of word-level edits needed" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "BERTScore uses contextual embeddings to capture semantic meaning, handling paraphrases and synonyms better than metrics that rely on exact n-gram overlap.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 39,
+      "question": "An analyst at a bank pastes a confidential earnings report into a public AI chat to get a summary. A colleague warns this could leak sensitive financial data. Which prompt engineering risk does this illustrate?",
+      "options": [
+        { "id": "a", "text": "Jailbreaking, where crafted prompts bypass the model's safety guardrails" },
+        { "id": "b", "text": "Exposure, where sensitive information is inadvertently disclosed through prompts" },
+        { "id": "c", "text": "Data poisoning, where malicious examples corrupt the model's training data" },
+        { "id": "d", "text": "Model hallucination, where the model generates fabricated financial figures" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Exposure refers to inadvertent disclosure of sensitive information through prompts or AI responses. Financial analysis carries high risk of exposing confidential data.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 40,
+      "question": "A customer support system augments its foundation model by first searching a knowledge base of product manuals and FAQs, then including the most relevant passages in the prompt before generating a response. What is this architecture called?",
+      "options": [
+        { "id": "a", "text": "Model distillation, which compresses a large model into a smaller student model" },
+        { "id": "b", "text": "Retrieval Augmented Generation, which combines document retrieval with text generation" },
+        { "id": "c", "text": "Reinforcement learning from human feedback, which aligns model behavior with preferences" },
+        { "id": "d", "text": "Continued pre-training, which extends the model's base knowledge with new corpora" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "RAG enhances language models by retrieving relevant information from external knowledge bases before generating responses. This improves accuracy and allows access to current information.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 41,
+      "question": "A developer shows a model three examples of converting informal text to formal business English, then asks it to convert a fourth piece of informal text. Which technique is this?",
+      "options": [
+        { "id": "a", "text": "Zero-shot prompting, which gives the model no examples at all" },
+        { "id": "b", "text": "Few-shot prompting, which demonstrates the expected pattern through several examples" },
+        { "id": "c", "text": "Chain-of-thought prompting, which walks through intermediate reasoning steps" },
+        { "id": "d", "text": "Negative prompting, which specifies what the model should avoid generating" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Few-shot learning provides multiple examples (typically 2-5) to demonstrate the expected input-output patterns, significantly improving model performance on specific tasks.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 42,
+      "question": "An image generation tool allows users to specify 'no blurry backgrounds, no watermarks' in addition to their main prompt. What is this type of instruction called?",
+      "options": [
+        { "id": "a", "text": "A system prompt that defines the model's persona and role" },
+        { "id": "b", "text": "A negative prompt that tells the model what elements to exclude" },
+        { "id": "c", "text": "A chain-of-thought prompt that guides step-by-step reasoning" },
+        { "id": "d", "text": "A few-shot prompt that demonstrates desired output through examples" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Negative prompts are instructions that tell the model what to exclude or avoid in its response. This technique refines outputs by explicitly stating what shouldn't be included.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 43,
+      "question": "A biotech company has a foundation model that performs well on general text but poorly on molecular biology papers. They decide to continue training the base model on a large corpus of biology journals before any task-specific tuning. What is this intermediate step called?",
+      "options": [
+        { "id": "a", "text": "Inference optimization, which speeds up prediction serving in production" },
+        { "id": "b", "text": "Prompt engineering, which crafts input text to improve output quality" },
+        { "id": "c", "text": "Quantization, which reduces numerical precision of weights for faster execution" },
+        { "id": "d", "text": "Continued pre-training, which extends the model's base knowledge with new domain data" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Continued pre-training is used to incorporate new domain-specific knowledge into a foundation model before fine-tuning, expanding its base understanding in specialized areas.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 44,
+      "question": "A company has a 175-billion-parameter model that is too large for their production servers. They train a 7-billion-parameter model to mimic the larger model's outputs. What is this technique?",
+      "options": [
+        { "id": "a", "text": "Knowledge distillation, which transfers capabilities from a large teacher model to a smaller student model" },
+        { "id": "b", "text": "Data augmentation, which generates additional training examples from existing data" },
+        { "id": "c", "text": "Ensemble learning, which combines predictions from multiple independent models" },
+        { "id": "d", "text": "Hyperparameter search, which finds optimal training configuration values" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Model distillation transfers knowledge from a large teacher model to a smaller student model. This creates more efficient models suitable for deployment with limited resources.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 45,
+      "question": "A customer support team uses pre-designed prompt structures with placeholders for customer name, issue type, and product ID, ensuring every agent's AI-assisted replies follow the same format. What is the primary benefit of this approach?",
+      "options": [
+        { "id": "a", "text": "It guarantees the model will never produce an incorrect answer" },
+        { "id": "b", "text": "It eliminates the need for any human review of generated responses" },
+        { "id": "c", "text": "It automatically handles all edge cases without any additional logic" },
+        { "id": "d", "text": "It maintains consistency across interactions and can be refined over time" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Prompt templates are pre-designed structures that maintain consistency across interactions. They can be customized for specific use cases and optimized over time for better results.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 46,
+      "question": "A red team discovers they can embed hidden instructions inside user-submitted text that cause the AI assistant to ignore its system prompt and reveal internal configuration. What type of attack is this?",
+      "options": [
+        { "id": "a", "text": "Denial-of-service, which overwhelms the model's compute resources" },
+        { "id": "b", "text": "Model extraction, which recreates the model's weights through repeated queries" },
+        { "id": "c", "text": "Data exfiltration, which copies training data from the model's storage" },
+        { "id": "d", "text": "Prompt injection, which inserts malicious instructions to override intended behavior" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Prompt injection and poisoning attacks use malicious inputs to manipulate model behavior, potentially causing biased, harmful, or unintended outputs.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 47,
+      "question": "A security researcher crafts a series of prompts that trick a chatbot into generating instructions for prohibited activities, despite the model having safety filters. What is this technique called?",
+      "options": [
+        { "id": "a", "text": "Fine-tuning, which adapts the model to new domains with labeled data" },
+        { "id": "b", "text": "Quantization, which reduces model precision for faster inference" },
+        { "id": "c", "text": "Distillation, which compresses a large model into a smaller one" },
+        { "id": "d", "text": "Jailbreaking, which circumvents the model's safety guidelines through adversarial prompts" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Jailbreaking refers to crafting prompts specifically designed to circumvent model safeguards and ethical guidelines, potentially generating harmful or inappropriate content.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 48,
+      "question": "A startup with limited budget needs to choose a foundation model for a simple FAQ chatbot. The most expensive model scores only 2% higher on their benchmark than a model costing one-tenth the price. Which selection criterion should take priority?",
+      "options": [
+        { "id": "a", "text": "Evaluating token pricing and cost efficiency relative to the use case requirements" },
+        { "id": "b", "text": "Choosing based solely on the model provider's brand reputation" },
+        { "id": "c", "text": "Always selecting the model with the highest parameter count" },
+        { "id": "d", "text": "Picking the model with the largest training dataset regardless of domain fit" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "For cost-sensitive applications, token efficiency and pricing should be prioritized. Smaller models may provide adequate performance at lower cost for many use cases.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 49,
+      "question": "A content moderation system uses Guardrails for Amazon Bedrock to block profanity, PII, and off-topic responses before they reach end users. What is the main benefit of this layer?",
+      "options": [
+        { "id": "a", "text": "It eliminates all inference costs by caching every possible response" },
+        { "id": "b", "text": "It automatically retrains the model whenever a violation is detected" },
+        { "id": "c", "text": "It ensures model outputs align with organizational policies and safety requirements" },
+        { "id": "d", "text": "It removes the need for any foundation model by replacing it with rule-based logic" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Guardrails ensure AI outputs align with business policies, ethical guidelines, and safety requirements through content filtering, input validation, and output formatting.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 50,
+      "question": "An engineering team reduces their model's weight precision from 32-bit floating point to 8-bit integers and trains a smaller model to mimic the original. Which optimization strategies are they applying?",
+      "options": [
+        { "id": "a", "text": "Data augmentation and transfer learning to expand training variety" },
+        { "id": "b", "text": "Quantization and distillation to reduce model size and computational cost" },
+        { "id": "c", "text": "Hyperparameter tuning and feature engineering to improve accuracy" },
+        { "id": "d", "text": "Ensemble methods and cross-validation to boost prediction reliability" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Model optimization techniques like quantization and distillation reduce model size and computational requirements while maintaining acceptable performance levels for cost efficiency.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 51,
+      "question": "A ride-sharing app needs its surge-pricing model to return a fare estimate within 100 milliseconds. When evaluating foundation models for this task, which factor is most critical?",
+      "options": [
+        { "id": "a", "text": "The total size of the model's pre-training dataset" },
+        { "id": "b", "text": "The number of languages the model supports" },
+        { "id": "c", "text": "The model's inference latency and response time under load" },
+        { "id": "d", "text": "The model provider's overall brand recognition in the market" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "For low-latency applications, response time and inference speed are critical. Smaller, optimized models may be preferred over larger ones that provide only marginally better accuracy.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 52,
+      "question": "A research team evaluates different language models on a standardized set of tasks including sentiment analysis, textual entailment, and question answering. What are these standardized evaluation suites called?",
+      "options": [
+        { "id": "a", "text": "Training checkpoints saved at intervals during model optimization" },
+        { "id": "b", "text": "Hyperparameter grids used to search for optimal configurations" },
+        { "id": "c", "text": "Benchmarks like GLUE and SuperGLUE that provide standardized NLU evaluation" },
+        { "id": "d", "text": "Loss functions that measure the difference between predicted and actual values" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "GLUE and SuperGLUE are benchmark datasets for evaluating natural language understanding. They provide standardized comparisons across different models and research efforts.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 53,
+      "question": "A pharmaceutical company wants its AI assistant to answer questions about approved drug interactions using the latest FDA database, which is updated weekly. Why is RAG the best architecture for this, rather than fine-tuning alone?",
+      "options": [
+        { "id": "a", "text": "RAG eliminates the need for a foundation model entirely" },
+        { "id": "b", "text": "RAG guarantees zero hallucinations in every generated response" },
+        { "id": "c", "text": "RAG allows the model to access current, frequently updated data at query time" },
+        { "id": "d", "text": "RAG removes all computational costs associated with model inference" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "RAG retrieves relevant information from knowledge bases before generating responses. This enables access to current, domain-specific, or proprietary information not in the base model.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 54,
+      "question": "Which TWO prompting techniques involve providing worked examples to the model so it can learn the desired pattern? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Single-shot, which provides one example to establish the expected format" },
+        { "id": "b", "text": "Few-shot, which supplies 2-5 example input-output pairs before the real query" },
+        { "id": "c", "text": "Chain-of-thought, which breaks complex problems into intermediate reasoning steps" },
+        { "id": "d", "text": "Zero-shot, which gives the model only a task description and no examples" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "b"],
+      "explanation": "Few-shot learning provides 2-5 examples to demonstrate patterns, while single-shot learning uses one example to set the expected format. Zero-shot uses no examples, and chain-of-thought focuses on reasoning steps.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 55,
+      "question": "Which TWO metrics are commonly used to evaluate the quality of generated text against reference texts? (Select 2)",
+      "options": [
+        { "id": "a", "text": "ROUGE, which measures n-gram recall between generated and reference summaries" },
+        { "id": "b", "text": "Accuracy, which counts the fraction of correctly classified examples" },
+        { "id": "c", "text": "Precision, which measures the fraction of predicted positives that are correct" },
+        { "id": "d", "text": "BLEU, which measures n-gram precision against reference translations" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "d"],
+      "explanation": "ROUGE is used for summarization evaluation measuring text overlap. BLEU evaluates machine translation quality. Accuracy and precision are classification metrics, not text generation metrics.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 56,
+      "question": "Which TWO of the following are security risks associated with prompt engineering? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Automatic improvement of model accuracy without any intervention" },
+        { "id": "b", "text": "Prompt injection attacks that embed malicious instructions in user input" },
+        { "id": "c", "text": "Exposure of confidential information through prompts or generated responses" },
+        { "id": "d", "text": "Reduced computational costs from shorter, more efficient prompts" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["b", "c"],
+      "explanation": "Prompt injection attacks use malicious inputs to manipulate outputs. Exposure risks sensitive data leakage through prompts. These are security concerns requiring input validation and output filtering.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 57,
+      "question": "Which TWO factors are most important when selecting a foundation model for a production application? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Cost efficiency and token pricing relative to the expected workload" },
+        { "id": "b", "text": "Always choosing the largest model regardless of the use case" },
+        { "id": "c", "text": "Latency requirements for the specific application scenario" },
+        { "id": "d", "text": "Ignoring model capabilities and selecting based only on brand name" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "c"],
+      "explanation": "Cost efficiency matters for sustainable production use. Latency requirements determine if smaller, faster models are needed. Model selection should match actual needs, not just size or brand.",
+      "domain": "Applications of Foundation Models"
+    },
+    {
+      "id": 58,
+      "question": "Which TWO of the following are benefits of Retrieval Augmented Generation for enterprise applications? (Select 2)",
+      "options": [
+        { "id": "a", "text": "It eliminates hallucinations entirely from all generated responses" },
+        { "id": "b", "text": "It removes the need for any foundation model in the generation pipeline" },
+        { "id": "c", "text": "It enables the model to incorporate proprietary enterprise data in its answers" },
+        { "id": "d", "text": "It allows access to current information beyond the model's original training cutoff" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["c", "d"],
+      "explanation": "RAG enables access to current information and proprietary data by retrieving from knowledge bases. It reduces but doesn't eliminate hallucinations, and still requires foundation models for generation.",
+      "domain": "Applications of Foundation Models"
+    }
+  ]
+}

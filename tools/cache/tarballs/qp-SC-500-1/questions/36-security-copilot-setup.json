@@ -1,0 +1,24 @@
+{
+    "id": "sc500-36-security-copilot-setup",
+    "question": "You are onboarding Microsoft Security Copilot for the SOC. Analysts must be able to run investigations with least privilege, compute spend must be provisioned and controlled by the security platform team, and Copilot must be able to reason over Defender XDR and Microsoft Sentinel data. Which setup is correct?",
+    "options": [
+        {
+            "text": "Provision Security Compute Unit (SCU) capacity and attach it to the Security Copilot workspace, grant the platform team the Copilot owner role and analysts the Copilot contributor role via security groups, and enable only the required plugins (such as Defender XDR and Sentinel)",
+            "correct": true
+        },
+        {
+            "text": "Assign every analyst the Global Administrator role, because Security Copilot requires tenant-wide administrative rights to answer questions",
+            "correct": false
+        },
+        {
+            "text": "Skip capacity provisioning, since Security Copilot usage is included with existing Defender XDR licenses",
+            "correct": false
+        },
+        {
+            "text": "Enable every available plugin by default and give all users the Copilot owner role so no investigation is ever blocked by a permission error",
+            "correct": false
+        }
+    ],
+    "explanation": "Security Copilot onboarding has three pillars, all reflected in the correct option: **capacity** — you provision **Security Compute Units (SCUs)** and associate the capacity with the workspace, which is how the platform team owns and caps spend; **role management** — the **Copilot owner** role manages settings/plugins while **Copilot contributor** lets analysts run sessions, assigned through security groups for least privilege; **plugins** — enabling only the needed plugins (Defender XDR, Sentinel) gives Copilot its data reach while limiting what it can access. Copilot also honors the user's underlying permissions in the source services.\n\n**Why not the other options:**\n- **Global Administrator for analysts** — Security Copilot does not require it for daily use, and handing out tenant-wide admin rights to run investigations is a severe least-privilege violation.\n- **No capacity needed** — SCU capacity is a distinct, required provisioned resource; Security Copilot is not bundled free into Defender XDR licensing.\n- **All plugins + everyone owner** — Owner grants configuration control analysts don't need, and enabling every plugin maximizes data exposure instead of scoping access to requirements.",
+    "category": "Manage and monitor security posture"
+}

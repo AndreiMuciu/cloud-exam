@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-identity-admin-units",
+    "type": "single",
+    "question": "Your company has a single Microsoft Entra tenant and offices in three cities. Each office has local IT staff who must be able to reset passwords and manage user account properties **only for the users in their own office**.\n\nYou must follow the principle of least privilege.\n\nWhat should you do?",
+    "options": [
+        { "text": "Create an administrative unit for each office, add each office's users to its administrative unit, and assign the local IT staff the User Administrator role scoped to their office's administrative unit", "correct": true },
+        { "text": "Assign the local IT staff the Helpdesk Administrator role at the directory (tenant) scope", "correct": false },
+        { "text": "Create a resource group per office and assign the local IT staff the User Access Administrator role on their office's resource group", "correct": false },
+        { "text": "Create a dynamic security group per office and assign the Password Administrator role to each group at the directory scope", "correct": false }
+    ],
+    "explanation": "**Administrative units (AUs)** exist precisely for this delegation pattern: they restrict the effective reach of a Microsoft Entra directory role to a defined subset of users, groups, or devices. By placing each office's users in an AU and assigning the local IT staff the **User Administrator role scoped to that AU**, the staff can reset passwords and manage user properties for their own office's users only — nothing tenant-wide. This is the least-privilege solution.\n\n**Why not the other options:**\n- **Helpdesk Administrator at tenant scope**: A tenant-scoped role applies to (nearly) all users in the directory, so IT staff in one office could reset passwords for users in every office — violating least privilege. Helpdesk Administrator also cannot manage user properties.\n- **Resource group + User Access Administrator**: Azure RBAC roles and resource groups govern **Azure resources** (VMs, storage, and so on), not Microsoft Entra user objects. You cannot manage user accounts or passwords through a resource group role assignment; User Access Administrator only manages Azure RBAC assignments.\n- **Dynamic group + Password Administrator at directory scope**: Assigning a directory role to a group grants every member that role **tenant-wide**. Group membership organizes *who holds* the role; it does not scope *which users* the role can act on. Only administrative units provide that scoping.",
+    "category": "Manage Azure Identities and Governance"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-identity-group-licensing",
+    "type": "single",
+    "question": "Your organization assigns Microsoft 365 E5 licenses through group-based licensing on a security group named **Grp-Faculty**. On user Lena's **Licenses** blade, the E5 license shows the assignment path **Inherited (Grp-Faculty)**.\n\nLena is transferring to a role that no longer requires an E5 license. You need to remove the E5 license from Lena.\n\nWhat should you do?",
+    "options": [
+        { "text": "Remove Lena from Grp-Faculty, because a license inherited from a group cannot be removed directly from the user", "correct": true },
+        { "text": "On Lena's Licenses blade, select the E5 license and click Remove license", "correct": false },
+        { "text": "Assign the E5 license to Lena directly, and then remove the direct assignment", "correct": false },
+        { "text": "Clear Lena's usage location so the inherited license is released automatically", "correct": false }
+    ],
+    "explanation": "With **group-based licensing**, the group is the source of truth: every member inherits the license, and the inherited assignment exists exactly as long as the membership does. To remove an inherited license from one user, you remove that user from the licensed group. (If Lena must remain in the group for other reasons, the group's licensing design should be revisited — for example, using a dedicated licensing group.)\n\n**Why not the other options:**\n- **Remove license on the user's blade**: The portal blocks removing a license whose assignment path is *Inherited* — the operation fails with an error stating the license is assigned via a group. Direct removal works only for directly assigned licenses.\n- **Assign directly, then remove the direct assignment**: Removing the direct assignment leaves the group-inherited assignment fully intact — Lena would still have E5. Direct and inherited assignments of the same product coexist independently.\n- **Clear the usage location**: Usage location is validated when a license is being *assigned*; clearing it afterwards does not revoke licenses that are already in place, and the inherited assignment would persist (potentially in an error state on future re-evaluations, which is not a removal mechanism).",
+    "category": "Manage Azure Identities and Governance"
+}

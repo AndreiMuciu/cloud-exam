@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-07-traversia-defender-cloud-multicloud",
+    "question": "Traversia Rail runs its ticketing platform in Azure and, after an acquisition, its freight tracking system in Amazon Web Services (AWS). The head of security wants a single tool that keeps evaluating the configuration of resources in **both** clouds against security standards and produces prioritized hardening recommendations in a single view.\n\nCan a single Microsoft solution meet this multicloud requirement, and if so, which one?",
+    "options": [
+        {
+            "text": "Yes — Microsoft Defender for Cloud can connect AWS accounts alongside Azure subscriptions and assess both in one posture view",
+            "correct": true
+        },
+        {
+            "text": "No — Microsoft posture management tools can only assess resources deployed in Azure",
+            "correct": false
+        },
+        {
+            "text": "Yes — Microsoft Sentinel is the tool designed to assess resource configurations and produce hardening recommendations",
+            "correct": false
+        },
+        {
+            "text": "Yes — Microsoft Purview Compliance Manager continuously assesses AWS virtual machine configurations",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Cloud is a multicloud solution.** Besides Azure subscriptions, it can connect **AWS accounts and Google Cloud projects** (and on-premises machines via Azure Arc), continuously assess their resource configurations, and surface the findings as recommendations and secure score impact in one portal. That gives Traversia the single posture view it wants across its Azure ticketing platform and its AWS freight system.\n\n**Why not the other options:**\n- **\"Posture tools only assess Azure\"** — This is outdated. Multicloud support (AWS and GCP connectors) is a core Defender for Cloud capability, which is precisely why it fits environments created by acquisitions.\n- **Microsoft Sentinel** — Sentinel is a SIEM/SOAR platform: it ingests and analyzes *log and event data* to detect and respond to threats. It does not continuously assess resource *configurations* against security standards or produce a secure-score-style posture view.\n- **Microsoft Purview Compliance Manager** — Compliance Manager tracks an organization's progress against *regulatory and standards assessments* (improvement actions, compliance score), primarily for the Microsoft 365 environment. It is not a cloud security posture management tool for AWS infrastructure.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_traversia_rail.json"
+}

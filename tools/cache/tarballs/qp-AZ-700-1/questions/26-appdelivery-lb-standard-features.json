@@ -1,0 +1,25 @@
+{
+    "id": "az700-appdelivery-lb-standard-features",
+    "type": "multi",
+    "question": "A team is reviewing the behavior of Azure Load Balancer for a new deployment. Which of the following statements about the current Standard SKU are correct? (Choose two.)",
+    "options": [
+        {
+            "text": "Standard Load Balancer and its public IP addresses are closed to inbound connections by default, and an NSG must explicitly allow the desired traffic",
+            "correct": true
+        },
+        {
+            "text": "Standard Load Balancer supports distributing traffic across backend instances in multiple availability zones",
+            "correct": true
+        },
+        {
+            "text": "A new Basic Load Balancer can still be created today as a lower-cost alternative for production workloads",
+            "correct": false
+        },
+        {
+            "text": "Standard Load Balancer requires a dedicated ExpressRoute circuit to operate",
+            "correct": false
+        }
+    ],
+    "explanation": "**Correct statements:**\n- Standard Load Balancer is built on the Zero Trust model: it and its public IP addresses are **closed to inbound connections by default**, and traffic is only permitted once an NSG explicitly allows it — a deliberate contrast to the old Basic tier's open-by-default behavior.\n- Standard Load Balancer supports **availability zones**, letting a single load balancer front backend instances distributed across zones for zone-level resiliency.\n\n**Why not the other options:**\n- **\"A new Basic Load Balancer can still be created\"** — Basic Load Balancer was retired on September 30, 2025; it can no longer be created, and existing deployments should be upgraded to Standard.\n- **\"Requires a dedicated ExpressRoute circuit\"** — Azure Load Balancer operates independently of ExpressRoute; it load-balances traffic across VMs/VMSS instances and has no dependency on an ExpressRoute circuit being present.",
+    "category": "Design and Implement Application Delivery Services"
+}

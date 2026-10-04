@@ -1,0 +1,25 @@
+{
+    "id": "az800-03-ironbridge-azure-ad-connect",
+    "question": "IronBridge Manufacturing wants to sync their users from on-premises AD DS to Microsoft Entra ID. They require a feature-rich solution with support for device-based conditional access and group-based writeback. Which version of the sync agent should they install?",
+    "options": [
+        {
+            "text": "Microsoft Entra Connect Cloud Sync",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Connect (Sync)",
+            "correct": true
+        },
+        {
+            "text": "Azure AD Application Proxy",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Domain Services",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Connect (Sync)** (the traditional, full agent) is required for advanced features like group-based writeback and device-based conditional access. Cloud Sync is a lightweight alternative but has a smaller feature set.\n\n**Why not the other options:**\n- **Cloud Sync** — Does not currently support the full range of writeback and complex filtering features of the main sync agent.\n- **Application Proxy** — Used for remote access to on-premises apps, not for identity synchronization.\n- **Entra Domain Services** — Provides a managed domain in the cloud used primarily for legacy auth protocols within a VNet, not for general identity sync.",
+    "category": "Deploy and manage AD DS in on-premises and cloud environments",
+    "caseStudy": "scenarios/case_study_ironbridge_manufacturing.json"
+}

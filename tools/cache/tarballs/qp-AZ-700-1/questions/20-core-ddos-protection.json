@@ -1,0 +1,24 @@
+{
+    "id": "az700-core-ddos-protection",
+    "question": "Verimark Logistics wants enhanced DDoS mitigation for every public IP address in one specific VNet, including adaptive tuning based on the VNet's own traffic patterns, attack analytics/metrics/alerting, and access to the DDoS Rapid Response team during an active attack.\n\nWhich Azure DDoS protection option should Verimark enable, and at what scope?",
+    "options": [
+        {
+            "text": "Rely on the automatic infrastructure-level protection that Azure already provides to every public IP address, with no further action",
+            "correct": false
+        },
+        {
+            "text": "Enable a DDoS Network Protection plan and associate it with the VNet",
+            "correct": true
+        },
+        {
+            "text": "Enable DDoS IP Protection individually on every public IP resource in the VNet, since this is the only way to get adaptive tuning",
+            "correct": false
+        },
+        {
+            "text": "Configure a WAF policy on Azure Front Door, since Front Door's WAF fully replaces the need for any DDoS protection service",
+            "correct": false
+        }
+    ],
+    "explanation": "**DDoS Network Protection**, enabled via a DDoS protection plan associated with a virtual network, protects every public IP resource within that VNet with adaptive, machine-learning-based traffic profiling tuned to the VNet's own traffic, plus attack analytics, metrics, alerting, and access to the DDoS Rapid Response team during an active attack. This VNet-level scope matches Verimark's requirement to cover every public IP in one VNet at once, rather than configuring each IP individually.\n\n**Why not the other options:**\n- **\"Rely on automatic infrastructure-level protection\"** — Azure's always-on infrastructure protection defends against common, large-scale network-layer attacks automatically, but it doesn't provide adaptive per-application tuning, attack analytics/alerting, or Rapid Response support — those come only with an explicit protection tier.\n- **DDoS IP Protection per public IP** — This is a valid, pay-per-protected-IP option with the same core mitigation engineering, but it's applied one public IP at a time rather than to an entire VNet, and it differs from DDoS Network Protection specifically in areas like Rapid Response support and cost protection guarantees — so it isn't the best fit when the requirement is VNet-wide coverage.\n- **\"WAF fully replaces DDoS protection\"** — A WAF protects against layer 7 application attacks (such as SQL injection and cross-site scripting); it does not mitigate layer 3/4 volumetric DDoS attacks, which is what DDoS Protection is designed for. The two are complementary, not substitutes for each other.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

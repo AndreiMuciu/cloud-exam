@@ -1,0 +1,25 @@
+{
+    "id": "az900-07-crestline-cost",
+    "question": "Crestline Financial Services wants a way for individual departments to see their specific Azure spending. What is the most effective way to organize resources to achieve this level of granular visibility?",
+    "options": [
+        {
+            "text": "Deploy all resources in a single Resource Group",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Tags to label resources by department",
+            "correct": true
+        },
+        {
+            "text": "Share a single administrative password across all departments",
+            "correct": false
+        },
+        {
+            "text": "Deploy all resources in the same Region",
+            "correct": false
+        }
+    ],
+    "explanation": "Using **Azure Tags** allows Crestline to label resources with metadata (e.g., Department: Finance). This metadata can then be used in Azure Cost Management to filter and group costs, providing granular visibility into spending per department.\n\n**Why not the other options:**\n- **Single Resource Group** — Makes it much harder to distinguish spending between different departments.\n- **Shared password** — A severe security risk that provides no financial visibility.\n- **Same Region** — Relates to physical location, not organizational accounting.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_crestline_financial.json"
+}

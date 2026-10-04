@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-gov-platform-lz",
+    "question": "A manufacturing group is implementing an Azure landing zone architecture based on the enterprise-scale design. The management group hierarchy contains a *Platform* branch and a *Landing Zones* branch. You are deciding where to place the shared connectivity resources: the hub virtual network, the ExpressRoute and VPN gateways, Azure Firewall, and the shared Private DNS zones.\n\nThe design must give the central platform team sole ownership of these resources, keep their cost and RBAC separate from application workloads, and let dozens of future workload subscriptions consume them without redeploying them.\n\nWhere should you recommend deploying the shared connectivity resources?",
+    "options": [
+        {
+            "text": "In a dedicated connectivity subscription placed under the Platform management group",
+            "correct": true
+        },
+        {
+            "text": "In each workload subscription under the Landing Zones management group, deployed from a common template",
+            "correct": false
+        },
+        {
+            "text": "In the management subscription that hosts the central Log Analytics workspace",
+            "correct": false
+        },
+        {
+            "text": "In a shared subscription under the Landing Zones management group to which all product teams have Contributor access",
+            "correct": false
+        }
+    ],
+    "explanation": "Enterprise-scale landing zone guidance separates **platform** concerns from **application** concerns using dedicated platform subscriptions. Shared network infrastructure belongs in a dedicated **connectivity subscription** under the *Platform* management group:\n\n- **Single ownership** — the connectivity subscription is owned and operated by the central platform team; platform-scoped policies and RBAC apply through the Platform management group without leaking to workloads\n- **Cost and blast-radius separation** — hub gateways, Azure Firewall, and shared DNS have their own subscription-level cost reporting and quota, cleanly separated from application spend\n- **Consume, don't copy** — workload (spoke) subscriptions peer their VNets to the hub and resolve the shared Private DNS zones; new landing zones vended by the subscription pipeline attach to the existing hub rather than redeploying expensive gateways\n\n**Why not the other options:**\n- **Hub resources in each workload subscription** — This is not a hub at all: every subscription would pay for its own gateways and firewall, ExpressRoute circuits would need multiple gateway connections, and the platform team would have to reach into application subscriptions to operate network infrastructure. Cost, operations, and security review all multiply by the number of workloads\n- **In the management subscription** — The management subscription exists for platform *observability and operations* resources (Log Analytics, Automation). Mixing network infrastructure into it entangles two different platform functions, their RBAC, and their change cadence; enterprise-scale explicitly separates connectivity from management\n- **Shared subscription under Landing Zones with Contributor for all teams** — Placing shared infrastructure under the *Landing Zones* branch subjects it to workload policies, and giving every product team Contributor access to the hub firewall and gateways destroys the separation of duties the design requires — any team could modify rules that protect everyone else",
+    "category": "Design Identity, Governance, and Monitoring"
+}

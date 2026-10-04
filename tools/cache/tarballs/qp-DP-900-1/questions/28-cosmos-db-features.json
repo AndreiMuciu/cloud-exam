@@ -1,0 +1,29 @@
+{
+    "id": "dp900-28-cosmos-db-features",
+    "type": "multi",
+    "question": "Which three statements about Azure Cosmos DB are true? (Choose three.)",
+    "options": [
+        {
+            "text": "It supports multiple APIs, including NoSQL (document), MongoDB, Cassandra, Gremlin (graph), and Table",
+            "correct": true
+        },
+        {
+            "text": "It can globally distribute data by replicating it across multiple Azure regions",
+            "correct": true
+        },
+        {
+            "text": "It automatically partitions data to scale storage and throughput as the workload grows",
+            "correct": true
+        },
+        {
+            "text": "It requires a fixed schema to be defined before any data can be inserted",
+            "correct": false
+        },
+        {
+            "text": "It is a managed platform for running the Microsoft SQL Server relational engine",
+            "correct": false
+        }
+    ],
+    "explanation": "**Correct statements:**\n- **Multiple APIs** — Cosmos DB is a multi-model service: one platform exposes APIs for NoSQL (JSON documents), MongoDB, Apache Cassandra, Apache Gremlin (graph), and Table, so teams can use familiar tools and drivers.\n- **Global distribution** — Data can be transparently replicated to any number of Azure regions, putting reads and writes close to users worldwide and improving availability.\n- **Automatic partitioning** — Cosmos DB horizontally partitions containers using a partition key, scaling storage and throughput elastically without manual sharding.\n\n**Why the other options are wrong:**\n- **Requires a fixed schema** — Cosmos DB is schema-agnostic. Items in the same container can have completely different structures; no schema is declared up front.\n- **Managed SQL Server platform** — That describes Azure SQL Database / SQL Managed Instance. Cosmos DB is a non-relational (NoSQL) service; although its NoSQL API uses a SQL-like query language, it does not run the SQL Server relational engine.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

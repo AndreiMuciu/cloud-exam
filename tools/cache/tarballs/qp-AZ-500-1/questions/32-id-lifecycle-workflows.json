@@ -1,0 +1,24 @@
+{
+    "id": "az500-32-id-lifecycle-workflows",
+    "question": "Which Microsoft Entra ID Governance feature allows you to automate the 'Joiner-Mover-Leaver' process, such as automatically generating a temporary access pass and sending a 'Welcome' email when a new employee record is created in HR?",
+    "options": [
+        {
+            "text": "Access Reviews",
+            "correct": false
+        },
+        {
+            "text": "Lifecycle Workflows",
+            "correct": true
+        },
+        {
+            "text": "Privileged Identity Management",
+            "correct": false
+        },
+        {
+            "text": "Conditional Access",
+            "correct": false
+        }
+    ],
+    "explanation": "**Lifecycle Workflows** enable you to automate user lifecycle management at the scale of your organization. You can create workflows that correspond to key lifecycle events like 'Joiner' (onboarding), 'Mover' (role change), and 'Leaver' (offboarding).\n\n**Why not the other options:**\n- **Access Reviews** — For periodic verification of existing access.\n- **PIM** — For managing JIT administrative access.\n- **Conditional Access** — For enforcing access controls at sign-in time.",
+    "category": "Manage identity and access"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az900-32-azure-cost-management",
+    "question": "Which service should you use to analyze your historical Azure spending and set up budgets and alerts to proactively manage your cloud costs?",
+    "options": [
+        {
+            "text": "Pricing Calculator",
+            "correct": false
+        },
+        {
+            "text": "Azure Cost Management + Billing",
+            "correct": true
+        },
+        {
+            "text": "TCO Calculator",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cost Management + Billing** allows you to monitor and control Azure spending. You can analyze costs by service, resource group, or tag, and create budgets that trigger email alerts.\n\n**Why not the other options:**\n- **Pricing Calculator** — Used for *estimating* costs *before* deployment.\n- **TCO (Total Cost of Ownership) Calculator** — Used to compare the cost of running on-premises workloads vs. running them in Azure.\n- **Azure Monitor** — Used for technical performance monitoring, not primarily for cost management.",
+    "category": "Describe Azure Management and Governance"
+}

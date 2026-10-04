@@ -1,0 +1,13 @@
+{
+    "id": "case_study_halbrecht",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Halbrecht Financial Group** is a regional bank subject to strict regulatory oversight. All employees hold Microsoft Entra ID P2 licenses. The bank recently suffered a phishing incident in which an administrator's SMS-based MFA code was intercepted.\n\n**Current environment:**\n- All 4,000 employees authenticate to Microsoft Entra ID; roughly 60 hold privileged administrative roles.\n- The security team wants to eliminate any authentication method that can be phished or relayed, for administrators first, then for the wider workforce.\n- Branch staff frequently work from bank-owned devices on the internal network, but loan officers travel to client sites using personal, unmanaged laptops."
+        },
+        {
+            "title": "Access Requirements",
+            "content": "- Administrators must sign in using a method that cannot be captured or replayed by a phishing site, and this requirement must be enforced by policy — not just recommended.\n- If a loan officer's account is flagged by Microsoft Entra ID Protection as high risk while they are actively working, the bank wants the offending session's tokens invalidated within minutes, without waiting for the token to naturally expire.\n- A new online loan-approval workflow must require step-up strong authentication only at the exact moment an officer approves a loan over $250,000 — not for browsing the rest of the app.\n- Contractors who need a one-time way to sign in and register their own MFA methods (because they have no existing credentials yet) must be onboarded without the helpdesk handing out permanent passwords."
+        }
+    ]
+}

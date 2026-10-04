@@ -1,0 +1,25 @@
+{
+    "id": "ai200-02-kestrelworks-aca-revisions",
+    "question": "You must implement the release requirement for the Kestrelworks REST API container app: a new version initially receives 10% of production traffic while the current version keeps 90%, with the ability to roll back instantly.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create a second container app for the new version and configure a nightly job that swaps the DNS record between the two apps.",
+            "correct": false
+        },
+        {
+            "text": "Set the container app to multiple-revision mode, deploy the new image as a new revision, and configure ingress traffic weights of 90/10 between the two active revisions.",
+            "correct": true
+        },
+        {
+            "text": "Keep the container app in single-revision mode and increase the replica count before deploying, so old replicas keep serving during the rollout.",
+            "correct": false
+        },
+        {
+            "text": "Use App Service deployment slots with a 10% traffic split, then swap the slots after validation.",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Container Apps supports **revision management**: in **multiple-revision mode**, each deployment creates a new immutable revision, and ingress **traffic splitting** assigns percentage weights across active revisions (90% to the current revision, 10% to the new one). Rollback is instant — set the new revision's weight back to 0 (or 100% to the old revision) without redeploying.\n\n**Why not the other options:**\n- **Second container app + DNS swap** — DNS changes propagate slowly and give no percentage-based split; rollback is neither instant nor controlled.\n- **Single-revision mode with more replicas** — In single-revision mode the new revision fully replaces the old one once provisioned; there is no traffic split and no side-by-side rollback target.\n- **App Service deployment slots** — Slots are an Azure App Service feature. The API runs in Azure Container Apps, which uses revisions, not slots.",
+    "category": "Develop containerized solutions on Azure",
+    "caseStudy": "scenarios/case_study_kestrelworks_logistics.json"
+}

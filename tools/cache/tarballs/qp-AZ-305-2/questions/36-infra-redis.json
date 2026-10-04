@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-infra-redis",
+    "question": "A ticket-sales web application scales between 2 and 40 App Service instances during sales events. Signed-in users currently lose their shopping carts whenever the platform scales in or recycles an instance, because cart and session data are stored in each instance's memory. The design must eliminate session loss, add sub-millisecond session reads, and keep the web tier stateless so autoscaling remains safe.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Store session state and carts in Azure Cache for Redis and configure the app's session provider to use it",
+            "correct": true
+        },
+        {
+            "text": "Enable ARR affinity (sticky sessions) so each user is always routed to the same instance",
+            "correct": false
+        },
+        {
+            "text": "Persist session state to an Azure SQL Database table on every request",
+            "correct": false
+        },
+        {
+            "text": "Broadcast session updates to all instances over Azure Service Bus so each instance holds a copy",
+            "correct": false
+        }
+    ],
+    "explanation": "**Externalizing session state to Azure Cache for Redis** is the canonical caching-solution answer for stateless scale-out:\n\n- **No session loss** — Session and cart data live in the cache, not in any instance's memory, so scale-in, restarts, and instance failures no longer destroy user state; any instance can serve any request\n- **Performance** — Redis is an in-memory store purpose-built for this access pattern, delivering sub-millisecond reads at very high request rates; official session-state providers exist for ASP.NET and comparable middleware for other stacks\n- **Autoscale safety** — With a genuinely stateless web tier, adding or removing instances is free of user-visible side effects, which is the design goal stated\n\n**Why not the other options:**\n- **ARR affinity** — Pins users to instances, which *undermines* autoscaling: load skews to long-lived instances, scale-in still kills the sessions pinned to removed instances, and an instance failure loses its users' carts. It treats the symptom while preserving the stateful anti-pattern\n- **SQL table per request** — Durable, but a relational round-trip with disk-backed storage on every request adds milliseconds (not sub-millisecond) and turns the database into a hot spot at 40-instance event traffic; session state is ephemeral data that doesn't need relational durability\n- **Service Bus broadcast to every instance** — Reinvents a distributed cache badly: 40 copies of every cart, ordering and consistency problems, memory duplication, and new instances start with no state until they somehow replay history",
+    "category": "Design Infrastructure Solutions"
+}

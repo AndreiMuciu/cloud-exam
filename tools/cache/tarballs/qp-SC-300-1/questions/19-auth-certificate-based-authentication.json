@@ -1,0 +1,24 @@
+{
+    "id": "sc300-auth-certificate-based-authentication",
+    "question": "A government contractor requires employees to sign in to Microsoft Entra ID using their existing smart cards, presenting a client certificate issued by the organization's own certificate authority, without deploying any third-party federation or MFA product.\n\nWhich native Microsoft Entra ID capability satisfies this requirement?",
+    "options": [
+        {
+            "text": "Microsoft Entra certificate-based authentication (CBA), with the issuing certificate authority configured as trusted in the tenant",
+            "correct": true
+        },
+        {
+            "text": "Password hash synchronization combined with a conditional access sign-in risk policy",
+            "correct": false
+        },
+        {
+            "text": "Windows Hello for Business configured in key trust deployment mode",
+            "correct": false
+        },
+        {
+            "text": "Self-service password reset combined with security questions",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra certificate-based authentication (CBA)** is a native, first-factor (and MFA-satisfying) authentication method that lets users sign in directly with a client certificate — such as one presented from a smart card — after the tenant is configured to trust the issuing certificate authority (by uploading its certificate chain). No third-party federation service or separate MFA product is required.\n\n**Why not the other options:**\n- **Password hash sync + sign-in risk policy** — this is still password-based authentication with a risk overlay; it doesn't let users authenticate directly with a smart card certificate.\n- **Windows Hello for Business, key trust mode** — this provisions a device-bound key/PIN gesture for the *device the user is enrolled on*; it is a different passwordless mechanism from presenting an existing, separately issued smart card certificate.\n- **SSPR with security questions** — this only helps a user recover/reset a forgotten password; it has nothing to do with signing in via a certificate.",
+    "category": "Implement authentication and access management"
+}

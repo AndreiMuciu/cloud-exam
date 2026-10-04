@@ -1,0 +1,22 @@
+{
+    "id": "az305-s2-halstrom-drill",
+    "type": "ordering",
+    "question": "You are documenting the quarterly disaster recovery drill procedure for the risk platform, using Azure Site Recovery. The drill must validate recovery in North Europe without impacting production or initiating an actual failover. Arrange the steps in the correct order.",
+    "items": [
+        "Run a test failover into an isolated virtual network in North Europe",
+        "Enable Azure Site Recovery replication for the VMs to the North Europe region",
+        "Clean up the drill by deleting the test failover VMs and recording the results",
+        "Create a recovery plan that groups the application and calculation tiers with the required startup order",
+        "Validate application functionality on the test VMs in the isolated network"
+    ],
+    "correctOrder": [
+        "Enable Azure Site Recovery replication for the VMs to the North Europe region",
+        "Create a recovery plan that groups the application and calculation tiers with the required startup order",
+        "Run a test failover into an isolated virtual network in North Europe",
+        "Validate application functionality on the test VMs in the isolated network",
+        "Clean up the drill by deleting the test failover VMs and recording the results"
+    ],
+    "explanation": "The correct sequence for a non-disruptive Azure Site Recovery DR drill is:\n\n1. **Enable replication** — Nothing can be tested until the VMs are replicating to North Europe; this is the one-time prerequisite that establishes recovery points\n2. **Create a recovery plan** — A recovery plan defines the failover unit: it groups the tiers, sets the boot order (for example, calculation tier before application tier), and can include automation scripts. Building it *before* the drill means the drill tests the actual runbook that would be used in a real disaster\n3. **Run a test failover into an isolated VNet** — Test failover creates VMs from recovery points in a network that is **not connected to production**, so production replication continues untouched and no actual failover occurs — exactly what the regulator-mandated quarterly test requires\n4. **Validate the application** — The drill only proves anything if the team verifies that the platform actually works on the test VMs (sign-in, run a valuation, check data recency against the RPO)\n5. **Clean up and record results** — ASR's cleanup step deletes the test VMs and lets you record notes, producing the documented evidence the regulator expects\n\nRunning the test failover before a recovery plan exists would test individual VMs but not the orchestrated, ordered recovery; cleaning up before validation would destroy the evidence the drill is meant to produce.",
+    "category": "Design Business Continuity Solutions",
+    "caseStudy": "scenarios/case_study_halstrom_capital.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-12-talverin-audit-premium",
+    "question": "After a loyalty-program member asked who had viewed her records, the Talverin Hotels data protection officer needs to search a log of user and administrator activities across Microsoft 365 — including high-value events such as exactly which items in a mailbox were accessed — with audit records retained for at least one year to cover investigations that look back many months.\n\nWhich Microsoft Purview solution meets these requirements?",
+    "options": [
+        {
+            "text": "Audit (Premium)",
+            "correct": true
+        },
+        {
+            "text": "eDiscovery (Standard)",
+            "correct": false
+        },
+        {
+            "text": "Communication compliance",
+            "correct": false
+        },
+        {
+            "text": "Data lifecycle management",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Purview **Audit** records user and admin activities across Microsoft 365 in a unified audit log that investigators can search. **Audit (Premium)** extends the standard capability with **longer default retention (one year, extendable to ten years) and intelligent insights such as high-value events — including *MailItemsAccessed*, which reveals which mailbox items were accessed** — precisely what Talverin needs to answer \"who viewed this guest's data\" months after the fact.\n\n**Why not the other options:**\n- **eDiscovery (Standard)** — eDiscovery searches for and preserves *content* (documents, messages) for legal matters. The question here is about *activity* — who accessed what — which is the audit log's job, not a content search.\n- **Communication compliance** — Communication compliance detects inappropriate or non-compliant *messages* (harassment, sensitive info in chat). It does not record or search resource-access activity.\n- **Data lifecycle management** — This governs retention and deletion of content over its life. It cannot tell an investigator which staff member accessed a guest's records.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_talverin_hotels.json"
+}

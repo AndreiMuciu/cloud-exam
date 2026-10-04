@@ -1,0 +1,13 @@
+{
+    "id": "case_study_solaris_education",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Solaris Education Platform** is an EdTech startup that provides on-demand video lessons to students worldwide. They are leveraging Azure to ensure high availability and global reach. \n\n**Current Architecture:**\n- Primary web application runs on Azure App Service.\n- Video files are stored in Azure Blob Storage.\n- A legacy Windows-based accounting software runs on an Azure Virtual Machine.\n- They use Azure SQL Database for user profiles and course progress data."
+        },
+        {
+            "title": "Goals",
+            "content": "**Future Plans:**\n- Implement a serverless processing engine that triggers whenever a new video is uploaded to storage.\n- Move the legacy accounting software to a more cost-effective model that doesn't require managing a full OS.\n- Provide a centralized dashboard to monitor the health of all Azure services."
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc300-governance-break-glass-best-practices",
+    "question": "Which of the following is a recommended best practice for a break-glass (emergency access) account?",
+    "options": [
+        {
+            "text": "Register the account's own multifactor authentication method on the personal mobile device of a specific administrator",
+            "correct": false
+        },
+        {
+            "text": "Configure alerting so that any sign-in by the break-glass account immediately notifies the security team, and monitor its use closely even though it is excluded from Conditional Access",
+            "correct": true
+        },
+        {
+            "text": "Rotate the account's password automatically every 24 hours using the same self-service password reset flow as regular employees",
+            "correct": false
+        },
+        {
+            "text": "Assign the account a PIM-eligible Global Administrator role that must be activated with approval before each use",
+            "correct": false
+        }
+    ],
+    "explanation": "Because a break-glass account is deliberately excluded from Conditional Access (so it isn't caught in an outage or misconfiguration) and holds standing privileged access, the compensating control is **strict monitoring**: configuring alerts so that any sign-in by the account is immediately flagged to the security team, since a sign-in on a break-glass account should be a rare, expected, and closely audited event.\n\n**Why not the other options:**\n- **Registering MFA on a specific administrator's personal device** — this ties the account's usability to that one person's device and defeats the emergency-access purpose (if that person is unavailable, or the device is the outage's cause, the account can't be used); best practice favors excluding it from MFA/Conditional Access and protecting the credential procedurally instead.\n- **Automatic password rotation via SSPR every 24 hours** — SSPR is an interactive, self-service flow that itself depends on the identity platform being available; automating it on a schedule undermines availability during an outage and isn't how break-glass credentials are managed (they use long, complex, procedurally-controlled passwords instead).\n- **PIM-eligible with approval required** — this creates a dependency on PIM's activation workflow and available approvers, both of which could be part of the very outage the break-glass account exists to survive; break-glass accounts should have a standing (permanent), not PIM-eligible, assignment.",
+    "category": "Plan and automate identity governance"
+}

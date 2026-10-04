@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-25-defender-servers-plan-choice",
+    "question": "Your organization runs 600 Azure VMs and 200 Azure Arc-enabled servers, all onboarded to Microsoft Defender for Endpoint through Defender for Servers Plan 1. The security team now additionally requires: agentless scanning of VM disks for vulnerabilities and installed software, detection of plaintext secrets on machines, file integrity monitoring for critical system files, and the premium capabilities of Microsoft Defender Vulnerability Management (such as certificate assessment and security baseline assessment). What is the most efficient change?",
+    "options": [
+        {
+            "text": "Upgrade the subscriptions to Defender for Servers Plan 2, which adds agentless machine scanning, secrets discovery, file integrity monitoring, and the Defender Vulnerability Management premium capabilities on top of Plan 1's EDR",
+            "correct": true
+        },
+        {
+            "text": "Keep Plan 1 and separately purchase Microsoft Defender Vulnerability Management standalone licenses for every server",
+            "correct": false
+        },
+        {
+            "text": "Keep Plan 1 and enable Defender CSPM, which includes file integrity monitoring and endpoint detection and response for servers",
+            "correct": false
+        },
+        {
+            "text": "Replace Defender for Servers with Azure Machine Configuration policies that audit file hashes and installed software versions",
+            "correct": false
+        }
+    ],
+    "explanation": "The Plan 1 versus **Plan 2** boundary is exactly what this question walks: Plan 1 is essentially the Defender for Endpoint (EDR) integration with basic vulnerability management, while **Plan 2 layers on the posture-heavy capabilities** — **agentless machine scanning** (snapshot-based disk analysis for vulnerabilities and software inventory), **agentless secrets discovery**, **file integrity monitoring** (change tracking over critical files and registry via MDE), and the **premium tier of Microsoft Defender Vulnerability Management** (certificate inventory and assessment, security baseline assessment, browser extension assessment, and more). One plan upgrade at the subscription level covers all 800 machines, Azure and Arc alike — a single move that satisfies all four requirements.\n\n**Why not the other options:**\n- **Plan 1 + standalone MDVM add-on licensing per server** — even where an MDVM add-on is available, it addresses only the vulnerability-management premium features: it brings no agentless disk scanning, no secrets discovery, and no file integrity monitoring, and per-server licensing across 800 machines is administratively the opposite of efficient.\n- **Plan 1 + Defender CSPM** — Defender CSPM does include agentless scanning and secrets discovery for posture purposes, but it does **not** provide file integrity monitoring or MDVM premium features, and it never includes EDR (that's a workload protection capability). Two of the four requirements remain unmet.\n- **Azure Machine Configuration** — an OS configuration compliance tool; auditing file hashes by policy is not file integrity *monitoring* with security alerting, and it offers no vulnerability assessment, no secrets discovery, and no threat detection. It complements Defender for Servers; it cannot replace it.",
+    "category": "Manage and monitor security posture"
+}

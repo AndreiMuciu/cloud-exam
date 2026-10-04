@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-17-scalability",
+    "question": "A regional ferry operator knows its bookings triple every summer. Ahead of each season, administrators deliberately increase the compute resources allocated to the reservation system, then shrink them again each autumn. Which cloud concept describes the system's ability to be adjusted to handle more or less demand in this way?",
+    "options": [
+        {
+            "text": "Scalability",
+            "correct": true
+        },
+        {
+            "text": "Elasticity",
+            "correct": false
+        },
+        {
+            "text": "High availability",
+            "correct": false
+        },
+        {
+            "text": "Fault tolerance",
+            "correct": false
+        }
+    ],
+    "explanation": "**Scalability** is the ability of a system to **adjust the resources allocated to it to match demand** — adding capacity (scaling up or out) when load grows and removing it when load shrinks. Scaling can be performed deliberately by administrators, as the ferry operator does before and after each season; the concept covers the *capability* to resize, regardless of whether the resizing is manual or automated.\n\n**Why not the other options:**\n- **Elasticity** — Refers specifically to resources being adjusted **automatically and dynamically** as demand changes, without human intervention. The operator is planning and applying the changes deliberately on a seasonal schedule, which demonstrates scalability rather than elastic, automatic response.\n- **High availability** — Concerns keeping a service **up and reachable despite failures**; it says nothing about resizing capacity for seasonal demand.\n- **Fault tolerance** — The ability to continue operating when components fail; like high availability, it is a resilience property, not a capacity-adjustment capability.",
+    "category": "Describe Cloud Concepts"
+}

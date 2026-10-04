@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-16-entra-domain-services",
+    "question": "A company is lifting a legacy warehouse application into Azure virtual machines. The application requires traditional domain services — Kerberos authentication, LDAP queries, and group policy — but the company does not want to deploy, patch, or manage any domain controller virtual machines in Azure.\n\nWhich Microsoft Entra service provides these domain capabilities as a managed offering?",
+    "options": [
+        {
+            "text": "Microsoft Entra Domain Services",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra ID with security defaults enabled",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra External ID",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Domain Services** provides **managed domain services — domain join, group policy, LDAP, and Kerberos/NTLM authentication — without the customer deploying, managing, or patching domain controllers**. It synchronizes with the Microsoft Entra tenant, so existing users and groups can be used, and it is the standard answer for lift-and-shift of legacy applications that expect a classic Active Directory environment.\n\n**Why not the other options:**\n- **Microsoft Entra ID with security defaults** — Microsoft Entra ID is a cloud identity platform that speaks modern protocols such as OAuth 2.0, OpenID Connect, and SAML. It does not natively serve Kerberos, LDAP, or group policy to virtual machines; security defaults merely enforce a baseline like MFA registration.\n- **Microsoft Entra ID Protection** — ID Protection detects and remediates identity risk (leaked credentials, anomalous sign-ins). It provides no domain services of any kind.\n- **Microsoft Entra External ID** — External ID handles customer and partner identity scenarios (CIAM and guest collaboration). It cannot domain-join virtual machines or answer LDAP and Kerberos requests.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

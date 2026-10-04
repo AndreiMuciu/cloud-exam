@@ -1,0 +1,25 @@
+{
+    "id": "az700-okarune-virtual-wan-hub",
+    "question": "Okarune Financial wants a single hub resource that can onboard all 50 branch offices over site-to-site VPN today, and later add ExpressRoute connections and point-to-site VPN access for mobile loan officers — all managed centrally without hand-building a traditional hub-and-spoke of virtual network gateways.\n\nWhich Virtual WAN type should Okarune deploy?",
+    "options": [
+        {
+            "text": "Basic Virtual WAN",
+            "correct": false
+        },
+        {
+            "text": "Standard Virtual WAN",
+            "correct": true
+        },
+        {
+            "text": "A Basic Virtual WAN, upgraded to Standard only once ExpressRoute is actually needed",
+            "correct": false
+        },
+        {
+            "text": "A traditional hub VNet with a VPN gateway, an ExpressRoute gateway, and a point-to-site configuration added manually",
+            "correct": false
+        }
+    ],
+    "explanation": "**Standard Virtual WAN** is required because Basic Virtual WAN supports **site-to-site VPN only** — it does not support ExpressRoute connections, point-to-site (User VPN) connections, inter-hub/VNet-to-VNet transit routing, or NVA/Azure Firewall integration. Since Okarune's stated requirements explicitly include future ExpressRoute and point-to-site access from a single hub, Standard is the correct type to deploy from the start.\n\n**Why not the other options:**\n- **Basic Virtual WAN** — Only supports site-to-site VPN; it cannot support the planned ExpressRoute or point-to-site requirements.\n- **Start on Basic, upgrade later** — While Azure does allow upgrading from Basic to Standard, doing so means re-provisioning the hub's gateway capabilities at that time; since ExpressRoute and P2S are already known requirements, deploying Standard from the outset avoids unnecessary rework, and a Standard Virtual WAN also doesn't allow adjusting gateway scale units the way Basic does.\n- **A traditional hand-built hub VNet** — This is exactly the labor-intensive, manually managed approach Okarune wants to avoid; Virtual WAN's value is that Microsoft manages the hub gateways and routing centrally as branches and connection types are added.",
+    "category": "Design, Implement, and Manage Connectivity Services",
+    "caseStudy": "scenarios/case_study_okarune.json"
+}

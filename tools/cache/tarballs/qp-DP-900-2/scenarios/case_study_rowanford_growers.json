@@ -1,0 +1,13 @@
+{
+    "id": "case_study_rowanford_growers",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Rowanford Growers** is an agricultural cooperative owned by about 300 member farms. The cooperative provides technology services that help members manage irrigation, crop scouting, and field imagery.\n\n**Current Data Landscape:**\n- **Soil probes**: fields are instrumented with soil-moisture probes from several manufacturers. Each probe reports readings as **JSON documents**, and the document structure varies by probe model — newer probes add nutrient and salinity properties that older probes do not send.\n- **Field-scouting app**: agronomists record pest and disease observations in a mobile app whose backend is a **self-managed MongoDB cluster** running on virtual machines that the co-op patches and scales itself.\n- **Drone imagery**: during the growing season, drones capture stitched field images totaling tens of terabytes. Agronomists view the images in a web portal that requests them **over HTTPS** using URLs."
+        },
+        {
+            "title": "Requirements",
+            "content": "Rowanford Growers wants to move these workloads to managed Azure services:\n- **Irrigation advisory service**: store the variable-schema probe JSON documents in a database that returns single-document reads in **milliseconds**, and that can elastically scale throughput up during the growing season and back down in winter.\n- **Field-scouting app**: replace the self-managed MongoDB cluster with a fully managed Azure service **without rewriting the app** — the existing MongoDB drivers and queries must keep working as-is.\n- **Drone imagery**: store the image files in a massively scalable service that the web portal can read directly over HTTPS, with options to keep older seasons' imagery at a lower storage cost."
+        }
+    ]
+}

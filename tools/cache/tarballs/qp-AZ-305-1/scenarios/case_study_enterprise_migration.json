@@ -1,0 +1,21 @@
+{
+    "id": "case_study_enterprise_migration",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Stratos Retail** is a global retail company headquartered in Seattle with regional offices in Toronto, London, and Sydney. The company operates two Active Directory forests: prod.stratos.com for production workloads and dev.stratos.com for development teams. There is no trust relationship between the forests.\n\n**Current Environment:**\nThe production forest (prod.stratos.com) handles authentication for all internal users and business applications. The development forest is isolated and used exclusively by the R&D team working on experimental projects. Each regional office maintains at least one domain controller for prod.stratos.com, while all dev.stratos.com domain controllers are located at headquarters.\n\nStratos Retail's primary customer-facing application, OrderTracker, runs in their Seattle datacenter on Hyper-V virtual machines. The application consists of an ASP.NET web tier hosted on IIS and a Microsoft SQL Server 2019 backend. A separate Hyper-V environment is used for testing OrderTracker updates before production deployment.\n\nThe company has an Enterprise Agreement with Microsoft that includes Software Assurance benefits. OrderTracker experiences highly variable traffic patterns—peak shopping seasons cause performance complaints, while off-peak periods leave resources significantly underutilized.\n\n**Migration Plans:**\nStratos Retail is planning a multi-year cloud migration to Azure. The first phase includes establishing hybrid identity to support a Microsoft 365 rollout, followed by migrating OrderTracker to Azure. Development operations will remain entirely on-premises."
+        },
+        {
+            "title": "Technical Requirements",
+            "content": "**Technical Requirements:**\n- Web content updates must be deployable from a centralized location\n- New web app instances should require minimal manual configuration\n- Leverage existing on-premises licenses where possible to minimize costs\n- Users must authenticate using their prod.stratos.com UPN\n- Azure deployments must maintain availability during regional failures\n- Use Azure App Service Standard tier when feasible\n- IT Operations must receive email notifications for directory sync issues\n- Azure-hosted VMs must authenticate to AD even if connectivity to on-premises fails\n- Azure AD synchronization must continue during on-premises network outages"
+        },
+        {
+            "title": "Database Requirements",
+            "content": "**Database Requirements:**\n- Production database metrics must be available for performance analysis\n- Database migration must minimize customer-facing downtime\n- Backups must be retained for 7 years for regulatory compliance"
+        },
+        {
+            "title": "Security Requirements",
+            "content": "**Security Requirements:**\n- All company data must be inaccessible to external parties\n- On-premises users must authenticate even during internet outages\n- Azure portal access requires MFA for administrators\n- OrderTracker test environments must not be publicly accessible\n- An Azure Storage account must be provisioned for database migration staging"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_lindengate",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Lindengate Health** operates a network of nine private hospitals and thirty outpatient clinics. The company recently acquired **Merriview Clinics**, a smaller clinic group that runs its own, completely separate Active Directory Domain Services (AD DS) forest with no network connectivity to the Lindengate forest.\n\n**Current Environment:**\n- Microsoft Entra tenant: lindengatehealth.org, licensed with Microsoft Entra ID P2\n- On-premises AD DS forest **lindengate.local** (11,000 users), currently not synchronized to the cloud\n- Acquired AD DS forest **merriview.local** (1,800 users), in a separate datacenter with no trust or VPN to lindengate.local\n- A management group **MG-Lindengate** contains all production subscriptions\n\n**Business Requirements:**\n- All staff from both forests must sign in to Microsoft 365 and Azure with a single hybrid identity\n- Identity infrastructure on-premises must be as lightweight as possible — the security team refuses to operate additional heavyweight sync servers, and the sync layer must survive the loss of any single server\n- External collaborators must be reviewed and cleaned up on a fixed schedule"
+        },
+        {
+            "title": "Identity and Governance Detail",
+            "content": "**Hybrid Identity:**\n- Password hash synchronization is the approved authentication method\n- The two forests cannot be connected to each other; any sync solution must treat them as disconnected islands\n- The team wants built-in high availability by simply installing more than one small agent per forest\n\n**External Collaborators:**\n- The security group **Grp-ClinicalResearch** contains roughly 200 Microsoft Entra guest users from partner universities and pharmaceutical companies\n- Compliance requires that, every three months, the owners of Grp-ClinicalResearch attest to each guest's continued need for access\n- Guests whose access is not approved — or whose reviewers do not respond — must lose their membership **automatically**, with no manual follow-up\n\n**Governance Exception:**\n- An Azure Policy assignment named **Deny-PublicIP** (effect: Deny) is assigned at the MG-Lindengate management group and blocks creation of public IP addresses\n- A telemedicine pilot team has board approval to run a 90-day proof of concept in resource group **RG-TelePilot** that requires public IP addresses\n- The Deny-PublicIP assignment itself must **not** be modified, and the exception must expire automatically when the pilot ends and remain visible for audits"
+        }
+    ]
+}

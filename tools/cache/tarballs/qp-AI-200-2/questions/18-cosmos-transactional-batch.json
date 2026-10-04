@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-18-cosmos-transactional-batch",
+    "question": "A Python booking service writes two documents to one Azure Cosmos DB for NoSQL container for every reservation: the reservation itself and an updated per-customer summary. Both share the partition key value (`/customerId`). Either **both** writes must succeed or **neither** may be persisted, and the team wants to stay in Python — no server-side JavaScript.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Submit both operations in one call with `container.execute_item_batch(batch_operations, partition_key=customer_id)`.",
+            "correct": true
+        },
+        {
+            "text": "Perform the two writes sequentially inside a `try/except` block and delete the first document if the second write raises an exception.",
+            "correct": false
+        },
+        {
+            "text": "Enable bulk mode on the client (`enable_bulk=True`) so the SDK groups the two operations into one request.",
+            "correct": false
+        },
+        {
+            "text": "Set the account's consistency level to strong so other readers never observe one write without the other.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Transactional batch** is the SDK-native way to get all-or-nothing semantics in Cosmos DB for NoSQL: all operations in the batch must target the **same logical partition key**, they execute atomically on the server, and if any operation fails the whole batch is rolled back. `execute_item_batch` exposes this directly in Python, satisfying the no-JavaScript constraint.\n\n**Why not the other options:**\n- **`try/except` with compensating delete** — Not atomic: between the two writes, readers can observe the half-written state, and if the process crashes (or the compensating delete itself fails) the container is left permanently inconsistent.\n- **Bulk mode** — A *throughput* optimization that batches many independent operations for efficiency. Operations still succeed or fail **individually**; bulk gives no transactional guarantee.\n- **Strong consistency** — Governs *when replicas see* a committed write, not whether two writes commit together. With strong consistency you would simply see the inconsistent half-state sooner.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

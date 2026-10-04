@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-13-vertical-scaling",
+    "question": "A database administrator responds to slow query performance by resizing an existing Azure virtual machine to a size with more vCPUs and more memory. Which term describes this action?",
+    "options": [
+        {
+            "text": "Vertical scaling (scaling up)",
+            "correct": true
+        },
+        {
+            "text": "Horizontal scaling (scaling out)",
+            "correct": false
+        },
+        {
+            "text": "High availability",
+            "correct": false
+        },
+        {
+            "text": "Disaster recovery",
+            "correct": false
+        }
+    ],
+    "explanation": "**Vertical scaling (scaling up)** means increasing the capabilities of an existing resource — adding CPU, memory, or faster disks to the same machine. Resizing a single VM to a larger size is the classic example, and it is often the right first move for databases that do not easily split across servers.\n\n**Why not the other options:**\n- **Horizontal scaling (scaling out)** — Means adding *more instances* of a resource (more VMs behind a load balancer), not making one instance bigger.\n- **High availability** — Is about keeping a service accessible despite component failures, typically via redundancy; resizing one VM does not add redundancy.\n- **Disaster recovery** — Is about restoring service after a major outage, usually in another location; it is unrelated to performance tuning.",
+    "category": "Describe Cloud Concepts"
+}

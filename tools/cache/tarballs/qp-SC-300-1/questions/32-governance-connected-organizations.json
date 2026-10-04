@@ -1,0 +1,24 @@
+{
+    "id": "sc300-governance-connected-organizations",
+    "question": "An entitlement management administrator wants users from a specific partner company — who do not yet have any guest accounts in the tenant — to be selectable as requestors when an access package's policy is scoped to \"users from a specific connected organization,\" before any of those partner users have ever been invited.\n\nWhat must the administrator configure first?",
+    "options": [
+        {
+            "text": "Add the partner company as a connected organization in entitlement management, identified by its Microsoft Entra directory (or by domain, for organizations without their own Entra tenant)",
+            "correct": true
+        },
+        {
+            "text": "Manually send a B2B guest invitation to every known employee at the partner company before configuring the access package",
+            "correct": false
+        },
+        {
+            "text": "Configure a cross-tenant access setting that fully trusts every claim from the partner's tenant",
+            "correct": false
+        },
+        {
+            "text": "Create a dynamic group scoped to the partner's email domain",
+            "correct": false
+        }
+    ],
+    "explanation": "A **connected organization** is entitlement management's way of registering an external organization — either by its Microsoft Entra tenant or by an email domain, for organizations without their own Entra ID — as a known source of potential requestors, *before* any individual user from that organization has a guest account. Once configured, an access package policy can be scoped to \"users from a specific connected organization,\" and requestors from that organization can request access, with a guest account created automatically upon approval if one doesn't already exist.\n\n**Why not the other options:**\n- **Manually inviting every known employee first** — this defeats the purpose of self-service, connected-organization scoping; it requires knowing every individual in advance and creates guest accounts for people who may never request access.\n- **A cross-tenant access setting that fully trusts every claim** — cross-tenant access settings govern B2B collaboration/direct connect trust behavior generally; they are not what registers an organization as selectable in an entitlement management access package policy.\n- **A dynamic group by email domain** — dynamic groups only evaluate attributes of *existing* directory objects; they cannot make an organization (with no existing guest accounts yet) selectable as a policy scope in entitlement management.",
+    "category": "Plan and automate identity governance"
+}

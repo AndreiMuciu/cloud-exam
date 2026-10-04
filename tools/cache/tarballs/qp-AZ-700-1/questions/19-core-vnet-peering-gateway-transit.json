@@ -1,0 +1,25 @@
+{
+    "id": "az700-core-vnet-peering-gateway-transit",
+    "type": "multi",
+    "question": "A network architect at Verimark Logistics is designing VNet peering between a hub VNet (which has a VPN gateway) and several spoke VNets. Which of the following statements about VNet peering are correct? (Choose two.)",
+    "options": [
+        {
+            "text": "VNet peering is non-transitive: a spoke peered to the hub cannot automatically reach another spoke peered to the same hub through the peering alone",
+            "correct": true
+        },
+        {
+            "text": "With gateway transit enabled on the hub-to-spoke peering, a spoke VNet can use the hub's VPN gateway to reach on-premises networks without deploying its own gateway",
+            "correct": true
+        },
+        {
+            "text": "Peered VNets are allowed to have overlapping address spaces as long as they are in different Azure regions",
+            "correct": false
+        },
+        {
+            "text": "VNet peering automatically routes traffic between spokes through the hub's virtual network gateway, even without any additional configuration",
+            "correct": false
+        }
+    ],
+    "explanation": "**Correct statements:**\n- **VNet peering is non-transitive** — Peering relationships aren't chained automatically. If Spoke A is peered with the hub and Spoke B is peered with the hub, Spoke A cannot reach Spoke B unless Spoke A is also directly peered with Spoke B (or routing is deliberately configured through an NVA/firewall in the hub).\n- **Gateway transit** lets a spoke VNet that doesn't have its own virtual network gateway use the hub's gateway (VPN or ExpressRoute) to reach on-premises networks, avoiding the cost and management overhead of deploying a gateway in every spoke.\n\n**Why not the other options:**\n- **\"Overlapping address spaces are allowed across regions\"** — Peered VNets must always have non-overlapping address spaces, regardless of region; peering creation fails otherwise.\n- **\"Peering automatically routes spoke-to-spoke traffic through the hub gateway\"** — Because peering is non-transitive, this doesn't happen automatically; achieving spoke-to-spoke or transitive routing through a hub requires explicit design, such as UDRs pointing at an NVA/firewall in the hub, or use of a hub-and-spoke-aware service like Virtual WAN.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

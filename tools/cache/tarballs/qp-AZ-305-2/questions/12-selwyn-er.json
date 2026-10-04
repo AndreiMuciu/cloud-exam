@@ -1,0 +1,26 @@
+{
+    "id": "az305-s2-selwyn-er",
+    "type": "multi",
+    "question": "You need to design connectivity between Azure and the airline's two datacenters that host the departure-control system. The design must provide an SLA and predictable latency, must not traverse the public internet for primary traffic, and must include a lower-cost fallback path if the primary link fails.\n\nWhich two actions should you include in the design? (Choose two.)",
+    "options": [
+        {
+            "text": "Provision an ExpressRoute circuit with private peering as the primary connectivity path",
+            "correct": true
+        },
+        {
+            "text": "Configure a site-to-site VPN connection as a failover path for the ExpressRoute circuit",
+            "correct": true
+        },
+        {
+            "text": "Provision a second ExpressRoute circuit at the same peering location as the fallback path",
+            "correct": false
+        },
+        {
+            "text": "Use a site-to-site VPN as the primary path and reserve ExpressRoute for failover",
+            "correct": false
+        }
+    ],
+    "explanation": "The classic AZ-305 hybrid connectivity pattern applies here:\n\n1. **ExpressRoute with private peering as primary** — ExpressRoute is a dedicated circuit through a connectivity provider: traffic never touches the public internet, latency is predictable, and the service carries a connectivity SLA — matching every primary-path requirement for reaching the departure-control system\n2. **Site-to-site VPN as failover** — A VPN gateway connection over the internet is the documented, lower-cost resilience pattern for ExpressRoute. Azure supports coexisting ExpressRoute and VPN gateways, with routing preferring the ExpressRoute path and the VPN taking over only if the circuit fails. The VPN is encrypted, and brief use of an internet path during an outage is the accepted trade-off for its low cost\n\n**Why not the other options:**\n- **Second ExpressRoute circuit at the same peering location** — A second circuit is the *high-cost* resilience option, contradicting the \"lower-cost fallback\" requirement — and placing it at the **same peering location** leaves a shared point of failure: an outage at that edge site takes down both circuits. If dual circuits were funded, they should be in different peering locations\n- **VPN primary / ExpressRoute failover** — Inverts the requirements: primary traffic would traverse the public internet with no latency predictability and a weaker SLA, while the expensive dedicated circuit sits idle. ExpressRoute billing also does not stop when unused, so this saves nothing",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_selwyn_airways.json"
+}

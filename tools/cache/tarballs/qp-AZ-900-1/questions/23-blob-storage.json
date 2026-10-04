@@ -1,0 +1,24 @@
+{
+    "id": "az900-23-blob-storage",
+    "question": "Which Azure Storage service is specifically optimized for storing massive amounts of unstructured data, such as images, videos, or log files?",
+    "options": [
+        {
+            "text": "Azure Queue Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob Storage",
+            "correct": true
+        },
+        {
+            "text": "Azure Table Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure Files",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Blob Storage** (Binary Large Object) is designed for massive amounts of unstructured data. It is commonly used for serving images or documents directly to a browser, streaming video, and storing data for backup, disaster recovery, and archiving.\n\n**Why not the other options:**\n- **Queue Storage** — Used for storing large numbers of messages for asynchronous processing.\n- **Table Storage** — A NoSQL store for key-attribute data.\n- **Azure Files** — Managed file shares that can be accessed via SMB or NFS, similar to a traditional file server.",
+    "category": "Describe Azure Architecture and Services"
+}

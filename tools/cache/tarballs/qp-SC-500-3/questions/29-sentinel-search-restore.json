@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-29-sentinel-search-restore",
+    "question": "A breach notification reveals that attackers may have been active in your environment 14 months ago. Your Microsoft Sentinel workspace keeps `SecurityEvent` in interactive (analytics) retention for 90 days, with total retention of 2 years — so the relevant records are in long-term (archived) retention. An investigator needs to (1) find events involving a specific compromised account across that archived period and (2) bring several weeks of the archived table back for full interactive KQL investigation. What should the investigator use?",
+    "options": [
+        {
+            "text": "Run a search job scoped to the archived time range to locate the account's events (results land in a new table), then run a restore of the needed weeks of SecurityEvent to make them queryable interactively",
+            "correct": true
+        },
+        {
+            "text": "Change the table's interactive retention setting from 90 days to 2 years, which retroactively moves the archived data back into analytics retention",
+            "correct": false
+        },
+        {
+            "text": "Query the archived period directly with a standard KQL query in Log Analytics, since archived data is transparently included in all queries",
+            "correct": false
+        },
+        {
+            "text": "Open a Microsoft support ticket, since data in long-term retention can be retrieved only by Microsoft",
+            "correct": false
+        }
+    ],
+    "explanation": "Long-term (archived) retention is cheap because it is **not directly queryable** — and Sentinel provides two purpose-built tools to reach into it. A **search job** runs an asynchronous KQL search (with the scope and time range you specify) across archived and analytics data and writes matches into a **new results table** (suffixed `_SRCH`) in the workspace — ideal for step 1's targeted hunt for one account across 14 months. When the investigation then needs *full interactive* analytics over a slice of history, a **restore** brings a chosen time range of the archived table back as a temporary restored table (suffixed `_RST`) that supports normal interactive KQL at full performance — step 2's several weeks of deep-dive. Both operations are charged for what they scan/restore, so scoping tightly matters.\n\n**Why not the other options:**\n- **Raising interactive retention to 2 years** — retention setting changes apply to how data *will be kept*; they do not rehydrate data already rolled into long-term retention, and keeping the whole table interactive for 2 years would be a massive standing cost for a one-off investigation.\n- **Standard KQL over the archive** — ordinary Log Analytics queries only see analytics-tier (interactive) data; the archived period is invisible to them. That is precisely why search jobs and restore exist.\n- **Microsoft support ticket** — retrieval is fully self-service through search jobs and restore; Microsoft does not manually fish customer data out of retention.",
+    "category": "Manage and monitor security posture"
+}

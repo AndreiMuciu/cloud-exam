@@ -1,0 +1,25 @@
+{
+    "id": "az700-palmsera-nsg-priority",
+    "question": "Palmsera Health's security team configured a network security group (NSG) on the database subnet of a spoke VNet with these rules:\n\n- Priority 100: Deny all inbound traffic\n- Priority 200: Allow inbound TCP port 1433 from the API subnet\n- Priority 65000 (default): AllowVNetInBound\n\nA request arrives at the database subnet from the API subnet on TCP port 1433.\n\nWhat happens to this traffic?",
+    "options": [
+        {
+            "text": "The traffic is denied, because priority 100's Deny all inbound rule is evaluated first and traffic matching it is dropped immediately",
+            "correct": true
+        },
+        {
+            "text": "The traffic is allowed, because priority 200 explicitly permits port 1433 from the API subnet",
+            "correct": false
+        },
+        {
+            "text": "The traffic is allowed, because the default AllowVNetInBound rule always takes precedence over custom rules",
+            "correct": false
+        },
+        {
+            "text": "Both rules 100 and 200 are evaluated and their results are combined, so the more specific rule (200) wins regardless of priority number",
+            "correct": false
+        }
+    ],
+    "explanation": "NSG rules are evaluated in **priority order, from the lowest number to the highest** (lower number = higher priority). Once a rule matches the traffic's five-tuple (source, source port, destination, destination port, protocol), processing stops and no further rules are evaluated. Here, priority 100's **Deny all inbound** rule is a match for any inbound traffic — including the request from the API subnet on port 1433 — so it denies the traffic before priority 200 is ever evaluated. This configuration is a mistake by the security team: to allow the API-to-database traffic, the **Allow port 1433** rule would need a lower priority number (higher priority) than the deny-all rule, for example priority 100 for the allow rule and 200 for the deny-all rule.\n\n**Why not the other options:**\n- **\"Allowed because rule 200 explicitly permits it\"** — Rule 200 is never reached because rule 100 (lower priority number, evaluated first) already matches and denies the traffic.\n- **\"Allowed because the default rule always wins\"** — Default rules are given the **lowest priority (highest number)** specifically so that custom rules are always evaluated first; they never override a matching custom rule.\n- **\"Rules are combined, more specific wins\"** — Azure NSGs don't combine or rank rules by specificity; they strictly evaluate by ascending priority number and stop at the first match.",
+    "category": "Design and Implement Azure Network Security Services",
+    "caseStudy": "scenarios/case_study_palmsera.json"
+}

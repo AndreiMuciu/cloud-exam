@@ -1,0 +1,31 @@
+{
+    "id": "gen-20-messaging-comparison-exhibit",
+    "exhibits": [
+        {
+            "title": "Messaging Service Comparison",
+            "type": "markdown",
+            "content": "| Feature | Event Grid | Service Bus | Event Hubs |\n|---|---|---|---|\n| Pattern | Push (reactive) | Pull (brokered messaging) | Pull (streaming) |\n| Best For | Event-driven automation | Enterprise messaging | Big data streaming |\n| Delivery | Near-instant | Guaranteed | Ordered partitions |"
+        }
+    ],
+    "question": "You need to collect and react to events from multiple Azure services in near real-time. The solution must use a push-based model. What should you recommend?",
+    "options": [
+        {
+            "text": "Azure Queue Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Bus",
+            "correct": false
+        },
+        {
+            "text": "Azure Event Hubs",
+            "correct": false
+        },
+        {
+            "text": "Azure Event Grid",
+            "correct": true
+        }
+    ],
+    "explanation": "The correct answer is **Azure Event Grid**. \n\n- **Azure Event Grid** is a highly scalable, serverless event broker that uses a **push-based** model to deliver events. It is designed for reactive, event-driven architectures with near-instant delivery.\n- Service Bus and Queue Storage use a **pull-based** model (polling).- Event Hubs is for massive data streaming and is typically consumed via a pull model (e.g., by Azure Stream Analytics or Event Hub SDK).",
+    "category": "Design Infrastructure Solutions"
+}

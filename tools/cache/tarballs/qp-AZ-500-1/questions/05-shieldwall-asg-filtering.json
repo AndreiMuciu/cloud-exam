@@ -1,0 +1,25 @@
+{
+    "id": "az500-05-shieldwall-asg-filtering",
+    "question": "You need to ensure that traffic to the ShieldWall App Tier subnets is only allowed from the DMZ Tier subnets. You want to simplify the management of these rules as the number of servers in each tier grows. Which feature should you use within your Network Security Groups (NSGs)?",
+    "options": [
+        {
+            "text": "Service Tags",
+            "correct": false
+        },
+        {
+            "text": "Application Security Groups (ASGs)",
+            "correct": true
+        },
+        {
+            "text": "IP Groups",
+            "correct": false
+        },
+        {
+            "text": "Azure Front Door WAF",
+            "correct": false
+        }
+    ],
+    "explanation": "**Application Security Groups (ASGs)** allow you to group servers (represented by their NICs) into logical groups and use those names as the source or destination in NSG rules. This removes the need to maintain long lists of individual IP addresses.\n\n**Why not the other options:**\n- **Service Tags** — Represent a group of IP address prefixes for specific Azure services (like 'Sql' or 'Storage'), not your own custom application tiers.\n- **IP Groups** — A collection of IP addresses used in Azure Firewall rules, not in NSGs. ASGs are specifically designed for grouping VMs within a VNet for use in NSG rules.\n- **WAF** — Operates at the application layer (HTTP/S) and is not used for network-layer VNet-to-VNet filtering within subnets.",
+    "category": "Secure networking",
+    "caseStudy": "scenarios/case_study_shieldwall_networks.json"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_vanguard_defense",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Vanguard Defense Systems** is a specialized defense contractor migrating its sensitive research applications to Azure. They require the highest level of security for identity and access management. The organization has 2,500 employees across three locations, with a mix of classified and unclassified projects."
+        },
+        {
+            "title": "Identity Requirements",
+            "content": "- All administrative access to the Azure subscription must be just-in-time (JIT) and require approval from a designated security officer.\n- Users must be able to sign in using their existing on-premises Active Directory credentials with seamless SSO, while minimizing on-premises infrastructure dependencies.\n- Break-glass accounts must be excluded from conditional access policies but monitored for any sign-in attempts via log alerts."
+        }
+    ]
+}

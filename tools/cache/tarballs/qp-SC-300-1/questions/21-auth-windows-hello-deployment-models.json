@@ -1,0 +1,24 @@
+{
+    "id": "sc300-auth-windows-hello-deployment-models",
+    "question": "A hybrid organization wants to deploy Windows Hello for Business to let users sign in to both Microsoft Entra ID and on-premises, domain-joined resources with a PIN or biometric gesture. The organization explicitly wants to avoid deploying or maintaining an internal enterprise public key infrastructure (PKI).\n\nWhich Windows Hello for Business hybrid deployment model best fits this constraint?",
+    "options": [
+        {
+            "text": "Hybrid Cloud Kerberos trust, which authenticates to on-premises resources using a cloud-issued Kerberos ticket-granting ticket instead of certificates",
+            "correct": true
+        },
+        {
+            "text": "Hybrid certificate trust, which issues each user a certificate from an internal enterprise certification authority for on-premises authentication",
+            "correct": false
+        },
+        {
+            "text": "On-premises key trust with a certificate-based smart card fallback",
+            "correct": false
+        },
+        {
+            "text": "Federated certificate trust, which requires an AD FS farm to issue certificates on behalf of the enterprise PKI",
+            "correct": false
+        }
+    ],
+    "explanation": "**Hybrid Cloud Kerberos trust** authenticates users to on-premises AD DS resources using a Kerberos ticket-granting ticket obtained from a cloud-based Kerberos Server object published via Microsoft Entra Connect — it does not require issuing or managing user certificates, and it has no enterprise PKI dependency, which is the lightest-weight of the hybrid trust models for organizations that want to avoid PKI.\n\n**Why not the other options:**\n- **Hybrid certificate trust** — by definition this model issues each user a certificate for on-premises authentication, which requires standing up and maintaining an enterprise certification authority — exactly what the organization wants to avoid.\n- **On-premises key trust with certificate fallback** — key trust itself doesn't need a PKI, but adding a \"certificate-based smart card fallback\" reintroduces a certificate-issuing dependency, and key trust also has stricter domain-controller patch-level prerequisites than cloud Kerberos trust.\n- **Federated certificate trust** — this both requires an AD FS farm and still relies on certificates being issued from an enterprise PKI, combining two things (federation infrastructure and PKI) the organization is trying to minimize.",
+    "category": "Implement authentication and access management"
+}

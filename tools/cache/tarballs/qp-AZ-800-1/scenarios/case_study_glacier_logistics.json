@@ -1,0 +1,9 @@
+{
+    "id": "case_study_glacier_logistics",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Glacier Logistics** manages cold storage warehouses across North America. They are migrating their file servers to Azure but must maintain high performance for local workers in the warehouses.\n\n**Hybrid Storage Strategy:**\n- Use Azure File Sync to centralize file shares in Azure Files.\n- Deploy local Windows Server 2022 machines in each warehouse to act as the Azure File Sync 'Cloud Tiering' endpoints.\n- Ensure all data is encrypted and accessible even during temporary internet outages."
+        }
+    ]
+}

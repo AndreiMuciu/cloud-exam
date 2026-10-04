@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-06-tallowfen-cosmos-rbac",
+    "question": "You need to meet Tallowfen Grocers' Cosmos DB access requirements: applications authenticate with Microsoft Entra identities holding data-plane permissions scoped to only the containers they use, and after migration the account keys must no longer work at all. What should you do?",
+    "options": [
+        {
+            "text": "Assign each application's managed identity a Cosmos DB data-plane RBAC role (such as Cosmos DB Built-in Data Contributor, or a custom data-plane role) scoped to its specific database or container, migrate the applications to Entra authentication, then disable local (key-based) authentication on the account",
+            "correct": true
+        },
+        {
+            "text": "Assign each application's managed identity the Cosmos DB Operator Azure RBAC role on the account and then rotate the primary and secondary keys",
+            "correct": false
+        },
+        {
+            "text": "Create one resource token per application using the Cosmos DB resource-token pattern and distribute the tokens through Azure Key Vault",
+            "correct": false
+        },
+        {
+            "text": "Move each application's containers into separate Cosmos DB accounts and give each application only its own account's primary key",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Cosmos DB has **two separate RBAC planes**: Azure RBAC roles (like Cosmos DB Operator) govern *management* operations on the account, while **Cosmos DB data-plane RBAC** (built-in roles such as *Cosmos DB Built-in Data Reader/Contributor*, or custom role definitions) governs reading and writing actual data. Data-plane role assignments can be **scoped to the account, a database, or an individual container**, which delivers the per-container least privilege the requirement asks for, and the principals are Entra identities — the applications' managed identities. The final step, **disabling local authentication** (`disableLocalAuth = true`), makes the primary/secondary keys and resource tokens stop working entirely, so a leaked key truly has no value.\n\n**Why not the other options:**\n- **Cosmos DB Operator plus key rotation** — Cosmos DB Operator is a *management-plane* role; it deliberately grants no ability to read or write data, so the applications would not function. Rotating keys invalidates the old ones but keys remain a working authentication method — a future leak is still exploitable.\n- **Resource tokens via Key Vault** — resource tokens are generated *with the account keys* and are part of local (non-Entra) authentication; they stop working when local auth is disabled and are not Microsoft Entra identities, failing the core requirement.\n- **One account per application** — massive operational overkill (separate throughput, endpoints, and billing) and it still leaves key-based authentication enabled everywhere, which is exactly what must be eliminated.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_tallowfen_grocers.json"
+}

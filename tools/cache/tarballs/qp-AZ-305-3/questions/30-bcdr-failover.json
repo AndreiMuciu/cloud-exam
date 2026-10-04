@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-bcdr-failover",
+    "question": "A claims-processing application writes to a geo-redundant (GRS) storage account whose primary is in a region currently experiencing a major outage. The application is down because it cannot **write** to the account. The business requires write access to be restored within the hour. Microsoft has posted a service-health advisory but has **not** initiated a storage failover.\n\nWhat should you recommend, and what is the key consequence to communicate to the business?",
+    "options": [
+        {
+            "text": "Initiate a customer-managed account failover to the secondary region, communicating that data written after the Last Sync Time may be lost and that the account must be reconfigured for geo-redundancy afterwards",
+            "correct": true
+        },
+        {
+            "text": "Wait for Microsoft to perform a service-managed failover, communicating that this is guaranteed to complete within the hour",
+            "correct": false
+        },
+        {
+            "text": "Convert the account to RA-GRS during the outage so the application can write to the secondary endpoint",
+            "correct": false
+        },
+        {
+            "text": "Restore the account's containers into a new storage account in another region from the geo-redundant copy",
+            "correct": false
+        }
+    ],
+    "explanation": "**Customer-managed (unplanned) account failover** exists precisely for this situation: the account owner promotes the secondary region to primary **on their own authority**, restoring full read *and write* access typically well within the required hour. Two consequences are the architect's duty to communicate:\n\n- **Possible data loss** — geo-replication is **asynchronous**. The account's **Last Sync Time** shows the point up to which data is guaranteed on the secondary; anything written to the primary after it may be lost when the secondary is promoted. Checking Last Sync Time quantifies the effective RPO before pulling the trigger\n- **Redundancy must be rebuilt** — after failover the account runs as **locally redundant (LRS)** in the new primary; geo-redundancy has to be re-enabled (a re-replication that takes time and incurs cost) before the account is protected against the *next* regional incident\n\n**Why not the other options:**\n- **Wait for Microsoft** — Service-managed failover is undertaken only if Microsoft judges the primary unrecoverable, on Microsoft's timeline, potentially hours or days into an event (most regional incidents recover without one). There is no SLA that it happens within the hour — presenting it as \"guaranteed\" is false and forfeits the RTO\n- **Convert to RA-GRS** — Read-access geo-redundancy exposes the secondary as **read-only**; it can never accept writes, so the application stays down. Replication settings also cannot be meaningfully changed while the primary region is unavailable\n- **Restore into a new account** — There is no \"restore from geo-copy to a different account\" operation; the geo-replica is only reachable via failover (or RA read access). Even approximating this by copying readable data out would require RA-GRS, take far longer than an hour at scale, and break every stored URL, connection string, and SAS pointing at the original account",
+    "category": "Design Business Continuity Solutions"
+}

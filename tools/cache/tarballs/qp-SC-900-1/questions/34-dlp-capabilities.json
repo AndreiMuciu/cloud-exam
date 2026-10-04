@@ -1,0 +1,29 @@
+{
+    "id": "sc900-34-dlp-capabilities",
+    "type": "multi",
+    "question": "A compliance administrator is rolling out Microsoft Purview and wants to reduce accidental leaks of sensitive data across the organization's cloud apps. Which two outcomes can the administrator achieve with DLP policies? (Select two.)",
+    "options": [
+        {
+            "text": "Detect documents in SharePoint Online and OneDrive that contain sensitive information, such as payment card numbers, and restrict their sharing",
+            "correct": true
+        },
+        {
+            "text": "Display a policy tip to a user who is about to email sensitive content outside the organization",
+            "correct": true
+        },
+        {
+            "text": "Encrypt the operating system disks of Azure virtual machines",
+            "correct": false
+        },
+        {
+            "text": "Automatically provision guest accounts for external business partners",
+            "correct": false
+        },
+        {
+            "text": "Grant administrators just-in-time activation of privileged roles",
+            "correct": false
+        }
+    ],
+    "explanation": "**DLP policies** identify content containing sensitive information types (credit card numbers, national ID numbers, health records, and so on) across Exchange Online, SharePoint Online, OneDrive, Teams, and endpoints. Policies can **restrict or block sharing** of matching items and can **show policy tips** — inline notifications that educate users at the moment they are about to violate policy, optionally allowing justified overrides.\n\n**Why not the other options:**\n- **Encrypting VM operating system disks** — Disk encryption is an Azure infrastructure capability (for example, Azure Disk Encryption); DLP governs data in Microsoft 365 and on endpoints, not VM disks.\n- **Provisioning guest accounts** — External collaboration is handled by Microsoft Entra B2B and entitlement management, not by DLP.\n- **Just-in-time role activation** — That is Microsoft Entra Privileged Identity Management (PIM), an identity governance capability unrelated to data loss prevention.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

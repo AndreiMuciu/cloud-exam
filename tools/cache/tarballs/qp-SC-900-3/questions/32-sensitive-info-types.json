@@ -1,0 +1,29 @@
+{
+    "id": "sc900-s3-32-sensitive-info-types",
+    "question": "A compliance administrator is configuring Microsoft Purview to detect national ID numbers and internal project codes in documents and emails so that DLP and labeling policies can act on them. She is defining a custom **sensitive information type (SIT)**.\n\nWhich two of the following are elements used to define how a sensitive information type detects content? (Select two.)",
+    "type": "multi",
+    "options": [
+        {
+            "text": "A primary pattern, such as a regular expression that matches the identifier's character format",
+            "correct": true
+        },
+        {
+            "text": "Supporting evidence such as keyword lists that must appear near the matched pattern, raising detection confidence",
+            "correct": true
+        },
+        {
+            "text": "A set of sample documents that an AI model learns from, with no patterns or keywords involved",
+            "correct": false
+        },
+        {
+            "text": "The retention period that will be applied to matching documents",
+            "correct": false
+        },
+        {
+            "text": "The Azure region where matching documents are physically stored",
+            "correct": false
+        }
+    ],
+    "explanation": "A **sensitive information type** is a *pattern-based* classifier. Its definition centers on a **primary element — typically a regular expression** (or a keyword list or function) that matches the data's character format, such as a nine-digit national ID layout — plus **supporting elements, such as keyword lists in proximity to the match** (for example, the word \"passport\" near the number) and, for many built-in types, checksum validation. Together with a **confidence level** and character proximity window, these determine how strictly content must match before policies such as DLP treat it as sensitive.\n\n**Why not the other options:**\n- **Sample documents an AI model learns from** — Learning a *category* of content from seed examples describes **trainable classifiers**, the complementary classification method used when no consistent pattern or keyword exists. It is not how a sensitive information type is defined.\n- **A retention period** — Retention is a *lifecycle* setting configured in retention policies and labels. A SIT only *identifies* content; it does not carry retention settings.\n- **The Azure region of storage** — Physical storage location is unrelated to content classification; SIT detection logic operates on the content itself, wherever it lives.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

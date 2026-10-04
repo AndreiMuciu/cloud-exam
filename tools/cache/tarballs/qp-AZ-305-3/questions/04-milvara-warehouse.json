@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-milvara-warehouse",
+    "question": "You need to recommend an analytics store for the 90 TB curated claims dataset. The store must support complex T-SQL joins and aggregations with dedicated, predictable performance, and the BI team must be able to pause compute outside the fixed daily processing windows.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "An Azure Synapse Analytics dedicated SQL pool",
+            "correct": true
+        },
+        {
+            "text": "An Azure Synapse Analytics serverless SQL pool querying the data lake",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Explorer with the claims data ingested into a time-series database",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Database Hyperscale with additional read replicas",
+            "correct": false
+        }
+    ],
+    "explanation": "An **Azure Synapse Analytics dedicated SQL pool** is the massively parallel processing (MPP) relational data warehouse in Azure. It matches every stated requirement:\n\n- **90 TB of structured, relational data** — dedicated SQL pools are built for multi-terabyte star-schema warehouses, distributing data and query execution across compute nodes\n- **Complex T-SQL joins and aggregations** — full T-SQL warehousing surface (distribution strategies, columnstore indexes, materialized views, result-set caching)\n- **Dedicated, predictable performance** — capacity is provisioned as Data Warehouse Units (DWU), so the BI team's daily runs are not subject to noisy-neighbor or per-query variability\n- **Pause compute** — a dedicated SQL pool can be **paused** outside processing windows, dropping compute billing to zero while storage is retained — a perfect fit for a fixed daily schedule\n\n**Why not the other options:**\n- **Serverless SQL pool** — Serverless is a pay-per-TB-scanned query layer over files in the data lake. It provides no dedicated capacity, so performance is not predictable, and repeatedly scanning tens of terabytes on a *known, fixed daily schedule* is the cost profile where provisioned (pausable) capacity beats per-query billing. There is also no warehouse storage engine (no clustered columnstore tables, distribution tuning, or materialized views over local tables)\n- **Azure Data Explorer** — ADX excels at telemetry/log/time-series exploration with KQL. The claims workload is classic relational warehousing with T-SQL joins — a different engine and query language than the BI team's requirement\n- **SQL Database Hyperscale** — Hyperscale scales OLTP-style databases past 100 TB and adds read replicas, but it is a symmetric-multiprocessing OLTP engine, not an MPP warehouse: massive analytical joins and aggregations over 90 TB are not its design center, and its compute cannot be paused",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_milvara_health.json"
+}

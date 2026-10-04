@@ -1,0 +1,25 @@
+{
+    "id": "az500-08-cryptovault-ade-encryption",
+    "question": "You are implementing Azure Disk Encryption (ADE) for virtual machines at CryptoVault Banking. Which of the following is a prerequisite specifically for ADE that is NOT required for the simpler 'Encryption at Host' feature?",
+    "options": [
+        {
+            "text": "A Managed Identity assigned to the VM",
+            "correct": false
+        },
+        {
+            "text": "An Azure Key Vault configured with the 'Azure Disk Encryption' access policy enabled",
+            "correct": true
+        },
+        {
+            "text": "The VM must be in a specific Availability Zone",
+            "correct": false
+        },
+        {
+            "text": "The VM must have Azure Backup configured first",
+            "correct": false
+        }
+    ],
+    "explanation": "For **ADE** to work, the Azure Key Vault must have the **'Azure Disk Encryption for volume encryption'** access policy (or RBAC permission) enabled so the platform can retrieve the required keys during boot.\n\n**Why not the other options:**\n- **Managed Identity** — While useful, it is not a technical prerequisite for the ADE encryption process itself.\n- **Availability Zone** — Encryption is independent of zones.\n- **Azure Backup** — While it is recommended to back up VMs before enabling encryption, it is not a technical prerequisite for ADE.",
+    "category": "Secure compute, storage, and databases",
+    "caseStudy": "scenarios/case_study_cryptovault_banking.json"
+}

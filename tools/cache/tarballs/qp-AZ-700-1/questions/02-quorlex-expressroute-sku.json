@@ -1,0 +1,25 @@
+{
+    "id": "az700-quorlex-expressroute-sku",
+    "question": "Quorlex Manufacturing has provisioned separate ExpressRoute circuits for its East US and West Europe factories. The company now needs the on-premises SCADA network at the East US factory to communicate directly with the on-premises SCADA network at the West Europe factory over the Microsoft backbone, without the traffic passing through either factory's Azure VNet.\n\nWhich ExpressRoute capability should Quorlex configure to meet this requirement?",
+    "options": [
+        {
+            "text": "ExpressRoute Global Reach",
+            "correct": true
+        },
+        {
+            "text": "ExpressRoute FastPath",
+            "correct": false
+        },
+        {
+            "text": "ExpressRoute Direct",
+            "correct": false
+        },
+        {
+            "text": "A site-to-site VPN gateway configured for VNet-to-VNet connectivity",
+            "correct": false
+        }
+    ],
+    "explanation": "**ExpressRoute Global Reach** links two ExpressRoute circuits together so that the on-premises networks connected to each circuit can exchange traffic directly over the Microsoft backbone — without the traffic ever entering either side's Azure virtual network. This is exactly the on-premises-to-on-premises connectivity Quorlex needs between its East US and West Europe factories.\n\n**Why not the other options:**\n- **ExpressRoute FastPath** — Improves data path performance between an on-premises network and a virtual network by bypassing the ExpressRoute virtual network gateway; it doesn't provide on-premises-to-on-premises connectivity between two separate circuits.\n- **ExpressRoute Direct** — Lets a customer connect directly into Microsoft's global network at a peering location using 100-Gbps or 10-Gbps ports; it's about how you physically connect to Microsoft, not about linking two existing circuits' on-premises sides together.\n- **A site-to-site VPN gateway for VNet-to-VNet** — This connects Azure VNets to each other or to on-premises sites over an encrypted tunnel; it doesn't connect two on-premises networks to each other and would still route traffic through Azure VNets.",
+    "category": "Design, Implement, and Manage Connectivity Services",
+    "caseStudy": "scenarios/case_study_quorlex.json"
+}

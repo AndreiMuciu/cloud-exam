@@ -1,0 +1,13 @@
+{
+    "id": "case_study_bellcairn_utilities",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Bellcairn Utilities** operates water treatment and distribution infrastructure. Its security operations team runs Microsoft Defender for Cloud across three Azure subscriptions and a Microsoft Sentinel workspace, and the company also keeps an on-premises Splunk deployment that the industrial-control (OT) team refuses to give up.\n\n**Current Environment:**\n- A contractor recently found a PDF on a build server containing a service-account password, which prompted the CISO to ask, \"How many other credentials are lying around in files on our machines, and what could an attacker reach with them?\" Nobody could answer.\n- About 40 Linux VMs run the telemetry ingestion tier. Their authentication and sudo activity is written to the local syslog daemon. None of it reaches the SOC today.\n- The Sentinel workspace generates Defender for Cloud security alerts and recommendations, but the OT team's on-call rotation works exclusively out of Splunk dashboards and refuses to monitor a second console.\n- Defender for Cloud plans (Defender CSPM and Defender for Servers Plan 2) are already enabled on all three subscriptions."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The security operations leadership has defined the following requirements:\n\n**Credential Exposure:**\n- Plaintext credentials (passwords, SSH private keys, connection strings) stored in files on Azure VMs and multicloud machines must be discovered **without installing any additional agent** on the machines.\n- Findings must show which discovered credentials could be used to move laterally to other resources, prioritized by the attack paths they enable.\n\n**Linux Telemetry Tier:**\n- Authentication and sudo events (the `auth` and `authpriv` syslog facilities, warning severity and above) from the 40 Linux VMs must be ingested into the Microsoft Sentinel workspace.\n- Other syslog facilities (mail, cron, daemon noise) must **not** be ingested, to control cost.\n- The solution must use the current Microsoft-supported collection agent, deployed and configured centrally — not per-machine manual edits.\n\n**Splunk Integration:**\n- New Defender for Cloud security alerts and recommendation state changes must flow **continuously and automatically** to the OT team's Splunk, in near real time.\n- The mechanism must be configuration, not code: no scheduled scripts polling APIs, and no humans exporting CSV files.\n- Additionally, the security operations manager and subscription owners must receive email whenever a high-severity alert fires."
+        }
+    ]
+}

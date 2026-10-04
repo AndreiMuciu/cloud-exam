@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-16-cloud-computing-definition",
+    "question": "A museum's board of trustees, new to technology decisions, asks for a one-sentence definition of **cloud computing**. Which statement is the most accurate?",
+    "options": [
+        {
+            "text": "The delivery of computing services — such as servers, storage, databases, and networking — over the internet, typically paid for based on usage",
+            "correct": true
+        },
+        {
+            "text": "The practice of buying and racking physical servers in a building the organization owns",
+            "correct": false
+        },
+        {
+            "text": "A type of software that can only run inside a web browser",
+            "correct": false
+        },
+        {
+            "text": "A licensing program that lets organizations prepay for desktop software",
+            "correct": false
+        }
+    ],
+    "explanation": "**Cloud computing is the delivery of computing services over the internet** — including virtual machines, storage, databases, networking, and higher-level services — provided on demand from a provider's datacenters and **typically billed based on actual usage** rather than up-front hardware purchases. This definition captures the two essentials: services delivered remotely over the network, and a consumption-oriented payment model.\n\n**Why not the other options:**\n- **Buying and racking physical servers in the organization's own building** — That is the traditional **on-premises** model, the opposite of consuming services from a provider over the internet.\n- **Software that can only run inside a web browser** — Cloud services host far more than browser applications: virtual machines, databases, message queues, and APIs, many of which are consumed by other software rather than a browser.\n- **A licensing program for prepaid desktop software** — Cloud computing is a service-delivery model, not a software licensing scheme.",
+    "category": "Describe Cloud Concepts"
+}

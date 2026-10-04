@@ -1,0 +1,19 @@
+{
+    "id": "dp900-32-analytics-pipeline-ordering",
+    "type": "ordering",
+    "question": "A team is building a modern data analytics solution on a cloud lakehouse platform.\n\nPlace the four stages of the analytics pipeline in the correct order, from first to last.",
+    "items": [
+        "Build a semantic model and create interactive reports for business users",
+        "Ingest raw data from the source systems into the data lake",
+        "Serve the curated tables through an analytical store optimized for queries",
+        "Transform and cleanse the raw data into curated, conformed tables"
+    ],
+    "correctOrder": [
+        "Ingest raw data from the source systems into the data lake",
+        "Transform and cleanse the raw data into curated, conformed tables",
+        "Serve the curated tables through an analytical store optimized for queries",
+        "Build a semantic model and create interactive reports for business users"
+    ],
+    "explanation": "The standard flow of a modern analytics pipeline is:\n\n1. **Ingest** — Raw data is copied from operational sources (databases, APIs, files, event streams) into the data lake, typically without modification, using pipelines or streaming ingestion.\n2. **Transform** — The raw data is cleansed, deduplicated, and reshaped into curated, conformed tables (for example, with Spark in Microsoft Fabric or Azure Databricks) — the \"T\" that follows the load in an ELT approach.\n3. **Serve** — Curated tables are exposed through an analytical store (a warehouse or lakehouse SQL endpoint) that is optimized for fast analytical queries by many consumers.\n4. **Visualize** — Analysts build a semantic model with measures and relationships and create interactive Power BI reports and dashboards on top of the served data.\n\nEach stage depends on the previous one: you cannot transform data that has not been ingested, cannot reliably serve data that has not been curated, and reports need a queryable, modeled layer beneath them.",
+    "category": "Describe an Analytics Workload on Azure"
+}

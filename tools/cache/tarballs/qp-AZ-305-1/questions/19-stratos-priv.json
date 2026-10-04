@@ -1,0 +1,16 @@
+{
+    "id": "gen-22-yes-pattern-break",
+    "question": "**Proposed Solution:**\n\nUse **Azure Private Link** to provide private connectivity from the on-premises network to the OrderTracker web application and its SQL backend. Configure a **Private Endpoint** for each resource within your company's VNet.\n\nDoes this meet the goal of ensuring the application and database are inaccessible from the public internet while allowing secure internal access?",
+    "options": [
+        {
+            "text": "Yes",
+            "correct": true
+        },
+        {
+            "text": "No",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Yes**. Azure Private Link allows you to access Azure PaaS services (like App Service and SQL Database) over a private endpoint in your virtual network. This ensures that traffic remains on the Microsoft backbone network and the services are not exposed to the public internet, directly meeting the security requirements.",
+    "category": "Design Infrastructure Solutions"
+}

@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-compute-vmss-autoscale",
+    "type": "single",
+    "question": "Recall the autoscale configuration of Ashgrove Retail Group's web tier scale set **vmss-web**:\n\n- Instance limits: minimum **2**, default **2**, maximum **10**\n- Scale out: add **2** instances when average CPU > 70% for 10 minutes\n- Scale in: remove **1** instance when average CPU < 25% for 15 minutes\n\nvmss-web is running at its default instance count when a flash sale begins. Average CPU rises above 70% and stays there long enough for the scale-out rule to be evaluated and applied **twice** (including its cooldown periods). Demand then levels off, and average CPU settles at around 45%.\n\nHow many instances is vmss-web running after these events?",
+    "options": [
+        { "text": "4", "correct": false },
+        { "text": "6", "correct": true },
+        { "text": "8", "correct": false },
+        { "text": "10", "correct": false }
+    ],
+    "explanation": "The scale set starts at the **default** of 2 instances. Each scale-out action adds 2 instances, so two applied scale-out actions give: 2 → 4 → 6 instances. After demand levels off, average CPU sits at ~45%, which is **below the 70% scale-out threshold but above the 25% scale-in threshold** — so neither rule fires again and the count stays at **6**. The maximum of 10 was never reached, so the cap did not constrain the result.\n\n**Why not the other options:**\n- **4**: That would be the count after only *one* scale-out action (2 + 2). The scenario states the rule was applied twice.\n- **8**: That would require *three* scale-out actions (2 + 2 + 2 + 2), one more than occurred.\n- **10**: The maximum instance limit only caps growth; it is not a target. Autoscale never jumps straight to the maximum — it applies the rule's increment (2 instances) per evaluation, and only two evaluations triggered.",
+    "category": "Deploy and Manage Azure Compute Resources",
+    "caseStudy": "scenarios/case_study_ashgrove.json"
+}

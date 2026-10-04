@@ -1,0 +1,24 @@
+{
+    "id": "ai103-24-foundry-sdk-connect-project",
+    "question": "You are writing a new Python service that must authenticate as itself (not as a signed-in user) and connect to an Azure AI Foundry project to get a chat completions client, using the Foundry SDK and keyless authentication.\n\nWhich code correctly establishes that connection?",
+    "options": [
+        {
+            "text": "```python\nfrom azure.ai.projects import AIProjectClient\nfrom azure.identity import DefaultAzureCredential\n\nproject = AIProjectClient(\n    endpoint=\"https://my-foundry-resource.services.ai.azure.com/api/projects/my-project\",\n    credential=DefaultAzureCredential(),\n)\nchat_client = project.inference.get_chat_completions_client()\n```",
+            "correct": true
+        },
+        {
+            "text": "```python\nimport requests\n\nresponse = requests.get(\n    \"https://my-foundry-resource.services.ai.azure.com/api/projects/my-project\",\n    headers={\"Authorization\": \"Bearer hardcoded-token-string\"},\n)\n```",
+            "correct": false
+        },
+        {
+            "text": "```python\nfrom azure.ai.projects import AIProjectClient\n\nproject = AIProjectClient(endpoint=\"https://my-foundry-resource.services.ai.azure.com/api/projects/my-project\")\n# credential intentionally omitted\n```",
+            "correct": false
+        },
+        {
+            "text": "```python\nimport os\n\napi_key = os.environ[\"HARDCODED_API_KEY_IN_SOURCE\"]\nchat_client = f\"key={api_key}\"  # pass the raw key string as the client\n```",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct pattern constructs an **`AIProjectClient`** with the project endpoint and a **`DefaultAzureCredential`**, which authenticates the service's own identity (managed identity in Azure, or developer credentials locally) and requests short-lived Microsoft Entra ID tokens — no secret ever appears in code.\n\n**Why not the other options:**\n- **A hardcoded bearer token in a raw HTTP call** — Bypasses the SDK entirely and embeds a literal token string in source code, which is both brittle (tokens expire) and a direct secret-leakage risk.\n- **Omitting the credential** — The client has no way to authenticate at all without a credential; this call would fail before ever reaching the project.\n- **Reading a hardcoded API key from an environment variable named for the fact that it's hardcoded** — Even via an environment variable, this is a long-lived secret pattern, not keyless authentication, and the snippet doesn't even construct a valid client from it.",
+    "category": "Implement generative AI and agentic solutions"
+}

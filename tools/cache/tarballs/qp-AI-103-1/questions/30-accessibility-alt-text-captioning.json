@@ -1,0 +1,24 @@
+{
+    "id": "ai103-30-accessibility-alt-text-captioning",
+    "question": "A retail app must generate alt-text for every product photo uploaded by sellers, so screen-reader users get a meaningful description of each image, in line with accessibility guidelines.\n\nWhat should the application do?",
+    "options": [
+        {
+            "text": "Send each uploaded image to a multimodal model configured to produce a concise, descriptive caption suitable as alt-text, generated automatically at upload time.",
+            "correct": true
+        },
+        {
+            "text": "Require sellers to type their own alt-text, and if a seller leaves it blank, publish the product listing with the alt-text attribute simply omitted.",
+            "correct": false
+        },
+        {
+            "text": "Use the image's file name (for example, `IMG_04213.jpg`) as the alt-text value.",
+            "correct": false
+        },
+        {
+            "text": "Insert the same generic placeholder text, such as \"product photo,\" as the alt-text for every image.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **multimodal captioning model** can automatically generate a concise, meaningful description of the actual image content at upload time, which is exactly what accessibility guidance calls for — descriptive, image-specific alt-text without depending on every seller to write it manually.\n\n**Why not the other options:**\n- **Blank alt-text when a seller skips it** — Leaves screen-reader users with nothing at all for a large share of listings; accessibility can't depend entirely on optional manual input.\n- **Using the file name** — Camera-generated file names carry no descriptive information about the image content and provide no real accessibility value.\n- **A single generic placeholder for every image** — Technically fills the field but conveys no image-specific information, which fails the intent of alt-text (distinguishing what is actually in *this* photo).",
+    "category": "Implement computer vision solutions"
+}

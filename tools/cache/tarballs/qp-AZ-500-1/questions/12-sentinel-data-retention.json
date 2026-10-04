@@ -1,0 +1,25 @@
+{
+    "id": "az500-12-sentinel-data-retention",
+    "question": "To meet the 365-day log retention requirement for Sentinel Surveillance, you notice that the default Log Analytics workspace retention is set to 90 days. What is the most cost-effective way to retain the historical security data for the full year within the same workspace?",
+    "options": [
+        {
+            "text": "Change the workspace retention setting to 365 days",
+            "correct": false
+        },
+        {
+            "text": "Configure 'Archive' for the relevant tables with a 275-day archive period",
+            "correct": true
+        },
+        {
+            "text": "Export the data to Azure Blob Storage daily",
+            "correct": false
+        },
+        {
+            "text": "Increase the 'Daily Cap' of the workspace",
+            "correct": false
+        }
+    ],
+    "explanation": "**Archiving** in Log Analytics (Search Jobs/Archive) is a cost-effective way to store historical data. You keep data 'active' (searchable) for the period you need for detection (e.g., 90 days) and 'archived' (at a lower cost) for the remainder of the compliance period (up to 7 years).\n\n**Why not the other options:**\n- **Change workspace retention** — While possible, keeping data 'active' for 365 days is significantly more expensive than using the Archive tier.\n- **Export to Blob** — While functional, it makes searching the data much more difficult than using the built-in Log Analytics archive feature.\n- **Daily Cap** — Limits ingestion volume, it doesn't solve the retention duration problem.",
+    "category": "Manage security operations",
+    "caseStudy": "scenarios/case_study_sentinel_surveillance.json"
+}

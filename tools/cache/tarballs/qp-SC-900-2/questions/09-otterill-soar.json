@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-09-otterill-soar",
+    "question": "The Otterill Energy security operations team is evaluating tooling categories. One requirement is for a capability that takes alerts as input and then orchestrates and automates the response — for example, automatically isolating an affected resource, notifying the on-call engineer, and opening a ticket — so analysts spend less time on repetitive manual steps.\n\nWhich category of security tooling does this requirement describe?",
+    "options": [
+        {
+            "text": "Security orchestration, automation, and response (SOAR)",
+            "correct": true
+        },
+        {
+            "text": "Security information and event management (SIEM)",
+            "correct": false
+        },
+        {
+            "text": "Cloud Security Posture Management (CSPM)",
+            "correct": false
+        },
+        {
+            "text": "Data loss prevention (DLP)",
+            "correct": false
+        }
+    ],
+    "explanation": "**SOAR — security orchestration, automation, and response** — describes tooling that **takes alerts or incidents as input and triggers automated, orchestrated workflows** to respond: isolating resources, sending notifications, creating tickets, and running remediation steps. Microsoft Sentinel provides SOAR capabilities through automation rules and playbooks, which is why it is described as both a SIEM and a SOAR solution.\n\n**Why not the other options:**\n- **Security information and event management (SIEM)** — A SIEM *collects and analyzes* log and event data from across the estate to *detect* threats and raise alerts. It is the input side of the pipeline; the automated response the team describes is the defining trait of SOAR.\n- **Cloud Security Posture Management (CSPM)** — CSPM continuously assesses resource configurations against best practices and surfaces hardening recommendations. It is preventive posture work, not alert-driven response automation.\n- **Data loss prevention (DLP)** — DLP policies detect and block risky handling of sensitive information, such as emailing payment card data externally. It protects data flows; it does not orchestrate incident-response workflows.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_otterill_energy.json"
+}

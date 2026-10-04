@@ -1,0 +1,25 @@
+{
+    "id": "sc900-08-bluepeak-defender-cloud",
+    "question": "BluePeak Logistics needs a single tool that continuously assesses the security configuration of its Azure resources and its on-premises servers, presents a numeric score of the overall posture, and lists prioritized hardening recommendations.\n\nWhich Microsoft solution meets this requirement?",
+    "options": [
+        {
+            "text": "Microsoft Sentinel",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Endpoint",
+            "correct": false
+        },
+        {
+            "text": "Azure Key Vault",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Cloud** provides cloud security posture management (CSPM): it continuously evaluates resources against security best practices, calculates a **secure score** that quantifies the posture, and produces prioritized recommendations. Through Azure Arc onboarding it can also assess on-premises and multicloud servers, satisfying the hybrid requirement.\n\n**Why not the other options:**\n- **Microsoft Sentinel** — Sentinel is a SIEM/SOAR for collecting signals, detecting threats, and automating responses; it does not calculate a configuration-posture score with hardening recommendations.\n- **Microsoft Defender for Endpoint** — This protects individual devices with endpoint detection and response; it is not a posture-assessment tool for cloud infrastructure resources.\n- **Azure Key Vault** — Key Vault stores secrets, keys, and certificates; it performs no security assessments at all.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_bluepeak_logistics.json"
+}

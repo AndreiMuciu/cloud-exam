@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-identity-restore-deleted-user",
+    "type": "single",
+    "question": "An HR offboarding script ran against the wrong list and deleted the Microsoft Entra user account of an active employee **12 days ago**. The employee returns from leave tomorrow and must keep the same object ID, group memberships, and app role assignments.\n\nWhat should you do?",
+    "options": [
+        { "text": "Restore the account from **Deleted users** in Microsoft Entra ID", "correct": true },
+        { "text": "Create a new user account with the same user principal name (UPN)", "correct": false },
+        { "text": "Run a sync cycle so the account is re-created from the on-premises directory", "correct": false },
+        { "text": "Open a Microsoft support request, because deleted accounts can only be recovered by Microsoft", "correct": false }
+    ],
+    "explanation": "A deleted Microsoft Entra user is **soft-deleted and restorable for 30 days**. During that window the account appears under **Deleted users**, and restoring it brings back the **same object** — the identical object ID, group memberships, licenses, and app role assignments — which is exactly what the requirement demands. At 12 days, the account is comfortably inside the window; after 30 days the object is permanently (automatically) deleted and cannot be restored by anyone.\n\n**Why not the other options:**\n- **New account with the same UPN**: a re-created user is a **brand-new object** with a new object ID. Group memberships, app role assignments, per-user MFA registration, and anything keyed to the old object ID would be lost — the same name does not mean the same identity.\n- **Re-create via sync**: even in a hybrid environment, a resynchronized account is matched or re-provisioned — and if the cloud object was deleted, a newly synced object is again a different object unless the soft-deleted one is restored first. Restoring from Deleted users is the direct, supported recovery path.\n- **Microsoft support request**: no support case is needed inside the 30-day window — restore is self-service for administrators with the appropriate role. After the 30-day window expires, not even Microsoft support can bring the object back.",
+    "category": "Manage Azure Identities and Governance"
+}

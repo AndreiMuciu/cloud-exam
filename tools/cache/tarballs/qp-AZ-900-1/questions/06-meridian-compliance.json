@@ -1,0 +1,25 @@
+{
+    "id": "az900-06-meridian-compliance",
+    "question": "To satisfy the regional data residency regulations mentioned in the **Scenario**, where should Meridian Healthcare Systems primarily focus their design efforts?",
+    "options": [
+        {
+            "text": "Subscription limits",
+            "correct": false
+        },
+        {
+            "text": "Regional data residency options and Geography boundaries",
+            "correct": true
+        },
+        {
+            "text": "Azure Marketplace solution types",
+            "correct": false
+        },
+        {
+            "text": "Pricing calculator estimates",
+            "correct": false
+        }
+    ],
+    "explanation": "Compliance with regional data residency regulations requires choosing the correct **Azure Geographies** and **Regions**. Azure ensures that data remains within the geography of the primary region (with a few exceptions) to help customers meet local legal requirements.\n\n**Why not the other options:**\n- **Subscription limits** — Relate to the number of resources you can create, not where the data is stored.\n- **Azure Marketplace** — A store for third-party solutions.\n- **Pricing calculator** — Used for cost estimation, not compliance design.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_meridian_healthcare.json"
+}

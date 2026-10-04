@@ -1,0 +1,24 @@
+{
+    "id": "sc900-13-encryption-vs-hashing",
+    "question": "Which statement accurately describes hashing?",
+    "options": [
+        {
+            "text": "It converts data into a unique, fixed-length value that is not designed to be reversed back to the original data",
+            "correct": true
+        },
+        {
+            "text": "It encodes data with a key so that the intended recipient can decode it back to the original form",
+            "correct": false
+        },
+        {
+            "text": "It uses a public key to protect data and a mathematically related private key to recover it",
+            "correct": false
+        },
+        {
+            "text": "It hides data inside an image or media file so that its presence is concealed",
+            "correct": false
+        }
+    ],
+    "explanation": "**Hashing** uses an algorithm to transform input of any size into a unique, fixed-length output called a hash value. Unlike encryption, hashing is a one-way process: it is not designed to be reversed to reveal the original input. That property makes hashing ideal for storing passwords and verifying data integrity — the same input always yields the same hash, but the hash cannot be converted back.\n\n**Why not the other options:**\n- **Encoding data with a key for a recipient to decode** — This describes *encryption*, which is intentionally reversible by anyone who holds the correct key.\n- **Public key to protect, private key to recover** — This describes *asymmetric encryption* specifically, which is again a reversible, two-way process.\n- **Hiding data inside media files** — This describes *steganography*, which conceals the existence of data rather than transforming it into a fixed-length value.",
+    "category": "Describe the concepts of security, compliance, and identity"
+}

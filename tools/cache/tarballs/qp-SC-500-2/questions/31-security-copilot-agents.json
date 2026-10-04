@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-31-security-copilot-agents",
+  "type": "single",
+  "question": "Microsoft Security Copilot is already provisioned in your tenant — capacity is purchased, workspaces exist, and analyst roles are assigned. The SOC now wants to hand off the triage of user-reported phishing emails to an autonomous capability that processes each submission, explains its verdict, and improves from analyst feedback; the team also wants to evaluate similar prepackaged capabilities from Microsoft partners. What should you do?",
+  "options": [
+    {
+      "text": "Enable and configure the Microsoft Phishing Triage Agent in Security Copilot, and browse the Microsoft Security Store to install vetted partner-built agents — reviewing each agent's identity and permissions before deployment",
+      "correct": true
+    },
+    {
+      "text": "Author a promptbook that chains the prompts an analyst would run for a phishing investigation, and schedule it to execute against the shared mailbox",
+      "correct": false
+    },
+    {
+      "text": "Purchase additional Security Compute Units, since higher SCU capacity unlocks the autonomous triage features in every Copilot workspace",
+      "correct": false
+    },
+    {
+      "text": "Build a Microsoft Sentinel automation rule with a Logic Apps playbook that closes phishing incidents whose sender fails DMARC",
+      "correct": false
+    }
+  ],
+  "explanation": "Security Copilot **agents** are the autonomous layer on top of the Copilot platform: unlike a prompt session, an agent runs a scoped security workflow on its own, shows the reasoning behind each verdict, and refines its behavior from analyst feedback. The **Phishing Triage Agent** is Microsoft's flagship example — it picks up user-submitted emails, analyzes content, headers, URLs, and attachments, resolves false alarms automatically, and escalates real phishing with an explained verdict. Partner- and Microsoft-built agents are distributed through the **Microsoft Security Store**, where you can discover, install, and manage them. Because each agent operates under its own identity with defined permissions, reviewing and least-privileging that access before deployment is part of configuring agents responsibly.\n\n**Why not the other options:**\n- **Promptbook** — a promptbook is a *reusable sequence of prompts* that a human runs (or embeds); it does not operate autonomously, has no triage queue, and does not learn from feedback. It automates the analyst's typing, not the analyst's decision.\n- **Buying more SCUs** — Security Compute Units are the capacity/billing unit for Copilot workloads. Capacity affects how much you can run, not *what exists*; no SCU threshold turns on autonomous triage. Agents must be enabled and configured deliberately.\n- **Sentinel automation rule on DMARC** — a static rule that closes incidents on a single signal is brittle and nothing like verdict-explaining, feedback-driven triage; attackers routinely pass or bypass single indicators, and user-reported phishing arrives via the submission pipeline rather than as neatly classified incidents.",
+  "category": "Secure compute"
+}

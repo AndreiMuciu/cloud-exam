@@ -1,0 +1,29 @@
+{
+    "id": "az305-s3-mon-logs-cost",
+    "type": "multi",
+    "question": "A company's central Log Analytics workspace ingests about 900 GB per day at pay-as-you-go rates, and the monitoring bill has become a board-level concern. Analysis shows:\n\n- Roughly 40% of the volume is verbose application debug and trace logs that are queried only occasionally, during troubleshooting\n- The remaining volume is security and operational data used for alert rules and daily interactive queries, and its daily volume is stable and predictable\n\nYou must reduce the Log Analytics cost while keeping all data queryable in the workspace.\n\nWhich two actions should you recommend? (Choose two.)",
+    "options": [
+        {
+            "text": "Configure the tables that hold verbose debug and trace logs to use the Basic table plan",
+            "correct": true
+        },
+        {
+            "text": "Purchase a commitment tier sized to the workspace's predictable daily ingestion",
+            "correct": true
+        },
+        {
+            "text": "Reduce the workspace's interactive retention period to lower the ingestion charges",
+            "correct": false
+        },
+        {
+            "text": "Split the ingestion across many small workspaces so that each stays below the billing threshold",
+            "correct": false
+        },
+        {
+            "text": "Route all logs to a storage account instead and delete the Log Analytics workspace",
+            "correct": false
+        }
+    ],
+    "explanation": "Log Analytics cost design has two main levers, and this workload profile calls for both:\n\n1. **Table plans** — The **Basic** plan ingests data at a substantially lower per-GB rate than the Analytics plan, in exchange for limitations that match troubleshooting data perfectly: limited KQL surface, a short included interactive window, no support for alert rules, and a small per-query charge. Verbose debug/trace logs that are \"queried only occasionally\" are the textbook Basic-plan candidate — the data stays in the workspace and remains queryable\n2. **Commitment tiers** — For the stable, predictable portion of ingestion, a commitment tier (starting at 100 GB/day) buys ingestion at a discounted rate compared with pay-as-you-go. At ~900 GB/day the workspace is far above the smallest tier, so the discount is significant and the predictability requirement (\"stable daily volume\") removes the risk of overcommitting\n\n**Why not the other options:**\n- **Reducing interactive retention** — Retention and ingestion are billed separately. Shortening retention reduces *retention* charges (beyond the included period) but does nothing to the dominant per-GB *ingestion* cost — and it sacrifices query history the teams may need\n- **Splitting into many workspaces** — There is no per-workspace billing threshold to duck under; ingestion is billed per GB wherever it lands. Fragmentation actually *increases* cost (a single large workspace qualifies for bigger commitment-tier discounts) and complicates queries, RBAC, and alerting\n- **Storage account instead of Log Analytics** — Blob storage is cheap but the data would no longer be interactively queryable with KQL or usable in alert rules, violating the requirement to keep all data queryable in the workspace. Archive/export to storage is a complement, not a replacement",
+    "category": "Design Identity, Governance, and Monitoring"
+}

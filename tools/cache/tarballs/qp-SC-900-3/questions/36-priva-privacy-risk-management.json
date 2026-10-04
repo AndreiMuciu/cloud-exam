@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-36-priva-privacy-risk-management",
+    "question": "A privacy officer wants to get ahead of privacy problems in Microsoft 365 rather than react to them: she needs ongoing visibility into where personal data is accumulating, policies that flag risky situations — personal data that is **overshared**, **transferred** between departments or regions, or **kept longer than needed** — and automated email nudges that guide the data owners to fix the issue themselves.\n\nWhich Microsoft Priva capability provides this?",
+    "options": [
+        {
+            "text": "Microsoft Priva Privacy Risk Management",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Priva Subject Rights Requests",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview Communication Compliance",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview eDiscovery",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Priva Privacy Risk Management** is the proactive half of Priva: it gives organizations **visibility into the personal data in their Microsoft 365 environment** and provides policy templates for the three classic privacy risk scenarios — **data overexposure** (personal data shared too broadly), **data transfers** (personal data moving across departments, regions, or outside the organization), and **data minimization** (personal data retained longer than necessary). When a policy detects an issue, it can **notify the data owner by email with recommended remediation steps**, turning employees into participants in reducing privacy risk rather than leaving everything to the privacy office.\n\n**Why not the other options:**\n- **Microsoft Priva Subject Rights Requests** — This is Priva's *reactive* capability: it manages requests from individuals exercising rights over their data (access, export, deletion) at scale. It responds to requests; it does not continuously police oversharing, transfers, or over-retention.\n- **Microsoft Purview Communication Compliance** — Communication compliance reviews *messages* in Teams and Exchange for conduct violations such as harassment or regulatory breaches. Its subject is the behavior expressed in communications, not the lifecycle of stored personal data.\n- **Microsoft Purview eDiscovery** — eDiscovery identifies, preserves, and exports content for *legal matters and investigations*. It is case-driven and retrospective, not an always-on privacy risk detection and remediation loop.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

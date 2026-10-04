@@ -1,0 +1,25 @@
+{
+    "id": "sc500-10-novaterra-defender-multicloud",
+    "question": "You need to give Novaterra Health a single view of security recommendations and secure score across Azure and AWS, with continuous HIPAA/HITRUST compliance assessment and consistent server protection for AWS EC2 and on-premises machines. What should you do in Microsoft Defender for Cloud?",
+    "options": [
+        {
+            "text": "Create an AWS connector in Defender for Cloud, enable Defender CSPM and Defender for Servers on the connector, onboard on-premises servers with Azure Arc, and assign the HIPAA/HITRUST standard in the regulatory compliance dashboard",
+            "correct": true
+        },
+        {
+            "text": "Deploy Microsoft Sentinel and install the AWS CloudTrail data connector, then export Sentinel incidents to Defender for Cloud",
+            "correct": false
+        },
+        {
+            "text": "Enable Defender for Cloud only on the Azure subscriptions and forward AWS Security Hub findings by email to the SOC mailbox",
+            "correct": false
+        },
+        {
+            "text": "Migrate the EC2 instances to Azure VMs so all resources are natively covered by the Microsoft cloud security benchmark",
+            "correct": false
+        }
+    ],
+    "explanation": "Defender for Cloud supports multicloud through **environment connectors**. An **AWS connector** brings EC2 and other AWS resources into recommendations and secure score; enabling **Defender CSPM** and **Defender for Servers** on the connector delivers posture management and workload protection (EC2 instances are onboarded via Azure Arc under the hood). **Azure Arc** onboards on-premises servers the same way. Compliance standards such as **HIPAA/HITRUST** are assigned per subscription/connector in the **regulatory compliance dashboard**.\n\n**Why not the other options:**\n- **Sentinel with AWS CloudTrail** — Sentinel is a SIEM for detection and investigation; it does not produce security recommendations, secure score, or regulatory compliance assessments, and incidents do not export 'to' Defender for Cloud.\n- **Azure-only Defender + emailed findings** — This provides no unified secure score or recommendations for AWS resources and no compliance assessment there.\n- **Migrating EC2 to Azure** — A cloud migration is a massive project and unnecessary; Defender for Cloud is explicitly designed for multicloud coverage.",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_novaterra_health.json"
+}

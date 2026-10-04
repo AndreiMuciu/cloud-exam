@@ -1,0 +1,24 @@
+{
+    "id": "az800-32-wsus-vs-automation-patching",
+    "question": "Your on-premises data center has strictly no internet access for its servers. Which technology is most appropriate for managing the distribution of Windows updates to these servers?",
+    "options": [
+        {
+            "text": "Azure Automation Update Management",
+            "correct": false
+        },
+        {
+            "text": "Windows Server Update Services (WSUS)",
+            "correct": true
+        },
+        {
+            "text": "Azure Automanage",
+            "correct": false
+        },
+        {
+            "text": "Windows Update for Business",
+            "correct": false
+        }
+    ],
+    "explanation": "**WSUS** is the definitive choice for air-gapped or restricted-internet environments. You can have one WSUS server download updates once (or manually import them) and distribute them locally to all other servers.\n\n**Why not the other options:**\n- **Azure Automation / Automanage** — Require a connection to Azure (either directly or via an Arc agent/gateway).\n- **Windows Update for Business** — Requires an internet connection for clients to download updates from Microsoft servers.",
+    "category": "Manage Windows Servers and workloads in a hybrid environment"
+}

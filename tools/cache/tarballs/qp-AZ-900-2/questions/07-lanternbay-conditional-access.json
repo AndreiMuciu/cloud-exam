@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-07-lanternbay-conditional-access",
+    "question": "Lanternbay wants sign-ins from trusted corporate networks to proceed with minimal friction, while sign-ins from unfamiliar locations or risky sessions are challenged with additional verification. Which Microsoft Entra capability evaluates signals such as user, location, and device at sign-in time and applies the appropriate access decision?",
+    "options": [
+        {
+            "text": "Microsoft Entra Conditional Access",
+            "correct": true
+        },
+        {
+            "text": "Azure role-based access control (RBAC)",
+            "correct": false
+        },
+        {
+            "text": "Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Resource locks",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Conditional Access** works like an if-then policy engine at sign-in: it collects signals (user and group membership, location, device state, sign-in risk, the application being accessed), evaluates them against policies, and then enforces a decision — allow, require multifactor authentication, or block. That gives Lanternbay adaptive security: low friction on trusted networks, stronger challenges for unfamiliar or risky sign-ins.\n\n**Why not the other options:**\n- **Azure RBAC** — Determines what an already-authenticated user is allowed to do on Azure resources; it does not evaluate sign-in conditions or require extra verification.\n- **Azure Policy** — Governs the configuration of Azure resources (allowed regions, required tags, and so on), not user sign-in behavior.\n- **Resource locks** — Protect resources from accidental deletion or modification; they are unrelated to authentication.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_lanternbay_hospitality.json"
+}

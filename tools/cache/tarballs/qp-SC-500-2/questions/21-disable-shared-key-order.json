@@ -1,0 +1,19 @@
+{
+  "id": "sc500-s2-21-disable-shared-key-order",
+  "type": "ordering",
+  "question": "A production storage account still permits Shared Key authorization, and security has mandated a move to Microsoft Entra ID-only data-plane access — without breaking the applications that use the account. Arrange the migration steps in the correct order.",
+  "items": [
+    "Set the AllowSharedKeyAccess property on the storage account to false and confirm the workloads continue to operate",
+    "Analyze the storage account's resource logs to identify every client that still authorizes requests with Shared Key or account SAS",
+    "Assign the built-in Azure Policy that prevents storage accounts from allowing Shared Key access, to stop new non-compliant accounts across the environment",
+    "Migrate the identified applications to Microsoft Entra ID authorization by granting data-plane RBAC roles such as Storage Blob Data Contributor to their managed identities"
+  ],
+  "correctOrder": [
+    "Analyze the storage account's resource logs to identify every client that still authorizes requests with Shared Key or account SAS",
+    "Migrate the identified applications to Microsoft Entra ID authorization by granting data-plane RBAC roles such as Storage Blob Data Contributor to their managed identities",
+    "Set the AllowSharedKeyAccess property on the storage account to false and confirm the workloads continue to operate",
+    "Assign the built-in Azure Policy that prevents storage accounts from allowing Shared Key access, to stop new non-compliant accounts across the environment"
+  ],
+  "explanation": "Disabling Shared Key authorization is instantly disruptive to any client still signing requests with the account key — including every account SAS, which is signed by that key. The safe sequence is therefore *discover, migrate, enforce, prevent regression*:\n\n1. **Discover first.** Azure Storage resource logs record the `AuthenticationType` of each request, so querying them (for example in Log Analytics) reveals exactly which clients, IPs, and operations still rely on Shared Key or account SAS. Flipping the switch before this inventory exists guarantees surprise outages.\n2. **Migrate the workloads.** Each identified application is moved to Microsoft Entra ID authorization — typically a managed identity holding a data-plane role such as Storage Blob Data Contributor or Storage Blob Data Reader. The account still accepts both auth methods during this phase, so migration is gradual and reversible.\n3. **Disable Shared Key.** Once the logs show no remaining Shared Key traffic, setting `AllowSharedKeyAccess` to `false` makes the storage service reject key-signed and account-SAS requests. Verifying workloads immediately afterward catches anything the log analysis missed.\n4. **Enforce with Azure Policy last.** The built-in policy (deny or audit that storage accounts allow Shared Key access) is an environment-wide guardrail: it prevents newly created or reconfigured accounts from reintroducing Shared Key authorization. Applying it as a Deny before existing workloads were migrated would have blocked legitimate remediation work and caused failures elsewhere.",
+  "category": "Secure storage, databases, and networking"
+}

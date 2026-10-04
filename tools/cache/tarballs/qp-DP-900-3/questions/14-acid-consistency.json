@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-14-acid-consistency",
+    "question": "An inventory database enforces a rule that a product's stock level can never be negative. Every transaction — no matter what it changes — must move the database from one state that satisfies this rule to another state that also satisfies it, or be rejected.\n\nWhich ACID property does this describe?",
+    "options": [
+        {
+            "text": "Consistency",
+            "correct": true
+        },
+        {
+            "text": "Atomicity",
+            "correct": false
+        },
+        {
+            "text": "Isolation",
+            "correct": false
+        },
+        {
+            "text": "Durability",
+            "correct": false
+        }
+    ],
+    "explanation": "**Consistency** is the guarantee that a transaction can only take the database from one valid state to another valid state — where \"valid\" means all defined rules, constraints, and relationships hold. If a transaction would leave stock below zero, it violates the rule and is rolled back, so the database never ends up in an invalid state.\n\n**Why not the other options:**\n- **Atomicity** — Atomicity makes a transaction all-or-nothing. A transaction could still be fully applied (atomically) and yet break a business rule if consistency were not enforced; the two properties answer different questions.\n- **Isolation** — Isolation prevents concurrent transactions from seeing each other's intermediate states; it does not enforce data validity rules.\n- **Durability** — Durability makes committed changes permanent across failures; it says nothing about whether those changes obey the database's rules.",
+    "category": "Describe Core Data Concepts"
+}

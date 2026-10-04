@@ -1,0 +1,13 @@
+{
+    "id": "case_study_thornbury_logistics",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Thornbury Logistics** is a freight and supply-chain company that tracks tens of thousands of shipments across road, rail, and sea. Their shipment-tracking platform currently runs in a leased datacenter, and the lease expires in nine months, so the company is planning a full move to Azure.\n\n**Current Workloads:**\n- A telemetry ingestion service that receives GPS position updates from trucks and containers **24 hours a day at a steady, predictable rate**.\n- A customer notification component that sends shipment-status emails and webhooks in **short, unpredictable bursts** whenever delivery events occur.\n- A managed relational database service (PaaS) is planned for storing shipment and customer records."
+        },
+        {
+            "title": "Planning Considerations",
+            "content": "**Finance:**\n- The CFO wants the lowest possible compute cost for the always-on telemetry service and is willing to commit to Azure for at least three years.\n\n**Engineering:**\n- The team wants event-driven code for notifications without provisioning or managing any servers.\n\n**Security & Compliance:**\n- Leadership is unclear about which operational duties transfer to Microsoft and which remain with Thornbury after moving to PaaS services, and has asked for a clear statement of responsibilities."
+        }
+    ]
+}

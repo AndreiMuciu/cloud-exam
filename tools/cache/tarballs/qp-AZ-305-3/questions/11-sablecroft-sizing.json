@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-sablecroft-sizing",
+    "question": "You are configuring the Azure Migrate assessment for the first migration wave. The cost projection must reflect each server's actual observed utilization so that target Azure VM sizes are right-sized, rather than mirroring the overprovisioned on-premises specifications.\n\nWhich assessment configuration should you recommend?",
+    "options": [
+        {
+            "text": "Performance-based sizing, with utilization data collected over a representative period and a percentile-based comfort factor",
+            "correct": true
+        },
+        {
+            "text": "As-on-premises sizing, so each Azure VM matches the allocated cores and memory of its source VM",
+            "correct": false
+        },
+        {
+            "text": "As-on-premises sizing, with a Dev/Test subscription offer applied to reduce the projected cost",
+            "correct": false
+        },
+        {
+            "text": "Performance-based sizing, with the assessment run immediately after the appliance is deployed",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Migrate assessments offer two sizing criteria, and the choice directly determines whether overprovisioning is carried into Azure:\n\n- **Performance-based sizing** recommends a target VM SKU (and disk type) based on the **collected utilization data** — CPU, memory, disk IOPS/throughput — rather than the allocated hardware. Because the servers are heavily overprovisioned, this is what produces genuinely right-sized (and much cheaper) targets\n- The data must be collected over a **representative period** (covering typical business cycles — for example month-end claims processing), and the **percentile** setting plus a **comfort factor** add headroom above observed peaks so right-sizing does not become under-sizing\n\n**Why not the other options:**\n- **As-on-premises sizing** — Simply maps allocated cores/memory to the closest Azure SKU. Every watt of historic overprovisioning becomes permanent Azure spend — exactly what the requirement says to avoid. It is appropriate only when utilization data cannot be collected or when sizing must deliberately match current allocation\n- **As-on-premises + Dev/Test offer** — A pricing discount does not fix wrong sizing, and Dev/Test offers are licensed **only for development and test workloads** — the policy, claims, and document systems are production, so this is also a licensing violation, not a cost strategy\n- **Performance-based immediately after deployment** — Right mechanism, wrong timing. The appliance needs time to accumulate a performance history; an assessment run on day one has little or no utilization data (Azure Migrate falls back to as-on-premises sizing for machines without enough data), so the recommendation would not reflect actual utilization",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_sablecroft_mutual.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-infra-ddos",
+    "question": "An online gaming company exposes about 40 public IP addresses (load balancers, application gateways, firewalls) across a dozen subscriptions. After a competitor suffered a volumetric attack, the security office requires:\n\n- Protection against volumetric and protocol (L3/L4) DDoS attacks, **tuned to each application's real traffic patterns**\n- Attack telemetry, diagnostics, and alerting during an attack, plus access to a rapid-response team\n- Cost protection: service credits for resources scaled out during a documented attack\n- One protection resource governing all the public IPs across the subscriptions\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "A single Azure DDoS Network Protection plan shared across the subscriptions, enabled on the virtual networks that contain the public IP addresses",
+            "correct": true
+        },
+        {
+            "text": "Rely on the default DDoS infrastructure protection that Azure applies to every public IP",
+            "correct": false
+        },
+        {
+            "text": "Apply a Web Application Firewall policy to every public endpoint",
+            "correct": false
+        },
+        {
+            "text": "Add network security group rules that block traffic from known malicious IP ranges, updated from a threat feed",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure DDoS Network Protection** is the SKU built for these exact requirements:\n\n- **Adaptive tuning** — the service learns each protected application's actual traffic profile and sets mitigation thresholds per public IP, rather than using the platform-wide generic thresholds — this is the \"tuned to real traffic patterns\" requirement verbatim\n- **Visibility and response** — attack mitigation reports and flow logs, near-real-time metrics and alerts during an attack, and access to Microsoft's **DDoS Rapid Response** team\n- **Cost protection** — documented attacks that cause resource scale-out qualify for **service credits**\n- **One plan, many subscriptions** — a single DDoS protection plan can be **shared across subscriptions in the tenant** and enabled on each VNet, covering all public IPs in those VNets (a plan covers 100 public IP resources at the base price) — a single governance point, as required\n\n**Why not the other options:**\n- **Default infrastructure protection** — Azure's always-on baseline defends the *Azure platform*, with thresholds set far above any single customer's traffic. It offers no per-application adaptive tuning, no telemetry or attack analytics for the customer, no rapid-response access, and no cost-protection credits — every stated requirement beyond bare survival is unmet\n- **WAF everywhere** — A web application firewall operates at **layer 7**, filtering HTTP(S) exploits (injection, XSS). It neither sees nor absorbs volumetric L3/L4 floods (SYN floods, UDP amplification) — and several of the 40 IPs (firewalls, non-HTTP game traffic) are not web endpoints at all. WAF *complements* DDoS protection; it does not replace it\n- **NSG rules from threat feeds** — NSGs are stateless-scale ACLs evaluated on the customer's side; a volumetric attack saturates links and resources regardless of whether packets are ultimately dropped by a rule. Attackers rotate sources faster than any feed updates, and spoofed-source floods make IP blocklists structurally ineffective against DDoS",
+    "category": "Design Infrastructure Solutions"
+}

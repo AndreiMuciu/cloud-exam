@@ -1,0 +1,25 @@
+{
+    "id": "sc300-quintavox-entitlement-management-access-package",
+    "question": "External studio staff at Quintavox Media need to request a single bundle of access — specific apps, a group, and a SharePoint site — from a self-service catalog. Requests must route through an approval chain, and the access must expire automatically at the end of the project unless explicitly extended.\n\nWhich Microsoft Entra ID Governance feature should you configure, and what must you create first?",
+    "options": [
+        {
+            "text": "Entitlement management; first create a catalog containing the group, SharePoint site, and application resources, then build an access package with an approval-based request policy and an expiration/access review policy",
+            "correct": true
+        },
+        {
+            "text": "Entitlement management; create the access package directly, since catalogs are only required for internal (non-guest) users",
+            "correct": false
+        },
+        {
+            "text": "Dynamic groups; configure a single dynamic membership rule that automatically adds and removes studio staff from all required resources",
+            "correct": false
+        },
+        {
+            "text": "Privileged Identity Management (PIM) for Groups; make each studio contact eligible for group ownership with a fixed activation duration",
+            "correct": false
+        }
+    ],
+    "explanation": "**Entitlement management** bundles multiple resources — groups/Teams, applications, and SharePoint sites — into a single **access package** that users can request through a catalog. A **catalog** is the container that holds the resources an access package can draw from and must be created before an access package referencing those resources can be built; the access package's policy then defines who can request it, the approval chain, and lifecycle settings such as automatic expiration.\n\n**Why not the other options:**\n- **\"Catalogs are only required for internal users\"** — catalogs are required regardless of whether the requestors are internal employees or external users; they are simply the resource container for any access package.\n- **Dynamic groups** — a dynamic membership rule can only add a user to a single group based on directory attributes; it cannot bundle multiple resource types (apps + group + SharePoint site) into one requestable, approval-gated, expiring package.\n- **PIM for Groups** — PIM for Groups provides just-in-time, eligible-then-activated access to a single group's membership or ownership; it isn't designed to bundle apps and SharePoint sites together behind a self-service catalog request.",
+    "category": "Plan and automate identity governance",
+    "caseStudy": "scenarios/case_study_quintavox.json"
+}

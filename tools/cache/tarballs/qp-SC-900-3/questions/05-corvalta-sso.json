@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-05-corvalta-sso",
+    "question": "Corvalta Mobile employees maintain separate passwords for the billing platform, the network inventory tool, the HR portal, and a dozen SaaS applications. The identity team wants employees to authenticate once with their Microsoft Entra ID account and then reach all of these business applications without being prompted for separate credentials for each one.\n\nWhich identity capability does this goal describe?",
+    "options": [
+        {
+            "text": "Single sign-on (SSO)",
+            "correct": true
+        },
+        {
+            "text": "Multifactor authentication (MFA)",
+            "correct": false
+        },
+        {
+            "text": "Self-service password reset (SSPR)",
+            "correct": false
+        },
+        {
+            "text": "Privileged Identity Management (PIM)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Single sign-on (SSO)** means a user **signs in once with one credential and gains access to multiple applications and resources** without re-authenticating to each. When applications are connected to Microsoft Entra ID for SSO, employees stop juggling per-app passwords — which improves the user experience *and* security, because there are fewer passwords to phish, reuse, or forget, and access to every connected app can be governed and revoked centrally from one identity.\n\n**Why not the other options:**\n- **Multifactor authentication (MFA)** — MFA strengthens the *act of signing in* by requiring an additional verification factor (something you have or are, in addition to something you know). It does not by itself remove the need for separate credentials across applications.\n- **Self-service password reset (SSPR)** — SSPR lets users reset their own forgotten passwords without helpdesk tickets. It eases password *recovery*; it does not consolidate many application sign-ins into one.\n- **Privileged Identity Management (PIM)** — PIM provides just-in-time, time-bound activation of administrative roles. It addresses privileged access, not everyday application sign-in convenience.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_corvalta_mobile.json"
+}

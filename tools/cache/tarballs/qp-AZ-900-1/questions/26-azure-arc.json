@@ -1,0 +1,24 @@
+{
+    "id": "az900-26-azure-arc",
+    "question": "Which Azure service allows you to manage and govern servers, Kubernetes clusters, and applications across on-premises, edge, and multi-cloud environments using the Azure Resource Manager (ARM) portal?",
+    "options": [
+        {
+            "text": "Azure Arc",
+            "correct": true
+        },
+        {
+            "text": "Azure Lighthouse",
+            "correct": false
+        },
+        {
+            "text": "Azure Blueprints",
+            "correct": false
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Arc** simplifies governance and management by delivering a consistent multi-cloud and on-premises management platform. It allows you to project your non-Azure resources into Azure Resource Manager.\n\n**Why not the other options:**\n- **Azure Lighthouse** — Used by managed service providers (MSPs) to manage multiple customer environments.\n- **Azure Blueprints** — (Being deprecated July 2026, replaced by Template Specs and Deployment Stacks) Used to define a repeatable set of Azure resources that adhere to organizational standards.\n- **Azure Advisor** — Analyzes resource configuration and usage telemetry to provide best practice recommendations.",
+    "category": "Describe Azure Architecture and Services"
+}

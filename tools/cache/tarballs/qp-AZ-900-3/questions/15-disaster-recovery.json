@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-15-disaster-recovery",
+    "question": "A podcast-hosting network designs its platform so that if the entire primary region is lost to a natural catastrophe, replicated data and standby infrastructure in a distant secondary region can be brought online to restore service. Which cloud concept does this plan represent?",
+    "options": [
+        {
+            "text": "Disaster recovery",
+            "correct": true
+        },
+        {
+            "text": "High availability",
+            "correct": false
+        },
+        {
+            "text": "Agility",
+            "correct": false
+        },
+        {
+            "text": "Economies of scale",
+            "correct": false
+        }
+    ],
+    "explanation": "**Disaster recovery (DR)** is the practice of preparing to **restore service after a catastrophic, large-scale event** — such as the loss of an entire region — typically by replicating data to a geographically distant location and keeping standby infrastructure that can be activated when disaster strikes. DR plans are measured by how quickly service can be restored and how much recent data may be lost during failover.\n\n**Why not the other options:**\n- **High availability** — Keeps a service running through **everyday, small-scale failures** (a failed disk, host, or instance) using redundancy within the running environment. DR is the complementary discipline for rare, catastrophic events that take out the whole primary site.\n- **Agility** — The ability to develop, test, and release quickly in the cloud; it concerns speed of innovation, not surviving a regional catastrophe.\n- **Economies of scale** — Explains why large providers have lower per-unit costs; it is unrelated to resilience planning.",
+    "category": "Describe Cloud Concepts"
+}

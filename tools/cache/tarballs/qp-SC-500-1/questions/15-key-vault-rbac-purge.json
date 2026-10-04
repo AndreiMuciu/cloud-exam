@@ -1,0 +1,24 @@
+{
+    "id": "sc500-15-key-vault-rbac-purge",
+    "question": "A DevOps engineer accidentally deleted a production key vault secret last month; it was recovered because soft delete was enabled. You must now guarantee that no one — including subscription Owners — can permanently remove deleted vault objects before the retention period expires, and you must grant a deployment pipeline read-only access to secrets only (not keys or certificates) using the least-privileged built-in role. What should you do?",
+    "options": [
+        {
+            "text": "Enable purge protection on the vault, use Azure RBAC authorization, and assign the pipeline's identity the Key Vault Secrets User role scoped to the vault",
+            "correct": true
+        },
+        {
+            "text": "Enable a CanNotDelete resource lock on the vault and assign the pipeline the Key Vault Reader role at subscription scope",
+            "correct": false
+        },
+        {
+            "text": "Increase the soft-delete retention to 90 days and assign the pipeline the Key Vault Administrator role scoped to the vault",
+            "correct": false
+        },
+        {
+            "text": "Back up all secrets to a storage account nightly and assign the pipeline the Key Vault Secrets Officer role scoped to the vault",
+            "correct": false
+        }
+    ],
+    "explanation": "**Purge protection** enforces the soft-delete retention period: once enabled, nobody — not even an Owner — can purge deleted objects (or the vault) until retention expires, and it cannot be turned off once on. With **Azure RBAC authorization** on the vault, **Key Vault Secrets User** grants read access to secret contents only — no keys, no certificates, no write access — the least-privileged fit for a pipeline that reads secrets.\n\n**Why not the other options:**\n- **CanNotDelete lock + Key Vault Reader** — A resource lock protects the vault resource, not individual deleted secrets from being purged; Key Vault Reader can read metadata but *not* secret values, so the pipeline would break — and subscription scope is broader than needed.\n- **Longer retention + Key Vault Administrator** — Retention length doesn't prevent purging without purge protection, and Administrator grants full data-plane control over all object types.\n- **Nightly backups + Secrets Officer** — Backups are a recovery aid, not a purge prevention; Secrets Officer includes create/delete rights the pipeline doesn't need.",
+    "category": "Manage identity, access, and governance"
+}

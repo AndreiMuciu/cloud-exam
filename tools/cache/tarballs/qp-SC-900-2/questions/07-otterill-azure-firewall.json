@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-07-otterill-azure-firewall",
+    "question": "Otterill Energy needs a single, fully managed network security service that provides stateful traffic filtering across all of its virtual networks and subscriptions, supports filtering rules based on fully qualified domain names (FQDNs), and uses Microsoft threat-intelligence feeds to alert on or block traffic to and from known-malicious IP addresses and domains.\n\nWhich Azure service meets these requirements?",
+    "options": [
+        {
+            "text": "Azure Firewall",
+            "correct": true
+        },
+        {
+            "text": "Network security groups (NSGs)",
+            "correct": false
+        },
+        {
+            "text": "Azure Web Application Firewall (WAF)",
+            "correct": false
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Firewall** is a **managed, cloud-based network security service** offering fully stateful firewalling as a service with built-in high availability and scalability. It provides exactly the capabilities Otterill requires: **centralized network- and application-level rules across virtual networks and subscriptions, FQDN-based filtering, and threat intelligence-based filtering** that can alert on or deny traffic from known-malicious IPs and domains. It is typically deployed in a hub virtual network to govern traffic for many spoke networks.\n\n**Why not the other options:**\n- **Network security groups (NSGs)** — NSGs filter traffic by IP address, port, and protocol at the subnet or NIC level, but they are basic 5-tuple rules per network: they are not a centralized managed firewall, cannot filter by FQDN, and have no built-in threat-intelligence feed.\n- **Azure Web Application Firewall (WAF)** — A WAF protects *web applications* against attacks such as SQL injection and cross-site scripting at the HTTP layer. It does not provide general stateful network filtering for all traffic across virtual networks.\n- **Azure Bastion** — Bastion provides secure browser-based RDP/SSH connectivity to virtual machines without exposing public IP addresses. It is a remote-access service, not a traffic-filtering firewall.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_otterill_energy.json"
+}

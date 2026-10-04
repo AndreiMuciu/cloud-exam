@@ -1,0 +1,24 @@
+{
+    "id": "az104-compute-app-service",
+    "question": "You deploy an Azure web app named **app-tracking** . During testing, you deploy new code to a deployment slot named **staging**. After testing, you swap the **staging** slot with the **production** slot.\n\nShortly after the swap, users report performance issues with the production application.\n\nYou need to revert to the previous version as quickly as possible.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Restore the web app from a backup",
+            "correct": false
+        },
+        {
+            "text": "Redeploy the previous version from source control",
+            "correct": false
+        },
+        {
+            "text": "Swap the deployment slots again",
+            "correct": true
+        },
+        {
+            "text": "Clone the web app to a new App Service plan",
+            "correct": false
+        }
+    ],
+    "explanation": "The fastest way to revert a deployment slot swap is to simply **swap the slots again**. When you initially swapped staging ↔ production:\n\n- The staging code moved to production\n- The production code moved to staging\n\nThe previous production code is still in the staging slot. Performing another swap immediately returns the previous version to production.\n\nWhy this is the best approach:\n- **Swap is near-instantaneous** — it changes routing rules, not physical files\n- **No downtime** — the swap is performed without stopping the application\n- **No rebuild required** — unlike redeploying from source control\n\nRestoring from backup is much slower and may result in data loss. Cloning creates a new app entirely, which is unnecessary for rollback. Redeployment from source control requires a build and deployment cycle.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

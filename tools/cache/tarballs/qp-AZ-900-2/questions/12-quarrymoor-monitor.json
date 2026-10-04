@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-12-quarrymoor-monitor",
+    "question": "Quarrymoor’s operations team needs to collect metrics and logs from the analytics virtual machines, raise an alert when CPU usage stays above 90%, and run ad-hoc queries against the collected logs. Which Azure service provides all of these capabilities?",
+    "options": [
+        {
+            "text": "Azure Monitor (with Log Analytics and alerts)",
+            "correct": true
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Monitor** is the platform service for collecting, analyzing, and acting on telemetry from Azure resources. It gathers VM metrics and logs, its **alerts** feature fires notifications or actions when a condition such as sustained CPU above 90% is met, and **Log Analytics** lets engineers write ad-hoc queries against the collected log data — covering all three requirements in one service.\n\n**Why not the other options:**\n- **Azure Service Health** — Reports on the health of the *Azure platform itself* (outages, planned maintenance) affecting your resources; it does not monitor your VMs’ CPU or store your logs.\n- **Azure Advisor** — Offers periodic best-practice recommendations; it is not a real-time telemetry, alerting, or log-query service.\n- **Microsoft Purview** — A data governance service for cataloging and classifying data, unrelated to operational monitoring.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_quarrymoor_manufacturing.json"
+}

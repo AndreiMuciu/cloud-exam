@@ -1,0 +1,24 @@
+{
+    "id": "az800-28-azure-vm-custom-script-extension",
+    "question": "You need to automatically run a PowerShell script on a new Azure VM immediately after it is provisioned to install a specific piece of software. Which Azure VM extension should you use?",
+    "options": [
+        {
+            "text": "IaaSAntimalware",
+            "correct": false
+        },
+        {
+            "text": "Custom Script Extension",
+            "correct": true
+        },
+        {
+            "text": "VMAccess extension",
+            "correct": false
+        },
+        {
+            "text": "Azure Disk Encryption extension",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Custom Script Extension** is the standard tool for post-provisioning configuration. It downloads and executes scripts on Azure virtual machines.\n\n**Why not the other options:**\n- **IaaSAntimalware** — Manages Defender/Antimalware settings.\n- **VMAccess** — Used for resetting passwords or SSH keys.\n- **ADE** — Used for managing disk encryption.",
+    "category": "Manage virtual machines and containers"
+}

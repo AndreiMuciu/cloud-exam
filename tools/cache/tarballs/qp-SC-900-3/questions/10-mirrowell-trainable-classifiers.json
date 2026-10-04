@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-10-mirrowell-trainable-classifiers",
+    "question": "Mirrowell Biosciences must automatically identify study protocols and statistical analysis plans across SharePoint Online and OneDrive so that protection policies can target them. These are lengthy narrative documents with no consistent keywords, ID numbers, or character patterns that a rule could match.\n\nWhich Microsoft Purview classification method is designed for this situation?",
+    "options": [
+        {
+            "text": "Trainable classifiers, which learn to recognize a category of content from example documents",
+            "correct": true
+        },
+        {
+            "text": "A built-in sensitive information type that matches a defined character pattern",
+            "correct": false
+        },
+        {
+            "text": "A retention policy applied to all SharePoint sites",
+            "correct": false
+        },
+        {
+            "text": "Manually tagging each document as it is uploaded",
+            "correct": false
+        }
+    ],
+    "explanation": "**Trainable classifiers** use AI and machine learning to recognize a *category* of content — such as contracts, source code, or, here, study protocols — by **learning from sample documents you provide (seed content) rather than by matching keywords or patterns**. After training and testing, the classifier can identify similar items across the environment and can be used with sensitivity labels, retention labels, and other policies. This is exactly the tool for narrative documents that pattern matching cannot describe.\n\n**Why not the other options:**\n- **A built-in sensitive information type** — Sensitive information types identify data by **patterns**: regular expressions, keyword lists, and checksums (for example, credit card or passport numbers). The scenario states there are no consistent keywords or patterns, which rules out pattern-based matching.\n- **A retention policy on all SharePoint sites** — A retention policy governs how long content is kept or when it is deleted; it applies broadly to locations and does not *identify* which documents are study protocols.\n- **Manually tagging each document** — Manual labeling cannot satisfy the requirement to identify these documents *automatically* across the estate, and it does not scale or apply retroactively to existing content.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_mirrowell_biosciences.json"
+}

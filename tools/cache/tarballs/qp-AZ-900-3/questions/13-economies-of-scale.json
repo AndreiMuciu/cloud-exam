@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-13-economies-of-scale",
+    "question": "A city transit authority asks why a cloud provider can typically offer computing capacity at a lower per-unit price than the authority could achieve by expanding its own small server room. Which cloud concept explains this?",
+    "options": [
+        {
+            "text": "Economies of scale",
+            "correct": true
+        },
+        {
+            "text": "Elasticity",
+            "correct": false
+        },
+        {
+            "text": "Vertical scaling",
+            "correct": false
+        },
+        {
+            "text": "Data sovereignty",
+            "correct": false
+        }
+    ],
+    "explanation": "**Economies of scale** means that the cost of doing something **per unit falls as the scale of the operation grows**. A hyperscale cloud provider buys hardware, power, bandwidth, and datacenter space in enormous volumes, negotiates supplier discounts unavailable to smaller buyers, and spreads fixed costs (buildings, staff, automation) across millions of customers. Those savings let the provider sell compute at a lower per-unit price than a small organization could achieve running its own server room.\n\n**Why not the other options:**\n- **Elasticity** — The ability to automatically grow and shrink resources with demand. It helps a *customer* avoid paying for idle capacity, but it does not explain why the provider's unit prices are lower in the first place.\n- **Vertical scaling** — Resizing a single machine to a larger size; it is a capacity technique, not an economic principle about unit costs.\n- **Data sovereignty** — The principle that data is subject to the laws of the country where it resides; it concerns jurisdiction, not pricing.",
+    "category": "Describe Cloud Concepts"
+}

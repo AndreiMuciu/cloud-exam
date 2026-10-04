@@ -1,0 +1,24 @@
+{
+    "id": "az700-privateaccess-service-endpoint-policy",
+    "question": "A subnet has a service endpoint enabled for Azure Storage, which lets VMs in the subnet reach any storage account over the Azure backbone using their optimized route. The security team is concerned that a compromised VM in the subnet could exfiltrate data to an attacker-owned storage account outside the organization, since the service endpoint alone does not restrict which storage accounts are reachable.\n\nWhat should the team configure to restrict the subnet to only a specific, approved list of storage accounts?",
+    "options": [
+        {
+            "text": "A service endpoint policy on the subnet, listing the approved storage account resources",
+            "correct": true
+        },
+        {
+            "text": "A private endpoint for each approved storage account, in place of the service endpoint",
+            "correct": false
+        },
+        {
+            "text": "An NSG rule denying the Storage service tag",
+            "correct": false
+        },
+        {
+            "text": "A route table entry pointing storage traffic to a firewall",
+            "correct": false
+        }
+    ],
+    "explanation": "A **service endpoint policy** applied to a subnet with a storage service endpoint restricts outbound access from that subnet to only the specific storage account resources listed in the policy (identified by resource ID), which directly closes the data-exfiltration gap: even though the service endpoint's optimized route reaches Azure Storage generally, the policy prevents traffic to any storage account not explicitly approved.\n\n**Why not the other options:**\n- **Replacing the service endpoint with private endpoints** — Would also achieve strong isolation, but it's a different, heavier-weight architecture change (assigning private IPs and DNS per storage account) rather than the direct, minimal fix of adding a policy to the existing service-endpoint setup; the question asks specifically how to restrict which accounts are reachable through the existing service endpoint.\n- **NSG rule denying the Storage service tag** — Would block all Azure Storage access from the subnet entirely (or require an unwieldy allow-list of individual storage account IP ranges, which change over time), not selectively allow specific accounts.\n- **Route table entry to a firewall** — Could be used to force inspection of storage traffic, but on its own doesn't provide resource-level allow-listing of specific storage accounts the way a service endpoint policy does.",
+    "category": "Design and Implement Private Access to Azure Services"
+}

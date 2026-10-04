@@ -1,0 +1,24 @@
+{
+    "id": "az700-core-public-ip-sku",
+    "question": "A team at Verimark Logistics is provisioning a new public IP address to front a VM that must support availability zones and be usable as a frontend for a zone-redundant Standard Load Balancer.\n\nWhich public IP address SKU and behavior should the team choose?",
+    "options": [
+        {
+            "text": "Standard SKU, because it supports availability zones and, unlike Basic, is secure by default and requires an NSG to explicitly allow inbound traffic",
+            "correct": true
+        },
+        {
+            "text": "Basic SKU, because it is open to inbound traffic by default and simplifies configuration",
+            "correct": false
+        },
+        {
+            "text": "Either SKU works identically for availability zone scenarios, since zone support was added to both SKUs at the same time",
+            "correct": false
+        },
+        {
+            "text": "Basic SKU, because it is required for compatibility with Standard Load Balancer frontends",
+            "correct": false
+        }
+    ],
+    "explanation": "**Standard SKU public IP addresses** support availability zones (zonal or zone-redundant) and are required as frontends for a Standard Load Balancer. Standard SKU resources are also **secure by default**: unlike the legacy Basic tier, traffic to a Standard public IP is closed unless an NSG explicitly allows it, which is consistent with the Zero Trust model that Standard networking resources are built on.\n\n**Why not the other options:**\n- **\"Basic SKU, open by default, simplifies configuration\"** — Being open to inbound traffic by default is a security liability, not a benefit, and Basic doesn't support availability zones at all.\n- **\"Either SKU works identically\"** — Only Standard SKU public IPs support availability zone deployment; Basic SKU has no zone support.\n- **\"Basic SKU required for Standard Load Balancer\"** — This is backwards: a Standard Load Balancer requires Standard SKU public IP addresses and backend resources, not Basic ones.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

@@ -1,0 +1,19 @@
+{
+    "id": "az900-s3-24-blob-access-tiers",
+    "type": "ordering",
+    "question": "Arrange the Azure Blob Storage access tiers from the tier designed for the **most frequently accessed** data to the tier designed for the **least frequently accessed** data.",
+    "items": [
+        "Cold",
+        "Hot",
+        "Archive",
+        "Cool"
+    ],
+    "correctOrder": [
+        "Hot",
+        "Cool",
+        "Cold",
+        "Archive"
+    ],
+    "explanation": "Blob Storage offers four access tiers along a spectrum: as expected access frequency drops, the **price of storing data falls** while the **cost (and, at the extreme, the delay) of accessing it rises**:\n\n1. **Hot** — For data accessed or modified frequently; highest storage price, lowest access cost, and immediate availability.\n2. **Cool** — For infrequently accessed data stored for **at least 30 days**; cheaper storage than hot in exchange for higher access charges.\n3. **Cold** — For rarely accessed data stored for **at least 90 days**; storage is cheaper still, access costs higher than cool, but the data remains online and instantly readable.\n4. **Archive** — For data that can tolerate being **offline**, stored for **at least 180 days** (such as long-term backups and compliance records); the lowest storage price of all, but a blob must first be **rehydrated — a process that can take hours** — before it can be read.",
+    "category": "Describe Azure Architecture and Services"
+}

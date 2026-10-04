@@ -1,0 +1,17 @@
+{
+    "id": "az700-core-udr-precedence",
+    "type": "ordering",
+    "question": "For a given destination prefix, Azure chooses among multiple possible routes to the same destination using a defined order of precedence. Arrange the following route sources from most preferred (used first) to least preferred, as Azure evaluates them for a subnet.",
+    "items": [
+        "System route (Azure's default route for the address space)",
+        "User-defined route (UDR) on the subnet's route table",
+        "Route learned via BGP (from a virtual network gateway or Route Server)"
+    ],
+    "correctOrder": [
+        "User-defined route (UDR) on the subnet's route table",
+        "Route learned via BGP (from a virtual network gateway or Route Server)",
+        "System route (Azure's default route for the address space)"
+    ],
+    "explanation": "Azure selects among routes to the same destination prefix using this order of preference:\n\n1. **User-defined routes (UDRs)** — Routes an administrator explicitly adds to a subnet's route table always take precedence over any other route source for the same or a more specific prefix.\n2. **BGP routes** — Routes learned dynamically through BGP (from an ExpressRoute/VPN gateway or Azure Route Server) are preferred next, if no UDR exists for that prefix.\n3. **System routes** — Azure's automatically created default routes (for the VNet address space, peered VNets, and 0.0.0.0/0 to the internet) are used only when no UDR or BGP route exists for a more specific or matching prefix.\n\nThis precedence is why a UDR can \"override\" the default internet route (0.0.0.0/0) to force traffic through a firewall or NVA, and why enabling BGP route propagation lets dynamically learned routes take effect without needing a UDR for every destination.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

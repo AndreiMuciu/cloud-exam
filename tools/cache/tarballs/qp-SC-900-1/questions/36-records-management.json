@@ -1,0 +1,24 @@
+{
+    "id": "sc900-36-records-management",
+    "question": "A regulated company must ensure that signed client contracts stored in Microsoft 365 are kept for seven years and cannot be edited or deleted by users during that period, with proof of disposition when the period ends.\n\nWhich Microsoft Purview capability should the company use?",
+    "options": [
+        {
+            "text": "Records management, declaring the contracts as records",
+            "correct": true
+        },
+        {
+            "text": "Sensitivity labels with encryption",
+            "correct": false
+        },
+        {
+            "text": "Insider risk management",
+            "correct": false
+        },
+        {
+            "text": "Activity explorer",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Purview records management** manages high-value content for legal and regulatory obligations. Applying a retention label that **declares an item a record** makes the content immutable — users cannot edit or delete it while the retention period (here, seven years) is in force — and disposition review at the end of the period provides **proof of defensible deletion**.\n\n**Why not the other options:**\n- **Sensitivity labels with encryption** — Sensitivity labels control *who can access* content and how it is marked; they do not enforce retention periods or prevent authorized users from editing or deleting files.\n- **Insider risk management** — This solution detects risky user behavior such as data exfiltration; it cannot make documents immutable or manage their retention lifecycle.\n- **Activity explorer** — Activity explorer visualizes what is being *done* with labeled and sensitive content (label changes, file activity); it is a monitoring view, not a retention or immutability control.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

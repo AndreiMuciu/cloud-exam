@@ -1,0 +1,13 @@
+{
+    "id": "case_study_veynhart_robotics",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Veynhart Robotics** designs warehouse automation robots and runs its control-plane services in Azure across a Development and a Production subscription in one Microsoft Entra ID tenant.\n\n**Current Environment:**\n- Infrastructure is deployed with Bicep templates from an internal deployment pipeline. Several parameter files in the repository contain plaintext SQL connection strings and third-party API keys; two of them were flagged during a recent code audit.\n- Many resources — including key vaults and SQL logical servers — were created by different teams over three years. An internal review found that resource logs are enabled on some resources and missing on others, and nobody notices when a new resource is created without them.\n- A fleet-diagnostics team occasionally needs to read secrets from the vault `kv-veyn-fleet` during live incident bridges. Today, six engineers hold a permanent Key Vault Secrets User assignment on the vault even though such incidents occur roughly once a month.\n- The team that reviews access complains that the six engineers appear in every quarterly review even though most have never actually used the access."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The platform security board has defined the following requirements:\n\n**Logging Compliance:**\n- Every existing and future key vault and SQL logical server must send resource logs to the central Log Analytics workspace.\n- Resources that are missing the configuration must be **corrected automatically**, without a human raising a ticket, and compliance must be visible in a single place.\n\n**Deployment Secrets:**\n- Secret values must never appear in template files, parameter files, or deployment history. The pipeline must obtain secrets from an approved vault **at deployment time** only.\n- Anyone reviewing a completed deployment in the portal must not be able to read the secret values that were passed in.\n\n**Incident Access to Secrets:**\n- The fleet-diagnostics engineers must have **no standing access** to `kv-veyn-fleet`. Access must be activated only when an incident occurs, must require approval by the on-call incident manager, must expire automatically after 8 hours, and every activation must be recorded with a justification.\n- The existing Azure RBAC role assignment model on the vault must keep working — the solution must not require re-granting vault permissions to individuals one by one."
+        }
+    ]
+}

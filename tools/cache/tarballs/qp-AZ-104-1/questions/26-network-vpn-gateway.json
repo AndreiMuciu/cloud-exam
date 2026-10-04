@@ -1,0 +1,24 @@
+{
+    "id": "az104-network-vpn-gateway",
+    "question": "You plan to connect your London office to Azure. You need to establish an encrypted connection from the London office to your VNet-Europe virtual network over the public internet.\n\nWhat should you create?",
+    "options": [
+        {
+            "text": "An ExpressRoute circuit only",
+            "correct": false
+        },
+        {
+            "text": "A virtual network gateway and an on-premises data gateway",
+            "correct": false
+        },
+        {
+            "text": "A virtual network gateway only and configure DirectAccess on the London server",
+            "correct": false
+        },
+        {
+            "text": "A virtual network gateway and a local network gateway, and configure a site-to-site VPN",
+            "correct": true
+        }
+    ],
+    "explanation": "A **site-to-site VPN** connection requires three components:\n\n1. **Virtual network gateway** — Deployed in Azure within the VNet, this serves as the Azure-side VPN endpoint\n2. **Local network gateway** — An Azure resource that represents the on-premises VPN device, specifying its public IP address and the on-premises address ranges\n3. **VPN connection** — Links the virtual network gateway to the local network gateway using IPsec/IKE\n\nThe on-premises office also needs a compatible VPN device (firewall/router).\n\nWhy not the other options:\n- **ExpressRoute** provides a **private** connection through a connectivity provider, not over the public internet\n- **DirectAccess** is a Windows Server feature for remote client access, not site-to-site connectivity\n- **On-premises data gateway** is for Azure Logic Apps and Power BI to access on-premises data sources, not for network connectivity",
+    "category": "Implement and Manage Virtual Networking"
+}

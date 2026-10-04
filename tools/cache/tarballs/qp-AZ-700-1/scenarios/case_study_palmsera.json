@@ -1,0 +1,13 @@
+{
+    "id": "case_study_palmsera",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Palmsera Health** is a healthcare provider that stores patient records and clinical imaging in Azure. The company must meet strict regulatory requirements for data confidentiality and network isolation.\n\n**Current Environment:**\n- A hub VNet centralizes shared security services; more than a dozen clinical-application spoke VNets are peered to the hub.\n- Clinical application tiers (web, API, database) run in separate subnets within each spoke, with traffic between tiers tightly restricted.\n- All outbound internet access from spokes must be inspected and filtered centrally rather than allowed directly from each spoke."
+        },
+        {
+            "title": "Compliance & Security Requirements",
+            "content": "**Segmentation:**\n- Within a spoke VNet, the API tier subnet must be able to reach the database tier subnet on port 1433 only; all other inbound traffic to the database subnet must be denied, including traffic from the same virtual network that isn't explicitly permitted.\n- The security team has created a custom NSG rule at priority 100 that denies all inbound traffic to the database subnet, and a second rule at priority 200 that allows port 1433 from the API subnet.\n\n**Centralized filtering:**\n- All spokes must send outbound internet-bound traffic through a single, centrally managed, stateful firewall in the hub VNet that supports FQDN-based application rules and can apply consistent policy across every spoke via one management plane.\n\n**Private data access:**\n- The Azure SQL Managed Instance and Storage account used for clinical records must be reachable from every spoke over a private IP address, and name resolution for these services must work correctly for spokes that don't have their own custom DNS server — a single private DNS zone strategy linked to all relevant VNets is required."
+        }
+    ]
+}

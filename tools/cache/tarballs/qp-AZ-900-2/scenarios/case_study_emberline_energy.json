@@ -1,0 +1,13 @@
+{
+    "id": "case_study_emberline_energy",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Emberline Energy** is a renewable-energy utility that operates coastal wind farms. Turbine sensors stream operational data to Azure, and an engineering team runs large simulation jobs to predict turbine wear and optimize blade pitch.\n\n**Current Environment:**\n- Simulation jobs arrive in a work queue; the number of queued jobs varies from a handful overnight to hundreds during storm season.\n- Sensor data lands in an Azure Storage account inside the engineering virtual network.\n- **400 TB of historical SCADA data** sits on aging on-premises storage arrays, connected to the internet by a single **100 Mbps** uplink."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Compute:**\n- Simulation capacity must consist of identical virtual machines that automatically increase and decrease in number based on the queue depth.\n\n**Networking:**\n- The storage account holding sensor data must be reachable **only over private IP addresses from within the virtual network**; its public endpoint must be disabled.\n\n**Migration:**\n- The historical SCADA archive must be in Azure within **six weeks**, without saturating the site’s limited internet uplink."
+        }
+    ]
+}

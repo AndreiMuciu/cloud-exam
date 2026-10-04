@@ -1,0 +1,25 @@
+{
+    "id": "sc300-quintavox-access-reviews-auto-apply",
+    "question": "Quintavox Media's compliance team must periodically confirm that studio staff who were granted access still need it. The team is too small to chase down every non-response, so access must be automatically removed if the assigned reviewer never responds to the review.\n\nHow should you configure the access review to achieve this?",
+    "options": [
+        {
+            "text": "Create a recurring access review on the access package (or resource), set the reviewer, and configure \"if reviewers don't respond\" to automatically remove access, with auto-apply results enabled",
+            "correct": true
+        },
+        {
+            "text": "Create a one-time access review and manually delete the assignments of anyone the reviewer hasn't responded about after 30 days",
+            "correct": false
+        },
+        {
+            "text": "Set \"if reviewers don't respond\" to \"No change\", and rely on the review's email reminders to eventually prompt the reviewer",
+            "correct": false
+        },
+        {
+            "text": "Configure the review to require self-review only, since self-review guarantees a response from every user",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra access reviews let you configure a **recurring** schedule and an explicit fallback behavior for **\"if reviewers don't respond\"** — options include automatically approving, automatically denying/removing access, or taking the recommendation. Setting this to remove access, combined with **auto-apply results** (so the outcome is applied automatically at the end of the review period instead of requiring an admin to manually apply it), removes access without any manual chasing — satisfying both the recurring recheck and the \"no response = removed\" requirement.\n\n**Why not the other options:**\n- **A one-time review with manual deletion** — this requires an administrator to manually intervene every cycle, which is exactly the manual burden the small compliance team cannot sustain, and it isn't recurring.\n- **\"No change\" on non-response** — this leaves access in place indefinitely if the reviewer never responds, which is the opposite of the required outcome.\n- **Self-review only** — self-review does not guarantee a response; a non-responsive self-reviewer is still possible, and the fallback behavior for non-response still needs to be configured to remove access automatically.",
+    "category": "Plan and automate identity governance",
+    "caseStudy": "scenarios/case_study_quintavox.json"
+}

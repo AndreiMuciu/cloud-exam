@@ -1,0 +1,13 @@
+{
+    "id": "case_study_otterill_energy",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Otterill Energy** is a regional electricity and water utility. Its customer billing platform, outage-reporting portal, and smart-meter data pipeline run across several Azure subscriptions, each with multiple virtual networks. A small security operations team monitors the environment.\n\n**Current Environment:**\n- Each application team currently manages its own subnet-level traffic rules, and there is no central point of control for traffic leaving the virtual networks.\n- Azure resources include virtual machines, storage accounts, and Azure SQL databases that hold customer and metering data.\n- The security operations team already reviews posture recommendations but receives no alerts when a resource is actively under attack."
+        },
+        {
+            "title": "Security Program Requirements",
+            "content": "The head of security at Otterill Energy has documented the following requirements:\n- **Centralize network control**: Deploy a single, fully managed, stateful network filtering service that can govern traffic across all virtual networks and subscriptions, filter by fully qualified domain name, and use Microsoft threat intelligence to block traffic from known-malicious sources.\n- **Detect active threats on workloads**: Go beyond configuration assessments — servers, storage accounts, and databases must generate security alerts when suspicious activity such as brute-force attempts or unusual data access occurs.\n- **Automate the response**: The security operations team wants the category of tooling that orchestrates and automates responses to alerts, such as isolating a resource or opening a ticket automatically."
+        }
+    ]
+}

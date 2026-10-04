@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-36-governance-matching",
+    "type": "matching",
+    "question": "Match each Azure governance or management tool to the job it performs.",
+    "sourceItems": [
+        "Microsoft Purview",
+        "Azure Policy",
+        "Resource locks",
+        "Azure Advisor"
+    ],
+    "targetSlots": [
+        "Discover, catalog, and classify data across the organization’s entire data estate",
+        "Audit or deny resource deployments that do not meet organizational standards",
+        "Prevent critical resources from being accidentally deleted or modified",
+        "Provide personalized recommendations for cost, security, reliability, and performance"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Microsoft Purview** — A unified data governance service that scans data sources across Azure, on-premises, and other clouds to build a catalog and automatically classify sensitive data.\n- **Azure Policy** — Defines and enforces organizational standards for resources: policies can audit, deny, or modify deployments that violate rules such as allowed regions or required tags.\n- **Resource locks** — CanNotDelete and ReadOnly locks protect critical resources from accidental deletion or modification, overriding even Owner permissions until removed.\n- **Azure Advisor** — Analyzes resource configuration and usage to deliver personalized best-practice recommendations across cost, security, reliability, performance, and operational excellence.",
+    "category": "Describe Azure Management and Governance"
+}

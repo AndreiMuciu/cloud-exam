@@ -1,0 +1,29 @@
+{
+    "id": "az104-network-service-endpoint",
+    "type": "multi",
+    "question": "You have an Azure SQL Database named `proddb` and a virtual network named `VNet-App` with a subnet named `Subnet-WebTier`. You need to ensure that only resources in `Subnet-WebTier` can access the SQL database using **service endpoints**. Internet access to the database should be blocked.\n\nWhich two actions should you perform? (Choose two.)",
+    "options": [
+        {
+            "text": "Enable a service endpoint for Microsoft.Sql on Subnet-WebTier",
+            "correct": true
+        },
+        {
+            "text": "Add a virtual network rule on the SQL database firewall allowing Subnet-WebTier",
+            "correct": true
+        },
+        {
+            "text": "Create a network security group rule allowing SQL traffic from Subnet-WebTier",
+            "correct": false
+        },
+        {
+            "text": "Configure a DNS private zone for the SQL database",
+            "correct": false
+        },
+        {
+            "text": "Create a private endpoint for the SQL database",
+            "correct": false
+        }
+    ],
+    "explanation": "To restrict Azure SQL Database access to a specific subnet using **service endpoints**:\n\n1. **Enable service endpoint** — On `Subnet-WebTier`, enable the service endpoint for `Microsoft.Sql`. This routes traffic to Azure SQL through the Azure backbone network rather than the internet.\n\n2. **Add VNet rule on SQL database** — In the SQL database firewall settings, add a virtual network rule specifying `Subnet-WebTier`. This allows only traffic from that subnet and denies all other access (including internet).\n\n**Why not the other options:**\n- **NSG rule** — Cannot control access to Azure SQL Database. NSGs filter traffic to/from VMs, not to Azure PaaS services\n- **DNS private zone** — Used with private endpoints, not service endpoints\n- **Private endpoint** — This is an alternative solution that provides a private IP address for the SQL database within your VNet. Service endpoints are simpler and don't require private IPs, but private endpoints provide better isolation\n\n**Service endpoints vs private endpoints:**\n- Service endpoints: Simpler, no extra cost, but traffic still leaves the VNet boundary (via Azure backbone)\n- Private endpoints: Better security (truly private), supports on-premises access, requires private DNS",
+    "category": "Implement and Manage Virtual Networking"
+}

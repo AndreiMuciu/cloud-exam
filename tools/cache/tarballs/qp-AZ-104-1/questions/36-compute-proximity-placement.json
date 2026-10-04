@@ -1,0 +1,24 @@
+{
+    "id": "az104-compute-proximity-placement",
+    "question": "You are deploying a high-performance computing (HPC) application in Azure that requires very low network latency between VMs. The application consists of 8 VMs that need to communicate frequently.\n\nWhich Azure feature should you use to minimize network latency between these VMs?",
+    "options": [
+        {
+            "text": "Place all VMs in the same availability set",
+            "correct": false
+        },
+        {
+            "text": "Deploy all VMs in the same availability zone",
+            "correct": false
+        },
+        {
+            "text": "Enable accelerated networking on all VMs",
+            "correct": false
+        },
+        {
+            "text": "Create a proximity placement group and deploy VMs into it",
+            "correct": true
+        }
+    ],
+    "explanation": "**Proximity placement groups** are designed specifically to reduce network latency by ensuring VMs are deployed physically close to each other in the same Azure datacenter.\n\nHow it works:\n- Creates a logical grouping that places resources in close physical proximity\n- Ideal for latency-sensitive workloads like HPC, gaming servers, and high-frequency trading\n- Reduces inter-VM network latency to sub-millisecond levels\n\n**Why not the other options:**\n- **Availability set** — Ensures high availability by spreading VMs across fault domains and update domains, which actually **increases** physical distance to avoid correlated failures\n- **Accelerated networking** — Improves network performance by enabling SR-IOV, but doesn't affect physical placement. It's complementary to proximity placement groups\n- **Availability zone** — Provides datacenter-level resilience by placing VMs in different physical datacenters within a region, which **increases** latency\n\n**Best practice:** For HPC workloads, combine proximity placement groups with accelerated networking for optimal performance.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

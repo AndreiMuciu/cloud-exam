@@ -1,0 +1,25 @@
+{
+    "id": "az800-09-terrabound-update-management",
+    "question": "TerraBound Energy wants to standardize patching across all servers. Which Azure service can they use to schedule updates, track compliance, and view missing patches for both Azure VMs and on-premises Arc-enabled servers in a single dashboard?",
+    "options": [
+        {
+            "text": "Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Azure Automation Update Management",
+            "correct": true
+        },
+        {
+            "text": "Windows Update for Business",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Automation Update Management** is designed for hybrid environments. It allows you to manage the patching lifecycle for Windows and Linux servers, whether they are in Azure, on-premises, or in other clouds (via Arc).\n\n**Why not the other options:**\n- **Azure Policy** — Can enforce that the agent is installed/enabled, but doesn't perform the 'patch scheduling' itself.\n- **Windows Update for Business** — Primarily for managing client OS updates (Windows 10/11) via Intune/Group Policy.\n- **Defender for Cloud** — Lists missing patches as a recommendation, but the actual 'management/scheduling' tool is Azure Automation.",
+    "category": "Manage virtual machines and containers",
+    "caseStudy": "scenarios/case_study_terrabound_energy.json"
+}

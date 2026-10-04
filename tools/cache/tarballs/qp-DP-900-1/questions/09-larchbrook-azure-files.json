@@ -1,0 +1,25 @@
+{
+    "id": "dp900-09-larchbrook-azure-files",
+    "question": "Larchbrook Media wants to replace its on-premises file server with a fully managed Azure service that the editors' Windows workstations can mount as a mapped drive over the SMB protocol, without changing how editors work.\n\nWhich Azure service should Larchbrook use?",
+    "options": [
+        {
+            "text": "Azure Blob Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure Files",
+            "correct": true
+        },
+        {
+            "text": "Azure Table Storage",
+            "correct": false
+        },
+        {
+            "text": "Azure Queue Storage",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Files** provides fully managed cloud file shares that are accessible over the industry-standard **SMB** protocol (NFS is also supported). Windows workstations can map a drive letter to an Azure file share exactly as they would to an on-premises file server, so editors keep their existing workflow while Larchbrook retires the aging hardware.\n\n**Why not the other options:**\n- **Azure Blob Storage** — Stores objects accessed over HTTP/HTTPS via REST APIs and SDKs, not a native SMB file share that can be mounted as a mapped drive by default.\n- **Azure Table Storage** — A NoSQL key/value store for structured entities; it stores rows of data, not files, and cannot be mounted as a drive.\n- **Azure Queue Storage** — A messaging service for decoupling application components with queued messages; it has nothing to do with file shares.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_larchbrook_media.json"
+}

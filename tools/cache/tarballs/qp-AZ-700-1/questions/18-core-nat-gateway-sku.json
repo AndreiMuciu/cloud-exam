@@ -1,0 +1,24 @@
+{
+    "id": "az700-core-nat-gateway-sku",
+    "question": "A team at Verimark Logistics is deploying a NAT gateway to provide outbound-only internet connectivity for a subnet of backend VMs. The design requires the NAT gateway to remain available across an availability zone failure, and the team also wants outbound IPv6 connectivity and NAT gateway flow log support.\n\nWhich NAT gateway SKU should the team deploy?",
+    "options": [
+        {
+            "text": "Standard, because it is the only SKU that supports SNAT port allocation",
+            "correct": false
+        },
+        {
+            "text": "StandardV2, because it is zone-redundant, supports IPv6 in addition to IPv4, and supports flow logs",
+            "correct": true
+        },
+        {
+            "text": "Standard, because StandardV2 cannot be used with public IP prefixes",
+            "correct": false
+        },
+        {
+            "text": "Either SKU, since both are zone-redundant by default",
+            "correct": false
+        }
+    ],
+    "explanation": "The **StandardV2** SKU of Azure NAT Gateway is **zone-redundant** — it operates across all availability zones in a region rather than a single zone — and additionally provides **IPv6 support** (alongside IPv4) and **flow log support**, none of which the Standard SKU offers. The Standard SKU is zonal (deployed to a single availability zone, or placed in \"No zone\") and only supports IPv4.\n\n**Why not the other options:**\n- **\"Standard is the only SKU that supports SNAT port allocation\"** — Both Standard and StandardV2 dynamically allocate SNAT ports to scale outbound connectivity; this isn't a differentiator between the two SKUs.\n- **\"Standard, because StandardV2 cannot use public IP prefixes\"** — StandardV2 does support public IP prefixes (StandardV2 prefixes specifically); it just can't use *Standard* SKU public IPs/prefixes, since it requires StandardV2 public IP resources.\n- **\"Either SKU, both are zone-redundant\"** — Only StandardV2 is zone-redundant by design; a Standard NAT gateway operates from a single availability zone (or no zone) and would not survive a zone-level failure.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-07-fennimore-bastion",
+    "question": "Fennimore Legal Group's administrators need occasional RDP and SSH sessions to the case-management virtual machines. Firm policy forbids public IP addresses on any VM, and no management ports may be exposed to the internet; sessions should open in the Azure portal over TLS. Which Azure service satisfies these requirements?",
+    "options": [
+        {
+            "text": "Azure Bastion",
+            "correct": true
+        },
+        {
+            "text": "A point-to-site VPN for each administrator",
+            "correct": false
+        },
+        {
+            "text": "A network security group allowing RDP from the internet",
+            "correct": false
+        },
+        {
+            "text": "Azure Front Door",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Bastion** is a fully managed service deployed into a virtual network that brokers **RDP and SSH sessions directly in the Azure portal over TLS (port 443)**. The target virtual machines need **no public IP addresses**, and ports 3389/22 are never exposed to the internet — the Bastion host reaches the VMs over their private IPs. This matches every constraint the firm's security committee imposed.\n\n**Why not the other options:**\n- **A point-to-site VPN for each administrator** — Would provide private connectivity, but it requires deploying and managing a VPN gateway and client certificates, and sessions would not open \"in the Azure portal over TLS\" as required; Bastion is the purpose-built, lower-friction answer to this exact scenario.\n- **A network security group allowing RDP from the internet** — Directly violates the requirement: it exposes management port 3389 publicly and still requires the VMs to have public IP addresses to be reachable.\n- **Azure Front Door** — A global entry point for delivering **web (HTTP/HTTPS) applications**; it is not a remote-administration service and cannot broker RDP or SSH sessions.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_fennimore_legal.json"
+}

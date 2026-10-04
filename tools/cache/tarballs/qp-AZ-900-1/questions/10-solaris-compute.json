@@ -1,0 +1,25 @@
+{
+    "id": "az900-10-solaris-compute",
+    "question": "Solaris Education Platform plans to re-develop their accounting application for a managed cloud platform where Azure handles the operating system, patching, and runtime. They do not want to manage any underlying infrastructure. Which Azure service category best fits this approach?",
+    "options": [
+        {
+            "text": "Infrastructure as a Service (IaaS)",
+            "correct": false
+        },
+        {
+            "text": "Platform as a Service (PaaS)",
+            "correct": true
+        },
+        {
+            "text": "Software as a Service (SaaS)",
+            "correct": false
+        },
+        {
+            "text": "On-premises Datacenter",
+            "correct": false
+        }
+    ],
+    "explanation": "**PaaS** is the best choice here. With PaaS, Azure manages the underlying operating system, hardware, and runtime environment, allowing Solaris to focus only on their application code. This is more cost-effective than IaaS (which requires managing the OS) and more flexible than SaaS.\n\n**Why not the other options:**\n- **IaaS** — Requires the user to manage the operating system, patching, and maintenance.\n- **SaaS** — Provides a finished software product managed entirely by the provider; Solaris needs to build a custom application, not use a pre-built one.\n- **On-premises** — Involves high capital expenditure and ongoing management overhead.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_solaris_education.json"
+}

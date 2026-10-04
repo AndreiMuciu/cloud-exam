@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s2-15-backup-mua-resource-guard",
+    "question": "After a ransomware tabletop exercise, your organization concludes that a single compromised backup administrator could currently disable soft delete on the Recovery Services vaults, reduce retention, and delete backup data. You must ensure that such destructive operations additionally require authorization controlled by a *separate* security team that backup administrators cannot influence. What should you implement?",
+    "options": [
+        {
+            "text": "Enable multi-user authorization by associating each Recovery Services vault with a Resource Guard that resides in a subscription (or tenant) administered only by the security team, so critical operations require the security team's approval path",
+            "correct": true
+        },
+        {
+            "text": "Apply a CanNotDelete resource lock to each Recovery Services vault",
+            "correct": false
+        },
+        {
+            "text": "Increase the soft-delete retention period on the vaults from 14 to 30 days",
+            "correct": false
+        },
+        {
+            "text": "Require the backup administrators to use PIM to activate their Backup Contributor role with MFA",
+            "correct": false
+        }
+    ],
+    "explanation": "**Multi-user authorization (MUA)** for Azure Backup uses a **Resource Guard** — a separate Azure resource, deliberately placed in a subscription or even a tenant that the backup administrators cannot access. Once a vault is associated with the Resource Guard, **critical operations** (disabling soft delete, disabling MUA, reducing retention, stopping protection with delete data, and similar) succeed only if the caller also has permissions on the Resource Guard — which only the security team can grant, typically just-in-time via PIM on the guard itself. A lone compromised backup admin can no longer destroy recovery points.\n\n**Why not the other options:**\n- **CanNotDelete lock** — protects the vault *resource* from deletion, but a backup administrator with vault permissions can still disable soft delete, shorten retention, or stop protection with data deletion — and an Owner can simply remove the lock. No second-party authorization is added.\n- **Longer soft-delete retention** — helpful, but the exercise showed the admin can *disable soft delete itself*; extending a setting the attacker can turn off adds no real barrier.\n- **PIM activation with MFA for the backup role** — strengthens *how* the admin gets their role, but once activated, the same single identity can still perform every destructive operation alone; the requirement is authorization by a *separate* team, i.e., MUA.",
+    "category": "Manage identity, access, and governance"
+}

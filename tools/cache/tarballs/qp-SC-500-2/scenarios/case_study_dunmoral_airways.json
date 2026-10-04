@@ -1,0 +1,13 @@
+{
+    "id": "case_study_dunmoral_airways",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Dunmoral Airways** is a regional airline. Its security operations center (SOC) uses a Microsoft Sentinel workspace, and the company runs Microsoft 365 for email, SharePoint, and Teams alongside its Azure workloads.\n\n**Current Environment:**\n- The airline's booking platform emits roughly 100 GB per day of verbose JSON application logs through a REST-capable log shipper. The logs are needed only occasionally, during incident investigations, but the aviation regulator requires that they remain available for one year.\n- The booking logs contain a `passengerDocument` field with passport numbers that must not be stored in the SIEM at all.\n- Core security tables such as `SigninLogs` and `SecurityEvent` are queried by analysts and analytics rules every day.\n- SOC analysts currently have no way to search Microsoft 365 activities (mailbox access, SharePoint file operations, Entra admin changes) from their security tooling; they file tickets with the Microsoft 365 team instead."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The SOC leadership has defined the following requirements:\n\n**Log Cost and Retention:**\n- Booking-platform logs must be ingested at the lowest possible cost, given that they are rarely queried and are used only for occasional investigations; they must be retained for 1 year.\n- Core security tables must remain fully available for interactive analytics queries for 90 days and must be retained for a total of 2 years for compliance searches.\n\n**Custom Ingestion:**\n- The booking logs must land in a dedicated custom table with a schema the SOC controls, and the `passengerDocument` field must be removed **before** the data is stored in the workspace.\n\n**Microsoft 365 Visibility:**\n- SOC analysts must be able to search audited Microsoft 365 user and admin activities from the Microsoft Defender portal as part of incident investigations, without asking the Microsoft 365 team to run searches for them."
+        }
+    ]
+}

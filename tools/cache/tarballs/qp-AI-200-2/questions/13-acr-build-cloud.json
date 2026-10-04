@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-13-acr-build-cloud",
+    "question": "Aldermoss Robotics builds its Python scoring API image in a CI pipeline that runs on lightweight agents **without a Docker daemon**. Each run must build the image from the repository's `Dockerfile` and make the result available in the Azure Container Registry `aldermossacr` in a single step.\n\nWhich command should the pipeline run?",
+    "options": [
+        {
+            "text": "az acr build --registry aldermossacr --image scoring-api:{{build_id}} .",
+            "correct": true
+        },
+        {
+            "text": "docker build -t aldermossacr.azurecr.io/scoring-api:{{build_id}} . && docker push aldermossacr.azurecr.io/scoring-api:{{build_id}}",
+            "correct": false
+        },
+        {
+            "text": "az acr import --name aldermossacr --source scoring-api:{{build_id}}",
+            "correct": false
+        },
+        {
+            "text": "az acr task create --registry aldermossacr --name build-scoring --context https://... --base-image-trigger-enabled true",
+            "correct": false
+        }
+    ],
+    "explanation": "`az acr build` runs a **quick task** in ACR Tasks: the build context is uploaded to Azure, the image is built **in the cloud** on registry-managed compute, and the result is pushed into the registry automatically. No Docker daemon is needed on the agent, and build plus push happen in one command — exactly what a daemon-less CI runner requires.\n\n**Why not the other options:**\n- **`docker build` + `docker push`** — Requires a local Docker daemon on the agent, which these CI runners do not have. It is also two steps, not one.\n- **`az acr import`** — Imports an image that *already exists* in another registry (or Docker Hub) into ACR. It performs no build from a Dockerfile.\n- **`az acr task create`** — Defines a *persistent, trigger-driven* task (for example, rebuild when the base image or a git branch changes). It sets up automation for later runs; it is not the one-shot build-and-push the pipeline step needs.",
+    "category": "Develop containerized solutions on Azure"
+}

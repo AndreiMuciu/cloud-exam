@@ -1,0 +1,19 @@
+{
+    "id": "az700-appdelivery-frontdoor-caching",
+    "type": "ordering",
+    "question": "Azure Front Door is configured with caching enabled on a route. Arrange the steps that occur, in order, when a client requests a cacheable object that is not yet present in the edge point-of-presence (PoP) cache.",
+    "items": [
+        "Front Door caches the response at the edge PoP and returns it to the client",
+        "The client sends the request to the nearest Front Door edge point-of-presence (PoP)",
+        "The edge PoP checks its cache and finds no valid cached copy of the object (a cache miss)",
+        "Front Door forwards the request to the configured origin to retrieve the object"
+    ],
+    "correctOrder": [
+        "The client sends the request to the nearest Front Door edge point-of-presence (PoP)",
+        "The edge PoP checks its cache and finds no valid cached copy of the object (a cache miss)",
+        "Front Door forwards the request to the configured origin to retrieve the object",
+        "Front Door caches the response at the edge PoP and returns it to the client"
+    ],
+    "explanation": "For a cacheable request that results in a cache miss, Azure Front Door processes it in this order:\n\n1. **Client request reaches the nearest edge PoP** — Front Door's anycast network routes the client to the closest point of presence.\n2. **Cache check (miss)** — The edge PoP checks whether it already has a valid, unexpired cached copy of the requested object; here, it does not.\n3. **Origin request** — Because of the cache miss, Front Door forwards the request to the configured origin (the regional backend) to retrieve the object.\n4. **Cache and respond** — Front Door stores the origin's response in the edge PoP's cache (subject to the configured caching rules) and returns the response to the client.\n\nOn a subsequent request for the same object from a nearby client, step 2 would result in a cache hit, and Front Door could skip contacting the origin entirely — which is the performance benefit caching provides.",
+    "category": "Design and Implement Application Delivery Services"
+}

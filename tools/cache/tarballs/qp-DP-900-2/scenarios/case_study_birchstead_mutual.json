@@ -1,0 +1,13 @@
+{
+    "id": "case_study_birchstead_mutual",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Birchstead Mutual** is a regional property and casualty insurer. The company is modernizing two very different workloads and is designing the relational schema for a new application.\n\n**Workload 1 — new claims-tracking application:**\n- A development team is building a brand-new, cloud-native web application for tracking insurance claims.\n- The application needs a single fully managed relational database. It uses **no** instance-level SQL Server features: no SQL Server Agent jobs, no cross-database queries, and no operating-system access.\n- The team wants the **lowest possible administrative effort** — no OS, instance, or patching management of any kind.\n\n**Workload 2 — legacy actuarial platform:**\n- A vendor-supplied actuarial modeling platform is certified to run only against one **specific SQL Server version and build**.\n- The vendor requires a third-party backup agent to be **installed on the server's operating system**.\n- The DBA team must keep **full control** over the operating system and the SQL Server instance, including when patches are applied."
+        },
+        {
+            "title": "Data Model Requirements",
+            "content": "The new claims-tracking database contains a **Policies** table and a **Claims** table:\n- Every claim is filed against exactly one policy, and the **Claims** table stores the policy number of the related policy in a `PolicyId` column.\n- The business rule is strict: it must be **impossible** to insert a row into **Claims** whose `PolicyId` does not match an existing row in **Policies**, and the database itself must enforce this rule automatically for every insert and update."
+        }
+    ]
+}

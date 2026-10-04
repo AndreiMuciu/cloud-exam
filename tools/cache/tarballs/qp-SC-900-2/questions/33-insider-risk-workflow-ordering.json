@@ -1,0 +1,21 @@
+{
+    "id": "sc900-s2-33-insider-risk-workflow-ordering",
+    "type": "ordering",
+    "question": "A compliance team is adopting Microsoft Purview Insider Risk Management. Arrange the stages of the insider risk management workflow in the correct order, from first to last.",
+    "items": [
+        "Triage the alert to confirm it warrants attention and assess its severity",
+        "Create an insider risk policy from a template that defines the users in scope and the risk activities to detect",
+        "Take action, ranging from sending the user a reminder of policy through escalating to a legal or HR investigation",
+        "An alert is generated when a user's activity matches the policy's indicators",
+        "Investigate the case in depth, reviewing the user's activity history and related content"
+    ],
+    "correctOrder": [
+        "Create an insider risk policy from a template that defines the users in scope and the risk activities to detect",
+        "An alert is generated when a user's activity matches the policy's indicators",
+        "Triage the alert to confirm it warrants attention and assess its severity",
+        "Investigate the case in depth, reviewing the user's activity history and related content",
+        "Take action, ranging from sending the user a reminder of policy through escalating to a legal or HR investigation"
+    ],
+    "explanation": "Microsoft Purview Insider Risk Management follows a defined workflow:\n\n1. **Policy** — Everything starts with a policy created from a template (for example, data theft by departing users or general data leaks). The policy defines which users are in scope, which risk indicators to watch, and how alerts should be scored. Nothing is monitored until a policy exists — a deliberate design that supports privacy by default.\n2. **Alert** — When in-scope user activity matches the policy's indicators (for example, a burst of downloads followed by copying files to a USB device), the system generates an alert with a severity score. User names can be pseudonymized at this stage to protect privacy during initial review.\n3. **Triage** — A reviewer evaluates the alert: is it noise, or does it need a closer look? Triage confirms severity and decides whether to dismiss the alert or promote it to a case.\n4. **Investigate** — A case brings together the user's risk activity history, the content involved, and investigation tooling so the team can understand intent and impact in depth.\n5. **Action** — The outcome ranges from the gentle end — sending the user a reminder notice about policy — to escalating the case for legal or HR investigation when the behavior appears malicious.\n\nThe order matters: policies generate alerts, alerts are triaged into cases, cases are investigated, and only then is action taken — keeping the process consistent, auditable, and fair to users.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

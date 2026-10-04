@@ -1,0 +1,13 @@
+{
+    "id": "case_study_copperbeck",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Copperbeck Energy** operates wind and solar farms across northern Europe. Telemetry from turbine and inverter sites is ingested into Azure for forecasting and maintenance planning.\n\n**Current Environment:**\n- Hub-spoke network topology in the North Europe region\n- Hub: **VNet-Hub** (10.50.0.0/16) with shared services\n- Spokes: **VNet-Telemetry** (10.51.0.0/16) and **VNet-Corp** (10.52.0.0/16), both peered to the hub\n- Storage account **stcopperbecktel** holds raw telemetry in Blob Storage\n\n**Security Mandate (board-approved):**\n- No virtual machine may have a public IP address\n- Administrative access to VMs must occur through a hardened, browser-based entry point\n- Traffic to PaaS services must stay on private connectivity wherever supported\n- Production network resources must survive the loss of a single availability zone"
+        },
+        {
+            "title": "Network Architecture",
+            "content": "**Private Connectivity:**\n- A **private endpoint** for the blob service of `stcopperbecktel` was recently created in VNet-Hub\n- Engineers report that a management VM in VNet-Hub still connects to the storage account over its public endpoint\n\n**Ingress and Egress:**\n- A network virtual appliance (NVA) firewall inspects egress traffic from spoke workloads\n- A public IP address is required for the firm's SD-WAN concentrator in the hub\n- The concentrator is business-critical and must remain reachable if one availability zone fails\n\n**Administrative Access:**\n- Operations engineers currently RDP to VMs from a jump server that the security team wants to decommission\n- The replacement must not require public IPs on any workload VM and must be reachable from the Azure portal"
+        }
+    ]
+}

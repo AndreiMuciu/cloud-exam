@@ -1,0 +1,13 @@
+{
+    "id": "case_study_vellmore_financial",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Vellmore Financial Group** is a digital-first retail bank operating in three countries. The company runs its customer-facing banking platform in Azure across two subscriptions (Production and Development) under a single Microsoft Entra ID tenant.\n\n**Current Environment:**\n- 14 administrators currently hold permanent Owner or Contributor role assignments on the Production subscription.\n- Users sign in with passwords only; a recent internal audit flagged the absence of multifactor authentication for privileged accounts.\n- The platform's microservices authenticate to Azure SQL Database and Azure Key Vault by using connection strings and client secrets stored in application configuration files.\n- Several third-party SaaS applications have been granted tenant-wide delegated permissions by individual users."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The Chief Information Security Officer has defined the following requirements:\n\n**Privileged Access:**\n- Administrative roles must be activated only when needed, for a maximum of 4 hours, and activation of the Owner role must be approved by a designated approver.\n- All role activations must require justification and be auditable.\n\n**Authentication and Access:**\n- All privileged users must use phishing-resistant multifactor authentication.\n- Access to the Azure portal and management endpoints must be blocked from countries where Vellmore has no employees.\n- Sign-in risk detected by Microsoft Entra ID Protection must trigger additional controls automatically.\n\n**Application Identity:**\n- Application code must not contain any stored credentials or secrets.\n- Users must no longer be able to consent to third-party applications on their own; consent must be routed through an administrator review process."
+        }
+    ]
+}

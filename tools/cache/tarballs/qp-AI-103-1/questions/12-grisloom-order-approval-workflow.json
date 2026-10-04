@@ -1,0 +1,25 @@
+{
+    "id": "ai103-12-grisloom-order-approval-workflow",
+    "question": "Any Grisloom agent action that places or modifies an order over $500 must pause for explicit customer confirmation before executing, rather than completing autonomously.\n\nWhat should the team configure?",
+    "options": [
+        {
+            "text": "Configure the order-actions agent's tool-calling flow so any order action above the $500 threshold requires an explicit approval step before it executes.",
+            "correct": true
+        },
+        {
+            "text": "Let the agent execute every order action automatically, then send a confirmation email after the order has already been placed.",
+            "correct": false
+        },
+        {
+            "text": "Lower the agent's temperature setting so it makes more conservative purchasing decisions.",
+            "correct": false
+        },
+        {
+            "text": "Remove the order-actions agent's ability to place any order over $500, so only human staff can complete large orders.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **human-in-the-loop approval step** wired into the tool-calling flow — pausing execution above the $500 threshold until the customer explicitly confirms — is precisely an oversight/approval control for agent behavior, and it still lets the agent complete the order once confirmed.\n\n**Why not the other options:**\n- **Confirm-after-the-fact email** — The order has already executed by the time the email is sent; this is notification, not the required pre-execution pause.\n- **Lowering temperature** — Temperature affects wording variability/creativity of generated text, not whether the agent pauses before taking a tool action; it does not implement an approval gate at all.\n- **Removing large-order capability entirely** — Fails the requirement, which asks the agent to still be able to handle it (with confirmation), not to hand every large order off to a human.",
+    "category": "Plan and manage an Azure AI solution",
+    "caseStudy": "scenarios/case_study_grisloom_commerce.json"
+}

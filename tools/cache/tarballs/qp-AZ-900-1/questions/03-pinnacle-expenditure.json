@@ -1,0 +1,25 @@
+{
+    "id": "az900-03-pinnacle-expenditure",
+    "question": "Pinnacle Retail Group wants to shift from a **Capital Expenditure (CapEx)** model to an **Operational Expenditure (OpEx)** model. Which feature of Azure best supports this goal?",
+    "options": [
+        {
+            "text": "Purchasing long-term server hardware leases",
+            "correct": false
+        },
+        {
+            "text": "The ability to pay for resources only when they are used (Consumption-based)",
+            "correct": true
+        },
+        {
+            "text": "Upfront payment for a 10-year data center lease",
+            "correct": false
+        },
+        {
+            "text": "Hiring more on-site hardware maintenance staff",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Consumption-based model** (pay-as-you-go) is a core OpEx characteristic. It allows Pinnacle to treat IT spending as an ongoing operating expense rather than an upfront capital investment in hardware.\n\n**Why not the other options:**\n- **Long-term leases** — Usually involve fixed commitments that can feel more like CapEx than the flexibility of the cloud.\n- **Upfront payment** — This is the definition of CapEx.\n- **Hiring staff** — While staff salaries are OpEx, this doesn't leverage the specific cloud benefit Pinnacle is seeking regarding infrastructure costs.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_pinnacle_retail.json"
+}

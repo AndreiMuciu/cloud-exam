@@ -1,0 +1,24 @@
+{
+    "id": "az900-29-azure-key-vault",
+    "question": "A developer needs a secure way to store and retrieve application connection strings and API keys without hard-coding them in the application source code. Which Azure service should they use?",
+    "options": [
+        {
+            "text": "Azure Storage Accounts",
+            "correct": false
+        },
+        {
+            "text": "Azure Key Vault",
+            "correct": true
+        },
+        {
+            "text": "Azure App Service Settings",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor Logs",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Key Vault** is a cloud service for securely storing and accessing secrets (like API keys and passwords), keys, and certificates. It provides centralized management and audit logs for access.\n\n**Why not the other options:**\n- **Storage Accounts** — While they can store data, they aren't specifically designed for secure secret management with fine-grained access control.\n- **App Service Settings** — While you *can* store settings here, it is best practice to store sensitive secrets in Key Vault and reference them from the App Service.\n- **Monitor Logs** — Used for logging and telemetry, not for secret storage.",
+    "category": "Describe Azure Management and Governance"
+}

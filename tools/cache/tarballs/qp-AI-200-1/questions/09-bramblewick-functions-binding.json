@@ -1,0 +1,25 @@
+{
+    "id": "ai200-09-bramblewick-functions-binding",
+    "question": "You are completing the Bramblewick fraud-screening function using the Python v2 programming model:\n\n```python\nimport azure.functions as func\n\napp = func.FunctionApp()\n\n@app.service_bus_queue_trigger(arg_name=\"msg\",\n                               queue_name=\"order-commands\",\n                               connection=\"ServiceBusConnection\")\n# ??? \ndef screen_order(msg: func.ServiceBusMessage, verdict: func.Out[func.Document]):\n    order = msg.get_body().decode(\"utf-8\")\n    result = score_order(order)\n    verdict.set(func.Document.from_dict(result))\n```\n\nThe verdict document must be written to the `orders` Cosmos DB container with minimal data-access code. Which decorator should replace `# ???`?",
+    "options": [
+        {
+            "text": "@app.cosmos_db_output(arg_name=\"verdict\", database_name=\"bramblewick\", container_name=\"orders\", connection=\"CosmosConnection\")",
+            "correct": true
+        },
+        {
+            "text": "@app.cosmos_db_trigger(arg_name=\"verdict\", database_name=\"bramblewick\", container_name=\"orders\", connection=\"CosmosConnection\")",
+            "correct": false
+        },
+        {
+            "text": "@app.queue_output(arg_name=\"verdict\", queue_name=\"orders\", connection=\"CosmosConnection\")",
+            "correct": false
+        },
+        {
+            "text": "@app.route(route=\"orders\", auth_level=func.AuthLevel.FUNCTION)",
+            "correct": false
+        }
+    ],
+    "explanation": "An **output binding** is the minimal-boilerplate way to write data from a function. `@app.cosmos_db_output` binds the `verdict: func.Out[func.Document]` parameter to the `orders` container, so calling `verdict.set(...)` persists the document — no Cosmos SDK client, connection management, or retry code in the function body.\n\n**Why not the other options:**\n- **`@app.cosmos_db_trigger`** — A trigger *starts* a function when items change in a container; this function is already triggered by the Service Bus queue, and a trigger cannot serve as an output target.\n- **`@app.queue_output`** — Writes messages to an Azure Storage queue, not documents to Cosmos DB; the connection and destination types are wrong.\n- **`@app.route`** — Declares an HTTP endpoint; it neither triggers on queue messages nor writes to Cosmos DB.",
+    "category": "Connect to and consume Azure services",
+    "caseStudy": "scenarios/case_study_bramblewick_retail.json"
+}

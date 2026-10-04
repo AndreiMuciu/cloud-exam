@@ -1,0 +1,13 @@
+{
+    "id": "case_study_thistledown",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Thistledown Studios** is an independent video game developer with 240 employees. The studio runs its player-facing services and its internal build infrastructure in the East US 2 region.\n\n**Current Environment:**\n- The player account portal is a web app named **app-portal** that runs in an Azure App Service plan (Premium v3) in the virtual network-adjacent resource group **RG-Player**\n- Player profile data is stored in an Azure Database for PostgreSQL flexible server named **pg-players**, which is injected into the subnet **Subnet-Data** of the virtual network **VNet-Games** and has **no public network access**\n- A matchmaking API is being redesigned as a set of small Linux containers\n- Roughly 40 Windows build-agent VMs compile game assets; each VM is manually configured from a checklist before it joins the build pool\n\n**Business Requirements:**\n- Player-facing services must stay on platform-as-a-service offerings; the studio does not want to operate Kubernetes clusters or patch VM fleets for these workloads\n- The build-agent fleet must be rebuilt from a standardized, versioned golden image instead of manual checklists"
+        },
+        {
+            "title": "Compute Detail",
+            "content": "**Portal Database Connectivity (app-portal):**\n- app-portal must open **outbound** connections to pg-players on its private IP address inside Subnet-Data\n- Inbound traffic to the portal itself remains public and unchanged\n- The team has already reserved an empty subnet, **Subnet-AppOut** (10.80.4.0/27), in VNet-Games for whatever the solution needs\n\n**Matchmaking API:**\n- Traffic is extremely bursty: near zero at night, thousands of HTTPS requests per second during evening tournaments\n- The containers must **scale out automatically on incoming HTTPS request volume** and must **scale in to zero running replicas** when idle so that nothing is billed for compute at night\n- The team wants a fully managed service and will not run or upgrade an orchestrator themselves\n\n**Build-Agent Golden Image:**\n- A technician has prepared a Windows VM named **VM-AgentBase** with all compilers and SDKs installed\n- The image must be published with version numbers (for example 1.0.0, 1.1.0) so that the pool can be rolled back to an earlier image version\n- New build agents will be created from the published image in the same subscription"
+        }
+    ]
+}

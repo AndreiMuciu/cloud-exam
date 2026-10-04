@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-id-external",
+    "question": "A software company is launching a consumer-facing web portal expected to reach two million end customers. Customers must be able to self-register, sign in with email one-time passcodes or social identities, and go through customizable branded sign-up journeys. Customer identities must be kept fully separate from the company's workforce directory.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Invite each customer as a B2B guest user in the company's workforce Microsoft Entra ID tenant",
+            "correct": false
+        },
+        {
+            "text": "Create a Microsoft Entra External ID external tenant dedicated to customer identities and register the portal there",
+            "correct": true
+        },
+        {
+            "text": "Deploy Microsoft Entra Domain Services and create a customer organizational unit with two million user accounts",
+            "correct": false
+        },
+        {
+            "text": "Store customer credentials in an Azure SQL Database table and implement custom authentication in the portal",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra External ID in an external tenant** is Microsoft's customer identity and access management (CIAM) solution — the successor to Azure AD B2C — and matches every requirement:\n\n- **Self-service sign-up** with customizable, branded user flows and journeys\n- **Flexible authentication** including email one-time passcodes, social identity providers (Google, Facebook, Apple), and local accounts\n- **Isolation** — An *external tenant* is a separate directory configured for consumers, so the two million customer identities never mix with workforce users, workforce Conditional Access, or corporate group memberships\n- **Consumer scale and pricing** — CIAM is licensed per monthly active user, appropriate for millions of consumers\n\n**Why not the other options:**\n- **B2B guests in the workforce tenant** — B2B collaboration is for *business partners* who bring their own organizational identity. It offers no consumer self-service sign-up journeys or social-identity-first experiences, and it would flood the corporate directory with two million consumer objects — violating the separation requirement\n- **Entra Domain Services** — Provides Kerberos/LDAP domain services for legacy workloads in a VNet; it has no web sign-up flows, no social identity federation, and is entirely the wrong tool for consumer web authentication\n- **Custom credential table in SQL** — Building password storage, hashing, MFA, breach detection, and account recovery yourself is a well-known security anti-pattern; it shifts the entire identity attack surface onto the application team when a managed CIAM platform exists",
+    "category": "Design Identity, Governance, and Monitoring"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-30-governance-rules-recommendations",
+  "type": "single",
+  "question": "Microsoft Defender for Cloud shows hundreds of open recommendations across your subscriptions, and remediation has stalled because no one owns anything. Management wants each new recommendation automatically assigned to the owner defined in the affected resource's `owner` tag, with a remediation due date, automatic email reminders, and a grace period so the finding does not degrade the secure score before the due date passes. What should you configure?",
+  "options": [
+    {
+      "text": "Governance rules in Defender for Cloud that set the owner from the resource tag, define the remediation timeframe, enable email notifications, and apply a grace period",
+      "correct": true
+    },
+    {
+      "text": "Workflow automation that triggers a Logic App on every recommendation to create a ticket, and Azure Policy exemptions to keep findings out of the secure score",
+      "correct": false
+    },
+    {
+      "text": "A Microsoft Sentinel analytics rule on the recommendations data that creates an incident per recommendation and assigns it round-robin to SOC analysts",
+      "correct": false
+    },
+    {
+      "text": "Disabling the noisy recommendations in the environment settings until teams have capacity to remediate them",
+      "correct": false
+    }
+  ],
+  "explanation": "**Governance rules** are Defender for Cloud's built-in accountability mechanism for driving remediation of recommendations. A rule selects a scope and a set of recommendations (by severity or specific recommendation), then assigns an **owner** — either a fixed email address or, as required here, dynamically **from a tag on the resource** such as `owner` — and a **remediation timeframe** (for example 14, 30, or 90 days). The rule can send **email notifications** to owners and their managers, including weekly reminders about open and overdue tasks, and the **grace period** option keeps the recommendation from affecting the secure score until its due date passes — giving teams a fair window while unremediated overdue items eventually count against posture.\n\n**Why not the other options:**\n- **Workflow automation plus policy exemptions** — a Logic App can open tickets, but it provides no ownership model, due dates, or overdue tracking, and Azure Policy exemptions *permanently* excuse resources from evaluation rather than granting a time-boxed grace period — actively hiding risk instead of scheduling its remediation.\n- **Sentinel analytics rule** — Sentinel incidents are for security *threat* response, not posture-recommendation workflow. Round-robin assignment ignores actual resource ownership, and nothing in Sentinel feeds back into secure-score grace handling.\n- **Disabling recommendations** — removes visibility entirely: no findings, no owners, no remediation pressure, and an artificially inflated secure score. It is the opposite of governance.",
+  "category": "Manage and monitor security posture"
+}

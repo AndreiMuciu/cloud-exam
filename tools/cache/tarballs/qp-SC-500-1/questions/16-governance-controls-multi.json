@@ -1,0 +1,33 @@
+{
+    "id": "sc500-16-governance-controls-multi",
+    "type": "multi",
+    "question": "Your security team must implement three governance requirements across an Azure environment:\n\n1. New storage accounts must be **prevented** from allowing public blob access — non-compliant deployments must fail.\n2. The `rg-prod-core` resource group must be protected from accidental deletion, while still allowing engineers to modify resources inside it.\n3. Role assignments in which the assigned identity has not used its permissions for months must be identified and reduced.\n\nWhich three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Assign an Azure Policy definition with the Deny effect that blocks creation of storage accounts permitting public blob access",
+            "correct": true
+        },
+        {
+            "text": "Apply a CanNotDelete resource lock to the rg-prod-core resource group",
+            "correct": true
+        },
+        {
+            "text": "Enable Defender Cloud Security Posture Management (Defender CSPM) and act on its recommendations to remove unused, overprivileged role assignments",
+            "correct": true
+        },
+        {
+            "text": "Assign an Azure Policy definition with the Audit effect that reports storage accounts permitting public blob access",
+            "correct": false
+        },
+        {
+            "text": "Apply a ReadOnly resource lock to the rg-prod-core resource group",
+            "correct": false
+        },
+        {
+            "text": "Replace all role assignments in the subscription with the Reader role",
+            "correct": false
+        }
+    ],
+    "explanation": "- An **Azure Policy Deny effect** blocks the non-compliant deployment at request time, which is what \"must fail\" requires.\n- A **CanNotDelete lock** prevents deletion of the resource group and its resources while still allowing authorized users to read and modify them.\n- **Defender CSPM** surfaces overprivileged and unused identities/permissions as recommendations, letting you right-size Azure RBAC assignments.\n\n**Why not the other options:**\n- **Audit effect** — Audit only records non-compliance in the activity log and compliance dashboard; the deployment still succeeds, so it does not satisfy \"must fail\".\n- **ReadOnly lock** — ReadOnly blocks *all* modifications, not just deletion, so engineers could no longer update resources in the resource group.\n- **Replacing everything with Reader** — This is indiscriminate: it breaks legitimate workloads and admins rather than selectively removing unused permissions.",
+    "category": "Manage identity, access, and governance"
+}

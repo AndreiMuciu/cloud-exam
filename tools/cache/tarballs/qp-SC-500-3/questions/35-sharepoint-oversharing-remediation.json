@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-35-sharepoint-oversharing-remediation",
+    "question": "An oversharing assessment before your Microsoft 365 Copilot rollout identified 60 SharePoint sites with excessive access — including sites shared with 'Everyone except external users' that contain financial data. You must now **remediate**: stop Copilot from reasoning over the highest-risk sites until they are cleaned up, put the cleanup of excessive permissions in the hands of the people who know the content, and ensure files in the finance sites get baseline protection even when users save new documents without thinking about permissions. Which combination should you implement?",
+    "options": [
+        {
+            "text": "Apply Restricted Content Discovery to the highest-risk sites so their content stops surfacing through Copilot and organization-wide search; run SharePoint site access reviews so site owners recertify and remove excessive permissions; and configure default sensitivity labels with protection settings on the finance sites' document libraries",
+            "correct": true
+        },
+        {
+            "text": "Disable Microsoft 365 Copilot for the whole tenant until every site's permissions have been manually audited by the security team",
+            "correct": false
+        },
+        {
+            "text": "Delete the 'Everyone except external users' claim from the tenant and re-add users to sites one by one as they complain",
+            "correct": false
+        },
+        {
+            "text": "Move the 60 sites into a separate tenant that does not have Copilot licenses",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the remediation toolkit that follows an oversharing *assessment*. **Restricted Content Discovery (RCD)** is the surgical containment control: flagged sites stop being discoverable through tenant-wide search and **Copilot stops using their content in responses**, while direct access for legitimately permissioned users continues — buying time to fix permissions without breaking work. **Site access reviews** push the recertification to **site owners** — the people who actually know whether 'Everyone' on a finance site is a mistake — driving removal of excessive permissions at the source rather than through a central team guessing. **Default sensitivity labels on document libraries** give durable, file-level baseline protection: new and existing documents in the library inherit a label whose encryption and access restrictions travel with the file, so a future oversharing mistake exposes ciphertext governed by the label, not open content.\n\n**Why not the other options:**\n- **Disabling Copilot tenant-wide** — punishes the entire rollout for 60 sites and fixes nothing: the oversharing (the actual security problem, exploitable by any curious user via search) remains. Containment should be scoped to the risky sites.\n- **Deleting the Everyone claim and re-adding on complaint** — you cannot 'delete' the built-in claim, and breaking every legitimate use of broad sharing across the tenant to rediscover needs via complaints is uncontrolled outage-driven administration.\n- **Migrating sites to a Copilot-less tenant** — enormous migration effort to avoid using the built-in controls; content remains overshared in the new tenant, and cross-tenant isolation creates new collaboration and governance problems.",
+    "category": "Secure compute"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az800-04-glacier-file-sync-cloud-tiering",
+    "question": "Glacier Logistics is using Azure File Sync with Cloud Tiering enabled. They notice that while the cloud share has 10 TB of data, the local server only has 500 GB of disk space but still appears to show the full directory structure to users. What is this behavior called?",
+    "options": [
+        {
+            "text": "Sparse files",
+            "correct": false
+        },
+        {
+            "text": "Cloud Tiering",
+            "correct": true
+        },
+        {
+            "text": "Data Deduplication",
+            "correct": false
+        },
+        {
+            "text": "Storage Replica",
+            "correct": false
+        }
+    ],
+    "explanation": "**Cloud Tiering** is a feature of Azure File Sync that archvies infrequently accessed files to the cloud while keeping the directory structure and 'reparse points' (metadata) on the local server. This allows users to 'see' the full 10 TB of data while only consuming 500 GB of local disk.\n\n**Why not the other options:**\n- **Sparse files** — A filesystem property where disk blocks are unallocated for empty regions, but not specifically the 'local-metadata/cloud-data' mechanism of File Sync.\n- **Data Deduplication** — Reduces space by removing redundant copies of data patterns within a volume.\n- **Storage Replica** — Used for block-level replication between servers for disaster recovery.",
+    "category": "Manage storage and file services",
+    "caseStudy": "scenarios/case_study_glacier_logistics.json"
+}

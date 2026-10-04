@@ -1,0 +1,25 @@
+{
+    "id": "dp900-08-larchbrook-graph-api",
+    "question": "Larchbrook Media's recommendation team needs to model entities such as viewers, titles, genres, and creators, along with the relationships between them, and run multi-hop queries that traverse those relationships.\n\nWhich Azure Cosmos DB API should the team use?",
+    "options": [
+        {
+            "text": "Azure Cosmos DB for NoSQL",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for Apache Gremlin",
+            "correct": true
+        },
+        {
+            "text": "Azure Cosmos DB for Table",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for MongoDB",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cosmos DB for Apache Gremlin** is the graph database API. It stores data as vertices (viewers, titles, genres, creators) and edges (watched, belongs to, follows) and uses the Gremlin traversal language, which is purpose-built for multi-hop relationship queries like \"titles watched by viewers who follow the same creators.\"\n\n**Why not the other options:**\n- **Azure Cosmos DB for NoSQL** — Stores JSON documents and queries them with a SQL-like syntax. It works well for document workloads but multi-hop relationship traversal would require repeated, awkward self-joins rather than native graph traversal.\n- **Azure Cosmos DB for Table** — A key/value API for simple entities retrieved by partition key and row key; it has no concept of relationships or traversals.\n- **Azure Cosmos DB for MongoDB** — A document API that provides wire-protocol compatibility for existing MongoDB applications; like the NoSQL API, it is not designed for graph traversal workloads.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_larchbrook_media.json"
+}

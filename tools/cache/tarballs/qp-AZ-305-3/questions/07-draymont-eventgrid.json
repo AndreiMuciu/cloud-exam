@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-draymont-eventgrid",
+    "question": "You need to recommend the event-distribution component for the parcel state-change events. The solution must push events over HTTPS to more than 300 partner webhook endpoints, deliver to each partner only the events for its own shipments, and give the tracking application a single publishing endpoint and management surface.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "An Azure Event Grid domain with one topic per partner and per-subscription event filtering",
+            "correct": true
+        },
+        {
+            "text": "An Azure Event Hubs namespace with one consumer group per partner",
+            "correct": false
+        },
+        {
+            "text": "An Azure Service Bus queue per partner, populated by the tracking application",
+            "correct": false
+        },
+        {
+            "text": "A single Azure Event Grid system topic with a subscription for each partner",
+            "correct": false
+        }
+    ],
+    "explanation": "An **Event Grid domain** is the multi-tenant publishing construct designed for exactly this pattern: one organization publishing discrete events to a large number of external consumers.\n\n- **Single publishing surface** — the tracking application publishes all events to the **domain endpoint**; Event Grid routes each event to the correct domain topic (for example, one per partner) based on the event's topic attribute. Domains scale to thousands of topics — 300 partners is squarely in the design range\n- **Push delivery with filtering** — each partner's event subscription pushes to its HTTPS webhook, and subscriptions support subject and advanced filters, so a partner receives only its own shipment events\n- **One management surface** — authorization, topics, and subscriptions are managed on the domain rather than as 300 hand-built, independent resources\n\n**Why not the other options:**\n- **Event Hubs + consumer groups** — Event Hubs is a *pull-based* streaming log: consumers connect and read partitions; it does not push to webhooks. Consumer groups are independent *views of the whole stream*, not per-partner filters, and namespaces have low consumer-group limits per event hub — nowhere near a per-partner isolation mechanism for 300 external parties\n- **Service Bus queue per partner** — Service Bus consumers *pull* messages; partners would each need to run a receiver against your namespace rather than exposing a webhook. The tracking application would also have to implement the per-partner routing itself when writing to 300 queues — precisely the management burden the requirement rules out\n- **System topic** — System topics carry events emitted *by Azure services* (storage accounts, resource groups, and so on). Application-generated business events require **custom** topics or a domain; a system topic cannot be published to by the tracking application at all",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_draymont_logistics.json"
+}

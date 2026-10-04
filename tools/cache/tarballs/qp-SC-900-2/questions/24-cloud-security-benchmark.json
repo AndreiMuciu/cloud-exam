@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-24-cloud-security-benchmark",
+    "question": "Microsoft Defender for Cloud continuously compares the configuration of an organization's resources against a built-in security standard and turns any gaps into prioritized recommendations that feed the secure score.\n\nWhich standard does Defender for Cloud apply by default for this assessment?",
+    "options": [
+        {
+            "text": "The Microsoft cloud security benchmark (MCSB)",
+            "correct": true
+        },
+        {
+            "text": "The General Data Protection Regulation (GDPR)",
+            "correct": false
+        },
+        {
+            "text": "The organization's Microsoft Purview Compliance Manager assessments",
+            "correct": false
+        },
+        {
+            "text": "The ISO/IEC 27001 audit reports published in the Service Trust Portal",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Microsoft cloud security benchmark (MCSB)** is Microsoft's framework of prescriptive security best practices for cloud environments, and it is the **default standard automatically assigned in Microsoft Defender for Cloud**. Defender for Cloud continuously evaluates resources against MCSB controls, surfaces failures as security recommendations, and reflects remediation progress in the secure score. Additional regulatory standards (such as NIST or PCI DSS frameworks) can be added to the regulatory compliance dashboard, but MCSB is the built-in baseline.\n\n**Why not the other options:**\n- **GDPR** — GDPR is a European data protection *regulation*. It is not the default technical benchmark Defender for Cloud assesses resource configurations against.\n- **Microsoft Purview Compliance Manager assessments** — Compliance Manager is a separate Purview solution for tracking regulatory improvement actions across Microsoft 365 and beyond; it does not drive Defender for Cloud's resource recommendations.\n- **ISO/IEC 27001 audit reports in the Service Trust Portal** — Those reports document *Microsoft's own* compliance as a cloud provider. They are reference documents for customers, not an assessment engine applied to customer resources.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

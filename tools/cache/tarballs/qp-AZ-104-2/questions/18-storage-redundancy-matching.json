@@ -1,0 +1,15 @@
+{
+    "id": "az104-s2-storage-redundancy-matching",
+    "type": "matching",
+    "question": "You are documenting Azure Storage redundancy options for your team's design standards.\n\nMatch each redundancy option to the description of how it stores and protects data.",
+    "sourceItems": ["GRS", "LRS", "GZRS", "ZRS"],
+    "targetSlots": [
+        "Three synchronous copies within a single datacenter in the primary region",
+        "Three synchronous copies spread across availability zones in the primary region",
+        "Three synchronous copies in one primary-region datacenter, plus three asynchronous copies in the secondary (paired) region",
+        "Three synchronous copies across primary-region availability zones, plus three asynchronous copies in the secondary (paired) region"
+    ],
+    "correctMapping": [1, 3, 0, 2],
+    "explanation": "The four base redundancy options combine two dimensions — *how data is protected within the primary region* and *whether it is also copied to the paired secondary region*:\n\n- **LRS (locally redundant storage)**: three synchronous copies within a single datacenter. Cheapest, but a datacenter-level disaster can destroy all copies.\n- **ZRS (zone-redundant storage)**: three synchronous copies spread across separate availability zones in the primary region, surviving the loss of an entire zone.\n- **GRS (geo-redundant storage)**: LRS in the primary region (single datacenter) plus **asynchronous** replication of three additional copies to the paired secondary region — protection against a regional outage.\n- **GZRS (geo-zone-redundant storage)**: ZRS in the primary region plus asynchronous copies in the secondary region — the highest durability, combining zone and geo protection.\n\nThe read-access variants (RA-GRS and RA-GZRS) add the ability to *read* from the secondary region at any time; without them, the secondary is accessible only after a failover. Because geo-replication is asynchronous, a regional failover can involve some data loss (a non-zero RPO), which is why write-critical workloads must plan around the Last Sync Time.",
+    "category": "Implement and Manage Storage"
+}

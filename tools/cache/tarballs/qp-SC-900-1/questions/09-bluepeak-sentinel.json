@@ -1,0 +1,25 @@
+{
+    "id": "sc900-09-bluepeak-sentinel",
+    "question": "BluePeak Logistics currently triages security alerts from disconnected tools in a spreadsheet. The company requires one place to collect security signals from Azure, Microsoft 365, and third-party firewalls, detect threats with analytics, investigate incidents, and trigger automated response playbooks.\n\nWhich Microsoft solution should BluePeak deploy?",
+    "options": [
+        {
+            "text": "Microsoft Defender for Cloud Apps",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Sentinel",
+            "correct": true
+        },
+        {
+            "text": "Azure Firewall",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Sentinel** is Microsoft's cloud-native SIEM (security information and event management) and SOAR (security orchestration, automation, and response) solution. Data connectors ingest signals from Azure, Microsoft 365, and third-party sources such as firewalls; built-in analytics detect threats; investigation tools correlate incidents; and playbooks automate common responses — replacing BluePeak's manual spreadsheet triage.\n\n**Why not the other options:**\n- **Microsoft Defender for Cloud Apps** — A cloud access security broker focused on discovering and controlling SaaS application usage, not an organization-wide SIEM for multi-source signal collection.\n- **Azure Monitor** — Collects performance and diagnostic telemetry for operations and troubleshooting; it lacks security analytics, incident management, and SOAR playbooks.\n- **Azure Firewall** — A network security service that filters traffic; it generates logs but cannot aggregate, correlate, and respond to signals from other products.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_bluepeak_logistics.json"
+}

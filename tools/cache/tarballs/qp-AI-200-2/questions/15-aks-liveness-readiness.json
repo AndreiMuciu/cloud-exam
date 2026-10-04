@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-15-aks-liveness-readiness",
+    "question": "An inference service on AKS occasionally deadlocks: the process stays alive but stops answering requests until someone deletes the pod. The container also takes about 90 seconds after start to load its model, and requests that arrive during loading fail.\n\nYou must fix both problems **in the Deployment manifest**. What should you add?",
+    "options": [
+        {
+            "text": "A `livenessProbe` on `/healthz` so kubelet restarts a hung container, plus a `readinessProbe` on `/ready` so the pod receives traffic only after the model is loaded.",
+            "correct": true
+        },
+        {
+            "text": "A `readinessProbe` on `/ready` only — it both delays traffic during model load and restarts the container when the probe fails.",
+            "correct": false
+        },
+        {
+            "text": "`restartPolicy: Always` on the pod spec so Kubernetes restarts the container whenever it stops serving requests.",
+            "correct": false
+        },
+        {
+            "text": "Increase `replicas` so that when one pod hangs, the remaining pods absorb its traffic.",
+            "correct": false
+        }
+    ],
+    "explanation": "The two symptoms map to the two probe types. A **livenessProbe** tells kubelet whether the process is still healthy; when the deadlocked container stops answering `/healthz`, kubelet kills and restarts it automatically. A **readinessProbe** controls Service endpoint membership; while `/ready` fails during the 90-second model load, the pod is simply excluded from load balancing, so no request reaches an unready container. Each probe solves exactly one of the problems, so both are required.\n\n**Why not the other options:**\n- **Readiness probe only** — A failing readiness probe removes the pod from Service endpoints but **never restarts the container**. The deadlocked pod would sit NotReady forever, silently shrinking capacity.\n- **`restartPolicy: Always`** — Already the default for Deployment pods, and it only applies when the container process *exits*. A deadlocked process that stays alive never triggers it.\n- **More replicas** — Masks the failure while hung pods accumulate over time (nothing ever restarts them), and it does nothing about traffic arriving during model load on any newly started pod.",
+    "category": "Develop containerized solutions on Azure"
+}

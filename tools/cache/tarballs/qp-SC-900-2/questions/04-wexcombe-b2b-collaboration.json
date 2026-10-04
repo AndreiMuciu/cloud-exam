@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-04-wexcombe-b2b-collaboration",
+    "question": "Wexcombe Polytechnic must give visiting researchers from partner universities access to shared research workspaces. The researchers should sign in with the credentials issued by their home institutions, appear as guest users in the Wexcombe directory, and require no new Wexcombe-managed passwords.\n\nWhich Microsoft Entra capability should the identity team use?",
+    "options": [
+        {
+            "text": "Microsoft Entra B2B collaboration",
+            "correct": true
+        },
+        {
+            "text": "Creating standard member accounts with temporary passwords for each researcher",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Domain Services",
+            "correct": false
+        },
+        {
+            "text": "Privileged Identity Management (PIM)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra B2B collaboration** (part of Microsoft Entra External ID) lets an organization invite external partners who then authenticate with their **own home-organization or social credentials**. The invited researchers appear as **guest users** in the Wexcombe tenant, can be granted access to specific resources such as the research workspaces, and Wexcombe never has to issue or manage passwords for them.\n\n**Why not the other options:**\n- **Creating standard member accounts with temporary passwords** — This is exactly what the requirement rules out: Wexcombe would have to provision, secure, and eventually deprovision credentials for people it does not employ, and the researchers would juggle a second set of credentials.\n- **Microsoft Entra Domain Services** — This provides managed domain services such as domain join, LDAP, and Kerberos/NTLM for legacy workloads in Azure. It has nothing to do with inviting external users to collaborate.\n- **Privileged Identity Management (PIM)** — PIM governs just-in-time activation of privileged roles for users who already exist in the directory. It does not onboard external identities.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_wexcombe_polytechnic.json"
+}

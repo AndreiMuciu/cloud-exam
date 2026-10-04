@@ -1,0 +1,25 @@
+{
+    "id": "az700-quorlex-ip-addressing",
+    "question": "Quorlex Manufacturing is planning the address spaces for its East US, West Europe, and Southeast Asia spoke VNets so that they can be globally peered in the future without conflicts. A network engineer proposes assigning `10.10.0.0/16` to East US, `10.10.0.0/16` to West Europe (reusing the same block because the regions are isolated today), and `10.30.0.0/16` to Southeast Asia.\n\nWhich change is required before these VNets can be safely peered together?",
+    "options": [
+        {
+            "text": "Nothing needs to change; VNet peering works regardless of overlapping address spaces as long as the VNets are in different regions",
+            "correct": false
+        },
+        {
+            "text": "West Europe's address space must be changed to a block that does not overlap with East US, such as 10.20.0.0/16",
+            "correct": true
+        },
+        {
+            "text": "Only the Southeast Asia address space needs to change, since it is the only one that will use gateway transit",
+            "correct": false
+        },
+        {
+            "text": "The address spaces are fine as configured; overlap is only a problem for ExpressRoute private peering, not VNet peering",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure VNet peering requires that the peered virtual networks have **non-overlapping address spaces**. East US and West Europe both being assigned `10.10.0.0/16` will block peering between them (and cause ambiguous routing if either is ever peered transitively through a hub). Quorlex should re-plan West Europe to a distinct block, such as `10.20.0.0/16`, before any peering is created. Southeast Asia's `10.30.0.0/16` already does not overlap with the others, so it does not need to change.\n\n**Why not the other options:**\n- **\"Nothing needs to change\"** — Region separation does not exempt VNets from the non-overlapping address space requirement; peering creation fails (or routes become unpredictable) when spaces overlap.\n- **\"Only Southeast Asia needs to change\"** — Southeast Asia's block already doesn't collide with the other two; the actual conflict is between East US and West Europe.\n- **\"Overlap is only a problem for ExpressRoute\"** — Overlapping address spaces break VNet peering and any hybrid connectivity path (VPN, ExpressRoute) equally; it's a general routing requirement, not one specific to ExpressRoute.",
+    "category": "Design and Implement Core Networking Infrastructure",
+    "caseStudy": "scenarios/case_study_quorlex.json"
+}

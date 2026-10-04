@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-31-readonly-lock",
+    "question": "During a six-week audit, a compliance team requires that a production virtual network’s configuration cannot be modified or deleted by anyone — including subscription Owners — while still allowing administrators to view its settings. Which mechanism enforces this?",
+    "options": [
+        {
+            "text": "A ReadOnly resource lock on the virtual network",
+            "correct": true
+        },
+        {
+            "text": "A CanNotDelete resource lock on the virtual network",
+            "correct": false
+        },
+        {
+            "text": "Assigning all administrators the Reader RBAC role",
+            "correct": false
+        },
+        {
+            "text": "Applying an audit = true tag to the virtual network",
+            "correct": false
+        }
+    ],
+    "explanation": "A **ReadOnly lock** freezes a resource: authorized users can still read its configuration, but no one — regardless of RBAC role, including Owners — can modify or delete it until the lock is removed. Locks apply on top of whatever permissions users hold, which is what makes them effective even against Owners.\n\n**Why not the other options:**\n- **CanNotDelete lock** — Blocks deletion only; Owners and Contributors could still *modify* the network configuration, which the audit forbids.\n- **Reader RBAC role** — Adding a Reader assignment does not remove users’ existing Owner/Contributor rights; the Owners would retain full modify permissions. Locks, by contrast, override role permissions.\n- **An audit tag** — Tags are inert metadata; they document intent but enforce nothing.",
+    "category": "Describe Azure Management and Governance"
+}

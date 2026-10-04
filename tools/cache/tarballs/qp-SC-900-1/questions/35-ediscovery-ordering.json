@@ -1,0 +1,21 @@
+{
+    "id": "sc900-35-ediscovery-ordering",
+    "type": "ordering",
+    "question": "A legal team uses Microsoft Purview eDiscovery (Premium) to manage content for a litigation matter. Arrange the stages of the eDiscovery (Premium) workflow in the correct order, from first to last.",
+    "items": [
+        "Review and analyze the collected content for relevance",
+        "Create a case for the legal matter",
+        "Export and download the results for outside counsel",
+        "Identify custodians and place a hold on their data",
+        "Collect potentially relevant content into a review set"
+    ],
+    "correctOrder": [
+        "Create a case for the legal matter",
+        "Identify custodians and place a hold on their data",
+        "Collect potentially relevant content into a review set",
+        "Review and analyze the collected content for relevance",
+        "Export and download the results for outside counsel"
+    ],
+    "explanation": "The Microsoft Purview eDiscovery (Premium) workflow follows the standard legal discovery sequence:\n\n1. **Create a case** — The case is the container that scopes everything else: permissions, holds, searches, and review sets for the matter.\n2. **Identify custodians and place holds** — People of interest (custodians) and their data sources are identified, and holds preserve that content so it cannot be altered or deleted while the matter is active.\n3. **Collect content into a review set** — Targeted searches gather potentially relevant items from the preserved sources and copy them into a review set for safe examination.\n4. **Review and analyze** — The legal team tags, filters, redacts, and uses analytics (such as near-duplicate detection and relevance prediction) to narrow the collection to what actually matters.\n5. **Export and download** — Only the final, reviewed material is exported for regulators or outside counsel.\n\nEach stage depends on the previous one: you cannot hold data without a case, collect without identified sources, review without a collection, or export before review.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "dp900-12-auralis-visualization",
+    "question": "Auralis Energy's analysts must build a Power BI visual that shows how total electricity consumption has changed month by month over the last twelve months, making the trend easy to see at a glance.\n\nWhich visualization type is the best choice?",
+    "options": [
+        {
+            "text": "Pie chart",
+            "correct": false
+        },
+        {
+            "text": "Line chart",
+            "correct": true
+        },
+        {
+            "text": "Scatter chart",
+            "correct": false
+        },
+        {
+            "text": "Card",
+            "correct": false
+        }
+    ],
+    "explanation": "A **line chart** is the standard choice for showing how a numeric value changes over a continuous dimension such as time. Plotting monthly consumption across twelve months makes the trend — rising, falling, or seasonal — immediately visible.\n\n**Why not the other options:**\n- **Pie chart** — Shows how parts contribute to a whole at a single point in time (proportions of a total); it cannot express change across a time axis.\n- **Scatter chart** — Reveals the relationship or correlation between two numeric measures across many data points; it is not designed to emphasize a single measure's trend over time.\n- **Card** — Displays one summary number (for example, total consumption this month). It shows a snapshot value, not a twelve-month trend.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_auralis_energy.json"
+}

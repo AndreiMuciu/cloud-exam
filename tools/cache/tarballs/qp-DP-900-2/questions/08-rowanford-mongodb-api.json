@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-08-rowanford-mongodb-api",
+    "question": "Rowanford Growers wants to retire the self-managed MongoDB cluster behind the field-scouting app and move to a fully managed Azure service. The existing MongoDB drivers and queries must keep working without rewriting the application.\n\nWhat should Rowanford Growers use?",
+    "options": [
+        {
+            "text": "Azure Cosmos DB for MongoDB",
+            "correct": true
+        },
+        {
+            "text": "Azure Cosmos DB for NoSQL",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for Table",
+            "correct": false
+        },
+        {
+            "text": "Azure Database for PostgreSQL",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cosmos DB for MongoDB** implements the **MongoDB wire protocol**, so applications built with existing MongoDB drivers, SDKs, and tools can connect to it by changing little more than the connection string. That makes it the standard destination for migrating a self-managed MongoDB deployment to a fully managed Azure service **without code changes**, while gaining Cosmos DB's managed scaling, patching, and availability.\n\n**Why not the other options:**\n- **Azure Cosmos DB for NoSQL** — Cosmos DB's native document API uses its own SDKs and SQL-style query syntax. It stores JSON documents well, but the existing MongoDB drivers and queries would **not** work against it — the app would need rewriting.\n- **Azure Cosmos DB for Table** — Provides a key/value API compatible with Azure Table Storage clients, not with MongoDB clients.\n- **Azure Database for PostgreSQL** — A managed **relational** database for the PostgreSQL engine; MongoDB drivers and document queries cannot run against it.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_rowanford_growers.json"
+}

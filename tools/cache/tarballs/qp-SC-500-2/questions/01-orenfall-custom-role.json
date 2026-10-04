@@ -1,0 +1,29 @@
+{
+    "id": "sc500-s2-01-orenfall-custom-role",
+    "question": "You need to give Orenfall Energy's platform operations team exactly the permissions defined in the role-based access control requirements: start, stop, restart, and read the telemetry virtual machines — assignable in both subscriptions but nowhere else in the tenant. What should you do?",
+    "options": [
+        {
+            "text": "Create a custom Azure role whose Actions include Microsoft.Compute/virtualMachines/read, start/action, restart/action, powerOff/action, and deallocate/action, set assignableScopes to the Platform and Corporate subscriptions, and assign it to the team at the resource group holding the telemetry VMs",
+            "correct": true
+        },
+        {
+            "text": "Assign the built-in Virtual Machine Contributor role to the team at the Platform subscription scope",
+            "correct": false
+        },
+        {
+            "text": "Create a custom Microsoft Entra ID directory role that grants virtual machine power management permissions and assign it to the team",
+            "correct": false
+        },
+        {
+            "text": "Keep the Contributor assignment but apply a ReadOnly resource lock to every resource the team must not change",
+            "correct": false
+        },
+        {
+            "text": "Create a custom Azure role with assignableScopes set to the root management group so it can be reused by any future subscription",
+            "correct": false
+        }
+    ],
+    "explanation": "When no built-in role matches, you author a **custom Azure role**. The `Actions` list is restricted to exactly the required operations (`read`, `start/action`, `restart/action`, `powerOff/action`, `deallocate/action` on `Microsoft.Compute/virtualMachines`), and `assignableScopes` controls **where the role can be assigned** — listing only the Platform and Corporate subscriptions satisfies \"assignable in both subscriptions but nowhere else.\" Assigning it at the resource group that contains the telemetry VMs applies least privilege at the narrowest practical scope.\n\n**Why not the other options:**\n- **Virtual Machine Contributor** — far broader than required: it allows creating and deleting VMs, attaching disks, and modifying network interfaces, violating the \"and nothing else\" requirement.\n- **Custom Microsoft Entra ID directory role** — Entra directory roles govern directory objects (users, groups, applications), not Azure resource operations. VM power management lives in the Azure RBAC (resource) plane.\n- **Contributor plus ReadOnly locks** — locks apply to resources for *everyone*, not per principal; they would also block legitimate changes by other teams, and Contributor would still confer broad rights on unlocked resources.\n- **assignableScopes at the root management group** — that would make the role assignable everywhere in the tenant, directly contradicting the requirement to restrict it to the two subscriptions.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_orenfall_energy.json"
+}

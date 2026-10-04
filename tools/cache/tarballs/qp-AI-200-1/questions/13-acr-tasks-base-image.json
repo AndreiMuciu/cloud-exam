@@ -1,0 +1,24 @@
+{
+    "id": "ai200-13-acr-tasks-base-image",
+    "question": "Your team stores a Python inference image in Azure Container Registry. The image's Dockerfile starts with `FROM python:3.12-slim`. Security policy requires that whenever the upstream `python:3.12-slim` base image is patched, your image is rebuilt and pushed automatically — without anyone committing a code change.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create an ACR task with `az acr task create` pointing at the Dockerfile in your source repo, and keep the base image update trigger enabled so a new build runs when `python:3.12-slim` changes.",
+            "correct": true
+        },
+        {
+            "text": "Run `az acr build` from a nightly cron job on a build agent so the image is rebuilt every 24 hours regardless of upstream changes.",
+            "correct": false
+        },
+        {
+            "text": "Configure a registry webhook on your own repository in ACR that calls a deployment endpoint when a new tag of your image is pushed.",
+            "correct": false
+        },
+        {
+            "text": "Use `az acr import` to copy the patched base image into your registry each time Docker Hub publishes an update.",
+            "correct": false
+        }
+    ],
+    "explanation": "**ACR Tasks** track the base images referenced in a task's Dockerfile. With the base image update trigger enabled (it is on by default for `az acr task create`), ACR detects when the tracked base image — such as `python:3.12-slim` — gets a new digest and automatically queues a rebuild and push of your dependent image. No commit or manual step is required.\n\n**Why not the other options:**\n- **Nightly `az acr build` cron job** — `az acr build` is a one-off quick build with no triggers. A schedule rebuilds too late (or pointlessly when nothing changed) and depends on an external agent instead of the registry's own base-image tracking.\n- **Registry webhook on your own image** — Webhooks fire *after* a push of your image; they cannot detect that an upstream base image changed, so nothing would ever trigger the rebuild.\n- **`az acr import`** — Import copies an image between registries; it does not rebuild your dependent image, and it would itself need something to trigger it.",
+    "category": "Develop containerized solutions on Azure"
+}

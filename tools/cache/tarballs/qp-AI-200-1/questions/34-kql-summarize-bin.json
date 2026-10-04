@@ -1,0 +1,24 @@
+{
+    "id": "ai200-34-kql-summarize-bin",
+    "question": "Application Insights request telemetry lands in the `AppRequests` table. You need a time chart of the number of **failed** requests per hour for each HTTP result code over the last 7 days.\n\nWhich KQL query should you use?",
+    "options": [
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(7d) and Success == false\n| summarize FailedCount = count() by ResultCode, bin(TimeGenerated, 1h)\n| render timechart",
+            "correct": true
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(7d) and Success == false\n| distinct ResultCode, TimeGenerated\n| render timechart",
+            "correct": false
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(7d)\n| count\n| render timechart",
+            "correct": false
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(7d) and Success == false\n| project ResultCode, TimeGenerated\n| sort by TimeGenerated asc",
+            "correct": false
+        }
+    ],
+    "explanation": "The query needs three things: a failure filter, an hourly aggregation split by result code, and a chart. `where ... Success == false` filters, `summarize count() by ResultCode, bin(TimeGenerated, 1h)` counts rows in one-hour buckets per result code (`bin()` truncates timestamps to the bucket boundary, which is what makes time-series grouping work), and `render timechart` plots one series per `ResultCode`.\n\n**Why not the other options:**\n- **`distinct ResultCode, TimeGenerated`** — Deduplicates rows; it produces one row per unique code/timestamp pair, not a count per hour. Raw timestamps are nearly all unique, so nothing is aggregated.\n- **`| count`** — Collapses the whole 7 days into a single scalar row: no failure filter, no per-code split, no time axis — nothing to chart over time.\n- **`project` + `sort`** — Selects and orders raw rows without any aggregation; there is no count and no hourly bucketing, so it is a sorted event list, not a time series.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

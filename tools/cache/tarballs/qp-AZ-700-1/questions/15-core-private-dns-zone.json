@@ -1,0 +1,24 @@
+{
+    "id": "az700-core-private-dns-zone",
+    "question": "Verimark Logistics has an Azure private DNS zone linked to its VNet with auto-registration enabled. A VM named `app-vm01` is deployed into that VNet.\n\nWhat happens to DNS name resolution for `app-vm01` as a result of auto-registration?",
+    "options": [
+        {
+            "text": "Nothing happens automatically; an administrator must still manually create an A record for app-vm01 in the zone",
+            "correct": false
+        },
+        {
+            "text": "Azure automatically creates and maintains an A record for app-vm01 in the linked private DNS zone, and removes it if the VM is deleted",
+            "correct": true
+        },
+        {
+            "text": "Auto-registration only works for VMs that also have a public IP address assigned",
+            "correct": false
+        },
+        {
+            "text": "Auto-registration creates a CNAME record pointing app-vm01 to the VNet's default domain name",
+            "correct": false
+        }
+    ],
+    "explanation": "When a private DNS zone is linked to a VNet with the **auto-registration** option enabled, Azure automatically creates and maintains an **A record** for every VM's network interface in that VNet, using the VM's private IP address. If the VM is deleted or its NIC is removed, Azure automatically removes the corresponding record. This lets VMs within (and, if the zone is linked to other VNets, across) the VNet resolve each other by name with no manual DNS administration.\n\n**Why not the other options:**\n- **\"Administrator must manually create the record\"** — This is the opposite of what auto-registration does; manual record creation is only needed if auto-registration is disabled.\n- **\"Requires a public IP\"** — Auto-registration works based on the VM's private IP address in the VNet; a public IP address isn't required or used for this record.\n- **\"Creates a CNAME to the VNet's default domain\"** — Auto-registration creates an A record mapping the hostname to the private IP address, not a CNAME alias.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

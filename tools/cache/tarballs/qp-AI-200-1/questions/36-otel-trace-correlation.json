@@ -1,0 +1,24 @@
+{
+    "id": "ai200-36-otel-trace-correlation",
+    "question": "An API publishes work items to an Azure Service Bus queue that a separate worker service processes. Both services send telemetry to the same Application Insights resource, but the transaction view shows the API call and the worker's processing as **two unrelated traces**, so you cannot follow a request end to end.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Instrument both services with OpenTelemetry (for example, the Azure Monitor distro) so the W3C `traceparent` context is written into the message's `Diagnostic-Id` application property by the sender and used by the worker to parent or link its processing spans.",
+            "correct": true
+        },
+        {
+            "text": "Nothing more is needed — sending telemetry to the same Application Insights resource automatically stitches spans from different services into one trace.",
+            "correct": false
+        },
+        {
+            "text": "Add a custom `correlationGuid` application property to each message and include it in every log line so engineers can join the traces manually in KQL.",
+            "correct": false
+        },
+        {
+            "text": "Set the sampling percentage to 100% in both services so no spans in the middle of the transaction are dropped.",
+            "correct": false
+        }
+    ],
+    "explanation": "Distributed traces are stitched by **context propagation**, not by destination. Over HTTP the `traceparent` header carries the trace ID; across Service Bus the instrumented sender stores that W3C context in the message's **`Diagnostic-Id`** application property, and the instrumented consumer extracts it to create its processing span in (or linked to) the same trace. Instrumenting both sides with OpenTelemetry — Azure SDK messaging instrumentation included in the Azure Monitor distro — makes this happen automatically, and the transaction view then shows one end-to-end operation.\n\n**Why not the other options:**\n- **Same Application Insights resource** — A shared resource only co-locates the telemetry; spans still land with unrelated trace IDs unless context was propagated. That is precisely the broken state described.\n- **Custom GUID + manual KQL joins** — A workable forensic hack, but it does not produce a single trace: the transaction view, application map, and span parent/child timing all remain disconnected, and every service must remember the convention forever.\n- **100% sampling** — Sampling decides *how many* traces are kept; it cannot connect spans that were created under different trace IDs. The problem is correlation, not volume.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc900-22-ddos-protection",
+    "question": "Which type of resource can Azure DDoS Protection be used to protect?",
+    "options": [
+        {
+            "text": "Azure resources with public IP addresses in virtual networks",
+            "correct": true
+        },
+        {
+            "text": "On-premises file servers with no internet exposure",
+            "correct": false
+        },
+        {
+            "text": "Microsoft 365 mailboxes and SharePoint sites",
+            "correct": false
+        },
+        {
+            "text": "Documents stored in employees' OneDrive folders",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure DDoS Protection** defends **Azure resources exposed through public IP addresses in virtual networks** — such as load balancers, application gateways, and virtual machines — against distributed denial-of-service attacks. It provides always-on traffic monitoring, adaptive tuning based on the application's normal traffic patterns, and automatic mitigation of volumetric, protocol, and resource-layer attacks.\n\n**Why not the other options:**\n- **On-premises file servers with no internet exposure** — DDoS Protection operates on Azure public IP addresses; it cannot protect servers that live outside Azure, and a resource with no internet exposure is not a DDoS target in the first place.\n- **Microsoft 365 mailboxes and SharePoint sites** — Microsoft protects its own SaaS infrastructure; Azure DDoS Protection is a service customers apply to their own virtual network resources, not to Microsoft 365 workloads.\n- **Documents in OneDrive folders** — Protecting documents involves classification, encryption, and DLP; DDoS protection addresses traffic floods against network endpoints, not files.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az800-02-ironbridge-dns-resolution",
+    "question": "IronBridge Manufacturing's Azure VMs are unable to resolve the names of on-premises servers. You have already established a VPN and confirmed that the internal IP addresses are reachable. What should you configure in the Azure VNet to enable name resolution for the on-premises domain?",
+    "options": [
+        {
+            "text": "Azure-provided DNS",
+            "correct": false
+        },
+        {
+            "text": "Custom DNS servers (pointing to the AD DS DCs in Azure)",
+            "correct": true
+        },
+        {
+            "text": "Public DNS servers like 8.8.8.8",
+            "correct": false
+        },
+        {
+            "text": "A records in the Azure Portal",
+            "correct": false
+        }
+    ],
+    "explanation": "To resolve names for an internal AD DS domain, the clients in the VNet must be configured to use **Custom DNS servers**. You should point them to the IP addresses of your Active Directory Domain Controllers (which handle the internal DNS zone).\n\n**Why not the other options:**\n- **Azure-provided DNS** — Only resolves public internet names and names of resources within the same VNet (via Private Zones if configured).\n- **Public DNS** — Has no knowledge of your internal IronBridge domain.\n- **A records in portal** — These are for public DNS zones hosted in Azure, not for the internal AD DS resolution process.",
+    "category": "Deploy and manage AD DS in on-premises and cloud environments",
+    "caseStudy": "scenarios/case_study_ironbridge_manufacturing.json"
+}

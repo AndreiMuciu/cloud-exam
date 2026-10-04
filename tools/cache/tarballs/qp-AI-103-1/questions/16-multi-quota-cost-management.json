@@ -1,0 +1,29 @@
+{
+    "id": "ai103-16-multi-quota-cost-management",
+    "type": "multi",
+    "question": "Your organization runs several model and agent deployments in Azure AI Foundry and wants to actively manage quotas, rate limits, and cost footprint before they become production incidents.\n\nWhich three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Review per-deployment tokens-per-minute (TPM) and requests-per-minute (RPM) quota utilization regularly, and request quota increases before a known traffic increase, not after.",
+            "correct": true
+        },
+        {
+            "text": "Configure alert rules that fire when a deployment's utilization approaches its configured rate limit, rather than only after requests start failing.",
+            "correct": true
+        },
+        {
+            "text": "Break down token consumption and cost by deployment/agent so spend can be attributed and unexpected growth is caught early.",
+            "correct": true
+        },
+        {
+            "text": "Set every deployment's rate limit to the maximum value the subscription allows, so throttling can never occur under any circumstance.",
+            "correct": false
+        },
+        {
+            "text": "Disable monitoring on low-traffic deployments to reduce the number of alerts the team has to review.",
+            "correct": false
+        }
+    ],
+    "explanation": "Proactive quota/cost management means **watching utilization ahead of need**, **alerting before limits are hit** (not after failures start), and **attributing cost per deployment** so a runaway agent or workload is caught quickly — all three keep the team ahead of incidents instead of reacting to them.\n\n**Why not the other options:**\n- **Maximizing every rate limit** — Removes a useful guardrail rather than managing it; it can let a single misbehaving workload consume far more capacity (and cost) than intended, and it does nothing to *manage* quota, only to raise the ceiling blindly.\n- **Disabling monitoring on low-traffic deployments** — A low-traffic deployment can still spike or fail; turning off its visibility trades a manageable amount of alert noise for a blind spot, which is the opposite of active management.",
+    "category": "Plan and manage an Azure AI solution"
+}

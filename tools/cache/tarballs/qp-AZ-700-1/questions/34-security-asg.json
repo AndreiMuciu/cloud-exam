@@ -1,0 +1,24 @@
+{
+    "id": "az700-security-asg",
+    "question": "A team manages NSG rules for a three-tier application (web, API, database) where VMs of each tier are scattered across several subnets and their individual IP addresses change periodically as VMs are redeployed. Maintaining NSG rules that reference specific IP addresses has become error-prone.\n\nWhat should the team use to simplify and scale this rule management, without rewriting rules every time a VM's IP address changes?",
+    "options": [
+        {
+            "text": "Application security groups (ASGs), grouping VM network interfaces by application role and referencing the ASGs as the source/destination in NSG rules",
+            "correct": true
+        },
+        {
+            "text": "A single NSG rule per VM, updated manually whenever a VM is redeployed",
+            "correct": false
+        },
+        {
+            "text": "User-defined routes that tag traffic by tier",
+            "correct": false
+        },
+        {
+            "text": "Azure Route Server, to dynamically track VM IP addresses",
+            "correct": false
+        }
+    ],
+    "explanation": "**Application security groups (ASGs)** let you group virtual machine network interfaces logically by application role (for example, a \"web-tier\" ASG, an \"api-tier\" ASG, and a \"db-tier\" ASG) and then write NSG rules that reference the **ASG itself** as the source or destination, instead of individual IP addresses. As VMs are added, removed, or redeployed, you only need to update ASG membership — the NSG rules referencing the ASG don't need to change, which is exactly the scaling and maintenance problem the team is facing.\n\n**Why not the other options:**\n- **One NSG rule per VM, manually updated** — This is the exact error-prone, unscalable approach the team is trying to move away from.\n- **User-defined routes** — UDRs control next-hop routing behavior; they don't group VMs for the purpose of NSG rule source/destination matching and have no role in security rule simplification.\n- **Azure Route Server** — Exchanges BGP routes with network virtual appliances; it has no concept of application security groups or NSG rule simplification.",
+    "category": "Design and Implement Azure Network Security Services"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-34-analytics-categories-matching",
+    "type": "matching",
+    "question": "Match each category of data analytics to the question it answers.",
+    "sourceItems": [
+        "Descriptive analytics",
+        "Diagnostic analytics",
+        "Predictive analytics",
+        "Prescriptive analytics"
+    ],
+    "targetSlots": [
+        "What is likely to happen in the future, based on historical patterns?",
+        "What happened, based on historical data?",
+        "What actions should we take to achieve a goal or target?",
+        "Why did this event or anomaly happen?"
+    ],
+    "correctMapping": [
+        2,
+        0,
+        3,
+        1
+    ],
+    "explanation": "- **Descriptive analytics — \"What happened?\"** — Summarizes historical data into reports, dashboards, and KPIs that describe past performance, such as last quarter's sales by region.\n- **Diagnostic analytics — \"Why did it happen?\"** — Digs into the descriptive findings to identify causes and contributing factors, for example drilling into an anomaly to find which segment drove a sales drop.\n- **Predictive analytics — \"What is likely to happen?\"** — Uses historical patterns, statistics, and machine learning to forecast future outcomes, such as next quarter's expected demand.\n- **Prescriptive analytics — \"What should we do?\"** — Goes beyond prediction to recommend actions and decisions that move the organization toward a target, often weighing multiple scenarios.\n\n**Why not the other options:**\n- Descriptive analytics only reports the past; it neither explains causes nor forecasts or recommends anything.\n- Diagnostic analytics is retrospective root-cause work — pairing it with future-looking questions confuses explanation with prediction.\n- Predictive analytics stops at estimating what will happen; choosing what to do about it is prescriptive.\n- Prescriptive analytics presupposes a prediction and answers the action question, so it cannot be the label for \"what happened\" or \"why.\"",
+    "category": "Describe an Analytics Workload on Azure"
+}

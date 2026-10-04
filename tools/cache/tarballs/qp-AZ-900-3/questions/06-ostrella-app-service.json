@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-06-ostrella-app-service",
+    "question": "Ostrella's web team wants to move the booking website to a managed Azure offering where Azure patches the operating system and web runtime, custom domains and TLS certificates are supported, and the site can scale automatically during fare sales — all without the team managing any virtual machines. Which service best fits?",
+    "options": [
+        {
+            "text": "Azure Virtual Machine Scale Sets",
+            "correct": false
+        },
+        {
+            "text": "Azure App Service",
+            "correct": true
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": false
+        },
+        {
+            "text": "Azure Container Registry",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure App Service** is a **platform as a service (PaaS)** offering for hosting websites and web APIs. Azure manages the underlying infrastructure — OS patching, runtime updates, and load balancing — while the team simply deploys code. It natively supports **custom domains, TLS/SSL certificates, deployment slots, and autoscaling rules**, making it the natural home for a booking website whose team wants out of the OS-management business.\n\n**Why not the other options:**\n- **Azure Virtual Machine Scale Sets** — Provide autoscaling for **IaaS virtual machines**, but the team would still own OS patching, web-server configuration, and runtime maintenance — exactly what they want to stop doing.\n- **Azure Bastion** — A service for secure RDP/SSH access to virtual machines through the portal; it does not host websites.\n- **Azure Container Registry** — Stores and manages **container images**; it is a registry, not a web-hosting platform, and the scenario does not mention containers.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_ostrella_airways.json"
+}

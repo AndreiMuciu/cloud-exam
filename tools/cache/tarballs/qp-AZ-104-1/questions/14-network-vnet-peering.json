@@ -1,0 +1,29 @@
+{
+    "id": "az104-network-vnet-peering",
+    "type": "multi",
+    "question": "You have the following virtual networks in Azure:\n\n| VNet | Address Space | Region |\n|---|---|---|\n| VNet-Corp | 10.10.0.0/16 | East US |\n| VNet-Trading | 10.20.0.0/16 | East US |\n| VNet-Europe | 10.10.0.0/16 | West Europe |\n\nVNet-Corp is peered with VNet-Trading.\n\nYou plan to create additional peerings.\n\nWhich two statements are correct? (Choose two.)",
+    "options": [
+        {
+            "text": "VNet-Corp can be peered with VNet-Europe because they are in different regions (global peering)",
+            "correct": false
+        },
+        {
+            "text": "VNet-Corp cannot be peered with VNet-Europe because their address spaces overlap",
+            "correct": true
+        },
+        {
+            "text": "VNet-Trading can be peered with VNet-Europe because their address spaces do not overlap",
+            "correct": true
+        },
+        {
+            "text": "VNet-Trading can communicate with VNet-Europe through VNet-Corp using transitive peering",
+            "correct": false
+        },
+        {
+            "text": "All three virtual networks can be peered with each other simultaneously",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure VNet peering has the following rules:\n\n1. **Address spaces cannot overlap** — VNet-Corp (10.10.0.0/16) and VNet-Europe (10.10.0.0/16) have the **same** address space. Peering requires non-overlapping address spaces, so this peering would fail.\n\n2. **Cross-region peering is supported** (global VNet peering) — VNets in different regions can be peered, as long as other requirements are met.\n\n3. **VNet peering is NOT transitive** — Even if VNet-A is peered with VNet-B, and VNet-B is peered with VNet-C, VNet-A cannot communicate with VNet-C through VNet-B automatically. Each peering is an independent bilateral connection.\n\n4. **VNet-Trading (10.20.0.0/16) can peer with VNet-Europe (10.10.0.0/16)** — Their address spaces do not overlap, so this peering is valid regardless of them being in different regions.",
+    "category": "Implement and Manage Virtual Networking"
+}

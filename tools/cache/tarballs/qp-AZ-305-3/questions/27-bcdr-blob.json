@@ -1,0 +1,29 @@
+{
+    "id": "az305-s3-bcdr-blob",
+    "type": "multi",
+    "question": "A publishing platform keeps article assets in Azure Blob Storage. After an incident in which a faulty deployment overwrote thousands of blobs, the reliability team defines two data-protection requirements:\n\n- Recover any **individual blob** to the state it had before it was overwritten or deleted\n- Roll back **entire containers** to their state at a chosen moment before a corruption incident\n\nWhich two capabilities should you enable on the storage account? (Choose two.)",
+    "options": [
+        {
+            "text": "Blob versioning, so every overwrite preserves the previous version of the blob",
+            "correct": true
+        },
+        {
+            "text": "Point-in-time restore for block blobs, with its prerequisites (soft delete, change feed, versioning) configured",
+            "correct": true
+        },
+        {
+            "text": "A locked time-based immutability policy on the containers",
+            "correct": false
+        },
+        {
+            "text": "Geo-zone-redundant storage (GZRS) replication for the account",
+            "correct": false
+        },
+        {
+            "text": "A nightly AzCopy job that mirrors the containers to a second storage account",
+            "correct": false
+        }
+    ],
+    "explanation": "The two requirements map to two account-level data-protection features that are designed to work together:\n\n1. **Blob versioning** — every time a blob is overwritten or deleted, the prior state is automatically preserved as a **previous version** that can be listed and promoted back. This answers the *individual blob* requirement with zero application changes and no scheduled jobs\n2. **Point-in-time restore (PITR) for block blobs** — lets an operator restore one or more **containers (or blob ranges) to an earlier moment** within the configured restore window — exactly the \"roll the container back to before the bad deployment\" operation. PITR is built on, and requires, **soft delete, change feed, and versioning**, which is why the two correct answers form a coherent pair rather than alternatives\n\n**Why not the other options:**\n- **Locked immutability policy (WORM)** — Immutability *prevents* writes and deletes during the retention period — including the platform's own legitimate updates, which would break the application. It is a compliance-retention control, not a recovery mechanism: it offers no way to restore data that was validly changed\n- **GZRS** — Redundancy protects against *infrastructure* loss (datacenter, zone, region). Replication is synchronous and faithful: the faulty deployment's overwrites replicate to every copy within seconds. No redundancy setting can recover a previous logical state\n- **Nightly AzCopy mirror** — A homegrown backup with a 24-hour RPO (everything written since last night is unrecoverable), double storage cost, and a job to operate and monitor — strictly worse than the built-in versioning + PITR combination for this scenario",
+    "category": "Design Business Continuity Solutions"
+}

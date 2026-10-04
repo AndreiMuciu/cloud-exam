@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-04-tessendale-elastic-pool",
+    "question": "Tessendale College must host two dozen small, cloud-native departmental databases that peak at different, unpredictable times. The databases must share a common set of compute resources to keep costs down, and none of them needs instance-level SQL Server features.\n\nWhat should the college use?",
+    "options": [
+        {
+            "text": "Azure SQL Database databases in an elastic pool",
+            "correct": true
+        },
+        {
+            "text": "A separate provisioned Azure SQL Database sized for peak load for each department",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Managed Instance",
+            "correct": false
+        },
+        {
+            "text": "SQL Server installed on one large Azure virtual machine",
+            "correct": false
+        }
+    ],
+    "explanation": "An **elastic pool** lets multiple Azure SQL Database databases share a single purchased set of compute and storage resources. Because the departmental databases peak at different times, each one can temporarily draw more from the pool while the others are quiet — exactly the usage pattern elastic pools are designed and priced for. The college pays for the pool, not for twenty-four individually peak-sized databases.\n\n**Why not the other options:**\n- **A separate provisioned database sized for peak load for each department** — This works but wastes money: every database would pay for peak capacity around the clock even though each is nearly idle most of the year.\n- **Azure SQL Managed Instance** — Managed Instance exists to provide near-complete SQL Server instance compatibility for migrated workloads. These are cloud-native apps that need no instance-level features, and Managed Instance carries a larger baseline footprint and cost than pooled single databases.\n- **SQL Server on one large Azure virtual machine** — An IaaS VM returns OS and SQL Server patching, backups, and availability to the college's small IT team, which contradicts the goal of low-effort, low-cost hosting.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_tessendale_college.json"
+}

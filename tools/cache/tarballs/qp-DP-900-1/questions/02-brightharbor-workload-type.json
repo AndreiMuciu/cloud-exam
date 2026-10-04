@@ -1,0 +1,25 @@
+{
+    "id": "dp900-02-brightharbor-workload-type",
+    "question": "Brightharbor Logistics' order-management system records every pickup, transfer, and delivery as it happens, handling thousands of small concurrent inserts and updates throughout the day, and each change must be applied reliably and consistently.\n\nWhich type of data workload does the order-management system represent?",
+    "options": [
+        {
+            "text": "An analytical (OLAP) workload",
+            "correct": false
+        },
+        {
+            "text": "A transactional (OLTP) workload",
+            "correct": true
+        },
+        {
+            "text": "A batch processing workload",
+            "correct": false
+        },
+        {
+            "text": "A data visualization workload",
+            "correct": false
+        }
+    ],
+    "explanation": "This is a classic **transactional (OLTP) workload**: a high volume of small read and write operations, executed live as business events occur, with strong integrity guarantees (ACID — atomicity, consistency, isolation, durability) so that every order change is applied reliably.\n\n**Why not the other options:**\n- **Analytical (OLAP) workload** — Optimized for reading and aggregating large volumes of historical data to answer business questions, not for processing many small live inserts and updates. That describes the separate reporting environment Brightharbor plans to build.\n- **Batch processing workload** — Processes accumulated data on a schedule (for example, nightly). The order system must record events the moment they happen, not in scheduled batches.\n- **Data visualization workload** — Refers to presenting data in charts and dashboards for human interpretation; it is not a way to classify a live order-capture system.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_brightharbor_logistics.json"
+}

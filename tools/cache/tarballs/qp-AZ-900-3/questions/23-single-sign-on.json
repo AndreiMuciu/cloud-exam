@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-23-single-sign-on",
+    "question": "Employees at an insurance brokerage sign in once at the start of the day and can then open the company's email, claims system, and expense application without being prompted for credentials again, because all of the applications trust the same Microsoft Entra ID identity. Which authentication capability does this describe?",
+    "options": [
+        {
+            "text": "Single sign-on (SSO)",
+            "correct": true
+        },
+        {
+            "text": "Multi-factor authentication (MFA)",
+            "correct": false
+        },
+        {
+            "text": "Conditional Access",
+            "correct": false
+        },
+        {
+            "text": "Azure role-based access control (RBAC)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Single sign-on (SSO)** lets a user **authenticate once and access multiple applications** that all trust the same identity provider — here, Microsoft Entra ID. Users remember one set of credentials instead of one per application, which reduces password fatigue and helpdesk resets, and IT gains a single place to disable access for every connected app when someone leaves the organization. SSO is only as secure as the initial sign-in, which is why it is commonly paired with strong authentication.\n\n**Why not the other options:**\n- **Multi-factor authentication (MFA)** — Strengthens the sign-in itself by requiring an additional proof (something you have or are) beyond the password; it does not eliminate repeated credential prompts across applications.\n- **Conditional Access** — Evaluates signals such as location, device, and risk to decide whether to allow, block, or challenge a sign-in; it is a policy engine, not the once-for-all-apps sign-in experience described.\n- **Azure role-based access control (RBAC)** — Governs what an already-authenticated identity is allowed to do with **Azure resources**; it is authorization, not authentication.",
+    "category": "Describe Azure Architecture and Services"
+}

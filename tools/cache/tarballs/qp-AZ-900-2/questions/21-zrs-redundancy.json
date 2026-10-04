@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-21-zrs-redundancy",
+    "question": "A national statistics bureau is legally required to keep all of its data inside a single Azure region, yet the data must survive the complete failure of one datacenter. Which storage redundancy option satisfies both requirements at the lowest cost?",
+    "options": [
+        {
+            "text": "Locally redundant storage (LRS)",
+            "correct": false
+        },
+        {
+            "text": "Zone-redundant storage (ZRS)",
+            "correct": true
+        },
+        {
+            "text": "Geo-redundant storage (GRS)",
+            "correct": false
+        },
+        {
+            "text": "Read-access geo-redundant storage (RA-GRS)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Zone-redundant storage (ZRS)** synchronously copies data across three **availability zones within one region**. Because each zone is a physically separate datacenter (or group of datacenters) with independent power, cooling, and networking, ZRS survives a full datacenter failure — while all copies remain inside the mandated region.\n\n**Why not the other options:**\n- **LRS** — Keeps three copies within a *single* datacenter; a failure of that datacenter can make the data unavailable, so the resilience requirement is not met.\n- **GRS** — Replicates data to a *second region*, which violates the legal requirement that data stay within one region (and costs more than ZRS).\n- **RA-GRS** — Also replicates to a secondary region (with read access), so it fails the data-residency requirement for the same reason.",
+    "category": "Describe Azure Architecture and Services"
+}

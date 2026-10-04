@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-compute-appservice-autoscale-tier",
+    "type": "single",
+    "question": "A marketing site runs in an Azure App Service plan on the **Basic B1** tier. Ahead of a product launch, the operations team must configure the plan to **automatically scale out to as many as 8 instances** when CPU utilization is high, and back in afterwards.\n\nWhen the team opens the plan's **Scale out** settings, rule-based autoscale is not available. What should the team do first?",
+    "options": [
+        { "text": "Scale up the App Service plan to the Standard tier or higher", "correct": true },
+        { "text": "Enable per-app scaling on the App Service plan", "correct": false },
+        { "text": "Move the web app into a new resource group with more capacity", "correct": false },
+        { "text": "Add a deployment slot so that the second slot can absorb the extra load", "correct": false }
+    ],
+    "explanation": "This is a **scale up before you can scale out** situation. The Basic tier supports only **manual** scale-out, and only to a maximum of **3 instances** — so an 8-instance, rule-based autoscale target is doubly impossible on B1. Rule-based (metric and schedule) autoscale becomes available from the **Standard** tier upward, and Standard raises the instance ceiling to **10** (Premium tiers go to 30). Changing the plan's pricing tier is a scale-up operation on the same plan; afterwards the team can create an autoscale setting with a CPU rule scaling between, say, 2 and 8 instances.\n\n**Why not the other options:**\n- **Per-app scaling**: this setting lets *individual apps* in a plan run on fewer instances than the plan itself has — a density/allocation feature. It neither adds autoscale rules nor raises Basic's 3-instance limit.\n- **New resource group**: resource groups are an organizational boundary with no compute capacity of their own; the plan's tier — not its group — determines scaling capabilities.\n- **Deployment slot**: slots are separate app *contents* (staging/production) sharing the same plan instances. A slot does not add instances or distribute load — traffic still lands on the same underlying workers, and Basic does not support additional slots anyway.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "ai103-05-brynflux-video-recut-pipeline",
+    "question": "Brynflux needs to re-cut and caption existing finished video ads for a new campaign, without regenerating the underlying footage.\n\nWhich approach satisfies this requirement?",
+    "options": [
+        {
+            "text": "Run a video analysis workflow that segments the video, transcribes and captions the audio, and identifies candidate re-cut points — all without regenerating pixels.",
+            "correct": true
+        },
+        {
+            "text": "Regenerate the entire video from a new text prompt that describes the content of the old ad.",
+            "correct": false
+        },
+        {
+            "text": "Extract a single representative frame from the video and caption only that frame.",
+            "correct": false
+        },
+        {
+            "text": "Run a speech-to-text pass on the audio track alone and burn the resulting transcript onto the video with no segment analysis.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **video analysis / understanding workflow** processes the existing footage directly — segmenting scenes, producing captions from the audio, and surfacing candidate cut points — which is exactly \"re-cut and caption an existing ad,\" with no regeneration of the source footage.\n\n**Why not the other options:**\n- **Regenerating from a text description** — Directly contradicts the requirement to re-cut existing footage rather than regenerate it, and a text description cannot reliably reproduce brand-specific existing footage.\n- **Captioning a single frame** — Loses everything except one still image; re-cutting and captioning both require reasoning across the whole video's timeline, not one frame.\n- **Audio-only captioning with no segment analysis** — Produces captions but gives no scene/segment boundaries to re-cut on, so it only satisfies half of the requirement.",
+    "category": "Implement computer vision solutions",
+    "caseStudy": "scenarios/case_study_brynflux_media.json"
+}

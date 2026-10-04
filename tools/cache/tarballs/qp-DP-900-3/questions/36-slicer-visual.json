@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-36-slicer-visual",
+    "question": "Report consumers need a control placed directly on a Power BI report page that lets them pick a fiscal year, immediately filtering every other visual on that page to the selected year.\n\nWhich element should the report designer add to the page?",
+    "options": [
+        {
+            "text": "A slicer",
+            "correct": true
+        },
+        {
+            "text": "A card visual",
+            "correct": false
+        },
+        {
+            "text": "A text box",
+            "correct": false
+        },
+        {
+            "text": "A gauge visual",
+            "correct": false
+        }
+    ],
+    "explanation": "A **slicer** is an on-canvas filtering control: the designer places it on the report page bound to a field (here, fiscal year), and consumers click or select values in it to filter the other visuals on the page instantly. Because it lives on the canvas, it is discoverable and self-explanatory for report viewers — the standard way to give consumers interactive, page-level filtering.\n\n**Why not the other options:**\n- **A card visual** — A card displays a single aggregated value; it shows data rather than letting users filter it.\n- **A text box** — A text box holds static explanatory text or titles; it is not interactive and cannot filter anything.\n- **A gauge visual** — A gauge shows progress of a value against a target on a dial; like the card, it presents data and provides no filtering control.",
+    "category": "Describe an Analytics Workload on Azure"
+}

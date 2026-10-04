@@ -1,0 +1,25 @@
+{
+    "id": "az700-okarune-network-watcher",
+    "question": "A branch office at Okarune Financial reports that it cannot reach a core banking VM in Azure. The network team wants to determine, for the exact source and destination IP addresses, ports, and protocol involved, whether an NSG rule is allowing or denying that specific flow — and if it's being denied, which rule is responsible — without capturing packets.\n\nWhich Azure Network Watcher capability should the team use?",
+    "options": [
+        {
+            "text": "Connection Monitor",
+            "correct": false
+        },
+        {
+            "text": "IP flow verify",
+            "correct": true
+        },
+        {
+            "text": "NSG flow logs",
+            "correct": false
+        },
+        {
+            "text": "Topology view",
+            "correct": false
+        }
+    ],
+    "explanation": "**IP flow verify** takes a specific five-tuple (source/destination IP, source/destination port, protocol) and immediately reports whether traffic matching it would be allowed or denied, and which NSG security rule is responsible for that decision. This directly answers the team's question about one specific flow without requiring any packet capture or waiting for log data to arrive.\n\n**Why not the other options:**\n- **Connection Monitor** — Provides ongoing, proactive monitoring of connectivity and latency between endpoints over time; it's built for continuous monitoring and alerting, not for an on-demand check of how one specific flow is filtered by an NSG rule.\n- **NSG flow logs** — Record what traffic actually occurred over time for later analysis (and are being retired in favor of virtual network flow logs); they show historical flow data rather than answering an immediate \"would this exact flow be allowed?\" question and require log data to already be flowing.\n- **Topology view** — Visualizes the resources and their relationships within a virtual network; it shows what's connected to what, not whether a specific traffic flow is allowed or denied by a rule.",
+    "category": "Design and Implement Core Networking Infrastructure",
+    "caseStudy": "scenarios/case_study_okarune.json"
+}

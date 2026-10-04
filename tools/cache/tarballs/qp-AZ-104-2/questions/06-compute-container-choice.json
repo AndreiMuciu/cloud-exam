@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-compute-container-choice",
+    "type": "single",
+    "question": "Ashgrove Retail Group's operations team must host the **inv-recon** nightly inventory reconciliation job. The job is a single Linux container that runs for roughly 30 minutes and then exits. The team's requirements are:\n\n- The simplest possible hosting option — **no cluster and no environment resource** to create or manage\n- **Per-second billing** only while the container runs\n- Images are pulled from the company's Azure Container Registry\n\nWhich Azure service should the team use?",
+    "options": [
+        { "text": "Azure Container Instances, with a container group whose restart policy is set to OnFailure or Never", "correct": true },
+        { "text": "An Azure Container Apps job with a scheduled trigger", "correct": false },
+        { "text": "An Azure Kubernetes Service (AKS) cluster running a Kubernetes CronJob", "correct": false },
+        { "text": "An Azure App Service WebJob on a dedicated App Service plan", "correct": false }
+    ],
+    "explanation": "**Azure Container Instances (ACI)** is Azure's serverless, standalone container host: you deploy a container group directly — no cluster, no orchestrator, and no environment resource — and you are billed **per second** for the vCPU and memory allocated while the container group runs. Setting the restart policy to **Never** or **OnFailure** makes ACI ideal for run-to-completion batch jobs like inv-recon: the container starts (for example, triggered nightly by an automation schedule or Logic App), runs its ~30 minutes, exits, and billing stops.\n\n**Why not the other options:**\n- **Azure Container Apps job**: Container Apps jobs are also designed for run-to-completion work, but every Container Apps resource must live inside a **Container Apps environment**, which the operations team explicitly does not want to create or manage.\n- **AKS with a CronJob**: This requires provisioning and operating an entire Kubernetes cluster (node pools, upgrades, networking) — the opposite of \"simplest possible,\" and node VMs are billed whether or not the job is running.\n- **App Service WebJob**: WebJobs run inside an App Service plan, which is billed continuously (24/7) regardless of whether the 30-minute job is executing, violating the per-second, pay-while-running requirement.",
+    "category": "Deploy and Manage Azure Compute Resources",
+    "caseStudy": "scenarios/case_study_ashgrove.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-data-lifecycle",
+    "question": "A financial services firm stores 500 TB of scanned customer documents as block blobs in the hot tier. Access analysis shows that documents are read frequently for about a month after they are last used, rarely for the following six months, and almost never afterwards — but regulators require they remain retrievable for seven years, after which they must be deleted.\n\nYou must minimize storage cost with the least ongoing operational effort.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Enable last-access-time tracking and configure a lifecycle management policy that tiers blobs to cool 30 days after last access, to archive after 210 days, and deletes them after 7 years",
+            "correct": true
+        },
+        {
+            "text": "Run an Azure Automation runbook that inventories all blobs weekly and moves them between tiers with AzCopy",
+            "correct": false
+        },
+        {
+            "text": "Upload all documents directly to the archive tier and rehydrate each document on demand when a user requests it",
+            "correct": false
+        },
+        {
+            "text": "Create three storage accounts (hot, cool, archive) and use Azure Data Factory pipelines to move blobs between accounts on a schedule",
+            "correct": false
+        }
+    ],
+    "explanation": "**Blob lifecycle management** is the platform-native, zero-code answer: a JSON policy evaluated daily by the storage service that tiers and deletes blobs automatically.\n\n- **Last-access-based rules** — enabling **last access time tracking** on the account lets rules key off `daysAfterLastAccessTimeGreaterThan`, matching the stated usage pattern (\"frequently for a month **after last use**\") far better than creation-time rules — a document that becomes active again is not prematurely archived (rules can even tier blobs back to hot on access)\n- **Tiering path** — hot → cool after 30 days of no access (infrequent but instant access), → archive after ~7 months (lowest cost, hours to rehydrate — acceptable for \"almost never\" data that must merely remain retrievable), → **delete after 7 years**, enforcing the retention end automatically\n- **Least effort** — the policy is set once at the account; there are no jobs, scripts, or pipelines to operate at 500 TB scale\n\n**Why not the other options:**\n- **Automation runbook + AzCopy** — Custom scripting that re-implements the built-in engine: it must enumerate hundreds of millions of blobs weekly, track access times itself, handle failures and retries, and be secured and maintained forever. Maximum operational effort for no functional gain\n- **Everything straight to archive** — Archive is offline: reads require **rehydration that takes hours** (or a higher-cost priority retrieval), yet documents are read *frequently* in their first month. Users would wait hours for routine document access, and per-read rehydration costs add up\n- **Three accounts + ADF** — Tiers are per-blob attributes within one account; separate accounts add cross-account copy costs, break every stored document URL on each move, and require operating ADF pipelines — solving with heavy infrastructure what a policy does natively",
+    "category": "Design Data Storage Solutions"
+}

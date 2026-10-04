@@ -1,0 +1,24 @@
+{
+    "id": "ai200-22-pgvector-hnsw-index",
+    "question": "A semantic search feature on Azure Database for PostgreSQL runs this query against a 4-million-row table:\n\n```sql\nSELECT chunk_id, content\nFROM doc_chunks\nORDER BY embedding <=> $1\nLIMIT 10;\n```\n\nExecution plans show a sequential scan, and P95 latency is over 6 seconds. You need sub-100 ms latency with high recall, and the team accepts approximate results.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create an HNSW index on `embedding` using the `vector_cosine_ops` operator class, for example:\n\n```sql\nCREATE INDEX ON doc_chunks\nUSING hnsw (embedding vector_cosine_ops);\n```",
+            "correct": true
+        },
+        {
+            "text": "Create a B-tree index on the `embedding` column so `ORDER BY` can walk the index in sorted order.",
+            "correct": false
+        },
+        {
+            "text": "Create the index with `USING hnsw (embedding vector_l2_ops)` because L2 indexes are faster to search than cosine indexes.",
+            "correct": false
+        },
+        {
+            "text": "Rewrite the query to compute similarity in the application after fetching all rows with `SELECT chunk_id, embedding FROM doc_chunks`.",
+            "correct": false
+        }
+    ],
+    "explanation": "`<=>` is pgvector's **cosine distance** operator, and an approximate-nearest-neighbor index is only used when its **operator class matches the query's operator** — so an HNSW index with `vector_cosine_ops` is what turns this sequential scan into a graph search. HNSW offers the best speed/recall trade-off for read-heavy workloads and needs no training step, making sub-100 ms top-10 retrieval realistic at millions of rows.\n\n**Why not the other options:**\n- **B-tree index** — B-trees order scalar values; a 1536-dimension vector has no meaningful linear sort order, and the planner cannot use a B-tree to satisfy `ORDER BY embedding <=> $1`. (pgvector B-tree support exists only for equality/uniqueness, not similarity.)\n- **`vector_l2_ops`** — The operator class must match the operator: an L2 index serves `<->` (Euclidean) queries. The planner would ignore it for `<=>`, leaving the sequential scan in place.\n- **Client-side similarity** — Shipping 4 million embeddings to the application per query is orders of magnitude slower than the current plan, not faster, and scales with table size.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

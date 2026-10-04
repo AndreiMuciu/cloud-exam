@@ -1,0 +1,20 @@
+{
+    "id": "sc900-21-identity-governance-matching",
+    "type": "matching",
+    "question": "Match each Microsoft Entra ID Governance capability to its description.",
+    "sourceItems": [
+        "Privileged Identity Management",
+        "Access reviews",
+        "Entitlement management",
+        "Terms of use"
+    ],
+    "targetSlots": [
+        "Provides just-in-time, time-bound activation of privileged roles with approval and justification",
+        "Enables recurring recertification of group memberships, application access, and role assignments",
+        "Automates access request workflows using access packages, including assignments, expirations, and approvals",
+        "Presents information that users must read and accept before they access resources"
+    ],
+    "correctMapping": [0, 1, 2, 3],
+    "explanation": "Microsoft Entra ID Governance helps organizations ensure the right people have the right access for the right amount of time:\n\n- **Privileged Identity Management (PIM)** — Eliminates standing privilege by letting eligible users activate roles just in time, for a limited duration, optionally with approval, MFA, and justification.\n- **Access reviews** — Schedule periodic reviews so that group owners, managers, or users themselves recertify whether access to groups, applications, and roles is still needed, removing stale access.\n- **Entitlement management** — Bundles groups, applications, and SharePoint sites into **access packages** that users (including external partners) can request, with built-in approval workflows, time limits, and automatic expiration.\n- **Terms of use** — Displays legal or compliance statements that users must accept (with acceptance tracked and auditable) before accessing resources, often enforced through Conditional Access.\n\nEach capability addresses a different governance need — elevation (PIM), recertification (access reviews), lifecycle of access at scale (entitlement management), and informed consent (terms of use) — so none of the descriptions are interchangeable.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

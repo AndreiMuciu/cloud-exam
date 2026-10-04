@@ -1,0 +1,21 @@
+{
+    "id": "ai103-22-ordering-build-deploy-tool-agent",
+    "type": "ordering",
+    "question": "You are building a new Foundry agent that must call a custom function tool to look up order status.\n\nPlace the steps in the correct order.",
+    "items": [
+        "Define the agent's role, goals, and a JSON schema describing the custom function tool's name, parameters, and expected return shape.",
+        "Register the tool definition and instructions with the agent when it is created.",
+        "Send a user message and let the agent decide, based on the conversation, whether to invoke the function tool.",
+        "Execute the requested function call in your application code and return its output to the agent.",
+        "Let the agent incorporate the function's returned output into its final response to the user."
+    ],
+    "correctOrder": [
+        "Define the agent's role, goals, and a JSON schema describing the custom function tool's name, parameters, and expected return shape.",
+        "Register the tool definition and instructions with the agent when it is created.",
+        "Send a user message and let the agent decide, based on the conversation, whether to invoke the function tool.",
+        "Execute the requested function call in your application code and return its output to the agent.",
+        "Let the agent incorporate the function's returned output into its final response to the user."
+    ],
+    "explanation": "Agent tool-calling has to be designed before it can run:\n\n1. **Define the schema** — The agent can't call a function it doesn't know exists; the schema tells it the tool's name, parameters, and what to expect back.\n2. **Register the tool with the agent** — The schema and instructions must be attached at agent creation (or configuration) time so the agent's planner is aware the tool is available.\n3. **Let the agent decide to call it** — Given a user message, the agent's own reasoning determines whether this tool is relevant to the current turn.\n4. **Execute the function in your code** — The agent service does not run your business logic itself; your application code executes the requested call and returns the result.\n5. **Incorporate the output into the final answer** — Only after receiving the function's result can the agent produce a response that actually reflects the order status.\n\nSkipping straight to sending a user message before the tool schema is defined and registered would leave the agent with no tool to call in the first place.",
+    "category": "Implement generative AI and agentic solutions"
+}

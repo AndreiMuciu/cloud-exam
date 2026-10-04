@@ -1,0 +1,25 @@
+{
+    "id": "az305-data-storage-tier",
+    "type": "multi",
+    "question": "You are designing a data lake solution for analytics workloads. The solution must support:\n\n- Storing petabytes of structured and unstructured data\n- Hierarchical namespace for efficient directory operations\n- Role-based access control at the file and directory level\n- Integration with Azure Synapse Analytics for querying\n\nWhich two features must you enable when creating the storage account? (Choose two.)",
+    "options": [
+        {
+            "text": "Azure Data Lake Storage Gen2 (hierarchical namespace)",
+            "correct": true
+        },
+        {
+            "text": "Azure AD authentication and RBAC (Azure role-based access control)",
+            "correct": true
+        },
+        {
+            "text": "Network file system (NFS) 3.0 protocol support",
+            "correct": false
+        },
+        {
+            "text": "Customer-managed encryption keys (CMK) with Azure Key Vault",
+            "correct": false
+        }
+    ],
+    "explanation": "To build an analytics-ready data lake:\n\n1. **Data Lake Storage Gen2 (hierarchical namespace)** — Enabling the hierarchical namespace on a StorageV2 account transforms it into ADLS Gen2, providing:\n   - True directory operations (rename, delete) in O(1) time instead of O(n)\n   - Hadoop-compatible access via the ABFS driver\n   - Native integration with Azure Synapse, Databricks, and HDInsight\n\n2. **Azure AD authentication and RBAC** — Enables fine-grained access control at the file and directory level using Azure RBAC roles (Storage Blob Data Reader/Contributor/Owner) and POSIX-like ACLs. This replaces shared key authentication with identity-based access.\n\n**Why not the other options:**\n- **NFS 3.0** — Provides Linux-native file access but is not required for analytics workloads. NFS 3.0 also has limitations (no Azure AD auth, no ACLs) that conflict with the RBAC requirement\n- **Customer-managed keys** — Enhances encryption control but is a security feature, not a data lake design requirement. Azure Storage encrypts all data at rest by default with Microsoft-managed keys",
+    "category": "Design Data Storage Solutions"
+}

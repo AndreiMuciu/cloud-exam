@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-20-cosmos-hierarchical-partition-key",
+    "question": "Marrowfield Health stores chat transcripts in an Azure Cosmos DB for NoSQL container partitioned on `/tenantId`. Its largest hospital tenant is approaching the **20 GB logical partition limit**. Queries almost always filter on `tenantId`, and often on `tenantId` plus `conversationId`. Queries that filter on `tenantId` alone must remain efficiently routed without application-side fan-out logic.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create a new container that uses the hierarchical partition key `/tenantId` then `/conversationId`, and migrate the data.",
+            "correct": true
+        },
+        {
+            "text": "Create a new container partitioned on a synthetic key that concatenates `tenantId` with a random suffix (for example `tenant7-03`).",
+            "correct": false
+        },
+        {
+            "text": "Open a support request to raise the 20 GB logical partition limit for the container.",
+            "correct": false
+        },
+        {
+            "text": "Keep the container as is and enable autoscale throughput so the large tenant's partition receives more RU/s.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Hierarchical partition keys** (subpartitioning) are built for exactly this shape of data: with `/tenantId` → `/conversationId`, each *combination* of the two values is the logical partition, so one tenant can grow far beyond 20 GB while a query on `tenantId` alone is still routed by the service to just that tenant's partitions — no application fan-out code. Queries on both levels remain single-partition and cheapest of all.\n\n**Why not the other options:**\n- **Synthetic key with a random suffix** — Also spreads the data, but the routing burden moves into your application: a `tenantId`-only query must now fan out across every suffix the app ever generated, which the requirement explicitly rules out.\n- **Support request** — The 20 GB logical partition size limit is architectural and cannot be raised.\n- **Autoscale throughput** — Adjusts RU/s, not storage. The 20 GB cap is about *size*; when the partition fills, writes fail no matter how many RU/s are provisioned.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

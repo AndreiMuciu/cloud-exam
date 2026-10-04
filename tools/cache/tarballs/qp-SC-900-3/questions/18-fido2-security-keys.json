@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-18-fido2-security-keys",
+    "question": "Factory-floor staff at a food-processing plant are not allowed to carry personal phones into production areas, so authenticator apps and SMS codes are not options. The security team wants these employees to sign in to shared kiosks **without passwords**, using a phishing-resistant hardware credential based on an open authentication standard that they can carry on a lanyard and plug into a USB port or tap via NFC.\n\nWhich Microsoft Entra ID passwordless authentication method fits this requirement?",
+    "options": [
+        {
+            "text": "FIDO2 security keys",
+            "correct": true
+        },
+        {
+            "text": "Windows Hello for Business",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Authenticator app sign-in",
+            "correct": false
+        },
+        {
+            "text": "Voice call verification",
+            "correct": false
+        }
+    ],
+    "explanation": "**FIDO2 security keys** are **external hardware devices — typically USB keys, which can also work over NFC or Bluetooth — based on the open FIDO2/WebAuthn standards**. The private key never leaves the hardware and the credential is bound to the legitimate site, making the method **phishing-resistant**. Because the key is a portable token rather than a phone app or a credential tied to one machine, it suits phone-free environments and shared kiosks.\n\n**Why not the other options:**\n- **Windows Hello for Business** — Windows Hello credentials (PIN or biometrics) are **tied to a specific enrolled device**. On shared kiosks used by many rotating workers, per-user-per-device enrollment is impractical; a portable key that travels with the worker fits better.\n- **Microsoft Authenticator app sign-in** — Passwordless phone sign-in requires the Authenticator app on a smartphone, which these employees cannot carry onto the production floor.\n- **Voice call verification** — A voice call is a telephone-based *MFA* factor, not a passwordless method — it supplements a password rather than replacing it, and it also requires a phone.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

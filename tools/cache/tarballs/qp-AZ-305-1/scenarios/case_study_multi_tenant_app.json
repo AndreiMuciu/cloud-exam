@@ -1,0 +1,9 @@
+{
+    "id": "case_study_multi_tenant_app",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**AltaVista Sports** operates a B2B software platform that connects ski resorts with equipment suppliers. The company has two business divisions with separate Azure infrastructure:\n\n| Division | Azure Subscription | Microsoft Entra ID Tenant |\n|----------|-------------------|---------------------------|\n| North | Sub-North | alta-north.com |\n| South | Sub-South | alta-south.com |\n\nSub-North contains an Azure App Service web application named SupplierPortal. SupplierPortal currently uses Microsoft Entra ID (formerly Azure AD) for single-tenant authentication.\n\nUsers from alta-north.com can authenticate to SupplierPortal. The company needs to enable users from the alta-south.com tenant to also access SupplierPortal without creating duplicate accounts.\n\n**Requirements:**\n- External tenant users must be able to authenticate to SupplierPortal\n- The solution should support governed access with approval workflows\n- API access between web apps and backend services must be secured\n- JWT tokens must be validated at the API gateway level\n\nWhat changes should you recommend to enable cross-tenant authentication?"
+        }
+    ]
+}

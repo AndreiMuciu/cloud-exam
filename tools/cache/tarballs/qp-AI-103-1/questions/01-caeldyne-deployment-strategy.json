@@ -1,0 +1,25 @@
+{
+    "id": "ai103-01-caeldyne-deployment-strategy",
+    "question": "Caeldyne Insurance is deploying its claims-extraction model in Azure AI Foundry. Claim volume is unpredictable and spikes sharply at month-end, and the team wants to avoid a manual capacity-planning exercise.\n\nWhich deployment option should they choose?",
+    "options": [
+        {
+            "text": "Deploy the model using a Global Standard (pay-as-you-go, consumption-based) deployment.",
+            "correct": true
+        },
+        {
+            "text": "Purchase a fixed Provisioned Throughput Units (PTU) deployment sized for average daily claim volume.",
+            "correct": false
+        },
+        {
+            "text": "Deploy the model only in batch mode and process every claim once per day after midnight.",
+            "correct": false
+        },
+        {
+            "text": "Deploy two identical PTU deployments and manually redirect traffic between them whenever volume rises.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Global Standard** deployment bills per token against Microsoft-managed capacity and scales elastically with demand, so an unpredictable month-end spike is absorbed automatically with no pre-purchased capacity to size.\n\n**Why not the other options:**\n- **PTU sized for average volume** — Provisioned Throughput reserves a fixed tokens-per-minute budget. Sizing it to the *average* day means the model throttles (HTTP 429) exactly when the spike Caeldyne is worried about actually happens.\n- **Batch-only, once per day** — Converts every claim into a fixed daily backlog regardless of when it arrives, and does nothing to address the underlying capacity question; it simply defers the spike rather than absorbing it.\n- **Two PTU deployments with manual cutover** — Still requires guessing capacity in advance and adds an operational task (manually redirecting traffic) precisely during the highest-pressure period, which is what the team is trying to avoid.",
+    "category": "Plan and manage an Azure AI solution",
+    "caseStudy": "scenarios/case_study_caeldyne_insurance.json"
+}

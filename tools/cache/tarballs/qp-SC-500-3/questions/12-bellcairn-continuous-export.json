@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-12-bellcairn-continuous-export",
+    "question": "You need to stream new Defender for Cloud security alerts and recommendation state changes continuously to Bellcairn Utilities' on-premises Splunk in near real time — using configuration rather than code — and ensure the security operations manager and subscription owners receive email for high-severity alerts. What should you configure in Microsoft Defender for Cloud?",
+    "options": [
+        {
+            "text": "Configure continuous export of security alerts and recommendations to an Azure Event Hub that Splunk consumes through its Azure add-on, and configure email notifications in the environment settings for the manager's address plus the Owner role, filtered to high severity",
+            "correct": true
+        },
+        {
+            "text": "Grant the OT team the Security Reader role and schedule a nightly Azure Logic App that queries the Defender for Cloud REST API and writes the results to a Splunk HTTP endpoint",
+            "correct": false
+        },
+        {
+            "text": "Configure continuous export to a Log Analytics workspace and have Splunk administrators download the workspace tables as CSV each morning",
+            "correct": false
+        },
+        {
+            "text": "Enable the workflow automation feature with a Logic App that emails the OT team a summary of every alert",
+            "correct": false
+        }
+    ],
+    "explanation": "**Continuous export** is Defender for Cloud's built-in, configuration-only streaming mechanism. Set to target an **Azure Event Hub**, it pushes security alerts and recommendation changes as they occur; Splunk's standard Azure/Event Hub integration then consumes the stream — the well-trodden path for feeding third-party SIEMs in near real time with no polling scripts. The **email notifications** settings (in the subscription's environment settings) handle the second requirement natively: you can name specific addresses (the security operations manager) *and* roles (Owner), and restrict notifications to alerts of a chosen severity such as High.\n\n**Why not the other options:**\n- **Nightly Logic App polling the REST API** — this is code/scheduled automation, which the requirement explicitly excludes, and a nightly batch is nowhere near 'near real time.' Security Reader for the OT team doesn't move any data to Splunk.\n- **Continuous export to Log Analytics with CSV downloads** — exporting to a workspace is valid for Azure-side analytics, but humans downloading CSVs is precisely the manual step the requirement forbids; Splunk should consume an event stream, not files.\n- **Workflow automation emailing summaries** — workflow automation triggers Logic Apps per alert and could send emails, but it doesn't stream alerts and recommendation state changes into Splunk, and per-alert email blasts to the OT team is not the requested targeted high-severity notification to the manager and subscription owners (which the built-in email notification settings do without building anything).",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_bellcairn_utilities.json"
+}

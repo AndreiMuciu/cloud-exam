@@ -1,0 +1,24 @@
+{
+    "id": "az800-24-azure-bastion-sku-differences",
+    "question": "You are using Azure Bastion to manage your VMs. You need the ability to share a link with external contractors so they can access a specific VM via Bastion without needing to log into the Azure Portal. Which Bastion SKU is required for this feature?",
+    "options": [
+        {
+            "text": "Basic SKU",
+            "correct": false
+        },
+        {
+            "text": "Standard SKU",
+            "correct": true
+        },
+        {
+            "text": "Developer SKU",
+            "correct": false
+        },
+        {
+            "text": "Free SKU",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Shareable Link** feature is an advanced capability of Azure Bastion and requires the **Standard SKU**. The Basic SKU provides RDP/SSH within the portal but lacks the external link sharing and scaling features.\n\n**Why not the other options:**\n- **Basic** — Lacks the shareable link feature.\n- **Developer SKU** — A lightweight, cost-effective version but has significantly fewer features than Standard.\n- **Free SKU** — Does not exist for Azure Bastion.",
+    "category": "Implement and manage on-premises and hybrid networking"
+}

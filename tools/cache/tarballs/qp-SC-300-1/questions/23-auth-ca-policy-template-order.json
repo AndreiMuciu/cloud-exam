@@ -1,0 +1,21 @@
+{
+    "id": "sc300-auth-ca-policy-template-order",
+    "type": "ordering",
+    "question": "An administrator is creating and safely rolling out a new Conditional Access policy using the built-in policy template gallery. Arrange the steps in the correct order.",
+    "items": [
+        "Review sign-in logs and the What If tool to confirm the policy would apply to the intended users and produce the expected result",
+        "Browse the Conditional Access template gallery and select a template that matches the desired scenario",
+        "Review and customize the template's pre-populated assignments and access controls for the organization's needs",
+        "Set the policy's enable policy toggle to Report-only and save it",
+        "Set the policy's enable policy toggle to On"
+    ],
+    "correctOrder": [
+        "Browse the Conditional Access template gallery and select a template that matches the desired scenario",
+        "Review and customize the template's pre-populated assignments and access controls for the organization's needs",
+        "Set the policy's enable policy toggle to Report-only and save it",
+        "Review sign-in logs and the What If tool to confirm the policy would apply to the intended users and produce the expected result",
+        "Set the policy's enable policy toggle to On"
+    ],
+    "explanation": "1. **Select a template** — the gallery provides pre-built, Microsoft-recommended configurations for common scenarios (for example, requiring MFA for admins), which is the fastest starting point.\n2. **Review and customize** — templates pre-populate assignments and controls, but an administrator must still review and adjust them (users/groups in scope, exclusions, specific controls) to match the organization's exact needs.\n3. **Save in Report-only** — this lets the policy's logic evaluate real sign-ins and record what *would* have happened, without actually blocking or challenging anyone yet.\n4. **Review sign-in logs / What If** — using the Report-only results and the What If tool confirms the policy affects the intended population and produces the expected grant/block outcome before it's live.\n5. **Turn the policy On** — only after confirming the expected behavior should the policy be switched from Report-only to actively enforcing.\n\nSkipping the Report-only/testing phase and enabling a policy immediately risks unintentionally locking out users or failing to cover the intended scenario.",
+    "category": "Implement authentication and access management"
+}

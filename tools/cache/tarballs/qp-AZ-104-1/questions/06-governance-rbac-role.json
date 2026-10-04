@@ -1,0 +1,25 @@
+{
+    "id": "az104-governance-rbac-role",
+    "question": "You are the Microsoft Entra administrator for Ridgepoint Financial. A new administrator named **Amara Osei** needs to manage both internal and public Azure Load Balancers in a resource group named **RG-Network**.\n\nYou need to assign the minimum permissions that allow Amara to fully manage the load balancers.\n\nWhich role assignment should you configure?",
+    "options": [
+        {
+            "text": "Assign the Network Contributor role on RG-Network",
+            "correct": true
+        },
+        {
+            "text": "Assign the Contributor role to each load balancer individually",
+            "correct": false
+        },
+        {
+            "text": "Assign the Owner role on RG-Network",
+            "correct": false
+        },
+        {
+            "text": "Assign the Network Contributor role to each load balancer individually",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Network Contributor** role provides full management permissions for network resources including load balancers, virtual networks, NSGs, and related resources. Assigning it at the **resource group level** (RG-Network) ensures Amara can manage all network resources within that scope, which is more efficient than individual resource assignments.\n\nWhy not the other options:\n- **Owner** provides excessive permissions (includes RBAC management), violating least privilege\n- **Contributor on each LB** works but is less efficient and doesn't cover related network resources needed for load balancer management\n- **Network Contributor on each LB** is overly granular and would require updating assignments whenever new load balancers are created",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_ridgepoint.json"
+}

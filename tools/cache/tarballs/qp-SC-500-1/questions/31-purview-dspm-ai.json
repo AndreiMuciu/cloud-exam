@@ -1,0 +1,24 @@
+{
+    "id": "sc500-31-purview-dspm-ai",
+    "question": "Before expanding its Microsoft 365 Copilot rollout, your organization is worried that Copilot could surface content from **overshared SharePoint sites** — files with broad \"Everyone\" permissions that users would never have found manually. You need to assess this oversharing risk, see how sensitive data is being used in Copilot prompts and responses, and get recommended policies to reduce the exposure. What should you use?",
+    "options": [
+        {
+            "text": "Microsoft Purview Data Security Posture Management (DSPM) for AI, running its oversharing assessment and applying the recommended protection policies",
+            "correct": true
+        },
+        {
+            "text": "Defender for AI Services in Microsoft Defender for Cloud, enabled on the Microsoft 365 tenant",
+            "correct": false
+        },
+        {
+            "text": "A Conditional Access policy that blocks the Microsoft 365 Copilot service for all users",
+            "correct": false
+        },
+        {
+            "text": "Disabling search indexing on all SharePoint sites so Copilot cannot retrieve their content",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Purview DSPM for AI** is built for exactly this: it provides **oversharing assessments** that identify SharePoint sites and files exposed too broadly, reports on how **sensitive information appears in AI prompts and responses**, and offers **one-click recommended policies** (sensitivity labels, DLP for Copilot, restricted content discovery) to shrink the exposure before and during the rollout.\n\n**Why not the other options:**\n- **Defender for AI Services** — That plan protects *Azure* AI workloads (e.g., model deployments consumed by your own apps) with runtime threat detection; it is enabled on Azure subscriptions, not on a Microsoft 365 tenant, and does not assess SharePoint oversharing.\n- **Blocking Copilot with Conditional Access** — This halts the rollout instead of managing its risk, and the underlying oversharing problem remains for ordinary search and browsing.\n- **Disabling search indexing everywhere** — A blunt measure that breaks search and legitimate collaboration tenant-wide; the goal is to fix excessive permissions and label sensitive content, not to hide everything.",
+    "category": "Secure compute"
+}

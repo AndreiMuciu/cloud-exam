@@ -1,0 +1,24 @@
+{
+    "id": "az800-20-file-sync-endpoint-prereq",
+    "question": "You are setting up Azure File Sync. You have created a Storage Sync Service and a Sync Group. What is the next step you must perform on your local Windows Server before you can add it as a 'Server Endpoint' to the Sync Group?",
+    "options": [
+        {
+            "text": "Install the Azure File Sync agent and register the server with the Storage Sync Service.",
+            "correct": true
+        },
+        {
+            "text": "Enable BitLocker on the server.",
+            "correct": false
+        },
+        {
+            "text": "Create a new Azure File Share in the portal.",
+            "correct": false
+        },
+        {
+            "text": "Map a network drive to the cloud share.",
+            "correct": false
+        }
+    ],
+    "explanation": "Before a server can interact with Azure File Sync, you must **install the agent** and **register the server**. Registration establishes a trust relationship between your on-premises server and the Storage Sync Service in Azure.\n\n**Why not the other options:**\n- **BitLocker** — Not a prerequisite for File Sync.\n- **Create File Share** — This is done *in Azure* before setting up the sync group, but it's not the next step *on the local server*.\n- **Map Drive** — Not part of the official setup process for the File Sync agent.",
+    "category": "Manage storage and file services"
+}

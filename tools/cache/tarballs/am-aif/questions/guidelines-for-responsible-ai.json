@@ -1,0 +1,193 @@
+{
+  "domain": "Guidelines for Responsible AI",
+  "questions": [
+    {
+      "id": 59,
+      "question": "A self-driving car AI must handle rain, fog, night driving, and unpaved roads without significant performance drops. Which responsible AI characteristic does this requirement address?",
+      "options": [
+        { "id": "a", "text": "Robustness, which ensures the system performs reliably across varied conditions" },
+        { "id": "b", "text": "Veracity, which ensures the system produces accurate and truthful information" },
+        { "id": "c", "text": "Inclusivity, which ensures the system serves users from diverse backgrounds" },
+        { "id": "d", "text": "Fairness, which ensures the system treats all demographic groups equitably" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Robustness means AI systems perform consistently across various scenarios including edge cases and unexpected inputs. This requires thorough testing and validation.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 60,
+      "question": "A company deploys a content generation API and needs to prevent it from producing hate speech, explicit material, or responses that violate company policy. Which AWS capability addresses this?",
+      "options": [
+        { "id": "a", "text": "Amazon SageMaker Autopilot, which automates model selection and training" },
+        { "id": "b", "text": "Guardrails for Amazon Bedrock, which filters inputs and outputs based on configurable policies" },
+        { "id": "c", "text": "Amazon Comprehend, which extracts entities and key phrases from text" },
+        { "id": "d", "text": "AWS CloudTrail, which records API calls for auditing purposes" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Guardrails for Amazon Bedrock provides content filtering, input validation, and output formatting to ensure generative AI applications operate within predefined ethical and operational boundaries.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 61,
+      "question": "A media company uses a generative AI model that was trained partly on copyrighted news articles. Their legal team is concerned that the model's outputs could reproduce protected content verbatim. What risk does this represent?",
+      "options": [
+        { "id": "a", "text": "Increased compute costs from processing copyrighted versus public domain text" },
+        { "id": "b", "text": "Slower inference times caused by the complexity of copyrighted language" },
+        { "id": "c", "text": "Potential intellectual property infringement if outputs reproduce protected material" },
+        { "id": "d", "text": "Difficulty integrating the model with the company's existing CMS platform" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Generative AI models trained on copyrighted material may produce outputs that infringe on existing intellectual property rights, creating legal liability for organizations.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 62,
+      "question": "A hiring tool trained mostly on resumes from one demographic consistently ranks candidates from that group higher. The team discovers the training data had 80% representation from that group. What data characteristic would have prevented this?",
+      "options": [
+        { "id": "a", "text": "Larger total volume of training data regardless of demographic mix" },
+        { "id": "b", "text": "Balanced representation across different demographic groups in the dataset" },
+        { "id": "c", "text": "More recent data reflecting current hiring trends and job titles" },
+        { "id": "d", "text": "Cleaner data with fewer formatting errors and duplicate entries" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Balanced datasets have proper distribution across different categories, preventing the model from developing bias toward overrepresented groups in the training data.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 63,
+      "question": "A lending platform's AI denies loans at significantly higher rates for certain ethnic groups despite similar financial profiles. Which responsible AI principle has been violated?",
+      "options": [
+        { "id": "a", "text": "Robustness, which requires consistent performance under varied conditions" },
+        { "id": "b", "text": "Transparency, which requires clear documentation of model architecture" },
+        { "id": "c", "text": "Safety, which requires protecting the system from adversarial attacks" },
+        { "id": "d", "text": "Fairness, which requires equitable treatment regardless of protected characteristics" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Fairness ensures AI systems treat all individuals equitably, providing equal opportunities regardless of characteristics like race, gender, age, or socioeconomic status.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 64,
+      "question": "A customer service chatbot confidently tells a user that the company offers a 'lifetime money-back guarantee' — a policy that has never existed. What is this phenomenon called?",
+      "options": [
+        { "id": "a", "text": "Hallucination, where the model generates plausible but factually incorrect content" },
+        { "id": "b", "text": "Overfitting, where the model memorizes training data too precisely" },
+        { "id": "c", "text": "Model drift, where prediction quality degrades over time after deployment" },
+        { "id": "d", "text": "Underfitting, where the model is too simple to capture company policies" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Hallucinations are outputs that sound plausible but contain factually incorrect information. This is a known limitation of generative AI requiring verification and human oversight.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 65,
+      "question": "A regulated financial institution must demonstrate to auditors exactly why their AI denied a specific loan application. Which responsible AI practice supports this requirement?",
+      "options": [
+        { "id": "a", "text": "Increasing the model's parameter count to improve prediction accuracy" },
+        { "id": "b", "text": "Using a more complex deep learning architecture with additional hidden layers" },
+        { "id": "c", "text": "Training on a larger and more diverse dataset from multiple data sources" },
+        { "id": "d", "text": "Implementing explainability mechanisms that show the factors behind each decision" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Transparency and explainability allow stakeholders to understand how AI systems make decisions. This is essential for building trust and meeting regulatory requirements.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 66,
+      "question": "A hospital uses an AI diagnostic tool that flags potential cancers in X-rays. Radiologists review every flagged case before any diagnosis is communicated to the patient. What responsible AI practice does this represent?",
+      "options": [
+        { "id": "a", "text": "Human-in-the-loop, where qualified professionals maintain oversight of critical AI decisions" },
+        { "id": "b", "text": "Automated decision-making, where the AI operates without any human involvement" },
+        { "id": "c", "text": "Model ensembling, where multiple AI models vote on each prediction" },
+        { "id": "d", "text": "Data augmentation, where synthetic X-ray images expand the training set" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Human-in-the-loop maintains human oversight in critical decision-making processes. AI serves as a supportive tool while humans retain final decision authority.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 67,
+      "question": "A sustainability-focused company is choosing between a 70-billion-parameter model and a 7-billion-parameter model that performs adequately for their simple classification task. Which responsible AI consideration should guide their choice?",
+      "options": [
+        { "id": "a", "text": "Always deploying the largest model to maximize prediction quality" },
+        { "id": "b", "text": "Training a new model from scratch for every individual use case" },
+        { "id": "c", "text": "Selecting the appropriately sized model to minimize energy consumption and carbon footprint" },
+        { "id": "d", "text": "Running separate infrastructure instances for development and production" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Responsible model selection considers environmental impact including energy efficiency and carbon footprint. Choosing appropriately sized models and reusing pretrained models reduces environmental impact.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 68,
+      "question": "A team examines their training data, algorithm design, and model outputs to identify and reduce unfair discrimination against protected groups. What is this process called?",
+      "options": [
+        { "id": "a", "text": "Removing all humans from the AI development and deployment pipeline" },
+        { "id": "b", "text": "Bias mitigation, which systematically identifies and reduces discriminatory patterns" },
+        { "id": "c", "text": "Maximizing model accuracy as the sole optimization objective" },
+        { "id": "d", "text": "Increasing the training duration to ensure the model fully converges" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Bias mitigation involves examining training data, algorithms, and outputs to prevent unfair discrimination and ensure AI systems don't perpetuate existing societal biases.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 69,
+      "question": "An AI product team adds screen-reader compatibility, multilingual support, and options for users with cognitive disabilities to their AI assistant. Which responsible AI principle guides these design decisions?",
+      "options": [
+        { "id": "a", "text": "Veracity, which ensures the AI produces only accurate and truthful information" },
+        { "id": "b", "text": "Robustness, which ensures the AI works reliably under adverse conditions" },
+        { "id": "c", "text": "Inclusivity, which ensures the AI is accessible and beneficial to diverse users" },
+        { "id": "d", "text": "Safety, which ensures the AI does not cause physical or digital harm" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Inclusivity means considering diverse perspectives and ensuring AI systems are accessible and beneficial to a wide range of users including those with disabilities or from underrepresented communities.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 70,
+      "question": "Which TWO of the following are characteristics of responsible AI development? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Providing transparency so stakeholders understand how decisions are made" },
+        { "id": "b", "text": "Ensuring fairness by preventing discriminatory outcomes in model predictions" },
+        { "id": "c", "text": "Maximizing model accuracy as the only metric that matters" },
+        { "id": "d", "text": "Prioritizing rapid deployment speed over thorough safety testing" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "b"],
+      "explanation": "Responsible AI prioritizes fairness to prevent discrimination and transparency to explain decisions. It balances accuracy with ethical considerations and requires thorough safety testing before deployment.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 71,
+      "question": "Which TWO features does Guardrails for Amazon Bedrock provide to help organizations deploy AI responsibly? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Content filtering that blocks inappropriate, harmful, or off-topic outputs" },
+        { "id": "b", "text": "Automatic model training that requires zero configuration or data" },
+        { "id": "c", "text": "Free unlimited API calls to every foundation model on the platform" },
+        { "id": "d", "text": "Input validation that ensures prompts meet organizationally defined criteria" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["a", "d"],
+      "explanation": "Guardrails provides content filtering to block inappropriate content and input validation to ensure prompts meet criteria. It doesn't train models or provide free unlimited access.",
+      "domain": "Guidelines for Responsible AI"
+    },
+    {
+      "id": 72,
+      "question": "Which TWO practices help mitigate bias in AI systems? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Training exclusively on data from a single demographic group" },
+        { "id": "b", "text": "Ignoring protected characteristics when evaluating model fairness" },
+        { "id": "c", "text": "Using balanced and diverse datasets that represent all relevant populations" },
+        { "id": "d", "text": "Conducting regular audits of model outputs to detect and correct unfair patterns" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["c", "d"],
+      "explanation": "Balanced, diverse datasets help prevent bias from overrepresented groups. Regular auditing identifies fairness issues in outputs. Training on single demographics or ignoring protected characteristics increases bias.",
+      "domain": "Guidelines for Responsible AI"
+    }
+  ]
+}

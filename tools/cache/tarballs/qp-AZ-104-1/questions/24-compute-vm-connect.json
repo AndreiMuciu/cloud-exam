@@ -1,0 +1,24 @@
+{
+    "id": "az104-compute-vm-connect",
+    "question": "You attempt to deploy the **Desired State Configuration (DSC)** extension on an Azure VM named **VM-Batch** by running the following Azure CLI command:\n\n```\naz vm extension set --resource-group RG-Batch --vm-name VM-Batch --name DSC --publisher Microsoft.Powershell --version 2.77\n```\n\nThe command returns the following error:\n\n> *\"The request failed due to conflict with the current state of resource VM-Batch. The VM is not running.\"*\n\nYou check the Azure portal and confirm that VM-Batch is in the **Stopped (deallocated)** state.\n\nWhat should you do to resolve the issue?",
+    "options": [
+        {
+            "text": "Rerun the command with the --no-wait flag to queue the extension for installation when the VM next starts",
+            "correct": false
+        },
+        {
+            "text": "Start VM-Batch, then rerun the extension deployment command",
+            "correct": true
+        },
+        {
+            "text": "Connect to VM-Batch via Azure Bastion and install the DSC extension manually from within the OS",
+            "correct": false
+        },
+        {
+            "text": "Redeploy VM-Batch to a new host, which will automatically start the VM and install pending extensions",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure VM extensions require the VM to be in a **running** state. When a VM is stopped (deallocated):\n\n- The VM agent is not running, so it cannot process extension requests\n- No compute resources are allocated to the VM\n- Extension operations (install, update, delete) will fail with a conflict error\n\nThe fix is to **start the VM** so the agent becomes active, then rerun the extension deployment command.\n\n**Why not the other options:**\n- **--no-wait flag** — This flag makes the CLI command return immediately without waiting for completion, but it does not queue operations for later. The extension still requires a running VM\n- **Azure Bastion / manual install** — You cannot connect to a deallocated VM via Bastion (or RDP/SSH). The VM must be running to accept connections\n- **Redeploy** — Redeploying moves the VM to a new host but requires the VM to be in a running or stopped (not deallocated) state. It also does not automatically install pending extensions",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

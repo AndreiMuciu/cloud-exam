@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-17-file-format-matching",
+    "type": "matching",
+    "question": "Match each data file format to the description that fits it best.",
+    "sourceItems": [
+        "JSON",
+        "Delimited text (CSV)",
+        "XML",
+        "Avro"
+    ],
+    "targetSlots": [
+        "Plain text in which each line is one record and a character such as a comma separates the field values",
+        "Human-readable text that represents data as name/value pairs with nested objects and arrays",
+        "Row-based binary format in which records are serialized using a schema that is stored with the data",
+        "Text markup that encloses each data element in opening and closing tags"
+    ],
+    "correctMapping": [
+        1,
+        0,
+        3,
+        2
+    ],
+    "explanation": "- **Delimited text (CSV)** — The simplest tabular text format: one record per line, fields separated by a delimiter (usually a comma), often with a header row. Universally supported for data exchange.\n- **JSON (JavaScript Object Notation)** — Human-readable text built from **name/value pairs**, with support for **nested objects and arrays**, which makes it the standard format for semi-structured data and web APIs.\n- **Avro** — A **row-based binary** serialization format. Each Avro file carries the **schema** used to serialize its records, so readers can interpret the binary data; it is widely used in streaming and big-data ingestion pipelines where compact row-oriented records matter.\n- **XML (eXtensible Markup Language)** — Text markup in which every element is wrapped in **opening and closing tags** (with optional attributes). Verbose compared with JSON, but still common in enterprise integrations.\n\nA useful contrast for the exam: CSV and XML and JSON are human-readable text; Avro is binary and row-oriented (optimized for writing and transporting whole records), whereas columnar binary formats like Parquet are optimized for analytical reads of selected columns.",
+    "category": "Describe Core Data Concepts"
+}

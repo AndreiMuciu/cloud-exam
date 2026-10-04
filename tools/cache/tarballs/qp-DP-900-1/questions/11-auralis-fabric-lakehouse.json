@@ -1,0 +1,25 @@
+{
+    "id": "dp900-11-auralis-fabric-lakehouse",
+    "question": "Auralis Energy needs one Microsoft Fabric item that stores raw meter files alongside curated Delta Lake tables in OneLake, and lets data engineers work with the data from Spark notebooks while analysts query the same tables with SQL.\n\nWhich Fabric item should Auralis create?",
+    "options": [
+        {
+            "text": "A lakehouse",
+            "correct": true
+        },
+        {
+            "text": "An Azure SQL Database",
+            "correct": false
+        },
+        {
+            "text": "A Power BI report",
+            "correct": false
+        },
+        {
+            "text": "An Azure Table Storage account",
+            "correct": false
+        }
+    ],
+    "explanation": "A Microsoft Fabric **lakehouse** combines the flexibility of a data lake with the table semantics of a warehouse. It stores unstructured and raw **files** and managed **Delta Lake tables** side by side in OneLake, supports Spark notebooks for engineering work, and exposes a SQL analytics endpoint so analysts can query the same tables with T-SQL — a single copy of the data serving both audiences.\n\n**Why not the other options:**\n- **An Azure SQL Database** — A relational OLTP service outside Fabric. It stores relational tables only, cannot hold raw files in OneLake, and is not queried through Spark notebooks as part of the Fabric analytics estate.\n- **A Power BI report** — Reports visualize data from a semantic model; they are the consumption layer, not a storage item for files and tables.\n- **An Azure Table Storage account** — A key/value NoSQL store, unrelated to OneLake, Delta tables, Spark, or SQL analytics endpoints.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_auralis_energy.json"
+}

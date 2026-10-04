@@ -1,0 +1,13 @@
+{
+    "id": "case_study_solstice_financial",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Solstice Financial Partners** is a wealth-management firm that handles investment portfolios for private clients. The firm uses Microsoft 365 for email, document collaboration, and client reporting, and it is subject to strict financial-services regulations.\n\n**Current Environment:**\n- Client statements, contracts, and internal research are stored in SharePoint Online and OneDrive.\n- Advisors frequently email documents to clients and external auditors.\n- A recent internal review found confidential documents that were shared without any classification or protection."
+        },
+        {
+            "title": "Compliance Requirements",
+            "content": "The compliance officer at Solstice Financial has defined the following requirements:\n- **Classify and protect**: Documents and emails containing client financial data must be classified, encrypted, and visibly marked, and the protection must travel with the file wherever it goes.\n- **Stop accidental leaks**: Messages that contain payment card numbers or account numbers must be automatically blocked from being sent to recipients outside the organization, with an explanatory notification for the sender.\n- **Detect risky insiders**: The firm must be able to identify potentially malicious or inadvertent data exfiltration by departing employees, while protecting employee privacy through pseudonymization during initial investigation."
+        }
+    ]
+}

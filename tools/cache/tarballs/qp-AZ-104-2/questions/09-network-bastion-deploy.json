@@ -1,0 +1,22 @@
+{
+    "id": "az104-s2-network-bastion-deploy",
+    "type": "ordering",
+    "question": "Copperbeck Energy's security team wants to decommission the jump server and replace it with a hardened, browser-based entry point that requires no public IP addresses on workload VMs. You decide to deploy **Azure Bastion** (Standard SKU) into VNet-Hub.\n\nArrange the steps to implement the replacement in the correct order.",
+    "items": [
+        "Deploy the Azure Bastion host into VNet-Hub",
+        "Create a subnet named AzureBastionSubnet with a prefix of /26 or larger in VNet-Hub",
+        "Decommission the jump server and remove its public IP address",
+        "Create a Standard SKU public IP address with static assignment for Bastion",
+        "Connect to a workload VM from the Azure portal through Bastion to validate access"
+    ],
+    "correctOrder": [
+        "Create a subnet named AzureBastionSubnet with a prefix of /26 or larger in VNet-Hub",
+        "Create a Standard SKU public IP address with static assignment for Bastion",
+        "Deploy the Azure Bastion host into VNet-Hub",
+        "Connect to a workload VM from the Azure portal through Bastion to validate access",
+        "Decommission the jump server and remove its public IP address"
+    ],
+    "explanation": "Azure Bastion (all SKUs except the Developer offering) requires a dedicated subnet named **exactly** `AzureBastionSubnet`, sized **/26 or larger**, in the same virtual network — so the subnet comes first. Bastion also requires a **Standard SKU, statically assigned public IP address**, which must exist before (or be created during) host deployment. With both prerequisites in place, you deploy the Bastion host into VNet-Hub, referencing the subnet and the public IP. You then validate by connecting to a workload VM from the Azure portal — Bastion brokers RDP/SSH over TLS in the browser, so the workload VMs need **no public IPs**, satisfying the board mandate. Only after validating the new access path should you decommission the jump server and remove its public IP, ensuring engineers are never left without administrative access.",
+    "category": "Implement and Manage Virtual Networking",
+    "caseStudy": "scenarios/case_study_copperbeck.json"
+}

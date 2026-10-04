@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-23-machine-configuration",
+  "type": "single",
+  "question": "Compliance requires that operating-system settings **inside** your Windows servers — disabling SMBv1, enforcing the local password policy, and setting audit policy values — are continuously assessed and automatically corrected when they drift, on both Azure VMs and Azure Arc-enabled on-premises servers, with compliance results visible in Azure Policy. What should you implement?",
+  "options": [
+    {
+      "text": "Azure Machine Configuration: assign machine configuration policy definitions for the required OS settings with remediation, so the in-guest agent audits the settings and automatically corrects drift",
+      "correct": true
+    },
+    {
+      "text": "Azure Policy with a custom definition using the Deny effect that rejects VMs whose in-guest settings do not match the baseline",
+      "correct": false
+    },
+    {
+      "text": "A scheduled Run Command script on each VM that reapplies the settings nightly and writes the result to a storage account",
+      "correct": false
+    },
+    {
+      "text": "Defender for Servers Plan 2, whose endpoint protection component enforces OS configuration baselines on every onboarded machine",
+      "correct": false
+    }
+  ],
+  "explanation": "**Azure Machine Configuration** (the successor to guest configuration) is the Azure-native way to govern settings *inside* the operating system. A machine configuration assignment — delivered through Azure Policy — has the in-guest agent evaluate the machine against a configuration package (built-in or custom, authored as PowerShell DSC). In audit mode it reports compliance; with **apply-and-autocorrect** remediation it also *sets* the desired values and re-corrects drift on every evaluation cycle. Because the agent runs identically on Azure VMs and on Azure Arc-enabled servers, one policy assignment covers the hybrid fleet, and results appear in the standard Azure Policy compliance view.\n\n**Why not the other options:**\n- **Azure Policy Deny effect** — plain Azure Policy evaluates the Azure Resource Manager representation of a resource (SKU, location, properties). It cannot see registry keys, local security policy, or services inside the guest OS, so a Deny on in-guest settings is impossible; reaching inside the OS is precisely what the machine configuration feature adds.\n- **Scheduled Run Command scripts** — a homegrown loop with no compliance model: no per-setting evaluation, no Azure Policy reporting, no drift detection between runs, and script results in a storage account satisfy no auditor. It also scales poorly across hundreds of hybrid machines.\n- **Defender for Servers Plan 2** — provides EDR, vulnerability management, and *assessment*-style recommendations; it can tell you a machine deviates from a security baseline but it is not an enforcement engine that automatically corrects arbitrary OS settings, and its findings do not surface as Azure Policy compliance.",
+  "category": "Secure compute"
+}

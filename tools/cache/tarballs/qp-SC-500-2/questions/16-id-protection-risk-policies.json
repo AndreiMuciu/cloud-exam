@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s2-16-id-protection-risk-policies",
+    "question": "Microsoft Entra ID Protection reports two recurring detection types in your tenant: users whose credentials appear in a leaked-credential dump (elevated user risk), and sign-ins with unfamiliar properties from new locations (elevated sign-in risk). You must configure automated, self-service remediation so that genuinely compromised credentials get replaced and suspicious sign-ins are challenged — without help-desk involvement and without blanket-blocking users. What should you configure?",
+    "options": [
+        {
+            "text": "A risk-based Conditional Access policy that requires a secure password change when user risk is high, and a second policy that requires multifactor authentication when sign-in risk is medium or higher",
+            "correct": true
+        },
+        {
+            "text": "A single Conditional Access policy that blocks access whenever any user or sign-in risk is detected, forcing users to call the help desk for reinstatement",
+            "correct": false
+        },
+        {
+            "text": "A Conditional Access policy requiring MFA for high user risk, and a policy requiring password change for medium sign-in risk",
+            "correct": false
+        },
+        {
+            "text": "Enable security defaults for the tenant, which automatically remediates user and sign-in risk",
+            "correct": false
+        }
+    ],
+    "explanation": "The remediation must match the risk type. **User risk** means the *credential itself* is likely compromised (leaked credentials) — the fix is a **secure password change**, which resets user risk. **Sign-in risk** means *this particular authentication* looks suspicious — the fix is proving identity with **MFA**, which remediates the sign-in risk if passed. Risk-based Conditional Access policies implement both as self-service: the legitimate user resolves the challenge in-line, no help desk needed, and untriggered users are unaffected.\n\n**Why not the other options:**\n- **Block on any risk** — blocking is the opposite of self-remediation: risk stays unresolved, every low-severity detection creates a help-desk ticket, and users are blanket-blocked, which the requirements exclude.\n- **MFA for user risk / password change for sign-in risk** — remediations are swapped. MFA on a *leaked* credential leaves the compromised password in place; forcing password changes for every unfamiliar sign-in churns passwords without addressing the momentary risk. Passing MFA does not reset user risk, and a password change is the wrong tool for sign-in anomalies.\n- **Security defaults** — a baseline that mainly enforces MFA registration and blocks legacy authentication; it contains no risk-based policies (ID Protection risk policies require appropriate licensing and explicit Conditional Access configuration) and cannot express per-risk remediations.",
+    "category": "Manage identity, access, and governance"
+}

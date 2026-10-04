@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-11-lumetra-data-pipeline",
+    "question": "Lumetra Retail Group needs the nightly ingestion process in Microsoft Fabric: it must run on a schedule, copy the 600 stores' extract files into the analytical store, run a transformation activity afterward, and send a notification email if any step fails.\n\nWhich Fabric capability should the operations team use?",
+    "options": [
+        {
+            "text": "A data pipeline in Fabric Data Factory",
+            "correct": true
+        },
+        {
+            "text": "An eventstream in Real-Time Intelligence",
+            "correct": false
+        },
+        {
+            "text": "A Power BI report with scheduled refresh",
+            "correct": false
+        },
+        {
+            "text": "A semantic model in Direct Lake mode",
+            "correct": false
+        }
+    ],
+    "explanation": "A **data pipeline** (the Data Factory experience in Microsoft Fabric) is the **orchestration** tool for exactly this pattern: it chains **activities** — such as Copy Data activities to pull the store extracts, a transformation activity (for example, running a notebook or stored procedure), and an Outlook/Teams notification activity on failure — and runs the whole flow on a **schedule**. Control-flow features like sequencing, conditions, and failure paths are what distinguish pipelines from single-purpose tools.\n\n**Why not the other options:**\n- **An eventstream** — Handles **continuous streaming events** in real time. The store extracts arrive once per night as files; there is no event stream to capture, and eventstreams do not orchestrate multi-step scheduled jobs with failure notifications.\n- **A Power BI report with scheduled refresh** — Refreshing a report updates its visuals from existing data; it cannot copy 600 stores' files into a warehouse or send failure emails as part of a multi-activity workflow.\n- **A semantic model in Direct Lake mode** — A modeling layer that lets Power BI read Delta tables in OneLake directly; it consumes data that ingestion has already landed and plays no role in moving it.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_lumetra_retail.json"
+}

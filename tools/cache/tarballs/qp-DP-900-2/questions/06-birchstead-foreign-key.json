@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-06-birchstead-foreign-key",
+    "question": "In the claims-tracking database, it must be impossible to insert a row into the Claims table whose PolicyId does not match an existing row in the Policies table, and the database itself must enforce the rule automatically.\n\nWhat should be defined on the Claims table to enforce this rule?",
+    "options": [
+        {
+            "text": "A foreign key constraint on the PolicyId column referencing the Policies table",
+            "correct": true
+        },
+        {
+            "text": "A primary key on the ClaimId column",
+            "correct": false
+        },
+        {
+            "text": "An index on the PolicyId column",
+            "correct": false
+        },
+        {
+            "text": "A CHECK constraint that requires PolicyId to be greater than zero",
+            "correct": false
+        }
+    ],
+    "explanation": "A **foreign key constraint** is exactly how a relational database enforces **referential integrity** between related tables. Declaring `Claims.PolicyId` as a foreign key that references the key of `Policies` makes the engine reject any insert or update in `Claims` whose `PolicyId` has no matching row in `Policies` — automatically, for every statement, with no application code required. This declared relationship between tables is a defining feature of the relational model.\n\n**Why not the other options:**\n- **A primary key on ClaimId** — Guarantees that each *claim* row is uniquely identified; it says nothing about whether the referenced policy exists.\n- **An index on PolicyId** — Only speeds up lookups on that column. Indexes improve performance; they do not validate that a value exists in another table.\n- **A CHECK constraint requiring PolicyId > 0** — Validates the value against a fixed expression, so `PolicyId = 12345` would pass even if no policy 12345 exists. CHECK constraints cannot verify a value against rows in another table the way a foreign key does.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_birchstead_mutual.json"
+}

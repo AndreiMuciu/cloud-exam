@@ -1,0 +1,204 @@
+{
+  "domain": "AWS Managed AI Services",
+  "questions": [
+    {
+      "id": 86,
+      "question": "A social media analytics firm needs to automatically determine whether thousands of customer reviews are positive, negative, or neutral, and extract mentioned product names and locations. Which AWS service provides these NLP capabilities out of the box?",
+      "options": [
+        { "id": "a", "text": "Amazon Comprehend, which performs sentiment analysis, entity extraction, and language detection" },
+        { "id": "b", "text": "Amazon Rekognition, which analyzes images and videos for objects and faces" },
+        { "id": "c", "text": "Amazon Polly, which converts written text into lifelike speech audio" },
+        { "id": "d", "text": "Amazon Transcribe, which converts speech audio recordings into text" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Amazon Comprehend is an NLP service using ML to find insights in text. It handles sentiment analysis, entity recognition, key phrase extraction, and language detection.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 87,
+      "question": "An airline wants to build an automated booking assistant that understands spoken flight requests over the phone and also handles typed queries on its website. Which AWS service is designed for this?",
+      "options": [
+        { "id": "a", "text": "Amazon Lex, which provides natural language understanding and speech recognition for conversational interfaces" },
+        { "id": "b", "text": "Amazon Translate, which converts text between different languages" },
+        { "id": "c", "text": "Amazon Polly, which synthesizes speech from written text" },
+        { "id": "d", "text": "Amazon Comprehend, which extracts insights from unstructured text" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Amazon Lex is designed for building conversational interfaces using voice and text. It provides automatic speech recognition and natural language understanding capabilities.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 88,
+      "question": "A security company needs to automatically detect faces in surveillance footage, identify unsafe content, and recognize common objects in uploaded images. Which managed service should they use?",
+      "options": [
+        { "id": "a", "text": "Amazon Textract, which extracts text and structured data from document images" },
+        { "id": "b", "text": "Amazon Comprehend, which analyzes text for sentiment and entity extraction" },
+        { "id": "c", "text": "Amazon Kendra, which provides intelligent search over enterprise documents" },
+        { "id": "d", "text": "Amazon Rekognition, which provides computer vision for image and video analysis" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Amazon Rekognition provides computer vision capabilities including image and video analysis, face detection, object recognition, and content moderation.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 89,
+      "question": "An accounting firm receives thousands of paper invoices daily. They need to automatically extract vendor names from headers, line-item amounts from tables, and payment terms from form fields. Which service handles this document intelligence?",
+      "options": [
+        { "id": "a", "text": "Amazon Comprehend, which extracts entities and key phrases from natural language text" },
+        { "id": "b", "text": "Amazon Textract, which extracts text, tables, and form data from scanned documents" },
+        { "id": "c", "text": "Amazon Translate, which converts text between different languages" },
+        { "id": "d", "text": "Amazon Kendra, which provides search across enterprise document repositories" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Amazon Textract automatically extracts text, handwriting, and data from scanned documents. It goes beyond OCR to identify forms and tables for structured data extraction.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 90,
+      "question": "A retail chain wants to predict how much of each product to stock in every store for the next three months, using five years of weekly sales data. Which purpose-built AWS service should they choose?",
+      "options": [
+        { "id": "a", "text": "Amazon Personalize, which generates individual product recommendations for users" },
+        { "id": "b", "text": "Amazon Comprehend, which analyzes text for sentiment and key phrases" },
+        { "id": "c", "text": "Amazon Forecast, which uses ML to deliver accurate time-series predictions" },
+        { "id": "d", "text": "Amazon SageMaker, which provides a general-purpose ML development platform" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Amazon Forecast uses ML to deliver accurate time-series forecasts. It's designed for predicting business outcomes like product demand, resource needs, and financial performance.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 91,
+      "question": "A streaming video platform wants to show each user a personalized home screen of recommended movies and shows based on their viewing history and preferences. Which AWS service powers this?",
+      "options": [
+        { "id": "a", "text": "Amazon Forecast, which predicts future values from time-series data" },
+        { "id": "b", "text": "Amazon Kendra, which provides intelligent enterprise search" },
+        { "id": "c", "text": "Amazon Comprehend, which understands natural language text" },
+        { "id": "d", "text": "Amazon Personalize, which delivers real-time personalized recommendations" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Amazon Personalize enables developers to build applications with real-time personalized recommendations using the same ML technology used by Amazon.com.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 92,
+      "question": "A data science team needs a unified platform where they can label training data, build and train custom models, tune hyperparameters, and deploy endpoints — all within one service. Which AWS offering provides this?",
+      "options": [
+        { "id": "a", "text": "Amazon Bedrock, which provides managed API access to third-party foundation models" },
+        { "id": "b", "text": "Amazon SageMaker, which offers an end-to-end platform for the ML development lifecycle" },
+        { "id": "c", "text": "AWS Lambda, which executes serverless functions in response to events" },
+        { "id": "d", "text": "Amazon EMR, which runs distributed data processing frameworks like Spark" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Amazon SageMaker is a fully managed ML platform that provides all components for building, training, and deploying models at scale with built-in algorithms and custom model support.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 93,
+      "question": "An accessibility startup needs to convert written news articles into natural-sounding audio in multiple languages so visually impaired users can listen to the news. Which service should they use for the text-to-speech conversion?",
+      "options": [
+        { "id": "a", "text": "Amazon Transcribe, which converts speech recordings into written text" },
+        { "id": "b", "text": "Amazon Translate, which converts text between different written languages" },
+        { "id": "c", "text": "Amazon Lex, which builds conversational chatbot interfaces" },
+        { "id": "d", "text": "Amazon Polly, which synthesizes lifelike speech from written text in multiple languages" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Amazon Polly converts text to lifelike speech, allowing creation of applications that talk. It supports multiple languages, voices, and SSML for enhanced control.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 94,
+      "question": "A global corporation needs its intranet search to understand questions like 'What is the process for requesting parental leave?' and return the relevant HR policy paragraph from thousands of internal documents. Which service does this?",
+      "options": [
+        { "id": "a", "text": "Amazon Athena, which runs SQL queries against data files stored in S3" },
+        { "id": "b", "text": "Amazon Kendra, which provides ML-powered enterprise search that understands natural language" },
+        { "id": "c", "text": "Amazon Textract, which extracts text and data from scanned documents" },
+        { "id": "d", "text": "Amazon Comprehend, which performs sentiment analysis on text content" }
+      ],
+      "correctAnswer": "b",
+      "explanation": "Amazon Kendra is an intelligent enterprise search service powered by ML. It allows users to search across multiple data sources using natural language questions.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 95,
+      "question": "A call center records all customer calls and needs to automatically convert the audio into searchable, timestamped text transcripts with speaker identification. Which service provides this?",
+      "options": [
+        { "id": "a", "text": "Amazon Polly, which generates spoken audio from written text" },
+        { "id": "b", "text": "Amazon Comprehend, which analyzes written text for sentiment and entities" },
+        { "id": "c", "text": "Amazon Transcribe, which provides automatic speech recognition and transcription" },
+        { "id": "d", "text": "Amazon Translate, which translates written text between languages" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Amazon Transcribe is an automatic speech recognition service that converts speech to text. It supports real-time and batch transcription with speaker identification.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 96,
+      "question": "A global e-commerce platform needs to translate its product listings from English into 15 other languages in real time as new products are added. Which service handles this?",
+      "options": [
+        { "id": "a", "text": "Amazon Polly, which converts text into spoken audio in multiple languages" },
+        { "id": "b", "text": "Amazon Comprehend, which detects the language of input text" },
+        { "id": "c", "text": "Amazon Translate, which provides neural machine translation between language pairs" },
+        { "id": "d", "text": "Amazon Transcribe, which transcribes spoken audio into written text" }
+      ],
+      "correctAnswer": "c",
+      "explanation": "Amazon Translate is a neural machine translation service that delivers fast, high-quality language translation. It supports many language pairs for content localization.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 97,
+      "question": "A computer vision team needs thousands of bounding-box annotations for their training images but wants to reduce labeling costs by using ML to pre-label easy examples and only sending ambiguous ones to human reviewers. Which service supports this workflow?",
+      "options": [
+        { "id": "a", "text": "Amazon SageMaker Ground Truth, which combines ML-assisted and human labeling for training datasets" },
+        { "id": "b", "text": "Amazon Rekognition Custom Labels, which trains custom object detection models" },
+        { "id": "c", "text": "Amazon Augmented AI (A2I), which adds human review to ML predictions in production" },
+        { "id": "d", "text": "Amazon SageMaker Autopilot, which automatically trains and tunes ML models" }
+      ],
+      "correctAnswer": "a",
+      "explanation": "SageMaker Ground Truth helps create high-quality labeled datasets for ML training. It combines human labelers with ML-assisted labeling to reduce costs and improve quality.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 98,
+      "question": "A company is deciding between Amazon SageMaker and Amazon Bedrock for a new project. The team has no ML engineers and wants to quickly build a customer-facing chatbot using an existing model. Which factor should drive their decision?",
+      "options": [
+        { "id": "a", "text": "SageMaker is always faster at inference than Bedrock for all model types" },
+        { "id": "b", "text": "Bedrock provides unlimited free access to all foundation models" },
+        { "id": "c", "text": "SageMaker only supports structured tabular data, not text or images" },
+        { "id": "d", "text": "Bedrock offers managed access to foundation models without requiring ML infrastructure expertise" }
+      ],
+      "correctAnswer": "d",
+      "explanation": "Choose SageMaker when you need custom model training, fine-tuning control, or specialized algorithms. Choose Bedrock when you need managed access to foundation models without ML infrastructure complexity.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 99,
+      "question": "Which TWO AWS services are specifically designed for natural language processing tasks? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Amazon Rekognition, which performs computer vision on images and video" },
+        { "id": "b", "text": "Amazon Comprehend, which provides sentiment analysis, entity recognition, and text insights" },
+        { "id": "c", "text": "Amazon Polly, which converts written text into synthesized speech audio" },
+        { "id": "d", "text": "Amazon Lex, which builds conversational interfaces with natural language understanding" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["b", "d"],
+      "explanation": "Amazon Comprehend provides NLP capabilities like sentiment analysis and entity recognition. Amazon Lex enables building conversational interfaces with NLU. Rekognition is for computer vision, and Polly is for speech synthesis.",
+      "domain": "AWS Managed AI Services"
+    },
+    {
+      "id": 100,
+      "question": "Which TWO AWS services are specifically designed for speech-related AI applications? (Select 2)",
+      "options": [
+        { "id": "a", "text": "Amazon Comprehend, which analyzes written text for sentiment and entities" },
+        { "id": "b", "text": "Amazon Transcribe, which converts spoken audio to written text" },
+        { "id": "c", "text": "Amazon Polly, which converts written text into lifelike spoken audio" },
+        { "id": "d", "text": "Amazon Textract, which extracts text and data from scanned documents" }
+      ],
+      "multiSelect": true,
+      "selectCount": 2,
+      "correctAnswers": ["b", "c"],
+      "explanation": "Amazon Transcribe provides speech-to-text conversion. Amazon Polly provides text-to-speech synthesis. Comprehend is for text analysis, and Textract is for document extraction, not speech.",
+      "domain": "AWS Managed AI Services"
+    }
+  ]
+}

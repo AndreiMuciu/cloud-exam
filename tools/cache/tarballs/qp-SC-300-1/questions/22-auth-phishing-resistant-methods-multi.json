@@ -1,0 +1,29 @@
+{
+    "id": "sc300-auth-phishing-resistant-methods-multi",
+    "type": "multi",
+    "question": "You are selecting authentication methods that satisfy the built-in \"Phishing-resistant MFA\" Conditional Access authentication strength. Which THREE methods qualify? (Select three.)",
+    "options": [
+        {
+            "text": "FIDO2 security keys",
+            "correct": true
+        },
+        {
+            "text": "Windows Hello for Business",
+            "correct": true
+        },
+        {
+            "text": "Certificate-based authentication (smart card or derived credential)",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Authenticator push notification with number matching",
+            "correct": false
+        },
+        {
+            "text": "SMS-based one-time passcode",
+            "correct": false
+        }
+    ],
+    "explanation": "**FIDO2 security keys**, **Windows Hello for Business**, and **certificate-based authentication** all bind the credential to a specific device or hardware key using public-key cryptography and cryptographically verify the origin (relying party) of the authentication request, so a look-alike phishing site cannot successfully capture or replay them. These three are exactly what Microsoft Entra ID's built-in \"Phishing-resistant MFA\" authentication strength accepts.\n\n**Why not the other options:**\n- **Microsoft Authenticator push with number matching** — number matching meaningfully reduces accidental approvals and blind MFA-fatigue taps, but the approval can still be triggered by a real-time adversary-in-the-middle proxy relaying the legitimate sign-in prompt; it is not classified as phishing-resistant.\n- **SMS-based one-time passcode** — SMS codes can be relayed or intercepted (as in the Halbrecht Financial Group incident) and are one of the weakest MFA methods against phishing and SIM-swap attacks; they do not satisfy the phishing-resistant authentication strength.",
+    "category": "Implement authentication and access management"
+}

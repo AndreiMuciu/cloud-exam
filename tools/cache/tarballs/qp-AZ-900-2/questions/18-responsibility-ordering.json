@@ -1,0 +1,19 @@
+{
+    "id": "az900-s2-18-responsibility-ordering",
+    "type": "ordering",
+    "question": "Arrange the following computing models from the one where your organization retains the **most** management responsibility to the one where it retains the **least**.",
+    "items": [
+        "Platform as a service (PaaS)",
+        "On-premises datacenter",
+        "Software as a service (SaaS)",
+        "Infrastructure as a service (IaaS)"
+    ],
+    "correctOrder": [
+        "On-premises datacenter",
+        "Infrastructure as a service (IaaS)",
+        "Platform as a service (PaaS)",
+        "Software as a service (SaaS)"
+    ],
+    "explanation": "The shared responsibility model forms a spectrum of who manages what:\n\n1. **On-premises datacenter** — The organization manages everything: facilities, hardware, network, OS, runtime, applications, and data.\n2. **IaaS** — The provider takes over the physical layer (buildings, servers, network hardware); the customer still manages the OS, runtime, applications, and data.\n3. **PaaS** — The provider additionally manages the operating system, middleware, and runtime; the customer manages applications, data, identities, and access.\n4. **SaaS** — The provider manages nearly the entire stack including the application itself; the customer is responsible mainly for its data, its devices, and its accounts and identities.",
+    "category": "Describe Cloud Concepts"
+}

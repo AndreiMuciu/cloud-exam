@@ -1,0 +1,28 @@
+{
+    "id": "sc500-s3-16-keyvault-capability-matching",
+    "type": "matching",
+    "question": "Match each Azure Key Vault capability to the requirement it satisfies.",
+    "sourceItems": [
+        "Purge protection",
+        "Key rotation policy",
+        "Event Grid integration",
+        "Azure Managed HSM",
+        "Private endpoint with public network access disabled"
+    ],
+    "targetSlots": [
+        "A deleted key must be unrecoverable by no one — even Owners must be unable to permanently purge it before the retention period ends",
+        "Encryption keys must automatically get a new version on a fixed schedule without manual steps",
+        "An operations team must be notified automatically when a secret or certificate approaches its expiry date",
+        "Regulatory requirements demand keys be protected by a single-tenant, FIPS 140-2 Level 3 validated hardware boundary that the customer administers",
+        "The vault must be reachable only from inside the corporate virtual network, never from the internet"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "explanation": "Each capability solves a distinct slice of key and secret lifecycle security:\n- **Purge protection** — soft delete alone lets authorized users *purge* (permanently delete) a soft-deleted object early; purge protection removes that ability for everyone, including subscription Owners, until the retention period elapses. It is the control against malicious or accidental permanent destruction.\n- **Key rotation policy** — defines automatic creation of a new key version on a schedule (or notice period before expiry) with no human involvement; applications referencing the key without a pinned version pick up new versions transparently.\n- **Event Grid integration** — Key Vault emits events such as *SecretNearExpiry* and *CertificateNearExpiry*; subscribing a Logic App, Function, or webhook to these events produces the automated notifications and renewal workflows operations teams need.\n- **Azure Managed HSM** — a single-tenant, FIPS 140-2 Level 3 validated hardware security module pool under the customer's own security domain and role model. Standard/Premium vaults are multi-tenant services (Premium keys are HSM-*backed*, but the service is shared); when the regulation says single-tenant hardware boundary the customer administers, Managed HSM is the answer.\n- **Private endpoint + public network access disabled** — puts the vault on a private IP in the VNet and turns off the public endpoint, making network reachability itself the control.\n\nThe classic confusions: purge protection vs soft delete (soft delete enables recovery; purge protection prevents early permanent deletion), rotation policy vs Event Grid (rotation *acts*, Event Grid *notifies*), and Premium vault vs Managed HSM (HSM-backed multi-tenant vs dedicated single-tenant).",
+    "category": "Manage identity, access, and governance"
+}

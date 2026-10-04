@@ -1,0 +1,24 @@
+{
+    "id": "sc500-23-disk-encryption-choice",
+    "question": "For a fleet of Azure VMs, security requires that the OS disk, data disks, **and the temp disk plus disk caches** are encrypted end-to-end between the VM host and storage — and the solution must not install any agent or extension inside the guest operating system. Which encryption option should you enable?",
+    "options": [
+        {
+            "text": "Encryption at host",
+            "correct": true
+        },
+        {
+            "text": "Azure Disk Encryption (ADE) with BitLocker/DM-Crypt",
+            "correct": false
+        },
+        {
+            "text": "Server-side encryption of managed disks with a customer-managed key (CMK)",
+            "correct": false
+        },
+        {
+            "text": "Confidential disk encryption",
+            "correct": false
+        }
+    ],
+    "explanation": "**Encryption at host** encrypts data on the VM host itself, so OS and data disk traffic, the **temp disk**, and **disk caches** are all encrypted end-to-end between the host and Azure Storage. It is a platform capability enabled on the VM — nothing is installed inside the guest OS.\n\n**Why not the other options:**\n- **Azure Disk Encryption (ADE)** — ADE runs BitLocker (Windows) or DM-Crypt (Linux) *inside the guest* via a VM extension, which violates the no-agent requirement.\n- **Server-side encryption with CMK** — SSE encrypts managed disks at rest in the storage backend, but by itself it does not cover the temp disk or cache data flowing between the host and storage; the CMK choice changes key ownership, not coverage.\n- **Confidential disk encryption** — This binds the **OS disk only** to the confidential VM's TPM as part of confidential computing; it does not address data disks, temp disks, or caches for a general VM fleet.",
+    "category": "Secure compute"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_wexcombe_polytechnic",
+    "tabs": [
+        {
+            "title": "Institution Overview",
+            "content": "**Wexcombe Polytechnic** is a technical university with 18,000 students, 1,200 staff, and an active research division. The institution uses Microsoft Entra ID as its identity platform and Microsoft 365 for teaching and administration. Several student-facing applications run in Azure.\n\n**Current Environment:**\n- Visiting researchers from partner universities need access to shared research workspaces for the duration of joint projects.\n- The IT helpdesk logs roughly 400 password-reset tickets per month, most of them from students at the start of each term.\n- A room-booking web application runs on Azure virtual machines and currently stores a database connection string in a configuration file on the server."
+        },
+        {
+            "title": "IT Modernization Goals",
+            "content": "The identity team at Wexcombe Polytechnic has set the following goals for the coming academic year:\n- **Collaborate without new credentials**: Give external research partners access using the accounts they already have at their home institutions, without creating and managing new Wexcombe passwords for them.\n- **Cut helpdesk load**: Let students securely recover access to their own accounts without contacting the helpdesk.\n- **Remove stored credentials**: Allow the room-booking application to authenticate to Azure services with an identity that is managed by the platform, so no secrets need to be stored in configuration files or rotated by hand."
+        }
+    ]
+}

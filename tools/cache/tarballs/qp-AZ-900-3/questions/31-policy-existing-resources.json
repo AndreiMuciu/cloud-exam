@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-31-policy-existing-resources",
+    "question": "A governance team assigns an Azure Policy with a **Deny** effect requiring every storage account to have a `costCenter` tag. Dozens of storage accounts that were created **before** the assignment do not have the tag. What happens to those existing storage accounts?",
+    "options": [
+        {
+            "text": "They are flagged as non-compliant in the policy compliance results but continue running unchanged",
+            "correct": true
+        },
+        {
+            "text": "They are automatically deleted at the next policy evaluation",
+            "correct": false
+        },
+        {
+            "text": "They are stopped until the required tag is added",
+            "correct": false
+        },
+        {
+            "text": "They are permanently exempt because the policy applies only to resources created after the assignment",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Deny** policy blocks **new create or update requests** that violate the rule — it stops future non-compliance at the door. Resources that already exist are **evaluated and marked non-compliant** in the policy compliance results, giving the team a clear inventory of what needs fixing, but Azure Policy **never deletes or stops existing resources** because of a deny rule. Existing violations can then be addressed manually or — for policies with effects like *modify* — through an explicitly created **remediation task**.\n\n**Why not the other options:**\n- **Automatically deleted** — Azure Policy has no effect that deletes existing resources; destructive cleanup is never automatic.\n- **Stopped until the tag is added** — Policy evaluation does not change a resource's running state; non-compliant resources keep serving traffic.\n- **Permanently exempt** — Existing resources are not ignored: they appear in compliance reporting as non-compliant. (Exemptions do exist in Azure Policy, but only when an administrator explicitly creates one.)",
+    "category": "Describe Azure Management and Governance"
+}

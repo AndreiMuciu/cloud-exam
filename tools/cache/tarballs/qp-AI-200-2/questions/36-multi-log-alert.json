@@ -1,0 +1,29 @@
+{
+    "id": "ai200-s2-36-multi-log-alert",
+    "type": "multi",
+    "question": "Operations must receive an **email within minutes** whenever the checkout API's failure rate, computed from the `AppRequests` table, exceeds 5% over a 15-minute window. The KQL query that computes the failure percentage already exists.\n\nWhich **two** resources should you create? (Select two.)",
+    "options": [
+        {
+            "text": "A log search alert rule that runs the KQL query on a schedule and fires when the failure percentage crosses the 5% threshold.",
+            "correct": true
+        },
+        {
+            "text": "An action group with an email notification, referenced by the alert rule.",
+            "correct": true
+        },
+        {
+            "text": "An Application Insights availability (URL ping) test against the checkout endpoint.",
+            "correct": false
+        },
+        {
+            "text": "An autoscale rule on the compute resource that triggers when failures increase.",
+            "correct": false
+        },
+        {
+            "text": "An Azure Monitor workbook that visualizes the failure percentage over time.",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Monitor alerting splits *detection* from *notification*. A **log search alert rule** is the detection half: it runs your KQL on a schedule (for example every 5 minutes over a 15-minute window) and enters the fired state when the computed value crosses the threshold. An **action group** is the notification half: it defines who gets told and how (email, SMS, webhook, and so on), and the alert rule references it. Both resources are required — a rule with no action group fires silently, and an action group with no rule never triggers.\n\n**Why not the other options:**\n- **Availability test** — An outside-in probe that checks whether a URL answers from global test points. It cannot compute a *percentage of failed application requests* from `AppRequests`, and a service can be reachable while 20% of real requests fail.\n- **Autoscale rule** — Changes instance counts in response to metrics. It sends no email, and a rising failure rate (for example from a bad deployment) is rarely solved by adding replicas.\n- **Workbook** — Interactive visualization for humans who are already looking. Workbooks evaluate nothing on a schedule and send no notifications.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

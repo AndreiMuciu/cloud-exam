@@ -1,0 +1,13 @@
+{
+    "id": "case_study_brightharbor_logistics",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Brightharbor Logistics** is a regional parcel delivery company that handles around 80,000 deliveries per day. The company runs a relational order-management database that records every pickup, transfer, and delivery as it happens.\n\n**Current Data Landscape:**\n- **Order records** are stored in relational tables with a fixed schema (order ID, customer, addresses, status, timestamps).\n- **Driver mobile apps** emit JSON event messages during each route. Events share common fields (driver ID, timestamp) but include different optional properties depending on the event type (traffic delay, failed delivery attempt, temperature alert).\n- **Proof-of-delivery photos** captured at each drop-off are uploaded as image files."
+        },
+        {
+            "title": "Business Goals",
+            "content": "Brightharbor Logistics wants to modernize its data estate on Azure:\n- Keep the order-management system fast and reliable for thousands of small concurrent inserts and updates throughout the day.\n- Build a separate reporting environment so that route-performance analysis does not slow down live order processing.\n- Hire the right specialists: someone to keep the databases secure, backed up, and performant; someone to build the pipelines that move and reshape data for reporting; and someone to turn the curated data into dashboards for operations managers."
+        }
+    ]
+}

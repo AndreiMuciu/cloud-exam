@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-storage-immutability",
+    "type": "single",
+    "question": "Perrigold Foods must enforce the regulatory retention rule for the **release-certificates** container in **stperrigoldqa**:\n\n- Once written, certificates can be **read but never modified or deleted** for exactly **five years** from creation — even by storage account administrators and Owners\n- After five years, the documents must become deletable again\n- The protection must be enforced by the storage platform itself\n\nWhat should you configure on the release-certificates container?",
+    "options": [
+        { "text": "A time-based retention policy for immutable storage with a five-year retention interval, and lock the policy", "correct": true },
+        { "text": "A legal hold on the container, removed by an administrator after five years", "correct": false },
+        { "text": "A CanNotDelete resource lock on the storage account", "correct": false },
+        { "text": "Blob soft delete with the maximum retention period", "correct": false }
+    ],
+    "explanation": "Immutable storage with a **time-based retention policy** is Azure's WORM (write once, read many) enforcement: while the policy is in effect, blobs in the container can be read but **cannot be overwritten or deleted by anyone** — not administrators, not Owners — because the storage service itself rejects the operations. The retention interval is measured **per blob from its creation**, so each certificate is protected for exactly five years, after which that blob becomes deletable again — matching the data-minimization requirement. **Locking** the policy makes the protection irreversible and compliant: a locked policy's interval can be extended but the policy cannot be removed, so the guarantee cannot be undone by an administrator.\n\n**Why not the other options:**\n- **Legal hold**: a legal hold is indefinite — it has **no retention period** and protects blobs only until someone explicitly clears the hold. Expiry would depend on an administrator remembering to act (a procedure, not platform enforcement), and the requirement is a fixed five-year clock per document.\n- **CanNotDelete resource lock**: management locks operate on the **Azure resource** (the storage account) through the control plane. They do not stop data-plane operations — a blob inside the account can still be overwritten or deleted while the account itself is locked.\n- **Blob soft delete**: soft delete is a *recovery* feature — it retains deleted or overwritten data for a period so it can be restored. It does not **prevent** modification or deletion, so it fails the never-modified requirement outright (and its retention maximum is far shorter than five years).",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_perrigold.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az500-03-vanguard-break-glass-monitoring",
+    "question": "Vanguard Defense needs to monitor their break-glass accounts for any sign-in attempts. Which service should you use to create an alert that triggers whenever a specific break-glass account successfully or unsuccessfully authenticates?",
+    "options": [
+        {
+            "text": "Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor Log Alerts based on Entra Sign-in logs",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Identity",
+            "correct": false
+        }
+    ],
+    "explanation": "By streaming Microsoft Entra **Sign-in logs** to a Log Analytics workspace, you can create an **Azure Monitor Log Alert** query (e.g., filtering for the specific UPN of the break-glass account) to notify the security team immediately upon any activity.\n\n**Why not the other options:**\n- **Azure Policy** — Evaluates resource state, not sign-in events.\n- **Entra ID Protection** — Detects identity risks (like leaked credentials), but a specific alert on a specific user regardless of risk is best handled by log alerts.\n- **Defender for Identity** — Monitors on-premises AD signals, not cloud-only break-glass account activity.",
+    "category": "Manage identity and access",
+    "caseStudy": "scenarios/case_study_vanguard_defense.json"
+}

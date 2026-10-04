@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-selwyn-containerapps",
+    "question": "You need to recommend a platform for the containerized seat-availability and fare-search microservices. The platform must scale to zero overnight, scale out automatically on event-driven load during fare sales, and must not require the four-person team to operate a container orchestrator.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Kubernetes Service (AKS) with the cluster autoscaler and KEDA installed",
+            "correct": false
+        },
+        {
+            "text": "Azure Container Instances (ACI) container groups behind an Azure Load Balancer",
+            "correct": false
+        },
+        {
+            "text": "Azure Container Apps with scale rules based on HTTP traffic and event sources",
+            "correct": true
+        },
+        {
+            "text": "Azure App Service with custom containers on a Premium v3 plan",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Container Apps** is designed for exactly this profile — event-driven microservices run by teams that want Kubernetes-class capabilities without operating Kubernetes:\n\n- **Scale to zero** — Container Apps natively scales replicas to zero when idle, so the overnight cost drops to (near) nothing; on the Consumption plan you are billed per vCPU-second and memory only while replicas run\n- **Event-driven autoscaling** — Scaling is powered by KEDA under the hood: scale rules can target HTTP concurrency, queue depth, Event Hubs lag, and dozens of other event sources — with no KEDA installation or management\n- **No orchestrator to run** — The underlying Kubernetes is fully managed and invisible; the team deploys container images and revisions, not clusters, node pools, or upgrades\n\n**Why not the other options:**\n- **AKS with autoscaler + KEDA** — Functionally capable of all the scaling requirements, but the team would own cluster upgrades, node images, networking add-ons, and KEDA lifecycle — explicitly ruled out for a four-person team with no Kubernetes experience\n- **ACI behind a load balancer** — ACI runs individual container groups; it has no built-in autoscaling, no scale-to-zero triggered by events, and no revision/traffic management — you would have to build the orchestration yourself\n- **App Service with containers** — Solid for web apps, but autoscale is metric/schedule-based rather than event-source-based, and a Premium plan cannot scale to zero — you pay for the plan 24/7, wasting money overnight",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_selwyn_airways.json"
+}

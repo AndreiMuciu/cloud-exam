@@ -1,0 +1,24 @@
+{
+    "id": "sc900-23-web-application-firewall",
+    "question": "A company hosts a public web application in Azure and needs centralized protection against common web-based attacks such as SQL injection and cross-site scripting (XSS), without modifying the application code.\n\nWhich Azure service should the company use?",
+    "options": [
+        {
+            "text": "A network security group (NSG)",
+            "correct": false
+        },
+        {
+            "text": "Azure Web Application Firewall (WAF)",
+            "correct": true
+        },
+        {
+            "text": "Azure DDoS Protection",
+            "correct": false
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Web Application Firewall (WAF)** provides centralized protection of web applications against common exploits and vulnerabilities — including SQL injection and cross-site scripting — using managed rule sets based on well-known lists of web attack patterns. Because WAF inspects HTTP/HTTPS requests at the edge (on Azure Application Gateway or Azure Front Door), no application code changes are needed.\n\n**Why not the other options:**\n- **A network security group (NSG)** — NSGs filter traffic by IP address, port, and protocol only; they cannot inspect HTTP request contents to recognize injection or scripting attacks.\n- **Azure DDoS Protection** — DDoS Protection mitigates traffic-flood attacks that aim to exhaust resources; it does not detect malicious payloads inside individual web requests.\n- **Azure Bastion** — Bastion provides secure RDP/SSH access to virtual machines for administrators; it plays no role in protecting a public web application from web attacks.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

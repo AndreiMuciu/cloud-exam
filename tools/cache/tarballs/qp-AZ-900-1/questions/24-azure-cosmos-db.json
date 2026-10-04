@@ -1,0 +1,24 @@
+{
+    "id": "az900-24-azure-cosmos-db",
+    "question": "Which Azure database service provides a globally distributed, multi-model database with guaranteed single-digit millisecond latency at the 99th percentile?",
+    "options": [
+        {
+            "text": "Azure SQL Database",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB",
+            "correct": true
+        },
+        {
+            "text": "Azure Database for PostgreSQL",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Managed Instance",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cosmos DB** is a globally distributed, multi-model database service that supports various data models (NoSQL, document, key-value, graph, and column-family). It offers high availability and low latency with automatic and manual scalability.\n\n**Why not the other options:**\n- **Azure SQL Database** — A relational database based on SQL Server; while highly available, it isn't designed as a multi-model, natively globally distributed NoSQL database by default in the same way as Cosmos DB.\n- **PostgreSQL** — A relational database service.\n- **SQL Managed Instance** — For migrating existing SQL Server workloads to the cloud with near 100% compatibility.",
+    "category": "Describe Azure Architecture and Services"
+}

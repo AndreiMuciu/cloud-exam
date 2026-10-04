@@ -1,0 +1,20 @@
+{
+    "id": "gen-19-log-transformation",
+    "question": "Before storing logs in Log Analytics, you need to transform and filter the data. What query language should you use in the Data Collection Rule transformation?",
+    "options": [
+        {
+            "text": "KQL (Kusto Query Language)",
+            "correct": true
+        },
+        {
+            "text": "WQL (WMI Query Language)",
+            "correct": false
+        },
+        {
+            "text": "XPath",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **KQL (Kusto Query Language)**.\n\nData Collection Rules support ingestion-time transformations using KQL. This allows you to filter, transform, and enrich data before it's stored in the Log Analytics workspace.\n\n- WQL is for querying Windows Management Instrumentation, not Azure Monitor.\n- XPath is for querying XML documents and is used in Event Log collection for filtering, but not for data transformation in DCRs.",
+    "category": "Design Identity, Governance, and Monitoring"
+}

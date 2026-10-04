@@ -1,0 +1,30 @@
+{
+    "id": "gen-03-hybrid-identity-strategy",
+    "type": "multi",
+    "question": "You are designing the identity strategy for Stratos Retail. The company plans to migrate to a hybrid identity model to support Microsoft 365 while maintaining legacy application access to the prod.stratos.com forest. Which two actions should you include in the recommendation? (Choose two.)",
+    "options": [
+        {
+            "text": "Deploy additional domain controllers for prod.stratos.com in Azure virtual networks",
+            "correct": true
+        },
+        {
+            "text": "Install and configure Microsoft Entra Connect in the on-premises environment",
+            "correct": true
+        },
+        {
+            "text": "Decommission all on-premises domain controllers and migrate to Azure AD DS",
+            "correct": false
+        },
+        {
+            "text": "Create a new Microsoft Entra ID tenant specifically for Azure workloads",
+            "correct": false
+        },
+        {
+            "text": "Assign the Global Administrator role to all regional IT managers",
+            "correct": false
+        }
+    ],
+    "explanation": "To support Microsoft 365 while maintaining legacy access in a hybrid model, two key steps are required:\n\n1. **Install Microsoft Entra Connect**: This is the essential tool for synchronizing identities from the on-premises AD forest (prod.stratos.com) to Microsoft Entra ID, enabling a single identity for users across both environments.\n2. **Deploy Domain Controllers in Azure**: By extending the prod.stratos.com forest into Azure via VMs in a VNet, applications hosted in Azure can authenticate locally even if the VPN/ExpressRoute link to on-premises fails.\n\n- Decommissioning on-premises DCs would break local legacy access.\n- Multiple tenants increase management complexity and fragment identity.\n- Over-assigning the Global Administrator role violates the principle of least privilege.",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_enterprise_migration.json"
+}

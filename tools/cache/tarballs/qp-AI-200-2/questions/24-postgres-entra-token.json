@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-24-postgres-entra-token",
+    "question": "A Python service running in Azure with a managed identity must connect to Azure Database for PostgreSQL flexible server. Company policy: **no database passwords may exist anywhere** — not in code, configuration, or Key Vault.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Enable Microsoft Entra authentication on the server, create a PostgreSQL principal for the managed identity, and in code pass `DefaultAzureCredential().get_token(\"https://ossrdbms-aad.database.windows.net/.default\").token` as the connection's password.",
+            "correct": true
+        },
+        {
+            "text": "Generate a strong PostgreSQL password, store it in Azure Key Vault, and have the service fetch it with its managed identity at startup.",
+            "correct": false
+        },
+        {
+            "text": "Acquire a token for the scope `https://database.windows.net/.default` and pass it as the connection's password.",
+            "correct": false
+        },
+        {
+            "text": "Nothing extra is needed — because the service has a managed identity, PostgreSQL accepts its connections automatically.",
+            "correct": false
+        }
+    ],
+    "explanation": "Passwordless PostgreSQL access has three parts: **enable Microsoft Entra authentication** on the flexible server, **map the managed identity to a PostgreSQL role** (so the database knows the principal), and at runtime **exchange the identity for an access token** using the PostgreSQL-specific scope `https://ossrdbms-aad.database.windows.net/.default`. The short-lived token is sent in the password field of an SSL connection — no long-lived secret ever exists.\n\n**Why not the other options:**\n- **Password in Key Vault** — Still a password: it exists, must be rotated, and can leak. The policy says no database passwords *anywhere*, and Key Vault is somewhere.\n- **`https://database.windows.net/.default`** — That is the scope for **Azure SQL Database**. A token issued for the wrong resource is rejected by PostgreSQL's Entra authentication; the `ossrdbms-aad` resource is specific to Azure Database for open-source engines.\n- **\"It just works\"** — A managed identity is only an identity. The server must have Entra authentication enabled and a corresponding PostgreSQL principal created, and the client must actually request and present a token; none of that happens implicitly.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

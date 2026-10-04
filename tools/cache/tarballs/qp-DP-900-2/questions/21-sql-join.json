@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-21-sql-join",
+    "question": "A report must list each order together with the name of the customer who placed it. Orders are stored in an `Orders` table and customer names in a `Customers` table, and the two tables share a related `CustomerID` column.\n\nWhich SQL capability should the report query use to combine columns from both tables into a single result set?",
+    "options": [
+        {
+            "text": "A JOIN between the two tables on the CustomerID column",
+            "correct": true
+        },
+        {
+            "text": "A UNION of the two tables",
+            "correct": false
+        },
+        {
+            "text": "A GROUP BY clause on the CustomerID column",
+            "correct": false
+        },
+        {
+            "text": "Two separate SELECT statements run one after the other",
+            "correct": false
+        }
+    ],
+    "explanation": "A **JOIN** combines rows from two (or more) tables **based on a related column** — here, `Orders.CustomerID = Customers.CustomerID`. The result set can then include columns from both tables in the same row, such as the order details alongside the customer's name. Joining related tables through key columns is the fundamental way relational databases reassemble normalized data for reporting.\n\n**Why not the other options:**\n- **A UNION of the two tables** — UNION stacks the *rows* of two result sets **vertically** and requires them to have compatible columns. It cannot place an order and its customer's name side by side in one row.\n- **A GROUP BY clause on the CustomerID column** — GROUP BY aggregates rows *within one result set* (for example, counting orders per customer). It does not bring in columns from a second table.\n- **Two separate SELECT statements run one after the other** — This returns two disconnected result sets and pushes the work of matching orders to customers onto the application. The database engine's JOIN does this matching efficiently in a single query.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

@@ -1,0 +1,26 @@
+{
+    "id": "az900-s2-02-thornbury-serverless",
+    "type": "multi",
+    "question": "Thornbury’s engineering team wants to rebuild the customer notification component using a **serverless** approach. Which **two** statements accurately describe serverless computing? (Select two.)",
+    "options": [
+        {
+            "text": "The cloud provider automatically provisions, scales, and manages the infrastructure that runs the code",
+            "correct": true
+        },
+        {
+            "text": "Billing is based on actual executions and resource consumption rather than pre-purchased server capacity",
+            "correct": true
+        },
+        {
+            "text": "The development team must select, configure, and patch the operating system of each server",
+            "correct": false
+        },
+        {
+            "text": "Serverless computing means the application code does not run on any servers",
+            "correct": false
+        }
+    ],
+    "explanation": "Serverless computing (for example, Azure Functions) abstracts the servers away from the developer: the platform **automatically provisions and scales** the underlying infrastructure in response to events, and you **pay for what actually runs** — executions, execution time, and resources consumed — rather than for idle reserved capacity. This fits Thornbury’s bursty, event-driven notification workload perfectly.\n\n**Why not the other options:**\n- **Selecting and patching the operating system** — That describes IaaS. In a serverless model the provider manages the OS and runtime entirely; that is the main point of the model.\n- **No servers involved** — Servers absolutely still exist; \"serverless\" only means the customer neither sees nor manages them.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_thornbury_logistics.json"
+}

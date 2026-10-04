@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-13-digital-signatures",
+    "question": "A procurement officer receives a digitally signed contract and wants to verify that the document really came from the claimed signer and has not been altered since it was signed.\n\nWhich key is used to verify the digital signature?",
+    "options": [
+        {
+            "text": "The signer's public key",
+            "correct": true
+        },
+        {
+            "text": "The signer's private key",
+            "correct": false
+        },
+        {
+            "text": "The recipient's private key",
+            "correct": false
+        },
+        {
+            "text": "A shared symmetric key known to both parties",
+            "correct": false
+        }
+    ],
+    "explanation": "Digital signing uses **asymmetric cryptography**, where a key pair consists of a mathematically related private key and public key. The signer creates the signature with their **private key** (which only they hold), and anyone can verify it with the signer's **public key** (which is freely distributable). Successful verification proves two things: the document was signed by the holder of the private key (authenticity) and it has not changed since signing (integrity).\n\n**Why not the other options:**\n- **The signer's private key** — The private key is what *creates* the signature. It must never be shared, so it cannot be what recipients use to verify. If verification required the signer's private key, the signer would have to give away the very secret that makes the signature trustworthy.\n- **The recipient's private key** — The recipient's own key pair plays no role in verifying someone else's signature. A recipient's private key is used to *decrypt* messages that were encrypted to the recipient — a different operation from signature verification.\n- **A shared symmetric key** — Symmetric encryption uses one shared key to encrypt and decrypt data. Digital signatures specifically rely on asymmetric key pairs precisely so that verification does not require sharing any secret.",
+    "category": "Describe the concepts of security, compliance, and identity"
+}

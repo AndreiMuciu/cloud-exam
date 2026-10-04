@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-12-dunmoral-purview-audit",
+    "question": "You need to give Dunmoral Airways' SOC analysts the ability to search audited Microsoft 365 user and admin activities (mailbox access, SharePoint file operations, Entra admin changes) from the Microsoft Defender portal during incident investigations. What should you do?",
+    "options": [
+        {
+            "text": "Verify that Microsoft Purview auditing is enabled for the tenant, grant the analysts a role that includes audit search permissions, and have them query the Purview Audit log from the unified Microsoft Defender portal during investigations",
+            "correct": true
+        },
+        {
+            "text": "Install the Azure Monitor Agent on the SharePoint Online and Exchange Online servers and create a data collection rule that forwards their security event logs",
+            "correct": false
+        },
+        {
+            "text": "Enable Microsoft Defender for Storage on the Microsoft 365 tenant so that file operations in SharePoint generate security alerts",
+            "correct": false
+        },
+        {
+            "text": "Export the Entra ID sign-in logs to a storage account and have analysts download the CSV files when a case involves Microsoft 365",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Purview Audit** is the unified audit log for Microsoft 365 — it records user and admin activities across Exchange Online, SharePoint Online, Teams, and Entra ID. Auditing is on by default for most tenants but should be verified, and searching requires an appropriate audit role. The audit search experience is integrated into the **unified Microsoft Defender portal** (security.microsoft.com), so SOC analysts can query Purview Audit records alongside their incident data without leaving the portal or filing tickets with the Microsoft 365 team — this is exactly the SC-500 skill \"query Microsoft Purview Audit in Defender XDR.\"\n\n**Why not the other options:**\n- **Azure Monitor Agent on SharePoint/Exchange Online \"servers\"** — SharePoint Online and Exchange Online are SaaS services; there are no customer-accessible servers to install agents on. M365 activity visibility comes from the service's own audit pipeline.\n- **Defender for Storage on the tenant** — Defender for Storage protects *Azure Storage accounts*; it has no relationship to SharePoint Online document libraries or a Microsoft 365 tenant.\n- **Exporting sign-in logs to CSV** — sign-in logs cover authentication only, not mailbox or file operations; manual CSV downloads also fail the requirement for analysts to search activities directly from their security tooling.",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_dunmoral_airways.json"
+}

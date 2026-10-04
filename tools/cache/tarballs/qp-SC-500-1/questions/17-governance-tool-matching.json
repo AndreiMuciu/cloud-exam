@@ -1,0 +1,28 @@
+{
+    "id": "sc500-17-governance-tool-matching",
+    "type": "matching",
+    "question": "Match each Azure governance or identity capability to the requirement it satisfies.",
+    "sourceItems": [
+        "Access reviews",
+        "Regulatory compliance dashboard in Microsoft Defender for Cloud",
+        "Azure Policy with the Deny effect",
+        "Resource lock (CanNotDelete)",
+        "Microsoft Entra Privileged Identity Management (PIM)"
+    ],
+    "targetSlots": [
+        "Block virtual machine deployments in non-approved Azure regions at request time",
+        "Prevent anyone from deleting the production resource group while still allowing updates",
+        "Provide time-boxed, approval-gated activation of the Owner role",
+        "Recertify guest users' membership in privileged groups every 90 days",
+        "Track how the environment measures against PCI DSS controls across subscriptions"
+    ],
+    "correctMapping": [
+        2,
+        3,
+        4,
+        0,
+        1
+    ],
+    "explanation": "- **Azure Policy (Deny)** evaluates resource requests and rejects deployments to disallowed regions before they happen.\n- **CanNotDelete lock** stops deletion of the resource group and its contents but leaves read/modify operations intact.\n- **PIM** converts standing role assignments into eligible ones that must be activated just-in-time, with configurable maximum duration and approval.\n- **Access reviews** periodically recertify group membership and role assignments — reviewers approve or remove each guest on a schedule.\n- The **regulatory compliance dashboard** in Defender for Cloud continuously assesses resources against assigned standards such as PCI DSS and shows passing/failing controls.\n\nNote the distinctions: a lock cannot block deployments by region (that is Policy), Policy cannot time-box role activation (that is PIM), and PIM activates roles but does not recertify existing group membership (that is access reviews).",
+    "category": "Manage identity, access, and governance"
+}

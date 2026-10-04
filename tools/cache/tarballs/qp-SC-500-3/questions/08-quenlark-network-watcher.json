@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-08-quenlark-network-watcher",
+    "question": "You need to give Quenlark Systems' operations team a repeatable way to see the combined set of security rules actually applied to a VM's network interface, and to determine which specific rule allows or denies a given flow (such as the blocked TCP 8443 call to the partner settlement API). Which Azure Network Watcher capabilities should they use?",
+    "options": [
+        {
+            "text": "Effective security rules to view the merged NSG rules (subnet-level plus NIC-level) applied to the VM's network interface, and IP flow verify to test the specific 5-tuple and identify the exact rule that allows or denies it",
+            "correct": true
+        },
+        {
+            "text": "Connection monitor to continuously probe the partner API, and packet capture to record the traffic for offline analysis in Wireshark",
+            "correct": false
+        },
+        {
+            "text": "Topology view to diagram the virtual network, and NSG flow logs sent to a storage account for later querying",
+            "correct": false
+        },
+        {
+            "text": "Next hop to determine where the VM's outbound traffic is routed, and VPN troubleshoot to inspect the gateway",
+            "correct": false
+        }
+    ],
+    "explanation": "These two Network Watcher diagnostics answer exactly the two questions asked. **Effective security rules** computes the *combined* rule set a network interface actually experiences — merging the NSG associated with the subnet and the NSG associated with the NIC, including default rules — so nobody has to mentally merge five NSGs. **IP flow verify** takes a specific 5-tuple (source/destination IP, port, protocol, direction), evaluates it against those effective rules, and returns allow or deny **plus the name of the specific rule responsible** — turning the day of guesswork into a single query for the blocked TCP 8443 flow.\n\n**Why not the other options:**\n- **Connection monitor + packet capture** — connection monitor measures reachability and latency over time but doesn't name the NSG rule at fault; packet capture records packets on the wire — a blocked flow mostly shows *absence* of traffic and still doesn't tell you which rule dropped it.\n- **Topology + NSG flow logs** — topology is a visual inventory of network resources, not a rule evaluation. Flow logs record allowed/denied flows after the fact and are excellent for auditing and traffic analytics, but querying them is retrospective analysis, not the on-demand \"which rule blocks this flow\" answer the team needs.\n- **Next hop + VPN troubleshoot** — next hop answers *routing* questions (UDR/appliance path), not security rule questions; VPN troubleshoot is for gateway connectivity issues. The scenario's problem is an NSG decision, not routing or VPN.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_quenlark_systems.json"
+}

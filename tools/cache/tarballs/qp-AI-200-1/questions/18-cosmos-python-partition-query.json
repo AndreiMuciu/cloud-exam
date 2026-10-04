@@ -1,0 +1,24 @@
+{
+    "id": "ai200-18-cosmos-python-partition-query",
+    "question": "A Python service reads chat transcripts from an Azure Cosmos DB for NoSQL container partitioned on `/tenantId`. For one tenant at a time, it must return recent transcripts with the lowest possible RU charge and no risk of SQL injection from the user-supplied tenant value.\n\nWhich code should you use?",
+    "options": [
+        {
+            "text": "```python\nitems = container.query_items(\n    query=\"SELECT * FROM c WHERE c.tenantId = @tid AND c.createdAt > @since\",\n    parameters=[\n        {\"name\": \"@tid\", \"value\": tenant_id},\n        {\"name\": \"@since\", \"value\": since_iso}\n    ],\n    partition_key=tenant_id\n)\n```",
+            "correct": true
+        },
+        {
+            "text": "```python\nitems = container.query_items(\n    query=f\"SELECT * FROM c WHERE c.tenantId = '{tenant_id}'\",\n    enable_cross_partition_query=True\n)\n```",
+            "correct": false
+        },
+        {
+            "text": "```python\nitems = [d for d in container.read_all_items()\n         if d[\"tenantId\"] == tenant_id and d[\"createdAt\"] > since_iso]\n```",
+            "correct": false
+        },
+        {
+            "text": "```python\nitems = container.read_item(item=tenant_id, partition_key=tenant_id)\n```",
+            "correct": false
+        }
+    ],
+    "explanation": "Passing `partition_key=tenant_id` scopes the query to a **single logical partition**, so Cosmos DB routes it to one physical partition instead of fanning out — the cheapest way to run a filtered query. Parameterized queries (`@tid`, `@since`) keep user input out of the query text, eliminating injection risk.\n\n**Why not the other options:**\n- **f-string with `enable_cross_partition_query=True`** — String interpolation of `tenant_id` is a SQL injection vector, and forcing a cross-partition fan-out makes every physical partition evaluate the query, multiplying RU cost for no benefit when the partition key value is known.\n- **`read_all_items` with Python filtering** — Reads the *entire container* and filters client-side; RU charge and latency grow with total data size, the opposite of the requirement.\n- **`read_item`** — A point read returns exactly one document by `id` + partition key. The `id` here is not the tenant ID, and the requirement is a filtered *set* of transcripts, so a single point read cannot satisfy it.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

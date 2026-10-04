@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-04-ostrella-azure-migrate",
+    "question": "Before moving its 120 VMware virtual machines to Azure, Ostrella Airways' IT director wants a single service that can discover and inventory the existing servers, assess their readiness to run in Azure, and estimate what the migrated servers will cost per month. Which Azure service should Ostrella use?",
+    "options": [
+        {
+            "text": "Azure Migrate",
+            "correct": true
+        },
+        {
+            "text": "Azure Data Box",
+            "correct": false
+        },
+        {
+            "text": "Azure Site Recovery",
+            "correct": false
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Migrate** is Azure's central hub for migration projects. It can **discover** on-premises servers (including VMware and Hyper-V virtual machines), run an automated **readiness assessment** that flags compatibility issues, recommend right-sized Azure VM targets, and produce **monthly cost estimates** for the migrated workloads — exactly the three things the IT director asked for — and then orchestrate the actual migration.\n\n**Why not the other options:**\n- **Azure Data Box** — A physical appliance for shipping large volumes of *data* into Azure when the network is too slow; it does not inventory servers, assess VM readiness, or estimate compute costs.\n- **Azure Site Recovery** — Replicates virtual machines for **disaster recovery** failover; while related to workload mobility, it is not the assessment-and-planning tool for a migration project.\n- **Azure Advisor** — Recommends improvements for resources **already deployed in Azure**; it cannot discover or assess on-premises VMware machines.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_ostrella_airways.json"
+}

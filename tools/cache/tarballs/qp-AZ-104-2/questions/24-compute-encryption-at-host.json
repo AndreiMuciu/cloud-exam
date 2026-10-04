@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-compute-encryption-at-host",
+    "type": "single",
+    "question": "Your subscription has never used **encryption at host**. You plan to enable encryption at host on several existing Azure virtual machines whose sizes support the feature.\n\nWhat should you do first?",
+    "options": [
+        { "text": "Register the **EncryptionAtHost** feature for the Microsoft.Compute resource provider in the subscription, for example: `Register-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute`", "correct": true },
+        { "text": "Enable Azure Disk Encryption on each virtual machine", "correct": false },
+        { "text": "Create a disk encryption set backed by a key vault that has purge protection enabled", "correct": false },
+        { "text": "Turn on the Encryption at host setting on each VM's Disks blade while the VMs are running", "correct": false }
+    ],
+    "explanation": "Encryption at host is gated behind a per-subscription **feature registration**. Before any VM in the subscription can use it, you must register the `EncryptionAtHost` feature under the `Microsoft.Compute` provider namespace (PowerShell `Register-AzProviderFeature`, or `az feature register --namespace Microsoft.Compute --name EncryptionAtHost`) and wait for the registration state to become *Registered*. Only then can you proceed with the per-VM work: **deallocate** each VM, enable encryption at host, and start it again. The feature encrypts the VM host's cache and data flows so that temp disks and disk caches are encrypted end to end with no performance impact on the VM.\n\n**Why not the other options:**\n- **Azure Disk Encryption (ADE)**: ADE (BitLocker/dm-crypt in-guest encryption) is a *different, mutually exclusive* technology — encryption at host **cannot** be enabled on a VM that uses ADE. Enabling ADE first would actively block the plan.\n- **Disk encryption set with purge protection**: A disk encryption set is required only if you want **customer-managed keys**. Encryption at host works fine with platform-managed keys, so this is not a prerequisite — and it is certainly not the *first* step.\n- **Enable on running VMs**: The encryption-at-host setting cannot be changed while a VM is running; each VM must be **deallocated** first. And even a deallocated VM cannot enable it until the subscription feature is registered.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

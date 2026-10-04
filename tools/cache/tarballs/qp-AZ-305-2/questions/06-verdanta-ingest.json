@@ -1,0 +1,26 @@
+{
+    "id": "az305-s2-verdanta-ingest",
+    "type": "multi",
+    "question": "You need to design the telemetry ingestion layer. The design must sustain millions of events per minute, buffer data when downstream consumers slow down, and automatically archive raw telemetry to low-cost object storage without custom archiving code.\n\nWhich two components should you include in the design? (Choose two.)",
+    "options": [
+        {
+            "text": "Azure Event Hubs as the ingestion front door for the sensor telemetry stream",
+            "correct": true
+        },
+        {
+            "text": "Event Hubs Capture writing raw events to Azure Data Lake Storage Gen2",
+            "correct": true
+        },
+        {
+            "text": "Azure Service Bus Premium queues as the ingestion front door for the sensor telemetry stream",
+            "correct": false
+        },
+        {
+            "text": "A timer-triggered Azure Functions job that periodically copies events to Blob Storage",
+            "correct": false
+        }
+    ],
+    "explanation": "The two correct components form the standard Azure pattern for high-volume telemetry ingestion with automatic archival:\n\n1. **Azure Event Hubs** — A partitioned event-streaming service designed for millions of events per second. Producers append to a durable log; consumers read at their own pace using offsets, so a downstream slowdown never causes data loss — events remain in the log for the retention period. This is exactly the buffering behavior required\n2. **Event Hubs Capture** — A built-in, configuration-only feature that automatically writes the raw event stream to Azure Blob Storage or Data Lake Storage Gen2 in Avro format on a time/size window. It fulfils the \"archive without custom code\" requirement directly\n\n**Why not the other options:**\n- **Service Bus Premium queues** — Service Bus is enterprise *messaging* (per-message locks, transactions, dead-lettering) intended for lower-throughput, high-value messages. It is not designed for millions of telemetry events per minute, has no offset-based replay semantics, and has no built-in capture-to-storage feature\n- **Timer-triggered Functions copy job** — This is precisely the custom archiving code the requirements prohibit. It would need checkpointing, error handling, and scale management that Event Hubs Capture provides natively, adding operational burden for a small team",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_verdanta_agritech.json"
+}

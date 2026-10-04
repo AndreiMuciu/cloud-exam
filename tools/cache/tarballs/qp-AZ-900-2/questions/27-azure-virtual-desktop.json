@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-27-azure-virtual-desktop",
+    "question": "A firm hires seasonal call-center contractors who work from personal devices. The firm wants each contractor to receive a full, centrally managed Windows desktop environment streamed from the cloud, with no corporate data stored on the personal device. Which Azure service provides this?",
+    "options": [
+        {
+            "text": "Azure Virtual Desktop",
+            "correct": true
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": false
+        },
+        {
+            "text": "Azure App Service",
+            "correct": false
+        },
+        {
+            "text": "Azure Arc",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Virtual Desktop** is a desktop and application virtualization service that streams full Windows desktops (including multi-session Windows 11) from Azure to almost any device. The desktop, apps, and data stay in the cloud under central management and policy — nothing needs to live on the contractor’s personal laptop, and capacity can be scaled to match seasonal hiring.\n\n**Why not the other options:**\n- **Azure Bastion** — Gives administrators secure, browser-based RDP/SSH connections to individual VMs for management purposes; it is not a desktop-virtualization service for a workforce.\n- **Azure App Service** — Hosts web applications and APIs, not Windows desktop environments.\n- **Azure Arc** — Projects servers and Kubernetes clusters running *outside* Azure into Azure management; it does not deliver virtual desktops.",
+    "category": "Describe Azure Architecture and Services"
+}

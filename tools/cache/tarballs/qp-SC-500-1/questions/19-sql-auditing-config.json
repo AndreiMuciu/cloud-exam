@@ -1,0 +1,24 @@
+{
+    "id": "sc500-19-sql-auditing-config",
+    "question": "A logical SQL server hosts eight Azure SQL databases, and two more are added every quarter. Compliance requires that database events for **all current and future databases** on the server are audited, and that auditors can run interactive KQL queries over the audit records. What should you configure?",
+    "options": [
+        {
+            "text": "Enable server-level auditing on the logical server with a Log Analytics workspace as the destination",
+            "correct": true
+        },
+        {
+            "text": "Enable database-level auditing individually on each of the eight existing databases with a storage account as the destination",
+            "correct": false
+        },
+        {
+            "text": "Enable Transparent Data Encryption (TDE) on the logical server and review the encryption scan logs",
+            "correct": false
+        },
+        {
+            "text": "Enable Microsoft Defender for SQL on the server and rely on its security alerts as the audit trail",
+            "correct": false
+        }
+    ],
+    "explanation": "**Server-level auditing** applies to every database on the logical server — including databases created later — so new databases are covered automatically. Choosing **Log Analytics** as the destination writes audit records to the workspace, where auditors can query them interactively with KQL.\n\n**Why not the other options:**\n- **Per-database auditing to a storage account** — Database-level policies cover only the databases you configure, so future databases are missed; storage-account audit files (`.xel`) also aren't directly queryable with KQL.\n- **TDE** — Transparent Data Encryption protects data at rest against offline attacks on files and backups; it produces no record of database events and is not an auditing feature.\n- **Defender for SQL** — This is threat protection: it raises alerts for anomalies such as SQL injection or unusual access, but alerts are not a comprehensive audit trail of database events and don't satisfy an auditing mandate.",
+    "category": "Secure storage, databases, and networking"
+}

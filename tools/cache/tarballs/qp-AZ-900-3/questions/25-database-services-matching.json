@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-25-database-services-matching",
+    "type": "matching",
+    "question": "Match each Azure database service to the workload it fits best.",
+    "sourceItems": [
+        "Azure SQL Database",
+        "Azure SQL Managed Instance",
+        "Azure Database for PostgreSQL",
+        "Azure Cosmos DB"
+    ],
+    "targetSlots": [
+        "Host a new cloud application's relational data in a fully managed SQL engine without operating a database server",
+        "Lift and shift an existing SQL Server workload that depends on instance-level features such as cross-database queries and the SQL Server Agent",
+        "Run an application built on a popular open-source relational engine as a fully managed Azure service",
+        "Store JSON documents in a globally distributed NoSQL database that replicates data across regions with very low latency"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Azure SQL Database** — A fully managed **PaaS relational database** built on the SQL Server engine, ideal for new cloud applications: Azure handles patching, backups, and high availability, and there is no database *server* for the team to operate.\n- **Azure SQL Managed Instance** — Provides **near-complete compatibility with a full SQL Server instance**, including instance-scoped features like cross-database queries and the SQL Server Agent, making it the smoothest lift-and-shift target for existing SQL Server workloads that plain Azure SQL Database cannot accommodate.\n- **Azure Database for PostgreSQL** — A fully managed service for the **open-source PostgreSQL engine**, letting teams keep their existing open-source skills, drivers, and tools while Azure manages the infrastructure.\n- **Azure Cosmos DB** — A **globally distributed NoSQL database** that stores document (JSON), key-value, and graph data, replicating it across any number of regions with single-digit-millisecond latency for reads and writes close to users.",
+    "category": "Describe Azure Architecture and Services"
+}

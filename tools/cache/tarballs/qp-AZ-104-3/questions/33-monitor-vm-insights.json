@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-monitor-vm-insights",
+    "type": "single",
+    "question": "Before migrating a poorly documented three-tier application, you must discover — from the running environment itself — **which processes on its Azure VMs communicate with which other VMs and external endpoints**, including TCP port details, presented as an interactive dependency map.\n\nWhich Azure Monitor capability should you enable on the VMs?",
+    "options": [
+        { "text": "VM insights with the processes and dependencies (Map) feature", "correct": true },
+        { "text": "Boot diagnostics with a serial console screenshot", "correct": false },
+        { "text": "Network Watcher topology for the virtual network", "correct": false },
+        { "text": "A diagnostic setting that streams the VMs' platform metrics to a Log Analytics workspace", "correct": false }
+    ],
+    "explanation": "**VM insights** is Azure Monitor's curated monitoring experience for virtual machines. When you enable it **with the processes and dependencies option**, the agents collect running-process and TCP-connection data into the `VMProcess` and `VMConnection` tables, and the **Map** view renders an interactive dependency diagram: each VM's processes, the connections between them, the other VMs they talk to, external endpoints, and the ports in use. This is the standard discovery tool for undocumented application topologies before a migration.\n\n**Why not the other options:**\n- **Boot diagnostics**: captures a console screenshot and serial log to troubleshoot VMs that fail to boot or hang. It says nothing about processes or network dependencies on a healthy, running system.\n- **Network Watcher topology**: draws the **Azure resource** topology — subnets, NICs, NSGs, and their associations. It has no visibility inside the guest OS, so it cannot show which *processes* communicate or with whom; two VMs in the same subnet look connected regardless of whether the application ever sends a packet.\n- **Diagnostic setting for platform metrics**: platform metrics are numeric time series (CPU, disk, network bytes). Routing them to Log Analytics enables charts and alerts but contains no process inventory or connection mapping — you cannot reconstruct a dependency map from counters.",
+    "category": "Monitor and Maintain Azure Resources"
+}

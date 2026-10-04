@@ -1,0 +1,24 @@
+{
+    "id": "sc300-workload-defender-cloud-apps-session-policy",
+    "question": "A company has sanctioned a SaaS file-sharing application but wants to block file downloads only when users connect from unmanaged (non-compliant) devices, while still allowing full functionality from compliant, managed devices — without changing anything in the SaaS application itself.\n\nWhat should you configure?",
+    "options": [
+        {
+            "text": "Route the app through Conditional Access App Control in Microsoft Defender for Cloud Apps, and create a session policy that blocks downloads based on device compliance state",
+            "correct": true
+        },
+        {
+            "text": "Create a Conditional Access policy that blocks all access to the app from any device that is not compliant",
+            "correct": false
+        },
+        {
+            "text": "Configure Cloud Discovery in Microsoft Defender for Cloud Apps to generate a report of unsanctioned app usage",
+            "correct": false
+        },
+        {
+            "text": "Enable password-based single sign-on for the app and require a managed device to unlock the stored credential",
+            "correct": false
+        }
+    ],
+    "explanation": "**Conditional Access App Control**, powered by Microsoft Defender for Cloud Apps, reverse-proxies session traffic for a sanctioned app in real time, letting you apply granular **session policies** — such as blocking (or protecting) file downloads — that key off signals like device compliance, without any change to the SaaS application. This meets the requirement to allow full access from compliant devices while restricting only the download action on unmanaged ones.\n\n**Why not the other options:**\n- **Blocking all access from non-compliant devices** — this is an all-or-nothing block; it would prevent unmanaged-device users from any access at all, rather than the more nuanced \"still usable, but downloads blocked\" outcome required.\n- **Cloud Discovery** — Cloud Discovery analyzes network/log traffic to *identify* SaaS apps in use (shadow IT); it does not enforce in-session controls like blocking downloads for an already-sanctioned app.\n- **Password-based SSO with device-locked credential** — this only affects how a shared credential is unlocked; it doesn't provide session-level content controls like blocking downloads based on device compliance.",
+    "category": "Plan and implement workload identities"
+}

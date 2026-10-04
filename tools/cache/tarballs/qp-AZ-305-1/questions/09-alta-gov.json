@@ -1,0 +1,32 @@
+{
+    "id": "gen-07-external-user-governance",
+    "question": "Users from the alta-south.com tenant need access to SupplierPortal hosted in the alta-north.com subscription. The solution must support governed access with approval workflows.\n\nReview the **Organization Structure** exhibit to understand the environment details.",
+    "exhibits": [
+        {
+            "title": "Organization Structure",
+            "type": "markdown",
+            "content": "### Division & Tenant Mapping\n\n![Division Table](assets/images/division_tenant_table.svg)\n\n| Division | Azure Subscription | Microsoft Entra ID Tenant |\n| :--- | :--- | :--- |\n| North | Sub-North | alta-north.com |\n| South | Sub-South | alta-south.com |"
+        }
+    ],
+    "options": [
+        {
+            "text": "Configure Microsoft Entra ID joined devices for South division users",
+            "correct": false
+        },
+        {
+            "text": "Enable pass-through authentication in the alta-south.com tenant",
+            "correct": false
+        },
+        {
+            "text": "Use Microsoft Entra ID Governance entitlement management",
+            "correct": true
+        },
+        {
+            "text": "Configure Privileged Identity Management (PIM) for alta-south.com users",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Use Microsoft Entra ID Governance entitlement management**.\n\nEntitlement management enables you to define access packages with approval workflows for external users. This provides governed, auditable access to applications for users in other Microsoft Entra ID tenants.\n\n- Device join is for managing devices, not application access for external users.\n- Pass-through authentication is for authenticating on-premises AD users, not cross-tenant access.\n- PIM manages privileged role assignments within an organization, not external user access.",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_multi_tenant_app.json"
+}

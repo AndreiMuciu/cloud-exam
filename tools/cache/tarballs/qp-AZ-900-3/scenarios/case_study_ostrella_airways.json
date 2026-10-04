@@ -1,0 +1,13 @@
+{
+    "id": "case_study_ostrella_airways",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Ostrella Airways** is a regional airline operating short-haul routes between island and coastal cities. Its reservation and crew-scheduling systems run on roughly 120 VMware virtual machines in a co-located datacenter whose contract ends next year, so the airline is planning a move to Azure.\n\n**Current Workloads:**\n- A crew-scheduling application on a cluster of Windows Server virtual machines.\n- A customer-facing **booking website** maintained by a small web team that wants to stop managing operating systems entirely.\n- Assorted line-of-business VMs of varying ages and configurations."
+        },
+        {
+            "title": "Migration Requirements",
+            "content": "**Assessment:**\n- Before committing to the move, the IT director wants an **inventory of the existing VMware virtual machines**, an automated **readiness assessment** for running them in Azure, and **estimated monthly Azure costs** for the migrated servers.\n\n**Resilience:**\n- The crew-scheduling VMs must be protected from downtime caused by **host hardware failures and planned platform maintenance**. The airline operates in a single region and does **not** require the VMs to be spread across separate physical locations.\n\n**Web Team:**\n- The booking website should move to a managed offering where Azure patches the OS and web runtime, supports custom domains and TLS certificates, and can **scale automatically** during fare sales."
+        }
+    ]
+}

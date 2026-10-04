@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-verdanta-telemetry",
+    "question": "You need to recommend an analytics store for the sensor telemetry. The store must be optimized for high-volume time-series ingestion and must return sub-second aggregations over time windows for the agronomy team's interactive dashboards.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Cosmos DB for NoSQL with the analytical store enabled",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Explorer",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Database Hyperscale with columnstore indexes",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob Storage queried through Azure Synapse serverless SQL pools",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Data Explorer (ADX)** is purpose-built for exactly this workload profile:\n\n- **Ingestion** — ADX is engineered for continuous, high-throughput ingestion of telemetry, logs, and time-series data (it natively connects to Event Hubs and IoT Hub)\n- **Query performance** — Its columnar storage, automatic indexing of every column, and Kusto Query Language (KQL) time-series operators deliver sub-second aggregations over billions of rows, ideal for interactive dashboards that slice by time window, field, and sensor type\n- **Operational fit** — It is a fully managed service with built-in data retention and caching policies, matching the small platform team's preference for managed services\n\n**Why not the other options:**\n- **Cosmos DB with analytical store** — Cosmos DB excels at low-latency point reads/writes of JSON documents (that's why it fits the *configuration document* workload, not this one). The analytical store feeds Synapse for batch-style analytics, but it is not designed for sub-second interactive time-series exploration at this ingest volume, and per-request RU pricing makes 2 TB/day of telemetry ingestion costly\n- **SQL Hyperscale with columnstore** — Can handle large volumes, but a relational OLTP engine is not optimized for append-heavy telemetry at millions of events per minute, and achieving consistent sub-second time-window aggregations at this scale requires significant tuning that ADX provides out of the box\n- **Blob + Synapse serverless SQL** — Serverless SQL pools scan files on demand; queries over weeks of raw telemetry take seconds to minutes, not sub-second, and there is no low-latency ingestion path or indexing",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_verdanta_agritech.json"
+}

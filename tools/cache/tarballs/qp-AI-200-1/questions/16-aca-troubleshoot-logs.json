@@ -1,0 +1,24 @@
+{
+    "id": "ai200-16-aca-troubleshoot-logs",
+    "question": "After you deploy a new revision of a container app named `inference-api`, the revision shows **Provisioning failed** and 0 running replicas. Your application writes structured logs to stdout, but no application log lines appear for the new revision.\n\nWhich command gives you the platform-level events (image pull results, container create/start attempts, probe failures) needed to diagnose the failure?",
+    "options": [
+        {
+            "text": "az containerapp logs show --name inference-api --resource-group rg-ai --type system",
+            "correct": true
+        },
+        {
+            "text": "az containerapp logs show --name inference-api --resource-group rg-ai --type console",
+            "correct": false
+        },
+        {
+            "text": "az containerapp exec --name inference-api --resource-group rg-ai --command \"cat /var/log/app.log\"",
+            "correct": false
+        },
+        {
+            "text": "az containerapp revision list --name inference-api --resource-group rg-ai --output table",
+            "correct": false
+        }
+    ],
+    "explanation": "Container Apps separates **console logs** (your app's stdout/stderr) from **system logs** (platform events emitted by the environment: image pulls, container creation, startup/readiness probe results, scaling activity). When a revision fails to provision, the container often never starts, so there is nothing in the console stream — the diagnosis lives in the system log stream, retrieved with `--type system` (or from the `ContainerAppSystemLogs` table in Log Analytics).\n\n**Why not the other options:**\n- **`--type console`** — Streams the application's own stdout/stderr. The question states no application lines exist because the container never started; console logs cannot show image-pull or probe failures.\n- **`az containerapp exec`** — Opens a shell inside a *running* replica. With 0 running replicas there is nothing to exec into, and the failure happened before any file could be written.\n- **`az containerapp revision list`** — Shows revision names, states, and traffic weights. It confirms *that* provisioning failed (which you already know) but contains no event detail explaining *why*.",
+    "category": "Develop containerized solutions on Azure"
+}

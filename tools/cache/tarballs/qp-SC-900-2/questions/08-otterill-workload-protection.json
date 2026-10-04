@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-08-otterill-workload-protection",
+    "question": "Otterill Energy already reviews Microsoft Defender for Cloud posture recommendations, but the security team also wants its servers, storage accounts, and Azure SQL databases to generate real-time security alerts when suspicious activity occurs — such as brute-force sign-in attempts against a virtual machine or unusual access to metering data in storage.\n\nWhich Microsoft Defender for Cloud capability provides this?",
+    "options": [
+        {
+            "text": "Cloud workload protection through resource-specific Microsoft Defender plans",
+            "correct": true
+        },
+        {
+            "text": "Foundational Cloud Security Posture Management (CSPM)",
+            "correct": false
+        },
+        {
+            "text": "The secure score",
+            "correct": false
+        },
+        {
+            "text": "The asset inventory view",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Defender for Cloud has two broad pillars: posture management (CSPM) and **cloud workload protection (CWP)**. Cloud workload protection is delivered through **resource-specific Microsoft Defender plans** — such as Defender for Servers, Defender for Storage, and Defender for SQL — that provide **advanced threat detection and security alerts for the protected resource types**. Enabling these plans is what turns on real-time alerts for brute-force attempts, anomalous storage access, and suspicious database activity.\n\n**Why not the other options:**\n- **Foundational Cloud Security Posture Management (CSPM)** — CSPM continuously assesses *configuration* against security standards and produces hardening recommendations. It tells you a VM is exposed; it does not raise an alert while the VM is actively being attacked.\n- **The secure score** — The secure score is a number summarizing how much of the recommended posture work has been completed. It measures posture over time and generates no threat alerts.\n- **The asset inventory view** — Inventory shows which resources exist and their security state at a glance. It is a visibility feature, not a threat-detection engine.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_otterill_energy.json"
+}

@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-governance-mgmt-groups",
+    "type": "single",
+    "question": "Fernhollow University's Central IT team has built the following management group hierarchy:\n\n- Tenant Root Group\n  - **MG-Fernhollow**\n    - **MG-Academic** — contains Sub-Teaching and Sub-StudentLabs\n    - **MG-Research** — contains Sub-Research\n    - **MG-Operations** — contains Sub-Admin\n\nNext academic year, several new teaching subscriptions will be created. Before automating subscription placement, Central IT needs to confirm exactly where a newly created Azure subscription appears in the hierarchy by default.\n\nWhere is a newly created subscription placed?",
+    "options": [
+        { "text": "In the tenant root management group, unless the tenant's default management group setting has been changed", "correct": true },
+        { "text": "In MG-Academic, because it already contains the other teaching subscriptions", "correct": false },
+        { "text": "Outside the management group hierarchy, until an administrator manually adds it to a management group", "correct": false },
+        { "text": "In the management group where the account that created the subscription holds its highest role assignment", "correct": false }
+    ],
+    "explanation": "By default, every new subscription is added to the **tenant root management group** (also called the root management group). A tenant administrator can change this behavior by configuring the **default management group** hierarchy setting (Portal: root management group > Settings > Default management group, or the `Microsoft.Management/managementGroups/settings` API), so that new subscriptions land in a designated management group instead. Because Fernhollow has not changed this setting, Central IT should expect new teaching subscriptions to appear at the root and plan its automation (for example, an Azure Policy or a script that moves them under MG-Academic) accordingly.\n\n**Why not the other options:**\n- **MG-Academic**: Azure never infers placement from naming conventions or from where similar subscriptions live. Without a default management group setting, new subscriptions always go to the tenant root group.\n- **Outside the hierarchy**: Every subscription in the tenant is always inside the hierarchy — the tenant root group implicitly contains all management groups and subscriptions. There is no \"unparented\" state.\n- **Creator's highest role assignment**: The creating account's RBAC or directory roles have no influence on where the subscription is placed in the hierarchy.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_fernhollow.json"
+}

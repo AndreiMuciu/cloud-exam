@@ -1,0 +1,24 @@
+{
+    "id": "sc300-workload-app-roles-assignment",
+    "question": "A line-of-business application registered in Microsoft Entra ID needs two distinct levels of access — \"Reviewer\" and \"Approver\" — that the application's own code can check for on each signed-in user, and administrators need to assign specific users and groups to each level from the enterprise application's management experience.\n\nWhat should you configure?",
+    "options": [
+        {
+            "text": "Define \"Reviewer\" and \"Approver\" as app roles in the app registration, then assign users and groups to each app role under the enterprise application's Users and groups blade",
+            "correct": true
+        },
+        {
+            "text": "Create two Microsoft Entra ID delegated OAuth scopes named Reviewer and Approver, and have users individually consent to the scope that matches their intended level",
+            "correct": false
+        },
+        {
+            "text": "Create two dynamic security groups named Reviewer and Approver, and rely on the application to query Active Directory Domain Services group membership directly",
+            "correct": false
+        },
+        {
+            "text": "Enable password-based single sign-on and configure two separate credential sets, one per access level",
+            "correct": false
+        }
+    ],
+    "explanation": "**App roles** are defined in the app registration's manifest (or through the app roles UI) and represent the distinct access levels an application's code can check via the `roles` claim in the issued token. Administrators (not end users) then assign specific users and groups to each app role from the corresponding enterprise application's **Users and groups** blade — precisely matching \"admin-assigned distinct levels the app's code can check.\"\n\n**Why not the other options:**\n- **Delegated OAuth scopes with user consent** — scopes represent what the *app* is permitted to do with the API on the user's behalf and are typically consented to by the user (or an admin) rather than being an admin-assigned \"access level\" per user, and they aren't the mechanism for defining app-specific role tiers like Reviewer/Approver.\n- **Dynamic groups queried via AD DS** — this bypasses Microsoft Entra ID's own role/claims model entirely and requires the application to independently query on-premises AD DS, which doesn't fit a cloud app role assignment scenario and adds unnecessary coupling to on-premises infrastructure.\n- **Password-based SSO with two credential sets** — this only replays a stored username/password into a login form; it has no concept of app roles or claims-based authorization tiers.",
+    "category": "Plan and implement workload identities"
+}

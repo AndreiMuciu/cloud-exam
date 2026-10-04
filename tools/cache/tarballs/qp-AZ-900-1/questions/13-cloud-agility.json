@@ -1,0 +1,24 @@
+{
+    "id": "az900-13-cloud-agility",
+    "question": "Which cloud concept describes the ability of a system to rapidly develop, test, and launch new software applications successfully?",
+    "options": [
+        {
+            "text": "Agility",
+            "correct": true
+        },
+        {
+            "text": "Elasticity",
+            "correct": false
+        },
+        {
+            "text": "Scalability",
+            "correct": false
+        },
+        {
+            "text": "High Availability",
+            "correct": false
+        }
+    ],
+    "explanation": "**Agility** in the cloud refers to the speed at which an organization can develop, test, and launch new applications. Since infrastructure is available on-demand, IT teams can move much faster than in traditional on-premises environments.\n\n**Why not the other options:**\n- **Elasticity** — The ability of a system to automatically grow or shrink its resources based on demand.\n- **Scalability** — The ability of a system to handle increased load (e.g., adding more CPU or RAM).\n- **High Availability** — Ensuring the system remains accessible even if a component fails.",
+    "category": "Describe Cloud Concepts"
+}

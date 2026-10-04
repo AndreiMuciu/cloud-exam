@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-storage-cold-tier",
+    "type": "single",
+    "question": "A compliance team stores appliance-inspection reports in Azure Blob Storage. The access profile is:\n\n- Reports are read **rarely** — perhaps a handful of times per year\n- When a report **is** requested, it must be readable **immediately**, with no rehydration delay\n- Reports are retained for at least **12 months**, so a 90-day minimum retention period is acceptable\n- Storage cost must be as low as possible within these constraints\n\nWhich access tier should the reports use?",
+    "options": [
+        { "text": "Cold", "correct": true },
+        { "text": "Archive", "correct": false },
+        { "text": "Cool", "correct": false },
+        { "text": "Hot", "correct": false }
+    ],
+    "explanation": "The **cold tier** is an **online** tier for rarely accessed data: blobs are readable immediately — no rehydration — with lower storage cost than cool (in exchange for higher access costs and slightly different performance characteristics). Its trade-off is a **90-day minimum retention period**: a blob deleted or moved out of the cold tier before 90 days incurs an early-deletion charge. Since the reports are kept at least 12 months and read only a few times a year, cold gives the lowest storage cost among the tiers that satisfy the instant-read requirement.\n\n**Why not the other options:**\n- **Archive**: the cheapest storage per GB, but it is an **offline** tier — an archived blob's content cannot be read until it is rehydrated, which takes up to about 15 hours at standard priority (or under an hour at high priority for small blobs). That violates the must-read-immediately requirement.\n- **Cool**: also online and suitable for infrequent access, with only a 30-day minimum retention — but it costs **more** to store than cold. Since the data comfortably clears cold's 90-day minimum, cool would simply be the more expensive choice.\n- **Hot**: optimized for frequent access — highest storage cost, lowest access cost. For data touched a few times a year, hot wastes storage spend for access-cost savings that never materialize.",
+    "category": "Implement and Manage Storage"
+}

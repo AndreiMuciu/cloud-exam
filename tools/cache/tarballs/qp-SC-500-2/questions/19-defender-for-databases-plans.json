@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-19-defender-for-databases-plans",
+  "type": "single",
+  "question": "Your data estate spans four platforms: Azure SQL Database, SQL Server instances running on Azure VMs and on Azure Arc-enabled on-premises servers, Azure Database for PostgreSQL flexible servers, and Azure Cosmos DB. Security requires threat detection — such as SQL injection attempts, anomalous access patterns, and brute-force attacks — across **all four** platforms, surfaced as Defender for Cloud security alerts. What should you enable?",
+  "options": [
+    {
+      "text": "The Defender for Databases plans that match the estate: Defender for Azure SQL Databases, Defender for SQL Servers on Machines (with the SQL Server extension on the Azure and Arc-enabled machines), Defender for Open-Source Relational Databases, and Defender for Azure Cosmos DB",
+      "correct": true
+    },
+    {
+      "text": "Defender for Azure SQL Databases only — it automatically extends to SQL Server on VMs, PostgreSQL, and Cosmos DB in the same subscription",
+      "correct": false
+    },
+    {
+      "text": "Auditing on every database with logs streamed to a Log Analytics workspace, because auditing raises security alerts for SQL injection and brute-force attacks",
+      "correct": false
+    },
+    {
+      "text": "Defender for Servers on the VMs and Arc-enabled machines — endpoint detection and response on the host covers the database engines running on it",
+      "correct": false
+    }
+  ],
+  "explanation": "Defender for Databases is not one monolithic plan — it is a family of four plans, each protecting a different engine class, and you enable the combination that matches your estate:\n- **Defender for Azure SQL Databases** covers Azure SQL Database and Azure SQL Managed Instance (PaaS).\n- **Defender for SQL Servers on Machines** covers self-hosted SQL Server — on Azure VMs and, via Azure Arc, on-premises — and requires the SQL Server extension so the service can see the database workload on the machine.\n- **Defender for Open-Source Relational Databases** covers Azure Database for PostgreSQL, MySQL, and MariaDB.\n- **Defender for Azure Cosmos DB** covers Cosmos DB accounts with detections such as SQL injection against the Cosmos DB SQL API and suspicious key-extraction patterns.\n\nEnabled together (typically at subscription scope), they deliver the required threat detections as Defender for Cloud security alerts across all four platforms.\n\n**Why not the other options:**\n- **Defender for Azure SQL Databases alone** — it protects only the Azure SQL PaaS services; it has no visibility into SQL Server inside VMs, PostgreSQL, or Cosmos DB, and no plan auto-extends across engine types.\n- **Auditing to Log Analytics** — auditing records events for compliance and investigation; it does not analyze behavior or raise threat-detection alerts. You would have raw logs, not detections.\n- **Defender for Servers** — host-level EDR sees processes and files, not database-protocol behavior. It cannot detect SQL injection patterns or anomalous database access, and it does nothing for the PaaS services (Azure SQL, PostgreSQL, Cosmos DB) where there is no host to protect.",
+  "category": "Secure storage, databases, and networking"
+}

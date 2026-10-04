@@ -1,0 +1,24 @@
+{
+    "id": "sc500-32-entra-agent-id-conditional-access",
+    "question": "Your company builds AI agents in Microsoft Foundry and Copilot Studio. Each agent receives a **Microsoft Entra Agent ID**, giving it its own identity in the tenant. Security requires that these agent identities can obtain tokens only from approved network locations, with non-compliant sign-ins blocked at the identity layer — without affecting policies that apply to human users. What should you configure?",
+    "options": [
+        {
+            "text": "A Conditional Access policy that targets the agent identities and blocks token issuance from outside the approved locations",
+            "correct": true
+        },
+        {
+            "text": "An Entra ID user Conditional Access policy requiring multifactor authentication, applied to the agents",
+            "correct": false
+        },
+        {
+            "text": "Network security group rules on the virtual network that deny outbound traffic from unapproved IP ranges",
+            "correct": false
+        },
+        {
+            "text": "A PIM eligible assignment for each agent so its identity is only active when a human approves it",
+            "correct": false
+        }
+    ],
+    "explanation": "**Entra Agent ID** gives every agent a first-class identity in Microsoft Entra, which means the identity control plane — including **Conditional Access** — can govern it. A policy scoped to the agent identities with location conditions enforces that tokens are only issued from approved locations, blocking everything else at sign-in, while leaving human-user policies untouched. Governing agents through their identities (not just network plumbing) is the core idea of securing agentic workloads.\n\n**Why not the other options:**\n- **Requiring MFA of agents** — Agents authenticate non-interactively; they cannot complete an interactive MFA challenge, so the policy would simply break them rather than restrict their locations.\n- **NSG rules** — NSGs filter packets on a virtual network. Agents run in SaaS/platform services, and the requirement is to control *token issuance at the identity layer*, which network ACLs cannot do.\n- **PIM eligible assignments** — PIM governs activation of *roles* by eligible principals through human-driven activation workflows; it does not gate an agent's day-to-day sign-ins by network location.",
+    "category": "Secure compute"
+}

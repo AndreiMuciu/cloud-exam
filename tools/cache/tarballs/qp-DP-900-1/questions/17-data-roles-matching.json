@@ -1,0 +1,22 @@
+{
+    "id": "dp900-17-data-roles-matching",
+    "type": "matching",
+    "question": "Match each responsibility to the data professional role that typically owns it.",
+    "sourceItems": [
+        "Designs and operates the pipelines that ingest, transform, and load data into analytical stores",
+        "Manages the security, backups, availability, and performance of database systems",
+        "Explores curated data and builds reports and visualizations that deliver business insights"
+    ],
+    "targetSlots": [
+        "Database administrator",
+        "Data engineer",
+        "Data analyst"
+    ],
+    "correctMapping": [
+        1,
+        0,
+        2
+    ],
+    "explanation": "- **Database administrator (DBA)** — Responsible for the day-to-day operation of database systems: configuring security and access, implementing backup and recovery plans, and monitoring availability and performance.\n- **Data engineer** — Builds and operates the data integration layer: ingestion pipelines, ETL/ELT transformations, and the loading of cleansed data into analytical stores such as warehouses and lakehouses.\n- **Data analyst** — Works with the curated data to answer business questions, building semantic models, reports, and visualizations (for example, in Power BI) for stakeholders.\n\nKeeping these three roles distinct is a core DP-900 concept: the DBA protects and operates the databases, the engineer moves and shapes the data, and the analyst turns it into insight.",
+    "category": "Describe Core Data Concepts"
+}

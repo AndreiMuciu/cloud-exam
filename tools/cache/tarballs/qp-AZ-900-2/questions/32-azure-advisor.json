@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-32-azure-advisor",
+    "question": "A cloud team wants a free, built-in service that continuously analyzes their deployed resources and offers personalized recommendations — for example, flagging underutilized virtual machines to shut down or resize, along with reliability, security, and performance improvements. Which service does this?",
+    "options": [
+        {
+            "text": "Azure Advisor",
+            "correct": true
+        },
+        {
+            "text": "Azure Monitor",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        },
+        {
+            "text": "Azure Policy",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Advisor** analyzes your resource configurations and usage telemetry and produces personalized best-practice recommendations across five categories: cost, security, reliability, performance, and operational excellence. Identifying idle or underutilized VMs and suggesting shutdown or resizing is one of its signature cost recommendations — and it is included at no extra charge.\n\n**Why not the other options:**\n- **Azure Monitor** — Collects and analyzes raw metrics and logs and fires alerts you define; it reports what is happening but does not generate curated best-practice recommendations.\n- **Azure Service Health** — Tells you about Azure platform incidents and planned maintenance affecting your resources, not about how well you use them.\n- **Azure Policy** — Evaluates resources against rules you author and enforces compliance; it does not proactively suggest cost or performance optimizations.",
+    "category": "Describe Azure Management and Governance"
+}

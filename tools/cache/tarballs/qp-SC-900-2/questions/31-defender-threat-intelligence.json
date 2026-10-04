@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-31-defender-threat-intelligence",
+    "question": "While investigating an alert, a threat hunter finds an unfamiliar domain in outbound traffic. The hunter needs to research the domain's reputation and hosting infrastructure, see whether it is linked to a known threat actor, read analyst-written articles about the associated campaign, and pull related indicators of compromise (IoCs) to hunt for elsewhere in the environment.\n\nWhich Microsoft solution is designed to provide this external threat intelligence?",
+    "options": [
+        {
+            "text": "Microsoft Defender Threat Intelligence",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender Vulnerability Management",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud Apps",
+            "correct": false
+        },
+        {
+            "text": "The Microsoft Service Trust Portal",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender Threat Intelligence (Defender TI)** curates Microsoft's massive external threat data into content analysts can act on: **threat actor and tooling profiles, analyst-written intel articles about active campaigns, reputation scoring for domains and IP addresses, internet infrastructure analysis** (such as who hosts a domain and what else resolves there), and **indicators of compromise** that can be exported for hunting. It gives investigators the outside-in context — who is behind an artifact and what campaign it belongs to — that internal telemetry alone cannot supply.\n\n**Why not the other options:**\n- **Microsoft Defender Vulnerability Management** — This inventories software weaknesses and misconfigurations on the organization's *own devices* and prioritizes remediation. It does not profile external threat actors or research third-party internet infrastructure.\n- **Microsoft Defender for Cloud Apps** — This is a SaaS security solution for discovering shadow IT and protecting data in cloud apps, not a threat intelligence research service.\n- **The Microsoft Service Trust Portal** — The Service Trust Portal publishes *Microsoft's own* audit reports and compliance documentation for customers. It has nothing to do with investigating suspicious domains or threat actors.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

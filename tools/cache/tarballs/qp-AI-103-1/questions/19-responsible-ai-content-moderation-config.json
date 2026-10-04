@@ -1,0 +1,24 @@
+{
+    "id": "ai103-19-responsible-ai-content-moderation-config",
+    "question": "A generative application must automatically block model outputs that contain hate speech or self-harm content before they are returned to end users, without the application team writing their own text classifiers.\n\nWhat should the team configure?",
+    "options": [
+        {
+            "text": "Configure the Foundry content safety filters on the model deployment, with severity thresholds set to block the disallowed categories before the response reaches the user.",
+            "correct": true
+        },
+        {
+            "text": "Ask the model itself, via the system prompt only, to promise that it will never produce hate speech or self-harm content.",
+            "correct": false
+        },
+        {
+            "text": "Add a client-side JavaScript word-blocklist that hides certain substrings in the browser after the response is already rendered.",
+            "correct": false
+        },
+        {
+            "text": "Disable logging of model responses so that any problematic output is simply never reviewed.",
+            "correct": false
+        }
+    ],
+    "explanation": "Built-in **content safety filters/guardrails** on the model deployment evaluate output against configured categories (hate, self-harm, violence, sexual) and severity thresholds, blocking or flagging disallowed content automatically before it is returned — exactly the \"without writing your own classifiers\" requirement.\n\n**Why not the other options:**\n- **A system-prompt promise** — Prompted instructions are guidance, not an enforcement mechanism; a model can still be steered around them, and there is no guaranteed blocking behavior.\n- **A client-side blocklist after rendering** — Runs too late (the harmful content already reached the client) and is trivially bypassed by simply not filtering equivalent phrasing not on the list.\n- **Disabling logging** — Removes visibility into what happened; it does nothing to prevent the harmful content from reaching the user and actively harms the team's ability to audit incidents.",
+    "category": "Plan and manage an Azure AI solution"
+}

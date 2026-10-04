@@ -1,0 +1,21 @@
+{
+    "id": "sc300-workload-app-registration-consent-order",
+    "type": "ordering",
+    "question": "A developer is integrating a new custom application with Microsoft Entra ID. The application needs a delegated Microsoft Graph permission, tenant-wide admin consent, a custom app role, and specific users assigned to that role. Arrange the configuration steps in the correct order.",
+    "items": [
+        "An administrator grants tenant-wide admin consent for the requested Microsoft Graph delegated permission",
+        "Register the application in Microsoft Entra ID, generating an application (client) ID",
+        "Define a custom app role in the app registration's manifest (or app roles blade)",
+        "Add the required Microsoft Graph delegated permission under API permissions on the app registration",
+        "Assign specific users and groups to the custom app role from the enterprise application's Users and groups blade"
+    ],
+    "correctOrder": [
+        "Register the application in Microsoft Entra ID, generating an application (client) ID",
+        "Add the required Microsoft Graph delegated permission under API permissions on the app registration",
+        "An administrator grants tenant-wide admin consent for the requested Microsoft Graph delegated permission",
+        "Define a custom app role in the app registration's manifest (or app roles blade)",
+        "Assign specific users and groups to the custom app role from the enterprise application's Users and groups blade"
+    ],
+    "explanation": "1. **Register the application** — this creates the app registration and its application (client) ID, which is the prerequisite object for every subsequent step.\n2. **Add the API permission** — the developer declares which Microsoft Graph delegated permission the app needs under API permissions.\n3. **Grant admin consent** — an administrator consents on behalf of the tenant so users aren't individually prompted to approve that permission (or so the permission is usable at all, if it requires admin consent).\n4. **Define the app role** — the custom Reviewer/Approver-style role is added to the app registration so it can be referenced for assignment.\n5. **Assign users/groups to the role** — only after the role exists can administrators assign specific identities to it from the corresponding enterprise application object.\n\nEach step depends on the object or definition created in the step before it — you cannot grant consent for a permission that hasn't been added, or assign users to a role that hasn't been defined.",
+    "category": "Plan and implement workload identities"
+}

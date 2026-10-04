@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-data-hyperscale",
+    "question": "A retail analytics vendor hosts a 38-TB Azure SQL database that grows about 2 TB per month. The vendor needs storage headroom beyond 100 TB, the ability to add read-only compute replicas for heavy reporting without duplicating storage, and fast, size-independent database restores.\n\nWhich service tier should you recommend?",
+    "options": [
+        {
+            "text": "Business Critical",
+            "correct": false
+        },
+        {
+            "text": "Hyperscale",
+            "correct": true
+        },
+        {
+            "text": "General Purpose",
+            "correct": false
+        },
+        {
+            "text": "Premium (DTU model)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Hyperscale** is architected for very large databases and is the only tier meeting all three requirements:\n\n1. **Storage headroom** — Hyperscale supports databases up to **128 TB**, with storage growing automatically as needed. The other tiers cap out far lower\n2. **Read replicas without duplicated storage** — Hyperscale's architecture separates compute from a shared, paged storage layer. **Named replicas** and high-availability replicas attach additional read-only compute to the *same* storage, so heavy reporting is offloaded without paying for another 38+ TB copy\n3. **Fast, size-independent restores** — Restores are based on storage snapshots rather than data copy, so restoring a multi-terabyte Hyperscale database takes minutes regardless of size, instead of hours\n\n**Why not the other options:**\n- **Business Critical** — Optimized for low latency and high IOPS with local SSDs, but its maximum database size (around 4 TB) is an order of magnitude too small for this workload\n- **General Purpose** — Same ~4 TB size ceiling; restores are size-dependent (from backups); read scale-out is limited compared to Hyperscale's named replicas\n- **Premium (DTU)** — The legacy DTU-model premium tier also tops out at ~4 TB and lacks the compute/storage separation needed for storage-free read replicas and snapshot restores",
+    "category": "Design Data Storage Solutions"
+}

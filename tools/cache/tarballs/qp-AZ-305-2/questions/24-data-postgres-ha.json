@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-data-postgres-ha",
+    "type": "multi",
+    "question": "A logistics company runs its dispatch system on Azure Database for PostgreSQL flexible server. The design must provide automatic failover with zero data loss if the datacenter hosting the primary fails, and must offload a heavy read-only reporting workload from the transactional primary.\n\nWhich two actions should you include in the recommendation? (Choose two.)",
+    "options": [
+        {
+            "text": "Enable zone-redundant high availability on the flexible server",
+            "correct": true
+        },
+        {
+            "text": "Create one or more read replicas and point the reporting workload at them",
+            "correct": true
+        },
+        {
+            "text": "Route the reporting queries to the zone-redundant standby server",
+            "correct": false
+        },
+        {
+            "text": "Configure the reporting workload against a geo-redundant backup of the server",
+            "correct": false
+        }
+    ],
+    "explanation": "The two requirements map to two distinct flexible server features that are often confused:\n\n1. **Zone-redundant high availability** — Provisions a standby server in a *different availability zone* with **synchronous replication**. If the primary's zone (datacenter) fails, automatic failover promotes the standby with **zero data loss (RPO = 0)** because every commit was already replicated synchronously — exactly the HA requirement\n2. **Read replicas** — Separate servers fed by **asynchronous** replication that are open for read-only connections. Pointing the reporting workload at a replica removes its I/O and CPU pressure from the transactional primary — exactly the read-offload requirement\n\n**Why not the other options:**\n- **Reporting against the HA standby** — In Azure Database for PostgreSQL flexible server, the zone-redundant standby is **not readable**; it exists solely to take over on failover. (This differs from some other engines' readable secondaries, which is why it's a favorite exam trap)\n- **Reporting against a geo-redundant backup** — Backups are restore artifacts, not queryable endpoints. You would have to restore to a new server to read the data, which would be stale, slow to produce, and unrelated to continuous reporting needs",
+    "category": "Design Data Storage Solutions"
+}

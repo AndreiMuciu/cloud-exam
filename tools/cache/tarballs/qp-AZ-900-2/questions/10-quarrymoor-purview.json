@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-10-quarrymoor-purview",
+    "question": "Quarrymoor’s auditors want a catalog of the company’s entire data estate — Azure SQL databases, the data lake, and on-premises file shares — with sensitive fields discovered and classified automatically. Which Microsoft service is designed for this?",
+    "options": [
+        {
+            "text": "Microsoft Purview",
+            "correct": true
+        },
+        {
+            "text": "Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Purview** provides unified data governance: it scans and maps data sources across Azure, on-premises, and even other clouds, builds a searchable **data catalog**, automatically **classifies** sensitive data (such as personal or financial information), and tracks data lineage. That is exactly the estate-wide catalog and classification the auditors are asking for.\n\n**Why not the other options:**\n- **Azure Policy** — Enforces rules about *resource configurations* (regions, SKUs, tags); it does not scan, catalog, or classify the data stored inside those resources.\n- **Microsoft Defender for Cloud** — Strengthens security posture and detects threats against workloads; it is not a data governance catalog.\n- **Azure Monitor** — Collects performance metrics and logs from resources; it has no data discovery or classification capability.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_quarrymoor_manufacturing.json"
+}

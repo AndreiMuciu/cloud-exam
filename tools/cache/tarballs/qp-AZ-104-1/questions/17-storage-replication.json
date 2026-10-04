@@ -1,0 +1,24 @@
+{
+    "id": "az104-storage-replication",
+    "question": "You have the following storage accounts:\n\n| Storage Account | Kind | Replication | Access Tier | Region |\n|---|---|---|---|---|\n| stlogistics01 | StorageV2 | LRS | Hot | West Europe |\n| stlogistics02 | StorageV2 | GRS | Hot | West Europe |\n| starchive03 | BlobStorage | LRS | Cool | North Europe |\n| stpremium04 | BlockBlobStorage | LRS | — | West Europe |\n\nYou need to identify which storage account can be converted to **zone-redundant storage (ZRS)** replication by requesting a live migration from Azure support.\n\nWhich storage account should you identify?",
+    "options": [
+        {
+            "text": "stlogistics01",
+            "correct": true
+        },
+        {
+            "text": "stlogistics02",
+            "correct": false
+        },
+        {
+            "text": "starchive03",
+            "correct": false
+        },
+        {
+            "text": "stpremium04",
+            "correct": false
+        }
+    ],
+    "explanation": "A **live migration** to ZRS has specific requirements:\n\n- The storage account must be **StorageV2 (GPv2)** or **FileStorage** kind\n- The account must currently use **LRS** replication (you cannot directly migrate from GRS to ZRS)\n- The region must support ZRS\n\nEvaluating each account:\n- **stlogistics01** ✅ — StorageV2 + LRS → eligible for ZRS live migration\n- **stlogistics02** ❌ — StorageV2 but uses GRS, not LRS. Must first change to LRS, then migrate to ZRS\n- **starchive03** ❌ — BlobStorage kind is a legacy type that does not support ZRS\n- **stpremium04** ❌ — BlockBlobStorage (Premium) supports ZRS in some regions but live migration is not supported for premium accounts; you must create a new account\n\nLive migration is an online process handled by Microsoft — your data remains available during the migration.",
+    "category": "Implement and Manage Storage"
+}

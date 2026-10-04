@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-27-cosmos-postgresql-api",
+    "question": "A team runs a PostgreSQL application whose data has outgrown a single server. They want a managed Azure service that keeps standard PostgreSQL syntax and drivers but distributes (shards) the tables horizontally across multiple nodes so the relational database itself can scale out.\n\nWhich service should they choose?",
+    "options": [
+        {
+            "text": "Azure Cosmos DB for PostgreSQL",
+            "correct": true
+        },
+        {
+            "text": "Azure Database for PostgreSQL",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for NoSQL",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Database",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cosmos DB for PostgreSQL** is a managed *distributed* PostgreSQL service: it runs real PostgreSQL (so existing syntax, drivers, and tools keep working) and shards tables across a multi-node cluster, letting a relational database scale out horizontally as data and traffic grow. That combination — genuine PostgreSQL plus node-based scale-out — is exactly what the team asked for.\n\n**Why not the other options:**\n- **Azure Database for PostgreSQL** — This managed service runs PostgreSQL on a single server (scaling up, with read replicas for read traffic); it does not shard tables horizontally across multiple writer nodes.\n- **Azure Cosmos DB for NoSQL** — This API is a document store queried with its own SQL-like dialect over JSON; it is not PostgreSQL, so the application's relational schema, syntax, and drivers would not carry over.\n- **Azure SQL Database** — A managed *Microsoft SQL Server* engine: a different relational product with different syntax and drivers, and its scale model is not PostgreSQL-compatible sharding.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

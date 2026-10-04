@@ -1,0 +1,24 @@
+{
+    "id": "az104-network-dns-zone",
+    "question": "You have an Azure VM named **VM-Portal** with the following configuration:\n\n- Location: West Europe\n- Connected to: VNet-Europe (10.30.0.0/16)\n- Private IP: 10.30.1.10\n- DNS suffix: galewind.net\n\nYou create the following Azure DNS zones:\n\n| Zone Name | Type |\n|---|---|\n| galewind.net | Public |\n| galewind.internal | Private |\n| tracking.galewind.net | Public |\n| fleet.internal | Private |\n\nYou configure VNet-Europe as the registration virtual network for the **galewind.internal** private DNS zone.\n\nYou discover that VM-Portal **can** resolve names in galewind.internal but **cannot** resolve names in galewind.net (the public zone). VM-Portal can resolve other public internet hosts normally.\n\nWhat should you do to ensure VM-Portal can resolve host names in the galewind.net public zone?",
+    "options": [
+        {
+            "text": "Update the DNS suffix on VM-Portal to match the zone name",
+            "correct": false
+        },
+        {
+            "text": "Create a virtual network link from VNet-Europe to the galewind.net zone",
+            "correct": false
+        },
+        {
+            "text": "Configure the name servers for galewind.net at the domain registrar to point to Azure DNS",
+            "correct": true
+        },
+        {
+            "text": "Add a CNAME record in the galewind.internal zone pointing to galewind.net",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure public DNS zones** require the domain's name servers at the registrar to be updated to point to Azure DNS. Without this delegation, DNS queries for the zone are handled by the current registrar's name servers, and Azure DNS records are not returned.\n\nThe VM can resolve galewind.internal because it is a **private DNS zone** linked to the VM's VNet — private zones use Azure's internal DNS resolution and don't require registrar configuration.\n\nThe VM can resolve other public hosts because standard internet DNS resolution works normally.\n\nWhy not the other options:\n- DNS suffix is for unqualified name resolution, not for zone delegation\n- Virtual network links are for **private** DNS zones, not public zones\n- A CNAME record would not fix the delegation issue",
+    "category": "Implement and Manage Virtual Networking"
+}

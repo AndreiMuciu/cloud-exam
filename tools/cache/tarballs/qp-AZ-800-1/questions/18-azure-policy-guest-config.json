@@ -1,0 +1,24 @@
+{
+    "id": "az800-18-azure-policy-guest-config",
+    "question": "You want to use Azure Policy to audit the internal settings of your virtual machines (e.g., ensuring a specific Windows feature is installed). Which feature of Azure Policy is required to 'see' inside the OS?",
+    "options": [
+        {
+            "text": "Azure ARC",
+            "correct": false
+        },
+        {
+            "text": "Guest Configuration",
+            "correct": true
+        },
+        {
+            "text": "Blueprints",
+            "correct": false
+        },
+        {
+            "text": "Metric Alerts",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Policy Guest Configuration** (now part of Azure Automanage Machine Configuration) uses the Desired State Configuration (DSC) engine to audit or configure settings *within* the virtual machine operating system.\n\n**Why not the other options:**\n- **Azure ARC** — Provides the *path* for on-premises machines to be managed by Azure Policy, but the 'inside the OS' capability is the Guest Configuration feature.\n- **Blueprints** — Used for environment orchestration.\n- **Metric Alerts** — Used for performance monitoring (CPU/RAM), not OS settings auditing.",
+    "category": "Manage Windows Servers and workloads in a hybrid environment"
+}

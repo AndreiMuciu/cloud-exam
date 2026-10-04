@@ -1,0 +1,24 @@
+{
+    "id": "ai200-32-appconfig-feature-flags",
+    "question": "Quillhaven Publishing wants to release a new AI summarization feature gradually: enabled for the internal `beta-readers` group immediately, plus a random 20% of all other users, with the percentage adjustable later **without redeploying** the app. The app already uses Azure App Configuration with the feature management library.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Define a feature flag in App Configuration and add the built-in **targeting filter**, listing the `beta-readers` group and setting a 20% default rollout percentage.",
+            "correct": true
+        },
+        {
+            "text": "Define the feature flag with a **time window filter** that enables the feature between a start and end date for all users.",
+            "correct": false
+        },
+        {
+            "text": "Add an `if random.random() < 0.2 or user.group == \"beta-readers\":` check in application code around the new feature.",
+            "correct": false
+        },
+        {
+            "text": "Create two App Configuration stores — one with the flag on, one off — and route 20% of traffic to the \"on\" store at the load balancer.",
+            "correct": false
+        }
+    ],
+    "explanation": "The **targeting filter** (`Microsoft.Targeting`) is built for exactly this rollout shape: an *audience* of named users/groups (each group can have its own rollout percentage — `beta-readers` at 100%) plus a **default percentage** for everyone else (20%). It hashes the user ID so each user gets a *sticky* consistent experience, and because the flag lives in App Configuration, operators change the percentage in the portal and the provider refreshes it at runtime — no redeploy.\n\n**Why not the other options:**\n- **Time window filter** — Turns a flag on/off between dates for the whole audience; it cannot target a group or a percentage of users.\n- **`random.random()` in code** — Not sticky (a user flips in and out of the feature between requests), and the 20% constant is compiled into the app, so adjusting it requires the redeploy the requirement forbids.\n- **Two stores behind a load balancer** — Splits *traffic*, not *users* (no stickiness), doubles configuration management, and entangles infrastructure routing with feature decisions that the feature management library already handles declaratively.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

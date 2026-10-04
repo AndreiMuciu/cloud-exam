@@ -1,0 +1,19 @@
+{
+    "id": "sc500-s2-14-workload-identity-federation-order",
+    "type": "ordering",
+    "question": "A GitHub Actions pipeline deploys to Azure by authenticating with a client secret stored in the repository's secret store. You must migrate the pipeline to secretless authentication with workload identity federation — without breaking deployments during the migration. Arrange the steps in the correct order.",
+    "items": [
+        "Update the GitHub workflow to authenticate with OpenID Connect (federated token) instead of the client secret",
+        "Add a federated identity credential to the existing app registration, with GitHub's OIDC issuer and the repository and branch as the subject",
+        "Delete the client secret from the app registration and remove the stored secret from the repository's secret store",
+        "Run the pipeline and verify that it deploys successfully by using the federated token"
+    ],
+    "correctOrder": [
+        "Add a federated identity credential to the existing app registration, with GitHub's OIDC issuer and the repository and branch as the subject",
+        "Update the GitHub workflow to authenticate with OpenID Connect (federated token) instead of the client secret",
+        "Run the pipeline and verify that it deploys successfully by using the federated token",
+        "Delete the client secret from the app registration and remove the stored secret from the repository's secret store"
+    ],
+    "explanation": "**Workload identity federation** lets an external identity provider's token (here, GitHub's OIDC token scoped to a repository and branch) be exchanged for a Microsoft Entra access token — eliminating stored secrets. The safe migration order is:\n\n1. **Add the federated identity credential first.** The app registration (and its existing RBAC assignments) stays untouched; adding the credential is non-disruptive because the secret still works.\n2. **Switch the workflow to OIDC.** The pipeline now requests a GitHub OIDC token and exchanges it for an Entra token (client-id, tenant-id, subscription-id — no secret). Doing this before the credential exists would break the pipeline.\n3. **Verify a successful federated deployment.** Never remove the old credential until the new path is proven.\n4. **Delete the client secret last** — from both the app registration and the repository store — completing the migration with zero stored credentials and no window of breakage.\n\nRemoving the secret earlier risks an outage if the federation subject (repo/branch) is misconfigured; updating the workflow before the federated credential exists guarantees failed runs.",
+    "category": "Manage identity, access, and governance"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-data-elastic-pool",
+    "question": "A SaaS vendor hosts one Azure SQL database per customer — currently 280 small databases. Each database is idle most of the time and bursts unpredictably, but the databases rarely peak at the same moment. The vendor wants to cut database compute costs while preserving per-customer database isolation and predictable performance during bursts.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Consolidate all customers into a single large database with a TenantId column",
+            "correct": false
+        },
+        {
+            "text": "Move the databases into Azure SQL Database elastic pools sized for the aggregate workload",
+            "correct": true
+        },
+        {
+            "text": "Convert every database to the serverless compute tier with auto-pause enabled",
+            "correct": false
+        },
+        {
+            "text": "Migrate all databases to a single Azure SQL Managed Instance sized for the combined peak of all customers",
+            "correct": false
+        }
+    ],
+    "explanation": "**Elastic pools** exist precisely for the many-databases-with-non-overlapping-bursts pattern:\n\n- A pool allocates a shared set of eDTUs or vCores that all member databases draw from. Because the 280 databases rarely peak together, the pool can be sized for the **aggregate** utilization — dramatically smaller (and cheaper) than the sum of 280 individually provisioned databases\n- Each customer keeps a **separate database**, preserving isolation, per-tenant restore, and per-tenant geo-replication options\n- Per-database min/max settings in the pool prevent one noisy tenant from starving others, giving predictable burst performance\n\n**Why not the other options:**\n- **Single multi-tenant database** — Destroys the per-customer database isolation requirement outright: one tenant's data sits beside another's, per-tenant restore becomes impossible, and a schema problem or noisy query affects everyone. It's a re-architecture, not a cost optimization\n- **Serverless with auto-pause per database** — Serverless helps genuinely idle single databases, but resume-from-pause adds connection delays (cold starts) that hurt \"predictable performance during bursts,\" and 280 separately billed serverless databases forgo the cross-database resource sharing that makes this scenario cheap — elastic pools are Microsoft's recommended fit here (note: serverless is also available *within* Hyperscale pools, but the core answer is pooling)\n- **Single SQL Managed Instance sized for combined peak** — SQL MI does host multiple databases, but sizing for the *combined peak* of all customers over-provisions massively when bursts don't overlap; MI is also the wrong tool when no instance-scoped features (SQL Agent, CLR, cross-database queries) are required",
+    "category": "Design Data Storage Solutions"
+}

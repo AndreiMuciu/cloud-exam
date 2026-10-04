@@ -1,0 +1,9 @@
+{
+    "id": "case_study_meridian_healthcare",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Meridian Healthcare Systems** is implementing a new patient-facing portal. They have strict requirements for data residency and disaster recovery.\n\n**System Architecture:**\n- All patient data must remain within the same geography. \n- They require high availability across datacenters in the same region.\n- They need a disaster recovery plan that uses a region at least 300 miles away."
+        }
+    ]
+}

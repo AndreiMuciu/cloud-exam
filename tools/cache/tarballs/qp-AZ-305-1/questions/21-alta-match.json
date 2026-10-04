@@ -1,0 +1,28 @@
+{
+    "id": "gen-24-identity-matching",
+    "type": "matching",
+    "question": "Match the Microsoft Entra ID feature to its primary architectural benefit.",
+    "sourceItems": [
+        "Provides managed identities for Azure resources to authenticate",
+        "Enables cross-tenant access for external b2b collaboration",
+        "Provides governed workflows for approving external access",
+        "Enables authentication for legacy apps requiring Kerberos/LDAP",
+        "Manages just-in-time privileged role activation"
+    ],
+    "targetSlots": [
+        "Microsoft Entra ID Managed Identities",
+        "Microsoft Entra ID Governance (Entitlement Management)",
+        "Microsoft Entra Domain Services (Azure AD DS)",
+        "Microsoft Entra External ID (B2B Collaboration)",
+        "Microsoft Entra Privileged Identity Management (PIM)"
+    ],
+    "correctMapping": [
+        0,
+        3,
+        1,
+        2,
+        4
+    ],
+    "explanation": "- **Managed Identities**: Eliminates the need for developers to manage credentials by providing an identity for the Azure resource.\n- **External ID (B2B Collaboration)**: Allows organizations to securely share applications and services with guest users from other organizations.\n- **Entitlement Management**: Part of Identity Governance, it uses access packages and approval workflows to manage life cycle for external users.\n- **Domain Services**: Provides managed domain services like Kerberos and LDAP for cloud-resident legacy applications.\n- **Privileged Identity Management (PIM)**: Provides just-in-time privileged access to Azure AD and Azure resources, requiring activation for elevated roles.",
+    "category": "Design Identity, Governance, and Monitoring"
+}

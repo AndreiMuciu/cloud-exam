@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-06-corvalta-guest-access-reviews",
+    "question": "Guest accounts for device manufacturers and an external advertising agency have accumulated in the Corvalta Mobile directory for years, and nobody has verified whether they are still needed. The identity team wants a recurring quarterly process in which designated reviewers attest whether each guest still requires access — and guests whose access is not approved are removed automatically.\n\nWhich Microsoft Entra ID Governance capability should the team use?",
+    "options": [
+        {
+            "text": "Access reviews",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        },
+        {
+            "text": "Conditional Access",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Password Protection",
+            "correct": false
+        }
+    ],
+    "explanation": "**Access reviews** in Microsoft Entra ID Governance provide exactly this recertification loop: an administrator schedules a **recurring review** of group memberships, application access, or guest accounts; **designated reviewers (or the users themselves) attest** whether access is still required; and the results can be **applied automatically**, removing access for guests who are denied — or who receive no response from their sponsor. Access reviews are the standard answer to stale guest access that has accumulated over time.\n\n**Why not the other options:**\n- **Microsoft Entra ID Protection** — ID Protection detects and remediates *risky* sign-ins and compromised credentials (leaked passwords, anonymized networks). It evaluates risk signals; it does not run recurring attestation campaigns over who should retain access.\n- **Conditional Access** — Conditional Access enforces policy *at sign-in time* (require MFA, block, require compliant device). It cannot ask a reviewer each quarter whether a guest still needs access, and it does not clean up unused guest accounts.\n- **Microsoft Entra Password Protection** — This feature blocks weak and banned passwords when passwords are set or reset. It is unrelated to reviewing and removing guest access.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_corvalta_mobile.json"
+}

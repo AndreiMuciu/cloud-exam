@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-infra-appservice-net",
+    "type": "multi",
+    "question": "An internal HR web app on Azure App Service (Premium v3) must meet two networking requirements:\n\n- The app must be reachable **only** from clients inside the corporate virtual network — its public endpoint must be disabled\n- The app's own **outbound** calls to an internal database must travel through the corporate virtual network\n\nWhich two configurations should you include in the design? (Choose two.)",
+    "options": [
+        {
+            "text": "Create a private endpoint for the app in the corporate virtual network and disable public network access",
+            "correct": true
+        },
+        {
+            "text": "Configure regional virtual network integration for the app's outbound traffic",
+            "correct": true
+        },
+        {
+            "text": "Configure regional virtual network integration to handle the app's inbound traffic",
+            "correct": false
+        },
+        {
+            "text": "Add a service endpoint for Microsoft.Web on the database subnet to make the app's outbound calls private",
+            "correct": false
+        }
+    ],
+    "explanation": "App Service networking splits cleanly into an **inbound** mechanism and an **outbound** mechanism, and this question tests knowing which is which:\n\n1. **Private endpoint (inbound)** — A private endpoint gives the app a private IP in the corporate VNet, and disabling public network access removes the internet route entirely. Only VNet-connected clients (including on-premises via VPN/ExpressRoute) can reach the app\n2. **Regional VNet integration (outbound)** — VNet integration routes the *app's own outgoing* traffic into the VNet, so calls to the internal database traverse the corporate network. It is available on Premium v3 without needing an App Service Environment\n\n**Why not the other options:**\n- **VNet integration for inbound traffic** — A classic misconception: regional VNet integration affects **only outbound** calls made by the app. It does not expose the app privately or restrict who can reach it — that is the private endpoint's job\n- **Service endpoint for Microsoft.Web on the database subnet** — Backwards on two counts: service endpoints are configured on the *client's* subnet to reach a *PaaS service's public endpoint* over the Azure backbone, and `Microsoft.Web` service endpoints govern traffic *to* App Service, not from it. They neither privatize the app's outbound path nor apply to a database subnet this way",
+    "category": "Design Infrastructure Solutions"
+}

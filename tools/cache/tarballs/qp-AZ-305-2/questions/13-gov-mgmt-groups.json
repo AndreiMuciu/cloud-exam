@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-gov-mgmt-groups",
+    "question": "A company is establishing an Azure environment that will grow to 60 subscriptions across three workload archetypes: corporate (internal apps), online (internet-facing apps), and sandbox (experimentation). Each archetype has a distinct set of security and compliance policies, and some baseline policies apply to everything. Policy assignments must be defined once per scope and must not be duplicated per subscription.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "A management group hierarchy with a top-level company group for baseline policies and child management groups per workload archetype for archetype-specific policies",
+            "correct": true
+        },
+        {
+            "text": "A single management group containing all subscriptions, with all policies assigned individually to each subscription",
+            "correct": false
+        },
+        {
+            "text": "A resource group naming convention with policies assigned at the resource group level in every subscription",
+            "correct": false
+        },
+        {
+            "text": "One Microsoft Entra ID tenant per workload archetype, each with its own set of tenant-wide policy assignments",
+            "correct": false
+        }
+    ],
+    "explanation": "A **layered management group hierarchy** is the Cloud Adoption Framework landing-zone pattern for this exact problem:\n\n- **Top-level (company) management group** — Baseline policies (allowed regions, required tags, diagnostic settings, security standards) are assigned **once** here and inherit down to every subscription automatically\n- **Child management groups per archetype** (corporate / online / sandbox) — Archetype-specific policies (for example, blocking public IPs in corporate, relaxed rules in sandbox) are assigned once at each child group\n- **New subscriptions inherit instantly** — Placing a new subscription into the correct management group applies the full policy set with zero additional assignments, which is how the design scales to 60 subscriptions without duplication\n\n**Why not the other options:**\n- **Single management group + per-subscription assignments** — Directly violates the no-duplication requirement: every policy change must be repeated across up to 60 subscriptions, guaranteeing drift and administrative errors\n- **Resource-group-level policies** — Even worse duplication (many resource groups per subscription), and resource-group scope cannot enforce subscription-level controls; naming conventions are not an enforcement mechanism\n- **Tenant per archetype** — Tenants are identity boundaries, not policy scoping tools. Multiple tenants fragment identity, licensing, and RBAC, and Azure Policy cannot be managed across tenants without additional tooling like Azure Lighthouse",
+    "category": "Design Identity, Governance, and Monitoring"
+}

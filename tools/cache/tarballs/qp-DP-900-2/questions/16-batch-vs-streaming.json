@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-16-batch-vs-streaming",
+    "question": "Which statement correctly describes a difference between batch processing and stream processing?",
+    "options": [
+        {
+            "text": "Batch processing handles a group of records collected over a period of time, while stream processing handles each event, or a small rolling window of events, as it arrives",
+            "correct": true
+        },
+        {
+            "text": "Batch processing always produces results with lower latency than stream processing",
+            "correct": false
+        },
+        {
+            "text": "Stream processing can only be used on data that was first loaded into a data warehouse",
+            "correct": false
+        },
+        {
+            "text": "Batch processing can only handle small volumes of data, while stream processing is required for large volumes",
+            "correct": false
+        }
+    ],
+    "explanation": "The fundamental difference is **scope and timing**. **Batch processing** buffers records as they are produced and then processes the whole **group** together — typically on a schedule or when a threshold is reached — which is efficient but introduces a delay before results are available. **Stream processing** operates on data **in motion**: each event (or a small rolling time window of events) is processed as soon as it arrives, enabling results within seconds or milliseconds.\n\n**Why not the other options:**\n- **\"Batch always has lower latency\"** — Backwards. Latency is the batch model's trade-off: results wait until the next scheduled run. Low latency is precisely what stream processing provides.\n- **\"Streaming requires data to be in a data warehouse first\"** — Stream processing works on events *before* they land anywhere; results are often written *to* a warehouse, lake, or dashboard afterward, not read from one.\n- **\"Batch is only for small volumes\"** — Batch processing is actually the workhorse for very **large** volumes (for example, reprocessing years of history), because it can use all the data at once; streaming is chosen for timeliness, not because batch cannot scale.",
+    "category": "Describe Core Data Concepts"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az104-monitor-log-queries",
+    "question": "You need to create a KQL (Kusto Query Language) query in Log Analytics to find all Azure VMs that have been restarted in the last 24 hours. The data is stored in the `AzureActivity` table.\n\nWhich query should you use?",
+    "options": [
+        {
+            "text": "AzureActivity | where OperationNameValue == 'Microsoft.Compute/virtualMachines/restart/action' | where TimeGenerated > ago(24h)",
+            "correct": true
+        },
+        {
+            "text": "AzureActivity | where ResourceType == 'VirtualMachine' and Status == 'Restarted' | where TimeGenerated > ago(1d)",
+            "correct": false
+        },
+        {
+            "text": "Heartbeat | where ComputerName contains 'VM' | where TimeGenerated > ago(24h) | distinct Computer",
+            "correct": false
+        },
+        {
+            "text": "Event | where EventID == 6006 | where TimeGenerated > ago(24h)",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Activity Log records control plane operations (resource management actions) in the `AzureActivity` table. VM restart operations are logged with the operation name `Microsoft.Compute/virtualMachines/restart/action`.\n\nThe correct query:\n- **`AzureActivity`** — The table containing Activity Log data\n- **`where OperationNameValue == 'Microsoft.Compute/virtualMachines/restart/action'`** — Filters for VM restart operations\n- **`where TimeGenerated > ago(24h)`** — Limits results to the last 24 hours\n\n**Why not the other options:**\n- Option B: `Status` and `ResourceType == 'VirtualMachine'` are not the correct field names/values in the AzureActivity schema\n- Option C: The `Heartbeat` table tracks VM connectivity/agent heartbeats, not restart actions\n- Option D: The `Event` table contains Windows Event Logs. EventID 6006 is a Windows shutdown event from the local VM, not an Azure control plane action. Also, this would only work if VMs send event logs to the workspace\n\n**KQL time functions:**\n- `ago(24h)` and `ago(1d)` are equivalent — both mean 24 hours ago\n- Common time literals: `1h`, `30m`, `7d`, `30d`",
+    "category": "Monitor and Maintain Azure Resources"
+}

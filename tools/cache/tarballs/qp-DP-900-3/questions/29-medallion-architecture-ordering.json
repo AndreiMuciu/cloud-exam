@@ -1,0 +1,19 @@
+{
+    "id": "dp900-s3-29-medallion-architecture-ordering",
+    "type": "ordering",
+    "question": "A data engineering team on Azure Databricks organizes its Delta Lake tables using the medallion (bronze/silver/gold) architecture.\n\nPlace the stages of the data flow in the correct order, from first to last.",
+    "items": [
+        "Aggregate and reshape the data into business-ready gold-layer tables",
+        "Land raw source data, unchanged, in bronze-layer tables",
+        "Connect reports and dashboards to the gold layer to deliver insights",
+        "Cleanse, deduplicate, and validate the data into silver-layer tables"
+    ],
+    "correctOrder": [
+        "Land raw source data, unchanged, in bronze-layer tables",
+        "Cleanse, deduplicate, and validate the data into silver-layer tables",
+        "Aggregate and reshape the data into business-ready gold-layer tables",
+        "Connect reports and dashboards to the gold layer to deliver insights"
+    ],
+    "explanation": "The medallion architecture refines data through progressively higher-quality layers:\n\n1. **Bronze — raw landing** — Source data is ingested as-is, preserving an untouched copy that downstream layers can always be rebuilt from.\n2. **Silver — cleansed and validated** — The raw data is deduplicated, standardized, and quality-checked into reliable, queryable tables; this can only happen after the raw data has landed.\n3. **Gold — business-ready** — Silver tables are aggregated and modeled into consumption-oriented tables (for example, star-schema facts and dimensions or KPI summaries) aligned to business definitions.\n4. **Consumption** — Reports and dashboards connect to the gold layer, where the data is trustworthy, modeled, and performant for analytics.\n\n**Why not the other options:**\n- Cleansing cannot precede landing — there is nothing to cleanse until raw data exists in bronze.\n- Building gold aggregates directly from raw bronze data would bake duplicates and errors into business metrics; gold depends on silver's validation.\n- Connecting reports before the gold layer exists would expose consumers to raw or partially refined data, defeating the architecture's purpose.",
+    "category": "Describe an Analytics Workload on Azure"
+}

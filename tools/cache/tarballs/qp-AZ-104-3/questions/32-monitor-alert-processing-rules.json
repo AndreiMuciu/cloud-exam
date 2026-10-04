@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-monitor-alert-processing-rules",
+    "type": "single",
+    "question": "Your team patches its Azure VMs during a maintenance window on the **first Sunday of every month, 02:00–06:00**. During the window, dozens of expected VM alerts fire and page the on-call engineer.\n\nYou must stop the notifications **during the window only**, while meeting these conditions:\n\n- The alert rules themselves must stay **enabled**, and alerts must still be recorded for later review\n- The suppression must recur monthly **automatically**, with no scripts or manual toggling\n\nWhat should you create?",
+    "options": [
+        { "text": "An alert processing rule that suppresses notifications for the VMs' scope on a monthly recurring schedule", "correct": true },
+        { "text": "An Azure Automation runbook that disables the alert rules at 02:00 and re-enables them at 06:00", "correct": false },
+        { "text": "A change to each metric alert rule's evaluation frequency so it does not evaluate on Sunday mornings", "correct": false },
+        { "text": "A removal of the on-call engineer from the action group during maintenance", "correct": false }
+    ],
+    "explanation": "**Alert processing rules** are the Azure Monitor feature for exactly this: applied to a scope (subscription, resource group, or specific resources), a rule with the **suppression** action stops action groups from being triggered — so no pages, emails, or webhooks — while the underlying alert rules keep evaluating and alert instances are **still created and visible** in the portal for later review. A processing rule accepts a **recurring window** (for example, monthly on the first Sunday, 02:00–06:00), so suppression starts and ends automatically with no operational effort.\n\n**Why not the other options:**\n- **Runbook that disables/enables alert rules**: this is custom automation to maintain (credentials, failures, drift), and while rules are disabled **no alerts are recorded at all** — violating the requirement that alerts remain visible for review. A missed re-enable also leaves production unmonitored.\n- **Changing evaluation frequency**: evaluation frequency controls how *often* a rule runs, not *when* — there is no calendar in a metric alert rule, so it cannot skip the first Sunday of a month. Distorting evaluation cadence also degrades monitoring the rest of the time.\n- **Editing the action group**: manually removing and re-adding receivers is toggling by another name — error-prone, not automatic, and it changes notification behavior for **every** alert that uses that action group, not just the maintenance scope.",
+    "category": "Monitor and Maintain Azure Resources"
+}

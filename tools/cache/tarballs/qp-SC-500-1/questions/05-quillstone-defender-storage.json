@@ -1,0 +1,25 @@
+{
+    "id": "sc500-05-quillstone-defender-storage",
+    "question": "Following the malware incident in the `stqsmedia` account, you must ensure uploaded blobs are scanned for malware in near real time with findings surfaced in Microsoft Defender for Cloud, and partner SAS tokens must become revocable with centrally controlled lifetimes. Which two changes should you make?",
+    "options": [
+        {
+            "text": "Enable Microsoft Defender for Storage with on-upload malware scanning on the subscription, and reissue partner SAS tokens as service SAS tokens tied to a stored access policy on the container",
+            "correct": true
+        },
+        {
+            "text": "Enable Azure Storage lifecycle management to move new blobs to the archive tier, and switch partners to user delegation SAS tokens with 10-year expiry",
+            "correct": false
+        },
+        {
+            "text": "Enable blob soft delete and versioning, and require partners to upload through SFTP with local users",
+            "correct": false
+        },
+        {
+            "text": "Enable Microsoft Defender for App Service, and rotate the storage account keys monthly to invalidate old SAS tokens",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Storage** with the **on-upload malware scanning** add-on scans blobs as they are uploaded (powered by Microsoft Defender Antivirus) and raises security alerts in Defender for Cloud. A **stored access policy** on the container lets you define start/expiry and permissions server-side; service SAS tokens that reference the policy can be revoked or shortened at any time by modifying or deleting the policy — without regenerating account keys.\n\n**Why not the other options:**\n- **Lifecycle management + 10-year user delegation SAS** — Lifecycle management controls tiering/retention, not malware; user delegation SAS is limited to 7 days and a 10-year token would recreate the standing-access problem anyway.\n- **Soft delete/versioning + SFTP** — Those aid recovery, not detection; SFTP changes the protocol but provides no malware scanning or SAS lifecycle control.\n- **Defender for App Service + key rotation** — Defender for App Service protects web apps, not storage; rotating account keys revokes account-key SAS tokens but is disruptive and is exactly what the requirement says to avoid.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_quillstone_retail.json"
+}

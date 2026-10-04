@@ -1,0 +1,25 @@
+{
+    "id": "sc500-04-quillstone-storage-firewall",
+    "question": "You need to restrict network access to Quillstone Retail Group's storage accounts so that only the e-commerce virtual network and the corporate office IP range can connect. What should you configure on each storage account?",
+    "options": [
+        {
+            "text": "Set the storage account firewall default action to Deny, add a virtual network rule for the e-commerce subnet (with the Microsoft.Storage service endpoint enabled), and add an IP network rule for 203.0.113.0/24",
+            "correct": true
+        },
+        {
+            "text": "Create an NSG on the storage account and add inbound allow rules for the virtual network and the office IP range",
+            "correct": false
+        },
+        {
+            "text": "Disable shared key authorization and require Microsoft Entra ID authentication for all storage requests",
+            "correct": false
+        },
+        {
+            "text": "Enable infrastructure encryption and rotate both storage account access keys",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Storage firewall rules control which networks can reach the account. Setting **Enabled from selected virtual networks and IP addresses** (default action Deny) and then adding a **virtual network rule** for the e-commerce subnet (which requires the `Microsoft.Storage` service endpoint on that subnet, unless you use private endpoints) plus an **IP rule** for 203.0.113.0/24 meets the requirement exactly.\n\n**Why not the other options:**\n- **NSG on the storage account** — NSGs attach to subnets and NICs in virtual networks; you cannot attach an NSG to a PaaS storage account.\n- **Disabling shared key authorization** — That strengthens authorization (who can authenticate) but does not restrict which networks can reach the endpoint.\n- **Infrastructure encryption and key rotation** — These are encryption-at-rest and credential-hygiene controls; they have no effect on network reachability.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_quillstone_retail.json"
+}

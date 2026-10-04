@@ -1,0 +1,28 @@
+{
+    "id": "sc500-26-sentinel-component-matching",
+    "type": "matching",
+    "question": "Match each Microsoft Sentinel component to the SOC requirement it fulfills.",
+    "sourceItems": [
+        "Playbook",
+        "Watchlist",
+        "Analytics rule",
+        "Workbook",
+        "Automation rule"
+    ],
+    "targetSlots": [
+        "Detect threats by running a scheduled KQL query against ingested logs and generating incidents",
+        "Automatically set severity and assign an owner the moment matching incidents are created",
+        "Run a Logic Apps workflow that blocks an attacker's IP address on the firewall",
+        "Present an interactive dashboard of sign-in failures for SOC leadership",
+        "Enrich detections with a curated list of recently terminated employees' account names"
+    ],
+    "correctMapping": [
+        2,
+        4,
+        0,
+        3,
+        1
+    ],
+    "explanation": "- **Analytics rules** are the detection engine: scheduled (or NRT) KQL queries over workspace tables that create alerts and incidents when results match.\n- **Automation rules** trigger on incident creation/update and perform lightweight actions centrally — changing severity, assigning owners, adding tags, or invoking playbooks.\n- **Playbooks** are Logic Apps workflows for response actions with external systems, such as blocking an IP on a firewall or disabling an account.\n- **Workbooks** are the visualization layer — interactive, parameterized dashboards over the workspace data.\n- **Watchlists** store curated reference data (e.g., terminated employees, VIP assets) that KQL queries can join against to enrich or prioritize detections.\n\nA common trap is confusing automation rules with playbooks: automation rules are the *orchestration* (when/what to trigger, simple incident edits), while playbooks contain the *actions* that reach outside Sentinel.",
+    "category": "Manage and monitor security posture"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az800-11-skyline-vpn-failover",
+    "question": "Skyline Insurance wants to implement a VPN-based failover for their main ExpressRoute connection. When configuring the Azure VPN Gateway, which routing protocol is required to ensure that traffic automatically reroutes to the VPN if the ExpressRoute circuit goes down?",
+    "options": [
+        {
+            "text": "Static routing",
+            "correct": false
+        },
+        {
+            "text": "Border Gateway Protocol (BGP)",
+            "correct": true
+        },
+        {
+            "text": "OSPF",
+            "correct": false
+        },
+        {
+            "text": "RIP",
+            "correct": false
+        }
+    ],
+    "explanation": "**BGP (Border Gateway Protocol)** is required for ExpressRoute and is the recommended way to manage dynamic routing and failover in Azure hybrid networks. It allows both the ExpressRoute and VPN Gateway to learn and propagate path information automatically.\n\n**Why not the other options:**\n- **Static routing** — Requires manual intervention for failover and is not supported by ExpressRoute.\n- **OSPF / RIP** — Not natively supported for Azure gateway-to-gateway routing.",
+    "category": "Implement and manage on-premises and hybrid networking",
+    "caseStudy": "scenarios/case_study_skyline_insurance.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-27-custom-security-standards",
+    "question": "Your organization has an internal hardening baseline that goes beyond the built-in compliance standards — for example, \"every storage account must have both infrastructure encryption and a customer-managed key.\" The security team wants these internal requirements assessed continuously across Azure **and** the connected AWS environment, shown with pass/fail resource counts alongside the built-in standards in Microsoft Defender for Cloud. What should you do?",
+    "options": [
+        {
+            "text": "Create a custom security standard in Defender for Cloud, author custom recommendations with KQL queries against the cloud asset graph for the internal requirements, add them to the standard, and assign the standard to the Azure subscriptions and the AWS connector",
+            "correct": true
+        },
+        {
+            "text": "Export all resources to a spreadsheet monthly and have the governance team mark each requirement as met or unmet",
+            "correct": false
+        },
+        {
+            "text": "Enable every built-in regulatory compliance standard available, since together they cover any conceivable internal requirement",
+            "correct": false
+        },
+        {
+            "text": "Create Azure Policy custom definitions only, since Defender for Cloud cannot assess non-Azure resources against custom rules",
+            "correct": false
+        }
+    ],
+    "explanation": "Defender for Cloud supports **custom security standards** populated with **custom recommendations**: you express each internal requirement as a **KQL query over the cloud security graph** (the same asset graph the cloud security explorer uses), define what compliant/non-compliant looks like, gather the recommendations into a named standard, and **assign the standard to scopes** — Azure subscriptions *and* AWS or GCP connectors. From then on the standard appears in the regulatory compliance and recommendations experience next to the built-ins, continuously assessed with per-resource pass/fail, unhealthy resource counts, and the usual remediation workflow. This KQL-based model is exactly what makes multicloud custom assessment possible.\n\n**Why not the other options:**\n- **Monthly spreadsheet** — point-in-time, human-driven, error-prone, invisible in Defender for Cloud, and provides no drift detection between reviews. 'Continuous' is the operative requirement.\n- **Enable every built-in standard** — built-in standards assess *their own* controls; none of them contains your organization's bespoke rules (like requiring double encryption *plus* CMK together). Enabling dozens of irrelevant standards adds noise, not coverage of internal requirements.\n- **Azure Policy custom definitions only** — the premise is outdated: Azure Policy custom definitions do apply to Azure resources (and remain an option for Azure-side standards), but Defender for Cloud's KQL-based custom recommendations were introduced precisely to assess **AWS and GCP resources** too. Ruling out multicloud custom assessment is simply wrong, and Policy alone leaves the AWS estate unassessed.",
+    "category": "Manage and monitor security posture"
+}

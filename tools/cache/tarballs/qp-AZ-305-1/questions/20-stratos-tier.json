@@ -1,0 +1,53 @@
+{
+    "id": "gen-23-storage-tier-hotspot-dropdown",
+    "type": "hotspot-dropdown",
+    "question": "You have different storage requirements for various departments. Select the appropriate **Storage Account Type** and **Access Tier** for each scenario.",
+    "image": "assets/images/storage_tier_selection.svg",
+    "dropdowns": [
+        {
+            "label": "Scenario 1: Long-term archival of audit logs (retained 7 years, rarely accessed).",
+            "x1": 30,
+            "y1": 27,
+            "x2": 80,
+            "y2": 45,
+            "options": [
+                "General-purpose v2 / Hot",
+                "General-purpose v2 / Cool",
+                "General-purpose v2 / Cold",
+                "General-purpose v2 / Archive",
+                "Premium Block Blobs"
+            ],
+            "correctIndex": 3
+        },
+        {
+            "label": "Scenario 2: Low-latency data ingestion for real-time order processing.",
+            "x1": 30,
+            "y1": 49,
+            "x2": 80,
+            "y2": 67,
+            "options": [
+                "General-purpose v2 / Hot",
+                "General-purpose v2 / Cool",
+                "Premium Block Blobs",
+                "Premium File Shares"
+            ],
+            "correctIndex": 2
+        },
+        {
+            "label": "Scenario 3: Standard file storage for employee home directories.",
+            "x1": 30,
+            "y1": 71,
+            "x2": 80,
+            "y2": 89,
+            "options": [
+                "General-purpose v2 / Hot",
+                "General-purpose v2 / Cool",
+                "Premium Page Blobs",
+                "Azure Data Lake Storage Gen2"
+            ],
+            "correctIndex": 0
+        }
+    ],
+    "explanation": "- **Archive tier** is the most cost-effective for data that is rarely accessed and can tolerate retrieval latency (like 7-year audit logs).\n- **Premium Block Blobs** are designed for high transaction rates and low latency, making them ideal for sub-second data ingestion scenarios.\n- **General-purpose v2 with Hot tier** is the standard choice for frequently accessed file storage like home directories.",
+    "category": "Design Data Storage Solutions"
+}

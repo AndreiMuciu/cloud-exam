@@ -1,0 +1,24 @@
+{
+    "id": "sc900-26-azure-key-vault",
+    "question": "A development team hard-codes database connection strings and API keys in application configuration files. The security team wants these secrets stored in a centralized, access-controlled cloud service that applications can retrieve them from at runtime, with all access logged.\n\nWhich Azure service should the team use?",
+    "options": [
+        {
+            "text": "Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": false
+        },
+        {
+            "text": "Azure Key Vault",
+            "correct": true
+        },
+        {
+            "text": "Azure Storage account",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Key Vault** is a centralized cloud service for safeguarding **secrets** (connection strings, API keys, passwords), **encryption keys**, and **certificates**. Access is tightly controlled through authentication and authorization (ideally via managed identities so applications need no stored credentials at all), secrets can be rotated without redeploying code, and all operations are logged for auditing.\n\n**Why not the other options:**\n- **Azure Policy** — Policy evaluates and enforces rules about resource configuration (for example, requiring encryption to be enabled); it does not store or serve secrets to applications.\n- **Microsoft Defender for Cloud** — Defender for Cloud assesses security posture and detects threats; it can *recommend* using a vault but is not a secret store itself.\n- **Azure Storage account** — General-purpose storage lacks the purpose-built secret lifecycle features of Key Vault — versioned secrets, rotation, certificate management, and hardware security module (HSM) backed key protection.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

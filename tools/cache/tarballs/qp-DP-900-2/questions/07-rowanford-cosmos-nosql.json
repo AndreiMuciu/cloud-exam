@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-07-rowanford-cosmos-nosql",
+    "question": "Rowanford Growers must store the soil-probe readings — JSON documents whose structure varies by probe model — for the irrigation advisory service. Single-document reads must return in milliseconds, and throughput must scale up during the growing season and back down in winter.\n\nWhich Azure service should Rowanford Growers use?",
+    "options": [
+        {
+            "text": "Azure Cosmos DB for NoSQL",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Database",
+            "correct": false
+        },
+        {
+            "text": "Azure Files",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob Storage",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cosmos DB for NoSQL** is a fully managed **document database** built for exactly this profile: it stores schema-flexible JSON documents (so newer probes can add nutrient and salinity properties without any schema change), it delivers **single-digit-millisecond** reads and writes backed by SLAs, and its throughput can be **elastically scaled** — including autoscale — to match seasonal demand.\n\n**Why not the other options:**\n- **Azure SQL Database** — A relational service that expects a fixed schema of typed columns. Documents that vary by probe model would force constant schema changes or sparse tables, and JSON stored in a text column loses the native document-query experience.\n- **Azure Files** — A managed file share for applications that read and write files over SMB or NFS; it is not a database, offers no per-document millisecond query capability, and cannot index JSON properties.\n- **Azure Blob Storage** — Great for large binary objects (like the drone imagery), but blobs are opaque: you cannot query inside a blob's JSON content or get indexed, low-latency lookups by document properties.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_rowanford_growers.json"
+}

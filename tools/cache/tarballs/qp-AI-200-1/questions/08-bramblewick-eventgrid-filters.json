@@ -1,0 +1,25 @@
+{
+    "id": "ai200-08-bramblewick-eventgrid-filters",
+    "question": "The Bramblewick refunds team's webhook must receive only `OrderReturned` events from the `bw-order-events` custom topic. Other event types must not be delivered to it, and the publisher code must not change.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create an event subscription on the topic for the refunds webhook and configure its included event types filter to deliver only `OrderReturned` events.",
+            "correct": true
+        },
+        {
+            "text": "Create a second custom topic named `bw-return-events` and update the order service to publish return events there instead.",
+            "correct": false
+        },
+        {
+            "text": "Deliver all events to the webhook and have the refunds service inspect each payload and return HTTP 400 for event types it does not handle.",
+            "correct": false
+        },
+        {
+            "text": "Route the topic to an Azure Service Bus queue and write a dispatcher function that forwards only return events to the webhook.",
+            "correct": false
+        }
+    ],
+    "explanation": "Event Grid filtering happens **per event subscription**. An included event types filter (or an advanced filter on event data) makes Event Grid deliver only matching events to that endpoint — the refunds webhook simply never sees `OrderPlaced` or `OrderShipped`, and the publisher keeps sending everything to the one topic unchanged.\n\n**Why not the other options:**\n- **Second topic** — Requires changing the publisher, which the requirement forbids, and fragments the event stream for every future consumer.\n- **Consumer-side filtering with HTTP 400** — The webhook still receives every event, and returning errors for valid deliveries triggers Event Grid's retry policy, eventually dead-lettering events that were never meant for this subscriber.\n- **Service Bus + dispatcher function** — Adds an extra hop, extra cost, and custom code to replicate filtering that Event Grid subscriptions provide natively.",
+    "category": "Connect to and consume Azure services",
+    "caseStudy": "scenarios/case_study_bramblewick_retail.json"
+}

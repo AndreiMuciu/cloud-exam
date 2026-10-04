@@ -1,0 +1,13 @@
+{
+    "id": "case_study_ironvale",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Ironvale Manufacturing** produces industrial sensors and operates two factories and a head office. The company runs Active Directory Domain Services (AD DS) on-premises and has recently purchased Microsoft 365 subscriptions for all 1,200 employees.\n\n**Current Environment:**\n- All user accounts are created and managed in on-premises AD DS.\n- Employees currently maintain a separate password for the new cloud services.\n- About 80 external contractors help with seasonal production planning and sign in from outside the company network.\n- A small IT team of five administrators holds permanent, highly privileged directory roles."
+        },
+        {
+            "title": "Identity Requirements",
+            "content": "Ironvale Manufacturing has defined the following requirements for its identity platform:\n- **Single set of credentials**: Employees must sign in to Microsoft 365 with the same password they use on-premises, with the least possible additional server infrastructure. Cloud sign-in must keep working even if the on-premises network is unavailable.\n- **Risk-appropriate authentication**: Contractors must be prompted for multifactor authentication only when they sign in from outside the corporate network; employees on the factory floor should not receive unnecessary prompts.\n- **Reduce standing privilege**: Administrators should receive privileged directory roles only when needed, for a limited time, and with an approval step and an audit trail."
+        }
+    ]
+}

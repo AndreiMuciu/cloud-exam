@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-network-nat-gateway",
+    "type": "single",
+    "question": "Blythewater Marine must fix the outbound connectivity of **Subnet-Ingest**, where 60 Linux VMs call a partner tide-data API.\n\nRecall the constraints:\n\n- Diagnostics show **SNAT port exhaustion** on the default outbound access path during peak windows\n- The partner allowlists at most **four** source IP addresses per customer\n- No inbound connections from the internet are required\n\nWhat should you deploy?",
+    "options": [
+        { "text": "A NAT gateway associated with Subnet-Ingest, using a public IP prefix of size /30", "correct": true },
+        { "text": "An instance-level public IP address on each of the 60 VMs", "correct": false },
+        { "text": "A service endpoint on Subnet-Ingest for the partner API", "correct": false },
+        { "text": "A user-defined route on Subnet-Ingest that sends 0.0.0.0/0 to the Internet next hop type", "correct": false }
+    ],
+    "explanation": "**Azure NAT Gateway** is the purpose-built answer to SNAT exhaustion for outbound-only workloads. Associating a NAT gateway with Subnet-Ingest replaces the constrained default outbound access with a dedicated, dynamically allocated pool of SNAT ports — 64,512 ports per public IP address — shared efficiently across all VMs in the subnet. A **public IP prefix of size /30** supplies exactly **4 contiguous static addresses**, matching the partner's four-address allowlist while quadrupling the SNAT port pool. NAT Gateway carries only outbound-originated flows, which fits the no-inbound requirement.\n\n**Why not the other options:**\n- **Instance-level public IPs on all 60 VMs**: each VM would then egress from its own address — 60 distinct source IPs, which blows far past the partner's four-address allowlist. It also exposes every VM directly to the internet, weakening the security posture for no benefit.\n- **Service endpoint**: service endpoints optimize traffic from a subnet to **Azure PaaS services** (Storage, SQL, and so on). The partner's tide-data API is an external internet service — service endpoints play no role and do nothing for SNAT capacity.\n- **UDR with next hop Internet**: the traffic already egresses to the internet; a 0.0.0.0/0 route with next hop type Internet merely re-states default routing. It adds no SNAT ports and no fixed source addresses, so both problems remain.",
+    "category": "Implement and Manage Virtual Networking",
+    "caseStudy": "scenarios/case_study_blythewater.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-03-veynhart-pim-groups",
+    "question": "You need to redesign the fleet-diagnostics engineers' access to `kv-veyn-fleet` for Veynhart Robotics: no standing access, activation only during incidents with approval by the on-call incident manager, automatic expiry after 8 hours, a recorded justification for every activation — and the existing Azure RBAC assignment model on the vault must keep working. What should you implement?",
+    "options": [
+        {
+            "text": "Create a role-assignable security group, assign it the Key Vault Secrets User role on the vault, onboard the group to Privileged Identity Management (PIM) for Groups, make the engineers eligible members, and configure the membership activation policy with approval, justification, and an 8-hour maximum duration",
+            "correct": true
+        },
+        {
+            "text": "Onboard the Key Vault Secrets User Azure role itself to PIM and make each of the six engineers individually eligible for the role on the vault",
+            "correct": false
+        },
+        {
+            "text": "Create a Conditional Access policy that blocks the engineers' access to Key Vault except when their sign-in risk is low and an incident ticket exists",
+            "correct": false
+        },
+        {
+            "text": "Replace the engineers' access with a shared break-glass account whose password is stored in a sealed envelope held by the incident manager",
+            "correct": false
+        }
+    ],
+    "explanation": "**PIM for Groups** wraps just-in-time activation around *group membership*: the group keeps a single permanent Azure RBAC assignment (Key Vault Secrets User on the vault), while the engineers hold only *eligible* membership in the group. When an incident starts, an engineer activates membership; PIM enforces the **approval step** (the on-call incident manager), the **required justification**, and the **time-boxed duration** (8 hours), after which membership — and therefore the vault permission — disappears automatically. Every activation and approval is written to the audit log. Crucially, the vault's RBAC model is untouched: permissions stay granted to the group, satisfying the requirement not to re-grant individuals one by one.\n\n**Why not the other options:**\n- **PIM for the Azure role per engineer** — PIM for Azure resource roles could also remove standing access, but it requires managing six separate eligible role assignments on the vault and re-doing them for every joiner/leaver, which is exactly the per-individual re-granting the requirement rules out. Managing eligibility through one group keeps administration to group membership.\n- **Conditional Access policy** — Conditional Access gates *authentication conditions*; it cannot implement approval workflows, activation justifications, or 8-hour time-boxed permission grants. The engineers would still hold standing RBAC permissions the rest of the time.\n- **Shared break-glass account** — shared credentials destroy individual accountability (no per-engineer audit trail), the envelope process is not automatic expiry, and distributing a password contradicts basic credential hygiene. Break-glass accounts exist for emergency *tenant* access, not routine incident workflows.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_veynhart_robotics.json"
+}

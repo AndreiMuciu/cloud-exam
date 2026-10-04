@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-28-wef-event-collection",
+  "type": "single",
+  "question": "Thousands of domain-joined Windows servers already forward their Security events over Windows Event Forwarding (WEF) to a small set of Windows Event Collector servers. The SOC must ingest these events into Microsoft Sentinel while keeping the existing WEF infrastructure and **without** deploying anything to the thousands of source servers. What should you implement?",
+  "options": [
+    {
+      "text": "Install the Azure Monitor Agent on the collector servers only, and use the Windows Forwarded Events connector with a data collection rule that reads events from the collectors' ForwardedEvents channel",
+      "correct": true
+    },
+    {
+      "text": "Deploy the Azure Monitor Agent to every source server via Group Policy and create a data collection rule for the Security event log on each of them",
+      "correct": false
+    },
+    {
+      "text": "Configure the collector servers to relay the events as syslog messages to a Linux log forwarder running the Azure Monitor Agent with a CEF data collection rule",
+      "correct": false
+    },
+    {
+      "text": "Enable Windows DNS-over-HTTPS on the collectors so events are pushed directly to the Sentinel workspace endpoint without an agent",
+      "correct": false
+    }
+  ],
+  "explanation": "Microsoft Sentinel's **Windows Forwarded Events** connector exists precisely for organizations that already run WEF. The source servers keep forwarding events exactly as they do today; the only change is on the small set of Windows Event Collector (WEC) servers, where the **Azure Monitor Agent (AMA)** is installed (via Azure Arc if they are on-premises). A **data collection rule** targets the collectors and reads from their `ForwardedEvents` channel — where WEF lands the subscribed events — optionally filtering with XPath queries to control ingestion volume. The result: thousands of servers covered by touching only a handful of machines, with the existing, hardened WEF pipeline preserved.\n\n**Why not the other options:**\n- **AMA on every source server** — technically workable, but it directly violates the constraint: it deploys an agent to thousands of servers, duplicates the collection path that WEF already provides, and multiplies the operational surface (agent health, Arc onboarding for every machine).\n- **Relaying as syslog/CEF** — Windows Event Collectors are not syslog senders, and Windows Security events are not CEF messages; converting them would need custom tooling and would mangle the native event schema that Sentinel's Windows analytics content expects.\n- **DNS-over-HTTPS** — a name-resolution privacy protocol; it has nothing to do with shipping event logs, and there is no agentless \"push to workspace endpoint\" mechanism for Windows event channels.",
+  "category": "Manage and monitor security posture"
+}

@@ -1,0 +1,29 @@
+{
+    "id": "dp900-s3-17-stream-processing-characteristics",
+    "type": "multi",
+    "question": "A team is designing a system to process a continuous feed of website clickstream events.\n\nWhich three characteristics are typical of stream processing? (Choose 3)",
+    "options": [
+        {
+            "text": "Each event, or a small group of events, is processed as it arrives rather than after a complete dataset has been collected",
+            "correct": true
+        },
+        {
+            "text": "Results are produced with very low latency, typically within seconds or milliseconds of the event occurring",
+            "correct": true
+        },
+        {
+            "text": "Aggregations are commonly computed over temporal windows, such as the number of clicks in the last five minutes",
+            "correct": true
+        },
+        {
+            "text": "All incoming data must first be loaded into a data warehouse before any processing can begin",
+            "correct": false
+        },
+        {
+            "text": "Processing starts only after the full day's events have been collected into a single file",
+            "correct": false
+        }
+    ],
+    "explanation": "Stream processing operates on **unbounded data in motion**:\n- **Per-event processing** — Work happens as each event (or micro-batch of events) arrives; the system never waits for the dataset to be \"complete,\" because a stream has no end.\n- **Low latency** — The whole point of streaming is to act on events within seconds or milliseconds — powering live dashboards, alerts, and immediate reactions.\n- **Temporal windows** — Because the stream is endless, aggregations are scoped to time windows (for example, tumbling five-minute windows of click counts) rather than to the whole dataset.\n\n**Why not the other options:**\n- **Loading into a data warehouse first** — Stream processors work on data before it lands anywhere; the warehouse is at most one of the destinations that processed results are written to, not a prerequisite.\n- **Waiting for the full day's events in a single file** — Collecting a period's data and processing it together is the definition of **batch** processing, not streaming.",
+    "category": "Describe Core Data Concepts"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s2-13-defender-for-key-vault",
+    "question": "Your organization's key vaults are accessed by dozens of applications with well-established patterns. The security team wants to be alerted when a vault is accessed in an anomalous way — for example, from a Tor exit node, by an unusual user or application, or through a sudden spike in secret list-and-get operations that suggests key harvesting — without changing how the applications currently access the vaults. What should you do?",
+    "options": [
+        {
+            "text": "Enable the Microsoft Defender for Key Vault plan on the subscriptions so that machine-learning-based anomaly detections generate security alerts in Microsoft Defender for Cloud",
+            "correct": true
+        },
+        {
+            "text": "Enable the Key Vault firewall with a default Deny action so that only known networks can reach the vaults",
+            "correct": false
+        },
+        {
+            "text": "Stream Key Vault diagnostic logs to a Log Analytics workspace and ask an engineer to review the AzureDiagnostics table weekly",
+            "correct": false
+        },
+        {
+            "text": "Enable purge protection and soft delete on every vault to detect and reverse malicious deletions",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Key Vault** is the threat-protection plan for vaults: enabled at the subscription level, it applies anomaly detection over vault access patterns and raises alerts such as *access from a Tor exit node*, *unusual user-application pair*, *unusual operation pattern*, or *high volume of operations* — with no agent, no application change, and no impact on the data path. Alerts surface in Defender for Cloud (and can flow to Sentinel), including suggested investigation steps.\n\n**Why not the other options:**\n- **Key Vault firewall with default Deny** — a *preventive* network control that would change (and potentially break) current application access; it cannot detect anomalous behavior originating from *allowed* networks or compromised legitimate identities.\n- **Diagnostic logs with weekly manual review** — logging is valuable forensically, but a weekly human review is not anomaly detection: no baseline modeling, no near-real-time alerting, and high analyst cost.\n- **Purge protection and soft delete** — these protect against destructive *deletion* of vault objects; they neither detect nor alert on suspicious *read* access such as secret harvesting.",
+    "category": "Manage identity, access, and governance"
+}

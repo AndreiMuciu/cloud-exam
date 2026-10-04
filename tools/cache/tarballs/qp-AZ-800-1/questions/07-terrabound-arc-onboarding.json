@@ -1,0 +1,25 @@
+{
+    "id": "az800-07-terrabound-arc-onboarding",
+    "question": "TerraBound Energy wants to manage their on-premises Windows Servers via the Azure portal using Azure Arc. Which component must be installed on the on-premises servers to enable this integration?",
+    "options": [
+        {
+            "text": "Azure Connected Machine agent",
+            "correct": true
+        },
+        {
+            "text": "Log Analytics agent",
+            "correct": false
+        },
+        {
+            "text": "Dependency agent",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Connect",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Azure Connected Machine agent** is the specific agent required to onboard a machine to Azure Arc. Once installed and registered, the machine appears as a resource in Azure.\n\n**Why not the other options:**\n- **Log Analytics agent** — Used for performance and log collection, but doesn't provide the 'control plane' management functionality of Arc.\n- **Dependency agent** — Used for VM Insights/Service Map to track network connections.\n- **Entra Connect** — For identity synchronization, not for server management.",
+    "category": "Manage virtual machines and containers",
+    "caseStudy": "scenarios/case_study_terrabound_energy.json"
+}

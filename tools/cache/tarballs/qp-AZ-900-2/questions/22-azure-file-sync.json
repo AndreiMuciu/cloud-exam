@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-22-azure-file-sync",
+    "question": "A regional engineering firm wants to centralize its project file shares in Azure Files while keeping its existing on-premises Windows file server as a fast local cache of the most frequently used files. Which service enables this?",
+    "options": [
+        {
+            "text": "Azure File Sync",
+            "correct": true
+        },
+        {
+            "text": "AzCopy",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Box",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob lifecycle management",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure File Sync** turns an on-premises Windows Server into a cache of an Azure file share. Files are centralized in Azure Files, while cloud tiering keeps only the most recently and frequently accessed files on the local server — users get LAN-speed access to hot files with the full share available in the cloud.\n\n**Why not the other options:**\n- **AzCopy** — A command-line utility for one-off or scripted copies to and from Azure Storage; it does not provide continuous two-way synchronization or local caching.\n- **Azure Data Box** — A physical appliance for bulk offline data transfer into Azure; it is a migration tool, not an ongoing hybrid file service.\n- **Azure Blob lifecycle management** — Automatically transitions blobs between access tiers (hot, cool, cold, archive) based on rules; it applies to Blob Storage tiering, not to file-share caching on a local server.",
+    "category": "Describe Azure Architecture and Services"
+}

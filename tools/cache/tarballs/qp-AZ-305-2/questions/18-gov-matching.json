@@ -1,0 +1,28 @@
+{
+    "id": "az305-s2-gov-matching",
+    "type": "matching",
+    "question": "Match each governance requirement to the Azure service that is designed to fulfil it.",
+    "sourceItems": [
+        "Enforce that every new resource is deployed only to approved Azure regions",
+        "Run a fast KQL-style inventory query across thousands of resources in all subscriptions",
+        "Alert the finance team when a department's monthly Azure spending forecast exceeds its budget",
+        "Track secure score and regulatory compliance posture of workloads against industry benchmarks",
+        "Delegate a managed service provider access to customer subscriptions from the provider's own tenant"
+    ],
+    "targetSlots": [
+        "Azure Policy",
+        "Azure Resource Graph",
+        "Microsoft Cost Management",
+        "Microsoft Defender for Cloud",
+        "Azure Lighthouse"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "explanation": "- **Azure Policy** — Assign a policy with the `Deny` effect using the *allowed locations* definition to prevent resources from being created outside approved regions. Policy is the enforcement engine for organizational standards\n- **Azure Resource Graph** — Provides high-performance, KQL-based queries over resource properties across all subscriptions and management groups at once — the right tool for at-scale inventory questions that would be far too slow via per-subscription ARM calls\n- **Microsoft Cost Management** — Budgets with forecast-based alerts notify stakeholders (via action groups) when actual or *forecasted* spend crosses thresholds, supporting departmental chargeback and cost governance\n- **Microsoft Defender for Cloud** — Continuously assesses workloads, producing a secure score and mapping findings to regulatory compliance standards (for example ISO 27001, PCI DSS) in its compliance dashboard\n- **Azure Lighthouse** — Enables cross-tenant delegated resource management, letting a service provider's users operate on customers' subscriptions from the provider's own tenant with scoped, auditable authorizations",
+    "category": "Design Identity, Governance, and Monitoring"
+}

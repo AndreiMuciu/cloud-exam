@@ -1,0 +1,25 @@
+{
+    "id": "sc300-marisund-managed-identity-choice",
+    "question": "Marisund Logistics has an Azure Automation runbook shared across three separate Azure subscriptions. The runbook must authenticate to an Azure Storage account and an Azure SQL Database in a fourth subscription. The identity used must be reusable across the multiple subscriptions the runbook touches, rather than being tied to the lifecycle of a single Azure resource.\n\nWhich identity should you create and assign to the Automation account?",
+    "options": [
+        {
+            "text": "A user-assigned managed identity, granted the appropriate roles on the storage account and SQL Database, and assigned to the Automation account",
+            "correct": true
+        },
+        {
+            "text": "A system-assigned managed identity on the Automation account",
+            "correct": false
+        },
+        {
+            "text": "A service principal secured with a client secret, shared across the runbook's steps",
+            "correct": false
+        },
+        {
+            "text": "A Microsoft Entra user account dedicated to running the runbook, with an assigned Microsoft Entra ID license",
+            "correct": false
+        }
+    ],
+    "explanation": "A **user-assigned managed identity** is created as its own standalone Azure resource, independent of any single Azure resource's lifecycle. It can be assigned to multiple Azure resources (here, the Automation account) and granted role-based access on resources across subscriptions in the same tenant, and it persists even if the Automation account is deleted and recreated — matching the \"reusable, not tied to one resource's lifecycle\" requirement.\n\n**Why not the other options:**\n- **System-assigned managed identity** — its lifecycle is tied directly to the single resource it's created on; if that Automation account is deleted, the identity is deleted with it, and it cannot be pre-provisioned or shared independently.\n- **A service principal with a client secret** — this requires manually managing and rotating a credential, which managed identities are specifically designed to eliminate; it's needlessly higher operational overhead for an Azure-to-Azure scenario.\n- **A dedicated licensed user account** — running automation as a human user account requires a password (or other user credential) to be stored and licensed, which is both an unnecessary cost and a credential-management risk compared to a managed identity.",
+    "category": "Plan and implement workload identities",
+    "caseStudy": "scenarios/case_study_marisund.json"
+}

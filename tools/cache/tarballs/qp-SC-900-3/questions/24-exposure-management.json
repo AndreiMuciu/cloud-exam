@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-24-exposure-management",
+    "question": "A security architect can already list individual weaknesses — unpatched servers, over-privileged accounts, exposed storage. What she cannot see is how an attacker could **chain** those weaknesses together, step by step, to reach the company's crown-jewel assets such as the payroll database. She wants a Defender portal capability that maps these attack paths toward critical assets and presents a unified, continuously updated view of the organization's exposure.\n\nWhich Microsoft capability should she use?",
+    "options": [
+        {
+            "text": "Microsoft Security Exposure Management, which identifies critical assets and visualizes attack paths an adversary could take to reach them",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender Vulnerability Management, which lists software vulnerabilities on individual devices",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview Compliance Manager, which scores progress against regulatory assessments",
+            "correct": false
+        },
+        {
+            "text": "Azure DDoS Protection, which analyzes volumetric traffic patterns",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Security Exposure Management**, part of the Microsoft Defender portal, provides a **unified view of security posture across the organization's assets and workloads**. It goes beyond flat lists of findings: it lets the organization designate **critical assets**, continuously aggregates posture signals from the Defender products and other sources, and — most importantly for this scenario — generates **attack paths** that show how an adversary could chain individual weaknesses (a vulnerable server, then a privileged account, then lateral movement) to reach those critical assets, so defenders can cut the path at the cheapest choke point.\n\n**Why not the other options:**\n- **Microsoft Defender Vulnerability Management** — Vulnerability Management discovers and prioritizes *individual* software vulnerabilities and misconfigurations on devices. It supplies valuable input signals, but it does not chain findings into cross-asset attack paths toward designated critical assets.\n- **Microsoft Purview Compliance Manager** — Compliance Manager measures progress against *regulatory and standards* assessments with improvement actions and a compliance score. It reasons about obligations, not about how an attacker traverses an environment.\n- **Azure DDoS Protection** — DDoS Protection defends public-facing endpoints against volumetric denial-of-service traffic. It plays no role in modeling attack paths or aggregating exposure across an estate.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

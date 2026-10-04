@@ -1,0 +1,24 @@
+{
+    "id": "az700-security-flow-logs-verify",
+    "question": "A network engineer wants to answer two different questions: (1) \"Would traffic from this exact source IP/port to this exact destination IP/port over TCP be allowed or denied right now, and by which rule?\" and (2) \"What traffic has actually been flowing through this NSG over the past week, so I can analyze patterns for an audit?\"\n\nWhich Network Watcher capabilities should the engineer use for each question, respectively?",
+    "options": [
+        {
+            "text": "IP flow verify for question 1; virtual network flow logs for question 2",
+            "correct": true
+        },
+        {
+            "text": "Virtual network flow logs for question 1; IP flow verify for question 2",
+            "correct": false
+        },
+        {
+            "text": "Connection Monitor for both questions, since it replaces both capabilities",
+            "correct": false
+        },
+        {
+            "text": "Topology view for question 1; IP flow verify for question 2",
+            "correct": false
+        }
+    ],
+    "explanation": "**IP flow verify** answers an immediate, single-flow question: given a specific five-tuple, it reports whether the traffic would be allowed or denied and which NSG rule is responsible — a point-in-time check, not a historical record. **Virtual network flow logs** (the current recommended replacement for the retiring NSG flow logs) record what traffic has actually traversed the network over time, which is what's needed to analyze historical patterns for an audit.\n\n**Why not the other options:**\n- **Reversing the two** — Flow logs don't provide an instant allow/deny verdict for a hypothetical or specific flow, and IP flow verify doesn't retain historical traffic data for trend analysis — the mapping must not be swapped.\n- **\"Connection Monitor replaces both\"** — Connection Monitor is built for ongoing connectivity and latency monitoring between endpoints; it doesn't provide an instant single-flow rule verdict the way IP flow verify does, nor does it replace the traffic-volume historical recording that flow logs provide.\n- **Topology view for question 1** — Topology view visualizes resource relationships and connections within a VNet; it doesn't evaluate whether a specific flow is allowed or denied by a rule.",
+    "category": "Design and Implement Azure Network Security Services"
+}

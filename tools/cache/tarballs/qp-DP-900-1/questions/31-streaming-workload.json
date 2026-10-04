@@ -1,0 +1,24 @@
+{
+    "id": "dp900-31-streaming-workload",
+    "question": "Which of the following scenarios is the best example of a stream processing workload?",
+    "options": [
+        {
+            "text": "Analyzing credit card transactions as they occur to flag potentially fraudulent activity within seconds",
+            "correct": true
+        },
+        {
+            "text": "Loading the previous day's sales orders into a data warehouse every night at 2 AM",
+            "correct": false
+        },
+        {
+            "text": "Generating a quarterly financial statement from the general ledger",
+            "correct": false
+        },
+        {
+            "text": "Running a weekly job that recalculates customer lifetime value scores",
+            "correct": false
+        }
+    ],
+    "explanation": "**Real-time fraud detection** is a classic stream processing workload: each transaction event is processed **as it arrives**, individually or in small time windows, so that action (blocking a card, raising an alert) can be taken within seconds. Stream processing deals with unbounded data — the flow of events never ends — and prioritizes low latency.\n\n**Why not the other options:**\n- **Nightly warehouse load** — A scheduled job that processes a bounded set of accumulated records is the definition of **batch processing**, where latency of hours is acceptable.\n- **Quarterly financial statement** — Also batch: it runs on a fixed schedule over a complete, bounded dataset (the quarter's ledger entries), with no real-time requirement.\n- **Weekly score recalculation** — A periodic batch computation over historical data. The results are refreshed weekly, not continuously as events occur.\n\nThe key distinction on the exam: batch processes **bounded** data on a schedule and tolerates latency; streaming processes **unbounded** event data continuously with near-real-time results.",
+    "category": "Describe an Analytics Workload on Azure"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-01-yarrowden-aca-scheduled-job",
+    "question": "You must move the Yarrowden soil-moisture aggregation batch off its always-on virtual machine. The container must run to completion once per night at 02:00, expose no network endpoint, incur no compute cost while idle, and require no new cluster or VM to operate.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Create an Azure Container Apps **job** in `yagro-env` with a Schedule trigger, for example `az containerapp job create --trigger-type Schedule --cron-expression \"0 2 * * *\"`.",
+            "correct": true
+        },
+        {
+            "text": "Create a regular container app in `yagro-env` with `minReplicas: 0` and add a cron scale rule that scales it to one replica at 02:00.",
+            "correct": false
+        },
+        {
+            "text": "Create a new AKS cluster and define a Kubernetes `CronJob` resource with `schedule: \"0 2 * * *\"`.",
+            "correct": false
+        },
+        {
+            "text": "Keep the batch on the virtual machine and configure an automation runbook that starts the VM at 02:00 and deallocates it afterward.",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Container Apps distinguishes **apps** (long-running services) from **jobs** (containers that run to completion and then stop). A job with a **Schedule trigger** runs the container on a cron expression, bills only for the execution time, has no ingress or endpoint, and lives in the existing Container Apps environment — every requirement is met with zero new infrastructure.\n\n**Why not the other options:**\n- **Container app with a cron scale rule** — Apps are modeled as continuously running services: when the batch process exits, the platform treats the container as failed and restarts it, so the work would loop instead of running once to completion. Scale rules control replica count, not run-to-completion semantics.\n- **New AKS cluster with a `CronJob`** — A Kubernetes `CronJob` has the right semantics, but standing up and operating a cluster just for one nightly batch violates the \"no new cluster\" requirement and adds constant node cost.\n- **VM start/stop automation** — Keeps the fragile VM plus new automation to maintain, boots an entire OS for one container, and contradicts the goal of retiring the VM.",
+    "category": "Develop containerized solutions on Azure",
+    "caseStudy": "scenarios/case_study_yarrowden_agronomy.json"
+}

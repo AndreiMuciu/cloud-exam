@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-16-predictability-benefits",
+    "type": "multi",
+    "question": "Which **two** statements correctly describe the benefit of **predictability** in the cloud? (Select two.)",
+    "options": [
+        {
+            "text": "Autoscaling adjusts resources to match demand, helping an application deliver consistent performance (performance predictability)",
+            "correct": true
+        },
+        {
+            "text": "Tools such as the pricing calculator, budgets, and spending alerts make cloud costs easier to forecast (cost predictability)",
+            "correct": true
+        },
+        {
+            "text": "Predictability means Azure guarantees that services will never experience an outage",
+            "correct": false
+        },
+        {
+            "text": "Predictability is achieved by purchasing all hardware capacity up front",
+            "correct": false
+        }
+    ],
+    "explanation": "Cloud predictability has two sides. **Performance predictability**: features like autoscaling, load balancing, and high-availability designs keep the customer experience consistent even as demand moves. **Cost predictability**: real-time usage tracking, budgets, and estimation tools (pricing calculator, TCO calculator) let organizations forecast and control spend with confidence.\n\n**Why not the other options:**\n- **A guarantee of no outages** — No cloud provider promises zero downtime; Azure offers SLAs with defined uptime targets and credits, which is different from a guarantee that failures never occur.\n- **Buying all hardware up front** — That is the traditional CapEx approach the cloud replaces; cloud predictability comes from tooling and elastic design, not from pre-purchasing capacity.",
+    "category": "Describe Cloud Concepts"
+}

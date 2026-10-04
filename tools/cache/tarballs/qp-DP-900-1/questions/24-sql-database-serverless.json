@@ -1,0 +1,24 @@
+{
+    "id": "dp900-24-sql-database-serverless",
+    "question": "A development team needs a relational database for an internal application that is used heavily during business hours and idle overnight and on weekends. They want compute to scale automatically with demand and to pause during inactive periods to save cost.\n\nWhich Azure offering should they choose?",
+    "options": [
+        {
+            "text": "Azure SQL Database serverless compute tier",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Managed Instance",
+            "correct": false
+        },
+        {
+            "text": "SQL Server on an Azure virtual machine",
+            "correct": false
+        },
+        {
+            "text": "Azure Database for MariaDB",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Azure SQL Database serverless** compute tier automatically scales compute up and down within a configured range based on workload demand, and can **automatically pause** the database during inactive periods so the team pays only for storage while it is paused. That matches the busy-by-day, idle-by-night usage pattern exactly.\n\n**Why not the other options:**\n- **Azure SQL Managed Instance** — Provides instance-level SQL Server compatibility, but it runs continuously with provisioned resources; it does not auto-pause when idle.\n- **SQL Server on an Azure virtual machine** — An IaaS deployment where the team would manage the OS and would have to script VM shutdowns themselves; there is no built-in demand-based auto-scaling or auto-pause for the database.\n- **Azure Database for MariaDB** — A managed open-source database service for the MariaDB engine, not a SQL Database tier, and it does not offer this auto-pause serverless model.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

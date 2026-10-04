@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-26-defender-cloud-apps",
+    "question": "An IT director suspects employees are storing company files in unsanctioned file-sharing and note-taking SaaS services (\"shadow IT\"). The security team needs to discover which cloud apps are actually in use across the organization, see risk assessments for those apps, and then sanction or block them and apply policies to protect data within approved apps.\n\nWhich Microsoft solution provides these capabilities?",
+    "options": [
+        {
+            "text": "Microsoft Defender for Cloud Apps",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": false
+        },
+        {
+            "text": "Azure Web Application Firewall (WAF)",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Cloud Apps** is Microsoft's SaaS security solution (a cloud access security broker and more). Its **Cloud Discovery** capability analyzes traffic logs to reveal which cloud apps are in use — the shadow IT the director suspects — and scores them against a large catalog of risk-assessed apps. Administrators can then **sanction or unsanction apps**, enforce session and access policies, protect sensitive information within connected apps, and detect anomalous behavior across SaaS.\n\n**Why not the other options:**\n- **Microsoft Defender for Cloud** — Despite the similar name, Defender for Cloud protects *infrastructure workloads* (servers, storage, databases, containers) and manages cloud security posture. It does not discover or govern employees' SaaS app usage.\n- **Azure Web Application Firewall (WAF)** — A WAF shields *your own* web applications from attacks like SQL injection. It has no visibility into which third-party SaaS services employees use.\n- **Microsoft Entra ID Protection** — ID Protection detects risky sign-ins and compromised credentials. It does not inventory cloud app usage or apply app-level data controls.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

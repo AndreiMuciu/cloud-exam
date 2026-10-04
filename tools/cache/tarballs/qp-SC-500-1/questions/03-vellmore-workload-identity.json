@@ -1,0 +1,25 @@
+{
+    "id": "sc500-03-vellmore-workload-identity",
+    "question": "You need to meet Vellmore Financial Group's application identity requirements: remove stored credentials from the microservices and stop users from consenting to third-party applications on their own. What should you do?",
+    "options": [
+        {
+            "text": "Enable managed identities on the compute resources hosting the microservices, grant those identities RBAC/database roles on Key Vault and Azure SQL, then configure the user consent settings to disable user consent and enable the admin consent workflow",
+            "correct": true
+        },
+        {
+            "text": "Move all connection strings and client secrets into a configuration file encrypted with a customer-managed key, then delete the third-party enterprise applications from the tenant",
+            "correct": false
+        },
+        {
+            "text": "Create one app registration with a long-lived client secret shared by all microservices, and require MFA for third-party application sign-ins",
+            "correct": false
+        },
+        {
+            "text": "Store the secrets in Azure Key Vault and grant every developer the Key Vault Secrets Officer role, then block all enterprise applications with Conditional Access",
+            "correct": false
+        }
+    ],
+    "explanation": "**Managed identities** give Azure-hosted services an automatically managed identity in Microsoft Entra ID, so the microservices can obtain tokens for Azure SQL Database and Key Vault with no secret anywhere in code or configuration. For consent, the tenant's **consent and permissions settings** can disable (or restrict) user consent, and the **admin consent workflow** lets users request access that administrators review — exactly the required review process.\n\n**Why not the other options:**\n- **Encrypted config file + deleting apps** — An encrypted file still contains stored credentials that must be decrypted and rotated; deleting existing enterprise apps breaks business use and does not prevent future user consent.\n- **Shared app registration with a client secret** — A long-lived shared secret is precisely the anti-pattern to eliminate, and MFA does not govern application consent.\n- **Key Vault + Secrets Officer for developers** — Key Vault centralizes secrets but the apps still authenticate to Key Vault somehow; granting broad Secrets Officer rights violates least privilege, and blocking all enterprise apps is not a consent governance mechanism.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_vellmore_financial.json"
+}

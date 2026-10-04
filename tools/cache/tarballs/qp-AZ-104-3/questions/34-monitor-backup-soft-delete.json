@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-monitor-backup-soft-delete",
+    "type": "single",
+    "question": "An administrator stopped protection for a production VM in a Recovery Services vault and chose **delete backup data** — by mistake. The deletion happened **5 days ago**. Soft delete is enabled on the vault with its default settings.\n\nWhat is the state of the backup data, and what should you do?",
+    "options": [
+        { "text": "The data is retained in a soft-deleted state for 14 days at no cost; undelete the backup item and resume protection", "correct": true },
+        { "text": "The data was permanently removed when the delete operation completed; restore is impossible", "correct": false },
+        { "text": "The data is retained for 90 days in an archive tier; open a support request to retrieve it", "correct": false },
+        { "text": "The data was moved to the Azure recycle bin and must be recovered within 7 days", "correct": false }
+    ],
+    "explanation": "**Soft delete for Azure Backup** protects exactly this scenario — accidental (or malicious) deletion of backup data. With soft delete enabled, deleting a backup item does not destroy it: the recovery points are kept in a **soft-deleted state for 14 additional days**, and this default retention comes at **no cost** for the vault. At 5 days, the administrator is inside the window: locate the backup item (shown with a soft-delete indicator in the vault), **undelete** it, and then **resume protection** so new recovery points are taken again. Security-focused variants (always-on soft delete, extended retention) exist, but the default already saves this VM's history.\n\n**Why not the other options:**\n- **Permanently removed**: that is what soft delete prevents. Permanent deletion only happens after the 14-day soft-delete window lapses (or if soft delete had been explicitly disabled before the deletion).\n- **90-day archive + support request**: no such mechanism — archive tier is a cost-optimization option for long-term recovery points, not a post-deletion holding area, and Microsoft support cannot resurrect data past the soft-delete window.\n- **Azure recycle bin**: Azure has no general recycle bin for backup data; the 7-day figure is invented. The actual mechanism is the vault's soft-delete state with 14-day default retention.",
+    "category": "Monitor and Maintain Azure Resources"
+}

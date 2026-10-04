@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-30-functions-http-authlevel",
+    "question": "Wrenfold Analytics exposes an HTTP-triggered Azure Function that partner systems call server-to-server. Each partner must present a key, and it must be possible to **revoke one partner's access without affecting the others and without redeploying code**, using built-in platform capabilities.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Set the trigger's `auth_level` to `func.AuthLevel.FUNCTION` and issue each partner its own named function key, deleting a partner's key to revoke access.",
+            "correct": true
+        },
+        {
+            "text": "Set the trigger's `auth_level` to `func.AuthLevel.ADMIN` and give each partner the host master key.",
+            "correct": false
+        },
+        {
+            "text": "Set the trigger's `auth_level` to `func.AuthLevel.ANONYMOUS` and validate a custom API-key header against a list in application code.",
+            "correct": false
+        },
+        {
+            "text": "Embed a shared secret in the function code and require callers to send it in the request body.",
+            "correct": false
+        }
+    ],
+    "explanation": "With `auth_level=FUNCTION`, the platform rejects any request that does not present a valid function key (`x-functions-key` header or `code` query parameter). Function keys are **named** and you can create **multiple keys per function** — one per partner — through the portal, CLI, or key-management API. Revoking a single partner is deleting that partner's key: instant, per-partner, and no code change or redeploy.\n\n**Why not the other options:**\n- **`ADMIN` + master key** — The `_master` host key grants access to the runtime's admin endpoints for the entire app. Sharing it with external partners is a serious over-grant, and there is only one master key, so revoking one partner means rotating everyone.\n- **`ANONYMOUS` + custom header check** — Moves key issuance, storage, comparison, and revocation into your own code and configuration — rebuilding what the platform already provides, contrary to the built-in-capability requirement.\n- **Secret in code** — One shared secret for all partners (no per-partner revocation), and rotating it requires a redeploy — the exact things the requirement forbids.",
+    "category": "Connect to and consume Azure services"
+}

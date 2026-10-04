@@ -1,0 +1,21 @@
+{
+    "id": "dp900-33-power-bi-workflow-ordering",
+    "type": "ordering",
+    "question": "An analyst is creating and sharing a new report using Power BI.\n\nArrange the steps of the typical Power BI workflow in the correct order, from first to last.",
+    "items": [
+        "Publish the report to a workspace in the Power BI service",
+        "Design report pages with interactive visuals",
+        "Connect to the data sources in Power BI Desktop",
+        "Share the report with business users, who view it in a browser or the mobile app",
+        "Transform the data and define the model's relationships and measures"
+    ],
+    "correctOrder": [
+        "Connect to the data sources in Power BI Desktop",
+        "Transform the data and define the model's relationships and measures",
+        "Design report pages with interactive visuals",
+        "Publish the report to a workspace in the Power BI service",
+        "Share the report with business users, who view it in a browser or the mobile app"
+    ],
+    "explanation": "The typical Power BI workflow runs:\n\n1. **Connect** — In Power BI Desktop, the analyst connects to one or more data sources (databases, files, cloud services).\n2. **Transform and model** — Power Query is used to clean and shape the data, then relationships, hierarchies, and DAX measures are defined to build the semantic model.\n3. **Design visuals** — Report pages are laid out with interactive charts, tables, maps, and slicers bound to the model.\n4. **Publish** — The finished report is published from Power BI Desktop to a workspace in the Power BI service (the cloud).\n5. **Share and consume** — From the service, the report is shared (directly, via apps, or on dashboards), and consumers view and interact with it in a web browser or the Power BI mobile app.\n\nA useful exam shorthand: reports are **created in Power BI Desktop** and **shared and consumed in the Power BI service** — authoring flows from Desktop to the cloud, never the reverse.",
+    "category": "Describe an Analytics Workload on Azure"
+}

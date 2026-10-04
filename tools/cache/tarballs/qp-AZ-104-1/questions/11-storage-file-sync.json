@@ -1,0 +1,22 @@
+{
+    "id": "az104-storage-file-sync",
+    "type": "ordering",
+    "question": "Galewind Logistics plans to set up Azure File Sync between an on-premises Windows Server named **FS-Chicago** and an Azure file share. Arrange the steps to configure Azure File Sync in the correct order.",
+    "items": [
+        "Register FS-Chicago with the Storage Sync Service",
+        "Create an Azure file share in a storage account",
+        "Install the Azure File Sync agent on FS-Chicago",
+        "Create a Storage Sync Service in Azure",
+        "Create a sync group and add the cloud endpoint and server endpoint"
+    ],
+    "correctOrder": [
+        "Create an Azure file share in a storage account",
+        "Create a Storage Sync Service in Azure",
+        "Install the Azure File Sync agent on FS-Chicago",
+        "Register FS-Chicago with the Storage Sync Service",
+        "Create a sync group and add the cloud endpoint and server endpoint"
+    ],
+    "explanation": "Azure File Sync setup follows this sequence:\n\n1. **Create the Azure file share** — The cloud storage must exist first, as it serves as the cloud endpoint for the sync group.\n\n2. **Create a Storage Sync Service** — This is the top-level Azure resource that manages sync groups and server registrations. It acts as the orchestrator.\n\n3. **Install the Azure File Sync agent** — The agent must be installed on the on-premises Windows Server to enable it to participate in sync.\n\n4. **Register the server** — After the agent is installed, the server is registered with the Storage Sync Service, establishing the trust relationship.\n\n5. **Create a sync group** — Finally, create a sync group that links the cloud endpoint (Azure file share) and server endpoint (local folder on FS-Chicago). This initiates the synchronization.\n\nThe agent installation must happen before registration, and the Storage Sync Service must exist before servers can register with it.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_galewind.json"
+}

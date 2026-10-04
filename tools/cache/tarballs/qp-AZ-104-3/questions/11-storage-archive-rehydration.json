@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-storage-archive-rehydration",
+    "type": "single",
+    "question": "A food-safety inspector has demanded a laboratory imagery file from Perrigold Foods. The blob is **4 GB** and currently in the **archive** access tier of **stperrigoldqa**. The inspector expects to view the file in **under one hour**; cost is a secondary concern.\n\nWhat should you do?",
+    "options": [
+        { "text": "Rehydrate the blob to an online tier and set the rehydration priority to High", "correct": true },
+        { "text": "Rehydrate the blob to an online tier with Standard priority", "correct": false },
+        { "text": "Change the storage account's default access tier from Cool to Hot", "correct": false },
+        { "text": "Download the blob directly from the archive tier by using AzCopy", "correct": false }
+    ],
+    "explanation": "Blobs in the **archive tier are offline** — their data cannot be read until they are rehydrated to an online tier (hot, cool, or cold), either by changing the blob's tier (Set Blob Tier) or by copying it to a new blob in an online tier. Rehydration runs at one of two priorities: **Standard**, which can take up to about 15 hours, and **High**, which is prioritized and **can complete in under one hour for objects smaller than 10 GB**. The inspector's 4 GB file with a sub-hour deadline is precisely the High-priority case, and the higher per-GB rehydration cost is acceptable because cost is secondary during an inspection.\n\n**Why not the other options:**\n- **Standard priority**: standard rehydration may take up to around 15 hours to complete — it cannot promise the under-one-hour turnaround the inspector demands.\n- **Changing the account's default access tier**: the default tier setting only affects how *newly uploaded* blobs are tiered when no explicit tier is given. It does not move existing blobs and does not rehydrate anything from archive.\n- **Direct download with AzCopy**: no tool can read an archived blob's data — the tier is offline and read operations fail until rehydration completes. AzCopy would simply receive an error; the blob must be rehydrated first regardless of the client used.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_perrigold.json"
+}

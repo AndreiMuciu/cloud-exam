@@ -1,0 +1,24 @@
+{
+    "id": "sc500-18-storage-sas-policies",
+    "question": "An external analytics partner needs read-only access to a single blob container for the next six hours. Security requirements state that:\n\n- The credential must be signed with Microsoft Entra credentials, not with a storage account key.\n- You must be able to invalidate the credential before it expires without rotating the storage account keys.\n\nWhat should you provide?",
+    "options": [
+        {
+            "text": "A user delegation SAS scoped to the container with a six-hour expiry; revoke the user delegation key early if the credential must be invalidated",
+            "correct": true
+        },
+        {
+            "text": "An account SAS with read permission on the Blob service and a six-hour expiry",
+            "correct": false
+        },
+        {
+            "text": "The storage account's primary access key, with a calendar reminder to rotate it in six hours",
+            "correct": false
+        },
+        {
+            "text": "A service SAS created ad hoc (without a stored access policy) with read permission on the container",
+            "correct": false
+        }
+    ],
+    "explanation": "A **user delegation SAS** is signed with a user delegation key obtained through Microsoft Entra ID — no storage account key is involved. If it must be invalidated early, you revoke the user delegation key (or remove the issuing identity's RBAC permissions), which immediately invalidates every SAS created from it, without touching the account keys.\n\n**Why not the other options:**\n- **Account SAS** — It is signed with the storage account key, violating the first requirement, and can only be revoked by rotating that key.\n- **Primary access key** — This grants full control of the entire account (all services, all containers, read and write), massively exceeding least privilege, and \"rotate later\" leaves a wide-open window.\n- **Ad hoc service SAS** — It is also signed with the account key, and without a stored access policy the only way to revoke it early is to rotate the key — exactly what the requirement forbids.",
+    "category": "Secure storage, databases, and networking"
+}

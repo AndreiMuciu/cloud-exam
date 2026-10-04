@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-network-private-dns-registration",
+    "type": "single",
+    "question": "You create an Azure **private DNS zone** named `internal.copperbeck.energy`. Virtual machines deployed into the virtual network **VNet-Telemetry** must automatically have their A records created in the zone when they are deployed, and the records must be removed automatically when the VMs are deleted.\n\nWhat should you configure?",
+    "options": [
+        { "text": "Create a virtual network link between the private DNS zone and VNet-Telemetry, and enable auto registration on the link", "correct": true },
+        { "text": "Create a DNS zone group that associates the private DNS zone with VNet-Telemetry", "correct": false },
+        { "text": "Configure VNet-Telemetry's DNS servers setting with the IP addresses of the zone's name servers", "correct": false },
+        { "text": "Create a wildcard A record in the zone that resolves to the subnet's address range", "correct": false }
+    ],
+    "explanation": "A **virtual network link with auto registration enabled** is the mechanism for dynamic registration in Azure Private DNS. Once VNet-Telemetry is linked to `internal.copperbeck.energy` as a *registration* network, every VM deployed into the VNet automatically gets an A record (private IP) created in the zone, the record is updated on IP changes, and it is deleted when the VM is deleted. Worth remembering: a virtual network can be linked to **many** private zones for *resolution*, but it can have auto registration enabled to **only one** private zone at a time.\n\n**Why not the other options:**\n- **DNS zone group**: Zone groups are a **private endpoint** construct — they keep a private endpoint's A record in sync inside a privatelink zone. They have nothing to do with VM auto registration in custom private zones.\n- **Configuring the zone's name servers on the VNet**: Private DNS zones do not expose public name servers to point at. Resolution of linked private zones happens transparently through Azure's built-in resolver (168.63.129.16); changing the VNet DNS setting is unnecessary for resolution and does nothing for registration.\n- **Wildcard A record**: A wildcard answers queries for any name with a fixed response — it cannot map each VM's actual name to its actual IP, is wrong for direct lookups, and never updates as VMs come and go.",
+    "category": "Implement and Manage Virtual Networking"
+}

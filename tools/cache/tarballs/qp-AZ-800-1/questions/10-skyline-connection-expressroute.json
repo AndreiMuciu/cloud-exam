@@ -1,0 +1,25 @@
+{
+    "id": "az800-10-skyline-connection-expressroute",
+    "question": "Skyline Insurance requires a high-bandwidth, low-latency connection to Azure that does not use the public internet. Which connectivity option should they choose?",
+    "options": [
+        {
+            "text": "Site-to-Site (S2S) VPN",
+            "correct": false
+        },
+        {
+            "text": "Point-to-Site (P2S) VPN",
+            "correct": false
+        },
+        {
+            "text": "Azure ExpressRoute",
+            "correct": true
+        },
+        {
+            "text": "Azure Virtual WAN",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure ExpressRoute** creates a private connection between an on-premises network and Microsoft datacenters. It bypasses the public internet entirely, providing more reliability, higher speeds, and lower latencies than typical VPN connections.\n\n**Why not the other options:**\n- **VPN** — Always travels over the public internet (though it is encrypted).\n- **Virtual WAN** — A networking service that simplifies large-scale connectivity; it can use *either* VPN or ExpressRoute, but the 'private, non-internet' requirement specifically points to ExpressRoute.",
+    "category": "Implement and manage on-premises and hybrid networking",
+    "caseStudy": "scenarios/case_study_skyline_insurance.json"
+}

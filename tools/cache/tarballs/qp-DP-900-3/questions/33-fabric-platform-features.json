@@ -1,0 +1,29 @@
+{
+    "id": "dp900-s3-33-fabric-platform-features",
+    "type": "multi",
+    "question": "A company is evaluating Microsoft Fabric as its analytics platform.\n\nWhich three statements about Microsoft Fabric are true? (Choose 3)",
+    "options": [
+        {
+            "text": "It is a unified software-as-a-service analytics platform that brings data integration, data engineering, warehousing, real-time analytics, data science, and business intelligence together",
+            "correct": true
+        },
+        {
+            "text": "Its items — such as lakehouses, warehouses, pipelines, and reports — are created and organized in workspaces",
+            "correct": true
+        },
+        {
+            "text": "Its different workloads can operate on the same stored copy of data, rather than each workload keeping its own separate copy",
+            "correct": true
+        },
+        {
+            "text": "Customers must provision, size, and patch their own Spark clusters and virtual machines before using it",
+            "correct": false
+        },
+        {
+            "text": "It can process only streaming data, so batch analytics still requires a separate platform",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Fabric's defining traits:\n- **Unified SaaS platform** — Fabric packages the full analytics estate — Data Factory-style integration, Spark-based engineering, warehousing, real-time intelligence, data science, and Power BI — as one software-as-a-service offering with shared governance and capacity.\n- **Workspaces** — Everything you build in Fabric (lakehouses, warehouses, pipelines, semantic models, reports) is an item that lives in a workspace, which organizes content and controls collaboration and access.\n- **One copy of data across workloads** — Fabric's workloads share a common storage foundation, so a Spark notebook, a SQL endpoint, and a Power BI model can all work against the same stored tables instead of each engine hoarding its own duplicate.\n\n**Why not the other options:**\n- **Provisioning and patching Spark clusters and VMs** — As a SaaS platform, Fabric supplies the compute behind every experience; there is no customer-managed cluster or VM to size or patch.\n- **Streaming only** — Fabric handles batch pipelines, warehouse loads, and scheduled transformations alongside its real-time capabilities; it is a general analytics platform, not a streaming-only tool.",
+    "category": "Describe an Analytics Workload on Azure"
+}

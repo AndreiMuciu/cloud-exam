@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-09-ombrava-cosmos-table-api",
+    "question": "Ombrava Telecom's self-care portal is built on the Azure Table Storage SDK. Its lookup data must now be distributed worldwide close to roaming subscribers, with dedicated reserved throughput and single-digit-millisecond reads — and the portal's Table API data-access code must not be rewritten.\n\nWhat should Ombrava migrate the lookup data to?",
+    "options": [
+        {
+            "text": "Azure Cosmos DB for Table",
+            "correct": true
+        },
+        {
+            "text": "A second Azure Table Storage account in each subscriber country",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for MongoDB",
+            "correct": false
+        },
+        {
+            "text": "Azure Files with SMB file shares",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Cosmos DB for Table** implements the same Table API programming model as Azure Table Storage, so the portal's existing data-access code keeps working. On top of that compatibility, Cosmos DB adds what Table Storage lacks: turnkey global distribution that replicates the data to regions near roaming subscribers, dedicated reserved throughput, and single-digit-millisecond read latency backed by SLAs.\n\n**Why not the other options:**\n- **A second Table Storage account in each country** — Azure Table Storage has no built-in multi-region replication with a single endpoint; the team would have to build and synchronize many accounts by hand and route users itself, with no throughput guarantees.\n- **Azure Cosmos DB for MongoDB** — The MongoDB API would give global distribution, but the portal speaks the Table API, so its data-access code would have to be rewritten — exactly what the requirement forbids.\n- **Azure Files with SMB file shares** — Azure Files provides managed file shares for file-system workloads, not a key/attribute entity store, and it offers neither the Table API nor global low-latency lookups.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_ombrava_telecom.json"
+}

@@ -1,0 +1,15 @@
+{
+    "id": "az104-s2-monitor-alert-types-matching",
+    "type": "matching",
+    "question": "You are designing the alerting strategy for a production environment in Azure Monitor.\n\nMatch each alert type to the scenario it is designed for.",
+    "sourceItems": ["Activity log alert", "Metric alert", "Service health alert", "Log search alert"],
+    "targetSlots": [
+        "Notify the team when average CPU utilization on a virtual machine exceeds 90% over a 5-minute window",
+        "Notify the team when a custom KQL query against application logs returns more than 100 error entries",
+        "Notify the team when anyone deletes a production resource group",
+        "Notify the team when Microsoft reports a platform outage or planned maintenance affecting the subscription's regions"
+    ],
+    "correctMapping": [1, 3, 0, 2],
+    "explanation": "Each Azure Monitor alert type is bound to a different signal source:\n\n- **Metric alert** — evaluates numeric platform (or custom) metrics in near real time against static or dynamic thresholds; VM CPU percentage over a time window is the canonical example.\n- **Log search alert** — runs a **KQL query** against a Log Analytics workspace on a schedule and fires based on the results (number of rows or a measured value), which is what evaluating \"more than 100 error entries in application logs\" requires.\n- **Activity log alert** — fires when a matching **control-plane event** is written to the subscription's activity log, such as a delete operation on a resource group, a policy change, or a role assignment. Deleting a resource group produces exactly such an administrative event.\n- **Service health alert** — a specialized activity log alert scoped to **Azure Service Health** events: service issues (outages), planned maintenance, health advisories, and security advisories for the regions and services you select.\n\nA useful exam heuristic: numeric telemetry → metric alert; query over collected logs → log search alert; \"someone did something\" management operations → activity log alert; \"Azure itself has a problem\" → service health alert.",
+    "category": "Monitor and Maintain Azure Resources"
+}

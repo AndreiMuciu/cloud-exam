@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-mon-tracing",
+    "question": "An e-commerce platform consists of 25 microservices spread across Azure Kubernetes Service, App Service, and Azure Functions, communicating over HTTP and Service Bus. When checkout requests fail intermittently, engineers currently cannot tell **which service in the chain** caused the failure.\n\nYou must recommend a monitoring design that provides:\n\n- End-to-end correlation of a single user request as it flows across all services\n- A dependency map showing call rates, latency, and failure rates between services\n- The ability to drill from a failed transaction into the exact calls and exceptions that produced it\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Instrument all services with Application Insights using OpenTelemetry-based distributed tracing, and use the application map and end-to-end transaction details",
+            "correct": true
+        },
+        {
+            "text": "Enable Container insights on the AKS cluster and review the cluster's performance charts",
+            "correct": false
+        },
+        {
+            "text": "Write all services' console logs to a Log Analytics workspace and correlate requests manually with KQL joins on timestamps",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Network Watcher connection monitor between the services' endpoints",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the scenario **Application Insights distributed tracing** exists for. Instrumenting each service (via OpenTelemetry SDKs or auto-instrumentation) propagates a **correlation context** — an operation ID that travels with the request across HTTP calls and Service Bus messages — so every span of work across all 25 services is stitched into one trace:\n\n- **End-to-end correlation** — the *end-to-end transaction details* view reconstructs the full call chain of a single checkout request across AKS, App Service, and Functions\n- **Dependency map** — the *application map* is generated automatically from the telemetry, showing each service and dependency with call volumes, durations, and failure percentages — instantly highlighting the component where failures concentrate\n- **Drill-down** — from a failed request you can open the exact dependency call, exception, and stack trace that produced the failure\n\n**Why not the other options:**\n- **Container insights** — Provides infrastructure telemetry for the AKS cluster: node CPU/memory, pod restarts, container logs. It has no concept of a *business transaction* crossing services, covers only the AKS portion of the estate, and cannot correlate a request through App Service and Functions\n- **Console logs + manual KQL correlation** — Without propagated correlation IDs, joining on timestamps across 25 services is guesswork under concurrent load — two simultaneous checkouts are indistinguishable. This rebuilds, badly and by hand, exactly what the tracing SDKs do automatically\n- **Network Watcher connection monitor** — Tests network reachability and latency between endpoints. It validates that the network path works; it knows nothing about application requests, exceptions, or which service returned an error",
+    "category": "Design Identity, Governance, and Monitoring"
+}

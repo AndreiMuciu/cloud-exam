@@ -1,0 +1,25 @@
+{
+    "id": "az700-quorlex-private-endpoint",
+    "question": "Quorlex Manufacturing must ensure that traffic from its spoke VNets to the Azure SQL Database and Storage account that receive telemetry never traverses the public internet, and that the resources are reachable only over a private IP address from within the VNets.\n\nWhich solution should Quorlex implement for the Azure SQL Database and Storage account?",
+    "options": [
+        {
+            "text": "Create a service endpoint for each service on the relevant subnets",
+            "correct": false
+        },
+        {
+            "text": "Create a private endpoint for each service, and link a private DNS zone for each service to the spoke VNets",
+            "correct": true
+        },
+        {
+            "text": "Configure a Standard SKU public IP address on each service and restrict it with an NSG",
+            "correct": false
+        },
+        {
+            "text": "Enable service endpoint policies on the Azure SQL Database's subnet",
+            "correct": false
+        }
+    ],
+    "explanation": "A **private endpoint** provisions a network interface with a private IP address from the spoke VNet's address space for each target service (Azure SQL Database, Storage account). Combined with a **private DNS zone** (for example, `privatelink.database.windows.net` and `privatelink.blob.core.windows.net`) linked to the spoke VNets, name resolution for the service's fully qualified domain name resolves to the private IP address instead of the service's public endpoint. Traffic from the VNet to the service then uses only the private IP address and never needs to reach the public internet.\n\n**Why not the other options:**\n- **Service endpoints** — Keep traffic on the Azure backbone and restrict access to the resource's public endpoint from specific subnets, but the resource still has a public IP address and the traffic is addressed to that public IP, not to a private IP inside the VNet. This doesn't meet the \"reachable only over a private IP address\" requirement.\n- **Standard SKU public IP with NSG** — Azure PaaS services like SQL Database and Storage accounts aren't assigned customer-managed public IP addresses in this way; an NSG on a subnet also can't make a PaaS service's own endpoint private.\n- **Service endpoint policies** — These restrict which specific Storage accounts (by resource ID) a subnet using a storage service endpoint can reach; they refine a service endpoint's scope but don't provide a private IP address for the service.",
+    "category": "Design and Implement Private Access to Azure Services",
+    "caseStudy": "scenarios/case_study_quorlex.json"
+}

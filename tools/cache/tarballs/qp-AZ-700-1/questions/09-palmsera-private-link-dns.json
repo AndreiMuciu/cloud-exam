@@ -1,0 +1,25 @@
+{
+    "id": "az700-palmsera-private-link-dns",
+    "question": "Palmsera Health has created private endpoints for its Azure SQL Managed Instance and Storage account so that every spoke VNet can reach them over a private IP address. Most spokes don't run their own custom DNS server. The team needs name resolution for these services to consistently return the private endpoint's IP address across all current and future spokes, without configuring DNS separately on each spoke.\n\nWhat should Palmsera implement?",
+    "options": [
+        {
+            "text": "A separate hosts file entry on every VM in every spoke that maps the service's FQDN to its private IP address",
+            "correct": false
+        },
+        {
+            "text": "A private DNS zone for each service's private-link DNS namespace, linked to the hub VNet and to every spoke VNet that needs to resolve the service",
+            "correct": true
+        },
+        {
+            "text": "A public DNS zone containing an A record that points the service's public FQDN to the private endpoint's IP address",
+            "correct": false
+        },
+        {
+            "text": "Service endpoint policies applied to each spoke's subnet",
+            "correct": false
+        }
+    ],
+    "explanation": "For private endpoints to resolve correctly without per-VM or per-spoke configuration, Azure recommends creating a **private DNS zone** for the service's private-link DNS namespace (for example, a zone for Azure SQL and one for Storage) and **linking that zone to every VNet** that needs to resolve the service — the hub and each spoke. Once linked, any VM in any linked VNet automatically resolves the service's fully qualified domain name to the private endpoint's private IP address, with no per-spoke DNS server or manual configuration required, and the same zone automatically covers spokes added in the future.\n\n**Why not the other options:**\n- **Per-VM hosts file entries** — Would technically work but requires manual, per-machine maintenance that doesn't scale and provides no benefit for future spokes; it's the opposite of the centralized, low-maintenance approach Palmsera needs.\n- **Public DNS zone with an A record to the private IP** — Publishing an internal private IP address in public DNS is both a security exposure and unnecessary; private-link DNS integration is specifically designed to keep this resolution private.\n- **Service endpoint policies** — These restrict which specific storage accounts a service-endpoint-enabled subnet can reach; they have nothing to do with DNS resolution for private endpoints.",
+    "category": "Design and Implement Private Access to Azure Services",
+    "caseStudy": "scenarios/case_study_palmsera.json"
+}

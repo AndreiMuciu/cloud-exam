@@ -1,0 +1,24 @@
+{
+    "id": "sc300-identity-pta-vs-phs",
+    "question": "A company using Microsoft Entra Connect Sync wants sign-in to Microsoft Entra ID to always validate the password against the on-premises Active Directory in real time, so that a disabled or password-expired on-premises account is denied immediately — even if the last synchronization cycle hasn't run yet. The company does not want passwords or their hashes stored in Microsoft Entra ID at all.\n\nWhich authentication method should the company implement?",
+    "options": [
+        {
+            "text": "Pass-through Authentication (PTA), with lightweight on-premises agents validating each sign-in directly against Active Directory",
+            "correct": true
+        },
+        {
+            "text": "Password hash synchronization (PHS), which synchronizes a hash of the password hash to Microsoft Entra ID",
+            "correct": false
+        },
+        {
+            "text": "Federation with Active Directory Federation Services (AD FS), configured with a token-signing certificate lifetime of one hour",
+            "correct": false
+        },
+        {
+            "text": "Seamless single sign-on (SSO) enabled as a standalone authentication method with no other sign-in method configured",
+            "correct": false
+        }
+    ],
+    "explanation": "**Pass-through Authentication (PTA)** validates passwords directly against on-premises Active Directory at the moment of sign-in, using lightweight authentication agents — no password or password hash is ever stored in Microsoft Entra ID. Because validation happens live against AD DS, account states like disabled, locked out, or expired passwords are enforced immediately, without waiting for the next Microsoft Entra Connect Sync cycle.\n\n**Why not the other options:**\n- **Password hash synchronization (PHS)** stores a hash of the password hash in Microsoft Entra ID and validates sign-ins against that synchronized value; on-premises account state changes (like a disable) only take effect in the cloud after the next sync cycle, not instantly.\n- **AD FS federation** — this can meet real-time validation goals too, but it requires deploying and maintaining a separate federation server farm; the option as stated (fixed to a token-signing certificate detail) doesn't address the \"no password data in the cloud\" requirement any more directly than PTA, and PTA is the simpler fit when real-time on-prem validation without password storage is the sole goal.\n- **Seamless SSO alone** — seamless SSO only removes the need for users to re-type credentials during federated/hash-sync/PTA sign-in on domain-joined devices; it is not itself a password validation method and must be paired with PHS or PTA.",
+    "category": "Implement and manage user identities"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_tallowfen_grocers",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Tallowfen Grocers** operates a chain of supermarkets and runs a wholesale marketplace in Azure that also serves several independent retail partners.\n\n**Current Environment:**\n- Marketplace document exports for all retail partners land in one general-purpose v2 storage account, with one blob container per partner. The storage account currently uses Microsoft-managed keys for encryption at rest.\n- The loyalty platform uses an Azure SQL database. Applications and analysts connect with SQL logins whose passwords are stored in various configuration files; the same `sqladmin` password has been shared among three teams for years.\n- Product-catalog and basket data for the e-commerce site is stored in an Azure Cosmos DB for NoSQL account. All services access it with the account's primary read-write key, which has never been rotated because nobody knows what would break.\n- A recent partner-facing security questionnaire asked whether each partner's data could be encrypted with a key dedicated to that partner, and whether Tallowfen could stop reading a specific partner's data on request. Tallowfen could not answer yes."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The data security team has defined the following requirements:\n\n**Partner Data Encryption:**\n- Each retail partner's container in the shared storage account must be encrypted at rest with a **different customer-managed key** held in Tallowfen's key vault, without creating a separate storage account per partner.\n- Revoking a single partner's key must render only that partner's data unreadable, leaving all other partners unaffected.\n- New blobs written to a partner's container must be forced to use that partner's key — individual uploads must not be able to choose a different key.\n\n**Loyalty Database Authentication:**\n- SQL authentication (logins and passwords) must be **completely disabled** on the loyalty platform's logical server; only Microsoft Entra identities may connect.\n- The loyalty API must connect to the database with an identity that has no password or stored credential, holding only the minimum database permissions it needs.\n- Analyst access must be granted to an Entra security group, not to individual accounts.\n\n**Cosmos DB Access:**\n- Applications must authenticate to the Cosmos DB account with Microsoft Entra identities and receive only data-plane permissions scoped to the containers they use.\n- After migration, authenticating with the account keys must be **impossible**, so that a leaked key has no value."
+        }
+    ]
+}

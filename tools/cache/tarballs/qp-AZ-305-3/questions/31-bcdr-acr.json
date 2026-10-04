@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-bcdr-acr",
+    "question": "A software company runs AKS clusters in three Azure regions, all pulling images from a single Azure Container Registry in West Europe. During a recent West Europe incident, deployments and pod restarts failed in **all three regions** because images could not be pulled.\n\nThe design must ensure that each cluster pulls images from a registry endpoint in (or near) its own region, that image pulls keep working during a regional registry outage, and that the teams keep **one registry name, one set of images, and one place to push**.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Upgrade the registry to the Premium tier and enable geo-replication to the two additional regions",
+            "correct": true
+        },
+        {
+            "text": "Create an independent registry in each region and extend the CI/CD pipeline to push every image to all three",
+            "correct": false
+        },
+        {
+            "text": "Change the registry's underlying storage redundancy to read-access geo-redundant storage",
+            "correct": false
+        },
+        {
+            "text": "Deploy a pull-through cache registry in each region that proxies the West Europe registry",
+            "correct": false
+        }
+    ],
+    "explanation": "**ACR geo-replication** (a Premium-tier feature) turns one registry into a multi-region registry while preserving a single logical resource:\n\n- **Regional pulls** — each replica serves pulls in its own region, and the registry's single login server name resolves to the **closest replica** via traffic routing, so clusters need no configuration changes and get local, low-latency, egress-free pulls\n- **Outage resilience** — if one region's replica is unavailable, the registry name resolves to a healthy replica in another region; pulls (and pod restarts) keep working\n- **One name, one push** — teams push once to the same registry name; ACR replicates images to all configured regions automatically. Webhooks, permissions, and image content stay centrally managed\n\n**Why not the other options:**\n- **Independent registry per region** — Delivers regional pulls, but at the cost of three names to manage, three sets of RBAC/policies, cluster manifests that differ per region, and a CI/CD pipeline that must push (and retry, and reconcile) three times. Drift between registries becomes a new failure mode — this is the management burden geo-replication is designed to eliminate\n- **RA-GRS storage** — A registry's storage redundancy is managed by the platform and is not a customer-tunable redundancy setting; more fundamentally, the registry's *endpoint* is regional — read-access to replicated storage in a paired region would not give the Docker/OCI API endpoint clusters pull from, nor endpoints in the two other chosen regions\n- **Pull-through caches** — Caches accelerate repeat pulls, but they are populated on demand: a cache miss (new image version, evicted layer) still requires the origin registry — during a West Europe outage, exactly those pulls fail. The origin remains a single point of failure for anything not already cached",
+    "category": "Design Business Continuity Solutions"
+}

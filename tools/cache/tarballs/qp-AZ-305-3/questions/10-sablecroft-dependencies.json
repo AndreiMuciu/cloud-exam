@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-sablecroft-dependencies",
+    "question": "You need to recommend a solution to map the network dependencies among the 400 VMware VMs so that interdependent servers can be grouped into migration waves. The security team prohibits installing agents on the servers during discovery.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Deploy the Azure Migrate appliance and enable agentless dependency analysis for the VMware VMs",
+            "correct": true
+        },
+        {
+            "text": "Install the Azure Monitor Agent and the Dependency agent on every VM and use VM insights Map",
+            "correct": false
+        },
+        {
+            "text": "Enable Azure Network Watcher and analyze NSG flow logs for the on-premises servers",
+            "correct": false
+        },
+        {
+            "text": "Onboard the servers to Azure Arc and query connection data with Azure Resource Graph",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Migrate agentless dependency analysis** is built for exactly this discovery constraint on VMware. The Azure Migrate **appliance** (a VM deployed into vSphere) uses **VMware Tools APIs** to gather TCP connection data, running processes, and destination ports from the guest VMs — **without installing anything on the servers themselves**. The collected dependency map lets the team visualize which servers talk to each other and group interdependent servers into the same migration wave, which is precisely the scenario's goal.\n\n**Why not the other options:**\n- **Azure Monitor Agent + Dependency agent (VM insights Map)** — This is the *agent-based* dependency approach. It works, but it requires installing two agents on every server — directly violating the security team's prohibition on new agents during discovery\n- **Network Watcher / NSG flow logs** — Network Watcher and NSG flow logs only observe traffic flowing through **Azure** network security groups. The 400 servers are on-premises on vSphere; there are no NSGs in their path, so there is nothing to log\n- **Azure Arc + Resource Graph** — Arc projects on-premises servers into Azure for management (policy, extensions, inventory), and onboarding requires installing the **Connected Machine agent** on each server — again violating the no-agent constraint. Resource Graph queries resource metadata; it is not a network-dependency mapping tool",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_sablecroft_mutual.json"
+}

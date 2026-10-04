@@ -1,0 +1,30 @@
+{
+    "id": "az104-storage-blob-access",
+    "type": "multi",
+    "question": "Galewind Logistics has a storage account named **stshipments01** that contains shipment document scans. Azure VMs in the same subscription use Azure Managed Disks for their OS and data disks. You need to configure network access for the storage account to meet the following requirements:\n\n- Allow uploads from the on-premises Chicago office (public IP: 203.45.67.0/24)\n- Ensure that Azure VMs can continue to access their Managed Disks without disruption\n- Block all other access to the storage account\n\nWhich two actions should you perform? (Choose two.)",
+    "options": [
+        {
+            "text": "From the Networking blade, add the 203.45.67.0/24 IP address range to the firewall rules",
+            "correct": true
+        },
+        {
+            "text": "From the Networking blade, set the default network access to Selected networks",
+            "correct": true
+        },
+        {
+            "text": "From the Networking blade, add VNet-Corp as a virtual network rule",
+            "correct": false
+        },
+        {
+            "text": "From the Networking blade, enable the 'Allow trusted Microsoft services' exception",
+            "correct": false
+        },
+        {
+            "text": "Create a service endpoint for Microsoft.Storage on VNet-Corp",
+            "correct": false
+        }
+    ],
+    "explanation": "To meet these requirements:\n\n1. **Set default access to Selected networks** — This changes the storage account from allowing all networks to only allowing explicitly permitted networks. This is essential to block other access.\n\n2. **Add the Chicago office IP range** — Adding `203.45.67.0/24` to the firewall rules allows the on-premises office to upload documents.\n\n**Regarding Managed Disks:** Azure Managed Disks are specialized resources. While the data is stored in Azure Storage underlyingly, the VM communicates with the disk via the Azure fabric/backplane, NOT through the standard storage account firewall or VNet rules. Therefore, No VNet rule or service endpoint is required for a VM to access its own managed disks.\n\nNote: If the VMs needed to access **Azure Files** or **Blob data** directly (e.g., via SMB or REST API), then a service endpoint and VNet rule would be needed.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_galewind.json"
+}

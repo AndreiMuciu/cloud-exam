@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-bcdr-crr",
+    "question": "A company protects 200 Azure VMs with Azure Backup in a Recovery Services vault in the primary region. The BC/DR standard adds a new rule: if the primary region becomes unavailable, the operations team must be able to **restore VMs from their backups in the paired region immediately** — without waiting for Microsoft to declare a region-wide disaster — and must **rehearse such restores quarterly** while the primary region is healthy.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Configure the vault with geo-redundant storage and enable cross-region restore",
+            "correct": true
+        },
+        {
+            "text": "Keep the vault geo-redundant and rely on Azure-initiated failover of the Backup service during a regional disaster",
+            "correct": false
+        },
+        {
+            "text": "Create a second Recovery Services vault in the paired region and back up each VM to both vaults",
+            "correct": false
+        },
+        {
+            "text": "Replace Azure Backup with Azure Site Recovery replication to the paired region",
+            "correct": false
+        }
+    ],
+    "explanation": "**Cross-region restore (CRR)** is the vault feature built for exactly this requirement. With the vault's backup storage set to **geo-redundant (GRS)** and CRR enabled, the backup data replicated to the **paired region becomes directly restorable by the customer at any time**:\n\n- **Customer-controlled** — the operations team can restore VMs in the secondary region whenever *they* decide — during a primary-region outage **without waiting for Microsoft to declare a disaster** and flip the vault's replica\n- **Testable** — because the secondary copy is always restorable, the quarterly rehearsal is a routine restore in the paired region against a healthy primary — auditable DR-drill evidence the standard demands\n\n**Why not the other options:**\n- **GRS without CRR (Azure-initiated failover)** — The secondary copy exists but is **not customer-accessible**; it only becomes restorable if **Microsoft declares the region lost and fails the vault over**. The team cannot restore on its own schedule during an ambiguous outage, and — critically — cannot rehearse at all while the primary is healthy. Both new rules fail\n- **Second vault, double backups** — Azure Backup protects an Azure VM to a vault in the **VM's own region**; you cannot point a backup of a primary-region VM at a paired-region vault. Even conceptually, dual backups would double cost and management for what CRR provides as a feature\n- **Azure Site Recovery** — ASR is *replication for failover* (RTO/RPO for running workloads), not backup: it maintains a current replica, not a history of restore points, and does not protect against the deletion/corruption scenarios backups exist for. The requirement is explicitly about restoring **from backups** in the secondary region — a different discipline than DR replication",
+    "category": "Design Business Continuity Solutions"
+}

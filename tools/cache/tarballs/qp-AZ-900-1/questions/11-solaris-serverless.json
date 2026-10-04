@@ -1,0 +1,25 @@
+{
+    "id": "az900-11-solaris-serverless",
+    "question": "Solaris Education plans to implement a serverless processing engine that triggers whenever a new video is uploaded to storage. Which Azure service is designed for this type of event-driven, serverless execution?",
+    "options": [
+        {
+            "text": "Azure Virtual Machines",
+            "correct": false
+        },
+        {
+            "text": "Azure Functions",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Database",
+            "correct": false
+        },
+        {
+            "text": "Azure Front Door",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Functions** is a serverless, event-driven compute service. It can be configured to trigger automatically when a file is uploaded to a Blob Storage container, making it perfect for Solaris's requirement.\n\n**Why not the other options:**\n- **Virtual Machines** — Require ongoing management and are not serverless.\n- **Azure SQL Database** — A relational database service, not a compute/processing engine.\n- **Azure Front Door** — A scalable and secure entry point for high-performance web applications; it's a networking service, not a processing engine.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_solaris_education.json"
+}

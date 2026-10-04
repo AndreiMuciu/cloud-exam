@@ -1,0 +1,33 @@
+{
+  "id": "sc500-s2-36-dspm-shadow-ai-multi",
+  "type": "multi",
+  "question": "Engineers have been pasting proprietary source code and customer records into consumer generative-AI websites from their corporate devices. Security must:\n\n1. Discover which AI apps and sites are actually being used across the organization, with risk ratings, and cut off the risky ones.\n2. Prevent users on managed devices from pasting or uploading sensitive information into AI websites.\n3. Monitor sensitive-data usage in third-party AI site interactions and get recommended one-click policies to reduce the risk.\n\nWhich three actions should you take? (Select three.)",
+  "options": [
+    {
+      "text": "Use cloud app discovery in Microsoft Defender for Cloud Apps to inventory generative-AI app usage with risk scores, and mark risky apps as unsanctioned to block them",
+      "correct": true
+    },
+    {
+      "text": "Create a Microsoft Purview endpoint DLP policy for onboarded devices that blocks pasting and uploading content matching sensitive info types into AI websites in the browser",
+      "correct": true
+    },
+    {
+      "text": "Use Microsoft Purview Data Security Posture Management (DSPM) for AI to monitor sensitive data in interactions with third-party AI sites and apply its recommended one-click policies",
+      "correct": true
+    },
+    {
+      "text": "Maintain a static blocklist of AI website FQDNs on the perimeter firewall, updated manually as new sites appear",
+      "correct": false
+    },
+    {
+      "text": "Apply sensitivity labels to every file in SharePoint, because labeled content cannot be typed or pasted into external websites",
+      "correct": false
+    },
+    {
+      "text": "Use an Intune device configuration profile to disable the clipboard across all browsers on corporate devices",
+      "correct": false
+    }
+  ],
+  "explanation": "Shadow-AI risk is tackled with three complementary Microsoft controls, one per requirement:\n- **Defender for Cloud Apps discovery** analyzes traffic signals (including from Defender for Endpoint on managed devices) to build an inventory of the generative-AI apps in actual use, each with a risk score from the cloud app catalog. Tagging an app **unsanctioned** propagates blocking to the endpoints — discovery and cutoff in one governed workflow that keeps up as new AI apps appear.\n- **Purview endpoint DLP** enforces on the device itself: for onboarded devices, a policy can detect sensitive info types (source code patterns, customer identifiers) and **block the paste or upload into AI websites in the browser** — stopping the leak at the moment of egress regardless of network path.\n- **Purview DSPM for AI** is the posture layer for AI data security: it surfaces how sensitive data flows into AI interactions — including **third-party AI sites** visited from protected browsers — provides analytics and reports, and offers **recommended one-click policies** (such as the DLP and collection policies above) to close the gaps it finds.\n\n**Why not the other options:**\n- **Static firewall FQDN blocklist** — perpetually out of date in a space where new AI tools launch weekly, blind to remote/off-network devices, and all-or-nothing: it cannot distinguish harmless use from sensitive-data egress.\n- **Sensitivity labels alone** — labels classify and protect *files*; they do not physically prevent a user from retyping or pasting content into a web form. Labels become effective when DLP and label-aware services enforce on them — the enforcement is the DLP policy, not the label.\n- **Disabling the clipboard everywhere** — a blunt instrument that breaks everyday legitimate work, is trivially bypassed by retyping, and is not data-aware; the requirement is to block *sensitive* content flows, which is DLP's job.",
+  "category": "Secure compute"
+}

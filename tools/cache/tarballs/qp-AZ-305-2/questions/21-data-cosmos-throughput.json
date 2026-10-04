@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-data-cosmos-throughput",
+    "question": "A ticketing platform uses Azure Cosmos DB for NoSQL. Traffic runs at a steady baseline most of the day but spikes to roughly ten times the baseline for a few hours when popular events go on sale. The platform must never be rate-limited during on-sale spikes, must not require capacity planning before each sale, and must avoid paying peak-level costs around the clock.\n\nWhich capacity configuration should you recommend?",
+    "options": [
+        {
+            "text": "Standard (manual) provisioned throughput sized for the peak load",
+            "correct": false
+        },
+        {
+            "text": "Autoscale provisioned throughput with the maximum RU/s set above the highest observed spike",
+            "correct": true
+        },
+        {
+            "text": "Serverless capacity mode",
+            "correct": false
+        },
+        {
+            "text": "Standard (manual) provisioned throughput sized for the baseline, with client-side retry policies for 429 responses",
+            "correct": false
+        }
+    ],
+    "explanation": "**Autoscale provisioned throughput** is designed for exactly this spiky-but-always-on profile:\n\n- Cosmos DB instantly and automatically scales the provisioned RU/s between 10% and 100% of the configured maximum, so a 10× on-sale spike is absorbed **without rate limiting and without pre-sale capacity planning**\n- During quiet hours the database bills at as little as one-tenth of the maximum, so the platform does not pay peak-level cost 24×7\n- Autoscale carries a ~50% per-RU price premium over manual throughput, which is economical whenever utilization varies widely — precisely this workload's shape\n\n**Why not the other options:**\n- **Manual throughput at peak** — Guarantees no throttling but pays for 10× capacity all day, every day — the exact cost outcome the requirement rules out\n- **Serverless** — Pay-per-request suits infrequent, light, or unpredictable *low-volume* workloads (dev/test, small apps). A production system with a sustained baseline typically costs more on serverless, and serverless containers have lower throughput ceilings and fewer capabilities (for example, no multi-region write configurations) — a poor fit for a high-scale ticketing platform\n- **Baseline throughput + retries on 429** — During a 10× spike the database would throttle massively; retry policies just re-queue the storm and stretch latencies from milliseconds to seconds or minutes. Customers would experience failures during the most business-critical hours — \"never rate-limited\" is directly violated",
+    "category": "Design Data Storage Solutions"
+}

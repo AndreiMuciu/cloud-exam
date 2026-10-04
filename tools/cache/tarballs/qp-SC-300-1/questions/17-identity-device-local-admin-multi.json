@@ -1,0 +1,29 @@
+{
+    "id": "sc300-identity-device-local-admin-multi",
+    "type": "multi",
+    "question": "A tenant's device settings have \"Additional local administrators on Microsoft Entra ID joined devices\" set to **None**, and \"Users may join devices to Microsoft Entra ID\" is set to a specific group that includes the user Priya. Priya joins a Windows 11 laptop to Microsoft Entra ID. Which TWO users end up in the local Administrators group on that laptop? (Select two.)",
+    "options": [
+        {
+            "text": "Priya, because the user who performs the Microsoft Entra join is automatically added as a local administrator on that device",
+            "correct": true
+        },
+        {
+            "text": "Any user holding the Global Administrator role, because Global Administrators are always added as local administrators on every Microsoft Entra ID joined device",
+            "correct": true
+        },
+        {
+            "text": "Every Microsoft Entra ID licensed user in the tenant, because Microsoft Entra ID joined devices default to tenant-wide local admin access",
+            "correct": false
+        },
+        {
+            "text": "Any user holding only the Helpdesk Administrator role, because that role manages device join settings",
+            "correct": false
+        },
+        {
+            "text": "Any user added by name to the \"Additional local administrators\" setting, even though it is currently set to None",
+            "correct": false
+        }
+    ],
+    "explanation": "By default, two categories of users are added to the local Administrators group on a Microsoft Entra ID joined device: the user who performed the join operation, and any user holding the **Global Administrator** (or the Azure AD Joined Device Local Administrator) role. The \"Additional local administrators\" setting can add further named users or groups on top of these defaults, but here it is set to **None**, so no extra users beyond the two defaults are added.\n\n**Why not the other options:**\n- **Every licensed user tenant-wide** — Microsoft Entra ID joined devices do not grant blanket local admin rights to all users; only the joiner and Global Administrators are added by default.\n- **Helpdesk Administrator role alone** — Helpdesk Administrator can reset passwords for some users and assist with support tasks, but that role by itself does not confer local administrator rights on Entra ID joined devices.\n- **Users added via \"Additional local administrators\"** — with the setting configured to None, there are no additional named users being added; this option contradicts the stated configuration.",
+    "category": "Implement and manage user identities"
+}

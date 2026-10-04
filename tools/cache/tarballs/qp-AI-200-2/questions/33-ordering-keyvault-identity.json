@@ -1,0 +1,21 @@
+{
+    "id": "ai200-s2-33-ordering-keyvault-identity",
+    "type": "ordering",
+    "question": "A containerized API must read a third-party API key from an RBAC-enabled Azure Key Vault at startup — passwordless, with no connection strings or stored credentials. Nothing has been configured yet.\n\nPlace the steps in the correct order.",
+    "items": [
+        "Enable a system-assigned managed identity on the app's compute resource.",
+        "Assign that identity the Key Vault Secrets User role, scoped to the vault.",
+        "In the application, create a `SecretClient` for the vault URI using `DefaultAzureCredential`.",
+        "Call `get_secret` during startup and cache the returned value in memory.",
+        "Verify by confirming startup succeeds and the vault's logs show no 403 (Forbidden) responses."
+    ],
+    "correctOrder": [
+        "Enable a system-assigned managed identity on the app's compute resource.",
+        "Assign that identity the Key Vault Secrets User role, scoped to the vault.",
+        "In the application, create a `SecretClient` for the vault URI using `DefaultAzureCredential`.",
+        "Call `get_secret` during startup and cache the returned value in memory.",
+        "Verify by confirming startup succeeds and the vault's logs show no 403 (Forbidden) responses."
+    ],
+    "explanation": "Each step depends on the one before it:\n\n1. **Enable the managed identity** — Until the identity exists, there is no principal to authorize; a system-assigned identity is created with (and dies with) the compute resource.\n2. **Assign Key Vault Secrets User** — On an RBAC-enabled vault, data-plane access comes only from role assignments. The role must be granted *to* the identity created in step 1, scoped to the vault for least privilege.\n3. **`SecretClient` + `DefaultAzureCredential`** — The code side: `DefaultAzureCredential` resolves to the managed identity at runtime, so no secret or connection string appears anywhere.\n4. **`get_secret` at startup, then cache** — Retrieval only succeeds once identity, role, and client are in place. Caching in memory avoids hammering the vault (and its throttling limits) on every request.\n5. **Verify** — Last, as always: a clean startup and an absence of 403s in the vault's diagnostic logs prove the identity resolved and the role assignment propagated.\n\nThe classic failure is doing step 3–4 before step 2: the identity authenticates successfully but every `get_secret` returns **403 Forbidden**, because authentication is not authorization.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-12-mirrowell-information-barriers",
+    "question": "Mirrowell Biosciences must prevent members of Team Helix and Team Meridian — research teams serving directly competing pharmaceutical sponsors — from communicating or collaborating with each other in Microsoft Teams, SharePoint Online, and OneDrive.\n\nWhich Microsoft Purview capability enforces this two-way restriction?",
+    "options": [
+        {
+            "text": "Information barriers",
+            "correct": true
+        },
+        {
+            "text": "Sensitivity labels with encryption",
+            "correct": false
+        },
+        {
+            "text": "Records management",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Conditional Access",
+            "correct": false
+        }
+    ],
+    "explanation": "**Information barriers** restrict **communication and collaboration between defined groups of users** in Microsoft Teams, SharePoint Online, and OneDrive. Administrators define segments (such as Team Helix and Team Meridian) and policies that block interactions between them: blocked users cannot chat or call each other, be added to the same teams, or collaborate on each other's sites and files. This addresses exactly the conflict-of-interest scenario of teams serving competing sponsors.\n\n**Why not the other options:**\n- **Sensitivity labels with encryption** — Labels protect *content*: they classify, encrypt, and restrict who can open specific documents and emails. They do not stop two groups of people from chatting, calling, or joining the same team.\n- **Records management** — Records management declares content as immutable records to meet retention obligations. It governs the lifecycle of items, not who may communicate with whom.\n- **Microsoft Entra Conditional Access** — Conditional Access decides whether a *sign-in to an application* is allowed and under what conditions (MFA, compliant device). It cannot express \"users in segment A may not communicate with users in segment B\" inside Microsoft 365 workloads.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_mirrowell_biosciences.json"
+}

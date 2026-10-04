@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-draymont-workflow",
+    "question": "You need to recommend a platform for the customs-clearance workflow. The platform must provide prebuilt connectors for the customs broker's SaaS API, SharePoint, Dynamics 365, and SFTP; a visual designer maintainable by the integration team; and a single-tenant runtime with virtual network integration.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Azure Logic Apps (Standard)",
+            "correct": true
+        },
+        {
+            "text": "Azure Logic Apps (Consumption)",
+            "correct": false
+        },
+        {
+            "text": "Azure Durable Functions with the fan-out/fan-in pattern",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Factory pipelines with custom activities",
+            "correct": false
+        }
+    ],
+    "explanation": "**Logic Apps Standard** is the single-tenant tier of Azure Logic Apps and is the only option that meets all three requirement groups:\n\n- **Prebuilt connectors** — Logic Apps has a catalog of over a thousand managed connectors, including SharePoint, Dynamics 365, SFTP, and generic HTTP/OpenAPI connectors for SaaS APIs — the connector-heavy, document-centric workflow is Logic Apps' home turf\n- **Visual designer** — workflows are built and maintained in a graphical designer, suitable for an integration team that is not staffed with full-time developers\n- **Single-tenant runtime with VNet integration** — the Standard SKU runs on dedicated (single-tenant) compute based on the Azure Functions runtime and supports **virtual network integration** for outbound traffic and private endpoints for inbound — satisfying the security team's requirement that shipment-processing components run inside the VNet\n\n**Why not the other options:**\n- **Logic Apps (Consumption)** — Same connectors and designer, but it runs in the **shared multi-tenant** Logic Apps environment. It cannot provide a single-tenant runtime with VNet integration — that is precisely the differentiator that forces the Standard SKU here\n- **Durable Functions** — An orchestration framework expressed *in code* (C#, JavaScript, Python). There is no visual designer and no managed-connector catalog; the team would hand-write every SaaS, SharePoint, Dynamics, and SFTP integration — the opposite of \"minimal custom code\"\n- **Data Factory** — ADF orchestrates *data movement and transformation* pipelines. It is not a general business-workflow engine: it has no SharePoint/Dynamics application connectors of the kind needed for a document-approval process, and \"custom activities\" means writing and hosting custom code on a Batch pool — maximal custom code and operational surface",
+    "category": "Design Infrastructure Solutions",
+    "caseStudy": "scenarios/case_study_draymont_logistics.json"
+}

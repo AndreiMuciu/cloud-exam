@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-14-appservice-container-port",
+    "question": "You deploy a vendor-supplied Linux container image to Azure App Service. The containerized API listens on port **5000**, and the vendor image cannot be modified (its Dockerfile contains no `EXPOSE` instruction). Requests to the site fail, and the platform logs show the container did not respond to HTTP pings on port 80 and was terminated.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Add the application setting `WEBSITES_PORT=5000` to the web app.",
+            "correct": true
+        },
+        {
+            "text": "Increase the application setting `WEBSITES_CONTAINER_START_TIME_LIMIT` so the container has more time to start.",
+            "correct": false
+        },
+        {
+            "text": "Enable `WEBSITE_ENABLE_APP_SERVICE_STORAGE` so the container can persist state between restarts.",
+            "correct": false
+        },
+        {
+            "text": "Scale the App Service plan up to a larger tier so the container has enough resources to answer on port 80.",
+            "correct": false
+        }
+    ],
+    "explanation": "App Service assumes a custom container listens on **port 80** (or the port declared via `EXPOSE`). When the process actually listens elsewhere, startup HTTP pings never get a response and the platform kills the container. The **`WEBSITES_PORT`** application setting tells App Service which port the container listens on, so the front end routes traffic (and health pings) to port 5000. It is the documented fix when the image cannot be changed.\n\n**Why not the other options:**\n- **`WEBSITES_CONTAINER_START_TIME_LIMIT`** — Extends the grace period for *slow-starting* containers. This container starts fine; it is listening on a port the platform never probes, so more time changes nothing.\n- **`WEBSITE_ENABLE_APP_SERVICE_STORAGE`** — Controls whether `/home` is backed by persistent shared storage. It has nothing to do with which port receives traffic.\n- **Scaling up the plan** — The container is not resource-starved; it is answering on port 5000 while the platform probes port 80. A bigger SKU fails identically.",
+    "category": "Develop containerized solutions on Azure"
+}

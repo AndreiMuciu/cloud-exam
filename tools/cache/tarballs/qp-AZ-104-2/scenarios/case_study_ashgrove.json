@@ -1,0 +1,13 @@
+{
+    "id": "case_study_ashgrove",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Ashgrove Retail Group** operates an e-commerce platform and 60 physical stores. Online traffic is highly seasonal — flash sales and the holiday season can multiply load tenfold within an hour.\n\n**Current Environment:**\n- Production subscription with a web tier on **Virtual Machine Scale Sets** (uniform orchestration)\n- Back-office batch processing packaged as **Linux containers**\n- All infrastructure is deployed through a CI/CD pipeline\n- The platform team is migrating its infrastructure-as-code from ARM JSON templates to **Bicep**\n\n**Business Goals:**\n- Absorb sales-event traffic spikes automatically without manual intervention\n- Keep infrastructure definitions readable and maintainable for a growing platform team\n- Minimize cost for workloads that only run occasionally"
+        },
+        {
+            "title": "Technical Environment",
+            "content": "**Web Tier (VM Scale Set `vmss-web`):**\n- Instance limits: minimum **2**, default **2**, maximum **10**\n- Scale out: add **2** instances when average CPU > **70%** for 10 minutes\n- Scale in: remove **1** instance when average CPU < **25%** for 15 minutes\n\n**Infrastructure as Code:**\n- Dozens of ARM JSON templates exported from existing deployments over the years\n- New standard: all templates must be authored in Bicep\n- Pipeline runs `az deployment group create` against the production resource group\n\n**Container Workloads:**\n- `inv-recon`: a nightly inventory reconciliation job in a single container; runs for roughly 30 minutes, then exits\n- The operations team wants the simplest possible hosting option for `inv-recon` — no cluster, no environment resource, and per-second billing only while it runs\n- Images are stored in an Azure Container Registry"
+        }
+    ]
+}

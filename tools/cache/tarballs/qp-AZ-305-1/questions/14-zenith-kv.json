@@ -1,0 +1,24 @@
+{
+    "id": "gen-12-key-vault-rbac",
+    "question": "The reporting application runs on an Azure VM and uses a **System-Assigned Managed Identity**. You need to allow the application to retrieve API keys (stored as secrets) from Azure Key Vault while following the principle of **least privilege**. What should you include in the recommendation?",
+    "options": [
+        {
+            "text": "Apply the Key Vault Administrator RBAC role to the application's managed identity",
+            "correct": false
+        },
+        {
+            "text": "Create a Key Vault access policy that grants 'Get' and 'List' permissions to all users",
+            "correct": false
+        },
+        {
+            "text": "Apply the Key Vault Secrets User RBAC role to the application's managed identity",
+            "correct": true
+        },
+        {
+            "text": "Store the Key Vault access key in the application's configuration file",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Apply the Key Vault Secrets User RBAC role to the application's managed identity**.\n\n- **Azure RBAC** is the modern and recommended authorization model for Key Vault. The **Key Vault Secrets User** role grants exactly the permission needed (Read) to retrieve secret values without allowing management of the Key Vault itself.\n- Access policies are a legacy model and granting 'List' to 'all users' is insecure.\n- The **Administrator** role provides excessive permissions (Create/Delete/Manage), violating least privilege.\n- Storing an access key in a config file creates a credential-management risk, which Managed Identities are designed to eliminate.",
+    "category": "Design Identity, Governance, and Monitoring"
+}

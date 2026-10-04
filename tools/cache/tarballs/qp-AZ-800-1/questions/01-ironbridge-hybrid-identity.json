@@ -1,0 +1,25 @@
+{
+    "id": "az800-01-ironbridge-hybrid-identity",
+    "question": "IronBridge Manufacturing wants to ensure their Azure VMs can join their on-premises AD DS domain. They have already established a Site-to-Site VPN. Which service should they deploy to Azure to provide local domain controller capabilities and reduce latency for authentication requests originating in Azure?",
+    "options": [
+        {
+            "text": "Microsoft Entra Domain Services",
+            "correct": false
+        },
+        {
+            "text": "AD DS Domain Controllers in an Azure VM",
+            "correct": true
+        },
+        {
+            "text": "Azure App Service",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Connect Cloud Sync",
+            "correct": false
+        }
+    ],
+    "explanation": "To provide full AD DS capabilities (including Group Policy and Kerberos) for Azure VMs that need to join the on-premises domain, the best practice is to deploy **Domain Controllers on Azure VMs** within an Azure VNet that is connected to the on-premises network.\n\n**Why not the other options:**\n- **Entra Domain Services** — Provides a *managed* domain service that is separate from your on-premises AD DS. While it supports similar protocols, it is not a direct 'extension' of your on-premises domain in the same way a dedicated DC VM is.\n- **Cloud Sync** — Synchronizes identities from AD to Entra ID; it doesn't provide domain controller services for VMs.",
+    "category": "Deploy and manage AD DS in on-premises and cloud environments",
+    "caseStudy": "scenarios/case_study_ironbridge_manufacturing.json"
+}

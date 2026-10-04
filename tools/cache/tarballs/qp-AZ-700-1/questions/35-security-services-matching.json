@@ -1,0 +1,25 @@
+{
+    "id": "az700-security-services-matching",
+    "type": "matching",
+    "question": "Match each Azure networking security service to its primary use case.",
+    "sourceItems": [
+        "Stateful layer 3/layer 4 traffic filtering on a subnet or network interface, using allow/deny rules evaluated by priority",
+        "Centralized, stateful firewall-as-a-service supporting FQDN-based application rules and threat intelligence filtering",
+        "Layer 7 protection against common web attack patterns such as SQL injection and cross-site scripting",
+        "Browser-based RDP/SSH access to VMs without exposing a public IP address or opening inbound management ports"
+    ],
+    "targetSlots": [
+        "Network Security Group (NSG)",
+        "Azure Firewall",
+        "Web Application Firewall (WAF)",
+        "Azure Bastion"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Network Security Group (NSG)**: Filters inbound and outbound traffic to/from subnets and network interfaces using stateful, priority-ordered allow/deny rules based on source, destination, port, and protocol — a layer 3/4 control.\n- **Azure Firewall**: A managed, centralized, stateful firewall that can filter based on fully qualified domain names (FQDN) via application rules and can flag or block traffic to known-malicious IP addresses/domains using threat intelligence — typically deployed once in a hub and shared across spokes.\n- **Web Application Firewall (WAF)**: Provides layer 7 protection for web applications, inspecting HTTP(S) requests for patterns associated with common attacks such as SQL injection and cross-site scripting, deployable on Azure Front Door or Application Gateway.\n- **Azure Bastion**: A fully managed PaaS service that provides secure RDP/SSH connectivity to VMs directly through the Azure portal (or native clients), without needing a public IP address on the VM or opening inbound ports 3389/22 to the internet.",
+    "category": "Design and Implement Azure Network Security Services"
+}

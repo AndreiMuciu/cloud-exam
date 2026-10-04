@@ -1,0 +1,24 @@
+{
+    "id": "az700-connectivity-p2s-auth",
+    "question": "Cindralux Robotics wants remote engineers to connect to Azure over point-to-site VPN using their existing Microsoft Entra ID credentials, including support for Conditional Access and multifactor authentication, without standing up a RADIUS server.\n\nWhich P2S authentication configuration should Cindralux use?",
+    "options": [
+        {
+            "text": "RADIUS authentication integrated with on-premises Active Directory",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID authentication using the OpenVPN tunnel type and the Azure VPN Client",
+            "correct": true
+        },
+        {
+            "text": "Certificate authentication with a self-signed root certificate",
+            "correct": false
+        },
+        {
+            "text": "IKEv2 with Microsoft Entra ID authentication, using any native OS VPN client",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra ID authentication** for point-to-site VPN lets users authenticate with their Entra ID credentials, enabling Conditional Access and multifactor authentication policies to apply to the VPN connection — with no RADIUS server required. This authentication method is supported **only for the OpenVPN tunnel type**, and clients must use the **Azure VPN Client** to connect and authenticate.\n\n**Why not the other options:**\n- **RADIUS with on-premises AD** — Requires deploying and maintaining a RADIUS server (on-premises or in Azure) that integrates with AD; it's a valid alternative but requires exactly the RADIUS infrastructure Cindralux wants to avoid, and doesn't natively use Entra ID Conditional Access/MFA the way Entra ID auth does.\n- **Certificate authentication** — Authenticates based on a client certificate issued from a trusted root, not user identity; it doesn't provide Entra ID sign-in, Conditional Access, or MFA integration.\n- **\"IKEv2 with Entra ID auth, any native client\"** — Entra ID authentication for P2S is supported only over the OpenVPN tunnel type, and requires the Azure VPN Client specifically — it is not available over IKEv2 or with arbitrary native OS VPN clients.",
+    "category": "Design, Implement, and Manage Connectivity Services"
+}

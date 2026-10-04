@@ -1,0 +1,13 @@
+{
+    "id": "case_study_cryptovault_banking",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**CryptoVault Banking** is a digital bank that stores highly sensitive customer financial records. They must ensure that all data is encrypted both in transit and at rest using customer-managed keys (CMK). The bank processes over 500,000 transactions daily across 12 geographic regions."
+        },
+        {
+            "title": "Encryption Requirements",
+            "content": "- Transparent Data Encryption (TDE) for Azure SQL Database must use a key stored in an Azure Key Vault Managed HSM for the highest level of hardware security.\n- Disk encryption for all virtual machines must be enforced using Azure Disk Encryption (ADE), with an Azure Key Vault configured for the appropriate access policies.\n- Access to the Key Vault must be restricted to specific service principals using Azure RBAC, ensuring that management plane access does not grant data plane access to keys and secrets."
+        }
+    ]
+}

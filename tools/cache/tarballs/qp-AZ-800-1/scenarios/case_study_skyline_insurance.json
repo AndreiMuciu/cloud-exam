@@ -1,0 +1,9 @@
+{
+    "id": "case_study_skyline_insurance",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Skyline Insurance** is migrating sits core database workloads to Azure. They require a highly resilient networking setup between their HQ and their main Azure region.\n\n**Networking Requirements:**\n- Establish a high-bandwidth, low-latency connection that doesn't use the public internet.\n- Implement a VPN backup for the primary connection.\n- Use Azure DNS Private Zones to resolve names of servers in both environments consistently."
+        }
+    ]
+}

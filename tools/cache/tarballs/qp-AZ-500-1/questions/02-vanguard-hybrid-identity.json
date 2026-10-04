@@ -1,0 +1,25 @@
+{
+    "id": "az500-02-vanguard-hybrid-identity",
+    "question": "To allow Vanguard Defense users to sign in using their on-premises credentials with seamless SSO while minimizing on-premises infrastructure requirements, which hybrid identity solution should you implement?",
+    "options": [
+        {
+            "text": "Password Hash Synchronization (PHS) with Seamless SSO",
+            "correct": true
+        },
+        {
+            "text": "Active Directory Federation Services (AD FS)",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra Domain Services",
+            "correct": false
+        },
+        {
+            "text": "Pass-through Authentication (PTA) with Seamless SSO",
+            "correct": false
+        }
+    ],
+    "explanation": "**Password Hash Synchronization (PHS)** with the **Seamless SSO** feature is the simplest and most resilient way to provide a single sign-on experience. It requires no on-premises authentication agents and provides disaster recovery benefits since authentication does not depend on on-premises infrastructure.\n\n**Why not the other options:**\n- **PTA with Seamless SSO** — Also provides seamless SSO, but requires on-premises authentication agents and depends on on-premises AD availability. It is preferred when password hashes must never leave the on-premises environment, but the question asks to *minimize* on-premises infrastructure.\n- **AD FS** — A more complex, on-premises federation service with the highest infrastructure requirements.\n- **Entra Domain Services** — Provides managed domain services (LDAP, Kerberos) in the cloud, but is not the primary mechanism for hybrid identity SSO for end users.",
+    "category": "Manage identity and access",
+    "caseStudy": "scenarios/case_study_vanguard_defense.json"
+}

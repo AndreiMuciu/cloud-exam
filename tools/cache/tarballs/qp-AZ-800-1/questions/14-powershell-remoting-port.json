@@ -1,0 +1,24 @@
+{
+    "id": "az800-14-powershell-remoting-port",
+    "question": "By default, when you use **PowerShell Remoting** (WinRM) over a secure HTTPS connection, which port must be open on the target server's firewall?",
+    "options": [
+        {
+            "text": "5985",
+            "correct": false
+        },
+        {
+            "text": "5986",
+            "correct": true
+        },
+        {
+            "text": "443",
+            "correct": false
+        },
+        {
+            "text": "22",
+            "correct": false
+        }
+    ],
+    "explanation": "Windows Remote Management (WinRM) uses port **5985** for HTTP and **5986** for HTTPS. Since the question specifies a secure HTTPS connection, port 5986 is the correct answer.\n\n**Why not the other options:**\n- **5985** — Standard HTTP port for WinRM.\n- **443** — Standard HTTPS port for web traffic, but not the default for WinRM.\n- **22** — Standard SSH port.",
+    "category": "Manage Windows Servers and workloads in a hybrid environment"
+}

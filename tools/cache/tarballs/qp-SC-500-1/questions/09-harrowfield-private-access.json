@@ -1,0 +1,25 @@
+{
+    "id": "sc500-09-harrowfield-private-access",
+    "question": "You need to modernize remote access for Harrowfield Logistics: depot staff need Zero Trust, per-application access to the internal shipment-tracking app without being placed on the network, and administrators must reach VMs without any public IPs on the VMs. Which pair of solutions should you choose?",
+    "options": [
+        {
+            "text": "Microsoft Entra Private Access for depot staff, and Azure Bastion for VM administration",
+            "correct": true
+        },
+        {
+            "text": "A larger site-to-site VPN gateway for depot staff, and RDP through Azure Firewall DNAT rules for administrators",
+            "correct": false
+        },
+        {
+            "text": "Point-to-site VPN with certificate authentication for depot staff, and public IPs with just-in-time VM access for administrators",
+            "correct": false
+        },
+        {
+            "text": "Azure Front Door for depot staff, and a jump-box VM with a public IP protected by an NSG for administrators",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Private Access** (part of Microsoft's Security Service Edge / Global Secure Access) provides identity-centric, per-application access to private apps with Conditional Access enforcement — users get access to the specific app, not a routable network segment, replacing legacy VPN access. **Azure Bastion** provides RDP/SSH to VMs over TLS directly from the portal (or native client) with no public IP on any VM.\n\n**Why not the other options:**\n- **Bigger site-to-site VPN + DNAT** — A network-level VPN places users on the network (contrary to Zero Trust per-app access), and DNAT-published RDP exposes a public management port.\n- **Point-to-site VPN + public IPs with JIT** — P2S VPN is still network-level access; JIT reduces exposure time but the requirement is *no* public IPs on VMs.\n- **Azure Front Door + jump box** — Front Door is a global entry point for public-facing web apps, not an authenticated private-app access broker; a public-IP jump box violates the no-public-IP requirement.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_harrowfield_logistics.json"
+}

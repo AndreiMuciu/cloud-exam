@@ -1,0 +1,13 @@
+{
+    "id": "case_study_traversia_rail",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Traversia Rail** operates passenger and freight rail services across three countries. Its ticketing platform runs in Microsoft Azure, its real-time freight tracking system runs in Amazon Web Services (AWS) after an acquisition, and signaling support systems remain in company data centers.\n\n**Current Environment:**\n- The security operations team is three analysts who cover business hours only.\n- Security posture is reviewed ad hoc: the Azure estate has some oversight, but nobody assesses the AWS accounts against any security standard.\n- Logs from the ticketing platform, the AWS freight system, station networks, and third-party badge readers sit in separate consoles and are only examined after something goes wrong."
+        },
+        {
+            "title": "Security Program Objectives",
+            "content": "The newly appointed head of security at Traversia Rail has set these objectives:\n- **One posture view**: Bring the Azure subscriptions *and* the AWS accounts under a single tool that continuously assesses configuration against security standards and recommends hardening steps.\n- **Centralize the signal**: Aggregate and correlate log data from cloud platforms, on-premises systems, and third-party devices in one analytics platform so threats are detected from combined evidence, not single consoles.\n- **Get ahead of alerts**: Give analysts a way to proactively search the collected data for signs of compromise that no alert has fired for, based on hypotheses from recent threat reports."
+        }
+    ]
+}

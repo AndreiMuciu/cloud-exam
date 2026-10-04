@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-halstrom-storage",
+    "question": "You need to recommend a redundancy configuration for the storage account that holds the valuation report files. The files must remain readable during a primary-region outage and must survive the loss of a single datacenter within the primary region.\n\nWhich redundancy option should you recommend?",
+    "options": [
+        {
+            "text": "Zone-redundant storage (ZRS)",
+            "correct": false
+        },
+        {
+            "text": "Read-access geo-redundant storage (RA-GRS)",
+            "correct": false
+        },
+        {
+            "text": "Geo-zone-redundant storage (GZRS)",
+            "correct": false
+        },
+        {
+            "text": "Read-access geo-zone-redundant storage (RA-GZRS)",
+            "correct": true
+        }
+    ],
+    "explanation": "**RA-GZRS** is the only option that satisfies both requirements simultaneously:\n\n- **Survive a datacenter loss in the primary region** — The *GZRS* part replicates data synchronously across **three availability zones** in the primary region, so losing one datacenter (zone) causes no data loss and no interruption\n- **Readable during a primary-region outage** — The *RA* (read-access) part asynchronously replicates data to the paired secondary region **and exposes a read endpoint** (`-secondary` suffix) that the reporting team can use even while the primary region is down, without waiting for a customer- or Microsoft-initiated failover\n\n**Why not the other options:**\n- **ZRS** — Protects against zone/datacenter failure inside the primary region, but keeps no copy in another region, so nothing is readable (or even preserved) if the whole primary region is lost\n- **RA-GRS** — Provides the secondary-region read endpoint, but the primary copy uses **LRS** (three replicas in a *single* datacenter). A datacenter-level failure in the primary region would leave the primary copies unavailable, failing the zone-resilience requirement (reads would have to rely solely on the potentially lagging secondary)\n- **GZRS** — Provides zone redundancy in the primary plus a geo-replica, but **without read access** the secondary copy is unreadable until a full account failover is initiated — so reports would not remain readable *during* the outage as required",
+    "category": "Design Business Continuity Solutions",
+    "caseStudy": "scenarios/case_study_halstrom_capital.json"
+}

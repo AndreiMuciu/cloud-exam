@@ -1,0 +1,24 @@
+{
+    "id": "az305-bcdr-geo-replication",
+    "question": "You are designing a disaster recovery strategy for a mission-critical Azure SQL Database. The organization has the following requirements:\n\n- Recovery Point Objective (RPO): less than 5 seconds\n- Recovery Time Objective (RTO): less than 60 seconds\n- Automatic failover when the primary region is unavailable\n- The secondary database must be readable for reporting workloads\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Configure geo-restore from automatically created geo-redundant backups",
+            "correct": false
+        },
+        {
+            "text": "Configure active geo-replication with a manual failover group",
+            "correct": false
+        },
+        {
+            "text": "Configure an auto-failover group with a readable secondary",
+            "correct": true
+        },
+        {
+            "text": "Configure long-term backup retention (LTR) with cross-region restore",
+            "correct": false
+        }
+    ],
+    "explanation": "**Auto-failover groups** with a readable secondary is the correct recommendation:\n\n- **RPO < 5 seconds** — Auto-failover groups use asynchronous geo-replication with an RPO of approximately 5 seconds\n- **RTO < 60 seconds** — With a customer-managed failover policy, automatic failover typically completes within 60 seconds by detecting the outage and redirecting the listener endpoint to the new primary\n- **Automatic failover** — The failover group detects outages and triggers failover without manual intervention\n- **Readable secondary** — The secondary database can serve read-only queries for reporting (read scale-out)\n\n**Why not the other options:**\n- **Geo-restore** — Restores from geo-redundant backups with an RPO of up to 1 hour and RTO of several hours. Far too slow\n- **Active geo-replication without failover group** — Provides readable secondaries but requires **manual** failover, which doesn't meet the automatic failover requirement\n- **Long-term retention** — Designed for compliance and archival (weekly/monthly/yearly backups), not real-time disaster recovery",
+    "category": "Design Business Continuity Solutions"
+}

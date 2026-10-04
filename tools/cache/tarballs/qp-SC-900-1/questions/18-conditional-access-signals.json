@@ -1,0 +1,24 @@
+{
+    "id": "sc900-18-conditional-access-signals",
+    "question": "Which of the following is a signal that Microsoft Entra Conditional Access policies can evaluate when deciding whether to allow, block, or challenge an access attempt?",
+    "options": [
+        {
+            "text": "The network location or IP address from which the user signs in",
+            "correct": true
+        },
+        {
+            "text": "The number of files stored in the user's OneDrive",
+            "correct": false
+        },
+        {
+            "text": "The length of the user's current password",
+            "correct": false
+        },
+        {
+            "text": "The amount of free disk space on the user's device",
+            "correct": false
+        }
+    ],
+    "explanation": "Conditional Access policies evaluate **signals** such as user or group membership, **named network locations and IP ranges**, device platform and compliance state, the application being accessed, and real-time sign-in or user risk from Microsoft Entra ID Protection. Location is one of the most commonly used signals — for example, blocking sign-ins from specific countries or skipping MFA on the trusted corporate network.\n\n**Why not the other options:**\n- **Number of files in OneDrive** — Storage contents are not an available Conditional Access condition; policies evaluate access context, not mailbox or drive contents.\n- **Length of the current password** — Password composition is governed by password policies and Microsoft Entra Password Protection, not by Conditional Access.\n- **Free disk space on the device** — Conditional Access can consider whether a device is *compliant* (as reported by a device-management solution) but raw hardware metrics like disk space are not sign-in signals.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

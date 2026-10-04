@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-32-iot-hub-ingestion",
+    "question": "A company must ingest telemetry streams from thousands of field devices. Beyond ingestion, the solution must also authenticate and manage each individual device and send commands back from the cloud to specific devices.\n\nWhich Azure service should the company use as the entry point for this device data?",
+    "options": [
+        {
+            "text": "Azure IoT Hub",
+            "correct": true
+        },
+        {
+            "text": "Azure Event Hubs",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Factory",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob Storage",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure IoT Hub** is the ingestion service built specifically for device fleets: it receives telemetry at scale like an event broker, but adds per-device identity and authentication, device management and provisioning, and **bidirectional communication** — the cloud can send commands and configuration back to individual devices. The device-management and cloud-to-device requirements make IoT Hub the fit.\n\n**Why not the other options:**\n- **Azure Event Hubs** — Event Hubs is a superb high-throughput event ingestion service, but it is one-way (into the cloud) and has no per-device identity, management, or cloud-to-device command capability.\n- **Azure Data Factory** — Data Factory orchestrates and copies data in scheduled pipelines; it is not a real-time ingestion endpoint that devices connect to, and it manages no devices.\n- **Azure Blob Storage** — Blob Storage is where data may eventually be stored; it cannot authenticate devices, receive continuous telemetry streams as an event endpoint, or send commands.",
+    "category": "Describe an Analytics Workload on Azure"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "ai103-26-autonomous-workflow-safeguards",
+    "question": "An operations team wants an agent to autonomously restart failed background jobs, but any action that would delete data (not just restart it) must require a human approval step before it executes.\n\nHow should this be implemented?",
+    "options": [
+        {
+            "text": "Classify the agent's available tools by risk, allow the low-risk restart tool to run autonomously, and require an explicit approval step in the tool-calling flow before any data-deletion tool executes.",
+            "correct": true
+        },
+        {
+            "text": "Grant the agent a single generic tool that can both restart jobs and delete data, and trust the agent's judgment about when each action is appropriate.",
+            "correct": false
+        },
+        {
+            "text": "Require human approval for every action the agent takes, including simple job restarts, to be maximally cautious.",
+            "correct": false
+        },
+        {
+            "text": "Allow the deletion tool to run autonomously, and review a log of what was deleted once a week.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Risk-based tool gating** — letting low-risk actions (restarts) run autonomously while requiring an explicit human approval step before high-risk actions (deletion) execute — is exactly how you build a semiautonomous workflow with the right safeguard placed where it matters, satisfying the requirement without blocking routine, safe operations.\n\n**Why not the other options:**\n- **One generic tool covering both actions** — Removes the ability to gate by risk at all; there is no separate control point to insert an approval step in front of only the destructive action.\n- **Requiring approval for every action** — Technically safe for deletions, but it also blocks the routine restarts the team explicitly wanted to run autonomously, defeating the purpose of automating that low-risk work.\n- **Autonomous deletion with a weekly review log** — The requirement is a pre-execution approval, not a post-hoc audit; by the time a weekly log is reviewed, any wrongful deletion has already happened and may be unrecoverable.",
+    "category": "Implement generative AI and agentic solutions"
+}

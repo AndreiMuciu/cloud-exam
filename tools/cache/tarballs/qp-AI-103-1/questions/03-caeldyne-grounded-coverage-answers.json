@@ -1,0 +1,30 @@
+{
+    "id": "ai103-03-caeldyne-grounded-coverage-answers",
+    "type": "multi",
+    "question": "Adjusters must be able to ask natural-language coverage questions and receive answers grounded strictly in Caeldyne's current policy documents, with no fabricated coverage terms.\n\nWhich three actions should the team take? (Select three.)",
+    "options": [
+        {
+            "text": "Ingest the policy PDFs and run OCR/layout enrichment so their text and clause structure are captured before indexing.",
+            "correct": true
+        },
+        {
+            "text": "Build a vector index over the policy content, chunked at a level that preserves individual coverage clauses.",
+            "correct": true
+        },
+        {
+            "text": "Configure the agent's retrieval tool to cite the retrieved passages so answers can be traced back to specific policy language.",
+            "correct": true
+        },
+        {
+            "text": "Skip indexing entirely and paste the full text of every policy PDF into the model's context window on every question.",
+            "correct": false
+        },
+        {
+            "text": "Fine-tune a new base model on the wording of the current policies so it memorizes coverage terms.",
+            "correct": false
+        }
+    ],
+    "explanation": "A grounded RAG pipeline needs all three: **enrichment/OCR** so the retrievable text is complete and structured, **clause-aware chunking with vector indexing** so retrieval returns the specific relevant passage instead of an entire document, and **citations back to source passages** so an adjuster (and an auditor) can verify the answer isn't fabricated.\n\n**Why not the other options:**\n- **Pasting every policy into context every time** — Doesn't scale, wastes tokens on irrelevant policies for a given question, and provides no retrieval ranking — it is not RAG, just a brute-force context stuff that will fail once the policy library grows.\n- **Fine-tuning on policy wording** — Fine-tuning nudges style and tone; it does not reliably encode exact, current, and updatable factual clauses, and policies change over time. It does not provide traceable citations and is a known path to *more* fabrication risk, not less, since the model can blend memorized wording with hallucinated wording.",
+    "category": "Implement information extraction solutions",
+    "caseStudy": "scenarios/case_study_caeldyne_insurance.json"
+}

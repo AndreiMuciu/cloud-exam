@@ -1,0 +1,25 @@
+{
+    "id": "dp900-03-brightharbor-data-roles",
+    "question": "Brightharbor Logistics is hiring a specialist to design and operate the pipelines that extract data from the order-management database, transform it, and load it into the new reporting environment.\n\nWhich data professional role best matches this responsibility?",
+    "options": [
+        {
+            "text": "Database administrator",
+            "correct": false
+        },
+        {
+            "text": "Data engineer",
+            "correct": true
+        },
+        {
+            "text": "Data analyst",
+            "correct": false
+        },
+        {
+            "text": "Systems administrator",
+            "correct": false
+        }
+    ],
+    "explanation": "A **data engineer** designs, builds, and operates data integration pipelines — the extract, transform, and load (ETL/ELT) processes that move data from operational systems into analytical stores and make it usable for reporting.\n\n**Why not the other options:**\n- **Database administrator** — Focuses on the ongoing management of database systems: security, backups, availability, and performance tuning. DBAs keep databases healthy; they do not typically build analytics pipelines.\n- **Data analyst** — Works at the other end of the pipeline, exploring curated data and building reports, dashboards, and visualizations to answer business questions for stakeholders like Brightharbor's operations managers.\n- **Systems administrator** — Manages servers, operating systems, and general IT infrastructure rather than data movement and transformation workloads.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_brightharbor_logistics.json"
+}

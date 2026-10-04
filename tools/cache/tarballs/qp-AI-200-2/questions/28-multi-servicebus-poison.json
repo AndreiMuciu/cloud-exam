@@ -1,0 +1,29 @@
+{
+    "id": "ai200-s2-28-multi-servicebus-poison",
+    "type": "multi",
+    "question": "An ingestion worker reads from an Azure Service Bus queue in PEEK_LOCK mode. Occasionally a malformed message arrives that will never parse. Requirements: malformed messages must not be retried indefinitely or block valid messages, they must be **preserved for later inspection**, and valid messages must keep at-least-once processing.\n\nWhich **two** actions should you take? (Select two.)",
+    "options": [
+        {
+            "text": "When validation fails with a permanent error, call `dead_letter_message` on the message, supplying a reason and error description.",
+            "correct": true
+        },
+        {
+            "text": "Leave the queue's max delivery count at a finite value so a message that keeps failing transient processing is moved to the dead-letter queue automatically.",
+            "correct": true
+        },
+        {
+            "text": "Switch the receiver to RECEIVE_AND_DELETE mode and let the parser exception discard the malformed message.",
+            "correct": false
+        },
+        {
+            "text": "Catch the parser exception and call `complete_message` so the malformed message is removed from the queue.",
+            "correct": false
+        },
+        {
+            "text": "Set a 5-minute `time_to_live` on all messages so malformed ones expire quickly.",
+            "correct": false
+        }
+    ],
+    "explanation": "Poison-message handling in Service Bus has an explicit path and a safety net, and you want both. Calling **`dead_letter_message`** the moment a *permanent* failure is detected moves the message to the queue's dead-letter sub-queue immediately — with your reason attached — so it stops consuming delivery attempts and is preserved for inspection. The **max delivery count** is the backstop: any message that keeps failing for reasons your code did not classify (crashes, lock expiry loops) is dead-lettered automatically after N deliveries, so nothing can block the queue indefinitely.\n\n**Why not the other options:**\n- **RECEIVE_AND_DELETE** — Destroys both guarantees at once: malformed messages vanish without a trace (nothing to inspect), and a worker crash loses *valid* messages, breaking at-least-once processing.\n- **`complete_message` on failure** — Successfully settles the message, permanently deleting it. The malformed payload is gone, violating the preservation requirement.\n- **Short TTL** — Applies to *all* messages: valid work items waiting behind a burst would expire too. Expired messages are also removed (not preserved) unless dead-lettering on expiration is separately configured, and a malformed message would still be retried until it happened to expire.",
+    "category": "Connect to and consume Azure services"
+}

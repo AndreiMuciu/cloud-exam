@@ -1,0 +1,25 @@
+{
+    "id": "sc300-marisund-delegated-vs-application-permissions",
+    "question": "Two integrations need API permissions configured on their app registrations at Marisund Logistics:\n\n- The **ClearRoute** SaaS application calls Marisund's internal shipment API on behalf of signed-in customs brokers, and each broker consents individually to what ClearRoute can do on their behalf.\n- A nightly **batch job** with no signed-in user calls Microsoft Graph directly to read shipment records, and an administrator approves this access once for the whole organization.\n\nWhich permission types should be configured for ClearRoute and the batch job, respectively?",
+    "options": [
+        {
+            "text": "ClearRoute should use delegated permissions with per-user consent; the batch job should use application permissions with tenant-wide admin consent",
+            "correct": true
+        },
+        {
+            "text": "Both ClearRoute and the batch job should use application permissions, since both call an API without a signed-in user present",
+            "correct": false
+        },
+        {
+            "text": "Both ClearRoute and the batch job should use delegated permissions, since both permissions require a user to consent",
+            "correct": false
+        },
+        {
+            "text": "ClearRoute should use application permissions with admin consent; the batch job should use delegated permissions with per-user consent",
+            "correct": false
+        }
+    ],
+    "explanation": "**Delegated permissions** represent the effective permissions of a signed-in user combined with the app, and can be consented to by each individual user for their own access — this matches ClearRoute acting \"on behalf of signed-in customs brokers\" with each broker consenting. **Application permissions** are used by apps that run without a signed-in user (like a nightly batch job) and always require an administrator to grant tenant-wide admin consent, since there's no interactive user to consent per-request.\n\n**Why not the other options:**\n- **Both using application permissions** — ClearRoute has an interactive, signed-in user (the broker) present at request time, so delegated permissions (with per-user consent) are the correct model, not application permissions.\n- **Both using delegated permissions** — the batch job has no interactive user at all, so there's no one present to grant delegated, per-user consent; it must use application permissions with admin consent.\n- **Swapping the two (application for ClearRoute, delegated for the batch job)** — this exactly inverts the correct mapping; a scenario with a signed-in user consenting per-request is delegated, and a headless job approved once tenant-wide is application.",
+    "category": "Plan and implement workload identities",
+    "caseStudy": "scenarios/case_study_marisund.json"
+}

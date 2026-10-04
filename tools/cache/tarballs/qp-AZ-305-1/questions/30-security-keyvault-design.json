@@ -1,0 +1,24 @@
+{
+    "id": "az305-security-keyvault-design",
+    "question": "You are designing a secrets management strategy for a company that runs multiple applications across three Azure subscriptions: Development, Staging, and Production.\n\nThe company has the following requirements:\n\n- Applications must not store secrets in code or configuration files\n- Secrets must be rotated automatically every 90 days\n- Access to production secrets must be logged and auditable\n- Developers must not have access to production secrets\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Deploy one Azure Key Vault per subscription, use managed identities for application access, and enable purge protection on the production vault",
+            "correct": true
+        },
+        {
+            "text": "Deploy a single shared Azure Key Vault, use service principals with client secrets for access, and configure RBAC at the secret level",
+            "correct": false
+        },
+        {
+            "text": "Store secrets in Azure App Configuration with customer-managed encryption keys and use connection strings for application access",
+            "correct": false
+        },
+        {
+            "text": "Deploy one Azure Key Vault per application, use access policies with compound identity, and enable soft delete only on production vaults",
+            "correct": false
+        }
+    ],
+    "explanation": "**Separate Key Vaults per subscription** with **managed identities** is the recommended approach:\n\n1. **No secrets in code** — Managed identities eliminate the need for credentials in code. The identity is automatically managed by Azure\n2. **Automatic rotation** — Azure Key Vault supports rotation policies that emit near-expiry events via Event Grid, which can trigger Azure Functions to perform the actual credential rotation at the target service (every 90 days). For cryptographic keys, Key Vault supports fully native auto-rotation\n3. **Audit logging** — Key Vault diagnostic logging captures all access operations. Purge protection prevents permanent deletion of secrets during the retention period\n4. **Environment isolation** — Separate vaults per subscription naturally isolate production secrets from developers who only have access to the Development subscription\n\n**Why not the other options:**\n- **Single shared vault** — Using service principals with client secrets reintroduces secret management problems (the client secret itself needs secure storage). A shared vault also makes it harder to isolate production access\n- **App Configuration** — Designed for feature flags and configuration settings, not secrets management. It can reference Key Vault secrets but shouldn't replace it\n- **Vault per application** — Over-provisioning that increases management overhead. Compound identity (user + app) is rarely needed and adds complexity. Soft delete is now enabled by default on all vaults",
+    "category": "Design Identity, Governance, and Monitoring"
+}

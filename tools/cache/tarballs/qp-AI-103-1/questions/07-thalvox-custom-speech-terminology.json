@@ -1,0 +1,25 @@
+{
+    "id": "ai103-07-thalvox-custom-speech-terminology",
+    "question": "Thalvox Health's near-real-time visit transcription frequently misrecognizes the clinic's own drug and procedure names.\n\nWhat should the team do to fix this?",
+    "options": [
+        {
+            "text": "Train and deploy a custom speech model (or a custom vocabulary/phrase list) that includes the clinic's drug and procedure terms, and use it for real-time speech-to-text.",
+            "correct": true
+        },
+        {
+            "text": "Keep the base speech-to-text model and post-process the transcript with a generic spell-checker.",
+            "correct": false
+        },
+        {
+            "text": "Increase the audio sample rate sent from the calling stack to the base speech model.",
+            "correct": false
+        },
+        {
+            "text": "Switch the pipeline to a text-to-speech model tuned for medical vocabulary.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **custom speech model** (or a custom vocabulary/phrase list layered on the base model) lets Thalvox bias recognition toward its own domain terms — drug names, procedure names, clinic-specific jargon — directly addressing the root cause of the misrecognition, and it still runs in real time.\n\n**Why not the other options:**\n- **Generic spell-checker post-processing** — A spell-checker corrects toward common dictionary words, which is exactly wrong for uncommon clinical terminology; it is more likely to \"correct\" a rare-but-right drug name into a common-but-wrong word.\n- **Higher sample rate** — Audio fidelity is not the failure mode described; the model recognizes common speech fine and specifically fails on domain vocabulary it was never trained to expect.\n- **A text-to-speech model** — Text-to-speech converts text to audio, the opposite direction of the problem (transcribing audio to text); it cannot address a speech *recognition* accuracy issue.",
+    "category": "Implement text analysis solutions",
+    "caseStudy": "scenarios/case_study_thalvox_health.json"
+}

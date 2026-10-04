@@ -1,0 +1,13 @@
+{
+    "id": "case_study_lumetra_retail",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Lumetra Retail Group** operates 600 grocery and convenience stores. Every night, each store's point-of-sale system produces an extract file of the day's sales, and the company has adopted **Microsoft Fabric** as its analytics platform.\n\n**Analytics Team:**\n- The BI team consists of long-time SQL Server developers who are fluent in **T-SQL** and prefer to create tables, load data, and transform it entirely with T-SQL `CREATE TABLE`, `INSERT`, and `UPDATE` statements.\n- A separate operations team is responsible for moving the nightly extract files from the stores into OneLake."
+        },
+        {
+            "title": "Requirements",
+            "content": "Lumetra Retail Group has three requirements for the Fabric solution:\n- **Analytical store**: a Fabric item that provides a full relational, SQL-endpoint experience where the BI team can both **read and write** data using T-SQL, including DDL and DML statements.\n- **Nightly ingestion**: an orchestrated process that runs on a **schedule**, copies the 600 stores' extract files into the analytical store, runs a transformation activity afterward, and sends a **notification email if any step fails**.\n- **Semantic model**: the sales data will be modeled for Power BI as a **star schema**. The model includes a `SalesTransactions` table holding one row per checkout line with quantity and amount columns, plus `Product`, `Store`, and `Date` tables that describe the attributes by which the business slices the numbers."
+        }
+    ]
+}

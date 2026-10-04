@@ -1,0 +1,24 @@
+{
+    "id": "sc900-33-compliance-manager",
+    "question": "A compliance team needs a Microsoft Purview solution that provides prebuilt assessments for regulations and standards (such as GDPR and ISO/IEC 27001), tracks both Microsoft-managed and customer-managed improvement actions, and calculates a risk-based score that measures the organization's progress.\n\nWhich solution should the team use?",
+    "options": [
+        {
+            "text": "Compliance Manager",
+            "correct": true
+        },
+        {
+            "text": "Content explorer",
+            "correct": false
+        },
+        {
+            "text": "Audit (Standard)",
+            "correct": false
+        },
+        {
+            "text": "Data loss prevention (DLP)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Purview Compliance Manager** helps organizations manage compliance requirements end to end. It ships with **prebuilt assessment templates** for common regulations and industry standards, tracks improvement actions — both those Microsoft manages for its services and those the customer must implement — and calculates the **compliance score**, a risk-based measure of progress in completing actions that reduce risks around data protection and regulatory requirements.\n\n**Why not the other options:**\n- **Content explorer** — Content explorer shows a current snapshot of items with sensitivity labels, retention labels, or sensitive information types across the organization; it does not assess regulatory compliance or produce a score.\n- **Audit (Standard)** — Auditing records user and admin activities for search and investigation; it is evidence collection, not assessment management.\n- **Data loss prevention (DLP)** — DLP prevents the sharing of sensitive information; it enforces a specific control rather than measuring overall compliance posture against standards.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

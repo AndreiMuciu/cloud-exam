@@ -1,0 +1,13 @@
+{
+    "id": "case_study_zephyron",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Zephyron Dynamics** is a mid-size industrial analytics firm headquartered in Rotterdam. It has just completed the acquisition of a smaller sensor-manufacturing company, **Corvale Sensing**, which operates its own on-premises Active Directory Domain Services (AD DS) forest and a separate Microsoft Entra tenant.\n\n**Current environment:**\n- Zephyron Dynamics: Microsoft Entra tenant `zephyrondynamics.io`, hybrid-joined with an on-premises AD DS forest synchronized via Microsoft Entra Connect Sync.\n- Corvale Sensing: a standalone Microsoft Entra tenant `corvalesensing.io` with its own users, groups, and line-of-business apps.\n- Leadership wants Corvale Sensing employees to collaborate with Zephyron Dynamics teams immediately, without a costly and slow tenant migration."
+        },
+        {
+            "title": "Identity Requirements",
+            "content": "- Only user accounts in specific on-premises organizational units (OUs) — **Engineering** and **Sales** — should synchronize to `zephyrondynamics.io`. Accounts in the **Contractors** OU must never appear in Microsoft Entra ID.\n- Corvale Sensing employees who need daily access to Zephyron Dynamics resources should have a representation that behaves like an internal collaboration model, automatically kept in sync as Corvale Sensing's HR system adds or removes employees — without manually inviting each person as a guest.\n- Corvale Sensing employees who only need occasional access to a single shared SharePoint site should NOT require any changes to Zephyron Dynamics licensing.\n- All external accounts must be reviewed periodically, and access must be automatically removed if no longer justified.\n- The security team wants confirmation of which licensing tier is required for the automated, HR-driven cross-tenant synchronization approach before they commit budget."
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "id": "case_study_monitoring_governance",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**ChronoSystems** manages 15 Azure subscriptions organized into four projects. Resources for each project are distributed across multiple subscriptions, making cost tracking and compliance monitoring challenging.\n\n**Cost Management Requirements:**\n- Monitor costs on a per-project basis using Microsoft Cost Management\n- Minimize administrative overhead for cost allocation\n\n**Compliance and Monitoring Requirements:**\n- Trigger automated compliance scans across all subscriptions\n- Generate alerts when resources become non-compliant with company policies\n- Forward logs from Azure VMs to a central Log Analytics workspace\n- Transform log data before storing it for long-term analysis\n- Collect event logs from multiple Azure services for security analysis\n\n**Storage Security Requirements:**\n- Blob storage access must be revocable without regenerating access tokens\n- File share access must use identity-based authentication\n- Deploy the Azure Monitor agent to support Data Collection Rules (DCRs)\n\nWhat solutions should you recommend for each requirement?"
+        }
+    ]
+}

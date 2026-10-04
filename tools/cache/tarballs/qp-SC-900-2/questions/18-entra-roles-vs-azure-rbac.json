@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-18-entra-roles-vs-azure-rbac",
+    "question": "An administrator holds the Microsoft Entra User Administrator role but complains that she cannot restart an Azure virtual machine in the company's subscription. A colleague explains the difference between Microsoft Entra roles and Azure role-based access control (RBAC) roles.\n\nWhich statement correctly describes that difference?",
+    "options": [
+        {
+            "text": "Microsoft Entra roles govern access to Entra resources such as users, groups, and domains, while Azure RBAC roles govern access to Azure resources such as virtual machines and storage",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra roles apply only to guest users, while Azure RBAC roles apply only to member users",
+            "correct": false
+        },
+        {
+            "text": "Azure RBAC roles are a subset of Microsoft Entra roles, so any Entra role automatically includes the equivalent Azure permissions",
+            "correct": false
+        },
+        {
+            "text": "The two role systems are identical and the administrator's issue must be a licensing problem",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft uses **two separate role systems with different scopes**. **Microsoft Entra roles** (such as User Administrator or Global Administrator) control access to *Microsoft Entra resources* — user accounts, groups, licenses, domains, and directory settings. **Azure RBAC roles** (such as Owner, Contributor, or Virtual Machine Contributor) control access to *Azure resources* — subscriptions, resource groups, virtual machines, storage, and networking. Holding User Administrator therefore says nothing about virtual machines; the administrator needs an appropriate Azure RBAC role assignment at the right scope.\n\n**Why not the other options:**\n- **Entra roles for guests, RBAC for members** — Both role systems can be assigned to any supported principal, including members, guests, groups, and service principals. The distinction is *what resources* they govern, not *who* receives them.\n- **Azure RBAC as a subset of Entra roles** — The systems are independent; no Entra role silently confers Azure resource permissions. (A Global Administrator can *elevate* access to Azure subscriptions, but that is an explicit, audited action — not an automatic inclusion.)\n- **The systems are identical / licensing problem** — They are distinct permission systems with different role definitions and scopes; licensing is unrelated to this access boundary.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

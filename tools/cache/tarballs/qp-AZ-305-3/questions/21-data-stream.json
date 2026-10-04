@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-data-stream",
+    "question": "A media company streams clickstream events through Azure Event Hubs. A team of SQL-skilled analysts (not software engineers) must compute rolling aggregations over one-minute tumbling windows, enrich each event with slowly-changing reference data stored in Azure Blob Storage, and push the results to a live Power BI dashboard with a few seconds of latency.\n\nThe solution must be fully managed and require minimal custom code and no cluster administration.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "An Azure Stream Analytics job with Event Hubs input, a blob reference-data input, and a Power BI output",
+            "correct": true
+        },
+        {
+            "text": "Azure Databricks Structured Streaming notebooks writing to a Power BI dataset",
+            "correct": false
+        },
+        {
+            "text": "An Azure Functions app triggered by Event Hubs that computes the aggregations and calls the Power BI REST API",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Factory pipelines with tumbling window triggers copying aggregated data to Power BI",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Stream Analytics** is the fully managed, SQL-first stream processor, and every element of the scenario maps to a native feature:\n\n- **SQL-skilled analysts** — jobs are written in a T-SQL-like language with first-class **windowing functions** (tumbling, hopping, sliding, session), so a one-minute tumbling aggregation is a couple of lines of SQL, not code\n- **Reference data enrichment** — Blob Storage (and SQL) can be declared as a **reference input** and joined to the stream directly in the query; Stream Analytics handles refreshing the slowly-changing data\n- **Power BI output** — a built-in output writes results directly to a **Power BI streaming dataset** for real-time dashboards — no REST plumbing\n- **Fully managed** — capacity is streaming units; there are no clusters, VMs, or runtime patching to administer\n\n**Why not the other options:**\n- **Databricks Structured Streaming** — Extremely capable, but it means Scala/Python/Spark-SQL notebooks, cluster sizing and cost management, and engineering ownership — the wrong fit for a SQL-analyst team with a \"no cluster administration\" requirement. There is also no native streaming-dataset output to Power BI; that becomes custom work\n- **Azure Functions** — Windowed aggregation needs *state* across invocations; hand-rolling correct one-minute windows, late-arrival handling, and reference-data joins in function code is significant custom engineering — exactly what a stream processor abstracts away\n- **Data Factory tumbling window triggers** — ADF is a *batch* orchestrator; a tumbling window *trigger* schedules pipeline runs over time slices (minimum every few minutes) — it is not stream processing and cannot deliver seconds-level latency to a live dashboard",
+    "category": "Design Data Storage Solutions"
+}

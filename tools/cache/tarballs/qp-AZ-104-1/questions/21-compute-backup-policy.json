@@ -1,0 +1,24 @@
+{
+    "id": "az104-compute-backup-policy",
+    "question": "You have an Azure subscription that contains the following resources:\n\n- 40 Azure virtual machines\n- 10 Azure SQL databases\n- 25 Azure file shares\n\nYou need to create daily backups of **all** these resources using Azure Backup.\n\nWhat is the **minimum** number of backup policies you must create?",
+    "options": [
+        {
+            "text": "1",
+            "correct": false
+        },
+        {
+            "text": "2",
+            "correct": false
+        },
+        {
+            "text": "3",
+            "correct": true
+        },
+        {
+            "text": "75",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Backup requires **separate backup policies for each resource type** because different resource types have different backup mechanisms, retention options, and schedules.\n\nThe minimum backup policies needed:\n\n1. **One policy for Azure VMs** — Azure VM backup policy covers all 40 VMs\n2. **One policy for Azure SQL databases** — SQL database backup has its own policy type with transaction log backup options\n3. **One policy for Azure file shares** — File share backup uses a dedicated policy type\n\nA single policy can cover multiple resources of the **same type**, but you cannot mix resource types in one policy. Therefore, 3 policies is the minimum — one per resource type.\n\nYou do not need 75 individual policies (one per resource), as a single policy can be applied to multiple resources of the same type.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

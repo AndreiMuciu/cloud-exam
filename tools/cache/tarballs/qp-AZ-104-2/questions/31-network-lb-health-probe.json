@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-network-lb-health-probe",
+    "type": "single",
+    "question": "A Standard Azure Load Balancer distributes traffic to a backend pool of web servers. The load-balancing rule uses an **HTTP health probe** with the path `/health`. After a recent application update, the app responds to `/health` with an **HTTP 302 redirect** to `/signin`.\n\nSince the update, the load balancer reports **all** backend instances as unhealthy and new connections fail, even though the web servers are running normally.\n\nWhat is the cause?",
+    "options": [
+        { "text": "An HTTP health probe marks an instance healthy only when it returns HTTP 200 within the timeout period; the 302 redirect is treated as a probe failure", "correct": true },
+        { "text": "The default NSG rules block traffic from the AzureLoadBalancer service tag, so the probes never reach the VMs", "correct": false },
+        { "text": "Standard Load Balancer requires an HTTPS probe when the backend serves web traffic", "correct": false },
+        { "text": "The probe interval is too long for web workloads, which causes the probes to time out", "correct": false }
+    ],
+    "explanation": "HTTP and HTTPS health probes on Azure Load Balancer succeed **only on an HTTP 200 OK** response received within the timeout. Probes do **not follow redirects**, so the 302 returned by `/health` counts as a failure; after the configured number of failures, each instance is marked down and the load balancer stops sending it *new* flows — which is why the whole pool appears unhealthy while the servers are actually fine. The fix is to point the probe at a path that returns 200 without authentication or redirection (a dedicated anonymous health endpoint), or to switch to a TCP probe that only checks port reachability.\n\n**Why not the other options:**\n- **NSG blocks AzureLoadBalancer**: The default NSG rule `AllowAzureLoadBalancerInBound` (priority 65001) explicitly permits health probe traffic. Probes are blocked only if someone adds an explicit deny — and in this scenario probing worked before the app update, so connectivity was never the issue.\n- **HTTPS probe required**: There is no such requirement. HTTP, HTTPS, and TCP probes are all valid for web backends; HTTPS probes exist for endpoints that only serve TLS.\n- **Probe interval too long**: The interval controls how *quickly* state changes are detected, not whether a given response is considered healthy. A 302 fails the probe at any interval.",
+    "category": "Implement and Manage Virtual Networking"
+}

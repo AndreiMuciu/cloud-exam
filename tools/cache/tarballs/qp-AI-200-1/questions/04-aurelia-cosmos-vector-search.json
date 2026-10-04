@@ -1,0 +1,25 @@
+{
+    "id": "ai200-04-aurelia-cosmos-vector-search",
+    "question": "You are implementing semantic search over the Aurelia `guidelines` container, which will hold several million 1536-dimension embeddings. Queries must return the most similar documents by cosine similarity with low, predictable RU consumption.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Define a vector embedding policy on the container for the embedding path with `cosine` as the distance function, add a `diskANN` vector index on that path, and query with `SELECT TOP 10 ... ORDER BY VectorDistance(c.embedding, @queryVector)`.",
+            "correct": true
+        },
+        {
+            "text": "Store the embeddings as JSON arrays with the default indexing policy and compute cosine similarity in the Python application after reading all documents for the department.",
+            "correct": false
+        },
+        {
+            "text": "Enable the container's full-text search feature and query with `CONTAINS(c.text, @question)` to find semantically similar documents.",
+            "correct": false
+        },
+        {
+            "text": "Create a composite index on the embedding property and the department key, and query with `ORDER BY c.embedding`.",
+            "correct": false
+        }
+    ],
+    "explanation": "Cosmos DB for NoSQL vector search requires a **vector embedding policy** on the container (path, data type, dimensions, distance function) and a **vector index** over that path. For collections in the millions of vectors, the **DiskANN** index type gives fast approximate-nearest-neighbor search at low RU cost; `VectorDistance()` in an `ORDER BY` then performs the similarity query server-side.\n\n**Why not the other options:**\n- **Client-side similarity** — Reading every document in a partition to score it in Python consumes enormous RUs and bandwidth and gets slower as the corpus grows; it is the opposite of predictable, low-cost retrieval.\n- **Full-text search with `CONTAINS`** — Keyword matching is lexical, not semantic; it cannot rank by vector similarity of embeddings.\n- **Composite index + `ORDER BY c.embedding`** — Composite indexes support multi-property ordering of scalar values; they cannot index high-dimensional vectors or compute similarity, and ordering by a raw array is meaningless for semantic ranking.",
+    "category": "Develop AI solutions by using Azure data management services",
+    "caseStudy": "scenarios/case_study_aurelia_health.json"
+}

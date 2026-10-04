@@ -1,0 +1,29 @@
+{
+    "id": "ai103-33-multi-sentiment-safety-detection",
+    "type": "multi",
+    "question": "A customer-feedback pipeline must automatically flag incoming messages for negative sentiment, aggressive or abusive tone, and mentions of sensitive personal information, so the right messages get routed to specialized reviewers.\n\nWhich three capabilities should the pipeline apply to each message? (Select three.)",
+    "options": [
+        {
+            "text": "Sentiment analysis to classify the message as positive, neutral, or negative.",
+            "correct": true
+        },
+        {
+            "text": "Tone/safety classification to detect aggressive, abusive, or otherwise unsafe language.",
+            "correct": true
+        },
+        {
+            "text": "Sensitive-content detection to flag messages that appear to contain personal information such as identifiers or health details.",
+            "correct": true
+        },
+        {
+            "text": "Text-to-speech conversion, so every message is read aloud to a reviewer instead of displayed as text.",
+            "correct": false
+        },
+        {
+            "text": "Image-generation, so an illustrative picture is created to accompany each message.",
+            "correct": false
+        }
+    ],
+    "explanation": "The three requirements map directly to three text-analysis capabilities: **sentiment analysis** for positive/negative classification, **tone/safety classification** for aggressive or abusive language, and **sensitive-content detection** for personal information — together they let the pipeline route each message to the right specialized reviewer.\n\n**Why not the other options:**\n- **Text-to-speech conversion** — Changes the message's modality (text to audio) but performs no sentiment, tone, or sensitivity analysis at all; it doesn't help decide how to route anything.\n- **Image generation** — Produces new illustrative images; it has no role in analyzing the sentiment, tone, or sensitivity of an incoming text message.",
+    "category": "Implement text analysis solutions"
+}

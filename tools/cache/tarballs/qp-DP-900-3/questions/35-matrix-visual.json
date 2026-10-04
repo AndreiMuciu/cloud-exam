@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-35-matrix-visual",
+    "question": "A Power BI report must display sales figures with product categories as rows and fiscal quarters as columns, including subtotals for each row and column, and allow users to expand category rows into their subcategories.\n\nWhich visual should the report designer use?",
+    "options": [
+        {
+            "text": "A matrix",
+            "correct": true
+        },
+        {
+            "text": "A table",
+            "correct": false
+        },
+        {
+            "text": "A pie chart",
+            "correct": false
+        },
+        {
+            "text": "A card",
+            "correct": false
+        }
+    ],
+    "explanation": "The **matrix** visual is Power BI's cross-tabulation (pivot-style) visual: it lays one field out across **rows** and another across **columns**, aggregates the measure at each intersection, adds row and column **subtotals and totals**, and supports **hierarchical drill-down** — expanding a category row to reveal its subcategories. Every stated requirement is a matrix feature.\n\n**Why not the other options:**\n- **A table** — The table visual is a flat grid of rows only; it cannot pivot a field across columns, produce cross-tab subtotals, or expand hierarchy levels within the grid.\n- **A pie chart** — A pie shows proportional shares of a single total across a few categories; it has no rows, columns, subtotals, or drill-down grid.\n- **A card** — A card displays one summarized value (such as total sales) at a glance; it presents no tabular breakdown at all.",
+    "category": "Describe an Analytics Workload on Azure"
+}

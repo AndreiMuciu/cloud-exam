@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-network-private-endpoint-dns",
+    "type": "single",
+    "question": "At Copperbeck Energy, a private endpoint for the blob service of **stcopperbecktel** was recently created in VNet-Hub. However, engineers report that a management VM in VNet-Hub still connects to `stcopperbecktel.blob.core.windows.net` over the storage account's **public** endpoint.\n\nYou need to ensure that the VM's traffic to the storage account uses the private endpoint, in line with the board's private-connectivity mandate.\n\nWhat should you configure?",
+    "options": [
+        { "text": "Create a private DNS zone named **privatelink.blob.core.windows.net**, link it to VNet-Hub, and add a DNS zone group to the private endpoint so its A record is registered in the zone", "correct": true },
+        { "text": "Enable a service endpoint for Microsoft.Storage on the management VM's subnet", "correct": false },
+        { "text": "Add an A record with the private endpoint's IP address to the company's on-premises DNS servers", "correct": false },
+        { "text": "Add an inbound NSG rule on the private endpoint's subnet that allows TCP 443 from VNet-Hub", "correct": false }
+    ],
+    "explanation": "With private endpoints, **name resolution determines which path traffic takes**. The storage account's public FQDN (`stcopperbecktel.blob.core.windows.net`) is aliased via CNAME to `stcopperbecktel.privatelink.blob.core.windows.net`. If nothing resolves that privatelink name privately, the query falls through to public DNS and returns the **public** IP — which is what the VM is experiencing. Creating the **privatelink.blob.core.windows.net** private DNS zone, linking it to VNet-Hub, and adding a **DNS zone group** on the private endpoint (which creates and maintains the endpoint's A record automatically) makes VMs in the linked VNet resolve the account name to the private IP, so traffic flows through the private endpoint.\n\n**Why not the other options:**\n- **Service endpoint**: Service endpoints are a different technology. They optimize routing to the storage service's *public* endpoint over the Azure backbone; they neither use the private endpoint nor change DNS resolution.\n- **On-premises DNS record**: The affected VM is in Azure and uses Azure-provided DNS (168.63.129.16); records on on-premises DNS servers would not affect its resolution. (On-premises records/forwarders matter only for on-premises clients.)\n- **NSG rule**: NSGs filter traffic that is already routed; they have no influence on whether DNS returns the public or private IP, so the VM would keep connecting to the public endpoint.",
+    "category": "Implement and Manage Virtual Networking",
+    "caseStudy": "scenarios/case_study_copperbeck.json"
+}

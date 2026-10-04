@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-24-iaas-responsibility",
+    "question": "A company runs SQL Server on an Azure virtual machine (an infrastructure-as-a-service deployment).\n\nWhich task remains the company's responsibility rather than Microsoft's?",
+    "options": [
+        {
+            "text": "Applying operating system updates and SQL Server patches on the virtual machine",
+            "correct": true
+        },
+        {
+            "text": "Maintaining the physical servers that host the virtual machine",
+            "correct": false
+        },
+        {
+            "text": "Repairing failed disks and network hardware in the datacenter",
+            "correct": false
+        },
+        {
+            "text": "Providing power, cooling, and physical security for the datacenter",
+            "correct": false
+        }
+    ],
+    "explanation": "In an **IaaS** deployment, Microsoft's responsibility ends at the **virtualization layer**: the physical hosts, storage hardware, networking gear, and the datacenter itself. Everything *inside* the virtual machine belongs to the customer — the **operating system, the SQL Server installation, patching for both, backups, and high-availability configuration**. This maximum control is the main reason to choose SQL Server on a VM, and this administrative burden is the main cost of that choice (compare a PaaS option such as Azure SQL Database, where patching and backups are automated).\n\n**Why not the other options:**\n- **Maintaining the physical servers** — Physical host hardware is always Microsoft's responsibility in every Azure service model, including IaaS.\n- **Repairing failed disks and network hardware** — Datacenter hardware maintenance never transfers to the customer; Azure abstracts it away beneath the virtual machine.\n- **Providing power, cooling, and physical security** — Facility operations are part of the cloud provider's foundational responsibility in IaaS, PaaS, and SaaS alike.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

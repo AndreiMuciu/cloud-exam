@@ -1,0 +1,13 @@
+{
+    "id": "case_study_mirrowell_biosciences",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Mirrowell Biosciences** is a contract research organization that runs clinical trials for competing pharmaceutical sponsors. The company uses Microsoft 365, with trial documentation in SharePoint Online and day-to-day collaboration in Microsoft Teams and Exchange Online.\n\n**Current Environment:**\n- Trial master files, study protocols, and statistical analysis plans are lengthy narrative documents; they contain no consistent keywords, ID numbers, or patterns that a simple rule could match.\n- Research teams are organized by sponsor: Team Helix serves one pharmaceutical sponsor, Team Meridian serves that sponsor's direct competitor.\n- Regulators require the company to monitor communications in regulated channels for conduct violations, such as sharing unpublished trial results or making off-label claims."
+        },
+        {
+            "title": "Compliance Requirements",
+            "content": "The Mirrowell Biosciences compliance officer has documented these requirements:\n- **Find the documents that matter**: Automatically identify study protocols and statistical analysis plans across SharePoint and OneDrive so protection policies can target them — even though these documents cannot be matched by keywords or number patterns.\n- **Monitor regulated communications**: Detect messages in Teams and Exchange that may breach conduct rules, and route them to designated reviewers for remediation.\n- **Separate competing teams**: Prevent members of Team Helix and Team Meridian from communicating or collaborating with each other in Microsoft Teams, SharePoint, and OneDrive, to honor confidentiality commitments to competing sponsors."
+        }
+    ]
+}

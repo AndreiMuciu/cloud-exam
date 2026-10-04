@@ -1,0 +1,13 @@
+{
+    "id": "case_study_larchbrook_media",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Larchbrook Media** is a video production and streaming company. It produces original programming and runs a subscription streaming service with about two million subscribers.\n\n**Current Data Landscape:**\n- **Raw footage archives**: finished projects generate terabytes of source video that contractual agreements require Larchbrook to retain for ten years. Archived footage is almost never accessed, and when it is requested, a retrieval time of several hours is acceptable.\n- **Viewer activity**: the recommendation team wants to model relationships such as *viewer watched title*, *title belongs to genre*, and *viewer follows creator*, and to run multi-hop queries like \"titles watched by viewers who follow the same creators as this viewer.\"\n- **Editing workstations**: video editors run Windows workstations that expect project files on a shared mapped drive accessed over the SMB protocol."
+        },
+        {
+            "title": "Requirements",
+            "content": "Larchbrook Media's storage and data requirements on Azure:\n- Minimize the storage cost of the ten-year footage archive.\n- Choose a database service purpose-built for traversing highly connected relationship data.\n- Replace the aging on-premises file server with a fully managed cloud file share that editing workstations can mount as a mapped drive without changing how editors work."
+        }
+    ]
+}

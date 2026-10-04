@@ -1,0 +1,13 @@
+{
+    "id": "case_study_ludomara_studios",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Ludomara Studios** is an independent video-game developer whose online multiplayer title has players on every continent. The game's backend is built as dozens of **containerized microservices** (matchmaking, leaderboards, inventory, chat) that the team packages as container images.\n\n**Current Pain Points:**\n- The containers currently run on a handful of manually managed virtual machines; deployments are hand-rolled and a crashed container stays down until someone notices.\n- Players in regions far from the game's primary datacenter complain about **slow downloads of game patches and asset packs**, which are large static files."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Platform Team:**\n- Move the microservices to a managed **container orchestration** service that can automatically scale the number of containers with player demand, restart failed containers, and roll out new versions with zero downtime.\n\n**Distribution:**\n- Deliver game patches and asset packs to players worldwide from **edge locations close to each player**, caching the files so repeated downloads do not travel back to the origin servers.\n\n**Finance:**\n- The studio owns **Windows Server licenses with active Software Assurance** from its on-premises build farm and wants to use them to **reduce the cost of the Windows virtual machines** it will still run in Azure."
+        }
+    ]
+}

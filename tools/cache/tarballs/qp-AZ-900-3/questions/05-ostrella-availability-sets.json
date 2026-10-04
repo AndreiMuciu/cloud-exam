@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-05-ostrella-availability-sets",
+    "question": "Ostrella's crew-scheduling virtual machines must be protected from downtime caused by host hardware failures and planned platform maintenance. The airline operates in a single region and does not need the VMs spread across separate physical locations. Which Azure feature should the VMs be deployed into?",
+    "options": [
+        {
+            "text": "An availability set",
+            "correct": true
+        },
+        {
+            "text": "Availability zones",
+            "correct": false
+        },
+        {
+            "text": "A region pair",
+            "correct": false
+        },
+        {
+            "text": "A resource group",
+            "correct": false
+        }
+    ],
+    "explanation": "An **availability set** spreads virtual machines across multiple **fault domains** (separate racks with independent power and networking) and **update domains** (groups that Azure reboots at different times during planned maintenance) **within a single datacenter**. If one host or rack fails, or Azure performs maintenance, only some of the VMs are affected at a time — exactly the host-level protection Ostrella needs, without the cross-location separation it explicitly does not require.\n\n**Why not the other options:**\n- **Availability zones** — Protect against the failure of an **entire datacenter** by placing resources in physically separate locations within the region. Ostrella stated it does not need its VMs spread across separate physical locations, so zones exceed the requirement; the question asks for protection from *host* failures and maintenance, which availability sets are purpose-built for.\n- **A region pair** — Two regions in the same geography used for geo-level disaster recovery; it addresses regional catastrophe, not host hardware failure or maintenance reboots.\n- **A resource group** — A purely **logical** container for managing resources; it provides no physical redundancy whatsoever.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_ostrella_airways.json"
+}

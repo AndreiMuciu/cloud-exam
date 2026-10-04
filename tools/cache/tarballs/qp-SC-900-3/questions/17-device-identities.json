@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-17-device-identities",
+    "question": "An organization issues corporate-owned Windows laptops to employees. Users must sign in to the laptops with their organizational Microsoft Entra ID accounts (no local or personal accounts), the devices must exist as identities in the directory, and IT must manage them fully through the organization's device management tooling.\n\nWhich device identity option meets these requirements?",
+    "options": [
+        {
+            "text": "Microsoft Entra joined devices",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra registered devices",
+            "correct": false
+        },
+        {
+            "text": "Guest accounts created for each device",
+            "correct": false
+        },
+        {
+            "text": "Managed identities assigned to each laptop",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra joined** devices are **owned by the organization and signed in to with the organization's Microsoft Entra account**. The join creates a full device identity in the directory, users authenticate to Windows with their work identity, and the device is managed with organizational tooling such as mobile device management. This is the intended model for corporate-owned Windows laptops.\n\n**Why not the other options:**\n- **Microsoft Entra registered devices** — Registration supports **bring-your-own-device (BYOD)** scenarios: users sign in to the device with a *personal* account (a local account or personal Microsoft account) and merely register it so it can access corporate resources, often with lighter mobile-application-level management. That contradicts the requirement that users sign in with organizational accounts on corporate-owned hardware.\n- **Guest accounts for each device** — Guest (B2B) accounts represent external *people* invited to collaborate. They are not a mechanism for giving devices an identity.\n- **Managed identities** — Managed identities are automatically managed identities for *Azure resources* (such as virtual machines and apps) to authenticate to Azure services without stored credentials. They are not used to represent employee laptops in the directory.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

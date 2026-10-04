@@ -1,0 +1,19 @@
+{
+    "id": "az500-35-pim-activation-order",
+    "type": "ordering",
+    "question": "You are an 'Eligible' owner for a subscription and need to perform a privileged task. Arrange the steps to activate your role using Microsoft Entra PIM in the correct order.",
+    "items": [
+        "Select the role to activate and click 'Activate'",
+        "Navigate to 'My roles' in the PIM dashboard",
+        "Provide a business justification and fulfill any MFA/approval requirements",
+        "Open the Azure Portal"
+    ],
+    "correctOrder": [
+        "Open the Azure Portal",
+        "Navigate to 'My roles' in the PIM dashboard",
+        "Select the role to activate and click 'Activate'",
+        "Provide a business justification and fulfill any MFA/approval requirements"
+    ],
+    "explanation": "The standard PIM workflow starts with the Portal, navigating to PIM, finding your eligible roles, initiating activation, and then providing the required justification or proof (MFA).",
+    "category": "Manage identity and access"
+}

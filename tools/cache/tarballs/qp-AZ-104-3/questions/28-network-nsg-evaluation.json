@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-network-nsg-evaluation",
+    "type": "multi",
+    "question": "A virtual machine's subnet has the network security group **NSG-Subnet** associated with it, and the VM's network interface has a second NSG, **NSG-Nic**, associated directly with the NIC.\n\nWhich **two** statements correctly describe how the two NSGs process **inbound** traffic to the VM?",
+    "options": [
+        { "text": "Inbound traffic is evaluated by NSG-Subnet first, and only traffic it allows is then evaluated by NSG-Nic", "correct": true },
+        { "text": "Traffic must be allowed by both NSGs to reach the VM; a deny in either one blocks it", "correct": true },
+        { "text": "NSG-Nic overrides NSG-Subnet because a NIC-level association is more specific", "correct": false },
+        { "text": "The rule with the lowest priority number across both NSGs is applied, regardless of which NSG contains it", "correct": false },
+        { "text": "If NSG-Subnet denies the traffic, an explicit Allow rule in NSG-Nic still admits it to the VM", "correct": false }
+    ],
+    "explanation": "When NSGs exist at both scopes, they are processed **in series, not merged**:\n\n- **For inbound traffic, the subnet NSG is evaluated first.** Traffic that survives NSG-Subnet is then evaluated by NSG-Nic. (Outbound is the mirror image: NIC NSG first, then subnet NSG.)\n- **Both must allow the traffic.** Each NSG independently applies its own rules in priority order and enforces the first match. A Deny at either level terminates the flow, so effective connectivity is the *intersection* of the two rule sets. This is why the **effective security rules** view exists — it shows the combined result for a NIC.\n\n**Why not the other options:**\n- **NIC NSG overrides subnet NSG**: there is no specificity-based precedence between association scopes. The two NSGs are evaluated sequentially, and neither can override the other's Deny.\n- **Lowest priority number across both NSGs**: priorities order rules **within a single NSG** only. Rules from the two NSGs are never interleaved into one list — each NSG completes its own first-match evaluation.\n- **NIC Allow rescues subnet Deny**: traffic denied by the subnet NSG **never reaches** the NIC NSG's evaluation for inbound flows — an Allow there is irrelevant. (This asymmetry is a classic troubleshooting trap: an allow rule added at the NIC does nothing while the subnet still denies.)",
+    "category": "Implement and Manage Virtual Networking"
+}

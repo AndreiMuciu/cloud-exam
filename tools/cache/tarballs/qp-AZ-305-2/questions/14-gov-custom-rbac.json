@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-gov-custom-rbac",
+    "question": "A 24×7 operations team must be able to start, stop, restart, and view Azure VMs across all 25 production subscriptions. The team must not be able to modify VM configurations, networking, or any other resource types. The solution must follow the principle of least privilege and minimize the number of role assignments.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Assign the built-in Virtual Machine Contributor role to the team at each subscription",
+            "correct": false
+        },
+        {
+            "text": "Create a custom RBAC role containing only the required VM power and read actions, and assign it once at the management group that contains the production subscriptions",
+            "correct": true
+        },
+        {
+            "text": "Assign the built-in Reader role at the management group and have the team raise tickets for restart operations",
+            "correct": false
+        },
+        {
+            "text": "Create a custom Microsoft Entra ID directory role with virtual machine permissions and assign it tenant-wide",
+            "correct": false
+        }
+    ],
+    "explanation": "A **custom Azure RBAC role assigned at the management group** satisfies every constraint:\n\n- **Least privilege** — The custom role's `actions` include only what the job needs, for example `Microsoft.Compute/virtualMachines/read`, `.../start/action`, `.../restart/action`, `.../deallocate/action` (plus read on resource groups for navigation). No write access to VM configuration, disks, or networking is granted\n- **Minimal assignments** — Setting `assignableScopes` to the production management group and creating **one** role assignment there covers all 25 subscriptions — and any future production subscription added to that group inherits it automatically\n\n**Why not the other options:**\n- **Virtual Machine Contributor** — Grants full management of virtual machines, including resizing, deleting, changing extensions, and managing the network interfaces and disks attached to VMs — far more than power operations, violating least privilege. Assigning it per subscription also means 25 assignments to maintain\n- **Reader + tickets** — Fails the requirement outright: a 24×7 operations team that must *perform* restarts cannot do so with read-only access; routing power actions through tickets defeats the purpose\n- **Custom Entra ID directory role** — Microsoft Entra directory roles govern directory objects (users, groups, applications). They cannot contain Azure resource permissions such as VM power actions — that is exclusively Azure RBAC's domain",
+    "category": "Design Identity, Governance, and Monitoring"
+}

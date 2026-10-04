@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-19-acid-atomicity",
+    "question": "A banking application transfers money between two accounts by debiting one account and crediting the other inside a single transaction. If either step fails, both changes must be undone so the transaction happens completely or not at all.\n\nWhich ACID property does this requirement describe?",
+    "options": [
+        {
+            "text": "Atomicity",
+            "correct": true
+        },
+        {
+            "text": "Consistency",
+            "correct": false
+        },
+        {
+            "text": "Isolation",
+            "correct": false
+        },
+        {
+            "text": "Durability",
+            "correct": false
+        }
+    ],
+    "explanation": "**Atomicity** is the \"all or nothing\" guarantee: a transaction is treated as a **single indivisible unit**, so either *every* operation in it succeeds, or the database rolls back and *none* of them take effect. The transfer is the canonical example — a debit without its matching credit must never survive, and atomicity is exactly the property that prevents it.\n\n**Why not the other options:**\n- **Consistency** — Guarantees that a transaction takes the database **from one valid state to another valid state**, honoring all defined rules and constraints. It is about ending in a legal state, not about the all-or-nothing execution of the steps.\n- **Isolation** — Ensures that **concurrent** transactions do not interfere with each other — one transaction cannot see another's half-finished changes. The scenario involves a single transaction's failure behavior, not concurrency.\n- **Durability** — Guarantees that once a transaction is **committed**, its changes survive failures such as a power loss. The scenario is about what happens *before* commit when a step fails, not about persistence afterward.",
+    "category": "Describe Core Data Concepts"
+}

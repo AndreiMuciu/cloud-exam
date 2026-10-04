@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-10-dunwharf-keyvault-rbac",
+    "question": "The Dunwharf ingestion API's managed identity must read secret values from the RBAC-enabled Key Vault, and must not be able to create, modify, or delete secrets, keys, or certificates. You must grant the minimum built-in role.\n\nWhich role should you assign to the managed identity on the vault?",
+    "options": [
+        {
+            "text": "Key Vault Secrets User",
+            "correct": true
+        },
+        {
+            "text": "Key Vault Secrets Officer",
+            "correct": false
+        },
+        {
+            "text": "Reader",
+            "correct": false
+        },
+        {
+            "text": "Key Vault Administrator",
+            "correct": false
+        }
+    ],
+    "explanation": "On a vault that uses **Azure RBAC for its data plane**, secret access is granted with the Key Vault data-plane roles. **Key Vault Secrets User** grants exactly *read secret contents* (get and list) and nothing else — no writes, no deletes, no keys, no certificates. That is the least-privilege fit for an application that only retrieves an API key at runtime.\n\n**Why not the other options:**\n- **Key Vault Secrets Officer** — Grants full management of secrets, including set and delete. The application would be able to modify and remove secrets, which the requirement explicitly forbids.\n- **Reader** — A *control-plane* role: it lets an identity see the vault resource's metadata in ARM, but it grants **no data-plane access at all** — `get_secret` calls would fail with 403. Control-plane and data-plane permissions are separate in RBAC-enabled vaults.\n- **Key Vault Administrator** — Full data-plane control over secrets, keys, *and* certificates; the maximum, not the minimum.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions",
+    "caseStudy": "scenarios/case_study_dunwharf_energy.json"
+}

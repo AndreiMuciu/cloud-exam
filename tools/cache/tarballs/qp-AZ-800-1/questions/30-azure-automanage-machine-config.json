@@ -1,0 +1,24 @@
+{
+    "id": "az800-30-azure-automanage-machine-config",
+    "question": "Which Azure service (formerly known as Azure Policy Guest Configuration) provides a managed, cloud-native way to enforce 'Desired State' within both Azure VMs and on-premises Arc-enabled servers?",
+    "options": [
+        {
+            "text": "Azure Functions",
+            "correct": false
+        },
+        {
+            "text": "Azure Automanage Machine Configuration",
+            "correct": true
+        },
+        {
+            "text": "Azure Resource Manager (ARM)",
+            "correct": false
+        },
+        {
+            "text": "Azure Automation DSC",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Automanage Machine Configuration** is the evolution of Guest Configuration. It allows for auditing and configuring settings inside a VM using DSC v3, providing a more integrated experience than the older standalone Azure Automation DSC service.\n\n**Why not the other options:**\n- **ARM** — Manages the resources *outside* the VM (the shell).\n- **Automation DSC** — The older, separate service that requires setting up a pull server or using the automation account's pull server.",
+    "category": "Manage Windows Servers and workloads in a hybrid environment"
+}

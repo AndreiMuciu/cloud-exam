@@ -1,0 +1,13 @@
+{
+    "id": "case_study_stonemede_civil",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Stonemede Civil Group** is a civil engineering and construction firm that designs and builds bridges, tunnels, and highway interchanges. The company is retiring its aging server room and migrating its project-costing system and structural modeling workloads to virtual machines in Microsoft Azure (Infrastructure as a Service).\n\n**Current Environment:**\n- Bid documents, structural drawings, and subcontractor contracts are stored on file servers that will move to Azure virtual machines.\n- Site engineers connect from trailers at remote construction sites; head-office staff work from two regional offices.\n- A small IT team of six people administers everything, and every IT team member currently holds full administrator rights on every system, at all times."
+        },
+        {
+            "title": "Migration Requirements",
+            "content": "The Stonemede Civil steering committee has set the following requirements for the migration:\n- **Clarify accountability**: Before signing off on the IaaS migration, the committee wants a clear statement of which operational duties transfer to the cloud provider and which remain with Stonemede.\n- **Rein in administrative rights**: Administrative access must follow a \"just enough, just in time\" philosophy so that no one carries standing rights beyond what their current task requires.\n- **Harden every layer**: The security lead is mapping each planned control to a layer of a defense-in-depth model, so gaps at any layer become visible."
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az900-09-crestline-locks",
+    "question": "To meet the requirement that resources cannot be deleted without explicit administrative approval, what feature should be applied to the resources at the Resource Group or Subscription level?",
+    "options": [
+        {
+            "text": "Read-Only Locks",
+            "correct": false
+        },
+        {
+            "text": "Delete Locks",
+            "correct": true
+        },
+        {
+            "text": "Tags",
+            "correct": false
+        },
+        {
+            "text": "Conditional Access",
+            "correct": false
+        }
+    ],
+    "explanation": "**Delete Locks** prevent a resource from being deleted. Even users with high-level permissions (like Owner) must first remove the lock before they can delete the resource.\n\n**Why not the other options:**\n- **Read-Only Locks** — Also prevent deletion, but they additionally block all modifications to the resource, which is more restrictive than necessary when the goal is only to prevent accidental deletion.\n- **Tags** — Metadata for organization, not for enforcing restrictions.\n- **Conditional Access** — A Microsoft Entra ID feature for controlling user sign-ins, not for protecting specific resources from deletion.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_crestline_financial.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "ai103-02-caeldyne-document-extraction",
+    "question": "Caeldyne's claim documents mix printed text, handwriting, and tables. Structured claim fields (claimant name, policy number, date of loss, itemized amounts) must be extracted and handed to a downstream reasoning agent without further manual cleanup.\n\nWhat should the team build?",
+    "options": [
+        {
+            "text": "A custom Azure AI Content Understanding document analyzer that extracts the required fields and returns structured JSON output.",
+            "correct": true
+        },
+        {
+            "text": "A pipeline that runs the Azure AI Vision Read API over each page and passes the raw OCR text to the agent as one unstructured text blob.",
+            "correct": false
+        },
+        {
+            "text": "A prompt that asks the generative model to describe a downsized JPEG of each scanned page, without any OCR or layout step.",
+            "correct": false
+        },
+        {
+            "text": "A fine-tuned classification-only model trained on a small hand-labeled sample of claim documents.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Content Understanding document analyzer** is purpose-built for exactly this: it combines OCR, layout analysis, and field extraction against a defined schema, and returns clean structured (JSON or markdown) output that a downstream agent can consume directly — no re-parsing required.\n\n**Why not the other options:**\n- **Raw Read API text as one blob** — Recovers characters but discards table structure and field boundaries; the agent would have to re-infer which numbers belong to which itemized field, which is fragile with handwriting and tables mixed in.\n- **Captioning a downsized JPEG** — A general image-captioning pass over a shrunk image is not equipped to reliably read fine-print numbers, policy IDs, or handwritten amounts; there is no OCR/layout step behind it, so extraction accuracy would be far too low.\n- **A classification-only fine-tune** — Classification assigns a document to a category; it does not extract field *values*, so it does not solve the stated extraction problem at all.",
+    "category": "Implement information extraction solutions",
+    "caseStudy": "scenarios/case_study_caeldyne_insurance.json"
+}

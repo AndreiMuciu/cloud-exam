@@ -1,0 +1,21 @@
+{
+    "id": "az104-s3-monitor-file-recovery-ordering",
+    "type": "ordering",
+    "question": "A user deleted a single configuration file from a Windows VM that is protected by Azure Backup in a Recovery Services vault. You must recover **only that file** — without restoring or replacing the whole VM — using the vault's **File Recovery** capability.\n\nArrange the steps in the correct order.",
+    "items": [
+        "In the Recovery Services vault, open the backup item for the protected VM",
+        "Select File Recovery and choose the recovery point to recover from",
+        "Download the provided script and run it on a Windows machine to mount the recovery point's disks as local drives",
+        "Browse the mounted volumes and copy the required file to its destination",
+        "Unmount the disks from the portal to end the file recovery session"
+    ],
+    "correctOrder": [
+        "In the Recovery Services vault, open the backup item for the protected VM",
+        "Select File Recovery and choose the recovery point to recover from",
+        "Download the provided script and run it on a Windows machine to mount the recovery point's disks as local drives",
+        "Browse the mounted volumes and copy the required file to its destination",
+        "Unmount the disks from the portal to end the file recovery session"
+    ],
+    "explanation": "Azure Backup's **file recovery** (item-level restore) avoids a full VM restore by mounting a recovery point over the network:\n\n1. **Open the backup item** — recovery always starts from the vault, at the protected item that owns the recovery points.\n2. **Select File Recovery and pick a recovery point** — you must choose *which* point-in-time to recover from before Azure can generate anything; the script produced next is specific to that recovery point.\n3. **Download and run the mounting script** — the executable script attaches the recovery point's disks to the machine where it runs as local drives over an iSCSI channel. Nothing is copied yet; the disks are simply browsable volumes. (For a Windows VM, run it on a Windows machine.)\n4. **Copy the required file** — with the volumes mounted, recovery of a single file is an ordinary file copy; only what you copy leaves the recovery point.\n5. **Unmount the disks from the portal** — closing the session detaches the drives and releases the connection. Skipping this leaves the mount open until it times out (mounts auto-expire, but tidy closure is the documented final step).\n\nEach step depends on the previous one's output — the script does not exist until a recovery point is selected, files cannot be browsed until the script has mounted the disks, and unmounting before copying would defeat the recovery.",
+    "category": "Monitor and Maintain Azure Resources"
+}

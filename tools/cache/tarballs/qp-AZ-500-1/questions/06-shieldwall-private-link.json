@@ -1,0 +1,25 @@
+{
+    "id": "az500-06-shieldwall-private-link",
+    "question": "ShieldWall Networks uses private endpoints for their Azure SQL Databases. Which DNS record type should you configure in a Private DNS Zone linked to your VNet so that resolution of the SQL Server's public FQDN (e.g., 'mydb.database.windows.net') returns the private IP of the endpoint?",
+    "options": [
+        {
+            "text": "A record",
+            "correct": true
+        },
+        {
+            "text": "CNAME record",
+            "correct": false
+        },
+        {
+            "text": "MX record",
+            "correct": false
+        },
+        {
+            "text": "TXT record",
+            "correct": false
+        }
+    ],
+    "explanation": "In a Private DNS Zone for Private Link (e.g., `privatelink.database.windows.net`), you create an **A record** that maps the resource's name to its **private IP address**. The platform handles the internal resolution so that a query for the public FQDN is transparently alias-mapped to the private A record.\n\n**Why not the other options:**\n- **CNAME** — Used to alias one name to another, but the 'final' resolution to the IP in a private DNS zone for Private Link is typically handled by an A record.\n- **MX / TXT** — Used for email routing and informational data, respectively.",
+    "category": "Secure networking",
+    "caseStudy": "scenarios/case_study_shieldwall_networks.json"
+}

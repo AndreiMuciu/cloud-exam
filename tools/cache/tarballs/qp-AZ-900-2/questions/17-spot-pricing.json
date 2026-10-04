@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-17-spot-pricing",
+    "question": "A visual-effects studio runs overnight rendering jobs that can be interrupted and resumed without losing work. The studio wants the lowest possible VM compute price and accepts that capacity can be reclaimed by the platform at any time. Which Azure pricing option fits this workload?",
+    "options": [
+        {
+            "text": "Azure Spot Virtual Machines",
+            "correct": true
+        },
+        {
+            "text": "Azure Reservations",
+            "correct": false
+        },
+        {
+            "text": "Standard pay-as-you-go instances",
+            "correct": false
+        },
+        {
+            "text": "Azure Hybrid Benefit",
+            "correct": false
+        }
+    ],
+    "explanation": "**Spot Virtual Machines** sell Azure’s spare capacity at very deep discounts, with the trade-off that Azure can **evict** the VMs when it needs the capacity back. Interruptible, checkpoint-friendly batch work — like overnight rendering — is the canonical Spot use case: maximum savings, and an eviction merely delays the job.\n\n**Why not the other options:**\n- **Azure Reservations** — Reward a 1- or 3-year commitment for *steady, always-on* workloads; they neither require nor tolerate interruption, and their discount is smaller than Spot pricing for this pattern.\n- **Pay-as-you-go** — The most flexible option but the highest unit price; it leaves money on the table when the workload happily tolerates eviction.\n- **Azure Hybrid Benefit** — A licensing benefit that lets you apply existing Windows Server or SQL Server licenses to reduce cost; it is not a capacity pricing model and is unrelated to interruptible workloads.",
+    "category": "Describe Cloud Concepts"
+}

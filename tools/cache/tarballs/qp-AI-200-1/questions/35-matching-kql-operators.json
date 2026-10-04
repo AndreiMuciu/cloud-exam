@@ -1,0 +1,26 @@
+{
+    "id": "ai200-35-matching-kql-operators",
+    "type": "matching",
+    "question": "Match each task to the KQL operator that performs it.",
+    "sourceItems": [
+        "Aggregate rows into groups and compute values such as `count()` or `percentile()` per group",
+        "Add a new calculated column to each row while keeping all existing columns",
+        "Keep only the specified columns (optionally renaming them), dropping the rest",
+        "Combine rows from two tables by matching values in a shared key column",
+        "Filter rows to those satisfying a boolean predicate"
+    ],
+    "targetSlots": [
+        "summarize",
+        "extend",
+        "project",
+        "join"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **`summarize`** — The aggregation operator: it groups rows by the `by` expressions and computes aggregate functions (`count()`, `avg()`, `percentile()`, `dcount()`), returning one row per group.\n- **`extend`** — Appends computed columns (`| extend DurationSec = DurationMs / 1000.0`) without touching existing ones; the row count is unchanged.\n- **`project`** — Shapes the output schema: only the listed columns survive, and `project NewName = OldName` renames along the way. Contrast with `extend`, which never removes columns.\n- **`join`** — Correlates two tables on key equality (`| join kind=inner (OtherTable) on OperationId`), the KQL analogue of a SQL join, with `kind` controlling inner/outer/semi behavior.\n\nThe fifth task — **filtering rows by a predicate** — is the decoy; that is the `where` operator, which is not among the slots. Keeping `where` vs. `project` straight matters: `where` removes *rows*, `project` removes *columns*.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

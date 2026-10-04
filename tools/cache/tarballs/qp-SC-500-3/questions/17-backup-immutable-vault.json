@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-17-backup-immutable-vault",
+    "question": "Following a ransomware assessment, your organization must guarantee that Azure Backup recovery points cannot be deleted or have their retention shortened before they expire — even by a compromised account holding full administrative rights on the Recovery Services vaults — and that this guarantee itself cannot be quietly switched off later. What should you configure?",
+    "options": [
+        {
+            "text": "Enable the immutable vault setting on each Recovery Services vault, verify the protection behaves as intended, and then lock the setting to make immutability irreversible",
+            "correct": true
+        },
+        {
+            "text": "Enable soft delete on the vaults so that deleted backup data is retained for 14 additional days",
+            "correct": false
+        },
+        {
+            "text": "Put a CanNotDelete lock on every Recovery Services vault",
+            "correct": false
+        },
+        {
+            "text": "Configure geo-redundant storage with cross-region restore so a second copy of every recovery point exists in the paired region",
+            "correct": false
+        }
+    ],
+    "explanation": "**Immutable vault** is the Azure Backup control aimed squarely at ransomware operators (and rogue admins) who try to destroy recovery points before detonating. With immutability enabled, operations that could lead to loss of restore points — deleting recovery points before expiry, reducing retention in a policy, stopping protection with delete data — are blocked *regardless of the caller's RBAC rights*. The critical second step is **locking** the immutable setting: while unlocked (the recommended trial state), an administrator could still disable it; once locked, immutability is **irreversible for the life of the vault**, which is what 'cannot be quietly switched off later' demands.\n\n**Why not the other options:**\n- **Soft delete** — valuable (and complementary): it retains deleted backup data for a recovery window. But it is reactive — data was already deleted — and unless enhanced/always-on soft delete is used, a privileged attacker can disable it or simply wait out the window. It does not block retention reduction at all.\n- **CanNotDelete resource lock** — protects the *vault resource* from ARM deletion; it does nothing about data-plane operations such as deleting individual recovery points or editing a backup policy's retention, and any Owner can remove the lock first.\n- **GRS with cross-region restore** — a resilience feature for regional disasters. The replica faithfully mirrors deletions and retention changes, so destroying primary recovery points destroys the secondary copies too. Redundancy is not immutability.",
+    "category": "Manage identity, access, and governance"
+}

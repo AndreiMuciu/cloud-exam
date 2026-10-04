@@ -1,0 +1,13 @@
+{
+    "id": "case_study_saltmere",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Saltmere Hospitality** runs 45 hotels under three brands, including a dozen franchised properties operated by independent partners.\n\n**Current Environment:**\n- Microsoft Entra tenant: saltmerehotels.com, hybrid identities synced from on-premises Active Directory Domain Services (AD DS)\n- Storage account **stsaltmeredocs** (StorageV2, West Europe) holds scanned booking documents in Blob Storage\n- Storage account **stsaltmerefiles** hosts Azure file shares used by front-desk staff at every hotel\n- Franchise partners receive time-limited access to specific blob containers to upload and download settlement documents\n\n**Business Requirements:**\n- Partner access must be revocable per partner, immediately, when a franchise agreement ends\n- Front-desk staff must access file shares with their existing corporate identities\n- Booking document scans must also exist in a second region for compliance"
+        },
+        {
+            "title": "Storage Environment",
+            "content": "**Partner Document Exchange (stsaltmeredocs):**\n- Each franchise partner gets a shared access signature (SAS) URL for its own container\n- Account keys must not be regenerated when a single partner is off-boarded, because other partners and internal systems would be disrupted\n\n**Staff File Shares (stsaltmerefiles):**\n- SMB file shares mounted on hotel front-desk workstations that are joined to the on-premises AD DS domain\n- The storage account has been configured for identity-based authentication\n- Access must be governed both at the share level and by NTFS-style permissions on folders\n\n**Compliance Replication:**\n- Scanned booking documents in `stsaltmeredocs` (West Europe) must be copied asynchronously to storage account **stsaltmereuk** in UK South\n- The compliance team asked what must be configured on the two accounts before a replication policy can be created"
+        }
+    ]
+}

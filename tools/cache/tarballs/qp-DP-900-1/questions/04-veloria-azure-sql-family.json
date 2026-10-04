@@ -1,0 +1,25 @@
+{
+    "id": "dp900-04-veloria-azure-sql-family",
+    "question": "Veloria Health Systems must migrate its on-premises SQL Server instance to Azure with minimal application changes. The solution must keep SQL Server Agent jobs and cross-database queries working, and the IT team must no longer manage an operating system.\n\nWhich Azure service should Veloria use?",
+    "options": [
+        {
+            "text": "Azure SQL Database (single database)",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Managed Instance",
+            "correct": true
+        },
+        {
+            "text": "SQL Server on an Azure virtual machine",
+            "correct": false
+        },
+        {
+            "text": "Azure Database for PostgreSQL",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure SQL Managed Instance** is the right fit. It is a platform-as-a-service offering with near-100% compatibility with on-premises SQL Server at the instance level, including instance-scoped features such as **SQL Server Agent** and **cross-database queries** — while Microsoft manages the operating system, patching, and backups.\n\n**Why not the other options:**\n- **Azure SQL Database (single database)** — Also PaaS, but it is scoped to a single database and does not support SQL Server Agent or cross-database queries, so Veloria's jobs and reports would break.\n- **SQL Server on an Azure virtual machine** — Provides full compatibility, but it is infrastructure as a service: the IT team would still patch and manage Windows Server and SQL Server, violating the requirement to stop managing operating systems.\n- **Azure Database for PostgreSQL** — A managed service for the PostgreSQL engine, not SQL Server. Migrating would require rewriting the application's database layer, the opposite of minimal changes.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_veloria_health.json"
+}

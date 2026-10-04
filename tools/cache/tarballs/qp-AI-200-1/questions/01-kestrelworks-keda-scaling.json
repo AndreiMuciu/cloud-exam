@@ -1,0 +1,25 @@
+{
+    "id": "ai200-01-kestrelworks-keda-scaling",
+    "question": "You are configuring the Kestrelworks inference worker container app. The app must scale out based on the depth of the `replan-requests` Service Bus queue and scale to zero overnight when the queue is empty.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Add a custom KEDA scale rule of type `azure-servicebus` that targets the `replan-requests` queue with a message-count threshold, and set the minimum replica count to 0.",
+            "correct": true
+        },
+        {
+            "text": "Add an HTTP scale rule with a concurrent-requests threshold and set the minimum replica count to 1.",
+            "correct": false
+        },
+        {
+            "text": "Configure a cron scale rule that scales the app to zero replicas at 22:00 and back to five replicas at 06:00.",
+            "correct": false
+        },
+        {
+            "text": "Deploy the worker to a Dedicated workload profile and rely on the profile's node autoscaling to add replicas.",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Container Apps uses **KEDA** for event-driven scaling. A custom scale rule of type `azure-servicebus` monitors the queue and scales replicas out as message count grows; with `minReplicas: 0`, the app scales to zero whenever the queue stays empty — exactly the overnight behavior required, with no schedule guessing.\n\n**Why not the other options:**\n- **HTTP scale rule** — Scales on concurrent HTTP requests. The worker is queue-driven, not request-driven, so queue depth would never influence replica count, and `minReplicas: 1` prevents scale-to-zero.\n- **Cron scale rule** — Scales on a fixed schedule, not on actual load. If a burst of replan requests arrives at night, they would sit unprocessed until 06:00; if the queue is empty during the day, replicas would idle.\n- **Dedicated workload profile autoscaling** — Workload profiles control the underlying compute nodes, not application replica counts. Replica scaling still requires a scale rule, so this alone does not satisfy the requirement.",
+    "category": "Develop containerized solutions on Azure",
+    "caseStudy": "scenarios/case_study_kestrelworks_logistics.json"
+}

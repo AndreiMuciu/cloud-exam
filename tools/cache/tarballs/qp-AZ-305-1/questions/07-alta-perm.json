@@ -1,0 +1,21 @@
+{
+    "id": "gen-05-api-permission-delegation",
+    "question": "The SupplierPortal web application needs to access a backend Orders API. How should you grant permissions for the web app to access the API?",
+    "options": [
+        {
+            "text": "Configure the permissions in Microsoft Entra ID application registrations",
+            "correct": true
+        },
+        {
+            "text": "Configure rate limiting policies in Azure API Management",
+            "correct": false
+        },
+        {
+            "text": "Add authorization logic directly in the Orders API code",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Configure the permissions in Microsoft Entra ID application registrations**.\n\nMicrosoft Entra ID (formerly Azure AD) handles authentication and authorization between applications through app registrations, API permissions, and consent flows. This is the standard approach for granting web applications access to protected APIs.\n\n- API Management handles traffic management, rate limiting, and transformation—not application-level permissions.\n- While APIs can implement additional authorization logic, the primary permission delegation should be configured in the identity provider.",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_multi_tenant_app.json"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_orenfall_energy",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Orenfall Energy** is a regional electricity utility that runs its grid-telemetry ingestion platform and customer-billing systems in Azure. The company uses two subscriptions (Platform and Corporate) under a single Microsoft Entra ID tenant.\n\n**Current Environment:**\n- The platform operations team holds the Contributor role on the Platform subscription, although its day-to-day work is limited to starting, stopping, restarting, and viewing the telemetry-ingestion virtual machines.\n- Customer-billing data is encrypted with customer-managed keys stored in an Azure key vault named `kv-orenfall-billing`. Key rotation is performed manually by an engineer roughly twice a year, and it has been missed twice.\n- TLS certificates for the SCADA gateway endpoints are stored in the same vault; one certificate expired unnoticed last quarter and caused a four-hour telemetry outage.\n- External engineering contractors from a partner firm are onboarded by emailing the service desk, which manually adds them to various groups and applications. Offboarding is inconsistent, and several contractor accounts from a project that ended last year still have access."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The security governance board has defined the following requirements:\n\n**Role-Based Access Control:**\n- The platform operations team must be able to start, stop, restart, and read the telemetry virtual machines, and nothing else. No built-in role matches this permission set.\n- The permission set must be defined once and be assignable in both the Platform and Corporate subscriptions, but must not be usable anywhere else in the tenant.\n\n**Key and Certificate Lifecycle:**\n- The customer-managed keys in `kv-orenfall-billing` must rotate automatically every 90 days without application changes or manual steps.\n- Operations must receive an automated notification 30 days before any certificate in the vault expires.\n\n**Contractor Access:**\n- Contractors must request a predefined bundle of groups and applications for a project through a self-service portal.\n- Each request must be approved by the project manager, access must expire automatically at 90 days unless extended, and remaining access must be recertified every quarter."
+        }
+    ]
+}

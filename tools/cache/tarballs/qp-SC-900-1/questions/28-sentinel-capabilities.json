@@ -1,0 +1,25 @@
+{
+    "id": "sc900-28-sentinel-capabilities",
+    "type": "multi",
+    "question": "Which two capabilities does Microsoft Sentinel provide? (Select two.)",
+    "options": [
+        {
+            "text": "Collect security data at cloud scale across users, devices, applications, and infrastructure, both on-premises and in multiple clouds",
+            "correct": true
+        },
+        {
+            "text": "Automate common security tasks and responses by using playbooks",
+            "correct": true
+        },
+        {
+            "text": "Apply retention labels automatically to documents stored in SharePoint Online",
+            "correct": false
+        },
+        {
+            "text": "Block the use of USB removable storage on managed endpoints",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Sentinel is a cloud-native **SIEM and SOAR** solution. As a SIEM it **collects data at cloud scale** — across all users, devices, applications, and infrastructure, on-premises and in multiple clouds — and applies analytics and threat intelligence to detect threats. As a SOAR it **automates responses using playbooks** built on Azure Logic Apps, so common tasks (such as isolating a machine or notifying a team) run automatically when an alert fires.\n\n**Why not the other options:**\n- **Applying retention labels in SharePoint** — Retention and records management are Microsoft Purview data lifecycle capabilities, entirely separate from Sentinel's security analytics.\n- **Blocking USB storage on endpoints** — Device control policies are enforced by endpoint management and protection tools such as Microsoft Intune and Microsoft Defender for Endpoint, not by a SIEM.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

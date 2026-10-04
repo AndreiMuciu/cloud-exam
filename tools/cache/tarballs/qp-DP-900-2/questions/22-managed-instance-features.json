@@ -1,0 +1,29 @@
+{
+    "id": "dp900-s2-22-managed-instance-features",
+    "type": "multi",
+    "question": "A company plans to move several on-premises SQL Server databases to Azure SQL Managed Instance.\n\nWhich three statements about Azure SQL Managed Instance are true? (Choose three.)",
+    "options": [
+        {
+            "text": "It provides near-complete compatibility with the on-premises SQL Server database engine",
+            "correct": true
+        },
+        {
+            "text": "It supports instance-scoped features such as SQL Server Agent, linked servers, and cross-database queries",
+            "correct": true
+        },
+        {
+            "text": "As a platform-as-a-service offering, it handles patching, backups, and high availability automatically",
+            "correct": true
+        },
+        {
+            "text": "It requires the customer to install and patch the Windows operating system",
+            "correct": false
+        },
+        {
+            "text": "It can host only a single database per instance",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure SQL Managed Instance sits between Azure SQL Database and SQL Server on a VM: it is a **fully managed PaaS service** that nevertheless exposes **almost the entire SQL Server surface area**. That combination is why it is the recommended target for lift-and-shift migrations:\n\n- **Near-complete engine compatibility** — existing databases, T-SQL code, and tooling move over with minimal changes.\n- **Instance-scoped features** — SQL Server Agent jobs, linked servers, cross-database queries, Service Broker, and CLR are available, unlike in Azure SQL Database where each database is isolated.\n- **PaaS management** — Microsoft handles OS and engine patching, automated backups, and built-in high availability, so the administrative burden stays low.\n\n**Why not the other options:**\n- **It requires the customer to install and patch the Windows operating system** — That describes SQL Server on an Azure **virtual machine** (IaaS). With Managed Instance there is no operating system for the customer to see or maintain.\n- **It can host only a single database per instance** — A managed *instance* hosts **many databases**, which is precisely what enables cross-database queries. The single-database deployment model belongs to Azure SQL Database, not Managed Instance.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

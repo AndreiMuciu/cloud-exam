@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-31-m365-agent-management",
+    "question": "Employees across your organization have started acquiring Copilot agents from various sources — some built in-house, some from the store — and IT has no picture of what is deployed. Governance requires a central place to see the agents available in the organization, decide which agents are approved for use, block specific agents entirely, and control which users or groups can access a given agent. Where should this be administered?",
+    "options": [
+        {
+            "text": "In the Microsoft 365 admin center, use the integrated apps / agent management experience to inventory agents, approve or block individual agents, and scope each agent's deployment to specific users and groups",
+            "correct": true
+        },
+        {
+            "text": "In the Microsoft Entra admin center, delete the service principals of any agent the organization has not approved",
+            "correct": false
+        },
+        {
+            "text": "In Microsoft Defender for Cloud Apps, mark the agents as unsanctioned so that Defender for Endpoint blocks their network traffic",
+            "correct": false
+        },
+        {
+            "text": "In each user's Copilot settings, ask employees to remove agents that are not on the published approved list",
+            "correct": false
+        }
+    ],
+    "explanation": "Organization-wide governance of Copilot agents is a **Microsoft 365 admin center** job. The integrated apps / agent management experience gives administrators the **inventory** of agents available to the organization (in-house builds, store acquisitions, and Microsoft-provided ones), and per-agent lifecycle controls: **approve** for use, **block** entirely, and **scope deployment** so an agent is available only to designated users or groups (for example, restricting a finance agent to the finance department). This is where the 'who can use what' decisions for agents live — the admin-center layer of the agent security story, complementing (not replacing) identity-level and runtime protections.\n\n**Why not the other options:**\n- **Deleting service principals in Entra** — a destructive improvisation: it may break the agent for everyone irrecoverably, offers no approve/scope granularity, and bypasses the supported governance workflow. Entra is where agent *identities* are managed (Agent ID, access policies), not where agent availability to users is curated.\n- **Defender for Cloud Apps unsanctioning** — the sanction/unsanction mechanism targets discovered *external cloud apps* at the network level; Copilot agents surface inside Microsoft 365 experiences, and their governance (approval, deployment scoping) is an M365 admin capability, not an endpoint network block.\n- **Asking users to self-remove** — voluntary compliance is not a control: there is no enforcement, no visibility of who complied, and new arrivals recreate the problem immediately.",
+    "category": "Secure compute"
+}

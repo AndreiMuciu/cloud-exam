@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-15-iaas-use-case",
+    "question": "A company must migrate a legacy line-of-business application to Azure with minimal code changes. The application depends on a specific operating system version, custom registry settings, and third-party agents that require full administrator access to the OS. Which cloud service type should they choose?",
+    "options": [
+        {
+            "text": "Infrastructure as a service (IaaS)",
+            "correct": true
+        },
+        {
+            "text": "Platform as a service (PaaS)",
+            "correct": false
+        },
+        {
+            "text": "Software as a service (SaaS)",
+            "correct": false
+        },
+        {
+            "text": "Serverless functions",
+            "correct": false
+        }
+    ],
+    "explanation": "**IaaS** (Azure virtual machines) gives the customer full control of the operating system — the exact OS version, registry settings, installed agents, and administrator access the legacy application demands. A lift-and-shift migration to a VM requires little or no code change, which meets the constraint directly.\n\n**Why not the other options:**\n- **PaaS** — The platform manages and abstracts the operating system, so custom OS versions, registry edits, and machine-level agents are generally not possible.\n- **SaaS** — Delivers a vendor’s finished application; it cannot host the company’s own custom legacy application.\n- **Serverless functions** — Designed for short-lived, event-driven code with no OS access at all; a monolithic legacy app with OS dependencies would require a full rewrite.",
+    "category": "Describe Cloud Concepts"
+}

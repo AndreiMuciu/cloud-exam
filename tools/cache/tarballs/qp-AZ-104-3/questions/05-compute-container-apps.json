@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-compute-container-apps",
+    "type": "single",
+    "question": "Thistledown Studios must choose a hosting service for the redesigned matchmaking API, which runs as a set of small Linux containers.\n\nRecall the requirements:\n\n- Scale out automatically based on **incoming HTTPS request volume**\n- Scale in to **zero running replicas** when idle, so no compute is billed at night\n- Fully managed — the team will not run or upgrade an orchestrator\n\nWhich service should you use?",
+    "options": [
+        { "text": "Azure Container Apps", "correct": true },
+        { "text": "Azure Container Instances", "correct": false },
+        { "text": "Azure Kubernetes Service (AKS)", "correct": false },
+        { "text": "A Web App for Containers in the existing Premium v3 App Service plan", "correct": false }
+    ],
+    "explanation": "**Azure Container Apps** is the fully managed, serverless container service built for exactly this profile. Its scaling is powered by KEDA: you define scale rules — including the built-in **HTTP scale rule** that tracks concurrent requests — with a minimum replica count of **0** and a maximum for tournament peaks. Idle apps scale to zero replicas, and no compute charges accrue while nothing is running. Kubernetes runs underneath, but it is entirely managed — the team never touches an orchestrator, node pools, or upgrades.\n\n**Why not the other options:**\n- **Azure Container Instances**: ACI runs individual container groups on demand. It has no built-in autoscaler — nothing watches HTTPS request volume and adds or removes container groups. It suits run-once jobs and burst compute, not an always-available API that must expand and contract automatically.\n- **AKS**: AKS can absolutely scale on HTTP traffic (with KEDA and the cluster autoscaler), but the studio would be operating a Kubernetes cluster — version upgrades, node images, capacity — which the requirements explicitly rule out.\n- **Web App for Containers**: App Service autoscale adds and removes plan instances, but a dedicated (Premium v3) plan does not scale a workload to **zero billed compute** — the plan's instances are billed as long as the plan exists, regardless of overnight traffic.",
+    "category": "Deploy and Manage Azure Compute Resources",
+    "caseStudy": "scenarios/case_study_thistledown.json"
+}

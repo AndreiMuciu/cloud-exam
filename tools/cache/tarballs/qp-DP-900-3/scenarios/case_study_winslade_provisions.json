@@ -1,0 +1,13 @@
+{
+    "id": "case_study_winslade_provisions",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Winslade Provisions** is a regional food-distribution company that supplies restaurants and grocery stores from three warehouses. Its order-entry system runs on a relational database, and delivery routes are planned by a separate route-planning service.\n\n**Current Data Landscape:**\n- **Order-entry database**: customer orders, stock levels, and invoices are recorded in a relational database. The warehouses occasionally suffer abrupt power interruptions, and management is worried about what happens to orders that were being saved at that moment.\n- **Service integration**: every confirmed order is published as an event message from the order system to the route-planning service. The integration team wants a compact, efficient format for these high-volume messages, and downstream consumers need to know each message's field names and data types reliably.\n- **Growing data team**: the company is expanding its data staff and needs to define responsibilities clearly before hiring."
+        },
+        {
+            "title": "Business Goals",
+            "content": "Winslade Provisions has defined the following requirements:\n\n- **Order reliability**: once the database confirms that an order transaction has committed, that order must still be present after any crash or power failure — even one that happens a moment after the commit.\n- **Event serialization**: choose a serialization format for the order events that is **binary and row-based**, stores records compactly for high-volume messaging, and **carries its schema with the data** so consumers always know the field names and types.\n- **New hire**: the first new role must own the day-to-day health of the order-entry database — scheduling and testing backups, managing logins and permissions, and monitoring and tuning performance."
+        }
+    ]
+}

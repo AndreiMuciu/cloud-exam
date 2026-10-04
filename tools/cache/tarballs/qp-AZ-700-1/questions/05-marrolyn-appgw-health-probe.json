@@ -1,0 +1,25 @@
+{
+    "id": "az700-marrolyn-appgw-health-probe",
+    "question": "One of Marrolyn Retail's regional backend pools sits behind an Application Gateway. The team wants the gateway to send its health check to a custom path (`/health`) instead of the default probe behavior, and to mark a backend instance unhealthy after 2 consecutive failed responses rather than the default number.\n\nWhat should the team configure?",
+    "options": [
+        {
+            "text": "Rely on the default health probe, since it already checks a fixed relative path of '/health' on every backend",
+            "correct": false
+        },
+        {
+            "text": "A custom health probe with the desired path set and the unhealthy threshold set to 2",
+            "correct": true
+        },
+        {
+            "text": "A routing rule rewrite set that redirects failed requests to '/health'",
+            "correct": false
+        },
+        {
+            "text": "A listener-level TLS policy that enforces a minimum protocol version",
+            "correct": false
+        }
+    ],
+    "explanation": "The **default health probe** only ever requests `<protocol>://127.0.0.1:<port>/` and uses a fixed unhealthy threshold of 3 — it cannot be pointed at a custom path or given a custom threshold. To probe a specific path such as `/health` and to change the number of consecutive failures required before a backend is marked unhealthy, Marrolyn must configure a **custom health probe**, setting the `Path` property to `/health` and the `Unhealthy threshold` property to `2`.\n\n**Why not the other options:**\n- **\"The default probe already checks '/health'\"** — Incorrect; the default probe always targets the root path on `127.0.0.1`, not a named path like `/health`.\n- **Rewrite set redirecting failed requests** — Rewrite sets modify HTTP headers and URLs for live traffic; they have no role in how the gateway performs backend health probing.\n- **Listener-level TLS policy** — Controls which TLS protocol versions and cipher suites the gateway accepts for client connections; it has no effect on backend health probe path or threshold behavior.",
+    "category": "Design and Implement Application Delivery Services",
+    "caseStudy": "scenarios/case_study_marrolyn.json"
+}

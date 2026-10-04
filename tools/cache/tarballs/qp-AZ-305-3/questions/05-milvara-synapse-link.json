@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-milvara-synapse-link",
+    "question": "You need to recommend a solution that lets analysts run near-real-time aggregations over the operational data in Azure Cosmos DB for NoSQL. The solution must not require ETL pipelines and must not consume the request units (RUs) provisioned for the customer-facing application.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Enable the analytical store on the Cosmos DB containers and query it through Azure Synapse Link",
+            "correct": true
+        },
+        {
+            "text": "Use the Cosmos DB change feed with an Azure Functions app to copy documents into a SQL database for analysis",
+            "correct": false
+        },
+        {
+            "text": "Add a dedicated Cosmos DB region for analytics and direct analyst queries to that region",
+            "correct": false
+        },
+        {
+            "text": "Schedule Azure Data Factory copy activities to export the containers to the data lake every 15 minutes",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Synapse Link for Cosmos DB** is a purpose-built hybrid transactional/analytical processing (HTAP) capability. Enabling the **analytical store** on a container creates a fully managed, **column-oriented copy** of the data that is kept in sync automatically (typically within a couple of minutes) by the platform:\n\n- **No ETL** — synchronization from the transactional (row) store to the analytical (column) store is automatic; nobody builds or operates pipelines\n- **No RU consumption** — analytical queries run from Synapse (Spark or serverless SQL) against the analytical store, which is completely isolated from the provisioned throughput serving the customer-facing application\n- **Near-real-time** — the auto-sync latency fits interactive analytical freshness requirements without impacting the operational workload\n\n**Why not the other options:**\n- **Change feed + Functions into SQL** — This *is* an ETL pipeline (custom code to build, monitor, scale, and handle failures/reprocessing), and reading the change feed **consumes RUs** from the container — both requirements violated\n- **Dedicated analytics region** — Adding a read region replicates the row-oriented transactional store; large scan/aggregation queries against it still burn RUs (global distribution replicates throughput provisioning) and a row store remains inefficient for aggregations. Regions address geography and availability, not workload isolation for analytics\n- **Scheduled Data Factory exports** — Explicitly an ETL pipeline; each 15-minute copy run consumes RUs to read the containers, freshness is bounded by the schedule, and repeated full/incremental exports add cost and operational surface",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_milvara_health.json"
+}

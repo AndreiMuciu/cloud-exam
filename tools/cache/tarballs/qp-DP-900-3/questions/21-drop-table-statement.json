@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-21-drop-table-statement",
+    "question": "A database contains an obsolete `LegacyImports` table. The team must permanently remove the table itself — its data **and** its definition — so that it no longer exists in the database at all.\n\nWhich SQL statement accomplishes this?",
+    "options": [
+        {
+            "text": "DROP TABLE LegacyImports",
+            "correct": true
+        },
+        {
+            "text": "DELETE FROM LegacyImports",
+            "correct": false
+        },
+        {
+            "text": "TRUNCATE TABLE LegacyImports",
+            "correct": false
+        },
+        {
+            "text": "ALTER TABLE LegacyImports",
+            "correct": false
+        }
+    ],
+    "explanation": "**DROP TABLE** is the DDL statement that removes a table entirely: all of its rows *and* the table definition itself (columns, constraints, indexes) are deleted from the database. After `DROP TABLE LegacyImports`, the table no longer exists and queries against it fail — exactly the goal for an obsolete object.\n\n**Why not the other options:**\n- **DELETE FROM LegacyImports** — DELETE is a DML statement that removes rows. Even with every row removed, the empty table and its definition remain in the database.\n- **TRUNCATE TABLE LegacyImports** — TRUNCATE quickly removes all rows, but like DELETE it leaves the table's definition in place, ready to receive new rows.\n- **ALTER TABLE LegacyImports** — ALTER TABLE modifies an existing table's structure (adding or dropping columns, changing types); it cannot remove the table itself.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

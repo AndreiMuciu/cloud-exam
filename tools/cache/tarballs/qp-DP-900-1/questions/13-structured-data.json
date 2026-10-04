@@ -1,0 +1,24 @@
+{
+    "id": "dp900-13-structured-data",
+    "question": "Which of the following is the best example of structured data?",
+    "options": [
+        {
+            "text": "Sales records stored as rows in relational tables with a fixed schema of columns",
+            "correct": true
+        },
+        {
+            "text": "JSON documents in which each document can contain different properties",
+            "correct": false
+        },
+        {
+            "text": "Video recordings of customer support calls",
+            "correct": false
+        },
+        {
+            "text": "Free-text bodies of customer email messages",
+            "correct": false
+        }
+    ],
+    "explanation": "**Structured data** conforms to a fixed schema that is defined before the data is written: every record has the same fields with the same data types. Rows in relational tables — such as sales records with predefined columns — are the textbook example.\n\n**Why not the other options:**\n- **JSON documents with varying properties** — This is semi-structured data: the documents carry field names and structure, but the schema is flexible and can differ from document to document.\n- **Video recordings** — Unstructured data; a video file has no field-level data model that a query engine can interpret directly.\n- **Free-text email bodies** — Also unstructured; prose text has no predefined schema, even though the surrounding email metadata (sender, date) might be structured.",
+    "category": "Describe Core Data Concepts"
+}

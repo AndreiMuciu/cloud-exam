@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-05-birchstead-sql-vm",
+    "question": "Birchstead Mutual must host the legacy actuarial platform in Azure. The vendor certifies only one specific SQL Server version and build, requires a third-party backup agent installed on the server's operating system, and the DBA team must control exactly when OS and SQL Server patches are applied.\n\nWhich hosting option meets these requirements?",
+    "options": [
+        {
+            "text": "SQL Server installed on an Azure virtual machine",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Database",
+            "correct": false
+        },
+        {
+            "text": "Azure SQL Managed Instance",
+            "correct": false
+        },
+        {
+            "text": "Azure Database for PostgreSQL",
+            "correct": false
+        }
+    ],
+    "explanation": "**SQL Server on an Azure virtual machine** is the infrastructure-as-a-service (IaaS) option, and it is the only choice that satisfies all three constraints: you pick and pin the **exact SQL Server version and build**, you have **full access to the operating system** (so the vendor's backup agent can be installed), and you decide **when patches are applied** to both Windows and SQL Server. This is the classic lift-and-shift answer when an application demands OS-level access or version control.\n\n**Why not the other options:**\n- **Azure SQL Database** — A PaaS service with no operating-system access at all; Microsoft controls the database engine version and patching schedule, so neither the pinned build nor the OS-installed agent is possible.\n- **Azure SQL Managed Instance** — Although it offers high SQL Server compatibility, it is still PaaS: there is **no access to the underlying operating system**, so the third-party OS-level backup agent cannot be installed, and Microsoft manages patching.\n- **Azure Database for PostgreSQL** — A managed service for an entirely different database engine; the vendor's platform is certified against SQL Server.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_birchstead_mutual.json"
+}

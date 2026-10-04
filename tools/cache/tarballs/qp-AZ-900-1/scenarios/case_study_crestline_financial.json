@@ -1,0 +1,13 @@
+{
+    "id": "case_study_crestline_financial",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Crestline Financial Services** has recently migrated several critical workloads to Azure. Their monthly Azure bill has been higher than expected, and they are looking for ways to optimize costs while maintaining strict governance standards. \n\n**Environment:**\n- Multiple departments have their own Azure subscriptions.\n- Developers often leave large, expensive VMs running over the weekend.\n- There is no central enforcement to prevent users from deploying resources in unauthorized regions."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Financial Requirements:**\n- Provide a way for individual departments to see their specific Azure spending.\n- Automatically alert administrators when spending reaches 80% of the monthly budget.\n\n**Governance Requirements:**\n- Prevent any resource from being deleted, even by owners, without explicit administrative approval.\n- Ensure that all resources have a \"Department\" tag assigned."
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_fernhollow",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Fernhollow University** is a public research university with 18,000 students and 2,400 faculty and staff across three campuses. Central IT manages the cloud estate, while each academic department has a small IT team with delegated responsibilities.\n\n**Current Environment:**\n- Single Microsoft Entra tenant: fernhollow.edu\n- Four Azure subscriptions: **Sub-Teaching**, **Sub-Admin**, **Sub-Research**, and **Sub-StudentLabs**\n- A management group hierarchy is being introduced to centralize governance\n- Hybrid identity with Microsoft Entra Connect syncing from on-premises Active Directory\n\n**Organizational Goals:**\n- Centralize governance without slowing down departmental innovation\n- Give the research faculty autonomy inside Sub-Research\n- Keep student lab spending predictable each semester"
+        },
+        {
+            "title": "Governance Requirements",
+            "content": "**Tagging and Compliance:**\n- Every resource must carry a `Department` tag for chargeback reporting\n- Hundreds of resources were created before the tagging standard was introduced\n- Compliance dashboards must reflect the tagging standard within one week\n\n**Cost Management:**\n- Sub-StudentLabs has a fixed semester budget approved by the finance office\n- The finance office wants proactive notification before and when the budget is consumed\n- Lab workloads must keep running during exam weeks even if spending is high\n\n**Subscription Management:**\n- Additional teaching subscriptions will be created next academic year\n- Central IT wants to understand exactly where newly created subscriptions appear in the management group hierarchy before automating placement"
+        }
+    ]
+}

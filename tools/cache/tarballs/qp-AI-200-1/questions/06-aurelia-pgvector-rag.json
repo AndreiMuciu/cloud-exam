@@ -1,0 +1,25 @@
+{
+    "id": "ai200-06-aurelia-pgvector-rag",
+    "question": "The Aurelia research summaries are stored in PostgreSQL with pgvector:\n\n```sql\nCREATE TABLE summaries (\n    id bigserial PRIMARY KEY,\n    specialty text NOT NULL,\n    body text NOT NULL,\n    embedding vector(1536)\n);\n```\n\nRetrieval must combine vector similarity with a metadata filter, for example returning only cardiology summaries. Which query pattern should you use?",
+    "options": [
+        {
+            "text": "Run `SELECT ... ORDER BY embedding <=> %(q)s LIMIT 10` first, then discard rows in Python whose `specialty` is not `'cardiology'`.",
+            "correct": false
+        },
+        {
+            "text": "Run one query per specialty table by creating a separate table for each specialty and querying only the matching table.",
+            "correct": false
+        },
+        {
+            "text": "Run a single query that applies the filter and similarity together: `SELECT id, body FROM summaries WHERE specialty = %(sp)s ORDER BY embedding <=> %(q)s LIMIT 10`.",
+            "correct": true
+        },
+        {
+            "text": "Run `SELECT id, body FROM summaries WHERE embedding <=> %(q)s < 0.5` without an ORDER BY, then sort the rows client-side by specialty.",
+            "correct": false
+        }
+    ],
+    "explanation": "The standard RAG-with-metadata-filter pattern in pgvector is a **single SQL statement** that combines a `WHERE` clause on the metadata columns with `ORDER BY embedding <=> $query LIMIT k` (the `<=>` operator is cosine distance). PostgreSQL evaluates the filter as part of the plan, so the top-k results are the most similar rows *within* the filtered set — and metadata columns can be indexed normally.\n\n**Why not the other options:**\n- **Filter client-side after top-k** — If the 10 nearest neighbors overall are mostly non-cardiology, you end up with fewer than 10 (possibly zero) relevant rows; correctness depends on luck.\n- **Table per specialty** — Explodes schema management, breaks cross-specialty queries, and is unnecessary since a `WHERE` clause expresses the same constraint.\n- **Distance threshold without ORDER BY** — Returns an unranked, arbitrarily sized set; sorting by specialty client-side does not rank by similarity at all.",
+    "category": "Develop AI solutions by using Azure data management services",
+    "caseStudy": "scenarios/case_study_aurelia_health.json"
+}

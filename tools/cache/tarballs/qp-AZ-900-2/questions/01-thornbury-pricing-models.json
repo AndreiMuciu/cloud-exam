@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-01-thornbury-pricing-models",
+    "question": "Thornbury Logistics’ telemetry ingestion service runs 24 hours a day at a steady, predictable rate, and the CFO is willing to commit to Azure for at least three years. Which Azure pricing model will reduce the compute cost of this workload the most while keeping it running continuously?",
+    "options": [
+        {
+            "text": "Pay-as-you-go pricing with no commitment",
+            "correct": false
+        },
+        {
+            "text": "Azure Reservations with a three-year commitment",
+            "correct": true
+        },
+        {
+            "text": "Spot Virtual Machines",
+            "correct": false
+        },
+        {
+            "text": "An Azure free account with trial credits",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Reservations** exchange a one- or three-year commitment for a significant discount (up to roughly 72% compared to pay-as-you-go). They are designed for exactly this situation: a workload that runs continuously at a predictable level, owned by an organization that can commit for a multi-year term.\n\n**Why not the other options:**\n- **Pay-as-you-go** — Offers maximum flexibility but the highest unit price; it makes sense for variable or short-lived workloads, not a steady 24/7 service the company will run for years.\n- **Spot Virtual Machines** — Deeply discounted, but Azure can evict them at any time when it needs the capacity back, so they are unsuitable for a service that must run continuously.\n- **Free account credits** — Intended for evaluation and learning; trial credits are time- and amount-limited and are not a pricing model for a production workload.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_thornbury_logistics.json"
+}

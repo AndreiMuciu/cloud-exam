@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-12-winslade-dba-role",
+    "question": "Winslade Provisions' first data hire must own the day-to-day health of the order-entry database: scheduling and testing backups, managing logins and permissions, and monitoring and tuning performance.\n\nWhich data professional role matches these responsibilities?",
+    "options": [
+        {
+            "text": "Database administrator",
+            "correct": true
+        },
+        {
+            "text": "Data engineer",
+            "correct": false
+        },
+        {
+            "text": "Data analyst",
+            "correct": false
+        },
+        {
+            "text": "Application developer",
+            "correct": false
+        }
+    ],
+    "explanation": "These are the classic operational duties of a **database administrator (DBA)**: protecting the data with backup and restore plans (and testing them), controlling access through logins, roles, and permissions, and keeping the database available and fast through monitoring and performance tuning. The DBA owns the running database itself rather than the data flows or the insights built on top of it.\n\n**Why not the other options:**\n- **Data engineer** — Data engineers build and operate pipelines that ingest, transform, and move data between systems; they do not typically own backup schedules, logins, or performance tuning of an operational database.\n- **Data analyst** — Data analysts explore curated data and build models, reports, and visualizations to answer business questions; they consume databases rather than administer them.\n- **Application developer** — Developers write the order-entry application code that uses the database; administering backups, security, and performance of the database service is a separate operational role.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_winslade_provisions.json"
+}

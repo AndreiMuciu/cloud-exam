@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-30-copilot-plugin-governance",
+    "question": "Microsoft Security Copilot is live in your tenant: capacity is provisioned, workspaces are configured, and analysts have their roles. During review, the security architect finds that any Copilot contributor can add new plugins — including custom plugins that call external APIs — and can toggle plugins on for their own sessions. Governance requires that only the platform team decides which plugins are available, that custom plugins pointing at unapproved external endpoints cannot be added by analysts, and that analysts keep using the approved plugin set without interruption. What should you configure?",
+    "options": [
+        {
+            "text": "In the Security Copilot owner settings, restrict plugin management so that only Copilot owners can add and enable plugins (including setting who can add custom plugins), and curate the approved plugin list centrally — leaving the approved plugins enabled for analyst sessions",
+            "correct": true
+        },
+        {
+            "text": "Remove the analysts' Copilot contributor role and require them to submit prompts to the platform team, who will run them with the correct plugins",
+            "correct": false
+        },
+        {
+            "text": "Block outbound HTTPS from the analysts' workstations to any domain not on the corporate allowlist, so unapproved plugin APIs cannot be reached",
+            "correct": false
+        },
+        {
+            "text": "Reduce the provisioned Security Compute Units so that unapproved plugins fail to execute due to insufficient capacity",
+            "correct": false
+        }
+    ],
+    "explanation": "Security Copilot separates *using* the platform from *governing* it. In the **owner settings**, plugin management can be restricted so that **only owners control plugin availability** — which plugins are on for the tenant/workspace, and specifically **who may add custom plugins**. Custom plugins are the sharpest risk here because they can send prompt-derived content (which may include incident details and organizational data) to arbitrary external endpoints; restricting their addition to the platform team enforces the approval gate. Analysts keep their contributor role and continue running investigations with the curated plugin set, so day-to-day work is uninterrupted — governance lands on configuration, not on people's workflow.\n\n**Why not the other options:**\n- **Taking away contributor and proxying prompts through the platform team** — this destroys the SOC's ability to investigate interactively and turns the platform team into a helpdesk bottleneck; the requirement explicitly preserves analyst usage.\n- **Workstation egress filtering** — Security Copilot plugins execute from the **service**, not from analyst workstations, so blocking analyst outbound traffic does nothing about which endpoints a plugin can call. Governance belongs in the product's plugin controls.\n- **Starving SCU capacity** — capacity governs how much workload Copilot can process; it is not an authorization mechanism and cannot distinguish approved from unapproved plugins. It would just throttle legitimate investigations.",
+    "category": "Manage and monitor security posture"
+}

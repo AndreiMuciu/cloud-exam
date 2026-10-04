@@ -1,0 +1,24 @@
+{
+    "id": "az500-26-kv-native-rotation",
+    "question": "You want to automate the rotation of cryptographic keys stored in Azure Key Vault. What is the most integrated, native way to achieve this without writing custom code?",
+    "options": [
+        {
+            "text": "Azure Automation runbook",
+            "correct": false
+        },
+        {
+            "text": "Native Key Vault rotation policy",
+            "correct": true
+        },
+        {
+            "text": "Logic App triggered by an Event Grid event",
+            "correct": false
+        },
+        {
+            "text": "Manual rotation every 30 days",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Key Vault supports **native rotation policies** for keys. You can define the rotation frequency (e.g., every 90 days) and the platform handles the creation of a new key version without requiring external automation scripts.\n\n**Why not the other options:**\n- **Azure Automation / Logic Apps** — These are 'custom' or 'semi-custom' approaches that were common before native rotation was introduced. They are still used for non-standard or complex rotation logic (e.g., rotating a secret and updating a downstream service).\n- **Manual rotation** — High operational overhead and prone to human error.",
+    "category": "Secure compute, storage, and databases"
+}

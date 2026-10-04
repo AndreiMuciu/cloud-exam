@@ -1,0 +1,13 @@
+{
+    "id": "case_study_hexbury_interactive",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Hexbury Interactive** is a video game studio that operates a popular online multiplayer title played by millions of players worldwide. The live-operations (live-ops) team monitors player behavior, match quality, and in-game purchases to keep the game balanced and profitable.\n\n**Current Data Landscape:**\n- **Game-server logs**: every match generates a continuous flood of timestamped log events — logins, matchmaking decisions, latency measurements, and error traces. The servers already produce billions of these events per month.\n- **Player and commerce data**: a separate platform team owns an existing Azure Data Lake Storage Gen2 account that holds curated player-profile and purchase datasets. That team retains ownership of the account and its data.\n- **Curated gameplay tables**: Hexbury's data engineers maintain curated Delta tables in a Microsoft Fabric lakehouse that summarize match outcomes and player progression."
+        },
+        {
+            "title": "Business Goals",
+            "content": "Hexbury Interactive has adopted **Microsoft Fabric** as its analytics platform and has defined the following requirements:\n\n- **Log exploration**: live-ops engineers must be able to store billions of timestamped game-server log events and explore them interactively using a query language that is purpose-built for time-series and log analytics.\n- **No data duplication**: the player-profile and purchase datasets must become usable from Fabric **without copying them out of the platform team's Azure Data Lake Storage Gen2 account**, and without disrupting the platform team's ownership of that account.\n- **Fast, fresh dashboards**: Power BI reports over the lakehouse's Delta tables must reflect new data shortly after it lands, must not depend on scheduled dataset refreshes that copy the data into the model, and must keep the fast interactive performance analysts expect."
+        }
+    ]
+}

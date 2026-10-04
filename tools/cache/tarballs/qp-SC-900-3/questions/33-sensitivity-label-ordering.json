@@ -1,0 +1,19 @@
+{
+    "id": "sc900-s3-33-sensitivity-label-ordering",
+    "type": "ordering",
+    "question": "An organization is rolling out Microsoft Purview sensitivity labels to classify and protect its documents and emails. Arrange the stages of a sensitivity label deployment in the correct order, from first to last.",
+    "items": [
+        "Labels are applied to content — manually by users, or automatically when configured conditions detect sensitive information",
+        "Create the sensitivity labels and rank them by sensitivity, for example from Public up to Highly Confidential",
+        "The label's configured protections, such as encryption and content markings like watermarks, are enforced and travel with the content",
+        "Publish the labels to chosen users and groups by using a label policy"
+    ],
+    "correctOrder": [
+        "Create the sensitivity labels and rank them by sensitivity, for example from Public up to Highly Confidential",
+        "Publish the labels to chosen users and groups by using a label policy",
+        "Labels are applied to content — manually by users, or automatically when configured conditions detect sensitive information",
+        "The label's configured protections, such as encryption and content markings like watermarks, are enforced and travel with the content"
+    ],
+    "explanation": "Sensitivity labeling follows a create → publish → apply → protect sequence:\n\n1. **Create the labels** — Administrators define the label taxonomy and order it by sensitivity (for example Public, General, Confidential, Highly Confidential), configuring each label's settings such as encryption and markings.\n2. **Publish with a label policy** — A label exists but is invisible to users until a **label policy** publishes it to selected users and groups; the policy can also set a default label or require labeling.\n3. **Apply to content** — Once published, labels are applied **manually by users** in Office apps, or **automatically** when conditions (such as detected sensitive information types) match — bringing classification onto the actual documents and emails.\n4. **Protection is enforced** — With the label applied, its protections take effect: encryption restricts who can open the item, markings such as headers or watermarks appear, and because the label is stored in the file's metadata, the **protection travels with the content** wherever it goes.\n\n**Why not the other options:** Each stage depends on the previous one — users cannot apply labels that no policy has published to them, a policy cannot publish labels that have not been created, and no protection can be enforced on content that carries no label yet.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

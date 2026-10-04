@@ -1,0 +1,25 @@
+{
+    "id": "az500-10-sentinel-bruteforce-detection",
+    "question": "Sentinel Surveillance needs to detect brute-force attacks on their virtual machines. They want to see a visualization of failed login attempts from different geographical locations. Which component of Microsoft Sentinel should you use for this visualization?",
+    "options": [
+        {
+            "text": "Workbooks",
+            "correct": true
+        },
+        {
+            "text": "Analytics Rules",
+            "correct": false
+        },
+        {
+            "text": "Hunting Queries",
+            "correct": false
+        },
+        {
+            "text": "Watchlists",
+            "correct": false
+        }
+    ],
+    "explanation": "**Workbooks** (formerly Azure Monitor Workbooks) are used for creating interactive reports and visualizations within Microsoft Sentinel, including maps and charts for security telemetry.\n\n**Why not the other options:**\n- **Analytics Rules** — Used for creating 'alerts' and 'incidents' when certain conditions are met, but they don't provide the visualization interface themselves.\n- **Hunting Queries** — Used by security analysts to proactively search for threats in the logs.\n- **Watchlists** — Data that you can correlate with events (e.g., a list of high-value employees or IP ranges).",
+    "category": "Manage security operations",
+    "caseStudy": "scenarios/case_study_sentinel_surveillance.json"
+}

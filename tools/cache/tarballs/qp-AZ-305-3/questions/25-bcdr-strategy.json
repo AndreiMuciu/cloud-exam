@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-bcdr-strategy",
+    "question": "An online ticketing company must design regional disaster recovery for its booking platform. The business has approved an **RTO of 30 minutes** and an **RPO of 5 minutes** for a regional outage, and has instructed the architects to meet — not exceed — these targets at the **lowest ongoing cost**.\n\nWhich disaster recovery pattern should you recommend?",
+    "options": [
+        {
+            "text": "Warm standby: a scaled-down but fully deployed copy of the platform in a secondary region with continuous data replication, scaled out during failover",
+            "correct": true
+        },
+        {
+            "text": "Active-active: the platform runs at full capacity in two regions behind a global load balancer serving traffic from both",
+            "correct": false
+        },
+        {
+            "text": "Backup and restore: geo-redundant backups only, with all infrastructure redeployed from templates after a disaster",
+            "correct": false
+        },
+        {
+            "text": "Pilot light: only the databases replicate to the secondary region; compute and networking are provisioned from templates during a disaster",
+            "correct": false
+        }
+    ],
+    "explanation": "DR patterns form a cost/recovery spectrum — backup-restore → pilot light → warm standby → active-active (multi-site) — and the design skill is picking the **cheapest pattern that still meets the targets**:\n\n**Warm standby** fits RTO 30 min / RPO 5 min precisely:\n- The secondary environment is **already deployed and running** (at minimal capacity), so failover is: redirect traffic + scale out — comfortably done in tens of minutes and easily rehearsed\n- **Continuous data replication** keeps data loss to minutes, meeting the 5-minute RPO\n- Ongoing cost is a fraction of a full second site, because standby compute runs small until needed\n\n**Why not the other options:**\n- **Active-active** — Meets the targets easily (near-zero RTO/RPO) but at roughly double the run cost plus the engineering burden of dual-write/data-consistency design. The business explicitly said to *meet, not exceed*, the targets at lowest cost — paying for capabilities beyond the approved RTO/RPO is the classic over-engineering trap this question type probes\n- **Backup and restore** — Cheapest, but recovery means provisioning all infrastructure and *restoring data from backups*: realistically hours for RTO, and RPO equals backup frequency (typically hours) — misses both targets by an order of magnitude\n- **Pilot light** — Data replication satisfies the RPO, but at disaster time the compute and networking must be **provisioned, configured, and validated from templates** before traffic can flow. Under a real regional outage (with the accompanying capacity rush and human pressure), completing all of that reliably inside 30 minutes is not a commitment an architect should sign — the RTO is at serious risk",
+    "category": "Design Business Continuity Solutions"
+}

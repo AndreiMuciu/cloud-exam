@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-data-always-encrypted",
+    "question": "A payroll application stores salary and bank account columns in an Azure SQL database. Compliance requires that database administrators and Microsoft operators must never be able to view these values in plaintext — even when running ad-hoc queries with full DBA rights — while the payroll application itself continues to read and write the values.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Transparent Data Encryption (TDE) with a customer-managed key in Azure Key Vault",
+            "correct": false
+        },
+        {
+            "text": "Always Encrypted with column encryption keys stored in Azure Key Vault",
+            "correct": true
+        },
+        {
+            "text": "Dynamic data masking on the salary and bank account columns",
+            "correct": false
+        },
+        {
+            "text": "Azure Storage service-side encryption with infrastructure double encryption",
+            "correct": false
+        }
+    ],
+    "explanation": "**Always Encrypted** is the only listed technology that protects data from *the database engine and its administrators*:\n\n- Sensitive columns are encrypted **client-side** by the application's driver using column encryption keys; the database only ever stores and returns ciphertext\n- Because the column master key lives in **Azure Key Vault** under the application team's control, DBAs and Microsoft operators can query the table but see only encrypted bytes — satisfying the \"never in plaintext, even with full DBA rights\" requirement\n- The payroll application, which is authorized to access the key, transparently encrypts and decrypts values through its client driver (with secure-enclave support enabling richer queries such as range comparisons if needed)\n\n**Why not the other options:**\n- **TDE with customer-managed key** — TDE encrypts data files and backups **at rest** to protect against stolen media; the engine decrypts pages in memory, so anyone who can run `SELECT` — including every DBA — sees plaintext. A CMK changes who controls the at-rest key, not who can query the data\n- **Dynamic data masking** — A presentation-layer convenience that obfuscates results for non-privileged users. Administrators can be granted UNMASK, can query underlying data via privileged paths, and masking is trivially bypassed by inference queries — it is explicitly *not* a security boundary against DBAs\n- **Storage service-side / double encryption** — Applies to Azure Storage accounts, not Azure SQL query access; like TDE it addresses at-rest threats, not privileged query access",
+    "category": "Design Data Storage Solutions"
+}

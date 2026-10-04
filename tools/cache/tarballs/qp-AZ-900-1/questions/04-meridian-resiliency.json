@@ -1,0 +1,25 @@
+{
+    "id": "az900-04-meridian-resiliency",
+    "question": "To meet the **Meridian Healthcare Systems** requirement to remain available even if an entire datacenter in the primary region fails, which Azure feature should they implement?",
+    "options": [
+        {
+            "text": "Availability Sets",
+            "correct": false
+        },
+        {
+            "text": "Availability Zones",
+            "correct": true
+        },
+        {
+            "text": "Resource Groups",
+            "correct": false
+        },
+        {
+            "text": "Management Groups",
+            "correct": false
+        }
+    ],
+    "explanation": "**Availability Zones** protect against the failure of an entire datacenter. Each zone consists of one or more datacenters with independent power, cooling, and networking.\n\n**Why not the other options:**\n- **Availability Sets** — Protect against hardware failures *within* a single datacenter (rack-level failure), but not the failure of the entire datacenter.\n- **Resource Groups** — A logical container for resources, not a high-availability feature.\n- **Management Groups** — Used to manage multiple subscriptions, not for workload availability.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_meridian_healthcare.json"
+}

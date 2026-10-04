@@ -1,0 +1,26 @@
+{
+    "id": "ai200-28-matching-messaging-services",
+    "type": "matching",
+    "question": "Match each integration requirement to the Azure service that best fits it.",
+    "sourceItems": [
+        "Back-end order commands that must be processed exactly once, in order per customer, with dead-letter handling for poison messages",
+        "Fan-out push notifications to many subscribers the moment a blob is created or a custom application state change occurs",
+        "Ingest millions of telemetry readings per second from devices for downstream stream analytics with per-partition offset replay",
+        "A simple, low-cost queue expected to grow beyond 80 GB of backlog, consumed by a single worker polling for work items",
+        "Synchronous request/response API calls between two services with sub-second latency"
+    ],
+    "targetSlots": [
+        "Azure Service Bus",
+        "Azure Event Grid",
+        "Azure Event Hubs",
+        "Azure Queue Storage"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Azure Service Bus** — Enterprise messaging: sessions give per-customer FIFO, duplicate detection approximates exactly-once, and every queue/subscription has a dead-letter sub-queue. That combination (ordering + DLQ + transactional processing) is Service Bus territory.\n- **Azure Event Grid** — A push-based *eventing* backplane for discrete state-change notifications. It fans a lightweight event out to many subscribers with near-real-time HTTP push, native blob-created system events, and custom topics for application events.\n- **Azure Event Hubs** — A partitioned log for *streaming* telemetry at massive throughput. Consumers track offsets per partition and can rewind/replay, which queue semantics cannot do.\n- **Azure Queue Storage** — Minimal queueing on top of a storage account: cheap, polling-based, and it supports queues far beyond the 80 GB ceiling of a Service Bus queue — the classic reason to choose it for huge simple backlogs.\n\nThe fifth requirement — **synchronous request/response** — is the decoy: none of these asynchronous messaging/eventing services fit; that is a direct HTTP/gRPC call (optionally fronted by API Management).",
+    "category": "Connect to and consume Azure services"
+}

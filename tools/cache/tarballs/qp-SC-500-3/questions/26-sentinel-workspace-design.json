@@ -1,0 +1,24 @@
+{
+    "id": "sc500-s3-26-sentinel-workspace-design",
+    "question": "You are standing up Microsoft Sentinel for a company whose Azure footprint and SOC are entirely in one region and one tenant. The IT operations team already runs a Log Analytics workspace for VM performance data, and its engineers must not gain access to security data. The SOC must control access to Sentinel independently, and security data must be kept separate from operational data. How should you create and connect the workspace?",
+    "options": [
+        {
+            "text": "Create a new Log Analytics workspace in a dedicated resource group for security, enable Microsoft Sentinel on it, and assign the SOC its Microsoft Sentinel roles at that resource group scope — leaving the operations workspace untouched",
+            "correct": true
+        },
+        {
+            "text": "Enable Microsoft Sentinel on the existing operations workspace to avoid duplicate ingestion charges, and use table-level RBAC to hide the performance tables from the SOC",
+            "correct": false
+        },
+        {
+            "text": "Create one workspace per data connector so that each data source's access can be controlled separately",
+            "correct": false
+        },
+        {
+            "text": "Create the Sentinel workspace in a separate Microsoft Entra tenant and manage it through Azure Lighthouse for maximum isolation",
+            "correct": false
+        }
+    ],
+    "explanation": "The default guidance for a single-tenant, single-region organization is **one dedicated workspace for Microsoft Sentinel**, isolated from operational logging. Placing it in a **dedicated resource group** makes access management clean: Microsoft Sentinel's RBAC roles (Reader, Responder, Contributor) assigned at that resource group give the SOC self-contained control, while IT operations engineers — whose permissions live on their own workspace and resource group — never see security data. Keeping security and operational data in separate workspaces also keeps retention, table plans, and cost management independently tunable.\n\n**Why not the other options:**\n- **Enabling Sentinel on the operations workspace** — mixing the estates means operations personnel with workspace-level rights can reach security data unless you build and forever maintain fragile table-level carve-outs — and Sentinel pricing applies to the workspace's ingestion patterns. Separation of duties is the stated requirement; a shared workspace works against it structurally.\n- **One workspace per connector** — Sentinel's correlation power comes from analytics rules and hunting queries joining data *within* a workspace. Fragmenting per source multiplies cost and management burden and cripples cross-source detection; access control within a workspace is handled by RBAC and, where needed, resource-context access — not by workspace sprawl.\n- **Separate tenant + Lighthouse** — multi-tenant designs and Lighthouse exist for service providers and genuinely multi-tenant enterprises. For a single-tenant company this adds identity management, licensing, and operational complexity with no security benefit that a dedicated resource group doesn't already deliver.",
+    "category": "Manage and monitor security posture"
+}

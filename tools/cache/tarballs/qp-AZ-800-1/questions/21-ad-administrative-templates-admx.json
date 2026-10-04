@@ -1,0 +1,24 @@
+{
+    "id": "az800-21-ad-administrative-templates-admx",
+    "question": "You want to manage the settings of the latest versions of Microsoft Edge using Group Policy in your on-premises AD DS environment. The required settings do not appear in the Group Policy Management Editor by default. What should you do?",
+    "options": [
+        {
+            "text": "Upgrade the domain controllers to Windows Server 2022.",
+            "correct": false
+        },
+        {
+            "text": "Download and copy the Edge ADMX and ADML files to the Central Store (PolicyDefinitions folder).",
+            "correct": true
+        },
+        {
+            "text": "Run 'gpupdate /force' on all clients.",
+            "correct": false
+        },
+        {
+            "text": "Use the Azure Portal to manage the browser settings via Azure Policy.",
+            "correct": false
+        }
+    ],
+    "explanation": "To manage new applications or OS features via GPO, you must add the relevant **Administrative Templates (.admx files)** and their language files (.adml) to the **Central Store** (located in the SYSVOL share). This makes them available to all GPO editors in the domain.\n\n**Why not the other options:**\n- **Upgrade DC** — While newer OS versions include more templates, specific apps like Edge always require manual template updates to stay current.\n- **GPUpdate** — This applies policy *clients*, it doesn't add new policy *options* to the editor.",
+    "category": "Deploy and manage AD DS in on-premises and cloud environments"
+}

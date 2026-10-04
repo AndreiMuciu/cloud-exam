@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-ruddervane-exemption",
+    "question": "An *allowed locations* Azure Policy assignment with the **Deny** effect is applied at the *Landing Zones* management group, restricting deployments to West Europe, East US, and Southeast Asia.\n\nYou need to allow the legacy analytics workload to keep running and deploying resources in North Europe until its migration completes next quarter. The exception must be time-limited, documented, and must expire automatically, and the policy must continue to protect every other workload.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Create a policy exemption with the Waiver category at the legacy workload's resource group scope, and configure an expiration date",
+            "correct": true
+        },
+        {
+            "text": "Remove the policy assignment from the Landing Zones management group and re-assign it individually to every compliant subscription",
+            "correct": false
+        },
+        {
+            "text": "Change the policy assignment's effect from Deny to Audit until the migration completes",
+            "correct": false
+        },
+        {
+            "text": "Move the legacy workload's subscription out of the management group hierarchy until the migration completes",
+            "correct": false
+        }
+    ],
+    "explanation": "An **Azure Policy exemption** is designed exactly for this situation: it excludes a narrow scope (here, one resource group) from evaluation of a specific assignment **without weakening the assignment anywhere else**. Exemptions support:\n\n- An **expiration date** (`expiresOn`), so the exception ends automatically next quarter without anyone having to remember to revoke it\n- A **category** (*Waiver* — the requirement is accepted temporarily — or *Mitigated*), plus a display name and description, giving the compliance team the documented, auditable record they require\n- A precise **scope** — the single resource group — so all other resources in all 45 subscriptions remain protected by the Deny effect\n\n**Why not the other options:**\n- **Re-assigning per subscription** — This explodes administrative overhead (dozens of assignments to create and keep in sync), contradicting the requirement to minimize per-subscription administration, and any new subscription vended by the pipeline would be unprotected until someone remembers to assign the policy. It also still doesn't produce a *time-limited* exception\n- **Changing Deny to Audit** — This weakens enforcement for the entire management group: every workload could then deploy to disallowed regions and merely be flagged. The requirement is to keep protection for everything except one resource group\n- **Moving the subscription out of the hierarchy** — The whole subscription would escape *all* inherited governance (every policy and RBAC assignment from the management groups), not just the location restriction — a far broader exception than the compliance team approved, and nothing would expire automatically",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_ruddervane_industrial.json"
+}

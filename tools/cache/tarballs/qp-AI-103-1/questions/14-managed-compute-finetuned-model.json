@@ -1,0 +1,24 @@
+{
+    "id": "ai103-14-managed-compute-finetuned-model",
+    "question": "You fine-tuned an open-weight small language model and must deploy it for low-latency production inference. The fine-tuned model is not offered as a serverless (pay-as-you-go) API deployment option in your region.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Deploy the fine-tuned model to a managed compute (real-time) endpoint, sized with dedicated compute instances for the expected load.",
+            "correct": true
+        },
+        {
+            "text": "Wait until the model is offered as a serverless API in your region before deploying anything.",
+            "correct": false
+        },
+        {
+            "text": "Deploy it as a Global Standard serverless deployment regardless, since every model supports that deployment type.",
+            "correct": false
+        },
+        {
+            "text": "Package the fine-tuned model as an Azure AI Content Understanding analyzer.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Managed compute deployment** provisions dedicated compute instances that you size for your load, and it is the deployment path for models that aren't available as a serverless API — including many fine-tuned and open-weight models — so it directly satisfies the low-latency, production requirement now.\n\n**Why not the other options:**\n- **Waiting for serverless availability** — Not a deployment option at all; it is an indefinite delay with no guarantee the model is ever offered serverless in that region, and it doesn't meet the \"now\" production need.\n- **Forcing a Global Standard deployment** — Serverless deployment types are model- and region-specific; not every model (especially a custom fine-tune) is eligible, so this option is simply unavailable for the described model.\n- **A Content Understanding analyzer** — Content Understanding is a document/multimodal extraction capability, not a hosting mechanism for a general-purpose fine-tuned language model.",
+    "category": "Plan and manage an Azure AI solution"
+}

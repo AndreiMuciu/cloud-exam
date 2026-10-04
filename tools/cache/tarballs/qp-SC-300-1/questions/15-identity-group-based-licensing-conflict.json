@@ -1,0 +1,24 @@
+{
+    "id": "sc300-identity-group-based-licensing-conflict",
+    "question": "A user is a member of two groups: Group A applies a Microsoft 365 E3 license with the Exchange Online service plan enabled, and Group B applies a Microsoft 365 E3 license with the Exchange Online service plan explicitly disabled. In the Microsoft Entra admin center, the user's license status shows a \"Problem\" indicator for a service plan.\n\nWhat is the most accurate description of the resulting state, and how should an administrator resolve it?",
+    "options": [
+        {
+            "text": "Group-based licensing resolves plan-level conflicts by disabling the conflicting service plan for that user, and admins can inspect the conflict on the user's \"Licenses\" blade to decide whether to adjust the group assignments",
+            "correct": true
+        },
+        {
+            "text": "The two group license assignments cancel each other out entirely, and the user receives no Microsoft 365 E3 license at all until the conflict is fixed",
+            "correct": false
+        },
+        {
+            "text": "Group-based licensing does not support any per-service-plan customization, so both groups must assign the exact same set of enabled service plans",
+            "correct": false
+        },
+        {
+            "text": "The conflict can only be resolved by removing group-based licensing entirely and assigning the license directly to the user",
+            "correct": false
+        }
+    ],
+    "explanation": "When multiple group license assignments provide the same product but disagree on whether a specific service plan is enabled or disabled, Microsoft Entra ID's group-based licensing engine resolves it automatically — the disabled setting effectively takes precedence for that plan — and surfaces a \"Problem licenses\" indicator so an administrator can review exactly which service plan is in conflict and adjust one of the group assignments if the resulting state isn't what was intended.\n\n**Why not the other options:**\n- **\"No license at all\"** — the user still receives the underlying product license (Microsoft 365 E3); the conflict is scoped to the specific service plan setting, not the whole product.\n- **\"No per-service-plan customization at all\"** — group-based licensing explicitly supports enabling/disabling individual service plans within a license assigned to a group; the scenario's conflict only arises because that customization exists and differs between the two groups.\n- **\"Must remove group-based licensing entirely\"** — an admin can resolve the conflict by adjusting the conflicting group's service-plan configuration or group membership; removing group-based licensing altogether is a far more drastic step than required.",
+    "category": "Implement and manage user identities"
+}

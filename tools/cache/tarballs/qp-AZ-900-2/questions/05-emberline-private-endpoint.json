@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-05-emberline-private-endpoint",
+    "question": "Emberline requires that the storage account holding turbine sensor data be reachable only over private IP addresses from inside the engineering virtual network, with its public endpoint disabled. What should they configure?",
+    "options": [
+        {
+            "text": "A private endpoint for the storage account",
+            "correct": true
+        },
+        {
+            "text": "A public endpoint protected by a storage firewall rule",
+            "correct": false
+        },
+        {
+            "text": "An Azure VPN Gateway on the virtual network",
+            "correct": false
+        },
+        {
+            "text": "A DNS zone in Azure DNS",
+            "correct": false
+        }
+    ],
+    "explanation": "A **private endpoint** gives the storage account a network interface with a **private IP address inside the virtual network**, so traffic between the VNet and the service travels over the Microsoft backbone and never touches the public internet. The account’s public endpoint can then be disabled entirely, which is precisely the stated requirement.\n\n**Why not the other options:**\n- **Public endpoint with a firewall rule** — Restricts *who* can reach the public endpoint, but the service is still exposed through a public IP address, which the requirement rules out.\n- **Azure VPN Gateway** — Connects on-premises networks (or individual clients) to a VNet over encrypted tunnels; it does not give an Azure PaaS service a private address inside the VNet.\n- **Azure DNS zone** — Hosts DNS records; on its own it does not change how the storage account is exposed on the network.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_emberline_energy.json"
+}

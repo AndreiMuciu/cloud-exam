@@ -1,0 +1,25 @@
+{
+    "id": "ai200-11-vantorra-appconfig-refresh",
+    "question": "Vantorra operators change several related App Configuration settings together. Running instances must reload all changed settings atomically, without restarting, and without polling every key on every request.\n\nHow should you configure the App Configuration provider in the scoring service?",
+    "options": [
+        {
+            "text": "Reduce the provider's cache expiration to one second so every key is re-read from the service almost continuously.",
+            "correct": false
+        },
+        {
+            "text": "Register a single sentinel key for refresh with refresh_all enabled; operators update the sentinel last, and the provider reloads the whole configuration only when the sentinel's value changes.",
+            "correct": true
+        },
+        {
+            "text": "Restart the container app's active revision from a deployment pipeline whenever a setting changes.",
+            "correct": false
+        },
+        {
+            "text": "Subscribe the application to Key Vault events so configuration reloads whenever any secret version changes.",
+            "correct": false
+        }
+    ],
+    "explanation": "The **sentinel key** pattern is the recommended way to refresh App Configuration dynamically. The provider watches one registered key; operators change all the real settings first and bump the sentinel **last**. When the provider's refresh interval elapses, it checks only that one key, and because `refresh_all` is enabled it reloads the entire configuration in one pass — atomic from the app's perspective, no restart, and only a single-key check per interval.\n\n**Why not the other options:**\n- **One-second cache on all keys** — Effectively constant polling of every key, adding load and cost; settings changed mid-edit would also be picked up piecemeal, breaking atomicity.\n- **Restarting the revision** — A restart is exactly what the requirement rules out, and it drops in-flight scoring requests.\n- **Key Vault events** — App Configuration settings are not Key Vault secrets; secret-version events say nothing about configuration key changes.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions",
+    "caseStudy": "scenarios/case_study_vantorra_financial.json"
+}

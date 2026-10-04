@@ -1,0 +1,19 @@
+{
+    "id": "dp900-s3-15-transaction-lifecycle-ordering",
+    "type": "ordering",
+    "question": "A payments application moves money between two accounts. Per its design, the debit is always applied before the credit, and both updates must succeed or fail together.\n\nPlace the steps of the successful transaction in the correct order, from first to last.",
+    "items": [
+        "Commit the transaction so both changes become permanent",
+        "Begin a new transaction to group the two updates together",
+        "Apply the debit update to the source account",
+        "Apply the credit update to the destination account"
+    ],
+    "correctOrder": [
+        "Begin a new transaction to group the two updates together",
+        "Apply the debit update to the source account",
+        "Apply the credit update to the destination account",
+        "Commit the transaction so both changes become permanent"
+    ],
+    "explanation": "The lifecycle of a successful database transaction is:\n\n1. **Begin the transaction** — This tells the database that the following statements form one atomic unit of work; nothing can be grouped until the boundary is opened.\n2. **Apply the debit update** — The application's design applies the debit to the source account first, inside the open transaction.\n3. **Apply the credit update** — The credit to the destination account follows, still inside the same transaction, so at no committed point does money exist in both accounts or in neither.\n4. **Commit the transaction** — The commit makes both updates permanent together. (If either update had failed, a rollback would have undone them both instead.)\n\n**Why not the other options:**\n- Any sequence that commits before both updates have run would make changes permanent while the work is incomplete, defeating the purpose of grouping them.\n- Applying either update before beginning the transaction would leave that change outside the atomic unit, so a later failure could not roll it back.\n- Applying the credit before the debit contradicts the stated application design, which fixes the debit-first order.",
+    "category": "Describe Core Data Concepts"
+}

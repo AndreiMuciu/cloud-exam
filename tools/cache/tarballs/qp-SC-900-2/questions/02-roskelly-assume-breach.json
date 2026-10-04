@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-02-roskelly-assume-breach",
+    "question": "Following the board directive to \"plan for compromise,\" the Roskelly Outfitters security team redesigns its operations as if an attacker already has a foothold: access is segmented so a compromised account reaches as little as possible, all sessions are encrypted end to end, and analytics continuously watch for signs of intrusion so the blast radius of any incident is minimized.\n\nWhich Zero Trust guiding principle is the team applying?",
+    "options": [
+        {
+            "text": "Assume breach",
+            "correct": true
+        },
+        {
+            "text": "Verify explicitly",
+            "correct": false
+        },
+        {
+            "text": "Use least privilege access",
+            "correct": false
+        },
+        {
+            "text": "Shared responsibility",
+            "correct": false
+        }
+    ],
+    "explanation": "The **assume breach** principle of Zero Trust means operating as though an attacker is already inside the environment. Instead of trusting the internal network, the organization **segments access to minimize blast radius, uses end-to-end encryption, and applies analytics to detect threats and improve defenses** — precisely the measures Roskelly is putting in place.\n\n**Why not the other options:**\n- **Verify explicitly** — This principle is about the *authentication and authorization decision*: always validating every access request using all available signals such as identity, location, and device health. The scenario describes designing for containment and detection, not how sign-in decisions are made.\n- **Use least privilege access** — This principle limits *how much* access users get (just-in-time, just-enough-access). Segmentation of the environment to contain an intruder is driven by assuming breach; the scenario's focus is on operating as if compromise has already happened.\n- **Shared responsibility** — The shared responsibility model divides security duties between a cloud provider and its customer. It is a cloud accountability concept, not one of the three Zero Trust guiding principles.",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_roskelly_outfitters.json"
+}

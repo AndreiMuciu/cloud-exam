@@ -1,0 +1,13 @@
+{
+    "id": "case_study_marrolyn",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Marrolyn Retail** runs a global e-commerce storefront with customers in North America, Europe, and Asia. Seasonal sales events cause traffic to spike to more than 20 times the normal baseline for short periods.\n\n**Current Environment:**\n- The storefront web application is hosted on backend pools of VMs in three Azure regions.\n- A single public entry point must accelerate and secure traffic before it reaches any regional backend.\n- The security team has flagged repeated OWASP Top 10 style attack attempts (SQL injection, cross-site scripting) against the storefront in the past quarter."
+            },
+        {
+            "title": "Web Platform Requirements",
+            "content": "**Global delivery:**\n- Traffic must be routed to the closest healthy regional backend and static assets should be cached at edge locations close to shoppers.\n- One of the regional origins is intentionally kept off the public internet entirely — Marrolyn requires a fully private path from the global entry point to that origin.\n- Microsoft-managed WAF rule sets and bot protection are both mandatory requirements for the global entry point.\n\n**Backend health:**\n- Each regional backend pool must be monitored so unhealthy VMs are automatically removed from rotation.\n- The team wants to probe a custom `/health` path rather than rely on the default probe behavior, and wants to fail a server out after 2 consecutive bad responses.\n\n**Security rollout:**\n- Because the storefront is business-critical, any new WAF policy must first run in a mode that logs matched rules without blocking legitimate shoppers, before it is switched to actively block attacks."
+        }
+    ]
+}

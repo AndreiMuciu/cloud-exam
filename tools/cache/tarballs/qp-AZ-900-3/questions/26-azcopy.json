@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-26-azcopy",
+    "question": "A photo-restoration studio digitizes historical prints and needs to upload several terabytes of image files from a local workstation into Azure Blob Storage. The studio wants a **command-line utility** it can script to run overnight, with support for resuming interrupted transfers. Which tool should it use?",
+    "options": [
+        {
+            "text": "AzCopy",
+            "correct": true
+        },
+        {
+            "text": "Azure Storage Explorer",
+            "correct": false
+        },
+        {
+            "text": "Azure Data Box",
+            "correct": false
+        },
+        {
+            "text": "Azure File Sync",
+            "correct": false
+        }
+    ],
+    "explanation": "**AzCopy** is Microsoft's **command-line utility for copying blobs and files to and from Azure Storage accounts**. Because it is a CLI tool, it can be scripted and scheduled — perfect for unattended overnight runs — and it is built for bulk transfers, with parallelism and the ability to **resume interrupted jobs** rather than starting over.\n\n**Why not the other options:**\n- **Azure Storage Explorer** — A **graphical** application for browsing and managing storage accounts. Convenient for interactive work (and it uses AzCopy under the hood for transfers), but a GUI is not what you script for scheduled, unattended uploads.\n- **Azure Data Box** — A physical appliance Microsoft ships to you for **offline** transfer of very large datasets (typically tens or hundreds of terabytes) when the network cannot do the job; the studio's terabytes can move over the wire with a scriptable tool.\n- **Azure File Sync** — Keeps an on-premises **Windows Server file share** synchronized with Azure Files as a caching tier; it is not a one-way bulk-upload utility for pushing image files into Blob Storage.",
+    "category": "Describe Azure Architecture and Services"
+}

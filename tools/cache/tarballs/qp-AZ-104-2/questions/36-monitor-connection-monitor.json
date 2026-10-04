@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-monitor-connection-monitor",
+    "type": "single",
+    "question": "Users report **intermittent slowness** between an application VM in your hub virtual network and an on-premises API reachable over a site-to-site VPN. You need to:\n\n- **Continuously** measure round-trip time and packet loss between the VM and the on-premises endpoint on a fixed test frequency\n- Keep the results as **historical trend data** for analysis\n- **Alert** the network team when round-trip time exceeds a threshold\n\nWhich Azure Network Watcher capability should you use?",
+    "options": [
+        { "text": "Connection monitor, with the application VM as the source and the on-premises endpoint as the destination", "correct": true },
+        { "text": "IP flow verify against the application VM's network interface", "correct": false },
+        { "text": "NSG flow logs with Traffic Analytics", "correct": false },
+        { "text": "Next hop, specifying the VM's IP as the source and the on-premises address as the destination", "correct": false }
+    ],
+    "explanation": "**Connection monitor** is Network Watcher's *continuous, synthetic* connectivity testing service. You define a test between a source (an Azure VM with the Network Watcher extension, or an on-premises machine with the Azure Monitor agent) and a destination (VM, FQDN, IP, or URL), choose the protocol and **test frequency**, and Connection monitor then records metrics over time — including **round-trip time** and the **percentage of failed checks** — giving exactly the historical trend the investigation needs. Because the results surface as Azure Monitor metrics (such as RoundTripTimeMs and ChecksFailedPercent), you can build **metric alerts** that notify the network team when RTT crosses the threshold.\n\n**Why not the other options:**\n- **IP flow verify**: A **point-in-time** diagnostic that answers one question — would this specific 5-tuple flow be allowed or denied by NSG rules right now? It measures no latency, runs no schedule, and keeps no history.\n- **NSG flow logs with Traffic Analytics**: These record and analyze *actual traffic flows* (who talked to whom, how much) for auditing and visibility. They are not synthetic probes and do not measure round-trip time on a schedule.\n- **Next hop**: Another one-shot diagnostic — it tells you which next hop (and route) applies to a destination from a VM, useful for routing problems, but it performs no continuous measurement and produces no metrics or alerts.",
+    "category": "Monitor and Maintain Azure Resources"
+}

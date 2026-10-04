@@ -1,0 +1,20 @@
+{
+    "id": "sc900-s2-14-identity-concepts-matching",
+    "type": "matching",
+    "question": "Match each identity concept to its description.",
+    "sourceItems": [
+        "Authentication",
+        "Authorization",
+        "Federation",
+        "Directory service"
+    ],
+    "targetSlots": [
+        "The process of proving that a user, device, or service is who or what it claims to be",
+        "The process of determining the level of access an authenticated identity has to a resource",
+        "A trust relationship that lets users in one domain access resources in another domain using their existing credentials",
+        "A hierarchical structure, such as Active Directory Domain Services, that stores and manages information about objects on a network"
+    ],
+    "correctMapping": [0, 1, 2, 3],
+    "explanation": "These four concepts form the vocabulary of identity:\n\n- **Authentication (AuthN)** — Proving an identity is genuine, typically with credentials such as a password, a certificate, biometrics, or an authenticator app. It answers \"who are you?\"\n- **Authorization (AuthZ)** — Once identity is proven, authorization determines *what* that identity is allowed to do — which resources it can reach and at what level (read, write, admin). It answers \"what can you do?\"\n- **Federation** — A trust relationship between identity domains: an identity provider in one organization vouches for its users so another organization's services accept them, enabling access across boundaries without a second set of credentials. This is what underlies signing in to one service with an account from another provider.\n- **Directory service** — A hierarchical store of network objects — users, groups, computers, printers — that can be managed and queried. Active Directory Domain Services (AD DS) is the best-known on-premises example.\n\nEach description names a distinct role in the identity lifecycle, so no two concepts are interchangeable: authentication precedes authorization, federation extends trust between providers, and a directory service is the underlying object store.",
+    "category": "Describe the concepts of security, compliance, and identity"
+}

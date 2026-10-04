@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-monitor-site-recovery",
+    "type": "single",
+    "question": "Azure Site Recovery replicates your production virtual machines from West Europe to North Europe. Compliance requires a **quarterly disaster recovery drill** that proves the VMs can run in North Europe — with **zero impact** on the production workloads and on the ongoing replication.\n\nWhat should you perform?",
+    "options": [
+        { "text": "A test failover into an isolated virtual network in North Europe, followed by a cleanup of the drill resources", "correct": true },
+        { "text": "A planned failover to North Europe, followed by a failback to West Europe", "correct": false },
+        { "text": "Disable replication and re-enable it to force a fresh initial synchronization", "correct": false },
+        { "text": "Restore the most recent recovery point into North Europe from an Azure Backup Recovery Services vault", "correct": false }
+    ],
+    "explanation": "A **test failover** is Site Recovery's purpose-built DR drill: it creates copies of the protected VMs in the target region from a chosen recovery point, inside an **isolated virtual network** that you select (deliberately separate from any production network to avoid IP conflicts and accidental traffic). The production VMs keep running untouched and **replication continues uninterrupted** throughout the drill. After validating that the applications work, you run **Cleanup test failover**, which deletes the drill VMs and records notes for the compliance audit trail. Microsoft recommends exactly this cadence of periodic test failovers to validate a DR plan.\n\n**Why not the other options:**\n- **Planned failover and failback**: A real failover shuts down and fails over the *production* workload, causing an outage, and failing back requires re-protecting and replicating in the reverse direction — a heavy, disruptive operation that violates the zero-impact requirement.\n- **Disable and re-enable replication**: This removes protection entirely and forces a full initial re-seed of every VM, leaving you without DR coverage for the duration. It proves nothing about the DR plan.\n- **Azure Backup restore**: Restoring from backup validates your *backups*, not your Site Recovery replication, recovery points, or failover runbooks — and it is a different service; ASR-protected VMs are drilled via test failover, not vault restores.",
+    "category": "Monitor and Maintain Azure Resources"
+}

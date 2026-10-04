@@ -1,0 +1,29 @@
+{
+    "id": "dp900-23-paas-database-benefits",
+    "type": "multi",
+    "question": "A team is choosing between Azure SQL Database (a fully managed service) and SQL Server installed on an Azure virtual machine. Which three advantages does the managed option provide over the VM-hosted approach? (Choose 3)",
+    "options": [
+        {
+            "text": "High availability is built into the service",
+            "correct": true
+        },
+        {
+            "text": "Automated patching and backups reduce administrative overhead",
+            "correct": true
+        },
+        {
+            "text": "Compute and storage can be scaled without purchasing or installing hardware",
+            "correct": true
+        },
+        {
+            "text": "Administrators keep full control over the operating system version and updates",
+            "correct": false
+        },
+        {
+            "text": "All PaaS database offerings can be paused so they incur no cost at all",
+            "correct": false
+        }
+    ],
+    "explanation": "PaaS database services shift infrastructure work to Microsoft:\n- **Built-in high availability** — Redundancy and failover are part of the service and backed by SLAs, with no cluster for you to design or operate.\n- **Automated patching and backups** — The platform patches the database engine and underlying OS and takes backups automatically, sharply reducing administrative overhead.\n- **Scaling without hardware** — You change a service tier or compute size instead of buying, racking, and installing servers.\n\n**Why the other options are wrong:**\n- **Full control of the operating system** — This is a characteristic of IaaS (SQL Server on an Azure VM). In PaaS offerings the OS is managed by Microsoft and is not accessible to you — giving up OS control is the trade-off for lower overhead.\n- **All PaaS databases can be paused to zero cost** — Only specific options (such as the Azure SQL Database serverless tier) support auto-pausing compute, and even paused databases still incur storage charges. It is not a universal PaaS capability.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-01-oakhaven-batch-processing",
+    "question": "Oakhaven Resorts' central job collects the nightly export files from all 45 properties and processes the entire day's records together in the early morning hours.\n\nWhich type of data processing does this consolidation job represent?",
+    "options": [
+        {
+            "text": "Stream processing",
+            "correct": false
+        },
+        {
+            "text": "Batch processing",
+            "correct": true
+        },
+        {
+            "text": "Online transaction processing (OLTP)",
+            "correct": false
+        },
+        {
+            "text": "Real-time dashboarding",
+            "correct": false
+        }
+    ],
+    "explanation": "This is **batch processing**. The defining traits are all present: records are **collected and buffered over a period** (the whole business day), then processed **together as a group** at a **scheduled time** (the early morning run). Batch processing is efficient for large volumes of data, but there is an inherent delay between when data is produced and when results are available — which is acceptable here.\n\n**Why not the other options:**\n- **Stream processing** — Processes each event (or a small rolling window of events) continuously **as it arrives**, with latency of seconds or less. Oakhaven's job deliberately waits until the end of the day and processes everything at once.\n- **Online transaction processing (OLTP)** — Describes the live systems that record individual business transactions as they happen (like each property's reservation database), not an overnight job that reshapes a full day of exported records.\n- **Real-time dashboarding** — Is a way of *visualizing* up-to-the-moment data, not a classification of how data is processed; nothing here updates in real time.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_oakhaven_resorts.json"
+}

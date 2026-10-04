@@ -1,0 +1,24 @@
+{
+    "id": "sc500-14-key-vault-network-access",
+    "question": "An Azure key vault stores TLS certificates used by an internal application. Security policy requires that the vault reject all public network traffic, that the application's VNet reach the vault privately, and that Azure disk encryption sets and trusted Microsoft services continue to function. How should you configure the vault's network settings?",
+    "options": [
+        {
+            "text": "Create a private endpoint for the vault in the application VNet, set Public network access to Disabled, and enable 'Allow trusted Microsoft services to bypass this firewall'",
+            "correct": true
+        },
+        {
+            "text": "Enable the vault firewall with the application VNet's public egress IP in the allow list, and disable soft delete to simplify certificate renewal",
+            "correct": false
+        },
+        {
+            "text": "Set Public network access to Enabled for all networks but require the Key Vault Administrator role for every request",
+            "correct": false
+        },
+        {
+            "text": "Create a service endpoint for Microsoft.KeyVault on the application subnet and set the vault's default action to Allow",
+            "correct": false
+        }
+    ],
+    "explanation": "A **private endpoint** gives the application VNet a private IP route to the vault, allowing **Public network access: Disabled** to satisfy the no-public-traffic rule. The **trusted services bypass** lets specific Microsoft services (such as disk encryption sets, Azure Backup, or ARM template deployment services, depending on configuration) reach the vault even though the firewall blocks other traffic.\n\n**Why not the other options:**\n- **Public egress IP allow-listing + disabling soft delete** — The vault would still accept (filtered) public traffic, and soft delete cannot be disabled on vaults and should never be turned off for recoverability.\n- **All networks + Key Vault Administrator per request** — Authorization does not satisfy a network isolation requirement, and requiring an administrator role for application reads massively over-privileges the app.\n- **Service endpoint with default action Allow** — Default action Allow means all networks can connect, and service endpoints still use the vault's public endpoint rather than making it private.",
+    "category": "Manage identity, access, and governance"
+}

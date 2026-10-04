@@ -1,0 +1,33 @@
+{
+    "id": "sc500-33-defender-for-ai-multi",
+    "type": "multi",
+    "question": "Your teams run generative AI applications on model deployments in Microsoft Foundry (Azure AI services). The SOC needs threat protection for these AI workloads: detection of prompt-injection and jailbreak attempts, alerts that include enough context to investigate, and a single place to monitor AI security posture and findings. Which three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Enable the Defender for AI Services plan under cloud workload protection on each subscription that hosts the model deployments",
+            "correct": true
+        },
+        {
+            "text": "Enable user prompt evidence so that relevant prompt and response snippets are included in the alerts for investigation",
+            "correct": true
+        },
+        {
+            "text": "Monitor findings and posture in the Data and AI security dashboard in Defender for Cloud",
+            "correct": true
+        },
+        {
+            "text": "Install the Azure Monitor Agent on the Foundry model endpoints to capture prompt traffic",
+            "correct": false
+        },
+        {
+            "text": "Enable Defender for Servers Plan 2 so its EDR component can inspect the model's prompts",
+            "correct": false
+        },
+        {
+            "text": "Turn off the deployments' content filters so Defender receives unmodified traffic to analyze",
+            "correct": false
+        }
+    ],
+    "explanation": "- **Defender for AI Services** is the cloud workload protection plan for Azure AI model deployments; enabled per subscription, it detects threats such as jailbreak and prompt-injection attempts (built on prompt analysis with Azure AI Content Safety Prompt Shields), credential/data-leak patterns, and anomalous usage.\n- **User prompt evidence** enriches those alerts with the suspicious prompt/response segments so SOC analysts can judge intent without reconstructing the interaction.\n- The **Data and AI security dashboard** in Defender for Cloud aggregates AI-related posture, alerts, and sensitive-data findings — the requested single monitoring surface.\n\n**Why not the other options:**\n- **Azure Monitor Agent on model endpoints** — Model deployments are PaaS endpoints, not VMs; there is nowhere to install an agent, and the protection is delivered service-side without agents.\n- **Defender for Servers EDR** — That plan protects servers at the OS level; EDR has no visibility into API-level prompt content of a PaaS AI service.\n- **Disabling content filters** — Content filters and Prompt Shields are complementary prevention layers, and threat detection does not require removing them; turning them off strictly weakens security.",
+    "category": "Secure compute"
+}

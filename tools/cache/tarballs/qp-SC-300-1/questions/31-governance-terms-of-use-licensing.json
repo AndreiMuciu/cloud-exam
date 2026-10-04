@@ -1,0 +1,24 @@
+{
+    "id": "sc300-governance-terms-of-use-licensing",
+    "question": "An organization only holds Microsoft Entra ID P1 licenses (no P2 and no Microsoft Entra ID Governance add-on). The compliance team wants to require every user to read and accept a legal terms-of-use document, enforced through Conditional Access, before they can sign in to any application.\n\nCan this be achieved with the organization's current licensing?",
+    "options": [
+        {
+            "text": "Yes — Conditional Access terms of use (ToU) attestation is included with Microsoft Entra ID P1 and does not require P2 or the Governance add-on",
+            "correct": true
+        },
+        {
+            "text": "No — terms of use requires Microsoft Entra ID P2 at minimum",
+            "correct": false
+        },
+        {
+            "text": "No — terms of use is only available as part of the Microsoft Entra ID Governance add-on",
+            "correct": false
+        },
+        {
+            "text": "Yes, but only if the organization also purchases the Microsoft Entra Suite",
+            "correct": false
+        }
+    ],
+    "explanation": "Unlike many other identity governance capabilities, **Conditional Access terms of use (ToU) attestation** is included starting at **Microsoft Entra ID P1** — it does not require P2 or the Microsoft Entra ID Governance add-on. An administrator uploads the ToU document and targets it in a Conditional Access policy requiring users to view and accept it before being granted access.\n\n**Why not the other options:**\n- **\"Requires P2 at minimum\"** and **\"only in the Governance add-on\"** — both overstate the licensing requirement; ToU is explicitly one of the few identity governance-adjacent features already available at the P1 tier, unlike entitlement management, access reviews, or PIM, which do require P2 or Governance.\n- **\"Only with Microsoft Entra Suite\"** — the Entra Suite includes ToU (since it includes everything in Governance and more), but it is not required to use ToU — P1 alone is sufficient.",
+    "category": "Plan and automate identity governance"
+}

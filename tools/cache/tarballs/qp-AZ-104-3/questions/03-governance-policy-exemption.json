@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-governance-policy-exemption",
+    "type": "single",
+    "question": "The Azure Policy assignment **Deny-PublicIP** (effect: Deny) at the **MG-Lindengate** management group currently blocks the telemedicine pilot from creating public IP addresses in resource group **RG-TelePilot**.\n\nRecall the constraints:\n\n- The Deny-PublicIP assignment itself must **not** be modified\n- The pilot is approved for **90 days**, and the exception must expire automatically\n- The exception must remain visible for audits\n\nWhat should you create?",
+    "options": [
+        { "text": "An Azure Policy exemption at the RG-TelePilot scope, with the Waiver category and an expiration date set to the end of the pilot", "correct": true },
+        { "text": "An exclusion (notScopes) for RG-TelePilot on the Deny-PublicIP assignment", "correct": false },
+        { "text": "A second policy assignment at the RG-TelePilot scope that explicitly allows public IP addresses", "correct": false },
+        { "text": "A temporary move of RG-TelePilot's subscription out of the MG-Lindengate management group", "correct": false }
+    ],
+    "explanation": "An **Azure Policy exemption** is the mechanism designed for time-boxed, auditable exceptions. Creating an exemption at the **RG-TelePilot** scope exempts that resource group from evaluation of the Deny-PublicIP assignment **without touching the assignment itself**. The exemption supports an **expiration date**, so it stops working automatically when the 90-day pilot ends, and it is a first-class ARM object (with a category such as **Waiver**, for approved business exceptions) that remains visible in the portal and in compliance data — exactly what auditors need.\n\n**Why not the other options:**\n- **Exclusion (notScopes) on the assignment**: this requires **editing the Deny-PublicIP assignment**, which the requirements forbid. Exclusions also have no expiration mechanism — someone must remember to remove the exclusion after the pilot, and the change is far less visible for audit purposes than a dedicated exemption object.\n- **A second \"allow\" assignment**: Azure Policy has no allow-override semantics — if *any* applicable policy denies a request, the request is denied. A more specific assignment at a narrower scope cannot overrule a Deny inherited from the management group.\n- **Moving the subscription out of MG-Lindengate**: this would strip **every** policy and inherited RBAC configuration of the management group from **all** resources in that subscription — a massive governance change to solve a single resource group's exception, with nothing enforcing that it gets moved back.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_lindengate.json"
+}

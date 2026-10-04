@@ -1,0 +1,14 @@
+{
+    "id": "case_study_grisloom_commerce",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Grisloom Commerce** runs an online marketplace for home-improvement products. The product team wants to replace its keyword-only site search with a conversational shopping assistant that can also place reorders on a customer's behalf.\n\n**Current Environment:**\n- Product catalog, order history, and return policies are indexed in an Azure AI Foundry project (`grisloom-shopping-foundry`).\n- A separate order-management API can place, modify, and cancel orders.\n- The assistant is expected to run as a set of cooperating agents: one specializing in product discovery, one specializing in order actions, and one that supervises the conversation.\n- Traffic is highly seasonal, spiking sharply during promotional events, and the finance team has asked for tighter visibility into token spend per agent."
+
+        },
+        {
+            "title": "Requirements",
+            "content": "**Governance Requirements:**\n- Any agent action that places or modifies an order over $500 must pause for explicit customer confirmation before executing, rather than completing autonomously.\n- Access from the agents to the order-management API and the Foundry project must not rely on any secret stored in application settings or source control.\n\n**Operations Requirements:**\n- The platform team must be able to see token consumption, request volume, and cost broken out per agent, and must be alerted before any agent's model deployment approaches its configured rate limit.\n- The three agents (product discovery, order actions, and the supervisor) must hand off a single customer conversation between one another based on customer intent, with the supervisor deciding which specialist agent responds next.\n\n**Reliability Requirements:**\n- During a promotional spike, request volume to the shopping assistant can grow more than tenfold within minutes, and the solution must accommodate that without the team manually reconfiguring capacity in the moment."
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-35-bar-chart",
+    "question": "An analyst must build a Power BI visual that compares total annual sales across eight product categories, so that viewers can instantly see which categories sold the most and how the categories rank against each other.\n\nWhich visualization type is the best choice?",
+    "options": [
+        {
+            "text": "A bar chart",
+            "correct": true
+        },
+        {
+            "text": "A line chart",
+            "correct": false
+        },
+        {
+            "text": "A card",
+            "correct": false
+        },
+        {
+            "text": "A treemap showing a single category",
+            "correct": false
+        }
+    ],
+    "explanation": "A **bar chart** (or its vertical sibling, the column chart) is the standard visual for **comparing a numeric value across discrete categories**. Each category gets its own bar, the bar lengths share a common baseline, and the human eye is extremely good at comparing lengths — so the biggest sellers and the overall ranking of the eight categories are visible at a glance. Sorting the bars by value makes the ranking even clearer.\n\n**Why not the other options:**\n- **A line chart** — Lines are for showing how a value changes over a **continuous axis, usually time** (a trend). Connecting eight unrelated product categories with a line would imply a progression between them that does not exist.\n- **A card** — A card displays **one single value** (for example, total sales overall). It cannot compare eight categories side by side.\n- **A treemap showing a single category** — A treemap conveys hierarchical part-to-whole proportions with nested rectangles, and one showing a *single* category communicates nothing comparative at all. Rectangle areas are also harder to compare precisely than bar lengths.",
+    "category": "Describe an Analytics Workload on Azure"
+}

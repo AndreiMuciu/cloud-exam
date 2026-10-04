@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-29-budget-alerts",
+    "question": "A university IT department creates a monthly budget of $5,000 in Microsoft Cost Management with an alert condition at 80% of the budget. Mid-month, actual spending reaches $4,000. What happens?",
+    "options": [
+        {
+            "text": "The configured recipients receive an alert notification, and all resources continue running unaffected",
+            "correct": true
+        },
+        {
+            "text": "All virtual machines in the subscription are automatically deallocated",
+            "correct": false
+        },
+        {
+            "text": "The subscription is suspended until the start of the next month",
+            "correct": false
+        },
+        {
+            "text": "New resource deployments are blocked until the budget is raised",
+            "correct": false
+        }
+    ],
+    "explanation": "Budgets in Microsoft Cost Management are a **monitoring and accountability tool, not an enforcement mechanism**. When spending crosses a configured threshold — here, 80% of $5,000 — the budget **sends notifications** to the configured recipients (and can trigger automation the customer has explicitly wired up, such as action groups), but **by default nothing is stopped, blocked, or shut down**. Resources keep running and charges continue to accrue; it is up to the team to act on the alert.\n\n**Why not the other options:**\n- **All virtual machines are automatically deallocated** — Budgets never take destructive action on their own; automated shutdowns happen only if the customer deliberately builds that automation.\n- **The subscription is suspended** — Exceeding a budget does not suspend a standard subscription; spending simply continues (spending caps exist only for certain credit-based offers, not as a budget feature).\n- **New deployments are blocked** — Deployment restrictions are the domain of Azure Policy and RBAC, not budgets; a budget threshold has no power to reject deployments.",
+    "category": "Describe Azure Management and Governance"
+}

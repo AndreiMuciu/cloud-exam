@@ -1,0 +1,20 @@
+{
+    "id": "sc900-s2-32-purview-pillars-matching",
+    "type": "matching",
+    "question": "Microsoft Purview approaches information protection and data lifecycle management through four organizing goals. Match each goal to its description.",
+    "sourceItems": [
+        "Know your data",
+        "Protect your data",
+        "Prevent data loss",
+        "Govern your data"
+    ],
+    "targetSlots": [
+        "Understand the data landscape and identify important content across the environment, for example by classifying items with sensitive information types and trainable classifiers",
+        "Apply protection such as encryption, access restrictions, and visual markings to sensitive content, typically through sensitivity labels",
+        "Detect risky behavior and stop accidental oversharing of sensitive content, for example blocking an outbound email that contains payment card numbers",
+        "Keep, delete, and store content in a compliant way, for example with retention policies, retention labels, and records management"
+    ],
+    "correctMapping": [0, 1, 2, 3],
+    "explanation": "Microsoft Purview's information protection and data lifecycle capabilities are organized around four goals that build on each other:\n\n- **Know your data** — Before anything can be protected, it must be found and understood. Classification capabilities — sensitive information types (patterns such as passport or credit card numbers), trainable classifiers (machine learning models that recognize categories of content), and the content and activity explorer views — reveal what sensitive data exists and where.\n- **Protect your data** — Once identified, sensitive content gets protection that travels with it. Sensitivity labels can apply encryption, restrict access to specific people, and add visual markings such as headers and watermarks.\n- **Prevent data loss** — Data loss prevention (DLP) policies watch how sensitive content is *used and shared* and intervene — showing policy tips, blocking an email or upload, or auditing the action — so protected information does not leave the organization by accident.\n- **Govern your data** — Content is kept only as long as it should be. Retention policies and labels ensure items are retained for required periods and disposed of afterward, and records management handles content with regulatory declaration and disposition requirements.\n\nEach description maps to exactly one goal: discovery and classification belong to *know*, encryption and markings to *protect*, blocking oversharing to *prevent loss*, and retention and disposition to *govern*.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

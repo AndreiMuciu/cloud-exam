@@ -1,0 +1,25 @@
+{
+    "id": "sc300-halbrecht-phishing-resistant-ca",
+    "question": "Halbrecht Financial Group's administrators must sign in using a method that cannot be captured or replayed by a phishing site, and this must be enforced by policy rather than left to individual choice.\n\nWhich Conditional Access configuration should you implement?",
+    "options": [
+        {
+            "text": "Create a Conditional Access policy targeting the Microsoft Admin Portals, granting access only when the sign-in satisfies the built-in \"Phishing-resistant MFA\" authentication strength",
+            "correct": true
+        },
+        {
+            "text": "Create a Conditional Access policy that requires multifactor authentication and enables Microsoft Authenticator push notifications as the only allowed method",
+            "correct": false
+        },
+        {
+            "text": "Create a Conditional Access policy that blocks sign-in from locations outside the corporate office IP range for all administrators",
+            "correct": false
+        },
+        {
+            "text": "Configure the per-user MFA legacy portal to require a second factor for each administrator account",
+            "correct": false
+        }
+    ],
+    "explanation": "Conditional Access supports **authentication strength** as a grant control, and Microsoft Entra ID includes a built-in **\"Phishing-resistant MFA\"** authentication strength that only accepts methods immune to credential replay and man-in-the-middle phishing — FIDO2 security keys, certificate-based authentication (smart card/derived credential), and Windows Hello for Business. Targeting this strength at the Microsoft Admin Portals (or all resources) for the administrator population enforces it as policy, not preference.\n\n**Why not the other options:**\n- **MFA with Authenticator push as the only method** — push notifications, even with number matching, are still vulnerable to MFA-fatigue and real-time relay/adversary-in-the-middle phishing attacks; this does not meet a genuinely phishing-resistant bar.\n- **Blocking sign-in outside the office IP range** — a location-based restriction addresses network origin, not the authentication method itself, and does not stop credential phishing from an approved location.\n- **The legacy per-user MFA portal** — this older mechanism only toggles blanket MFA per user; it cannot enforce a specific phishing-resistant authentication strength and is superseded by Conditional Access authentication strengths.",
+    "category": "Implement authentication and access management",
+    "caseStudy": "scenarios/case_study_halbrecht.json"
+}

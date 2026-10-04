@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-26-append-blobs",
+    "question": "Glenmarsh Logistics writes telemetry from its delivery vans to Azure Blob Storage. Each van continuously adds new lines to the end of its daily log file, and existing lines are never modified.\n\nWhich blob type is optimized for this workload?",
+    "options": [
+        {
+            "text": "Append blobs",
+            "correct": true
+        },
+        {
+            "text": "Block blobs",
+            "correct": false
+        },
+        {
+            "text": "Page blobs",
+            "correct": false
+        },
+        {
+            "text": "Archive blobs",
+            "correct": false
+        }
+    ],
+    "explanation": "**Append blobs** are purpose-built for **append-only scenarios such as logging**: new blocks can only be added to the **end** of the blob, and updating or deleting existing content is not supported. That matches the vans' behavior exactly — a steady stream of new log lines, never edits to old ones — and lets many writers add data efficiently without rewriting the file.\n\n**Why not the other options:**\n- **Block blobs** — The general-purpose blob type for documents, media, and backups. A block blob is best when content is uploaded as a whole (or replaced); continuously appending small pieces to it is far less efficient than using an append blob.\n- **Page blobs** — Collections of fixed 512-byte pages optimized for **random read/write** access; they are used as the backing store for virtual machine disks, not for sequential log appends.\n- **Archive blobs** — Not a blob *type* at all. Archive is an **access tier** for rarely accessed data, and a blob in the archive tier must be rehydrated before it can even be read — the opposite of a hot, constantly written log.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

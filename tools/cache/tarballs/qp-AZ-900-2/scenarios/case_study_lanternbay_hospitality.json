@@ -1,0 +1,13 @@
+{
+    "id": "case_study_lanternbay_hospitality",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**Lanternbay Hospitality** operates a chain of resort hotels across three continents. Staff sign in to cloud applications from hotel front desks, corporate offices, and personal devices while traveling. The company uses Microsoft Entra ID as its identity provider.\n\n**Business Context:**\n- Independent travel agencies (business partners) need access to Lanternbay’s room-inventory portal, but Lanternbay does not want to create or manage passwords for partner employees.\n- A recent phishing attempt against a front-desk manager has pushed security to the top of the agenda."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "**Identity Requirements:**\n- Sign-ins from trusted corporate networks should proceed with minimal friction, but sign-ins from unfamiliar locations or risky sessions must be challenged with additional verification — the control must evaluate conditions **at sign-in time**.\n- Partner travel agencies must authenticate with **their own organizations’ credentials**.\n\n**Defense Strategy:**\n- The CISO wants a security strategy in which identity, perimeter, network, compute, application, and data are **each protected by their own layer of controls**, so that the failure of any single control does not expose guest data."
+        }
+    ]
+}

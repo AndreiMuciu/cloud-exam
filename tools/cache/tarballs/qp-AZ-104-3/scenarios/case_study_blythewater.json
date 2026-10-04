@@ -1,0 +1,13 @@
+{
+    "id": "case_study_blythewater",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Blythewater Marine** provides vessel tracking and port logistics services to shipping operators across northern Europe. The company runs a hub-and-spoke network in the North Europe region.\n\n**Current Environment:**\n- Hub virtual network **VNet-Hub** (10.60.0.0/16) contains a VPN gateway named **VGW-Hub** with an active site-to-site tunnel to the harbor headquarters\n- Spoke virtual network **VNet-Ops** (10.61.0.0/16) is peered with VNet-Hub and contains the subnet **Subnet-Ingest** with 60 Linux VMs that process vessel telemetry\n- Field surveyors work from laptops aboard vessels and in remote ports, connecting over whatever internet access is available\n\n**Business Requirements:**\n- Outbound connectivity from Subnet-Ingest must be reliable at peak load and present a small, fixed set of source IP addresses to external partners\n- The company wants exactly **one** VPN gateway in the whole topology; spokes must not get their own gateways\n- Surveyor remote access must authenticate with corporate Microsoft Entra ID identities and be subject to Conditional Access with multifactor authentication"
+        },
+        {
+            "title": "Networking Detail",
+            "content": "**Telemetry Egress (Subnet-Ingest):**\n- The 60 VMs continuously call a partner tide-data API on the internet; the partner allowlists at most **four** source IP addresses per customer\n- During peak processing windows, outbound connections from the subnet intermittently fail; diagnostics point to exhaustion of source network address translation (SNAT) ports on the default outbound access path\n- No inbound connections from the internet to the VMs are required\n\n**Headquarters Reachability:**\n- Servers at the harbor headquarters must reach the VMs in VNet-Ops through the existing tunnel terminated on VGW-Hub in the hub\n- Currently, headquarters servers can reach hub resources but **cannot** reach any spoke address; the VNet-Hub / VNet-Ops peering is configured with default settings on both sides\n\n**Surveyor Remote Access:**\n- Surveyors will use the Azure VPN Client on company Windows laptops\n- Sign-in must use Microsoft Entra ID credentials (no client certificates to manage) so that Conditional Access and MFA policies apply\n- Some vessel and port networks are known to block classic IPsec/IKE ports, so the tunnel should work over standard outbound TLS (TCP 443)"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_okarune",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Okarune Financial** is a regional bank with 50 branch offices that all need connectivity back to core banking applications hosted in Azure. Branches vary widely in size, and most rely on off-the-shelf VPN/SD-WAN appliances rather than dedicated circuits.\n\n**Current Environment:**\n- A pilot ExpressRoute circuit already connects the bank's data center to Azure.\n- Branch offices currently have no connectivity to Azure at all.\n- The network team is small and wants to minimize the number of individual gateways and route tables it has to manage by hand as branches are added."
+        },
+        {
+            "title": "Connectivity Requirements",
+            "content": "**Branch onboarding:**\n- All 50 branches need site-to-site VPN connectivity into Azure, and the design must support onboarding many more branches over time without redesigning the hub.\n- Some branches will eventually need ExpressRoute, and mobile loan officers need point-to-site VPN access — all of this must be manageable from a single hub resource rather than a hand-built hub-and-spoke of virtual network gateways.\n\n**Resilience:**\n- The existing ExpressRoute circuit must have a VPN-based backup path in case the circuit itself fails, and the primary corporate VNet's gateway must support both connection types at once.\n- The gateway used for the corporate VNet's site-to-site VPN must be zone-redundant and support at least 1 Gbps of aggregate throughput with BGP enabled.\n\n**Troubleshooting:**\n- When a branch reports it cannot reach a core banking VM, the network team needs a way to determine, packet-by-packet, whether a specific NSG rule is allowing or denying that exact flow — without setting up a packet capture."
+        }
+    ]
+}

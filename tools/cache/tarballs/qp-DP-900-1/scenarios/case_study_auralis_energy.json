@@ -1,0 +1,13 @@
+{
+    "id": "case_study_auralis_energy",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Auralis Energy** is an electricity utility serving 1.4 million households. Smart meters installed at every property transmit a consumption reading every 30 seconds, producing a continuous stream of telemetry around the clock.\n\n**Current Environment:**\n- Meter readings currently land in nightly files that are loaded into an aging on-premises data warehouse once per day.\n- Grid operators complain that they only discover demand spikes and outages many hours after they happen.\n- Analysts export warehouse extracts to spreadsheets to build monthly consumption reports for regulators."
+        },
+        {
+            "title": "Requirements",
+            "content": "Auralis Energy is standardizing its analytics estate on **Microsoft Fabric** with these requirements:\n- **Real-time visibility**: capture and process the smart-meter stream as readings arrive so grid operators can be alerted to demand spikes within seconds.\n- **Unified storage**: keep one copy of raw meter files *and* curated tables in an open format that both Spark notebooks and SQL queries can work with, stored in OneLake.\n- **Self-service reporting**: analysts should build interactive visuals showing consumption trends over time, replacing the spreadsheet exports."
+        }
+    ]
+}

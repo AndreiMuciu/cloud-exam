@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-32-azure-resource-manager",
+    "question": "At a maritime insurance firm, one engineer creates resources in the Azure portal, another scripts with the Azure CLI, and a third uses REST APIs from custom tooling. All of these requests are received by the same underlying management layer, which authenticates and authorizes each request **before** sending it to the appropriate Azure service. What is this layer called?",
+    "options": [
+        {
+            "text": "Azure Resource Manager (ARM)",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra ID",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        },
+        {
+            "text": "The Azure Marketplace",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Resource Manager (ARM)** is the **deployment and management layer for all of Azure**. Whether a request originates from the portal, the Azure CLI, Azure PowerShell, SDKs, or raw REST APIs, it lands at the same ARM endpoint, which **authenticates and authorizes** the caller and then forwards the operation to the responsible resource provider. This single front door is why every tool sees identical results, why RBAC and locks apply consistently no matter which tool is used, and why declarative templates can drive the same operations as clicks in the portal.\n\n**Why not the other options:**\n- **Microsoft Entra ID** — The identity provider ARM relies on to *verify who the caller is*; it issues tokens but is not the management layer that receives and routes resource operations.\n- **Azure Service Health** — Reports outages, planned maintenance, and health advisories; it plays no role in processing management requests.\n- **The Azure Marketplace** — A catalog for discovering and deploying first- and third-party solutions; it is a storefront, not the control plane that processes every management call.",
+    "category": "Describe Azure Management and Governance"
+}

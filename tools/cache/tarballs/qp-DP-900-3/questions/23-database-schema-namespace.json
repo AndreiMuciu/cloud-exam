@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-23-database-schema-namespace",
+    "question": "In a SQL database, tables are referenced as `Sales.Orders`, `Sales.Invoices`, and `Hr.Employees`, where related objects share the same prefix and permissions can be granted on each prefix as a whole.\n\nWhat are `Sales` and `Hr` in these names?",
+    "options": [
+        {
+            "text": "Schemas — logical namespaces that group related database objects",
+            "correct": true
+        },
+        {
+            "text": "Separate physical databases on different servers",
+            "correct": false
+        },
+        {
+            "text": "Partitions that split each table's rows across storage",
+            "correct": false
+        },
+        {
+            "text": "Views that expose selected columns from the tables",
+            "correct": false
+        }
+    ],
+    "explanation": "`Sales` and `Hr` are **schemas**: named logical containers inside one database that group related objects such as tables and views. Schemas organize a database the way folders organize files — the same object name can exist in different schemas (`Sales.Orders` vs. `Archive.Orders`) — and they act as a security boundary, since permissions can be granted once at the schema level to cover everything inside it.\n\n**Why not the other options:**\n- **Separate physical databases on different servers** — All these objects live in the same database; the prefix is a namespace within it, not a different server or database.\n- **Partitions** — Partitioning divides one table's rows across storage units for manageability and performance; it is invisible in the object's two-part name.\n- **Views** — A view is itself a queryable object that would *live inside* a schema (like `Sales.OpenOrdersView`); it is not the container the prefix refers to.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

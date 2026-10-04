@@ -1,0 +1,13 @@
+{
+    "id": "case_study_vantorra_financial",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Vantorra Financial** provides a real-time fraud-scoring API to credit unions. The scoring service is a Python application deployed to Azure Container Apps, with configuration in **Azure App Configuration** and secrets in **Azure Key Vault**.\n\n**Current Environment:**\n- The scoring model calls a third-party sanctions-list API that authenticates with an API key stored as a Key Vault secret named `sanctions-api-key`. The provider requires the key to be rotated every 90 days.\n- Application settings (thresholds, model version labels, feature flags) are stored in App Configuration.\n- Telemetry is exported to **Azure Monitor Application Insights** through the **Azure Monitor OpenTelemetry distro for Python**; logs and metrics land in a Log Analytics workspace."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Security Requirements:**\n- Rotation of `sanctions-api-key` must be automated: the platform must react shortly before the secret expires, obtain a new key from the provider, and store it as a new secret version. Running instances must pick up the new version without a redeploy.\n- The application authenticates to Key Vault and App Configuration with its managed identity only.\n\n**Configuration Requirements:**\n- Operators change several related settings together; running instances must reload all changed settings atomically, without restarting, and without polling every key on every request.\n\n**Monitoring Requirements:**\n- On-call engineers must be able to query the 95th-percentile scoring latency per operation over time directly from the Log Analytics workspace."
+        }
+    ]
+}

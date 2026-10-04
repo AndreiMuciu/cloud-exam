@@ -1,0 +1,30 @@
+{
+    "id": "az104-identity-group-membership",
+    "type": "multi",
+    "question": "You manage the Microsoft Entra tenant for NovaBright Solutions. The tenant contains the following groups:\n\n| Group | Type | Membership Type | Rule |\n|---|---|---|---|\n| Grp-Engineering | Security | Dynamic User | `user.department -eq \"Engineering\"` |\n| Grp-AllStaff | Microsoft 365 | Dynamic User | `user.accountEnabled -eq true` |\n| Grp-ProjectAlpha | Security | Assigned | — |\n\nYou create two user accounts:\n- **Priya Kapoor** — Department: Engineering, Account enabled\n- **James Okonkwo** — Department: Sales, Account enabled\n\nJames is manually added to Grp-ProjectAlpha.\n\nWhich groups does each user belong to? (Choose two correct statements.)",
+    "options": [
+        {
+            "text": "Priya belongs to Grp-Engineering and Grp-AllStaff",
+            "correct": true
+        },
+        {
+            "text": "James belongs to Grp-AllStaff and Grp-ProjectAlpha",
+            "correct": true
+        },
+        {
+            "text": "Priya belongs to Grp-Engineering, Grp-AllStaff, and Grp-ProjectAlpha",
+            "correct": false
+        },
+        {
+            "text": "James belongs to Grp-Engineering and Grp-AllStaff",
+            "correct": false
+        },
+        {
+            "text": "Priya belongs to Grp-Engineering only",
+            "correct": false
+        }
+    ],
+    "explanation": "Dynamic groups automatically evaluate membership based on user attributes:\n\n**Priya Kapoor:**\n- ✅ Grp-Engineering — Her department is \"Engineering\", matching the dynamic rule\n- ✅ Grp-AllStaff — Her account is enabled, matching the dynamic rule\n- ❌ Grp-ProjectAlpha — This is an assigned group and Priya was not manually added\n\n**James Okonkwo:**\n- ❌ Grp-Engineering — His department is \"Sales\", not matching the rule\n- ✅ Grp-AllStaff — His account is enabled, matching the dynamic rule\n- ✅ Grp-ProjectAlpha — He was manually added to this assigned group\n\nDynamic groups cannot have members manually added; membership is determined solely by the rule. Assigned groups require explicit addition.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_novabright.json"
+}

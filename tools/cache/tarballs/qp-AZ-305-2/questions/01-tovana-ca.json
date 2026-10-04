@@ -1,0 +1,25 @@
+{
+    "id": "az305-s2-tovana-ca",
+    "question": "You need to recommend a solution that satisfies both the clinician sign-in requirement (no MFA prompts from hospital networks, MFA everywhere else) and the requirement that Global Administrators and Privileged Role Administrators use phishing-resistant authentication only.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Enable security defaults for the tenant and enforce per-user MFA for all administrator accounts",
+            "correct": false
+        },
+        {
+            "text": "Create Conditional Access policies that use named locations for the hospital networks and apply a phishing-resistant MFA authentication strength to the privileged directory roles",
+            "correct": true
+        },
+        {
+            "text": "Configure Microsoft Entra ID Protection sign-in risk policies to require MFA for medium-risk sign-ins and block high-risk sign-ins",
+            "correct": false
+        },
+        {
+            "text": "Deploy Microsoft Entra Domain Services and require smart card authentication for all administrative accounts",
+            "correct": false
+        }
+    ],
+    "explanation": "**Conditional Access with named locations and authentication strengths** is the only option that addresses both requirements precisely:\n\n1. **Named locations** — The hospital networks' public IP ranges are defined as trusted named locations. A Conditional Access policy requires MFA for all users but **excludes sign-ins from the trusted locations**, so clinicians on hospital workstations are not prompted while any external sign-in is.\n2. **Authentication strengths** — A second Conditional Access policy targets the Global Administrator and Privileged Role Administrator roles and applies the built-in **Phishing-resistant MFA** authentication strength (FIDO2 security keys, passkeys, or certificate-based authentication), which prevents those roles from satisfying MFA with weaker methods such as SMS or push approvals.\n\n**Why not the other options:**\n- **Security defaults + per-user MFA** — Security defaults apply tenant-wide with no location-based exclusions, so clinicians would be prompted from hospital networks. Neither security defaults nor legacy per-user MFA can enforce *which* MFA method is used, so they cannot guarantee phishing-resistant authentication\n- **ID Protection risk policies** — Risk-based policies react to detected risk signals, not to network location. A routine sign-in from outside the hospital is not necessarily risky, so it would not reliably trigger MFA, and risk policies cannot restrict methods to phishing-resistant ones\n- **Entra Domain Services + smart cards** — Entra Domain Services provides Kerberos/LDAP for legacy workloads inside a virtual network; it plays no role in controlling cloud sign-in MFA behavior for Entra ID roles",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_tovana_health.json"
+}

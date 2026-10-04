@@ -1,0 +1,13 @@
+{
+    "id": "case_study_novabright",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**NovaBright Solutions** is a mid-sized software development company with 800 employees across offices in Chicago, Denver, and Portland. The company develops SaaS products for the healthcare industry.\n\n**Current Environment:**\n- Single Microsoft Entra tenant: novabright.io\n- Hybrid identity with Microsoft Entra Connect syncing from on-premises AD\n- Three Azure subscriptions: Development, Staging, Production\n- Management group hierarchy: Root > Corporate > Dev, Staging, Prod\n\n**IT Staff:**\n- 12 cloud administrators managed by a central IT team\n- 40 developers with varying levels of Azure access\n- 5 security analysts responsible for compliance\n\n**Key Requirements:**\n- Enforce least-privilege access across all subscriptions\n- All production changes must go through an approval workflow\n- User accounts must support self-service password reset\n- Device management for both corporate and BYOD devices\n- Monthly access reviews for privileged roles"
+        },
+        {
+            "title": "Infrastructure",
+            "content": "**Networking:**\n- Hub-spoke virtual network topology\n- Hub VNet (10.0.0.0/16) in Central US with VPN Gateway\n- Spoke VNets peered to hub for Dev, Staging, Prod workloads\n- Site-to-site VPN connecting the Chicago office\n- Point-to-site VPN for remote employees\n\n**Compute:**\n- 25 Azure VMs running various workloads\n- 2 VM Scale Sets for web front-ends\n- 3 Azure App Service plans hosting APIs\n- Azure Kubernetes Service cluster for microservices\n\n**Storage:**\n- 4 Storage Accounts (GPv2) across regions\n- Azure File Shares synced to on-premises file servers\n- Blob storage for application data and backups\n\n**Monitoring:**\n- Log Analytics workspace for centralized logging\n- Azure Monitor configured with basic alert rules\n- Recovery Services vault for VM backups"
+        }
+    ]
+}

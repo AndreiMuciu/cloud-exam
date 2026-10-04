@@ -1,0 +1,25 @@
+{
+    "id": "ai200-10-vantorra-keyvault-rotation",
+    "question": "You must automate rotation of the Vantorra `sanctions-api-key` secret. The platform must react shortly before the secret expires, obtain a new key from the provider, store it as a new secret version, and let running instances pick it up without a redeploy.\n\nWhat should you implement?",
+    "options": [
+        {
+            "text": "Subscribe an Azure Function to the Key Vault `SecretNearExpiry` event via Event Grid; the function requests a new key from the provider and creates a new version of the secret. The application retrieves the secret by name (no pinned version) and refreshes its cached value periodically.",
+            "correct": true
+        },
+        {
+            "text": "Configure a Key Vault rotation policy with automatic rotation so Key Vault generates a new API key value itself when the secret nears expiry.",
+            "correct": false
+        },
+        {
+            "text": "Store the API key in the container app's environment variables and update the value during each quarterly deployment.",
+            "correct": false
+        },
+        {
+            "text": "Extend the secret's expiration date to five years so rotation is no longer required, and document the exception.",
+            "correct": false
+        }
+    ],
+    "explanation": "The recommended rotation pattern for **third-party secrets** is event-driven: Key Vault emits a `Microsoft.KeyVault.SecretNearExpiry` event through **Event Grid**, a rotation function calls the external provider for a new key and writes it as a **new secret version** with a fresh expiry. Because the app reads the secret by name — not by a pinned version — and refreshes its cache, it picks up the new version with no redeploy.\n\n**Why not the other options:**\n- **Key Vault automatic rotation policy** — Automatic rotation applies to Key Vault *keys* (and to secrets only via your own custom logic); Key Vault cannot invent a valid API key for an external provider — the provider must issue it.\n- **Environment variables updated at deploy time** — Requires a redeploy for every rotation, violating the requirement, and spreads the secret outside Key Vault.\n- **Five-year expiry** — Ignores the provider's 90-day mandate; it is a policy violation, not a solution.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions",
+    "caseStudy": "scenarios/case_study_vantorra_financial.json"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az800-34-wac-extension-management",
+    "question": "You have installed Windows Admin Center (WAC). You want to add a new tool to manage Azure Kubernetes Service (AKS) on Azure Stack HCI from within the WAC interface. How should you perform this task?",
+    "options": [
+        {
+            "text": "Install a new instance of WAC.",
+            "correct": false
+        },
+        {
+            "text": "Download and install an 'Extension' through the WAC settings menu.",
+            "correct": true
+        },
+        {
+            "text": "Edit the registry of the WAC server.",
+            "correct": false
+        },
+        {
+            "text": "Reinstall Windows Server with the 'Kubernetes' role.",
+            "correct": false
+        }
+    ],
+    "explanation": "Windows Admin Center is built with a modular architecture. New capabilities (like managing Azure IoT, AKS, or Dell/HP hardware) are added by installing **Extensions** from the WAC feed.\n\n**Why not the other options:**\n- **Registry / Reinstall** — Unnecessary; WAC extensions are the native way to expand functionality.",
+    "category": "Manage Windows Servers and workloads in a hybrid environment"
+}

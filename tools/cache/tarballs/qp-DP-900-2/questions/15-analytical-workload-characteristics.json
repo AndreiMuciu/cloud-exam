@@ -1,0 +1,28 @@
+{
+    "id": "dp900-s2-15-analytical-workload-characteristics",
+    "question": "A company is building a system to analyze several years of historical sales data for trends and forecasting.\n\nWhich three characteristics are typical of this kind of analytical (OLAP) workload? (Choose 3)",
+    "options": [
+        {
+            "text": "Queries scan and aggregate large volumes of historical data",
+            "correct": true
+        },
+        {
+            "text": "Data is often stored in denormalized structures, such as a star schema, to make queries faster and simpler",
+            "correct": true
+        },
+        {
+            "text": "Data is loaded periodically in bulk, for example by nightly ETL jobs, rather than by continuous small writes",
+            "correct": true
+        },
+        {
+            "text": "Every user interaction performs a small, low-latency ACID write that must commit immediately",
+            "correct": false
+        },
+        {
+            "text": "The system is optimized for thousands of concurrent row-level updates to individual records",
+            "correct": false
+        }
+    ],
+    "explanation": "Analytical workloads exist to turn accumulated history into insight, which drives three typical characteristics:\n- **Large scans and aggregations** — Queries group, filter, and summarize millions of rows (totals by month, region, product) rather than fetching single records.\n- **Denormalized structures** — Analytical stores commonly use star schemas or other read-optimized, denormalized designs so queries need fewer joins and run faster; redundancy is accepted because the data is read far more than it is written.\n- **Periodic bulk loads** — Data arrives from operational systems through scheduled ETL/ELT jobs, so the store is refreshed in batches instead of by a constant stream of individual transactions.\n\n**Why not the other options:**\n- **Small, immediate ACID writes per user interaction** — Describes a **transactional (OLTP)** workload such as order entry, where each business event must be durably committed at once; analytical systems consume that data later.\n- **Thousands of concurrent row-level updates** — Also an OLTP trait. Analytical stores are optimized for reads; their writes are infrequent, large, and append-oriented, not constant in-place record updates.",
+    "category": "Describe Core Data Concepts"
+}

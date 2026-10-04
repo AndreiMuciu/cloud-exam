@@ -1,0 +1,24 @@
+{
+    "id": "dp900-30-etl-vs-elt",
+    "question": "A data team copies raw sales files from source systems directly into a cloud data lakehouse, and then uses the lakehouse's own scalable Spark compute to cleanse and reshape the data into curated tables.\n\nWhich data integration pattern does this describe?",
+    "options": [
+        {
+            "text": "Extract, transform, load (ETL)",
+            "correct": false
+        },
+        {
+            "text": "Extract, load, transform (ELT)",
+            "correct": true
+        },
+        {
+            "text": "Stream processing",
+            "correct": false
+        },
+        {
+            "text": "Database replication",
+            "correct": false
+        }
+    ],
+    "explanation": "This is **ELT (extract, load, transform)**: raw data is extracted from the sources and **loaded first**, unchanged, into the target analytical store, and the transformation happens afterward using the destination's own scalable compute (here, Spark in the lakehouse). ELT is the common pattern in modern cloud analytics platforms such as Microsoft Fabric and Azure Databricks, because the destination can process huge volumes of raw data cheaply and the raw copy is preserved for reprocessing.\n\n**Why not the other options:**\n- **ETL** — In extract-transform-load, data is cleansed and reshaped **before** it reaches the destination, typically in a separate transformation engine, and only the transformed result is loaded. Here the raw files land first, so the order is load-then-transform.\n- **Stream processing** — Processes an unbounded flow of events continuously as they arrive. This scenario is a batch movement of files, not a continuous event stream.\n- **Database replication** — Keeps a copy of a database synchronized with its source for availability or read scaling; it does not involve transforming data into curated analytical tables.",
+    "category": "Describe an Analytics Workload on Azure"
+}

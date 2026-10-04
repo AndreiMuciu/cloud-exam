@@ -1,0 +1,24 @@
+{
+    "id": "sc500-34-ai-gateway-apim",
+    "question": "Multiple development teams call the same Microsoft Foundry model deployments. Platform security requires per-team token quotas so one team cannot exhaust capacity, centralized logging of LLM usage for auditing, and that raw model API keys are never handed to the teams. What should you implement?",
+    "options": [
+        {
+            "text": "Deploy AI Gateway capabilities in Azure API Management in front of the model deployments: apply token-limit and token-metric policies per team subscription, and let API Management authenticate to the backend with its managed identity",
+            "correct": true
+        },
+        {
+            "text": "Distribute the model deployment's API keys to each team and ask them to log their own usage to a shared workspace",
+            "correct": false
+        },
+        {
+            "text": "Place Azure Front Door with a WAF policy in front of the model endpoints and use rate limiting by client IP address",
+            "correct": false
+        },
+        {
+            "text": "Create a separate Foundry project and model deployment for every team and reconcile usage from monthly billing exports",
+            "correct": false
+        }
+    ],
+    "explanation": "The **AI Gateway** pattern in **Azure API Management** is Microsoft's answer to governed LLM consumption: teams call APIM (each with their own APIM subscription), where **LLM token-limit policies** enforce per-team token quotas, **token-metric/logging policies** emit centralized usage telemetry for audit, and APIM authenticates to the Foundry/Azure OpenAI backend using its **managed identity** — so backend keys are never distributed and can be removed from circulation entirely.\n\n**Why not the other options:**\n- **Distributing API keys** — This violates the key-handling requirement directly, provides no enforceable quota (a key grants unmetered access), and makes revocation and rotation per-team impossible.\n- **Front Door with WAF** — Front Door rate-limits by requests and inspects HTTP threats, but it has no notion of *LLM tokens* (the unit that actually measures model capacity) and cannot attribute usage to teams by identity.\n- **Deployment per team + billing exports** — This multiplies cost and operational burden, still leaves keys in each team's hands, and monthly billing reconciliation is neither real-time enforcement nor an audit log of prompts and usage.",
+    "category": "Secure compute"
+}

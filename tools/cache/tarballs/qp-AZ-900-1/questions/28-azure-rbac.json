@@ -1,0 +1,24 @@
+{
+    "id": "az900-28-azure-rbac",
+    "question": "Which Azure feature uses a model of 'Allow' rules to grant specific users or groups access to Azure resources at a specific scope (Management Group, Subscription, Resource Group, or Resource)?",
+    "options": [
+        {
+            "text": "Azure Policy",
+            "correct": false
+        },
+        {
+            "text": "Azure Role-Based Access Control (RBAC)",
+            "correct": true
+        },
+        {
+            "text": "Azure Resource Locks",
+            "correct": false
+        },
+        {
+            "text": "Azure Blueprints",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure RBAC** is the system used to manage who has access to Azure resources, what they can do with those resources, and what areas they have access to. It is based on role assignments, which consist of a security principal, a role definition, and a scope.\n\n**Why not the other options:**\n- **Azure Policy** — Evaluates resources and identifies those that don't comply with your defined rules (governance), rather than granting user permissions.\n- **Resource Locks** — Prevents users (even those with access) from deleting or modifying a resource.\n- **Azure Blueprints** — Used for orchestrating the deployment of various resource templates and other artifacts such as role assignments and policy assignments.",
+    "category": "Describe Azure Management and Governance"
+}

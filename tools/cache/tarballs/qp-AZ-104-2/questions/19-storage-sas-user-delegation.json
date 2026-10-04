@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-storage-sas-user-delegation",
+    "type": "single",
+    "question": "Your security team mandates the following for shared access signatures (SAS) used to grant temporary access to blob containers:\n\n- The SAS must **not** be signed with a storage account access key\n- The SAS must be secured with **Microsoft Entra credentials**\n- It must be possible to invalidate issued tokens without regenerating account keys\n\nWhich type of SAS should you issue?",
+    "options": [
+        { "text": "A user delegation SAS", "correct": true },
+        { "text": "An account SAS", "correct": false },
+        { "text": "A service SAS that references a stored access policy", "correct": false },
+        { "text": "A service SAS signed with the key1 account access key", "correct": false }
+    ],
+    "explanation": "A **user delegation SAS** is signed with a *user delegation key* that is obtained by authenticating to Azure Storage with **Microsoft Entra credentials** (the caller needs the `generateUserDelegationKey` permission, included in roles such as Storage Blob Data Contributor). No account key is involved at any point, which is why Microsoft recommends it as the most secure SAS type. Issued tokens can be invalidated by **revoking the user delegation key** — no account key regeneration required. Key constraints worth remembering for the exam: a user delegation SAS is supported for the **Blob service only**, and its maximum validity (like the delegation key's) is **7 days**.\n\n**Why not the other options:**\n- **Account SAS**: Always signed with one of the storage account access keys — this directly violates the first mandate, and revocation requires regenerating that key.\n- **Service SAS with a stored access policy**: The stored access policy gives excellent revocation control, but the SAS itself is still **signed with an account access key**, failing the first two requirements.\n- **Service SAS signed with key1**: Fails every requirement — account-key signed, no Entra identity involved, and revocation means regenerating key1, which breaks every other consumer of that key.",
+    "category": "Implement and Manage Storage"
+}

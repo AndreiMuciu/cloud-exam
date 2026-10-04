@@ -1,0 +1,24 @@
+{
+    "id": "dp900-20-index-purpose",
+    "question": "A query that searches a large table by customer surname is slow because the database engine reads every row in the table. Which database object should you create so the engine can locate matching rows without scanning the whole table?",
+    "options": [
+        {
+            "text": "An index on the surname column",
+            "correct": true
+        },
+        {
+            "text": "A view that selects the surname column",
+            "correct": false
+        },
+        {
+            "text": "A stored procedure that runs the query",
+            "correct": false
+        },
+        {
+            "text": "A schema to contain the table",
+            "correct": false
+        }
+    ],
+    "explanation": "An **index** is a sorted structure over one or more columns that lets the database engine seek directly to matching rows instead of scanning the entire table — much like using the index at the back of a book instead of reading every page. Indexing the surname column turns the full-table scan into a fast lookup. (The trade-off: indexes consume storage and add overhead to inserts and updates.)\n\n**Why not the other options:**\n- **A view** — A view is a saved query that presents data as a virtual table; by itself it does not change how the engine physically finds rows, so the scan would remain.\n- **A stored procedure** — Encapsulates SQL logic for reuse and security, but the query inside it would still scan the table without an index.\n- **A schema** — A namespace for organizing database objects; it has no effect on query performance.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

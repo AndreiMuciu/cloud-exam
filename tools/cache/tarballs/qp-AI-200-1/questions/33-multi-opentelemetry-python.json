@@ -1,0 +1,29 @@
+{
+    "id": "ai200-33-multi-opentelemetry-python",
+    "type": "multi",
+    "question": "You are instrumenting a Python FastAPI service with the Azure Monitor OpenTelemetry distro (`azure-monitor-opentelemetry`) so traces, metrics, and logs flow to Application Insights, including custom spans around each model-inference call.\n\nWhich three statements are correct? (Select three.)",
+    "options": [
+        {
+            "text": "Call `configure_azure_monitor()` once at startup, before requests are served, supplying the connection string directly or via the `APPLICATIONINSIGHTS_CONNECTION_STRING` environment variable.",
+            "correct": true
+        },
+        {
+            "text": "Supported libraries such as FastAPI, `requests`, and `psycopg2` are captured by the distro's bundled instrumentations without per-request tracing code.",
+            "correct": true
+        },
+        {
+            "text": "Create custom spans with `tracer = trace.get_tracer(__name__)` and `with tracer.start_as_current_span(\"model-inference\"):` so inference timing nests inside the request trace.",
+            "correct": true
+        },
+        {
+            "text": "The distro requires only the classic instrumentation key; connection strings are accepted but deprecated for OpenTelemetry-based ingestion.",
+            "correct": false
+        },
+        {
+            "text": "Custom spans must be emitted through the classic `TelemetryClient.track_dependency()` API because OpenTelemetry spans cannot be exported to Application Insights.",
+            "correct": false
+        }
+    ],
+    "explanation": "The three correct statements describe the distro's intended usage:\n- **`configure_azure_monitor()` early, with a connection string** — One call wires up trace, metric, and log providers with Azure Monitor exporters. It must run before the instrumented frameworks handle traffic, and it resolves the connection string from the parameter or `APPLICATIONINSIGHTS_CONNECTION_STRING`.\n- **Automatic instrumentation of supported libraries** — The distro bundles OpenTelemetry instrumentations (FastAPI/ASGI, `requests`, `urllib3`, `psycopg2`, and more), so inbound requests and outbound dependencies are traced with no per-call code.\n- **Standard OpenTelemetry tracer for custom spans** — `start_as_current_span` creates a child of the active request span, so the `model-inference` span appears nested in the same end-to-end transaction in Application Insights.\n\n**Why not the other options:**\n- **\"Instrumentation key is required; connection strings deprecated\"** — Inverted: instrumentation-key-only ingestion is the deprecated path, and the OpenTelemetry distro requires a **connection string**.\n- **\"Custom spans need `TelemetryClient`\"** — The classic SDK is superseded; the distro's exporters translate native OpenTelemetry spans into Application Insights telemetry (requests/dependencies), so no classic API is needed — mixing the two is discouraged.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

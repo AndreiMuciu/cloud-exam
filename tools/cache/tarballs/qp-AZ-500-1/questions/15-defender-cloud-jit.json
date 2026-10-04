@@ -1,0 +1,24 @@
+{
+    "id": "az500-15-defender-cloud-jit",
+    "question": "To shrink the attack surface of your Azure virtual machines, you decide to allow management-port access only on demand, for a limited time window (just-in-time VM access). Which Microsoft Defender for Cloud tier is required for this feature?",
+    "options": [
+        {
+            "text": "Defender for Cloud (Free Tier / Foundational)",
+            "correct": false
+        },
+        {
+            "text": "Defender for Servers Plan 2",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Individuals",
+            "correct": false
+        },
+        {
+            "text": "Defender for DevOps",
+            "correct": false
+        }
+    ],
+    "explanation": "**JIT VM Access** is an advanced security feature that requires one of the paid plans, specifically **Defender for Servers (Plan 2)**. It provides a mechanism to open ports on-demand for a limited time.\n\n**Why not the other options:**\n- **Free Tier** — Only provides the basic Secure Score and recommendations.\n- **Plan 1** — Focuses on integrated EDR (Defender for Endpoint) but doesn't include the 'advanced cloud' features like JIT.\n- **Defender for Individuals** — A consumer product for personal devices.",
+    "category": "Manage security operations"
+}

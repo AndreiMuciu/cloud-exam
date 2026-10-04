@@ -1,0 +1,19 @@
+{
+    "id": "dp900-s3-24-schema-design-ordering",
+    "type": "ordering",
+    "question": "A designer is creating a new normalized relational database for an application.\n\nPlace the design steps in the correct order, from first to last.",
+    "items": [
+        "Add foreign key relationships that link the related tables together",
+        "Identify the business entities that the application must store",
+        "Choose a primary key that uniquely identifies each row in each table",
+        "Define a table for each entity with appropriate columns and data types"
+    ],
+    "correctOrder": [
+        "Identify the business entities that the application must store",
+        "Define a table for each entity with appropriate columns and data types",
+        "Choose a primary key that uniquely identifies each row in each table",
+        "Add foreign key relationships that link the related tables together"
+    ],
+    "explanation": "Relational design proceeds from the business domain down to enforced relationships:\n\n1. **Identify the entities** — Design starts by understanding what real-world things (customers, orders, products) the application must record; everything else derives from this.\n2. **Define a table per entity with columns and data types** — Each entity becomes a table whose attributes become typed columns; there is nothing to key or relate until the tables exist.\n3. **Choose primary keys** — Each table needs a column (or combination) that uniquely identifies every row; keys can only be chosen once the tables and their columns are defined.\n4. **Add foreign key relationships** — Finally, relationships are enforced by foreign keys that reference the primary keys of related tables — which is why this step must come after the primary keys exist.\n\n**Why not the other options:**\n- Foreign keys cannot be created first (or before primary keys), because a foreign key must reference an existing table's primary key.\n- Choosing primary keys before defining tables and columns is impossible — the key is one of the table's columns.\n- Defining tables before identifying entities inverts the process and typically produces a schema that fails to model the business correctly.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

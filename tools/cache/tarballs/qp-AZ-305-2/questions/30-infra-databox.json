@@ -1,0 +1,21 @@
+{
+    "id": "az305-s2-infra-databox",
+    "type": "ordering",
+    "question": "A media archive company must migrate 800 TB of historical footage from its datacenter to Azure Blob Storage. The site's internet uplink makes online transfer impractical, so the company will use Azure Data Box. Arrange the migration steps in the correct order.",
+    "items": [
+        "Copy the footage to the device shares over the local network",
+        "Order the Data Box devices from the Azure portal, specifying the destination storage account",
+        "Verify the data in Blob Storage and confirm the device has been securely erased",
+        "Ship the devices back to Microsoft using the provided return label",
+        "Receive the devices, connect them to the local network, and unlock them with the device credentials"
+    ],
+    "correctOrder": [
+        "Order the Data Box devices from the Azure portal, specifying the destination storage account",
+        "Receive the devices, connect them to the local network, and unlock them with the device credentials",
+        "Copy the footage to the device shares over the local network",
+        "Ship the devices back to Microsoft using the provided return label",
+        "Verify the data in Blob Storage and confirm the device has been securely erased"
+    ],
+    "explanation": "The Azure Data Box offline migration workflow proceeds as follows:\n\n1. **Order from the Azure portal** — The order specifies the Azure region and destination storage account; Microsoft ships ruggedized, encrypted transfer devices (each standard Data Box holds ~80 TB usable, so multiple devices or Data Box Heavy would be used for 800 TB)\n2. **Receive, connect, and unlock** — The device attaches to the local network and is unlocked with credentials retrieved from the portal; data on the device is protected with AES 256-bit encryption\n3. **Copy the data locally** — Footage is copied to the device's SMB/NFS shares (or via the data copy service) at LAN speed — this is the entire point of bypassing the slow uplink\n4. **Ship back to Microsoft** — The e-ink shipping label ensures the device returns to the correct Azure datacenter, where Microsoft uploads the contents into the destination storage account\n5. **Verify and confirm erasure** — After the portal shows the upload complete, the company validates the blobs (checksums/inventory), and Microsoft performs a NIST 800-88-compliant wipe of the device, confirmed in the order status\n\nEach step depends on the previous one: you cannot copy before the device arrives and is unlocked, the upload happens only after the device is returned, and verification is only meaningful after Microsoft's upload completes.",
+    "category": "Design Infrastructure Solutions"
+}

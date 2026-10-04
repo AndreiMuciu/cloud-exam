@@ -1,0 +1,25 @@
+{
+    "id": "sc300-governance-monitoring-logs-matching",
+    "type": "matching",
+    "question": "Match each Microsoft Entra ID monitoring or reporting capability to what it is specifically used for.",
+    "sourceItems": [
+        "Sign-in logs",
+        "Audit logs",
+        "Provisioning logs",
+        "Identity Secure Score"
+    ],
+    "targetSlots": [
+        "Records every authentication attempt, including which Conditional Access policies were applied and the result",
+        "Records administrative and system changes made in the tenant, such as a user being created or a role assignment being changed",
+        "Records the create, update, and delete operations performed by an automated provisioning connector against a target application or directory",
+        "Provides a percentage-based measurement of the tenant's identity security posture against Microsoft's recommendations, with actionable improvement items"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Sign-in logs** capture authentication events, including Conditional Access policies evaluated and their grant/block outcome, session details, and risk signals for that sign-in.\n- **Audit logs** capture directory and administrative changes — user creation/deletion, role assignments, application changes, and other write operations across Microsoft Entra ID.\n- **Provisioning logs** capture the activity of automated user/group provisioning connectors, showing each create, update, or delete pushed to (or pulled from) a target system such as a SaaS app or on-premises AD DS.\n- **Identity Secure Score** aggregates configuration and behavior signals into a single score, benchmarking the tenant against Microsoft's recommended identity security practices and surfacing specific, actionable improvement actions.\n\nThese four surfaces are complementary, not interchangeable: an investigator troubleshooting a blocked sign-in reaches for sign-in logs, one confirming who changed a Conditional Access policy reaches for audit logs, one debugging a broken HR-to-SaaS sync reaches for provisioning logs, and one benchmarking overall posture reaches for Secure Score.",
+    "category": "Plan and automate identity governance"
+}

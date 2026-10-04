@@ -1,0 +1,24 @@
+{
+    "id": "ai200-31-appconfig-keyvault-reference",
+    "question": "A Python app loads settings from Azure App Configuration, including a key `Search:ApiKey` that is a **Key Vault reference**. At runtime the app authenticates with its managed identity, reads plain keys successfully, but fails with an authorization error when resolving `Search:ApiKey`.\n\nWhat is the cause, and what should you do?",
+    "options": [
+        {
+            "text": "App Configuration stores only the secret's URI, and the *application's* identity resolves it against Key Vault at runtime — grant the app's managed identity the Key Vault Secrets User role (or a `get` secrets access policy) on the vault.",
+            "correct": true
+        },
+        {
+            "text": "The App Configuration store's system-assigned identity lacks vault access — grant the *store's* identity Key Vault Secrets User so it can return the secret value to clients.",
+            "correct": false
+        },
+        {
+            "text": "Key Vault references require the secret value to be duplicated into App Configuration — re-import the secret so its value is stored encrypted in the configuration store.",
+            "correct": false
+        },
+        {
+            "text": "The app needs the App Configuration Data Owner role instead of Data Reader to read keys that are Key Vault references.",
+            "correct": false
+        }
+    ],
+    "explanation": "A Key Vault reference in App Configuration is just a pointer: the store holds the **secret URI, never the secret value**. When the configuration provider encounters the reference, it calls Key Vault directly **as the application's own credential**. Reading plain keys works because the app has data-plane access to App Configuration; resolving the reference fails because the same identity has no permission on the *vault*. Granting the app's managed identity **Key Vault Secrets User** (RBAC) or a `get` secrets policy fixes it.\n\n**Why not the other options:**\n- **Granting the store's identity access** — App Configuration never dereferences secrets on the client's behalf at read time; the store's identity is irrelevant to runtime resolution. (It matters only for portal experiences and validation, not for your app's reads.)\n- **Duplicating the value into App Configuration** — Contradicts the design: the whole point of references is that the value stays in Key Vault under its access controls, rotation, and audit logs. There is no supported \"encrypted value import\" for references.\n- **Data Owner role** — App Configuration roles govern access to configuration data only. Data Reader already returns the reference itself; no App Configuration role grants access to the vault behind it.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

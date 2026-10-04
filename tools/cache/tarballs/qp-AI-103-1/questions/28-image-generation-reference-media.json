@@ -1,0 +1,24 @@
+{
+    "id": "ai103-28-image-generation-reference-media",
+    "question": "A marketing team wants to generate a set of lifestyle photos placing an existing, specific product (shown in one reference photo) into several different generated scenes described by short text prompts.\n\nWhich generation approach should they use?",
+    "options": [
+        {
+            "text": "An image-generation model that accepts a text prompt and a reference image together, so each new scene is generated around the actual product shown in the reference photo.",
+            "correct": true
+        },
+        {
+            "text": "A text-to-image model, describing the product's appearance in the text prompt in as much detail as the team can write.",
+            "correct": false
+        },
+        {
+            "text": "A video-generation model, extracting one still frame from the generated clip for each scene.",
+            "correct": false
+        },
+        {
+            "text": "An OCR model run on the reference photo to extract any text printed on the product's packaging.",
+            "correct": false
+        }
+    ],
+    "explanation": "Passing both the **text prompt and the reference image** to an image-generation model conditions the output on the real product's actual appearance, letting the team place the same real product into many new scenes without it drifting into a generic look-alike.\n\n**Why not the other options:**\n- **Text-only description** — No amount of written detail reproduces an exact product's precise shape, color, and branding as reliably as actually providing the reference image to a model built to use it.\n- **A video model with frame extraction** — Optimized for temporal video coherence, not single-image product fidelity, and it's an unnecessarily indirect way to produce still images.\n- **OCR on the reference photo** — Extracts printed text only; it says nothing about generating a new scene and does not use the photo as visual generation input at all.",
+    "category": "Implement computer vision solutions"
+}

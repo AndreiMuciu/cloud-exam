@@ -1,0 +1,9 @@
+{
+    "id": "case_study_ironbridge_manufacturing",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**IronBridge Manufacturing** operates a global network of smart factories. They use a mix of on-premises Windows Server 2019/2022 and Azure IaaS VMs. Their goal is to consolidate their identity management using a hybrid approach.\n\n**Current Environment:**\n- 10 on-premises Active Directory Domain Services (AD DS) sites.\n- 5,000 users and 2,000 servers.\n- They have recently deployed a Microsoft Entra ID (Azure AD) tenant.\n\n**Requirements:**\n- Sync all on-premises users to Entra ID.\n- Implement Azure High Availability for AD DS by deploying domain controllers in Azure VMs.\n- Ensure that servers in Azure can join the on-premises domain with minimal latency."
+        }
+    ]
+}

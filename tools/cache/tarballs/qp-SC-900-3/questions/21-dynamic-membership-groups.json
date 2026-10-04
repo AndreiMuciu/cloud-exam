@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-21-dynamic-membership-groups",
+    "question": "An identity administrator maintains a security group that grants the sales department access to a forecasting application. Every time someone joins, leaves, or transfers out of the sales department, the administrator must remember to edit the group's member list by hand — and mistakes keep granting access to people who have moved on.\n\nWhich Microsoft Entra ID capability removes this manual upkeep?",
+    "options": [
+        {
+            "text": "A group with dynamic membership rules that automatically adds and removes users based on attributes such as department",
+            "correct": true
+        },
+        {
+            "text": "A group with assigned membership, reviewed by the administrator each month",
+            "correct": false
+        },
+        {
+            "text": "Converting each sales employee to a guest account",
+            "correct": false
+        },
+        {
+            "text": "Granting each sales employee a Microsoft Entra administrative role",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra ID groups support **dynamic membership rules**: instead of listing members by hand, the administrator writes a rule over user (or device) attributes — for example, *department equals Sales* — and the directory **automatically adds users whose attributes match and removes them when the attributes stop matching**. When someone transfers out of sales, updating their department attribute (typically driven from the HR record) removes their group membership — and with it the application access — without anyone touching the member list.\n\n**Why not the other options:**\n- **Assigned membership with monthly review** — Assigned membership is exactly the manual model causing the problem; a periodic review shrinks the window of stale access but does not eliminate the hand-editing or the mistakes between reviews.\n- **Converting employees to guest accounts** — Guest accounts represent *external* collaborators invited through B2B collaboration. Turning internal staff into guests is the wrong identity type and does nothing to automate group membership.\n- **Granting administrative roles** — Microsoft Entra roles confer *directory administration* rights such as managing users or groups. Handing sales staff admin roles would massively over-privilege them and still would not maintain the group's member list.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

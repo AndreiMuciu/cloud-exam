@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s3-09-traversia-threat-hunting",
+    "question": "After reading a threat report about a campaign targeting transportation companies, a Traversia Rail analyst wants to proactively search the data already collected in Microsoft Sentinel for signs of that campaign — before any alert has fired — starting from powerful built-in queries that can be customized with hypotheses from the report.\n\nWhich Microsoft Sentinel capability supports this activity?",
+    "options": [
+        {
+            "text": "Threat hunting with built-in, customizable hunting queries",
+            "correct": true
+        },
+        {
+            "text": "Automation playbooks that run in response to triggered alerts",
+            "correct": false
+        },
+        {
+            "text": "The incident queue, which lists alerts that analytics rules have already raised",
+            "correct": false
+        },
+        {
+            "text": "Data retention settings for the Log Analytics workspace",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Sentinel includes **hunting** capabilities: **powerful built-in search-and-query tools, based on the MITRE ATT&CK framework, that let analysts proactively hunt for security threats across the organization's data before an alert is triggered**. Analysts start from built-in hunting queries, customize them to test hypotheses — such as indicators from a fresh threat report — and can create custom detection rules from what they find so future occurrences surface as alerts.\n\n**Why not the other options:**\n- **Automation playbooks** — Playbooks are Sentinel's SOAR feature: they *respond* to alerts and incidents that have already been raised. Hunting is explicitly about looking for what has *not* yet raised an alert.\n- **The incident queue** — Incidents group alerts produced by analytics rules. Working the incident queue is reactive triage; the analyst's goal here is proactive discovery ahead of any alert.\n- **Data retention settings** — Retention controls how long collected data is stored. Longer retention may *enable* hunting over older data, but it is a storage setting, not the proactive search capability itself.",
+    "category": "Describe the capabilities of Microsoft security solutions",
+    "caseStudy": "scenarios/case_study_traversia_rail.json"
+}

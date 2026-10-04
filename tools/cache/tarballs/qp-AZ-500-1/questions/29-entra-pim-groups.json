@@ -1,0 +1,24 @@
+{
+    "id": "az500-29-entra-pim-groups",
+    "question": "You want to use Microsoft Entra PIM to manage access for a group of developers to a production environment. Instead of assigning individual users to roles, you want to manage the group membership itself via JIT activation. What is this feature called?",
+    "options": [
+        {
+            "text": "PIM for Groups (formerly Privileged Access Groups)",
+            "correct": true
+        },
+        {
+            "text": "Dynamic Group Membership",
+            "correct": false
+        },
+        {
+            "text": "Entra Entitlement Management",
+            "correct": false
+        },
+        {
+            "text": "Administrative Units",
+            "correct": false
+        }
+    ],
+    "explanation": "**PIM for Groups** allows you to manage just-in-time access to groups that have been assigned to privileged roles. When a user activates their membership, they are added to the group for a limited time.\n\n**Why not the other options:**\n- **Dynamic Groups** — Automatic membership based on user attributes (like 'Department=HR'), not JIT activation.\n- **Entitlement Management** — Used for broader access packages and requests, often involving external users and access reviews.\n- **Administrative Units** — Used for delegating administrative authority over specific subsets of users or groups, not for JIT activation.",
+    "category": "Manage identity and access"
+}

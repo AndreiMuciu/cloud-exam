@@ -1,0 +1,25 @@
+{
+    "id": "ai103-04-brynflux-reference-image-generation",
+    "question": "An editor at Brynflux Media wants to generate a new campaign still image from a text brief and a reference product photo. The generated image must preserve the actual product's appearance, not just a generic description of it.\n\nWhat should the solution use?",
+    "options": [
+        {
+            "text": "An image-generation model invoked with both the text prompt and the reference product photo, so the output is conditioned on the reference image.",
+            "correct": true
+        },
+        {
+            "text": "A text-to-image model given only the text brief, with the product described in as much written detail as possible.",
+            "correct": false
+        },
+        {
+            "text": "A video-generation model run in a single-frame mode to produce one still image from the brief.",
+            "correct": false
+        },
+        {
+            "text": "A text-to-image model run once, followed by a human retoucher manually pasting the real product photo into the result.",
+            "correct": false
+        }
+    ],
+    "explanation": "Image generation that accepts **both a text prompt and a reference image** conditions the output on the actual reference media, which is exactly how the platform preserves a specific product's real appearance instead of inventing a look-alike.\n\n**Why not the other options:**\n- **Text-only generation with a detailed description** — No matter how detailed the text is, a text-only prompt describes an *idea* of the product; the model will still synthesize its own interpretation rather than reproduce the exact product shown in the reference photo.\n- **A video model in single-frame mode** — Video-generation models are optimized for temporal coherence across frames, not for single-image product fidelity, and this doesn't change the missing-reference-input problem anyway.\n- **Manual pasting after the fact** — Defeats the purpose of an automated generation pipeline the team needs in order to test many campaign variants quickly; it reintroduces the manual-design bottleneck the requirement was meant to remove.",
+    "category": "Implement generative AI and agentic solutions",
+    "caseStudy": "scenarios/case_study_brynflux_media.json"
+}

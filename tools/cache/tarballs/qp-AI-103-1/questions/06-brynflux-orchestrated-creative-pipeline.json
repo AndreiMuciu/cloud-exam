@@ -1,0 +1,25 @@
+{
+    "id": "ai103-06-brynflux-orchestrated-creative-pipeline",
+    "question": "Brynflux wants an editor to submit a single request such as \"turn this brief into a finished, on-brand video ad,\" and have the individual generation, captioning, and review-queue steps carried out automatically in the right order.\n\nWhat should the team build?",
+    "options": [
+        {
+            "text": "An orchestrator agent that plans the task and calls the generation tool, the captioning tool, and the moderation tool in sequence, tracking state across the steps.",
+            "correct": true
+        },
+        {
+            "text": "A menu of the three capabilities so editors trigger each step by hand, one at a time.",
+            "correct": false
+        },
+        {
+            "text": "A single prompt that lists all three tool descriptions and asks the base chat model to produce a finished video ad directly in one response.",
+            "correct": false
+        },
+        {
+            "text": "Three independent agents with no shared context, where editors copy the output of one into the next manually.",
+            "correct": false
+        }
+    ],
+    "explanation": "An **orchestrator agent** that plans a multistep task and invokes tools in sequence — carrying state (the brief, the generated asset, the caption) between steps — is exactly how a single natural-language request gets turned into a coordinated, multi-tool pipeline result.\n\n**Why not the other options:**\n- **A manual menu of steps** — Still requires the editor to drive each step, which is precisely the manual bottleneck the single-request requirement is meant to eliminate.\n- **One prompt listing all three tools** — A chat model can describe what it *would* do, but without an orchestration/tool-calling loop it cannot actually invoke the generation, captioning, and moderation tools and thread real outputs between them.\n- **Three disconnected agents with manual copy-paste** — Reintroduces the same manual coordination problem one layer down; nothing plans the sequence or carries state automatically.",
+    "category": "Implement generative AI and agentic solutions",
+    "caseStudy": "scenarios/case_study_brynflux_media.json"
+}

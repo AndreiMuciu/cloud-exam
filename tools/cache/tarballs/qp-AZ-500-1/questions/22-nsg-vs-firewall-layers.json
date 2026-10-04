@@ -1,0 +1,24 @@
+{
+    "id": "az500-22-nsg-vs-firewall-layers",
+    "question": "You need to filter traffic based on fully qualified domain names (FQDNs), such as allowing outbound traffic only to 'windowsupdate.com'. Which Azure service should you use?",
+    "options": [
+        {
+            "text": "Network Security Group (NSG)",
+            "correct": false
+        },
+        {
+            "text": "Azure Firewall",
+            "correct": true
+        },
+        {
+            "text": "Azure Load Balancer",
+            "correct": false
+        },
+        {
+            "text": "Azure Traffic Manager",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Firewall** supports Application Rules that allow you to filter based on FQDNs. NSGs operate primarily at L3/L4 (IP addresses and ports) and do not support FQDN filtering (except for specific Service Tags).\n\n**Why not the other options:**\n- **NSG** — Restricted to IP, Port, and Protocol (and limited Service Tags).\n- **Load Balancer** — Distributes traffic; does not provide outbound domain-level filtering.\n- **Traffic Manager** — A DNS-based load balancer, not a security filter.",
+    "category": "Secure networking"
+}

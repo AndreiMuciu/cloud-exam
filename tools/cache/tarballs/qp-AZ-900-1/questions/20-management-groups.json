@@ -1,0 +1,19 @@
+{
+    "id": "az900-20-resource-hierarchy",
+    "type": "ordering",
+    "question": "Arrange the following Azure resource hierarchy levels from the **broadest** scope to the **narrowest** scope.",
+    "items": [
+        "Resource",
+        "Subscription",
+        "Resource Group",
+        "Management Group"
+    ],
+    "correctOrder": [
+        "Management Group",
+        "Subscription",
+        "Resource Group",
+        "Resource"
+    ],
+    "explanation": "The Azure resource hierarchy from broadest to narrowest is:\n\n1. **Management Group** — The highest level of scope. Used to organize multiple subscriptions and apply governance policies (such as Azure Policy or RBAC) that inherit downward.\n2. **Subscription** — A billing and access control boundary. Each subscription is associated with a Microsoft Entra ID tenant.\n3. **Resource Group** — A logical container for related resources. Every Azure resource must belong to exactly one resource group.\n4. **Resource** — An individual Azure service instance (e.g., a virtual machine, storage account, or database).",
+    "category": "Describe Azure Architecture and Services"
+}

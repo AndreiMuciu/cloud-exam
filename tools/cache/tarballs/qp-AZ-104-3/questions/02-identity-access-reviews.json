@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-identity-access-reviews",
+    "type": "single",
+    "question": "Lindengate Health must satisfy the compliance requirement for the security group **Grp-ClinicalResearch**, which contains about 200 guest users:\n\n- Every **three months**, the group's owners must attest to each guest's continued need for access\n- Guests who are denied — **or whose reviewers do not respond** — must lose their group membership automatically, with no manual follow-up\n\nThe tenant is licensed with Microsoft Entra ID P2. What should you configure?",
+    "options": [
+        { "text": "A recurring access review of Grp-ClinicalResearch with a quarterly recurrence, group owners as reviewers, auto-apply results enabled, and **If reviewers don't respond** set to **Remove access**", "correct": true },
+        { "text": "A Conditional Access policy that blocks guest users who have not signed in for 90 days", "correct": false },
+        { "text": "A group expiration policy that requires the owners of Grp-ClinicalResearch to renew the group every 90 days", "correct": false },
+        { "text": "Privileged Identity Management (PIM) eligible membership in Grp-ClinicalResearch with a 90-day activation limit", "correct": false }
+    ],
+    "explanation": "**Microsoft Entra access reviews** (a P2 capability) are purpose-built for periodic attestation of group membership. You create a review of Grp-ClinicalResearch scoped to **guest users**, set the recurrence to **quarterly**, and assign the **group owners** as reviewers. Two settings make the cleanup fully automatic: **Auto apply results to resource** removes denied members when the review completes, and **If reviewers don't respond → Remove access** ensures that unreviewed guests also lose membership instead of silently retaining it. This satisfies both the three-month attestation cadence and the no-manual-follow-up requirement.\n\n**Why not the other options:**\n- **Conditional Access based on 90-day inactivity**: Conditional Access evaluates sign-in conditions; it cannot ask owners to attest to a business need, does not remove group memberships, and inactivity is not the compliance criterion — owner approval is.\n- **Group expiration policy**: expiration renews or deletes the **entire group** (and applies to Microsoft 365 groups, not security groups). It cannot evaluate individual members, so approved guests and stale guests would be treated identically.\n- **PIM for Groups**: PIM makes membership *eligible* and time-boxed for activation, which is aimed at just-in-time privileged access. It does not implement an owner attestation workflow over 200 existing guests, and converting research collaborators to just-in-time activation does not meet the stated requirement.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_lindengate.json"
+}

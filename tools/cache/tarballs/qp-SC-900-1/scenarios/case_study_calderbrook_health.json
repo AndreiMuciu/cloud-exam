@@ -1,0 +1,13 @@
+{
+    "id": "case_study_calderbrook_health",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Calderbrook Health Group** is a regional network of clinics and diagnostic laboratories. The organization stores patient records, appointment systems, and billing data on a mix of on-premises servers and newly adopted Microsoft cloud services.\n\n**Current Environment:**\n- A patient self-service portal is being moved to a Software as a Service (SaaS) offering.\n- Clinic staff sign in from shared workstations, personal tablets, and home offices.\n- A recent security assessment found that the network is protected mainly by a single perimeter firewall."
+        },
+        {
+            "title": "Security Objectives",
+            "content": "The newly appointed security lead at Calderbrook Health has set the following goals:\n- **Clarify accountability**: Understand exactly which security responsibilities transfer to the cloud provider and which remain with Calderbrook Health for each cloud service model.\n- **Modernize the security strategy**: Replace the assumption that everything inside the network is safe with a model suited to remote work and cloud services.\n- **Layer the defenses**: Ensure that a failure of any single control — including the perimeter firewall — does not expose patient data.\n- **Protect patient records**: Sensitive medical data must remain protected even if storage media or backups are stolen."
+        }
+    ]
+}

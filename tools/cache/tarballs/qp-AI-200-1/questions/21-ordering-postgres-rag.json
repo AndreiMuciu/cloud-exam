@@ -1,0 +1,21 @@
+{
+    "id": "ai200-21-ordering-postgres-rag",
+    "type": "ordering",
+    "question": "You are building the retrieval layer of a RAG application on Azure Database for PostgreSQL flexible server. The corpus is several million pre-computed 1536-dimension embeddings that will be bulk-loaded once, then queried with cosine similarity and a tenant metadata filter.\n\nPlace the implementation steps in the correct order.",
+    "items": [
+        "Allowlist and enable the extension on the server, then run `CREATE EXTENSION vector;` in the database.",
+        "Create the documents table with a `vector(1536)` embedding column plus `tenant_id` and chunk-text columns.",
+        "Bulk-load the document rows and their pre-computed embeddings into the table.",
+        "Create an HNSW index on the embedding column with `vector_cosine_ops`.",
+        "Query with `WHERE tenant_id = $1 ORDER BY embedding <=> $2 LIMIT 10` to retrieve the top matches."
+    ],
+    "correctOrder": [
+        "Allowlist and enable the extension on the server, then run `CREATE EXTENSION vector;` in the database.",
+        "Create the documents table with a `vector(1536)` embedding column plus `tenant_id` and chunk-text columns.",
+        "Bulk-load the document rows and their pre-computed embeddings into the table.",
+        "Create an HNSW index on the embedding column with `vector_cosine_ops`.",
+        "Query with `WHERE tenant_id = $1 ORDER BY embedding <=> $2 LIMIT 10` to retrieve the top matches."
+    ],
+    "explanation": "The dependencies force this sequence:\n\n1. **Enable `pgvector`** — On Azure Database for PostgreSQL flexible server, the extension must be allowlisted (`azure.extensions`) and created before the `vector` type exists at all.\n2. **Create the table** — The `vector(1536)` column type is only available after step 1; metadata columns like `tenant_id` are part of the schema so filters can be pushed into SQL.\n3. **Bulk-load first, index after** — Loading millions of rows *before* building the index is the recommended pattern: building HNSW over existing data is significantly faster than maintaining it incrementally during a huge initial load.\n4. **Create the HNSW index with `vector_cosine_ops`** — The operator class must match the distance operator the queries will use (`<=>` is cosine distance); HNSW gives low-latency, high-recall approximate search at this scale.\n5. **Query last** — `ORDER BY embedding <=> $2 LIMIT 10` with the tenant filter only benefits from the index once it exists; running similarity queries earlier would fall back to exact sequential scans.\n\nCreating the index before the bulk load (swapping 3 and 4) still works but makes the load dramatically slower, and querying before indexing produces full-table scans — the ordering above is the intended production sequence.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

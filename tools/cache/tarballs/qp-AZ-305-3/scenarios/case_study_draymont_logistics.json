@@ -1,0 +1,13 @@
+{
+    "id": "case_study_draymont_logistics",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Draymont Logistics** operates a parcel-delivery network across 12 countries. A modernization program is replacing nightly batch file exchanges with an event-driven integration platform on Azure.\n\n**Current Environment:**\n- A tracking application publishes parcel state-change events (picked up, in transit, customs hold, delivered) — about 40 million discrete events per day\n- More than 300 retail partners subscribe to shipment events; each partner must receive **only** the events for its own shipments, delivered by HTTPS push to the partner's webhook endpoint\n- Partner endpoints are unreliable: individual endpoints are sometimes offline for several hours during partner-side maintenance\n- A customs-clearance team runs a document-heavy workflow that coordinates a customs broker's SaaS API, SharePoint document libraries, Dynamics 365, and an SFTP server hosted by a port authority\n- Integration components that process shipment data must run inside the company's virtual network to satisfy the security team"
+        },
+        {
+            "title": "Integration Requirements",
+            "content": "**Integration Requirements:**\n- Event distribution must be push-based, filter events per partner, and expose a single management and publishing surface to the tracking application — the team must not create and manage 300 separate topics by hand\n- No shipment event may be lost when a partner endpoint is unavailable for an extended period; undeliverable events must be captured for later reprocessing and the platform must keep retrying delivery for as long as possible first\n- The customs-clearance workflow must be built with minimal custom code, using prebuilt connectors for the SaaS, SharePoint, Dynamics 365, and SFTP systems, with a visual designer that the integration team (not full-time developers) can maintain\n- The customs workflow must run in a single-tenant runtime with virtual network integration"
+        }
+    ]
+}

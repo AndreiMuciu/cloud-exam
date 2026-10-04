@@ -1,0 +1,33 @@
+{
+    "id": "sc500-s3-36-ai-spm-multi",
+    "type": "multi",
+    "question": "Your organization builds generative AI applications on Microsoft Foundry in Azure, with additional model workloads in AWS Bedrock and GCP Vertex AI. Leadership wants **posture** answers before an attacker finds them: an inventory of every AI workload and its components (models, grounding data stores, SDKs) across all three clouds, identification of misconfigurations like an internet-exposed compute resource that can reach a vector store of proprietary data, and prioritized, exploitable chains involving AI resources — all **before runtime attacks happen**, not alerts after. Which three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Enable the Defender CSPM plan with its AI security posture management capabilities on the Azure subscriptions and on the AWS and GCP connectors",
+            "correct": true
+        },
+        {
+            "text": "Review the discovered AI inventory (the AI 'bill of materials': deployed models, datasets, grounding sources, and AI services) and remediate the AI-specific posture recommendations",
+            "correct": true
+        },
+        {
+            "text": "Use attack path analysis and the cloud security explorer to find and prioritize exploitable chains that lead to AI resources, such as exposed compute with a route to grounding data",
+            "correct": true
+        },
+        {
+            "text": "Enable the Defender for AI Services workload protection plan, since posture misconfigurations are detected from analyzing runtime prompt traffic",
+            "correct": false
+        },
+        {
+            "text": "Deploy Azure AI Content Safety Prompt Shields on every model deployment to inventory the models and their grounding data",
+            "correct": false
+        },
+        {
+            "text": "Enable Microsoft Purview DSPM for AI to map the multicloud AI infrastructure and its network exposure",
+            "correct": false
+        }
+    ],
+    "explanation": "The requirement is **AI security posture management (AI-SPM)** — pre-breach, configuration-and-graph work, which lives in **Defender CSPM**. (1) Enabling Defender CSPM's AI posture capabilities across the Azure subscriptions **and the AWS/GCP connectors** is the prerequisite: discovery then spans Foundry, Bedrock, and Vertex AI. (2) The plan generates the **AI inventory / bill of materials** — deployed models and versions, AI services, datasets and grounding sources, SDK components — plus AI-specific recommendations (unhardened endpoints, missing access controls on vector stores), which is exactly the leadership inventory-and-misconfiguration ask. (3) **Attack path analysis and the cloud security explorer** operate over the same security graph to surface *chained* exposure — for example, internet-exposed compute with a critical CVE that holds an identity able to read the proprietary vector store — prioritized by exploitability, before any attacker runs a prompt.\n\n**Why not the other options:**\n- **Defender for AI Services** — that is the *workload protection* (runtime) plan: it analyzes prompts and responses to detect jailbreaks, injection, and data-leak attempts as they happen and raises alerts. Valuable, but it is the after-the-traffic layer; the question explicitly asks for pre-runtime posture, and misconfigurations are not detected from prompt traffic.\n- **Prompt Shields everywhere** — Prompt Shields classify *inputs* to block injection attacks at inference time; they have no inventory, discovery, or posture function whatsoever.\n- **Purview DSPM for AI** — governs *data-and-user* interactions with AI (sensitive data in prompts/responses, user activity in Copilots and AI sites, protection policies). It does not map cloud AI infrastructure, network exposure, or multicloud model deployments — that graph belongs to Defender CSPM.",
+    "category": "Secure compute"
+}

@@ -1,0 +1,19 @@
+{
+    "id": "az900-s2-33-policy-lifecycle-ordering",
+    "type": "ordering",
+    "question": "A governance team is rolling out its first Azure Policy control. Arrange the steps of the policy lifecycle in the correct order.",
+    "items": [
+        "Review the compliance results for existing resources",
+        "Create a policy definition that describes the rule to enforce",
+        "Create a remediation task for non-compliant resources",
+        "Assign the policy definition to a management group or subscription"
+    ],
+    "correctOrder": [
+        "Create a policy definition that describes the rule to enforce",
+        "Assign the policy definition to a management group or subscription",
+        "Review the compliance results for existing resources",
+        "Create a remediation task for non-compliant resources"
+    ],
+    "explanation": "The Azure Policy lifecycle proceeds in this order:\n\n1. **Create a policy definition** — Author (or pick a built-in) definition describing the rule, such as an allowed-locations or required-tag rule, and its effect (audit, deny, append, and so on).\n2. **Assign the definition to a scope** — A definition does nothing until it is assigned to a management group, subscription, or resource group; the assignment activates evaluation within that scope.\n3. **Review compliance results** — Azure Policy evaluates both new deployments and *existing* resources, producing a compliance report that shows what already violates the rule.\n4. **Create a remediation task** — For policies that support it, a remediation task brings existing non-compliant resources into compliance (for example, appending a missing tag) rather than only blocking future deployments.",
+    "category": "Describe Azure Management and Governance"
+}

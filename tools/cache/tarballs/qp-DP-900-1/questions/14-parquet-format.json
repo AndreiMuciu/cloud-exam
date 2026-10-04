@@ -1,0 +1,24 @@
+{
+    "id": "dp900-14-parquet-format",
+    "question": "A data team stores large datasets in a data lake for analytical queries that typically read only a few columns from tables containing hundreds of millions of rows. The team wants a file format that stores data column-by-column and compresses it efficiently.\n\nWhich file format should the team choose?",
+    "options": [
+        {
+            "text": "CSV",
+            "correct": false
+        },
+        {
+            "text": "JSON",
+            "correct": false
+        },
+        {
+            "text": "Avro",
+            "correct": false
+        },
+        {
+            "text": "Parquet",
+            "correct": true
+        }
+    ],
+    "explanation": "**Parquet** is a columnar file format: values for each column are stored together, so analytical queries that read a few columns can skip the rest of the data entirely, and similar values compress very efficiently. This makes Parquet the standard choice for analytical data in data lakes (and it underpins Delta Lake tables).\n\n**Why not the other options:**\n- **CSV** — A plain-text, row-based format. Every query must read entire rows, there is no built-in compression or type information, and parsing large text files is slow.\n- **JSON** — A verbose, text-based, row-oriented format best suited to data interchange and semi-structured documents, not efficient columnar analytics at scale.\n- **Avro** — An efficient binary format, but it is **row-based**: it excels at write-heavy workloads and record-by-record processing (such as event streams), not column-selective analytical scans.",
+    "category": "Describe Core Data Concepts"
+}

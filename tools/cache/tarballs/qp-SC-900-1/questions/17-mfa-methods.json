@@ -1,0 +1,29 @@
+{
+    "id": "sc900-17-mfa-methods",
+    "type": "multi",
+    "question": "Which three of the following can be used as authentication methods for Microsoft Entra multifactor authentication (MFA)? (Select three.)",
+    "options": [
+        {
+            "text": "A notification or code from the Microsoft Authenticator app",
+            "correct": true
+        },
+        {
+            "text": "A FIDO2 security key",
+            "correct": true
+        },
+        {
+            "text": "A verification code sent by SMS text message",
+            "correct": true
+        },
+        {
+            "text": "Answers to preselected security questions",
+            "correct": false
+        },
+        {
+            "text": "A picture password drawn on the sign-in screen",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra MFA supports methods including the **Microsoft Authenticator app** (push notifications and time-based codes), **FIDO2 security keys** (phishing-resistant hardware or platform keys), **SMS text codes**, voice calls, and OATH hardware/software tokens.\n\n**Why not the other options:**\n- **Security questions** — In Microsoft Entra ID, security questions can be used only for self-service password reset (SSPR), never as an MFA method for sign-in, because knowledge-based answers are too easy to discover.\n- **A picture password** — Picture passwords are a local Windows sign-in convenience feature; they are not an authentication method offered by Microsoft Entra MFA.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

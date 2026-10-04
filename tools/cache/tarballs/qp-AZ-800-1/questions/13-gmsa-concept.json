@@ -1,0 +1,24 @@
+{
+    "id": "az800-13-gmsa-concept",
+    "question": "You need to run a service on multiple Windows Servers in a cluster. You want to use a single identity for this service that doesn't require manual password management and is automatically managed by Active Directory. Which type of account should you use?",
+    "options": [
+        {
+            "text": "Domain User Account",
+            "correct": false
+        },
+        {
+            "text": "Standalone Managed Service Account (sMSA)",
+            "correct": false
+        },
+        {
+            "text": "Group Managed Service Account (gMSA)",
+            "correct": true
+        },
+        {
+            "text": "Local System Account",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Group Managed Service Account (gMSA)** provides the same functionality as an sMSA but allows the account to be used on multiple servers (like in a cluster). The password is automatically managed by Active Directory, removing the need for manual rotation.\n\n**Why not the other options:**\n- **Domain User** — Requires manual password management and rotation.\n- **sMSA** — Restricted to a single server instance.\n- **Local System** — Restricted to the local machine; cannot access network resources with a domain identity.",
+    "category": "Deploy and manage AD DS in on-premises and cloud environments"
+}

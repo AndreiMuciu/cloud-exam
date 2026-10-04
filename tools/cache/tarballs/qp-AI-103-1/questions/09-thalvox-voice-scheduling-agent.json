@@ -1,0 +1,25 @@
+{
+    "id": "ai103-09-thalvox-voice-scheduling-agent",
+    "question": "Patients must be able to call in and book, reschedule, or cancel visits by speaking to Thalvox's scheduling agent, with no human scheduler involved.\n\nWhat should the team implement?",
+    "options": [
+        {
+            "text": "Integrate real-time speech-to-text and text-to-speech with the scheduling agent, so spoken requests are transcribed, matched to the agent's booking/reschedule/cancel tools, and the agent's reply is read back to the caller.",
+            "correct": true
+        },
+        {
+            "text": "Build a fixed touch-tone (DTMF) menu that routes every call to the existing human scheduling team.",
+            "correct": false
+        },
+        {
+            "text": "Expose the scheduling agent only through the patient web portal's text chat window.",
+            "correct": false
+        },
+        {
+            "text": "Record voicemails from callers and have a staff member transcribe and act on them the next business day.",
+            "correct": false
+        }
+    ],
+    "explanation": "Adding **speech as an agent modality** — real-time speech-to-text feeding the agent's tool-calling loop, and text-to-speech reading the response back — is what lets a caller complete a booking, reschedule, or cancellation entirely by voice, with the agent (not a person) handling the request.\n\n**Why not the other options:**\n- **A DTMF menu to a human team** — Still requires a human scheduler on the other end, which is exactly what the requirement says to remove.\n- **Text chat only** — Does not serve patients who *call in*; it solves a different channel and leaves phone callers unserved.\n- **Voicemail reviewed the next business day** — Fails the \"agent handles it\" and any real-time expectation implied by a live phone call; it reintroduces a human in the loop with a full-day delay.",
+    "category": "Implement generative AI and agentic solutions",
+    "caseStudy": "scenarios/case_study_thalvox_health.json"
+}

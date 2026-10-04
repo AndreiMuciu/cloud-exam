@@ -1,0 +1,25 @@
+{
+    "id": "sc500-11-novaterra-sentinel-connectors",
+    "question": "You are implementing data collection for Novaterra Health's new Microsoft Sentinel workspace. You must ingest Azure activity logs, Windows Security events from the on-premises domain controllers, and CEF messages from the Linux-based network appliances. Which collection methods should you use?",
+    "options": [
+        {
+            "text": "The Azure Activity connector (diagnostic settings-based); the Windows Security Events via AMA connector with a data collection rule targeting the Arc-enabled domain controllers; and the CEF via AMA connector using a Linux log forwarder machine",
+            "correct": true
+        },
+        {
+            "text": "The Azure Activity connector; the legacy Log Analytics MMA agent on the domain controllers; and a REST API integration that posts CEF messages directly to the workspace",
+            "correct": false
+        },
+        {
+            "text": "Azure Event Grid subscriptions for activity logs; Windows Event Forwarding directly into Sentinel without an agent; and installing the Azure Monitor Agent on every network appliance",
+            "correct": false
+        },
+        {
+            "text": "Resource diagnostic settings for all three sources, streaming to an event hub that Sentinel polls hourly",
+            "correct": false
+        }
+    ],
+    "explanation": "The supported patterns are: **Azure Activity** connector, which uses subscription diagnostic settings to stream the activity log; **Windows Security Events via AMA**, where the Azure Monitor Agent on the (Arc-enabled) domain controllers is scoped and filtered by a **data collection rule**; and **CEF via AMA**, where appliances send syslog/CEF to a **Linux log forwarder** running the AMA, which forwards to the workspace — you cannot install agents on closed network appliances.\n\n**Why not the other options:**\n- **Legacy MMA + direct REST** — The Log Analytics (MMA) agent is retired; ad hoc REST ingestion of CEF bypasses parsing/normalization the CEF connector provides.\n- **Event Grid + agentless WEF + AMA on appliances** — Activity logs are not collected via Event Grid; WEF still requires a collector with an agent and a DCR; firewall/load-balancer appliances generally cannot run the AMA.\n- **Diagnostic settings to event hub with polling** — Domain controllers and third-party appliances have no Azure diagnostic settings, and Sentinel does not poll event hubs hourly for these connectors.",
+    "category": "Manage and monitor security posture",
+    "caseStudy": "scenarios/case_study_novaterra_health.json"
+}

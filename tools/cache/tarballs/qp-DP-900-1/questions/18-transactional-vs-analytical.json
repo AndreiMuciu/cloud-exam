@@ -1,0 +1,24 @@
+{
+    "id": "dp900-18-transactional-vs-analytical",
+    "question": "Which of the following statements about transactional and analytical workloads is true?",
+    "options": [
+        {
+            "text": "Analytical systems are optimized for a high volume of low-latency write operations",
+            "correct": false
+        },
+        {
+            "text": "Transactional systems typically enforce ACID properties to protect data integrity",
+            "correct": true
+        },
+        {
+            "text": "Transactional systems are primarily used to explore long-term historical trends",
+            "correct": false
+        },
+        {
+            "text": "Analytical stores must update each record in place the moment source data changes",
+            "correct": false
+        }
+    ],
+    "explanation": "The true statement is that **transactional systems typically enforce ACID properties** — atomicity, consistency, isolation, and durability. These guarantees ensure that each business transaction (an order, a payment, a booking) either completes fully or not at all, and that concurrent users never see inconsistent data.\n\n**Why the other statements are false:**\n- **\"Analytical systems are optimized for high-volume, low-latency writes\"** — Reversed: analytical systems are optimized for large read and aggregation queries; high-volume low-latency writes are the hallmark of transactional (OLTP) systems.\n- **\"Transactional systems are primarily used to explore long-term historical trends\"** — Trend exploration over historical data is the job of analytical (OLAP) stores; transactional systems handle current operational activity.\n- **\"Analytical stores must update each record in place immediately\"** — Analytical stores are typically loaded periodically (or via streams) in append-oriented fashion; immediate in-place record updates are a transactional pattern, not an analytical requirement.",
+    "category": "Describe Core Data Concepts"
+}

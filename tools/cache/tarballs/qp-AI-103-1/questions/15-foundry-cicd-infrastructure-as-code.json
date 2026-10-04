@@ -1,0 +1,24 @@
+{
+    "id": "ai103-15-foundry-cicd-infrastructure-as-code",
+    "question": "A team wants every change to its Azure AI Foundry project — model deployments, connections, and agent definitions — to go through its existing Azure DevOps pipeline, with no manual Azure portal steps for a production change.\n\nWhat should the team do?",
+    "options": [
+        {
+            "text": "Define the Foundry project's resources (deployments, connections) as Bicep or Terraform templates checked into source control, and apply them through pipeline stages that run on every merge.",
+            "correct": true
+        },
+        {
+            "text": "Have an engineer manually reproduce each change by clicking through the Azure portal for every release, guided by a shared checklist document.",
+            "correct": false
+        },
+        {
+            "text": "Export an ARM template from the portal once, and treat it as the permanent source of truth without updating it as the project changes.",
+            "correct": false
+        },
+        {
+            "text": "Track the desired configuration in a shared spreadsheet that engineers reference when making changes by hand.",
+            "correct": false
+        }
+    ],
+    "explanation": "Defining Foundry resources as **infrastructure-as-code (Bicep/Terraform) in source control**, applied through **CI/CD pipeline stages**, is what makes every change reviewable, repeatable, and free of manual portal steps — exactly the integration the team wants.\n\n**Why not the other options:**\n- **Manual portal steps guided by a checklist** — Is precisely the manual process the team is trying to eliminate; checklists still rely on a human executing steps correctly every time.\n- **A one-time ARM export treated as permanent** — Goes stale the moment the project changes again, since it was never wired into the pipeline to re-apply or track drift.\n- **A shared spreadsheet** — Documents intent but has no mechanism to actually apply or validate configuration; it's not infrastructure-as-code and cannot run in a pipeline.",
+    "category": "Plan and manage an Azure AI solution"
+}

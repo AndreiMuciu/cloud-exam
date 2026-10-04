@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-03-oakhaven-analytical-workload",
+    "question": "Oakhaven Resorts is designing the new platform where revenue managers will analyze five years of occupancy and revenue history across all 45 properties.\n\nWhich statement correctly describes this analytical workload?",
+    "options": [
+        {
+            "text": "It is optimized for reading and aggregating very large volumes of historical data, and it is refreshed by periodic loads rather than by guest bookings",
+            "correct": true
+        },
+        {
+            "text": "It must capture each guest booking with an ACID transaction the moment the booking occurs",
+            "correct": false
+        },
+        {
+            "text": "It is optimized for a high volume of small, concurrent inserts and updates from front-desk staff",
+            "correct": false
+        },
+        {
+            "text": "It must update individual reservation rows in place as guests check in and out during the day",
+            "correct": false
+        }
+    ],
+    "explanation": "The platform is a classic **analytical (OLAP) workload**: its purpose is to answer questions about the business by **scanning and aggregating large volumes of historical data** (five years, 45 properties). Analytical stores are optimized for reads — queries that group, filter, and summarize millions of rows — and they are populated by **periodic bulk loads** from the operational systems, not by live transactions. Keeping this workload separate also satisfies the requirement to avoid loading the live reservation systems.\n\n**Why not the other options:**\n- **Capturing each booking with an ACID transaction** — That is the job of the *transactional* reservation systems at each property. The analytics platform consumes copies of that data later; it does not process live bookings.\n- **High volume of small, concurrent inserts and updates** — Describes an OLTP workload's write pattern. The analytics platform's traffic is dominated by large read queries.\n- **Updating reservation rows in place during the day** — In-place, row-level updates as events happen are a transactional-system behavior; analytical stores are typically appended to or reloaded in bulk on a schedule.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_oakhaven_resorts.json"
+}

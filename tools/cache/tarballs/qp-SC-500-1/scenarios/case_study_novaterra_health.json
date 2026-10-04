@@ -1,0 +1,13 @@
+{
+    "id": "case_study_novaterra_health",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Novaterra Health** is a hospital network that runs clinical and administrative workloads across Azure, Amazon Web Services (AWS), and an on-premises data center.\n\n**Current Environment:**\n- Azure hosts patient-portal web apps, Azure SQL databases, and about 120 VMs across two subscriptions.\n- AWS hosts a legacy claims-processing system on EC2 instances.\n- The on-premises data center contains Windows Server domain controllers and a fleet of Linux syslog-emitting network appliances (firewalls and load balancers) that support Common Event Format (CEF).\n- The security operations team currently reviews alerts in separate consoles for each environment and has no centralized SIEM."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The security operations director has defined the following requirements:\n\n**Posture Management:**\n- A single view of security recommendations and secure score must cover Azure and AWS resources.\n- Compliance against HIPAA/HITRUST and Microsoft cloud security benchmark standards must be assessed continuously.\n- Servers in AWS and on-premises must receive the same vulnerability scanning and endpoint protection recommendations as Azure VMs.\n\n**Security Operations:**\n- All security telemetry must be centralized in Microsoft Sentinel: Azure activity and resource logs, Windows Security events from domain controllers, and CEF messages from the network appliances.\n- High-severity incidents involving confirmed credential compromise must automatically disable the affected user account and post a notification to the on-call channel.\n- The SOC analysts must be able to manage incidents without being able to change analytics rules or connectors."
+        }
+    ]
+}

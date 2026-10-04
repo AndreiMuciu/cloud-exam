@@ -1,0 +1,25 @@
+{
+    "id": "sc300-zephyron-cross-tenant-sync",
+    "question": "Corvale Sensing employees need daily access to Zephyron Dynamics resources. As Corvale Sensing's HR system adds or removes employees, their representation in `zephyrondynamics.io` must be created, updated, and removed automatically — without an administrator manually sending or revoking individual B2B invitations.\n\nWhich feature should you implement, and what must be true of the tenant's licensing for this specific capability?",
+    "options": [
+        {
+            "text": "Implement cross-tenant synchronization from corvalesensing.io to zephyrondynamics.io; synchronizing users this way requires only a Microsoft Entra ID P1 license",
+            "correct": true
+        },
+        {
+            "text": "Implement cross-tenant synchronization from corvalesensing.io to zephyrondynamics.io; this capability is available at no cost with Microsoft Entra ID Free",
+            "correct": false
+        },
+        {
+            "text": "Configure Microsoft Entra Connect Cloud Sync between the two tenants; this requires a Microsoft Entra ID Governance license",
+            "correct": false
+        },
+        {
+            "text": "Configure a bulk invite using the Microsoft Entra admin center's CSV-based guest invitation tool, scheduled to run nightly",
+            "correct": false
+        }
+    ],
+    "explanation": "**Cross-tenant synchronization** automates provisioning and deprovisioning of B2B collaboration guest accounts between two Microsoft Entra tenants, keeping the representation in sync with the source tenant's user lifecycle (adds, attribute updates, and removals) — exactly the \"HR-driven, no manual invitation\" behavior described. For **users**, cross-tenant synchronization in the same cloud requires only **Microsoft Entra ID P1** (or an equivalent Microsoft 365 SKU that includes it); synchronizing **groups**, or cross-cloud synchronization, are the capabilities that require Microsoft Entra ID Governance.\n\n**Why not the other options:**\n- **\"...available at no cost with Microsoft Entra ID Free\"** — cross-tenant synchronization for users requires at least Microsoft Entra ID P1; it is not included in the Free tier.\n- **Microsoft Entra Connect Cloud Sync** synchronizes an on-premises AD DS forest into a single Microsoft Entra tenant — it does not synchronize users between two separate Microsoft Entra tenants, so it doesn't solve this cross-tenant problem, and the licensing claim is also for the wrong feature.\n- **A scheduled CSV bulk-invite** still requires someone to export and re-run the list, and it doesn't automatically remove access when Corvale Sensing's HR system deprovisions an employee — it is not the automated lifecycle-driven mechanism required here.",
+    "category": "Implement and manage user identities",
+    "caseStudy": "scenarios/case_study_zephyron.json"
+}

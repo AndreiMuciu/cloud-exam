@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-31-dataflow-gen2",
+    "question": "Business analysts with no coding experience must connect to several sources, then clean and reshape the data using a visual, low-code Power Query experience in Microsoft Fabric, landing the results in a lakehouse.\n\nWhich Fabric capability should they use?",
+    "options": [
+        {
+            "text": "A Dataflow Gen2",
+            "correct": true
+        },
+        {
+            "text": "A Spark notebook written in PySpark",
+            "correct": false
+        },
+        {
+            "text": "A KQL queryset",
+            "correct": false
+        },
+        {
+            "text": "A T-SQL script in a warehouse",
+            "correct": false
+        }
+    ],
+    "explanation": "**Dataflow Gen2** is Fabric's low-code data preparation experience built on **Power Query**: analysts connect to hundreds of sources, then apply cleaning and reshaping steps through a visual editor — no code required — and configure a destination such as a lakehouse where the transformed output lands. It is designed precisely for business analysts doing self-service data prep.\n\n**Why not the other options:**\n- **A Spark notebook written in PySpark** — Notebooks are a code-first tool for data engineers and scientists; requiring Python contradicts the no-coding requirement.\n- **A KQL queryset** — KQL querysets run Kusto Query Language queries against real-time/log stores; they are for querying, require writing KQL, and are not a visual ingestion-and-transformation tool.\n- **A T-SQL script in a warehouse** — T-SQL scripts require SQL programming and operate inside a warehouse; they are not a visual, low-code, multi-source data preparation experience.",
+    "category": "Describe an Analytics Workload on Azure"
+}

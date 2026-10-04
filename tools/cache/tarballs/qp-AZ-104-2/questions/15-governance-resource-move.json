@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-governance-resource-move",
+    "type": "single",
+    "question": "You plan to move a **running** Azure virtual machine — together with its network interface and managed disks — from resource group **RG-Ops** to resource group **RG-Platform**. Both resource groups are in the same subscription. RG-Ops is in the East US location and RG-Platform is in the West Europe location. The VM was deployed in East US.\n\nWhich statement about the move operation is true?",
+    "options": [
+        { "text": "While the move is in progress, both RG-Ops and RG-Platform are locked, and write and delete operations on resources in the two groups are blocked", "correct": true },
+        { "text": "The virtual machine is deallocated automatically before the move and restarted afterwards", "correct": false },
+        { "text": "The virtual machine's region changes to West Europe to match the location of RG-Platform", "correct": false },
+        { "text": "Role assignments scoped to RG-Ops move with the virtual machine and are re-created automatically at RG-Platform", "correct": false }
+    ],
+    "explanation": "During a resource move, Azure places a transient lock on **both the source and the destination resource groups**: you cannot add, update, or delete resources in either group until the move completes (the lock can remain for a period — up to four hours in the worst case). Read operations are unaffected. This is a key operational planning fact, because deployments and automation targeting either group will fail while the move runs.\n\n**Why not the other options:**\n- **Automatic deallocation**: Moving a resource between resource groups (or subscriptions) is a metadata operation on Azure Resource Manager — the VM **keeps running** throughout and no restart occurs.\n- **Region change**: A resource group's location only records where the group's *metadata* is stored. Resources inside a group can live in any region, and a move between groups **never changes a resource's region** — the VM stays in East US. (Changing a VM's region is a separate process using Azure Resource Mover or Site Recovery.)\n- **Role assignments**: Role assignments, and Azure Policy assignments, scoped to the source resource group do **not** follow the resource. After the move, the VM inherits whatever assignments exist at RG-Platform and above; any source-specific access must be re-created manually.",
+    "category": "Manage Azure Identities and Governance"
+}

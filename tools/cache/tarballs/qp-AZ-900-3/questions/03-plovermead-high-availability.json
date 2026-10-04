@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-03-plovermead-high-availability",
+    "question": "Plovermead's service commitment states that the crop-advisory platform must continue operating with minimal downtime even when an individual component or piece of hardware fails. Which cloud concept does this requirement describe?",
+    "options": [
+        {
+            "text": "High availability",
+            "correct": true
+        },
+        {
+            "text": "Disaster recovery",
+            "correct": false
+        },
+        {
+            "text": "Elasticity",
+            "correct": false
+        },
+        {
+            "text": "Consumption-based pricing",
+            "correct": false
+        }
+    ],
+    "explanation": "**High availability (HA)** is the goal of keeping a service **up and reachable for the maximum possible time**, typically by removing single points of failure — redundant instances, load balancing, and health-based failover — so the failure of one component or host does not take the whole service down. Uptime targets are commonly expressed as a percentage (\"nines\") in a service-level agreement.\n\n**Why not the other options:**\n- **Disaster recovery** — Concerns recovering service **after a catastrophic event**, such as the loss of an entire region, usually by failing over to a secondary location. Plovermead's requirement is about riding through *everyday component failures* without an outage, not recovering from a large-scale disaster.\n- **Elasticity** — The ability to automatically add or remove resources as demand changes; it addresses fluctuating load, not surviving hardware failures.\n- **Consumption-based pricing** — A billing model (pay only for what you use); it has nothing to do with keeping a service running through failures.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_plovermead_agritech.json"
+}

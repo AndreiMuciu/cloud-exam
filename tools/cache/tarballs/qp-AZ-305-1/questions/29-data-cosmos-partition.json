@@ -1,0 +1,24 @@
+{
+    "id": "az305-data-cosmos-partition",
+    "question": "You are designing an Azure Cosmos DB solution for a global e-commerce platform. The database stores order documents and must support the following query patterns:\n\n- Most queries filter by `customerId`\n- Some queries filter by `customerId` and `orderDate`\n- The platform processes 50,000 orders per second across 20 regions\n\nYou need to select a partition key that ensures even data distribution and supports the query patterns efficiently.\n\nWhat should you use as the partition key?",
+    "options": [
+        {
+            "text": "`customerId` — Aligns with the primary query filter and avoids cross-partition queries",
+            "correct": true
+        },
+        {
+            "text": "`orderDate` — Distributes data across time-based partitions",
+            "correct": false
+        },
+        {
+            "text": "`region` — Ensures each region has its own partition for local queries",
+            "correct": false
+        },
+        {
+            "text": "`orderId` — Provides maximum cardinality for even distribution",
+            "correct": false
+        }
+    ],
+    "explanation": "**`customerId`** is the optimal partition key because:\n\n1. **Query alignment** — Most queries filter by `customerId`, making them **single-partition queries** (the most efficient type). Queries by `customerId` + `orderDate` also benefit because `orderDate` is a secondary filter within the partition\n2. **Even distribution** — Assuming customers generate roughly similar volumes of orders, data distributes evenly across partitions\n3. **High cardinality** — Customer IDs have high cardinality, preventing hot partitions\n\n**Why not the other options:**\n- **`orderDate`** — Low cardinality per day. All orders on the same day would go to the same partition, creating hot partitions during peak hours. Also doesn't align with the primary query pattern\n- **`region`** — Only 20 distinct values, leading to large, unbalanced partitions. Partition keys are about data distribution, not geographic locality (that's handled by Cosmos DB multi-region writes)\n- **`orderId`** — Maximum cardinality ensures even distribution, but **every query by `customerId` would become a cross-partition fan-out query**, which is expensive at 50,000 orders/second",
+    "category": "Design Data Storage Solutions"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s2-07-brindlecote-avnm-rules",
+    "question": "You need to implement Brindlecote Manufacturing's organization-wide network guardrails: mandatory rules (such as denying inbound internet traffic to RDP/SSH) that apply automatically to all current and future virtual networks, are evaluated before the application teams' NSG rules, and cannot be overridden or deleted by those teams. What should you implement?",
+    "options": [
+        {
+            "text": "Deploy Azure Virtual Network Manager, add the virtual networks to a network group with dynamic membership defined by Azure Policy, and deploy a security admin configuration containing the mandatory deny rules",
+            "correct": true
+        },
+        {
+            "text": "Create a standard NSG named nsg-baseline in each subscription and instruct every application team to associate it with their subnets alongside their own NSGs",
+            "correct": false
+        },
+        {
+            "text": "Apply CanNotDelete resource locks to every NSG so that application teams cannot delete security rules",
+            "correct": false
+        },
+        {
+            "text": "Route all traffic through a central Azure Firewall by using user-defined routes so that NSG rules become irrelevant",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Virtual Network Manager (AVNM) security admin rules** are designed for exactly this: rules defined centrally in a **security admin configuration** are evaluated **before** NSG rules, apply across subscriptions to **network groups**, and cannot be modified by the VNet or NSG owners. Using **dynamic membership** (Azure Policy-based definitions), new virtual networks that match the criteria join the network group automatically, so future VNets inherit the guardrails with no manual step. Application teams keep full control of their own NSGs for everything the admin rules do not cover.\n\n**Why not the other options:**\n- **A baseline NSG per subscription** — a subnet or NIC can have only one NSG association per level, teams could still edit or detach it (repeating last year's incident), and nothing guarantees coverage of future VNets.\n- **Resource locks on NSGs** — locks would freeze the teams' *own* rule management (they must keep managing their NSGs) and do nothing for VNets and NSGs created later; a lock also does not add any mandatory rule.\n- **Central Azure Firewall with UDRs** — a firewall inspects routed traffic, but UDRs must be maintained on every subnet, teams with Contributor rights on their spokes could change the routes, and inbound internet-to-VM traffic on public IPs does not pass a hub firewall by default. It does not satisfy \"evaluated before NSG rules and not overridable.\"",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_brindlecote_manufacturing.json"
+}

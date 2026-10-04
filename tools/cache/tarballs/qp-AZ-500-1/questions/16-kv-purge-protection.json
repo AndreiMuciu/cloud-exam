@@ -1,0 +1,24 @@
+{
+    "id": "az500-16-kv-purge-protection",
+    "question": "You want to ensure that even if a secret is deleted from an Azure Key Vault, it cannot be permanently erased (purged) for at least 90 days. Which two Key Vault settings should you enable together?",
+    "options": [
+        {
+            "text": "Soft Delete and Purge Protection",
+            "correct": true
+        },
+        {
+            "text": "Retention Policy and Data Residency",
+            "correct": false
+        },
+        {
+            "text": "Resource Locks and Versioning",
+            "correct": false
+        },
+        {
+            "text": "Azure Backup and Site Recovery",
+            "correct": false
+        }
+    ],
+    "explanation": "**Soft Delete** ensures the vault/objects are reachable after deletion for a retention period. **Purge Protection** is a separate setting that prevents the permanent deletion (purging) of those soft-deleted items until the retention period expires.\n\n**Why not the other options:**\n- **Retention Policy** — A general term, but 'Soft Delete' is the specific vault feature.\n- **Resource Locks** — Prevents the *initial* deletion of the vault resource itself, but doesn't manage the 'purging' behavior of deleted objects inside the vault.",
+    "category": "Secure compute, storage, and databases"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "case_study_plovermead_agritech",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Plovermead Agritech** is a precision-agriculture company that helps grain and orchard growers optimize irrigation and fertilization. Thousands of in-field soil probes upload moisture and nutrient readings to Plovermead's crop-advisory platform, which growers check through a web dashboard.\n\n**Current Environment:**\n- The crop-advisory platform runs in Azure, but the agronomy analytics team also uses a machine-learning service from a **second public cloud provider** whose tooling they prefer.\n- The grower-facing web API is **stateless** and sits behind a load balancer.\n- Traffic follows the growing season: near-idle in winter, then sustained heavy load from planting through harvest."
+        },
+        {
+            "title": "Business Requirements",
+            "content": "**Board Directives:**\n- Avoid dependence on any single cloud provider; keep workloads running in **both** public clouds under a coordinated management approach.\n\n**Engineering Goals:**\n- During harvest season, add capacity to the web API by increasing the **number of instances** serving requests rather than moving to ever-larger machines.\n\n**Service Commitments:**\n- Growers rely on irrigation recommendations daily; the platform must **continue operating even when an individual component or piece of hardware fails**, with as little downtime as possible."
+        }
+    ]
+}

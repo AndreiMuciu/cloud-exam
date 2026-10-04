@@ -1,0 +1,13 @@
+{
+    "id": "case_study_bluepeak_logistics",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**BluePeak Logistics** is a freight-forwarding company that tracks shipments through a fleet-management application hosted in Microsoft Azure. The application runs on virtual machines in a virtual network, alongside a database tier in a separate subnet. The company also keeps several legacy servers in a co-located data center.\n\n**Current Environment:**\n- Azure virtual machines host the web tier and database tier in separate subnets.\n- Security alerts arrive by email from several disconnected tools and are triaged manually in a spreadsheet.\n- The operations team has no consolidated view of how securely the Azure and on-premises servers are configured."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "BluePeak Logistics wants to improve its cloud security with the following requirements:\n- **Basic traffic filtering**: Inbound and outbound traffic to each subnet must be filtered by source and destination IP address, port, and protocol, using a built-in Azure capability with no additional service cost.\n- **Posture visibility**: The team needs a single tool that continuously assesses the security configuration of resources in Azure **and** the on-premises servers, provides a numeric score, and lists prioritized hardening recommendations.\n- **Centralized detection and response**: Security signals from Azure, Microsoft 365, and third-party firewalls must be collected in one place where analysts can detect threats, investigate incidents, and trigger automated response playbooks."
+        }
+    ]
+}

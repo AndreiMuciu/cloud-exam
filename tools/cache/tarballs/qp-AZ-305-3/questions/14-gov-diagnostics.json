@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-gov-diagnostics",
+    "question": "A company with 45 subscriptions requires that every key resource type (Azure SQL, storage accounts, Key Vault, App Service) sends its resource logs to a central Log Analytics workspace.\n\nThe solution must:\n\n- Configure diagnostic settings **automatically** on new resources, with no action by product teams\n- Bring **existing** non-compliant resources into compliance\n- Be assigned and maintained once, not per subscription\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "A custom Azure Policy initiative of DeployIfNotExists diagnostic-settings definitions, assigned at the intermediate root management group with a managed identity, plus remediation tasks",
+            "correct": true
+        },
+        {
+            "text": "Azure Policy definitions with the Audit effect assigned at each subscription, with a monthly review of the compliance report",
+            "correct": false
+        },
+        {
+            "text": "An Azure Automation runbook that scans all subscriptions nightly and creates missing diagnostic settings",
+            "correct": false
+        },
+        {
+            "text": "A standard Bicep module containing the diagnostic settings that all product teams are required to include in their deployments",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the canonical use case for the **DeployIfNotExists (DINE)** effect delivered as a **policy initiative**:\n\n- **Automatic for new resources** — when a resource is created without the required diagnostic setting, the DINE policy deploys it automatically (via a template embedded in the definition); product teams do nothing and cannot forget\n- **Existing resources** — a **remediation task** applies the same deployment to resources that existed before the assignment, using the assignment's **managed identity** (which needs rights to create diagnostic settings and write to the workspace)\n- **Assign once** — grouping the per-resource-type definitions into one **initiative** and assigning it at the management group above all 45 subscriptions gives a single object to assign, parameterize (workspace ID), and monitor; new subscriptions inherit it automatically\n\n**Why not the other options:**\n- **Audit + monthly review** — Audit only *reports* missing diagnostic settings. Logs from a non-compliant resource are simply never collected until a human notices and fixes it — up to a month of missing security and operational telemetry, forever chasing drift\n- **Nightly Automation runbook** — Custom code to write, secure, and maintain, with an up-to-24-hour gap during which new resources log nothing. It also duplicates what Policy provides natively, and it has no compliance view for auditors\n- **Required Bicep module** — A convention, not a control. Nothing enforces that teams use the module (or don't remove it); resources created through the portal, CLI, or older pipelines bypass it entirely, and there is no mechanism to fix existing resources",
+    "category": "Design Identity, Governance, and Monitoring"
+}

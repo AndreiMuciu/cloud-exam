@@ -1,0 +1,25 @@
+{
+    "id": "az800-06-glacier-storage-encryption",
+    "question": "Glacier Logistics must ensure that all data stored in Azure Files is encrypted. Which encryption feature is enabled by default for all Azure Storage accounts and cannot be disabled?",
+    "options": [
+        {
+            "text": "Azure Disk Encryption (ADE)",
+            "correct": false
+        },
+        {
+            "text": "BitLocker",
+            "correct": false
+        },
+        {
+            "text": "Storage Service Encryption (SSE)",
+            "correct": true
+        },
+        {
+            "text": "Virtual Private Network (VPN)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Storage Service Encryption (SSE)** is the native encryption-at-rest feature that is automatically enabled for all Azure Storage accounts. It encrypts data as it is written and decrypts it as it is read, transparently to the user.\n\n**Why not the other options:**\n- **ADE** — A feature for encrypting virtual machine disks (OS and data disks).\n- **BitLocker** — The underlying Windows technology often used by ADE, but not the name of the cloud service for Azure Files storage-level encryption.\n- **VPN** — Protects data in transit, not at rest.",
+    "category": "Manage storage and file services",
+    "caseStudy": "scenarios/case_study_glacier_logistics.json"
+}

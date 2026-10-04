@@ -1,0 +1,25 @@
+{
+    "id": "ai103-25-matching-agent-capability-tool",
+    "type": "matching",
+    "question": "Match each agent capability requirement to the Foundry tool or service that best provides it.",
+    "sourceItems": [
+        "The agent must answer questions using the organization's own indexed documents, with citations back to source passages.",
+        "The agent must run small, sandboxed Python snippets to perform calculations or data transformations mid-conversation.",
+        "The agent must call an internal REST API to check real-time inventory levels using a schema you define.",
+        "The agent must remember earlier turns of the same conversation across multiple requests."
+    ],
+    "targetSlots": [
+        "Knowledge/retrieval tool backed by Azure AI Search",
+        "Code interpreter tool",
+        "Custom function-calling tool",
+        "Conversation thread/memory"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Knowledge/retrieval tool (Azure AI Search)** — Grounds answers in an organization's indexed content and is the mechanism that supports citing specific retrieved passages back to the user.\n- **Code interpreter tool** — Provides a sandboxed execution environment for running short scripts, which is exactly how an agent performs on-the-fly calculations or data transforms safely.\n- **Custom function-calling tool** — Lets you define a schema for your own internal API (like an inventory lookup) so the agent can call out to it and use the real-time result.\n- **Conversation thread/memory** — Persists prior turns of a conversation so the agent has continuity across multiple requests instead of treating each message as a fresh, context-free interaction.\n\nEach requirement maps to a distinct building block — mixing them up (for example, trying to use the code interpreter to call an external REST API) either doesn't work or reimplements a capability the platform already provides.",
+    "category": "Implement generative AI and agentic solutions"
+}

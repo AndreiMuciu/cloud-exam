@@ -1,0 +1,25 @@
+{
+    "id": "az700-marrolyn-waf-mode",
+    "question": "Marrolyn Retail is rolling out a new WAF policy on its global entry point. The security team wants to see which rules would have matched real shopper traffic before any request is actually blocked, so that they can tune the policy and avoid rejecting legitimate checkout traffic.\n\nWhich WAF policy mode should be enabled first?",
+    "options": [
+        {
+            "text": "Prevention mode",
+            "correct": false
+        },
+        {
+            "text": "Detection mode",
+            "correct": true
+        },
+        {
+            "text": "Disabled",
+            "correct": false
+        },
+        {
+            "text": "Bot protection mode only, with the managed rule set turned off",
+            "correct": false
+        }
+    ],
+    "explanation": "**Detection mode** logs each request that matches a WAF rule but takes no blocking action, letting the security team review which rules would trigger against real production traffic without any risk of blocking legitimate shoppers. Once the team has tuned the policy (adding exclusions for false positives, for example), they can switch the policy to Prevention mode to start actively blocking matched requests.\n\n**Why not the other options:**\n- **Prevention mode** — Actively blocks requests that match a rule as soon as it's enabled; switching to this mode first, before tuning, risks blocking legitimate checkout traffic exactly as the team is trying to avoid.\n- **Disabled** — Turns off WAF evaluation entirely, so no rule matches are logged at all — it wouldn't let the team see anything about how the policy would behave.\n- **Bot protection mode only, managed rule set off** — Bot protection is a separate rule category and isn't a substitute for detection/prevention mode; disabling the managed rule set would prevent the team from seeing OWASP-style rule matches at all.",
+    "category": "Design and Implement Azure Network Security Services",
+    "caseStudy": "scenarios/case_study_marrolyn.json"
+}

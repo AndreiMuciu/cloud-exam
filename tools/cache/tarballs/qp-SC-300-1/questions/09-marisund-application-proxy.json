@@ -1,0 +1,25 @@
+{
+    "id": "sc300-marisund-application-proxy",
+    "question": "Marisund Logistics runs a legacy, on-premises customs-documentation web portal with no cloud-native authentication support. Remote customs brokers must be able to reach it without a VPN, while Conditional Access is still enforced on every request.\n\nWhat should you implement?",
+    "options": [
+        {
+            "text": "Publish the portal through Microsoft Entra Application Proxy, using a connector installed on an on-premises server, and require Microsoft Entra ID pre-authentication",
+            "correct": true
+        },
+        {
+            "text": "Enable Microsoft Entra Connect Cloud Sync to replicate the portal's local authentication database into Microsoft Entra ID",
+            "correct": false
+        },
+        {
+            "text": "Register the portal as an app with a client secret and have brokers authenticate directly against the on-premises Active Directory Federation Services (AD FS) farm over the public internet",
+            "correct": false
+        },
+        {
+            "text": "Configure the portal for password-based single sign-on in the application gallery",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra Application Proxy** publishes an on-premises web application for secure remote access without a VPN. A lightweight connector installed on-premises establishes an outbound-only connection to the Application Proxy service; when a broker requests the app, Microsoft Entra ID performs **pre-authentication** first (which is where Conditional Access policies are evaluated) before the request is forwarded through the connector to the internal portal — exactly meeting \"no VPN\" plus \"Conditional Access enforced on every request.\"\n\n**Why not the other options:**\n- **Microsoft Entra Connect Cloud Sync** synchronizes directory objects (users, groups) into Microsoft Entra ID; it has no role in publishing a web application for remote access or applying Conditional Access to app requests.\n- **Exposing AD FS directly over the internet** — this bypasses Microsoft Entra ID and Conditional Access entirely, and directly exposing an on-premises federation server to the internet is a significant, unnecessary attack-surface risk.\n- **Password-based SSO** — this stores and replays a shared credential into a web form; it doesn't solve remote reachability without a VPN, and legacy portals with no cloud-native auth are the exact scenario Application Proxy (not password SSO) is designed for.",
+    "category": "Plan and implement workload identities",
+    "caseStudy": "scenarios/case_study_marisund.json"
+}

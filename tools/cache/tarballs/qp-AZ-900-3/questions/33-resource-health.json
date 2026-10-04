@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-33-resource-health",
+    "question": "After a virtual machine rebooted unexpectedly twice in one week, an engineer at a payroll-services company wants to check whether **her specific VM** was affected by Azure platform events — such as host hardware problems or platform-initiated maintenance — including a per-resource timeline of past health events. Which capability should she use?",
+    "options": [
+        {
+            "text": "Azure Resource Health",
+            "correct": true
+        },
+        {
+            "text": "The public Azure status page",
+            "correct": false
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        },
+        {
+            "text": "Application Insights",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Resource Health** (part of the Azure Service Health family) reports the **health of an individual resource** — this VM, that SQL database — telling the engineer whether the resource is available, degraded, or unavailable, whether a problem was **platform-initiated** (host hardware failure, planned maintenance) or potentially user-initiated, and it keeps a **history of health events** for the resource. That per-resource timeline is exactly what distinguishing \"Azure's fault\" from \"my fault\" requires.\n\n**Why not the other options:**\n- **The public Azure status page** — Shows **broad, widespread incidents** affecting Azure services globally; it will not say anything about one customer's individual virtual machine.\n- **Azure Advisor** — Offers best-practice recommendations for cost, security, reliability, performance, and operational excellence; it recommends improvements but does not report platform health events for a resource.\n- **Application Insights** — Collects telemetry (requests, dependencies, exceptions) from **application code**; it monitors the app's behavior, not whether the underlying Azure host had a hardware problem.",
+    "category": "Describe Azure Management and Governance"
+}

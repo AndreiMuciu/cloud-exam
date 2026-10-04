@@ -1,0 +1,24 @@
+{
+    "id": "az900-30-defender-for-cloud",
+    "question": "Which Azure service provides a unified security management system that strengthens the security posture of your data centers and provides advanced threat protection across your hybrid workloads in the cloud and on-premises?",
+    "options": [
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Sentinel",
+            "correct": false
+        },
+        {
+            "text": "Azure Information Protection",
+            "correct": false
+        },
+        {
+            "text": "Azure DDoS Protection",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Cloud** (formerly Azure Security Center) is a tool for security posture management and threat protection. It provides a 'Secure Score' and recommendations to improve your security.\n\n**Why not the other options:**\n- **Microsoft Sentinel** — A scalable, cloud-native SIEM (Security Information and Event Management) and SOAR (Security Orchestration, Automation, and Response) solution.\n- **Azure Information Protection** — Used to classify and protect documents and emails by applying labels.\n- **Azure DDoS Protection** — Specifically protects your Azure applications from Distributed Denial of Service (DDoS) attacks.",
+    "category": "Describe Azure Management and Governance"
+}

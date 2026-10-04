@@ -1,0 +1,29 @@
+{
+    "id": "az104-identity-conditional-access",
+    "type": "multi",
+    "question": "Your organization requires that all users accessing Azure resources must use multi-factor authentication (MFA) when signing in from outside the corporate network. You need to implement this requirement using Microsoft Entra ID Conditional Access.\n\nWhich two settings must you configure in the Conditional Access policy? (Choose two.)",
+    "options": [
+        {
+            "text": "Conditions: Locations - Include 'All trusted locations', exclude 'All locations'",
+            "correct": false
+        },
+        {
+            "text": "Conditions: Locations - Include 'Any location', exclude 'Selected locations' (corporate network IPs)",
+            "correct": true
+        },
+        {
+            "text": "Access controls: Grant - Require multi-factor authentication",
+            "correct": true
+        },
+        {
+            "text": "Access controls: Session - Sign-in frequency",
+            "correct": false
+        },
+        {
+            "text": "Conditions: Device platforms - Exclude 'Windows'",
+            "correct": false
+        }
+    ],
+    "explanation": "To enforce MFA for external access while exempting corporate network access:\n\n1. **Conditions: Locations** — Set to include 'Any location' (or 'All locations'), then exclude your corporate network IP ranges. This ensures the policy applies to all sign-ins except those from the office.\n\n2. **Access controls: Grant** — Select 'Require multi-factor authentication'. This enforces MFA when the condition matches (external access).\n\n**Why not the other options:**\n- Including 'All trusted locations' and excluding 'All locations' is contradictory and wouldn't work\n- **Sign-in frequency** controls how often users must re-authenticate, not whether MFA is required\n- **Device platforms** is unrelated to network location requirements\n\n**Note:** Trusted locations must be defined in Microsoft Entra ID (Named locations) before being used in Conditional Access policies.",
+    "category": "Manage Azure Identities and Governance"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "ai200-03-kestrelworks-aks-imagepull",
+    "question": "After the batch re-planning service image is moved to `kestrelworksacr`, you apply the updated Deployment manifest to the AKS cluster. `kubectl get pods` shows the new pods stuck in `ImagePullBackOff`, and `kubectl describe pod` reports `401 Unauthorized` from the registry.\n\nYou must fix the deployment while meeting the requirement that no registry passwords are stored in the cluster. What should you do?",
+    "options": [
+        {
+            "text": "Enable the ACR admin account and add its username and password to the cluster as an `imagePullSecrets` Kubernetes secret.",
+            "correct": false
+        },
+        {
+            "text": "Integrate the registry with the cluster by running `az aks update --attach-acr kestrelworksacr`, so the cluster's kubelet identity is granted the AcrPull role.",
+            "correct": true
+        },
+        {
+            "text": "Set `imagePullPolicy: Always` in the pod spec and delete the failing pods so they are rescheduled.",
+            "correct": false
+        },
+        {
+            "text": "Rebuild the image with `az acr build` and push it again to the registry with a new tag.",
+            "correct": false
+        }
+    ],
+    "explanation": "`ImagePullBackOff` with a `401 Unauthorized` means the cluster is not authorized to pull from the registry. `az aks update --attach-acr` assigns the **AcrPull** role to the cluster's **kubelet managed identity**, letting nodes pull images with Microsoft Entra authentication — no passwords or Kubernetes secrets involved, which satisfies the credentials requirement. Using `kubectl describe pod` to read the events was the correct first troubleshooting step.\n\n**Why not the other options:**\n- **ACR admin account + `imagePullSecrets`** — This works mechanically but stores a shared registry password in the cluster, directly violating the requirement; the admin account is discouraged for production.\n- **`imagePullPolicy: Always` + deleting pods** — The pull policy controls *when* the kubelet pulls, not *whether it is authorized*; rescheduled pods fail with the same 401.\n- **Rebuilding and re-pushing the image** — The image already exists in the registry; the failure is authorization, not a missing or corrupt image.",
+    "category": "Develop containerized solutions on Azure",
+    "caseStudy": "scenarios/case_study_kestrelworks_logistics.json"
+}

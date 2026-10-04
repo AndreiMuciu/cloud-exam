@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-10-lumetra-fabric-warehouse",
+    "question": "Lumetra Retail Group's BI team of T-SQL developers needs a Microsoft Fabric item that provides a full relational experience where they can both read and write data using T-SQL, including CREATE TABLE, INSERT, and UPDATE statements.\n\nWhich Fabric item should the team create?",
+    "options": [
+        {
+            "text": "A warehouse",
+            "correct": true
+        },
+        {
+            "text": "A lakehouse",
+            "correct": false
+        },
+        {
+            "text": "An eventstream",
+            "correct": false
+        },
+        {
+            "text": "A KQL database",
+            "correct": false
+        }
+    ],
+    "explanation": "A Microsoft Fabric **warehouse** (Fabric Data Warehouse) is the item built for SQL-first teams: it presents a fully **transactional, relational data warehouse** experience over data in OneLake, with complete **T-SQL support for both reads and writes** — DDL such as `CREATE TABLE` and DML such as `INSERT` and `UPDATE`. That matches a team that wants to build and transform the analytical store entirely in T-SQL.\n\n**Why not the other options:**\n- **A lakehouse** — Combines files and Delta tables in OneLake and is primarily worked with through **Spark** (notebooks in Python, Scala, Spark SQL). Its SQL analytics endpoint is **read-only** for T-SQL — the BI team could query but not `CREATE TABLE`, `INSERT`, or `UPDATE` through T-SQL, so it fails the read *and write* requirement.\n- **An eventstream** — A Real-Time Intelligence item for capturing and routing streaming events; it is not a relational store you populate with T-SQL.\n- **A KQL database** — Stores telemetry-style data queried with **Kusto Query Language (KQL)**, not a T-SQL relational warehouse.",
+    "category": "Describe an Analytics Workload on Azure",
+    "caseStudy": "scenarios/case_study_lumetra_retail.json"
+}

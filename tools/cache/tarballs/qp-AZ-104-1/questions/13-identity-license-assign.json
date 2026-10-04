@@ -1,0 +1,24 @@
+{
+    "id": "az104-identity-license-assign",
+    "question": "You are attempting to assign a Microsoft 365 E5 license to a user named **Carlos Vega** in Microsoft Entra ID. Carlos was recently created and has no existing license assignments. The subscription has 50 available licenses. When you try to assign the license, you receive the following error:\n\n> *\"License cannot be assigned because the user does not have a usage location set.\"*\n\nWhat should you do to resolve the issue?",
+    "options": [
+        {
+            "text": "From the Groups blade, add Carlos to a license assignment group",
+            "correct": false
+        },
+        {
+            "text": "From the user's Profile blade, set a valid usage location",
+            "correct": true
+        },
+        {
+            "text": "From the Directory roles blade, assign the License Administrator role to your account",
+            "correct": false
+        },
+        {
+            "text": "From the Subscriptions blade, increase the license quota",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Entra ID requires a **usage location** to be set on a user account before a license can be assigned. This is because Microsoft 365 and Azure services have regional availability requirements, and the usage location determines which services are available to the user.\n\nIf the usage location is not set (common for newly created or synced accounts), the license assignment will fail even when licenses are available. The fix is to set a valid usage location (e.g., \"US\", \"GB\", \"DE\") on the user's profile.\n\nGroup-based licensing is an alternative assignment method but does not address the root cause. The License Administrator role is not needed if you already have permissions to assign licenses.",
+    "category": "Manage Azure Identities and Governance"
+}

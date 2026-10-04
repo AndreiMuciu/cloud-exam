@@ -1,0 +1,25 @@
+{
+    "id": "sc900-s2-01-roskelly-grc",
+    "question": "The board of Roskelly Outfitters wants to adopt a structured Governance, Risk, and Compliance (GRC) program. As part of this program, the security team defines processes to identify threats to the business — such as theft of stored payment tokens — assess how likely and damaging they would be, and decide how to respond to them.\n\nWhich element of GRC do these processes represent?",
+    "options": [
+        {
+            "text": "Risk",
+            "correct": true
+        },
+        {
+            "text": "Governance",
+            "correct": false
+        },
+        {
+            "text": "Compliance",
+            "correct": false
+        },
+        {
+            "text": "Auditing",
+            "correct": false
+        }
+    ],
+    "explanation": "In a GRC framework, **risk** refers to the processes an organization uses to **identify, assess, and respond to threats** that could harm the business — exactly what the Roskelly security team is doing when it catalogs threats like payment-token theft, evaluates their likelihood and impact, and chooses a response (mitigate, transfer, accept, or avoid).\n\n**Why not the other options:**\n- **Governance** — Governance is the system of rules, practices, and processes by which the organization is *directed and controlled* — for example, defining security policies and assigning accountability. It sets the direction; it is not the threat identification and assessment process itself.\n- **Compliance** — Compliance is about meeting external obligations: the laws, regulations, and standards (such as data protection law for stored payment data) that the organization must follow. Assessing business threats is broader than meeting regulatory requirements.\n- **Auditing** — Auditing is the independent examination of records and controls to verify they work as intended. It checks the program after the fact; it is not one of the three pillars that give GRC its name.",
+    "category": "Describe the concepts of security, compliance, and identity",
+    "caseStudy": "scenarios/case_study_roskelly_outfitters.json"
+}

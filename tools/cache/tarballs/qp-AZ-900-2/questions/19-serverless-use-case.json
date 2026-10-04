@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-19-serverless-use-case",
+    "question": "Which of the following workloads is the **best** fit for a serverless computing model?",
+    "options": [
+        {
+            "text": "A function that generates image thumbnails whenever customers upload photos, with long idle periods between bursts of activity",
+            "correct": true
+        },
+        {
+            "text": "A licensing server that must run continuously at high CPU utilization 24 hours a day",
+            "correct": false
+        },
+        {
+            "text": "A legacy application that requires a customized operating system kernel",
+            "correct": false
+        },
+        {
+            "text": "A desktop application installed locally on employee laptops",
+            "correct": false
+        }
+    ],
+    "explanation": "Serverless platforms shine for **event-driven, intermittent** workloads: the thumbnail function runs only when an upload event fires, scales automatically during bursts, scales to zero while idle, and costs nothing between invocations. That usage pattern maximizes the model’s pay-per-execution advantage.\n\n**Why not the other options:**\n- **A 24/7 high-CPU licensing server** — Constant maximum utilization erases the pay-per-use benefit; a reserved VM or dedicated instance is far more economical for an always-busy workload.\n- **A customized OS kernel** — Serverless offers no operating-system access at all; kernel-level customization requires IaaS.\n- **A locally installed desktop application** — It runs on employee hardware, not in the cloud, so a cloud execution model does not apply.",
+    "category": "Describe Cloud Concepts"
+}

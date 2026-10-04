@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-network-udr-nva",
+    "type": "single",
+    "question": "In a hub-spoke topology, a network virtual appliance (NVA) firewall runs in the hub virtual network with the private IP address **10.50.1.4**. Company policy requires that **all internet-bound traffic** from the spoke subnet **Subnet-Workloads** passes through the NVA for inspection. The spoke is peered with the hub.\n\nWhat should you configure?",
+    "options": [
+        { "text": "Create a route table containing a user-defined route for 0.0.0.0/0 with next hop type **Virtual appliance** and next hop address 10.50.1.4, associate the route table with Subnet-Workloads, and enable IP forwarding on the NVA's network interface", "correct": true },
+        { "text": "Create a user-defined route for 0.0.0.0/0 with next hop type **Internet** and associate the route table with the NVA's subnet", "correct": false },
+        { "text": "Create a user-defined route for 0.0.0.0/0 with next hop type **Virtual network gateway** and associate the route table with Subnet-Workloads", "correct": false },
+        { "text": "Add an outbound NSG rule on Subnet-Workloads with destination 10.50.1.4 and allow all internet-bound traffic", "correct": false }
+    ],
+    "explanation": "Azure's default system route sends 0.0.0.0/0 traffic directly to the internet. To force traffic through an NVA you override it with a **user-defined route (UDR)**: destination `0.0.0.0/0`, next hop type **Virtual appliance**, next hop IP `10.50.1.4`. The route table must be **associated with the subnet whose traffic you want to steer** (Subnet-Workloads). Finally, **IP forwarding must be enabled on the NVA's NIC** — otherwise Azure drops packets arriving at the NIC that are not addressed to its own IP, and the firewall never sees the forwarded traffic. (Inside the guest OS, forwarding/routing must be enabled too.)\n\n**Why not the other options:**\n- **Next hop Internet on the NVA subnet**: Next hop type *Internet* sends traffic straight out — the opposite of inspection — and associating the table with the NVA's subnet steers the wrong traffic (routes affect traffic *leaving* the associated subnet, not traffic destined for it). A 0.0.0.0/0 → Internet route on the NVA subnet is actually used to keep the NVA's own egress direct, not to protect workloads.\n- **Next hop Virtual network gateway**: That next hop type directs traffic to a VPN/ExpressRoute gateway for on-premises connectivity; it cannot deliver traffic to an NVA's private IP.\n- **Outbound NSG rule**: NSGs **filter** (allow/deny) traffic along the path routing has already chosen — they can never *redirect* traffic to a different next hop.",
+    "category": "Implement and Manage Virtual Networking"
+}

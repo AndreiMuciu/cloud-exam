@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-compute-whatif",
+    "type": "single",
+    "question": "Before deploying an updated ARM template to a production resource group, a change advisory board requires you to present a list of **exactly which resources the deployment would create, modify, or delete** — without changing anything in the environment.\n\nWhich command should you run?",
+    "options": [
+        { "text": "az deployment group what-if --resource-group RG-Prod --template-file main.json", "correct": true },
+        { "text": "az deployment group validate --resource-group RG-Prod --template-file main.json", "correct": false },
+        { "text": "az deployment group create --resource-group RG-Prod --template-file main.json --mode Complete", "correct": false },
+        { "text": "az group export --name RG-Prod", "correct": false }
+    ],
+    "explanation": "The **what-if** operation is purpose-built for this: it evaluates the template against the current state of the resource group and reports the changes that *would* happen — resources to be **created**, **deleted**, or **modified** (down to individual property changes) and those left unchanged — **without executing the deployment**. The color-coded output of `az deployment group what-if` (or `New-AzResourceGroupDeployment -WhatIf` in PowerShell) is exactly the evidence a change advisory board asks for.\n\n**Why not the other options:**\n- **validate**: validation checks that the template is syntactically well-formed and would be accepted by ARM — it does **not** compare against the environment or enumerate what would change. A template can validate cleanly and still delete half the resource group in Complete mode.\n- **create --mode Complete**: this actually **performs** the deployment — and in Complete mode it also deletes resources in the group that are absent from the template. Running it to \"see what happens\" in production is precisely the disaster what-if exists to prevent.\n- **az group export**: exports the resource group's current state as a template. It says nothing about what the *new* template would change; comparing exported JSON by eye is error-prone and not the supported preview mechanism.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

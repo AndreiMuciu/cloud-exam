@@ -1,0 +1,29 @@
+{
+    "id": "az104-storage-lifecycle",
+    "type": "multi",
+    "question": "Your company stores shipment tracking images in an Azure Blob Storage container. The company has the following data management requirements:\n\n- Images older than 30 days should be moved to the **Cool** tier\n- Images older than 180 days should be moved to the **Archive** tier\n- Images older than 730 days should be **deleted**\n\nWhich two features should you use to implement these requirements? (Choose two.)",
+    "options": [
+        {
+            "text": "Azure Blob lifecycle management rules",
+            "correct": true
+        },
+        {
+            "text": "A StorageV2 (general-purpose v2) storage account",
+            "correct": true
+        },
+        {
+            "text": "Azure Logic Apps with a timer trigger",
+            "correct": false
+        },
+        {
+            "text": "Azure Functions with blob trigger bindings",
+            "correct": false
+        },
+        {
+            "text": "A BlobStorage account with immutability policies",
+            "correct": false
+        }
+    ],
+    "explanation": "To implement automated tier transitions and deletion based on age:\n\n1. **Azure Blob lifecycle management rules** — This built-in feature allows you to define rules that automatically transition blobs between tiers (Hot → Cool → Archive) and delete them based on the last modified date. No custom code is needed.\n\n2. **StorageV2 (GPv2) account** — Lifecycle management rules require a **StorageV2** or **BlobStorage** account. However, StorageV2 is the recommended and more capable option, supporting all blob tiers, lifecycle management, and additional features like static websites.\n\nWhy not the other options:\n- **Logic Apps / Azure Functions** — These work but are unnecessary complexity when lifecycle management has native support for this exact scenario\n- **Immutability policies** prevent data from being modified or deleted, which is the opposite of the deletion requirement",
+    "category": "Implement and Manage Storage"
+}

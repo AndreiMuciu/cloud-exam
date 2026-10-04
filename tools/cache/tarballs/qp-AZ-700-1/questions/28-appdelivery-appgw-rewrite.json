@@ -1,0 +1,24 @@
+{
+    "id": "az700-appdelivery-appgw-rewrite",
+    "question": "An Application Gateway backend pool expects requests on the path `/api/v2/*`, but the public-facing listener must continue to accept client requests on the legacy path `/v2/*` without asking every client to change. The team also needs to add a custom response header to every response the gateway returns to clients.\n\nWhich Application Gateway feature should the team configure to handle both the URL path change and the added response header?",
+    "options": [
+        {
+            "text": "A rewrite rule set, using a URL rewrite condition/action for the path and a response header rewrite action for the header",
+            "correct": true
+        },
+        {
+            "text": "A custom health probe with a path match condition",
+            "correct": false
+        },
+        {
+            "text": "A backend HTTP setting with cookie-based affinity enabled",
+            "correct": false
+        },
+        {
+            "text": "A listener-level TLS policy specifying supported cipher suites",
+            "correct": false
+        }
+    ],
+    "explanation": "Application Gateway **rewrite rule sets** let you modify the URL path (and query string) of requests as they pass through the gateway, as well as add, modify, or remove HTTP request and **response headers**. A rule with a URL rewrite action can translate the incoming `/v2/*` path to `/api/v2/*` before forwarding to the backend, and a separate rewrite action in the same or another rule can inject the required custom response header on the way back to the client.\n\n**Why not the other options:**\n- **Custom health probe** — Controls how the gateway checks backend health (path, interval, threshold); it has no effect on live request/response URL paths or headers.\n- **Cookie-based affinity** — Keeps a client's requests pinned to the same backend instance for session persistence; it doesn't rewrite URLs or headers.\n- **Listener TLS policy** — Controls which TLS versions/cipher suites are accepted on the listener; unrelated to URL path translation or header manipulation.",
+    "category": "Design and Implement Application Delivery Services"
+}

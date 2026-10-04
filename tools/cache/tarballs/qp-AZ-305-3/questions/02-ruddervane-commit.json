@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-ruddervane-commit",
+    "question": "You need to recommend a three-year purchase strategy that maximizes the discount for the always-on VM fleet and the Azure SQL managed instances, while still discounting the simulation compute whose VM families and regions change several times per year.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Purchase three-year reserved instances for the always-on VMs and reserved capacity for the SQL managed instances, and cover the simulation compute with a three-year compute savings plan",
+            "correct": true
+        },
+        {
+            "text": "Cover all compute, including the SQL managed instances, with a single three-year compute savings plan",
+            "correct": false
+        },
+        {
+            "text": "Purchase three-year reserved instances for every VM family the simulation teams might use, and exchange the reservations whenever the teams change families",
+            "correct": false
+        },
+        {
+            "text": "Enable Azure Hybrid Benefit for all workloads and rely on Spot pricing for the simulation compute",
+            "correct": false
+        }
+    ],
+    "explanation": "The two commitment instruments have complementary trade-offs, and the scenario calls for **both**:\n\n- **Reservations** give the **deepest discount** but are tied to a specific VM family/size flexibility group and region (and, for SQL managed instances, *reserved capacity* tied to the service). The always-on VM fleet and the managed instances are stable and predictable — exactly the profile where a reservation's rigidity costs nothing and its larger discount wins\n- **A compute savings plan** commits to an hourly spend amount rather than a specific SKU. It automatically applies to eligible compute **across VM families and regions**, so the simulation workloads keep their discount no matter which families the teams switch to. The discount is smaller than a reservation's, which is the accepted price of that flexibility\n\n**Why not the other options:**\n- **A single savings plan for everything** — Two problems: the always-on fleet would earn a smaller discount than a reservation would give for the same commitment, and compute savings plans **do not apply to Azure SQL Managed Instance** at all — SQL requires reserved capacity. Part of the estate would be left with no discount\n- **Reservations for every possible simulation family** — Reservations for capacity that may never be used waste the commitment, and constantly exchanging reservations is manual overhead; exchange policies are also subject to limits and change over time. This fights the tool's design instead of using the instrument built for changing usage\n- **Hybrid Benefit + Spot** — Azure Hybrid Benefit reduces *licensing* cost (Windows Server/SQL licenses with Software Assurance); it is complementary but is not a compute-consumption discount strategy by itself. Spot VMs can be evicted at any time, and nothing in the scenario says the simulations tolerate interruption — and Spot still would not address the always-on fleet or the managed instances",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_ruddervane_industrial.json"
+}

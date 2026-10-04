@@ -1,0 +1,24 @@
+{
+    "id": "az500-14-nsg-priority-logic",
+    "question": "An NSG has two inbound rules:\n1. Rule A: Priority 100, Action: Deny, Source: 10.0.0.0/24, Destination: Any, Port: 80\n2. Rule B: Priority 200, Action: Allow, Source: Any, Destination: Any, Port: 80\n\nA packet from 10.0.0.5 arrives at the destination on port 80. What happens to the packet?",
+    "options": [
+        {
+            "text": "The packet is Allowed because Rule B matches 'Any' source.",
+            "correct": false
+        },
+        {
+            "text": "The packet is Denied because Rule A has a lower priority number.",
+            "correct": true
+        },
+        {
+            "text": "The packet is Denied because Rule A is more specific.",
+            "correct": false
+        },
+        {
+            "text": "The packet is Allowed because 'Allow' rules always override 'Deny' rules.",
+            "correct": false
+        }
+    ],
+    "explanation": "In Azure NSGs, rules are processed in priority order, starting from the **lowest priority number**. Once a match is found, processing stops. Since 10.0.0.5 is within 10.0.0.0/24, Rule A (Priority 100) matches first and the packet is Denied.\n\n**Why not the other options:**\n- **Priority number** — 100 is higher priority (processed earlier) than 200.\n- **Specific vs General** — While Rule A is more specific, it wins because of its priority, not purely because of specificity (though they often align).\n- **Allow vs Deny** — There is no default 'Allow wins' logic; it's purely priority-based.",
+    "category": "Secure networking"
+}

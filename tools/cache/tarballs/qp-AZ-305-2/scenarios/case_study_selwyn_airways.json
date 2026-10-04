@@ -1,0 +1,13 @@
+{
+    "id": "case_study_selwyn_airways",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Selwyn Airways** is a regional airline whose booking platform serves passengers in 18 countries. The platform's web front end and booking APIs run in two Azure regions (Southeast Asia and Australia East). The airline also operates 40 airport ticketing offices that connect back to its two datacenters.\n\n**Current Environment:**\n- The booking front end is an HTTP/HTTPS web application deployed independently in both Azure regions\n- Seat-availability and fare-search microservices are event-driven, scale from near-zero overnight to thousands of concurrent requests during fare sales, and are maintained by a four-person platform team with no Kubernetes experience\n- The two on-premises datacenters host the legacy departure-control system, which Azure workloads must reach with predictable, low-latency connectivity"
+        },
+        {
+            "title": "Technical Requirements",
+            "content": "**Platform Requirements:**\n- Passenger web traffic must be routed to the closest healthy region, fail over automatically if a region is down, and be protected against SQL injection and cross-site scripting at the global entry point\n- Static assets (seat maps, images) should be cached close to passengers to reduce page load times\n- The microservices platform must support scale-to-zero, per-request billing characteristics where possible, and built-in event-driven autoscaling — while keeping container orchestration complexity away from the platform team\n- Connectivity between Azure and the two datacenters must offer an SLA, predictable latency, and must not traverse the public internet; a lower-cost fallback path is required if the primary link fails"
+        }
+    ]
+}

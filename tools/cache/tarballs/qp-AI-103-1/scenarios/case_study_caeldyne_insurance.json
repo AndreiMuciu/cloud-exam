@@ -1,0 +1,13 @@
+{
+    "id": "case_study_caeldyne_insurance",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Caeldyne Insurance** underwrites property and casualty policies and processes tens of thousands of claims each month. Claims arrive as a mix of scanned paper forms, photographed damage reports, PDF policy documents, and adjuster PDFs with embedded tables.\n\n**Current Environment:**\n- All claim intake documents land in an Azure Blob Storage container named `claims-intake`.\n- Adjusters currently key claim data into a legacy system by hand after reading each document.\n- Policy documents (coverage limits, exclusions, endorsements) are stored as PDFs and are frequently referenced when adjusters answer coverage questions.\n- The company has an Azure AI Foundry project (`caeldyne-claims-foundry`) but has not yet connected any data sources or agents to it.\n- A single shared service principal secret is currently used by a nightly batch script that lists blobs in `claims-intake`."
+        },
+        {
+            "title": "Requirements",
+            "content": "**Extraction Requirements:**\n- Structured claim fields (claimant name, policy number, date of loss, damage description, itemized amounts) must be extracted from scanned forms and adjuster PDFs, including documents that mix printed text, handwriting, and tables.\n- Extracted output must be clean enough to feed directly into a downstream reasoning agent without additional manual cleanup.\n\n**Grounding Requirements:**\n- Adjusters must be able to ask natural-language coverage questions and receive answers grounded strictly in the current policy documents, with no fabricated coverage terms.\n\n**Platform Requirements:**\n- The claims-processing solution must be deployed as an Azure AI Foundry project with a clear compute and deployment strategy that can absorb unpredictable month-end claim spikes.\n- No component may authenticate to Azure Storage or Azure AI Foundry using a stored secret or connection string.\n- Foundry infrastructure changes must be deployable through the company's existing CI/CD pipeline without manual portal steps."
+        }
+    ]
+}

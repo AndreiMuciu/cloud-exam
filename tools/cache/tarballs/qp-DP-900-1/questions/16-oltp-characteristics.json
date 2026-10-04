@@ -1,0 +1,29 @@
+{
+    "id": "dp900-16-oltp-characteristics",
+    "type": "multi",
+    "question": "A retail company records point-of-sale purchases the instant they happen, and each sale must be captured reliably. Which three characteristics describe this kind of transactional workload? (Choose 3)",
+    "options": [
+        {
+            "text": "A high volume of small read and write operations processed as business events occur",
+            "correct": true
+        },
+        {
+            "text": "Transactions that enforce ACID properties to guarantee data integrity",
+            "correct": true
+        },
+        {
+            "text": "A normalized schema designed to avoid redundant data and support fast updates",
+            "correct": true
+        },
+        {
+            "text": "Optimization for scanning and aggregating years of historical data in a single query",
+            "correct": false
+        },
+        {
+            "text": "Data loaded only during scheduled overnight batch windows",
+            "correct": false
+        }
+    ],
+    "explanation": "OLTP systems support live business operations, so they are characterized by:\n- **High volumes of small reads and writes** — many users creating orders, updating records, and checking status simultaneously, each touching only a few rows.\n- **ACID transactions** — atomicity, consistency, isolation, and durability guarantee that every business transaction is applied completely and reliably.\n- **Normalized schemas** — storing each fact once avoids redundancy, keeps updates fast, and prevents inconsistencies.\n\n**Why the other options are wrong:**\n- **Scanning and aggregating years of historical data** — That describes an analytical (OLAP) workload, which is optimized for large read-heavy queries over historical data, typically using denormalized schemas.\n- **Loading data only in overnight batch windows** — That describes batch processing into an analytical store. OLTP systems accept writes continuously, the moment transactions happen.",
+    "category": "Describe Core Data Concepts"
+}

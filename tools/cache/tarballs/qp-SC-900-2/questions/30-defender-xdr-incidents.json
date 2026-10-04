@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-30-defender-xdr-incidents",
+    "question": "An attack unfolds in stages: a phishing email is delivered, a user opens the attachment and malware runs on the laptop, and the attacker then uses stolen credentials to attempt lateral movement. Microsoft Defender for Office 365, Microsoft Defender for Endpoint, and Microsoft Defender for Identity each raise their own alerts. The security analyst wants these related alerts grouped automatically into one item that tells the full story of the attack, viewable in a single portal.\n\nWhat provides this?",
+    "options": [
+        {
+            "text": "Microsoft Defender XDR, which correlates the related alerts from each service into a single incident in the Microsoft Defender portal",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Cloud, which merges the alerts into a single security recommendation",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection, which combines the alerts under the affected user's risk level",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview Audit, which groups the alerts in the unified audit log",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender XDR** is the unified **extended detection and response** suite that spans email and collaboration, endpoints, identities, and cloud apps. Its defining behavior is exactly what the analyst wants: it **automatically correlates the alerts raised by the individual Defender services into a single incident** — a container that presents the full attack story across all affected assets — in the **Microsoft Defender portal**. Analysts triage and respond to the incident as one investigation instead of chasing three disconnected alerts, and self-healing capabilities can automatically remediate affected assets.\n\n**Why not the other options:**\n- **Microsoft Defender for Cloud** — This protects *infrastructure workloads* (servers, storage, databases) and manages cloud security posture. Recommendations are posture-hardening suggestions, not correlated attack timelines spanning email, endpoint, and identity alerts.\n- **Microsoft Entra ID Protection** — ID Protection assigns sign-in and user risk levels for cloud identities. A risk level is a score, not an incident that stitches together email, malware, and lateral-movement alerts from multiple services.\n- **Microsoft Purview Audit** — The unified audit log records user and admin *activities* for compliance investigations. It is a searchable log, not a threat-detection service, and it does not correlate security alerts into incidents.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

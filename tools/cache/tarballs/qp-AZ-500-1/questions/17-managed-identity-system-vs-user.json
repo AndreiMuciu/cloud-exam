@@ -1,0 +1,24 @@
+{
+    "id": "az500-17-managed-identity-system-vs-user",
+    "question": "You are developing an application on a VM that needs access to Key Vault and Storage. You want the identity's lifecycle to be tied directly to the VM's lifecycle so that if the VM is deleted, the identity is also removed. Which type of identity should you use?",
+    "options": [
+        {
+            "text": "System-assigned managed identity",
+            "correct": true
+        },
+        {
+            "text": "User-assigned managed identity",
+            "correct": false
+        },
+        {
+            "text": "Service Principal with Client Secret",
+            "correct": false
+        },
+        {
+            "text": "Certificate-based identity",
+            "correct": false
+        }
+    ],
+    "explanation": "A **System-assigned managed identity** is enabled directly on an Azure service instance (like a VM). It has a 1:1 relationship with that resource and its lifecycle is managed by Azure—it is automatically deleted when the resource is deleted.\n\n**Why not the other options:**\n- **User-assigned** — An independent resource that can be assigned to multiple VMs; its lifecycle is managed separately.\n- **Service Principal** — Requires manual secret management and manual deletion.",
+    "category": "Manage identity and access"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az104-identity-admin-local",
+    "question": "Your organization, NovaBright Solutions, has an Microsoft Entra tenant named novabright.io. The tenant has the following configuration:\n\n- **Users may join devices to Microsoft Entra ID**: set to `DeviceAdmin1`\n- **Additional local administrators on Microsoft Entra ID joined devices**: set to `None`\n\nA user named DeviceAdmin1 joins a Windows 11 device named Workstation5 to novabright.io. Another user named CloudAdmin1 has the **Global Administrator** role.\n\nYou need to identify which users are members of the local Administrators group on Workstation5.\n\nWhich users are local administrators?",
+    "options": [
+        {
+            "text": "DeviceAdmin1 only",
+            "correct": false
+        },
+        {
+            "text": "DeviceAdmin1 and CloudAdmin1 only",
+            "correct": true
+        },
+        {
+            "text": "DeviceAdmin1, CloudAdmin1, and all Microsoft Entra ID users",
+            "correct": false
+        },
+        {
+            "text": "CloudAdmin1 only",
+            "correct": false
+        }
+    ],
+    "explanation": "When a user joins a device to Microsoft Entra ID, they are automatically added to the local Administrators group on that device. Additionally, users with the **Global Administrator** and **Microsoft Entra ID Joined Device Local Administrator** roles are always added to the local Administrators group on all Microsoft Entra ID joined devices.\n\nSince the \"Additional local administrators\" setting is configured to **None**, no extra users are added beyond the defaults. Therefore:\n- **DeviceAdmin1** — added because they performed the join operation\n- **CloudAdmin1** — added because they hold the Global Administrator role\n\nOther Microsoft Entra ID users without these specific roles or the device join action are not added.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_novabright.json"
+}

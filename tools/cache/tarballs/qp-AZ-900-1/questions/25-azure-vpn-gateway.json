@@ -1,0 +1,24 @@
+{
+    "id": "az900-25-azure-vpn-gateway",
+    "question": "An organization wants to connect their on-premises office to their Azure Virtual Network over the public internet using an encrypted tunnel. Which Azure service should they implement?",
+    "options": [
+        {
+            "text": "Azure ExpressRoute",
+            "correct": false
+        },
+        {
+            "text": "Azure VPN Gateway",
+            "correct": true
+        },
+        {
+            "text": "Azure Bastion",
+            "correct": false
+        },
+        {
+            "text": "Azure Front Door",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure VPN Gateway** allows you to create an encrypted connection (tunnel) between your on-premises location and your Azure Virtual Network over the public internet.\n\n**Why not the other options:**\n- **ExpressRoute** — Provides a private, dedicated connection; it does *not* go over the public internet.\n- **Azure Bastion** — Used to provide secure RDP or SSH access to virtual machines from the Azure portal without public IPs.\n- **Front Door** — A service for global load balancing and web application protection.",
+    "category": "Describe Azure Architecture and Services"
+}

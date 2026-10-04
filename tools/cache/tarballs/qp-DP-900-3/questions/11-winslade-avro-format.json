@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-11-winslade-avro-format",
+    "question": "Winslade Provisions must serialize the high-volume order events sent to the route-planning service. The format must be binary and row-based, store each record compactly, and carry its schema with the data so consumers always know the field names and types.\n\nWhich format should the integration team choose?",
+    "options": [
+        {
+            "text": "Avro",
+            "correct": true
+        },
+        {
+            "text": "Delimited text (CSV)",
+            "correct": false
+        },
+        {
+            "text": "Parquet",
+            "correct": false
+        },
+        {
+            "text": "XML",
+            "correct": false
+        }
+    ],
+    "explanation": "**Avro** is a row-based binary serialization format in which records are written compactly according to a schema that travels with the data. Each message is small and fast to serialize, and any consumer can read the embedded schema to learn the exact field names and data types — making Avro a common choice for high-volume event and message payloads.\n\n**Why not the other options:**\n- **Delimited text (CSV)** — CSV is plain text, so it is larger and slower than binary, and it carries no data types or schema beyond an optional header row of names; consumers must guess or hard-code the types.\n- **Parquet** — Parquet is binary but **columnar**: it organizes values column-by-column across many records, which is ideal for analytical scans of large files but a poor fit for serializing individual event messages one record at a time.\n- **XML** — XML is verbose text markup; per-message size and parsing cost are high, and a schema is a separate artifact (an XSD) rather than something embedded with the data by design.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_winslade_provisions.json"
+}

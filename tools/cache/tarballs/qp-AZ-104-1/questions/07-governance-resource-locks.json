@@ -1,0 +1,25 @@
+{
+    "id": "az104-governance-resource-locks",
+    "question": "Ridgepoint Financial has a resource group named **RG-Production** that contains a storage account named **stproddata01** and a virtual machine named **VM-ProdDB**. A **Delete** lock is applied at the resource group level.\n\nAn administrator attempts to delete the storage account stproddata01.\n\nWhat is the result?",
+    "options": [
+        {
+            "text": "The storage account is deleted because the lock is applied to the resource group, not the storage account",
+            "correct": false
+        },
+        {
+            "text": "The deletion fails only if the administrator does not have Owner permissions",
+            "correct": false
+        },
+        {
+            "text": "The storage account is deleted but the resource group cannot be deleted",
+            "correct": false
+        },
+        {
+            "text": "The deletion fails because the Delete lock on the resource group is inherited by all resources within it",
+            "correct": true
+        }
+    ],
+    "explanation": "Azure resource locks are **inherited** by child resources. A **Delete** lock on a resource group prevents the deletion of the resource group itself and **all resources within it**.\n\nKey points about resource locks:\n- Locks are inherited from parent scopes (subscription → resource group → resource)\n- A **Delete** lock prevents deletion but allows modification of resources\n- A **ReadOnly** lock prevents both modification and deletion\n- Even users with **Owner** permissions cannot delete a locked resource — the lock must be removed first\n- Locks apply regardless of RBAC permissions\n\nTo delete the storage account, the administrator would first need to remove or modify the lock on the resource group.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_ridgepoint.json"
+}

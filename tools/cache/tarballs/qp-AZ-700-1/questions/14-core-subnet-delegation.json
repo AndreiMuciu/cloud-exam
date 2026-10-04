@@ -1,0 +1,24 @@
+{
+    "id": "az700-core-subnet-delegation",
+    "question": "A platform team at Verimark Logistics needs to deploy a service that must be injected directly into a customer's VNet subnet, where Azure requires that subnet to be used exclusively by that service and to hand off certain permissions to the service provider for that subnet.\n\nWhat should the team configure on the subnet before deploying the service?",
+    "options": [
+        {
+            "text": "A service endpoint for the target service",
+            "correct": false
+        },
+        {
+            "text": "Subnet delegation to the target service",
+            "correct": true
+        },
+        {
+            "text": "A private endpoint network policy override",
+            "correct": false
+        },
+        {
+            "text": "A route table associated with the subnet, pointing default traffic to the service",
+            "correct": false
+        }
+    ],
+    "explanation": "**Subnet delegation** explicitly hands off a subnet to a named Azure service (for example, certain VNet-integrated PaaS services), granting that service the specific permissions it needs to create service-specific resources within the subnet. A delegated subnet is dedicated to that service — you generally can't mix other unrelated resource types into it. This is a distinct concept from a service endpoint or a private endpoint, both of which are about controlling *access to* a service rather than *injecting* a service's own resources into your subnet.\n\n**Why not the other options:**\n- **Service endpoint** — Extends a subnet's identity to reach a PaaS service's public endpoint over the Azure backbone; it doesn't delegate the subnet to a service or grant that service permissions to deploy resources into it.\n- **Private endpoint network policy override** — Controls whether NSGs and UDRs apply to a private endpoint's network interface; unrelated to delegating a subnet to a service for injection.\n- **A route table pointing to the service** — Route tables influence next-hop routing behavior; they don't grant a service permission to provision resources inside your subnet.",
+    "category": "Design and Implement Core Networking Infrastructure"
+}

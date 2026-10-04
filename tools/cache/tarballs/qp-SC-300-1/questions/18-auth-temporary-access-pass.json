@@ -1,0 +1,24 @@
+{
+    "id": "sc300-auth-temporary-access-pass",
+    "question": "A new contractor has no existing corporate credentials and needs to sign in for the first time to register their own passwordless authentication method (a FIDO2 security key). The helpdesk wants to avoid issuing or emailing a permanent password.\n\nWhich authentication method should be issued to the contractor for this one-time onboarding step?",
+    "options": [
+        {
+            "text": "A Temporary Access Pass (TAP), configured by an administrator with a limited lifetime and one-time or limited-use setting",
+            "correct": true
+        },
+        {
+            "text": "A permanent password set by the helpdesk and communicated over email",
+            "correct": false
+        },
+        {
+            "text": "Self-service password reset (SSPR), configured for the contractor before their account is even created",
+            "correct": false
+        },
+        {
+            "text": "Windows Hello for Business, provisioned remotely without the contractor being present at a device",
+            "correct": false
+        }
+    ],
+    "explanation": "A **Temporary Access Pass (TAP)** is a time-limited passcode an administrator issues to a user, specifically designed to let them sign in once (or a limited number of times, depending on configuration) to bootstrap enrollment of a passwordless method like a FIDO2 security key or Windows Hello for Business — all without ever issuing a traditional password.\n\n**Why not the other options:**\n- **A permanent password emailed by the helpdesk** — this reintroduces the very credential-handling risk (a long-lived, transmissible secret) that TAP is designed to eliminate.\n- **SSPR** — self-service password reset lets a user who already has an account and registered methods reset a forgotten password; it isn't a bootstrapping mechanism for a brand-new user with no credentials or registered methods yet.\n- **Windows Hello for Business provisioned remotely** — enrollment inherently requires the user to be present at the device to complete biometric/PIN gesture registration, and it still requires an initial authentication (typically via TAP) to start the enrollment.",
+    "category": "Implement authentication and access management"
+}

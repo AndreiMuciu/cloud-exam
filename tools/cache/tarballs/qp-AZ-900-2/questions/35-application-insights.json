@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-35-application-insights",
+    "question": "A web team wants deep telemetry for its customer-facing web application: request rates, response times, failure rates, dependency call tracking, and synthetic availability tests that probe the site from around the world. Which Azure Monitor feature provides this?",
+    "options": [
+        {
+            "text": "Application Insights",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        },
+        {
+            "text": "Azure Policy",
+            "correct": false
+        }
+    ],
+    "explanation": "**Application Insights**, the application performance management (APM) feature of Azure Monitor, instruments a live application to capture request rates, response times, failure rates, exceptions, and the performance of dependency calls (databases, APIs), and can run **availability tests** that probe the application from multiple locations worldwide — covering every requirement listed.\n\n**Why not the other options:**\n- **Microsoft Defender for Cloud** — Focuses on security posture and threat protection, not application performance telemetry.\n- **Azure Service Health** — Reports Azure platform outages and maintenance; it does not instrument your application or measure its response times.\n- **Azure Policy** — A governance service for enforcing resource standards; it collects no application telemetry.",
+    "category": "Describe Azure Management and Governance"
+}

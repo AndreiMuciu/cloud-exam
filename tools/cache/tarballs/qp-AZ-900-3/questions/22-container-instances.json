@@ -1,0 +1,24 @@
+{
+    "id": "az900-s3-22-container-instances",
+    "question": "A tax-preparation startup has a single containerized batch job that runs for about twenty minutes, a few times per day. The team wants to run the container in Azure with per-second billing, startup in seconds, and **no virtual machines or orchestration platform to manage**. Which service is the best fit?",
+    "options": [
+        {
+            "text": "Azure Container Instances (ACI)",
+            "correct": true
+        },
+        {
+            "text": "Azure Kubernetes Service (AKS)",
+            "correct": false
+        },
+        {
+            "text": "Azure Virtual Machine Scale Sets",
+            "correct": false
+        },
+        {
+            "text": "An Azure virtual machine running a container runtime",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Container Instances (ACI)** is the fastest and simplest way to run a container in Azure: you provide the image, ACI starts the container **in seconds**, bills **per second** while it runs, and requires **no virtual machines to provision and no orchestrator to operate**. That makes it ideal for simple, short-lived workloads such as periodic batch jobs, task automation, and build agents.\n\n**Why not the other options:**\n- **Azure Kubernetes Service (AKS)** — A full container **orchestration** platform designed for fleets of containers that need scheduling, self-healing, and rolling updates across a node pool. For one short-lived container a few times a day, operating a Kubernetes cluster is unnecessary overhead.\n- **Azure Virtual Machine Scale Sets** — Scale identical **virtual machines**, not containers; the team would still manage the OS and container runtime on every instance.\n- **An Azure virtual machine running a container runtime** — Reintroduces exactly what the team wants to avoid: a VM to patch, secure, and pay for around the clock, even when the job is not running.",
+    "category": "Describe Azure Architecture and Services"
+}

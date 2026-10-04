@@ -1,0 +1,21 @@
+{
+    "id": "ai200-s2-16-ordering-aca-deploy",
+    "type": "ordering",
+    "question": "Brackenholt Insurance is moving a Python document-scoring API to Azure Container Apps. Nothing exists yet: no image in the registry, no Container Apps environment, no app. The team has no local Docker installation. After the first public release, an updated image must ship as a new revision.\n\nPlace the steps in the correct order.",
+    "items": [
+        "Build the image in the cloud and push it to the registry with `az acr build --registry brackenholtacr --image doc-scoring:1.0.0 .`",
+        "Create the Container Apps environment with `az containerapp env create`.",
+        "Create the container app from the image with `az containerapp create --ingress external --target-port 8000`.",
+        "Ship the updated image as a new revision with `az containerapp update --image brackenholtacr.azurecr.io/doc-scoring:1.1.0`.",
+        "Verify the new revision is provisioned and serving with `az containerapp revision list`."
+    ],
+    "correctOrder": [
+        "Build the image in the cloud and push it to the registry with `az acr build --registry brackenholtacr --image doc-scoring:1.0.0 .`",
+        "Create the Container Apps environment with `az containerapp env create`.",
+        "Create the container app from the image with `az containerapp create --ingress external --target-port 8000`.",
+        "Ship the updated image as a new revision with `az containerapp update --image brackenholtacr.azurecr.io/doc-scoring:1.1.0`.",
+        "Verify the new revision is provisioned and serving with `az containerapp revision list`."
+    ],
+    "explanation": "The dependency chain runs image → environment → app → revision → verification:\n\n1. **`az acr build`** — With no local Docker, the image must be built by ACR Tasks in the cloud; nothing downstream can reference an image that does not exist in the registry.\n2. **Create the environment** — A container app can only be created *inside* a Container Apps environment, so the environment must exist before the app.\n3. **`az containerapp create`** — Creates the app from the 1.0.0 image with external ingress on the container's port; this is the first release.\n4. **`az containerapp update --image`** — Pointing the app at the 1.1.0 image creates a **new revision**; this only makes sense after the app exists and the release is live.\n5. **`az containerapp revision list`** — Verification comes last: confirm the new revision reached the *Provisioned/Running* state and is receiving traffic.\n\nThe classic mistake is trying `az containerapp create` before the environment exists, or before the image is present in the registry — both fail immediately because each step consumes the previous step's output.",
+    "category": "Develop containerized solutions on Azure"
+}

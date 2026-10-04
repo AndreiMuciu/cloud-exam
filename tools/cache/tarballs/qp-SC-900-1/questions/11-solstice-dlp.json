@@ -1,0 +1,25 @@
+{
+    "id": "sc900-11-solstice-dlp",
+    "question": "Solstice Financial Partners must automatically block email messages that contain payment card numbers or account numbers from being sent to recipients outside the organization, and the sender must receive an explanatory notification.\n\nWhich Microsoft Purview solution should the compliance officer configure?",
+    "options": [
+        {
+            "text": "A data loss prevention (DLP) policy",
+            "correct": true
+        },
+        {
+            "text": "A sensitivity label",
+            "correct": false
+        },
+        {
+            "text": "Records management",
+            "correct": false
+        },
+        {
+            "text": "eDiscovery (Premium)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Data loss prevention (DLP) policies** inspect content for sensitive information types — such as credit card or bank account numbers — and enforce actions like blocking external sharing while showing the user a **policy tip** that explains why the message was blocked. This matches both the automatic blocking and the sender-notification requirements.\n\n**Why not the other options:**\n- **A sensitivity label** — Labels classify and encrypt content, but on their own they do not scan outgoing mail for card numbers and block it; DLP performs that conditional enforcement.\n- **Records management** — Records management declares content as immutable records for retention purposes; it does not inspect or block outbound email.\n- **eDiscovery (Premium)** — eDiscovery identifies, holds, and exports content for legal investigations after the fact; it is not a preventive control for data in motion.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_solstice_financial.json"
+}

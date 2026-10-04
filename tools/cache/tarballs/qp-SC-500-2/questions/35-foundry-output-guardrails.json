@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-35-foundry-output-guardrails",
+  "type": "single",
+  "question": "A retrieval-augmented chat application built on a Microsoft Foundry model deployment already screens **incoming** prompts for injection attacks. Legal review now flags two risks in what the model **returns** to users:\n\n1. Responses might reproduce copyrighted third-party text verbatim.\n2. Responses might state \"facts\" that are not supported by the retrieved source documents.\n\nWhich guardrail configuration addresses both risks?",
+  "options": [
+    {
+      "text": "In the deployment's content filtering configuration, enable protected material detection and groundedness detection on model outputs",
+      "correct": true
+    },
+    {
+      "text": "Enable Prompt Shields on the deployment, which validates both user prompts and the documents supplied to the model",
+      "correct": false
+    },
+    {
+      "text": "Set the model's temperature to zero and reduce the maximum output tokens so the model cannot generate long copied passages",
+      "correct": false
+    },
+    {
+      "text": "Add a custom blocklist containing the titles of known copyrighted works to the deployment's content filter",
+      "correct": false
+    }
+  ],
+  "explanation": "Foundry's guardrail stack filters *output* as well as input, and the two flagged risks map to two specific output-side capabilities:\n- **Protected material detection** examines the model's completions for matches against known protected content — for example published text and code — and can flag or block responses that reproduce it. That directly addresses the verbatim-copyright risk.\n- **Groundedness detection** compares the model's claims against the grounding sources provided in the request (the retrieved documents in a RAG flow) and detects *ungrounded* statements — text not supported by the sources. It can annotate or filter such content, addressing the unsupported-\"facts\" risk.\n\nBoth are configured in the deployment's content filtering configuration and act on responses, complementing the input-side protections already in place.\n\n**Why not the other options:**\n- **Prompt Shields** — an *input* defense: it detects direct jailbreak attempts in user prompts and indirect injection embedded in supplied documents. The scenario says input screening is already handled; Prompt Shields never evaluates what the model outputs.\n- **Temperature zero and short outputs** — decoding parameters shape randomness and length, not legality or truthfulness. A deterministic model can still reproduce copyrighted text (arguably more reliably) and still assert ungrounded claims — just concisely.\n- **Blocklist of titles** — blocklists match exact terms or patterns. A response can reproduce paragraphs of protected prose without ever mentioning a title, and a blocklist has no concept of whether a statement is supported by retrieved sources.",
+  "category": "Secure compute"
+}

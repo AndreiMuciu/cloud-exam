@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-36-management-tools-matching",
+    "type": "matching",
+    "question": "Match each Azure management tool to the way it is used.",
+    "sourceItems": [
+        "Azure portal",
+        "Azure PowerShell",
+        "Azure Cloud Shell",
+        "Azure mobile app"
+    ],
+    "targetSlots": [
+        "Manage resources through a web-based graphical interface with dashboards, wizards, and visualizations",
+        "Script management tasks using Verb-Noun cmdlets such as New-AzVM in an automation-friendly shell",
+        "Run command-line tools from any web browser, with no local installation, authenticated as the signed-in user",
+        "Check the status of resources and run quick management actions from an iOS or Android device"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Azure portal** — The web-based **graphical** interface: dashboards, resource blades, and creation wizards make it ideal for exploring services, one-off tasks, and visualizing an environment.\n- **Azure PowerShell** — A module of **Verb-Noun cmdlets** (like `New-AzVM` and `Get-AzResourceGroup`) that lets administrators script and automate management tasks, especially natural for teams already fluent in PowerShell.\n- **Azure Cloud Shell** — A **browser-based command-line environment** with both the Azure CLI and Azure PowerShell preinstalled and already authenticated as the signed-in user, so you can manage resources from any machine without installing anything.\n- **Azure mobile app** — Brings monitoring and quick actions to **iOS and Android**: check resource health and alerts, restart a VM, or even run Cloud Shell commands while away from a workstation.",
+    "category": "Describe Azure Management and Governance"
+}

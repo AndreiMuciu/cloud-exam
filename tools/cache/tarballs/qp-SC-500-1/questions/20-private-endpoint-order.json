@@ -1,0 +1,21 @@
+{
+    "id": "sc500-20-private-endpoint-order",
+    "type": "ordering",
+    "question": "An application running on VMs in a virtual network reads from an Azure Storage account over its public endpoint. You must move the traffic onto a private endpoint and then remove all public access — **without breaking the application at any point**. Arrange the steps in the correct order.",
+    "items": [
+        "Set the storage account's public network access to Disabled",
+        "Create a private endpoint for the storage account's blob sub-resource in the application's virtual network",
+        "Confirm from a VM that the storage account FQDN now resolves to the private endpoint's private IP address",
+        "Create the privatelink.blob.core.windows.net private DNS zone, link it to the virtual network, and register the endpoint's A record",
+        "Verify the application still reads blobs successfully"
+    ],
+    "correctOrder": [
+        "Create a private endpoint for the storage account's blob sub-resource in the application's virtual network",
+        "Create the privatelink.blob.core.windows.net private DNS zone, link it to the virtual network, and register the endpoint's A record",
+        "Confirm from a VM that the storage account FQDN now resolves to the private endpoint's private IP address",
+        "Set the storage account's public network access to Disabled",
+        "Verify the application still reads blobs successfully"
+    ],
+    "explanation": "1. **Create the private endpoint** first — this provisions a NIC with a private IP in the VNet mapped to the blob sub-resource, while public access still works.\n2. **Configure private DNS** (`privatelink.blob.core.windows.net` zone, VNet link, A record) so the storage FQDN resolves to the private IP from inside the network. Without DNS, clients keep resolving to the public IP.\n3. **Confirm name resolution** — validating that the FQDN returns the private IP proves traffic will flow through the private endpoint before you cut anything off.\n4. **Disable public network access** only after private connectivity is proven; doing it earlier would cause an outage while clients still resolved the public endpoint.\n5. **Verify the application** end-to-end as the final check that the lockdown caused no regression.\n\nThe key sequencing principle: establish and validate the private path *before* removing the public path.",
+    "category": "Secure storage, databases, and networking"
+}

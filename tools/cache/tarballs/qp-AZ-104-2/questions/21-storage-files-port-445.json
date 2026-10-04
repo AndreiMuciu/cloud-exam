@@ -1,0 +1,25 @@
+{
+    "id": "az104-s2-storage-files-port-445",
+    "type": "single",
+    "question": "Remote employees working from home cannot mount an Azure Files SMB share that works fine from the corporate office. On an affected home network, you run:\n\n```\nTest-NetConnection -ComputerName mystorageacct.file.core.windows.net -Port 445\n```\n\nThe result shows `TcpTestSucceeded : False`. You determine that the employees' internet providers block outbound TCP port 445.\n\nWhat should you implement so the remote employees can mount the share?",
+    "options": [
+        {
+            "text": "Connect each home machine to the company's Azure virtual network with Point-to-Site VPN and mount the share over the tunnel",
+            "correct": true
+        },
+        {
+            "text": "Reconfigure the file share to listen on TCP port 8445 and update the mount command",
+            "correct": false
+        },
+        {
+            "text": "Enable the 'Secure transfer required' setting on the storage account",
+            "correct": false
+        },
+        {
+            "text": "Migrate the share from SMB to the NFS 4.1 protocol",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Files serves SMB **exclusively on TCP 445**, and many consumer ISPs block that port outbound because of historical SMB worms. The supported remedy is to carry the SMB traffic inside a tunnel: a **point-to-site (P2S) VPN** from each remote client to an Azure virtual network (typically combined with a private endpoint for the storage account) encapsulates port 445 traffic inside the VPN protocol (which uses ports the ISP does not block), letting the share mount normally. Site-to-site VPN or ExpressRoute solves the same problem for whole offices.\n\n**Why not the other options:**\n- **Port 8445**: The SMB port for Azure Files is fixed — there is no setting to change the listening port, and Windows SMB clients connect to 445 only.\n- **Secure transfer required**: This setting enforces encryption (SMB 3.x encryption / HTTPS) on connections that already reach the service. It does not change the port and cannot bypass an ISP block.\n- **NFS 4.1**: NFS Azure file shares require premium (FileStorage) accounts, are aimed at Linux workloads, don't support Windows identity-based access — and cannot be accessed over the public internet anyway; they require network-level private connectivity, so this neither fits the Windows clients nor avoids the connectivity work.",
+    "category": "Implement and Manage Storage"
+}

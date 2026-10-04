@@ -1,0 +1,37 @@
+{
+    "id": "gen-10-database-tier-hotspot-dropdown",
+    "type": "hotspot-dropdown",
+    "question": "You are migrating a high-performance OLTP database to Azure SQL Database. The solution must provide the **lowest possible latency** and **highest IOPS** using locally-attached SSD storage. Select the correct database type AND service tier.\n\n**Requirements:**\n- Support for zone-redundant configuration\n- 99.99% availability SLA\n- Lowest latency for I/O operations (using local SSDs)",
+    "image": "assets/images/database_tier_selection.svg",
+    "dropdowns": [
+        {
+            "label": "Database Type",
+            "x1": 35,
+            "y1": 36,
+            "x2": 85,
+            "y2": 56,
+            "options": [
+                "A single Azure SQL database",
+                "Azure SQL Managed Instance",
+                "Azure SQL Database elastic pool"
+            ],
+            "correctIndex": 0
+        },
+        {
+            "label": "Service Tier",
+            "x1": 35,
+            "y1": 66,
+            "x2": 85,
+            "y2": 86,
+            "options": [
+                "General Purpose",
+                "Hyperscale",
+                "Business Critical"
+            ],
+            "correctIndex": 2
+        }
+    ],
+    "explanation": "The correct answer is **A single Azure SQL database** in the **Business Critical** service tier.\n\nWhile both **Hyperscale** and **Business Critical** tiers now support zone redundancy and a 99.99% SLA, the **Business Critical** tier is specifically architected for applications requiring the **lowest latency** and **highest IOPS**. This is achieved by using **locally-attached SSDs** for data and log files, unlike Hyperscale's distributed remote storage architecture, which may introduce slightly higher latency.",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_arm_reporting.json"
+}

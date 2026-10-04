@@ -1,0 +1,29 @@
+{
+    "id": "sc900-s2-16-conditional-access-controls",
+    "type": "multi",
+    "question": "After a Microsoft Entra Conditional Access policy evaluates the signals of a sign-in attempt, it enforces a decision. Which three of the following are decisions or controls that a Conditional Access policy can apply? (Select three.)",
+    "options": [
+        {
+            "text": "Block access entirely",
+            "correct": true
+        },
+        {
+            "text": "Grant access only after multifactor authentication (MFA) is completed",
+            "correct": true
+        },
+        {
+            "text": "Grant access only from a device marked as compliant",
+            "correct": true
+        },
+        {
+            "text": "Permanently delete the user account that triggered the policy",
+            "correct": false
+        },
+        {
+            "text": "Apply a retention label to the user's mailbox",
+            "correct": false
+        }
+    ],
+    "explanation": "Conditional Access is an if-then engine: **if** the assignments match (user, application, conditions such as location or risk), **then** it enforces access controls. The common decisions are to **block access** or to **grant access with requirements**, such as **requiring MFA**, requiring the device to be **marked compliant** (for example, by Microsoft Intune), requiring a Microsoft Entra hybrid joined device, or requiring an approved client app. Session controls can further limit what happens inside the app after sign-in.\n\n**Why not the other options:**\n- **Permanently delete the user account that triggered the policy** — Conditional Access gates *access*; it never destroys identities. Account lifecycle actions are administrative operations (or governance workflows), not policy grant controls.\n- **Apply a retention label to the user's mailbox** — Retention labels belong to Microsoft Purview data lifecycle management. Conditional Access has no data-governance controls; it decides whether and how a sign-in proceeds.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

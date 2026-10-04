@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-20-storage-services-matching",
+    "type": "matching",
+    "question": "Match each Azure storage service to the scenario it is designed for.",
+    "sourceItems": [
+        "Azure Files",
+        "Azure Queue Storage",
+        "Azure Table Storage",
+        "Azure Disk Storage"
+    ],
+    "targetSlots": [
+        "Replace an on-premises file server with fully managed file shares accessed over SMB or NFS",
+        "Buffer large numbers of messages between application components for asynchronous processing",
+        "Store large volumes of structured, non-relational key/attribute data in a NoSQL store",
+        "Provide persistent block-storage volumes attached to Azure virtual machines"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Azure Files** — Fully managed file shares in the cloud, reachable via the industry-standard SMB and NFS protocols, making it a drop-in replacement for a traditional file server.\n- **Azure Queue Storage** — Stores large numbers of messages that components retrieve and process asynchronously, decoupling the producers from the consumers.\n- **Azure Table Storage** — A NoSQL key/attribute store for massive amounts of structured, non-relational data at low cost.\n- **Azure Disk Storage** — Managed block-level storage volumes (like virtual hard disks) that provide the persistent OS and data disks for Azure virtual machines.",
+    "category": "Describe Azure Architecture and Services"
+}

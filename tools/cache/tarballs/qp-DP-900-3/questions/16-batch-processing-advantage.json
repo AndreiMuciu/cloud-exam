@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-16-batch-processing-advantage",
+    "question": "A company calculates employee pay once per month by processing all submitted timesheets together in a single overnight run.\n\nWhich statement best explains why batch processing suits this workload?",
+    "options": [
+        {
+            "text": "The results are not needed immediately, so large volumes of accumulated records can be processed together efficiently during off-peak hours",
+            "correct": true
+        },
+        {
+            "text": "Payroll figures must be recalculated within seconds of each timesheet being submitted",
+            "correct": false
+        },
+        {
+            "text": "Batch processing always delivers results with lower latency than stream processing",
+            "correct": false
+        },
+        {
+            "text": "Batch processing is required because streaming systems cannot perform calculations on numeric data",
+            "correct": false
+        }
+    ],
+    "explanation": "Batch processing shines when data can **accumulate over a period and be processed as one group**: latency does not matter (pay is needed once a month, not per event), and handling the whole month's timesheets in a single scheduled run is computationally efficient and can be pushed into off-peak hours when systems are idle. Payroll is a textbook batch workload.\n\n**Why not the other options:**\n- **Recalculated within seconds of each submission** — That describes a low-latency, per-event requirement, which would call for stream processing; it is the opposite of this scenario's needs.\n- **Batch always delivers lower latency than streaming** — Backwards: batch results are only available after the batch window and run complete, so latency is high; streaming is the low-latency approach.\n- **Streaming cannot perform numeric calculations** — Untrue; stream processors aggregate and compute over numeric data constantly (for example, averages over time windows). Batch is chosen here for efficiency and scheduling, not because streaming lacks arithmetic.",
+    "category": "Describe Core Data Concepts"
+}

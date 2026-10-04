@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-02-yarrowden-aks-rollout-undo",
+    "question": "A new release of the Yarrowden map-tile rendering service was applied to the AKS cluster with an updated Deployment manifest. Minutes later, P95 tile latency triples. You must restore the previous version as quickly as possible, using built-in Kubernetes mechanisms.\n\nWhich command should you run?",
+    "options": [
+        {
+            "text": "kubectl rollout undo deployment/tile-renderer",
+            "correct": true
+        },
+        {
+            "text": "kubectl rollout restart deployment/tile-renderer",
+            "correct": false
+        },
+        {
+            "text": "kubectl delete pods -l app=tile-renderer",
+            "correct": false
+        },
+        {
+            "text": "kubectl scale deployment/tile-renderer --replicas=0 && kubectl scale deployment/tile-renderer --replicas=3",
+            "correct": false
+        }
+    ],
+    "explanation": "A Kubernetes **Deployment keeps a revision history** of its pod template (backed by ReplicaSets). `kubectl rollout undo` re-applies the previous revision's template, so the Deployment rolls back to the prior image and configuration in one command — no need to find the old manifest or image tag. You can inspect the history first with `kubectl rollout history deployment/tile-renderer`.\n\n**Why not the other options:**\n- **`kubectl rollout restart`** — Recreates the pods with the *current* (bad) pod template. Every restarted pod still runs the slow release; nothing is rolled back.\n- **`kubectl delete pods -l app=tile-renderer`** — The Deployment's ReplicaSet immediately recreates pods from the same bad template. This only causes a brief outage while the slow version comes back.\n- **Scaling to 0 and back** — Takes the service completely down and then brings back the *same* bad version. Replica count is independent of which pod template revision is deployed.",
+    "category": "Develop containerized solutions on Azure",
+    "caseStudy": "scenarios/case_study_yarrowden_agronomy.json"
+}

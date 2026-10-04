@@ -1,0 +1,25 @@
+{
+    "id": "sc500-s3-05-tallowfen-sql-entra-only",
+    "question": "You need to meet Tallowfen Grocers' loyalty database authentication requirements: SQL authentication completely disabled on the logical server, the loyalty API connecting without any password or stored credential and holding minimal database permissions, and analyst access granted through an Entra security group. What should you do?",
+    "options": [
+        {
+            "text": "Set a Microsoft Entra admin on the logical server and enable Microsoft Entra-only authentication; enable a managed identity on the loyalty API's compute resource, create a contained database user from that identity and grant it only the needed database roles; and create a contained database user from the analysts' Entra security group",
+            "correct": true
+        },
+        {
+            "text": "Rotate the sqladmin password, store it in Azure Key Vault, and have the loyalty API and the analysts retrieve it from the vault at connection time",
+            "correct": false
+        },
+        {
+            "text": "Enable Microsoft Entra-only authentication and register a service principal with a client secret for the loyalty API, granting the service principal db_owner so it never hits permission errors",
+            "correct": false
+        },
+        {
+            "text": "Delete the sqladmin login and create individual SQL logins for the API and for each analyst, each with a strong unique password",
+            "correct": false
+        }
+    ],
+    "explanation": "This is the full Entra-native pattern for Azure SQL. First, a **Microsoft Entra admin** must be set on the logical server (a prerequisite), then **Entra-only authentication** is enabled, which disables SQL authentication entirely — the shared `sqladmin` password stops working no matter who still knows it. The loyalty API gets a **managed identity**, which has no password or stored credential by design; a **contained database user created from that identity** (`CREATE USER [api-identity] FROM EXTERNAL PROVIDER`) is then granted only the minimal database-level roles it needs (for example `db_datareader`/`db_datawriter` on specific schemas), satisfying least privilege. Finally, creating a contained user **from the analysts' security group** means analyst access is administered by group membership in Entra ID, not by per-person database changes.\n\n**Why not the other options:**\n- **Rotating sqladmin and vaulting the password** — this keeps SQL authentication alive, violating the requirement to disable it completely; a vaulted shared password is still a shared credential with no per-user accountability.\n- **Service principal with a client secret and db_owner** — a client secret is precisely the stored credential the requirement forbids (a managed identity avoids it), and `db_owner` grants far more than minimal permissions; 'so it never hits permission errors' is the opposite of least privilege.\n- **Individual SQL logins with strong passwords** — still SQL authentication, so it must be disabled per the requirement; it also creates a password-management burden per analyst instead of using the mandated Entra security group.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_tallowfen_grocers.json"
+}

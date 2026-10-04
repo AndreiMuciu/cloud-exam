@@ -1,0 +1,25 @@
+{
+    "id": "az104-identity-guest-invite",
+    "question": "You are an administrator for NovaBright Solutions. A user named **Tomoko Sato** has the **User Administrator** role in Microsoft Entra ID. Tomoko attempts to invite an external partner with the email address `partner@riverdaledesign.com` to the Microsoft Entra tenant but receives the error:\n\n> *\"Unable to invite user partner@riverdaledesign.com — Generic authorization exception.\"*\n\nYou need to ensure that Tomoko can invite external users to the tenant.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Modify the External collaboration settings to allow Tomoko's role to invite guests",
+            "correct": true
+        },
+        {
+            "text": "Add riverdaledesign.com as a verified custom domain",
+            "correct": false
+        },
+        {
+            "text": "Assign the Security Administrator role to Tomoko",
+            "correct": false
+        },
+        {
+            "text": "Create a new identity provider for riverdaledesign.com",
+            "correct": false
+        }
+    ],
+    "explanation": "The error occurs because the **External collaboration settings** in Microsoft Entra ID restrict who can invite guest users. These settings can be configured to:\n\n- Allow anyone in the organization to invite\n- Allow only users with specific admin roles to invite\n- Allow only Global Administrators and users assigned the Guest Inviter role\n- Block all invitations\n\nThe User Administrator role does **not** automatically include guest invitation permissions if the external collaboration settings are restrictive. To resolve this, you should modify the External collaboration settings to either allow admins and users in the guest inviter role to send invitations, or assign Tomoko the **Guest Inviter** role.\n\nAdding a custom domain or identity provider addresses different scenarios (custom domain verification and B2B federation, respectively).",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_novabright.json"
+}

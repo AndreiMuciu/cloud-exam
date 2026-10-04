@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-34-retention-labels",
+    "question": "An engineering consultancy already retains all SharePoint content for three years through a broad, location-wide setting. Its client agreements, however, have a special obligation: **each agreement document** must be kept for ten years, with the clock starting **when that particular agreement expires** — an event that happens on a different date for every document.\n\nWhich Microsoft Purview capability handles this item-level, event-driven requirement?",
+    "options": [
+        {
+            "text": "A retention label applied to each agreement, configured to start its retention period based on an event such as the agreement's expiration",
+            "correct": true
+        },
+        {
+            "text": "A second retention policy on the SharePoint location, since policies target individual documents",
+            "correct": false
+        },
+        {
+            "text": "A sensitivity label with encryption applied to the agreements",
+            "correct": false
+        },
+        {
+            "text": "Deleting the agreements after three years along with everything else",
+            "correct": false
+        }
+    ],
+    "explanation": "**Retention labels** work at the **item level**: a label travels with the individual document, can be applied manually or automatically, and can be configured to start its retention period not just from creation or last modification but **from an event** — such as *this* agreement expiring or an employee leaving — which is exactly what a per-document, ten-years-after-expiry obligation requires. Where a retention label and a broader retention setting both apply, the item is retained for the **longest** applicable period, so the ten-year label wins over the three-year baseline.\n\n**Why not the other options:**\n- **A second retention policy on the location** — Retention *policies* apply broadly to entire locations (all of a site or mailbox); they cannot single out particular documents, and they cannot start the clock from a per-item business event. Item-level and event-based retention are precisely what distinguishes labels from policies.\n- **A sensitivity label with encryption** — Sensitivity labels *protect* content (classification, encryption, markings); they do not define how long content is kept or when it is deleted. Retention is the job of retention labels and policies.\n- **Deleting after three years** — That would breach the ten-year obligation for agreements; the requirement is to retain these specific items longer than the baseline, not to let the baseline dispose of them.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

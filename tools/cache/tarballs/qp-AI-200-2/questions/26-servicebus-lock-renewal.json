@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-26-servicebus-lock-renewal",
+    "question": "A Python worker receives transcription jobs from an Azure Service Bus queue in PEEK_LOCK mode. Each job takes up to 20 minutes of model inference. Jobs are being **processed multiple times**: while one worker is still transcribing, the same message reappears on another worker. The queue's lock duration is already at its maximum of 5 minutes.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Register each received message with an `AutoLockRenewer` whose `max_lock_renewal_duration` exceeds the longest job, and complete the message when processing finishes.",
+            "correct": true
+        },
+        {
+            "text": "Set the queue's lock duration to 30 minutes so the lock outlives the longest job.",
+            "correct": false
+        },
+        {
+            "text": "Switch the receiver to RECEIVE_AND_DELETE mode so the message is removed from the queue as soon as it is delivered.",
+            "correct": false
+        },
+        {
+            "text": "Increase the queue's max delivery count so redelivered messages are not dead-lettered.",
+            "correct": false
+        }
+    ],
+    "explanation": "A PEEK_LOCK lock is capped at **5 minutes**; when processing outlives it, the broker considers the message abandoned and redelivers it — exactly the observed duplication. The `azure-servicebus` **`AutoLockRenewer`** solves this by renewing the lock in the background for as long as you allow (`max_lock_renewal_duration`), so a 20-minute job keeps exclusive ownership until it calls `complete_message`. At-least-once semantics are preserved: if the worker crashes, renewal stops and the message is redelivered.\n\n**Why not the other options:**\n- **30-minute lock duration** — Not possible: the maximum lock duration is 5 minutes. That ceiling is why lock *renewal* exists.\n- **RECEIVE_AND_DELETE** — Eliminates redelivery by eliminating the safety net: the message is gone the moment it is delivered, so a worker crash mid-transcription loses the job permanently.\n- **Max delivery count** — Controls *how many failed deliveries* occur before dead-lettering. It neither extends the lock nor stops the premature redelivery that causes duplicate processing.",
+    "category": "Connect to and consume Azure services"
+}

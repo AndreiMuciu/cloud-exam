@@ -1,0 +1,21 @@
+{
+    "id": "az104-compute-update-management",
+    "type": "ordering",
+    "question": "You need to configure **Azure Update Manager** to automatically install security updates on a group of Windows Server VMs every Sunday at 2:00 AM. Arrange the steps in the correct order.",
+    "items": [
+        "Review the update assessment for the VMs",
+        "Specify the update classifications and schedule (Sundays, 2:00 AM)",
+        "Enable periodic assessment and set patch orchestration to AutomaticByPlatform on the VMs",
+        "Create a maintenance configuration",
+        "Assign the maintenance configuration to the VMs"
+    ],
+    "correctOrder": [
+        "Enable periodic assessment and set patch orchestration to AutomaticByPlatform on the VMs",
+        "Review the update assessment for the VMs",
+        "Create a maintenance configuration",
+        "Specify the update classifications and schedule (Sundays, 2:00 AM)",
+        "Assign the maintenance configuration to the VMs"
+    ],
+    "explanation": "Configuring Azure Update Manager for scheduled patching follows this sequence:\n\n1. **Enable periodic assessment and set patch orchestration** — On each VM, enable periodic assessment (so Update Manager automatically checks for missing updates every 24 hours) and set the patch orchestration mode to **AutomaticByPlatform** (required for scheduled patching via maintenance configurations). The necessary VM extensions are installed automatically on first use.\n\n2. **Review update assessment** — After enablement, review the assessment results to see which updates are needed across the VMs. You can also trigger an on-demand check.\n\n3. **Create a maintenance configuration** — In Azure Update Manager, create a maintenance configuration that defines the update deployment settings (name, region, scope).\n\n4. **Specify classifications and schedule** — Within the maintenance configuration, select update classifications (Critical, Security, etc.) and set the recurrence (weekly on Sundays at 2:00 AM). The maintenance window must be at least 2 hours.\n\n5. **Assign the maintenance configuration to the VMs** — Associate the maintenance configuration with the target VMs so updates are applied on the defined schedule. This can also be done during creation.\n\n**Note:** Azure Update Manager replaced the legacy Automation-based Update Management solution. It does not require a Log Analytics workspace or Automation account.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

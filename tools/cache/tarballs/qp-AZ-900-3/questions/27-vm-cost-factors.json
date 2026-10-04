@@ -1,0 +1,29 @@
+{
+    "id": "az900-s3-27-vm-cost-factors",
+    "type": "multi",
+    "question": "A bookkeeping firm is planning its first Azure virtual machines and asks which factors will directly influence the monthly compute charge. Which **three** of the following affect the cost of running an Azure virtual machine? (Select three.)",
+    "options": [
+        {
+            "text": "The size and series of the virtual machine (vCPUs, memory, hardware generation)",
+            "correct": true
+        },
+        {
+            "text": "The region in which the virtual machine is deployed",
+            "correct": true
+        },
+        {
+            "text": "How long the virtual machine runs — compute is billed only while it is allocated",
+            "correct": true
+        },
+        {
+            "text": "The number of resource groups in the subscription",
+            "correct": false
+        },
+        {
+            "text": "The number of tags applied to the virtual machine",
+            "correct": false
+        }
+    ],
+    "explanation": "Three factors on this list directly drive VM compute cost:\n\n- **Size and series** — Bigger VMs with more vCPUs and memory cost more per hour, and different series (general purpose, compute optimized, GPU) carry different rates for the hardware they provide.\n- **Region** — The same VM size is priced differently in different regions, reflecting local infrastructure, energy, and market costs.\n- **Runtime / consumption** — Compute is a metered, consumption-based charge: you pay while the VM is allocated, and a **stopped (deallocated)** VM stops accruing compute charges (attached disks continue to bill as storage).\n\n**Why not the other options:**\n- **The number of resource groups** — Resource groups are free logical containers; how resources are organized has no effect on their price.\n- **The number of tags** — Tags are free metadata used for organization and cost *reporting*; applying them never changes what a resource costs.",
+    "category": "Describe Azure Management and Governance"
+}

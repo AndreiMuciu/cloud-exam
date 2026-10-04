@@ -1,0 +1,29 @@
+{
+    "id": "sc900-s3-23-attack-disruption",
+    "question": "A ransomware operator has compromised one laptop and one user account at a manufacturing firm and is beginning to spread. Microsoft Defender XDR correlates high-confidence signals across endpoints, identities, and email, recognizes the pattern of an active human-operated attack, and triggers **automatic attack disruption**.\n\nWhich two response actions can automatic attack disruption take on its own, at machine speed, to stop the attack from spreading? (Select two.)",
+    "type": "multi",
+    "options": [
+        {
+            "text": "Contain the compromised device so it can no longer communicate with other machines on the network",
+            "correct": true
+        },
+        {
+            "text": "Disable the compromised user account to cut off the attacker's identity-based access",
+            "correct": true
+        },
+        {
+            "text": "Wait for a security analyst to review and approve each containment step before anything happens",
+            "correct": false
+        },
+        {
+            "text": "Uninstall the operating system from every device in the organization",
+            "correct": false
+        },
+        {
+            "text": "Permanently delete the affected user's mailbox and files as a precaution",
+            "correct": false
+        }
+    ],
+    "explanation": "**Automatic attack disruption** in Microsoft Defender XDR is designed to stop in-progress, human-operated attacks — such as ransomware, business email compromise, and adversary-in-the-middle campaigns — **before they spread**. Because containment must outpace a live attacker, disruption acts **automatically at machine speed** using high-confidence, correlated signals from across the XDR workloads. Its signature actions include **containing the compromised device** (blocking its network communication) and **disabling or containing the compromised user account** so stolen credentials stop working, which removes the attacker's two main footholds while leaving the security team in control of full remediation afterward.\n\n**Why not the other options:**\n- **Waiting for analyst approval of each step** — That is precisely what attack disruption is built to avoid: a human-operated attack progresses in minutes, so disruption acts first and lets analysts review, adjust, or release the containment afterward.\n- **Uninstalling operating systems organization-wide** — Attack disruption applies *surgical, reversible* containment to the assets involved in the attack; it does not take destructive fleet-wide actions.\n- **Permanently deleting the user's mailbox and files** — Disruption limits the attacker's access; it never destroys a legitimate user's data. Deleting evidence would also undermine the investigation that follows.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

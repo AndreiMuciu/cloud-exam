@@ -1,0 +1,23 @@
+{
+    "id": "ai103-35-ordering-rag-ingestion-pipeline",
+    "type": "ordering",
+    "question": "You are setting up a retrieval-augmented generation ingestion pipeline for a library of scanned PDF manuals.\n\nPlace the steps in the correct order.",
+    "items": [
+        "Ingest the raw PDF files from storage into the pipeline.",
+        "Run OCR and layout analysis to convert scanned pages into structured, machine-readable text.",
+        "Split the extracted text into semantically coherent chunks sized for retrieval.",
+        "Generate vector embeddings for each chunk.",
+        "Write the chunks and their embeddings into a search index configured for vector (or hybrid) search.",
+        "Query the index at request time to retrieve the most relevant chunks for a user's question."
+    ],
+    "correctOrder": [
+        "Ingest the raw PDF files from storage into the pipeline.",
+        "Run OCR and layout analysis to convert scanned pages into structured, machine-readable text.",
+        "Split the extracted text into semantically coherent chunks sized for retrieval.",
+        "Generate vector embeddings for each chunk.",
+        "Write the chunks and their embeddings into a search index configured for vector (or hybrid) search.",
+        "Query the index at request time to retrieve the most relevant chunks for a user's question."
+    ],
+    "explanation": "Each step in a RAG ingestion pipeline depends on the one before it:\n\n1. **Ingest the raw PDFs** — Nothing downstream can happen until the source files are available to the pipeline.\n2. **OCR/layout analysis** — Scanned pages are images; OCR is what turns them into text the rest of the pipeline can process.\n3. **Chunking** — Text must be split into retrieval-sized pieces before embeddings are generated, or embeddings would represent whole documents instead of specific, retrievable passages.\n4. **Generate embeddings** — Requires chunked text as input; embedding an unchunked document defeats fine-grained retrieval.\n5. **Write to the index** — Embeddings (and their source chunks) must be persisted into a searchable index before anything can query them.\n6. **Query at request time** — Retrieval only happens after ingestion is complete; this is the runtime step that actually serves user questions.\n\nAttempting to embed or index before OCR would mean embedding nothing (scanned pages have no extractable text yet), and querying before the index is populated would return nothing at all.",
+    "category": "Implement information extraction solutions"
+}

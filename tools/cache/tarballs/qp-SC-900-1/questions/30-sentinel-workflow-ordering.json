@@ -1,0 +1,19 @@
+{
+    "id": "sc900-30-sentinel-workflow-ordering",
+    "type": "ordering",
+    "question": "Microsoft Sentinel supports an end-to-end security operations workflow. Arrange the four stages of the Microsoft Sentinel workflow in the correct order, from first to last.",
+    "items": [
+        "Investigate incidents with artificial intelligence and hunt for suspicious activities",
+        "Collect data at cloud scale across users, devices, applications, and infrastructure",
+        "Respond to incidents rapidly with built-in orchestration and automation",
+        "Detect previously undetected threats using analytics and threat intelligence"
+    ],
+    "correctOrder": [
+        "Collect data at cloud scale across users, devices, applications, and infrastructure",
+        "Detect previously undetected threats using analytics and threat intelligence",
+        "Investigate incidents with artificial intelligence and hunt for suspicious activities",
+        "Respond to incidents rapidly with built-in orchestration and automation"
+    ],
+    "explanation": "Microsoft Sentinel's workflow follows four stages in sequence:\n\n1. **Collect** — Data connectors ingest signals from users, devices, applications, and infrastructure, on-premises and across clouds. Nothing can be detected until the telemetry exists in the workspace.\n2. **Detect** — Analytics rules and Microsoft threat intelligence run over the collected data to surface previously undetected threats and minimize false positives.\n3. **Investigate** — Analysts use AI-assisted investigation graphs and proactive hunting queries to understand the scope and root cause of the incidents raised by detections.\n4. **Respond** — Playbooks and automation rules orchestrate rapid response — isolating assets, disabling accounts, or notifying teams — to contain the confirmed threat.\n\nThe order matters because each stage feeds the next: detection depends on collected data, investigation examines detected incidents, and response acts on investigation outcomes.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

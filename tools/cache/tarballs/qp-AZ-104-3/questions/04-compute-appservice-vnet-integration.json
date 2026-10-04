@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-compute-appservice-vnet-integration",
+    "type": "single",
+    "question": "Thistledown Studios must let the web app **app-portal** open outbound connections to the PostgreSQL flexible server **pg-players**, which is only reachable on its private IP address inside **Subnet-Data** of **VNet-Games**.\n\nRecall the constraints:\n\n- Inbound traffic to app-portal remains public and unchanged\n- The empty subnet **Subnet-AppOut** (10.80.4.0/27) has been reserved in VNet-Games for the solution\n\nWhat should you configure on app-portal?",
+    "options": [
+        { "text": "Virtual network integration, using Subnet-AppOut as the integration subnet delegated to Microsoft.Web/serverFarms", "correct": true },
+        { "text": "A private endpoint for app-portal in Subnet-AppOut", "correct": false },
+        { "text": "A hybrid connection from app-portal to pg-players", "correct": false },
+        { "text": "A service endpoint for Microsoft.Web on Subnet-Data", "correct": false }
+    ],
+    "explanation": "**Virtual network integration** is the App Service feature for **outbound** connectivity into a virtual network. You integrate app-portal with VNet-Games by selecting a dedicated, empty integration subnet — Subnet-AppOut — which gets **delegated to `Microsoft.Web/serverFarms`**. The app's outbound traffic to private addresses then originates from addresses in that subnet, so app-portal can reach pg-players on its private IP in Subnet-Data. Inbound access to the app is unaffected: the portal keeps serving players over its public endpoint. (Premium v3, the plan app-portal already uses, fully supports VNet integration.)\n\n**Why not the other options:**\n- **Private endpoint for app-portal**: a private endpoint controls **inbound** traffic — it gives the *app itself* a private IP so that clients inside the network can call it. It does nothing for the app's outbound connections to the database, and the portal's inbound access is meant to stay public anyway.\n- **Hybrid connection**: Hybrid Connections relay traffic through Azure Relay to an on-premises host running Hybrid Connection Manager. pg-players is an Azure PaaS server inside a virtual network, not an on-premises machine with an agent — VNet integration is the direct, supported path.\n- **Service endpoint for Microsoft.Web on Subnet-Data**: service endpoints let traffic *from a subnet* reach *a PaaS service's public endpoint* over the Azure backbone. Configuring one on Subnet-Data would affect traffic leaving that subnet toward App Service — the opposite direction of what is needed — and does not give app-portal any path to a private IP.",
+    "category": "Deploy and Manage Azure Compute Resources",
+    "caseStudy": "scenarios/case_study_thistledown.json"
+}

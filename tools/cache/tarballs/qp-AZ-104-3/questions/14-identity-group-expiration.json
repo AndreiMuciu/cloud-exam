@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-identity-group-expiration",
+    "type": "single",
+    "question": "Your Microsoft Entra tenant has accumulated hundreds of Microsoft 365 groups created by project teams over the years, and many are abandoned. You must implement automatic lifecycle cleanup that meets these requirements:\n\n- Groups that are still **in use** must be renewed **automatically**, without bothering their owners\n- Owners of unused groups must be prompted to renew, and groups that are not renewed must be deleted\n- Owners must be able to recover a group that was deleted by mistake\n\nWhat should you configure?",
+    "options": [
+        { "text": "A group expiration policy for Microsoft 365 groups", "correct": true },
+        { "text": "A recurring access review of all Microsoft 365 groups", "correct": false },
+        { "text": "A dynamic membership rule on each Microsoft 365 group", "correct": false },
+        { "text": "A group naming policy with a prefix that encodes the group's end date", "correct": false }
+    ],
+    "explanation": "The **group expiration policy** (Microsoft Entra ID > Groups > Expiration) is the built-in lifecycle feature for **Microsoft 365 groups**. You set a group lifetime (for example 180 days) and the scope of groups it applies to. Groups with recent user activity are **renewed automatically** thanks to activity-based renewal — owners of active groups are never prompted. Owners of inactive groups get renewal notifications as expiration approaches; if nobody renews, the group is deleted. Because an expired Microsoft 365 group is **soft-deleted**, it can be restored within 30 days — covering the accidental-deletion requirement.\n\n**Why not the other options:**\n- **Access reviews**: reviews attest to *who belongs in* a group — reviewers approve or remove **members**. They do not delete unused groups, do not auto-renew active ones, and would generate exactly the owner-nagging the requirements want to avoid for healthy groups.\n- **Dynamic membership rules**: dynamic rules compute membership from user attributes. They say nothing about whether a group is still in use and provide no expiration, renewal, or deletion behavior.\n- **Naming policy**: a naming policy standardizes prefixes/suffixes and blocks banned words at creation time. Encoding a date in a name changes nothing operationally — nothing reads that date, prompts owners, or deletes the group.",
+    "category": "Manage Azure Identities and Governance"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az305-compute-app-service-plan",
+    "question": "You are designing a web application deployment strategy. The application has the following requirements:\n\n- Deploy to multiple Azure regions for high availability\n- Test new releases with a subset of production traffic before full rollout\n- Scale automatically based on HTTP request queue length\n- Maintain TLS/SSL certificates for custom domains\n\nWhich App Service plan tier is the **minimum** that supports all these requirements?",
+    "options": [
+        {
+            "text": "Basic (B1)",
+            "correct": false
+        },
+        {
+            "text": "Isolated v2 (I1v2)",
+            "correct": false
+        },
+        {
+            "text": "Premium v3 (P1v3)",
+            "correct": false
+        },
+        {
+            "text": "Standard (S1)",
+            "correct": true
+        }
+    ],
+    "explanation": "**Standard (S1)** is the minimum tier that supports all four requirements:\n\n1. **Multi-region deployment** — App Service supports multi-region deployment at any paid tier when combined with Azure Front Door or Traffic Manager. The Standard tier supports this.\n2. **Deployment slots** — Standard tier introduces **deployment slots** (up to 5), enabling traffic routing to test new releases with a percentage of production traffic (slot-based A/B testing)\n3. **Auto-scale** — Standard tier introduces **auto-scale** based on metrics like HTTP queue length, CPU, and memory\n4. **Custom SSL** — Standard tier supports **SNI SSL** bindings for custom domains\n\n**Why not the other options:**\n- **Basic (B1)** — Supports custom domains and SSL but does **not** support deployment slots or auto-scale\n- **Premium v3** — Supports everything but exceeds the minimum requirement. It adds features like larger instances, more slots (20), and VNet integration\n- **Isolated v2** — Designed for network isolation (runs in an App Service Environment). Significantly more expensive than needed",
+    "category": "Design Infrastructure Solutions"
+}

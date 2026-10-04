@@ -1,0 +1,24 @@
+{
+    "id": "gen-04-sql-migration-strategy",
+    "question": "You need to recommend a strategy for migrating the OrderTracker database to Azure SQL Managed Instance with minimal downtime. What should you include in the recommendation?",
+    "options": [
+        {
+            "text": "Back up the database to a URL and restore directly to Azure SQL Managed Instance",
+            "correct": false
+        },
+        {
+            "text": "Export the database as a BACPAC file and import to Azure SQL Managed Instance",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Site Recovery to replicate the SQL Server virtual machines",
+            "correct": false
+        },
+        {
+            "text": "Use the Azure Database Migration Service (DMS) to perform an online migration",
+            "correct": true
+        }
+    ],
+    "explanation": "The correct answer is **Use the Azure Database Migration Service (DMS) to perform an online migration**.\n\n- **Azure DMS (online mode)** supports minimal-downtime migration to **Azure SQL Managed Instance**. It uses a continuous sync process that allows for a cutover with near-zero data loss and minimal disruption. Note: DMS online mode is supported for SQL Managed Instance but **not** for Azure SQL Database (which only supports offline migration).\n- BACPAC export/import requires the database to be offline or read-only during the process, leading to significant downtime.\n- Azure Site Recovery is for DR and VM migration, not for migrating to PaaS services like Azure SQL Managed Instance.\n- Restoring from a URL to SQL Managed Instance is a valid offline approach, but it requires taking the source database offline, so it does not minimize downtime.",
+    "category": "Design Data Storage Solutions"
+}

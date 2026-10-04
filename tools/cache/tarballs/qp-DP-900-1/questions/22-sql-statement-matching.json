@@ -1,0 +1,25 @@
+{
+    "id": "dp900-22-sql-statement-matching",
+    "type": "matching",
+    "question": "Match each SQL statement to the category of the SQL language it belongs to.",
+    "sourceItems": [
+        "Data Manipulation Language (DML)",
+        "Data Control Language (DCL)",
+        "Data Query Language (DQL)",
+        "Data Definition Language (DDL)"
+    ],
+    "targetSlots": [
+        "SELECT Name, Price FROM Products WHERE Price > 10",
+        "INSERT INTO Products (Name, Price) VALUES ('Lamp', 24.99)",
+        "CREATE TABLE Products (ID INT PRIMARY KEY, Name VARCHAR(50), Price DECIMAL)",
+        "GRANT SELECT ON Products TO ReportingUser"
+    ],
+    "correctMapping": [
+        2,
+        0,
+        3,
+        1
+    ],
+    "explanation": "- **SELECT — Data Query Language (DQL)**: retrieves data from tables without changing anything. (SELECT is often grouped under DML, but when the query category is called out separately it is DQL.)\n- **INSERT — Data Manipulation Language (DML)**: changes the *data* in tables; INSERT, UPDATE, and DELETE are the core DML statements.\n- **CREATE TABLE — Data Definition Language (DDL)**: defines or changes the *structure* of database objects; CREATE, ALTER, and DROP are the core DDL statements.\n- **GRANT — Data Control Language (DCL)**: manages permissions and access control; GRANT, REVOKE, and DENY are DCL statements.\n\nRemembering the split helps on the exam: DDL shapes objects, DML changes rows, DQL reads rows, and DCL controls who can do what.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

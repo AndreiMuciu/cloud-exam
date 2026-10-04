@@ -1,0 +1,24 @@
+{
+    "id": "sc500-28-easm-discovery",
+    "question": "After several acquisitions, your security team suspects there are internet-facing assets nobody tracks: forgotten subdomains, servers hosted with third-party providers, expiring TLS certificates, and shadow-IT websites — many of them **outside** your Azure subscriptions. You need continuous discovery and risk assessment of this unknown external footprint. What should you deploy?",
+    "options": [
+        {
+            "text": "Create a Microsoft Defender External Attack Surface Management (EASM) resource and seed it with the organization's known domains and hosts so it can discover and inventory related internet-facing assets",
+            "correct": true
+        },
+        {
+            "text": "Enable Defender CSPM on all Azure subscriptions and review its inventory of internet-exposed resources",
+            "correct": false
+        },
+        {
+            "text": "Use Azure Network Watcher to run IP flow verify and effective security rules diagnostics across the virtual networks",
+            "correct": false
+        },
+        {
+            "text": "Add more data connectors to Microsoft Sentinel so logs from all known websites are ingested",
+            "correct": false
+        }
+    ],
+    "explanation": "**Defender EASM** works from the outside in: you seed it with known assets (domains, hosts, IP blocks), and its discovery engine crawls connections to build an inventory of the organization's whole external attack surface — including assets on other clouds, at hosting providers, or from acquisitions — then flags risks like expiring certificates, exposed services, and vulnerable components. That is exactly \"find what we don't know we own.\"\n\n**Why not the other options:**\n- **Defender CSPM** — Its inventory covers resources in *onboarded* subscriptions and connected clouds; it cannot see assets your organization runs elsewhere or has forgotten about, which is the core of this problem.\n- **Network Watcher** — IP flow verify and effective security rules diagnose traffic within your Azure virtual networks; they discover nothing external.\n- **More Sentinel connectors** — Connectors ingest telemetry from systems you already know about and manage; they cannot enumerate unknown assets.",
+    "category": "Manage and monitor security posture"
+}

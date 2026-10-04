@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-28-defender-cloud-devops-security",
+    "question": "A platform engineering team keeps application code in GitHub and Azure DevOps repositories. The security team has found hard-coded credentials in commits and misconfigured infrastructure-as-code templates that later became insecure cloud deployments. They want their existing cloud security tool to connect to these source code management platforms and show code, secret-scanning, and infrastructure-as-code findings alongside their cloud posture recommendations, in one console.\n\nWhich capability meets this requirement?",
+    "options": [
+        {
+            "text": "DevOps security in Microsoft Defender for Cloud, which connects Azure DevOps and GitHub environments and unifies their security findings with cloud posture management",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Sentinel data connectors, which stream repository commit logs into a SIEM workspace",
+            "correct": false
+        },
+        {
+            "text": "Azure Key Vault, which scans repositories for vulnerabilities",
+            "correct": false
+        },
+        {
+            "text": "Azure Bastion, which secures developer connections to the repositories",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Cloud includes DevOps security**: organizations connect their **Azure DevOps, GitHub (and GitLab)** environments to Defender for Cloud, which then surfaces findings from the development pipeline — **exposed secrets in code, code vulnerabilities, and infrastructure-as-code misconfigurations** — in the same console as the cloud security posture recommendations for the deployed resources. This unifies security from code to cloud, so a template flaw can be fixed before it ever becomes a misconfigured production resource.\n\n**Why not the other options:**\n- **Microsoft Sentinel data connectors** — Sentinel ingests *log and event* data for threat detection. Streaming commit logs into a SIEM does not assess code, scan for secrets, or evaluate infrastructure-as-code templates, and it lives in a different console from cloud posture recommendations.\n- **Azure Key Vault** — Key Vault *stores* secrets, keys, and certificates securely. It is the right destination for the credentials that should not be in code, but it has no capability to scan repositories or report security findings.\n- **Azure Bastion** — Bastion provides secure browser-based RDP/SSH connectivity to virtual machines. How developers connect to repositories is unrelated to assessing the security of the code inside them.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

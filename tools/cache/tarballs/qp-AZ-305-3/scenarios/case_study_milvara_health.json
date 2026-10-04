@@ -1,0 +1,13 @@
+{
+    "id": "case_study_milvara_health",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Milvara Health Analytics** provides population-health reporting to insurers and hospital groups. The platform ingests claims files, clinical documents, and wearable-device readings, and produces regulatory reports and interactive dashboards for analysts.\n\n**Current Environment:**\n- Operational data (patient enrollment, device registrations, real-time device readings) is stored in Azure Cosmos DB for NoSQL, which serves the customer-facing application\n- Curated claims data — about 90 TB of structured, relational data — is loaded nightly and queried by a business-intelligence team using complex T-SQL joins and aggregations against a fixed daily schedule of reports\n- Data assets are spread across Azure SQL databases, Azure Data Lake Storage Gen2 accounts, and Power BI workspaces in three subscriptions\n- The company is subject to healthcare data-protection regulations and must demonstrate where protected health information (PHI) resides and how it flows through the platform"
+        },
+        {
+            "title": "Analytics Requirements",
+            "content": "**Analytics and Governance Requirements:**\n- The BI team needs a dedicated, predictable-performance relational data warehouse for the 90 TB claims dataset; the workload runs heavy T-SQL joins on a known daily schedule, and the team wants to pause compute outside processing windows\n- Analysts must run near-real-time aggregations over the Cosmos DB operational data **without** building ETL pipelines and **without** consuming the request units provisioned for the customer-facing application\n- The compliance team requires an automated, organization-wide inventory of data assets: scheduled scans of the SQL databases, data lake, and Power BI tenant; automatic classification of columns that contain PHI; end-to-end lineage showing how data moves from source to report; and a searchable business glossary for analysts"
+        }
+    ]
+}

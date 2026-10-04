@@ -1,0 +1,25 @@
+{
+    "id": "az500-01-vanguard-pim-approval",
+    "question": "Vanguard Defense Systems needs to ensure that all administrative access to the Azure subscription requires approval and is only active for a limited time. Which features of Microsoft Entra Privileged Identity Management (PIM) should you configure?",
+    "options": [
+        {
+            "text": "Access Reviews and Conditional Access",
+            "correct": false
+        },
+        {
+            "text": "Eligible assignments and Approval requirements",
+            "correct": true
+        },
+        {
+            "text": "Permanent assignments and Multi-factor authentication",
+            "correct": false
+        },
+        {
+            "text": "Group-based licensing and Dynamic groups",
+            "correct": false
+        }
+    ],
+    "explanation": "To meet the 'just-in-time' and 'approval' requirements, you should configure users with **Eligible assignments** (rather than permanent) and set a policy that requires **Approval** from a designated authorizer before the role can be activated.\n\n**Why not the other options:**\n- **Access Reviews** — Used for periodic certification of access, not for JIT activation.\n- **Permanent assignments** — Violates the JIT requirement.\n- **Group-based licensing** — Not related to privileged access management.",
+    "category": "Manage identity and access",
+    "caseStudy": "scenarios/case_study_vanguard_defense.json"
+}

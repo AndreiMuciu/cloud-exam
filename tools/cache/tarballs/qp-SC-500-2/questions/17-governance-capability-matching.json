@@ -1,0 +1,28 @@
+{
+    "id": "sc500-s2-17-governance-capability-matching",
+    "type": "matching",
+    "question": "Match each identity or governance capability to the requirement it satisfies.",
+    "sourceItems": [
+        "Azure Policy with the DeployIfNotExists effect",
+        "Custom Azure RBAC role",
+        "Entitlement management access package",
+        "Resource Guard with multi-user authorization",
+        "Microsoft Entra ID Protection"
+    ],
+    "targetSlots": [
+        "Automatically deploy diagnostic settings to any resource that is created without them",
+        "Grant operators an exact permission set that no built-in role provides",
+        "Let partner users request a time-limited, approval-gated bundle of groups and applications",
+        "Require authorization from a separately administered scope before backup protection can be weakened",
+        "Detect leaked credentials and score the probability that an account is compromised"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "explanation": "- **Azure Policy with DeployIfNotExists** evaluates resources after creation or update and runs a remediation deployment (via a managed identity) when the required configuration — such as diagnostic settings — is missing. Deny can only block; DeployIfNotExists *fixes*.\n- **Custom Azure RBAC roles** are the answer whenever the phrase \"no built-in role matches\" appears: you compose exact `Actions`/`NotActions` and control where the role may be assigned with `assignableScopes`.\n- **Entitlement management access packages** bundle groups, applications, and sites behind a self-service request with approvers, assignment expiration, and attached access reviews — designed for partner/guest project access.\n- **Resource Guard (multi-user authorization)** protects Azure Backup's critical operations: disabling soft delete, reducing retention, or stopping protection requires permissions on the guard, which lives in a scope only the security team administers.\n- **Microsoft Entra ID Protection** aggregates signals (leaked credential dumps, anomalous behavior) into *user risk* and *sign-in risk* scores that risk-based Conditional Access policies can act on.\n\nKey distinctions: DeployIfNotExists remediates configuration but cannot gate destructive operations behind a second team (Resource Guard's job); access packages govern resource bundles for people, not permission definitions (the custom role's job); and ID Protection detects compromise but grants nothing.",
+    "category": "Manage identity, access, and governance"
+}

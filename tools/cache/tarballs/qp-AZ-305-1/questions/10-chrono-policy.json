@@ -1,0 +1,25 @@
+{
+    "id": "gen-14-policy-remediation",
+    "question": "You need to ensure all new and existing storage accounts in the production environment have 'Allow Blob Public Access' disabled. You plan to use Azure Policy with the 'Modify' effect. What should you do to ensure existing non-compliant resources are corrected automatically?",
+    "options": [
+        {
+            "text": "Use the 'AuditIfNotExists' effect and manually run a PowerShell script to disable public access",
+            "correct": false
+        },
+        {
+            "text": "Enable the 'deployIfNotExists' effect on a second policy specifically for existing resources",
+            "correct": false
+        },
+        {
+            "text": "Create a remediation task and ensure the policy assignment has a managed identity with sufficient permissions",
+            "correct": true
+        },
+        {
+            "text": "Assign the 'Deny' policy effect to the storage accounts at the resource group level",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Create a remediation task and ensure the policy assignment has a managed identity**. \n\n- When using effects like **Modify** or **deployIfNotExists**, Azure Policy can automatically fix existing non-compliant resources through a **remediation task**. This task uses a managed identity (System or User assigned) that must be granted the necessary RBAC permissions (e.g., Storage Account Contributor) to make the changes.\n- 'Deny' prevents future non-compliance but doesn't fix existing resources.- 'Audit' only flags non-compliance without correcting it.",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_monitoring_governance.json"
+}

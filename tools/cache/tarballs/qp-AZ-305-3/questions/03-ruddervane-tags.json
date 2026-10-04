@@ -1,0 +1,25 @@
+{
+    "id": "az305-s3-ruddervane-tags",
+    "question": "You need to recommend a tagging solution so that finance can attribute all Azure spend to a `costCenter`. The solution must:\n\n- Ensure new **and** existing resources carry the `costCenter` tag\n- Not cause product-team deployments to fail\n- Minimize manual effort\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Assign a policy with the Modify effect that inherits the costCenter tag from the resource group, and run a remediation task for existing resources",
+            "correct": true
+        },
+        {
+            "text": "Assign a policy with the Deny effect that blocks the creation of any resource that does not include a costCenter tag",
+            "correct": false
+        },
+        {
+            "text": "Run a scheduled PowerShell script from Azure Automation that applies the costCenter tag to untagged resources every night",
+            "correct": false
+        },
+        {
+            "text": "Require product teams to add the costCenter tag manually and track compliance with an Azure Policy Audit assignment",
+            "correct": false
+        }
+    ],
+    "explanation": "The built-in **`Inherit a tag from the resource group`** policy definition uses the **Modify** effect: when a resource is created or updated without the tag, Azure Policy **adds the tag automatically** during the request instead of rejecting it — deployments never fail. Because the tag is stamped at the resource-group level once (resource groups map naturally to product teams and cost centers), individual engineers never have to think about it.\n\nFor the thousands of **existing** untagged resources, a **remediation task** applies the same Modify operation retroactively across the scope, using the assignment's managed identity — no scripts to write or maintain.\n\nThis combination satisfies all three requirements: full coverage (new + existing), zero deployment friction, and near-zero ongoing effort.\n\n**Why not the other options:**\n- **Deny effect** — Guarantees the tag on new resources but does so precisely by *failing deployments*, which the scenario explicitly forbids (product teams already complain about this). Deny also does nothing for the thousands of existing untagged resources\n- **Nightly Automation script** — Custom code that must be authored, secured, monitored, and maintained; there is a window (up to a day) where new resources are untagged and costs are unattributed; and it duplicates functionality Azure Policy provides natively. Maximal manual effort, not minimal\n- **Manual tagging + Audit** — Audit only *reports* non-compliance; it neither adds tags nor prevents their absence. Attribution would depend on every engineer's diligence, and finance would chase gaps every month",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_ruddervane_industrial.json"
+}

@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-storage-stored-access-policy",
+    "type": "single",
+    "question": "Saltmere Hospitality issues each franchise partner a shared access signature (SAS) URL for that partner's own container in **stsaltmeredocs**. When a franchise agreement ends, the partner's access must be revocable **immediately and individually** — and the account keys must **not** be regenerated, because other partners and internal systems would be disrupted.\n\nWhat should you implement?",
+    "options": [
+        { "text": "Create a stored access policy on each partner's container and issue service SAS tokens that reference the policy; revoke a partner by deleting or modifying that container's stored access policy", "correct": true },
+        { "text": "Issue each partner an ad hoc account SAS with a one-year expiry, and revoke a partner by regenerating the account access keys", "correct": false },
+        { "text": "Issue each partner an ad hoc service SAS signed with key2 while internal systems use key1, and regenerate key2 to revoke a partner", "correct": false },
+        { "text": "Enable anonymous public access on each partner's container and restrict it with storage account firewall IP rules per partner", "correct": false }
+    ],
+    "explanation": "A **service SAS that references a stored access policy** inherits its start time, expiry, and permissions from the policy defined on the container. Deleting the policy (or changing its expiry to a past time) **immediately invalidates every SAS token that references it** — without touching the account keys. Because each partner has its own container with its own stored access policy, revocation is precise, per-partner, and instantaneous, and no other partner or internal system is affected. A container supports up to five stored access policies, which comfortably covers one policy per partner container.\n\n**Why not the other options:**\n- **Ad hoc account SAS + key regeneration**: An ad hoc SAS can only be revoked by regenerating the key that signed it — which invalidates *every* SAS and connection string based on that key, disrupting all partners and internal systems at once. This is exactly what the scenario forbids.\n- **Signing partner SAS with key2**: This narrows the blast radius but does not eliminate it — regenerating key2 still kills the SAS of **every** partner simultaneously, not just the off-boarded one.\n- **Anonymous access + firewall rules**: Anonymous access is read-only (partners must also upload), cannot be scoped per partner identity, and dismantles the security model entirely; account firewall rules apply account-wide, not per container.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_saltmere.json"
+}

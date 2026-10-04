@@ -1,0 +1,24 @@
+{
+    "id": "az305-compute-aks-design",
+    "question": "You are designing a solution for a microservices application that has the following requirements:\n\n- Automatic horizontal scaling based on CPU and memory utilization\n- Rolling updates with zero downtime\n- Service-to-service communication using DNS-based service discovery\n- Support for both Linux and Windows containers\n\nWhich compute service should you recommend?",
+    "options": [
+        {
+            "text": "Azure Container Instances (ACI)",
+            "correct": false
+        },
+        {
+            "text": "Azure App Service with custom containers",
+            "correct": false
+        },
+        {
+            "text": "Azure Kubernetes Service (AKS)",
+            "correct": true
+        },
+        {
+            "text": "Azure Functions with container support",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Kubernetes Service (AKS)** is the best fit because it natively supports all four requirements:\n\n1. **Horizontal Pod Autoscaler (HPA)** — Scales pods based on CPU, memory, or custom metrics\n2. **Rolling updates** — Kubernetes deployments support rolling update strategies with configurable surge and unavailable pod counts\n3. **Service discovery** — CoreDNS provides built-in DNS-based service discovery within the cluster\n4. **Mixed OS node pools** — AKS supports both Linux and Windows node pools in the same cluster\n\n**Why not the other options:**\n- **ACI** — Serverless containers without built-in orchestration, service discovery, or rolling update strategies. Best for simple, short-lived workloads\n- **App Service** — Supports containers but has limited service-to-service discovery and does not natively support mixed Linux/Windows containers in the same plan\n- **Azure Functions** — Event-driven compute, not designed for long-running microservices with inter-service communication patterns",
+    "category": "Design Infrastructure Solutions"
+}

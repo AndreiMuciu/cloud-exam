@@ -1,0 +1,13 @@
+{
+    "id": "case_study_quorlex",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Quorlex Manufacturing** operates IoT-connected factories that produce industrial sensors. The company is expanding its Azure footprint to support real-time telemetry ingestion from factory-floor equipment in three regions: East US, West Europe, and Southeast Asia.\n\n**Current Environment:**\n- Each regional factory has its own hub-and-spoke virtual network (VNet) topology.\n- Telemetry data is written to Azure SQL Database and Azure Storage for downstream analytics.\n- On-premises SCADA systems at each factory must exchange data with Azure over a private, low-latency connection."
+        },
+        {
+            "title": "Network Requirements",
+            "content": "**Addressing:**\n- All spoke VNets across the three regions must use non-overlapping address spaces so that future global VNet peering is possible.\n- Subnets must be sized to accommodate virtual network gateways, Azure Bastion, and platform-integrated services without re-addressing later.\n\n**Connectivity:**\n- Each factory requires a dedicated ExpressRoute circuit to Microsoft for predictable, private connectivity — the public internet must not carry SCADA telemetry.\n- The East US and West Europe factories must be able to reach each other's on-premises network directly through the Microsoft backbone, without routing through Azure VNets.\n\n**Data access:**\n- The Azure SQL Database and Storage account that receive telemetry must be reachable only over private IP addresses from the spoke VNets — no traffic to these services may traverse the public internet, even from within Azure."
+        }
+    ]
+}

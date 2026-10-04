@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-05-tessendale-group-by",
+    "question": "The registrar needs a single query against the `Enrollments` table that returns one row per course showing the total number of enrolled students for that course.\n\nWhich SQL capability should the query use?",
+    "options": [
+        {
+            "text": "A GROUP BY clause on the course column with the COUNT aggregate function",
+            "correct": true
+        },
+        {
+            "text": "An ORDER BY clause that sorts the rows by course",
+            "correct": false
+        },
+        {
+            "text": "A SELECT DISTINCT query that removes duplicate rows",
+            "correct": false
+        },
+        {
+            "text": "A separate WHERE clause query run once for each course",
+            "correct": false
+        }
+    ],
+    "explanation": "**GROUP BY** collapses rows that share a value — here, the course — into groups, and an aggregate function such as **COUNT** computes one result per group. `SELECT CourseId, COUNT(*) FROM Enrollments GROUP BY CourseId` returns exactly one row per course with its total enrollment: a single query, as required.\n\n**Why not the other options:**\n- **An ORDER BY clause** — ORDER BY only sorts the result rows; it does not combine rows or calculate totals, so the registrar would still see one row per enrollment, not per course.\n- **A SELECT DISTINCT query** — DISTINCT removes duplicate rows from the output. It could list each course once, but it cannot count how many enrollments each course has.\n- **A separate WHERE clause query per course** — Running one filtered query per course could eventually produce the numbers, but it requires dozens of queries and manual assembly, violating the single-query requirement.",
+    "category": "Identify Considerations for Relational Data on Azure",
+    "caseStudy": "scenarios/case_study_tessendale_college.json"
+}

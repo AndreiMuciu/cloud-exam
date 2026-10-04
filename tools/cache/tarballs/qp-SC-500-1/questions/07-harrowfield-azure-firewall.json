@@ -1,0 +1,25 @@
+{
+    "id": "sc500-07-harrowfield-azure-firewall",
+    "question": "You need to design the central traffic inspection point for Harrowfield Logistics so that all spoke outbound internet traffic is filtered by FQDN and threat intelligence, and east-west traffic between spokes is deny-by-default. What should you deploy and configure?",
+    "options": [
+        {
+            "text": "Deploy Azure Firewall Premium in vnet-hub, add user-defined routes (0.0.0.0/0 and spoke-to-spoke prefixes) on the spoke subnets pointing to the firewall's private IP, and use application rules with threat intelligence in deny mode for undefined traffic",
+            "correct": true
+        },
+        {
+            "text": "Deploy an NSG in the hub with a deny-all outbound rule, and enable VNet peering with gateway transit between the spokes",
+            "correct": false
+        },
+        {
+            "text": "Deploy Azure Application Gateway with WAF in each spoke and configure path-based routing rules to filter outbound traffic",
+            "correct": false
+        },
+        {
+            "text": "Deploy Azure DDoS Network Protection on all four virtual networks and enable Network Watcher flow logs",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Firewall** in the hub is the standard central egress and east-west inspection point. **Application rules** provide FQDN-based filtering, **threat intelligence-based filtering** can alert/deny traffic to known-malicious IPs and domains, and Azure Firewall is deny-by-default for traffic not explicitly allowed. **User-defined routes** on the spoke subnets force both internet-bound (0.0.0.0/0) and inter-spoke traffic through the firewall, since spokes are not peered directly with each other.\n\n**Why not the other options:**\n- **Hub NSG + gateway transit** — NSGs cannot filter by FQDN (beyond service tags) or use threat intelligence, and an NSG in the hub does not see spoke traffic; gateway transit shares a VPN/ExpressRoute gateway, not a filtering device.\n- **Application Gateway with WAF per spoke** — Application Gateway is a reverse proxy for inbound HTTP(S) to your apps; it is not an outbound/egress filtering solution and per-spoke deployment is not centralized.\n- **DDoS Protection + flow logs** — DDoS protection defends against volumetric attacks on public endpoints and flow logs are telemetry; neither filters or inspects outbound traffic.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_harrowfield_logistics.json"
+}

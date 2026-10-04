@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-20-security-defaults",
+    "question": "A 25-person nonprofit uses the free tier of Microsoft Entra ID and has no dedicated IT security staff. It wants a preconfigured, no-cost baseline that requires all users to register for multifactor authentication, requires MFA for administrators, and blocks legacy authentication protocols — without designing any custom policies.\n\nWhat should the nonprofit enable?",
+    "options": [
+        {
+            "text": "Security defaults",
+            "correct": true
+        },
+        {
+            "text": "A set of custom Conditional Access policies",
+            "correct": false
+        },
+        {
+            "text": "Privileged Identity Management (PIM)",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection risk policies",
+            "correct": false
+        }
+    ],
+    "explanation": "**Security defaults** are a **preconfigured set of baseline identity protections available at no extra cost**, including in the free tier of Microsoft Entra ID. Turning on the single toggle requires all users to register for MFA, enforces MFA for administrators (and challenges users when necessary), and blocks legacy authentication protocols that cannot perform MFA. It is designed precisely for organizations without security expertise that need a sound baseline immediately.\n\n**Why not the other options:**\n- **A set of custom Conditional Access policies** — Conditional Access offers granular, tailored control, but it requires a paid Microsoft Entra ID license and someone to design and maintain the policies — the opposite of the \"preconfigured, no-cost, no design work\" requirement. (Security defaults and Conditional Access are also mutually exclusive: enabling one means not using the other.)\n- **Privileged Identity Management (PIM)** — PIM provides just-in-time activation for privileged roles. It is a premium governance feature and does not enforce tenant-wide MFA or block legacy authentication.\n- **Microsoft Entra ID Protection risk policies** — Risk-based policies react to detected sign-in and user risk and require premium licensing. They are not a free, preconfigured baseline for a small organization.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

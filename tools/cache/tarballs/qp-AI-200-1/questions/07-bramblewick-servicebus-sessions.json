@@ -1,0 +1,25 @@
+{
+    "id": "ai200-07-bramblewick-servicebus-sessions",
+    "question": "You must meet the Bramblewick messaging requirement: for any single order, its create, amend, and cancel commands on the `order-commands` queue must be processed strictly in send order, while commands for different orders are processed in parallel by many workers.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Enable duplicate detection on the queue and set the `MessageId` of every command to the order ID.",
+            "correct": false
+        },
+        {
+            "text": "Enable message sessions on the queue, set the `session_id` of every command to its order ID, and process messages with session receivers.",
+            "correct": true
+        },
+        {
+            "text": "Set the `time_to_live` on each command so amend and cancel commands expire if they arrive before the create command completes.",
+            "correct": false
+        },
+        {
+            "text": "Run a single receiver instance with `prefetch_count=1` so all messages are handled one at a time.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Message sessions** give Service Bus FIFO guarantees *per session*. By setting `session_id` to the order ID, all commands for one order form a session that is locked to a single receiver and delivered in order, while sessions for other orders are handled concurrently by other workers — exactly \"ordered within an order, parallel across orders.\"\n\n**Why not the other options:**\n- **Duplicate detection with `MessageId` = order ID** — Duplicate detection *drops* messages with a repeated `MessageId` within the detection window, so the amend and cancel commands would be discarded as duplicates of the create command. It has nothing to do with ordering.\n- **`time_to_live`** — TTL controls expiration, not sequencing; expiring commands loses business data instead of ordering it.\n- **Single receiver with `prefetch_count=1`** — Serializes *everything*, destroying the parallelism requirement and creating a throughput bottleneck; it also breaks the moment you scale to a second instance.",
+    "category": "Connect to and consume Azure services",
+    "caseStudy": "scenarios/case_study_bramblewick_retail.json"
+}

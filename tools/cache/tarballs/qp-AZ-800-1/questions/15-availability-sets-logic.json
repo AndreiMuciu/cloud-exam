@@ -1,0 +1,24 @@
+{
+    "id": "az800-15-availability-sets-logic",
+    "question": "You are deploying two virtual machines in an Azure Availability Set. You want to ensure that they are never rebooted at the same time during planned Azure maintenance. What determines this behavior?",
+    "options": [
+        {
+            "text": "Fault Domains",
+            "correct": false
+        },
+        {
+            "text": "Update Domains",
+            "correct": true
+        },
+        {
+            "text": "Availability Zones",
+            "correct": false
+        },
+        {
+            "text": "Proximity Placement Groups",
+            "correct": false
+        }
+    ],
+    "explanation": "**Update Domains** (UDs) are used to ensure that only a subset of VMs in an availability set are rebooted at any given time during planned maintenance. Azure will only reboot VMs in one UD at a time.\n\n**Why not the other options:**\n- **Fault Domains** (FDs) — Protect against *unplanned* hardware failures (rack failure) by ensuring VMs are on separate power/network sources.\n- **Availability Zones** — Protect against entire datacenter failures.\n- **Proximity Placement Groups** — Used to keep VMs physically close to each other for low latency, not for maintenance isolation.",
+    "category": "Manage virtual machines and containers"
+}

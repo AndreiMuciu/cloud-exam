@@ -1,0 +1,19 @@
+{
+    "id": "dp900-s2-25-sql-database-provisioning-ordering",
+    "type": "ordering",
+    "question": "A developer is setting up a brand-new Azure SQL Database for an application and then loading its first tables.\n\nPlace the steps in the correct order, from first to last.",
+    "items": [
+        "Configure the server firewall so the developer's client IP address is allowed to connect",
+        "Create the database on the logical server and select its compute and service tier",
+        "Provision a logical SQL server in Azure to act as the administrative endpoint",
+        "Connect with a client tool and run CREATE TABLE statements to define the schema"
+    ],
+    "correctOrder": [
+        "Provision a logical SQL server in Azure to act as the administrative endpoint",
+        "Create the database on the logical server and select its compute and service tier",
+        "Configure the server firewall so the developer's client IP address is allowed to connect",
+        "Connect with a client tool and run CREATE TABLE statements to define the schema"
+    ],
+    "explanation": "The natural provisioning flow works from the outside in:\n\n1. **Provision the logical server** — Every Azure SQL Database lives on a *logical server*, which provides the connection endpoint (`<server>.database.windows.net`), the admin login, and server-level settings. It must exist before any database can be placed on it.\n2. **Create the database and choose its tier** — The database is created on that server, and this is where you pick the compute model and service tier (for example, vCore-based General Purpose, or serverless) that determine performance and cost.\n3. **Configure the firewall** — By default the server blocks outside connections. Adding a firewall rule for the client's IP address (or allowing Azure services) is what makes the new database reachable.\n4. **Connect and create the schema** — Only once connectivity is open can the developer attach with a tool such as Azure Data Studio or SQL Server Management Studio and run DDL statements like `CREATE TABLE` to build the schema.\n\nSwapping any pair breaks the flow: a database cannot exist without its server, a firewall rule belongs to a server that must already exist, and no DDL can run before a connection is possible.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

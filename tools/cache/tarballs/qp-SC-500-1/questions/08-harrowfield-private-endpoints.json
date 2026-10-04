@@ -1,0 +1,25 @@
+{
+    "id": "sc500-08-harrowfield-private-endpoints",
+    "question": "You need to ensure the Harrowfield billing application reaches Azure SQL Database and Azure Storage over private IP addresses only, with public endpoints disabled and name resolution working for both Azure and on-premises clients. What should you implement?",
+    "options": [
+        {
+            "text": "Create private endpoints for the SQL logical server and storage account in vnet-billing, link privatelink DNS zones (privatelink.database.windows.net and privatelink.blob.core.windows.net) to the VNets, configure a DNS forwarder or Azure DNS Private Resolver for on-premises resolution, and set Public network access to Disabled on both resources",
+            "correct": true
+        },
+        {
+            "text": "Enable service endpoints for Microsoft.Sql and Microsoft.Storage on the billing subnet and add the subnet to each resource's firewall",
+            "correct": false
+        },
+        {
+            "text": "Create a Private Link service behind a Standard Load Balancer in vnet-billing and register the SQL and storage endpoints as backend targets",
+            "correct": false
+        },
+        {
+            "text": "Deploy a NAT gateway on the billing subnet so that outbound traffic to SQL and Storage uses a fixed public IP that you allow in each resource's firewall",
+            "correct": false
+        }
+    ],
+    "explanation": "**Private endpoints** project the PaaS resources into the VNet with private IPs, allowing you to set **Public network access: Disabled** on the SQL server and storage account. Name resolution relies on the **privatelink.* private DNS zones**; on-premises clients cannot query Azure Private DNS directly, so a **DNS forwarder in Azure or Azure DNS Private Resolver** is needed to resolve the private records across the VPN.\n\n**Why not the other options:**\n- **Service endpoints** — Traffic stays on the Microsoft backbone but still targets the resource's *public* endpoint, so the public endpoint cannot be disabled; service endpoints also don't work from on-premises.\n- **Private Link service** — A Private Link *service* is for publishing **your own** load-balanced application to consumers; you don't create one for Microsoft PaaS resources — you consume their private endpoints.\n- **NAT gateway with allowed public IP** — Traffic would still traverse the public endpoint, violating the private-IP-only and disabled-public-endpoint requirements.",
+    "category": "Secure storage, databases, and networking",
+    "caseStudy": "scenarios/case_study_harrowfield_logistics.json"
+}

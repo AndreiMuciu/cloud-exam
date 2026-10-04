@@ -1,0 +1,25 @@
+{
+    "id": "az900-s2-09-lanternbay-defense-in-depth",
+    "question": "Lanternbay’s CISO wants a strategy in which identity, perimeter, network, compute, application, and data are each protected by their own layer of controls, so that the failure of any single control does not expose guest data. Which security concept describes this strategy?",
+    "options": [
+        {
+            "text": "Defense in depth",
+            "correct": true
+        },
+        {
+            "text": "The shared responsibility model",
+            "correct": false
+        },
+        {
+            "text": "Single sign-on",
+            "correct": false
+        },
+        {
+            "text": "The consumption-based model",
+            "correct": false
+        }
+    ],
+    "explanation": "**Defense in depth** layers multiple protective mechanisms — physical security, identity and access, perimeter, network, compute, application, and data — so that if one layer is breached, subsequent layers still slow or stop the attack. The CISO’s description of independent layers protecting each level of the stack is the textbook definition.\n\n**Why not the other options:**\n- **Shared responsibility model** — Describes how security *duties are divided* between the cloud provider and the customer; it says nothing about layering controls.\n- **Single sign-on** — A convenience/identity feature that lets users authenticate once for multiple applications; it is one control, not a layered strategy.\n- **Consumption-based model** — A pricing concept (pay for what you use), unrelated to security.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_lanternbay_hospitality.json"
+}

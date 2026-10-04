@@ -1,0 +1,15 @@
+{
+    "id": "az104-s3-network-watcher-matching",
+    "type": "matching",
+    "question": "You are writing a troubleshooting runbook for your network operations team.\n\nMatch each Azure Network Watcher capability to the task it is designed for.",
+    "sourceItems": ["Next hop", "Packet capture", "Topology", "VPN troubleshoot"],
+    "targetSlots": [
+        "Determine where traffic from a VM to a specific destination IP address is routed, to detect an unexpected or missing route",
+        "Record the actual network traffic to and from a VM into a capture file for offline protocol-level analysis",
+        "Generate a visual diagram of the resources in a virtual network and their relationships",
+        "Diagnose the health of a virtual network gateway and its site-to-site connections"
+    ],
+    "correctMapping": [0, 1, 2, 3],
+    "explanation": "Each Network Watcher tool answers a different troubleshooting question:\n\n- **Next hop** takes a source VM and a destination IP and returns the effective next hop type (Internet, VirtualNetworkGateway, VirtualAppliance, None, and so on) and address — the fastest way to spot a user-defined route or missing route sending traffic somewhere unexpected.\n- **Packet capture** records real traffic on a VM (via the Network Watcher agent extension) into a `.cap` file — with optional five-tuple filters and size/time limits — for deep protocol analysis in tools like Wireshark. It is the option when you need to see the *actual packets*, not just policy verdicts.\n- **Topology** renders the resources of a virtual network (subnets, NICs, NSGs, gateways) and their interconnections as a diagram — orientation and documentation rather than live diagnostics.\n- **VPN troubleshoot** runs diagnostics against a virtual network gateway and its connections, returning health status and detailed logs to pinpoint why a site-to-site tunnel is failing to connect or passing no traffic.\n\nOther tools in the family complete the picture — **IP flow verify** tests whether NSG rules allow a hypothetical flow, **Connection troubleshoot / Connection monitor** test reachability once or continuously, and **effective security rules** shows the merged NSG rule set on a NIC — so knowing which question each tool answers is what the exam (and real incident response) rewards.",
+    "category": "Implement and Manage Virtual Networking"
+}

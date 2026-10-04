@@ -1,0 +1,25 @@
+{
+    "id": "dp900-01-brightharbor-data-classification",
+    "question": "Brightharbor Logistics' driver mobile apps emit JSON event messages that share a few common fields but include different optional properties depending on the event type.\n\nHow should this driver telemetry data be classified?",
+    "options": [
+        {
+            "text": "Structured data",
+            "correct": false
+        },
+        {
+            "text": "Semi-structured data",
+            "correct": true
+        },
+        {
+            "text": "Unstructured data",
+            "correct": false
+        },
+        {
+            "text": "Relational data",
+            "correct": false
+        }
+    ],
+    "explanation": "The telemetry is **semi-structured data**. JSON documents carry their own organizational information (field names and nesting), but the fields can vary from record to record — exactly what happens here, where each event type includes different optional properties. Semi-structured data has a flexible, self-describing schema rather than a rigid one defined up front.\n\n**Why not the other options:**\n- **Structured data** — Requires a fixed schema defined in advance, where every record has the same columns (like the company's relational order tables). The varying optional properties rule this out.\n- **Unstructured data** — Has no inherent data model at all, such as the proof-of-delivery photos. JSON events clearly carry field-level structure.\n- **Relational data** — Describes data stored in related tables with rows, columns, and keys; it is a form of structured data, not a classification that fits variable JSON documents.",
+    "category": "Describe Core Data Concepts",
+    "caseStudy": "scenarios/case_study_brightharbor_logistics.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-02-plovermead-horizontal-scaling",
+    "question": "During harvest season, Plovermead plans to handle the surge in dashboard traffic by increasing the **number of instances** of its stateless web API running behind the load balancer, then reducing the count again in winter. Which term describes this approach to adding capacity?",
+    "options": [
+        {
+            "text": "Horizontal scaling (scaling out)",
+            "correct": true
+        },
+        {
+            "text": "Vertical scaling (scaling up)",
+            "correct": false
+        },
+        {
+            "text": "Fault tolerance",
+            "correct": false
+        },
+        {
+            "text": "Geo-replication",
+            "correct": false
+        }
+    ],
+    "explanation": "**Horizontal scaling (scaling out)** adds capacity by increasing the **number of instances** that share the work — more copies of the web API behind the load balancer — and later **scales in** by removing instances. It suits stateless services because any instance can serve any request, and it avoids the ceiling that a single machine's maximum size imposes.\n\n**Why not the other options:**\n- **Vertical scaling (scaling up)** — Increases the **size** of an existing instance (more vCPUs or memory on one machine) rather than the number of instances. Plovermead is explicitly changing the instance *count*, not the instance size.\n- **Fault tolerance** — Describes a system's ability to keep running when components fail; it is a resilience property, not a method of adding capacity for seasonal demand.\n- **Geo-replication** — Copies data to another geographic region for durability or disaster recovery; it does not add request-serving capacity behind a load balancer.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_plovermead_agritech.json"
+}

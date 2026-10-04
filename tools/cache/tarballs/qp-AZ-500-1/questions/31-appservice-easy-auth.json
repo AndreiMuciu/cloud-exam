@@ -1,0 +1,24 @@
+{
+    "id": "az500-31-appservice-easy-auth",
+    "question": "You have a web application running on Azure App Service. You want to implement authentication (requiring users to log in with their corporate Entra ID account) WITHOUT modifying the application code. Which feature should you use?",
+    "options": [
+        {
+            "text": "MSAL.js library",
+            "correct": false
+        },
+        {
+            "text": "App Service Authentication (Easy Auth)",
+            "correct": true
+        },
+        {
+            "text": "Azure Application Proxy",
+            "correct": false
+        },
+        {
+            "text": "Application Gateway WAF",
+            "correct": false
+        }
+    ],
+    "explanation": "**App Service Authentication** (often called **Easy Auth**) is a built-in platform feature that handles the authentication handshake with identity providers (like Entra ID, Google, Facebook) at the platform level, passing the identity information to the app via headers.\n\n**Why not the other options:**\n- **MSAL.js** — A client-side library that *requires* code modification to implement.\n- **Application Proxy** — Used for exposing on-premises apps to the web.\n- **WAF** — For security filtering (SQLi, XSS), not for user authentication.",
+    "category": "Secure compute, storage, and databases"
+}

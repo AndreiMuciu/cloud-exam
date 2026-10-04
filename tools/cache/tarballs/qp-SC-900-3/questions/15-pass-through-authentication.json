@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s3-15-pass-through-authentication",
+    "question": "A bank is adopting Microsoft 365 alongside its on-premises Active Directory. Its regulator insists that user passwords — even in hashed form — must never be stored in the cloud, and that every sign-in must be validated directly against the on-premises domain controllers in real time, so that on-premises account states such as disabled accounts and logon-hour restrictions take effect immediately.\n\nWhich hybrid identity authentication method satisfies these constraints?",
+    "options": [
+        {
+            "text": "Pass-through authentication (PTA)",
+            "correct": true
+        },
+        {
+            "text": "Password hash synchronization (PHS)",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra B2B collaboration",
+            "correct": false
+        },
+        {
+            "text": "Cloud-only accounts with no on-premises directory",
+            "correct": false
+        }
+    ],
+    "explanation": "**Pass-through authentication (PTA)** installs one or more lightweight agents on on-premises servers; when a user signs in to Microsoft Entra ID, the password is **validated directly against the on-premises Active Directory in real time**, and **no password (or password hash) is ever stored in the cloud**. Because validation happens live against the domain controllers, on-premises security states — a just-disabled account, expired password, or logon-hour restriction — are enforced immediately. This matches both regulatory constraints in the scenario.\n\n**Why not the other options:**\n- **Password hash synchronization (PHS)** — PHS synchronizes a hash of each user's password hash *to Microsoft Entra ID*, and sign-in validation happens in the cloud. That directly violates the requirement that no password material be stored in the cloud, and changes to on-premises account state are not enforced in real time.\n- **Microsoft Entra B2B collaboration** — B2B is for inviting *external partner users* as guests; it is not an authentication method for an organization's own hybrid workforce.\n- **Cloud-only accounts** — Abandoning the on-premises directory contradicts the premise: the bank keeps Active Directory and must validate against it. Cloud-only accounts store credentials in the cloud, failing the regulator's core condition.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

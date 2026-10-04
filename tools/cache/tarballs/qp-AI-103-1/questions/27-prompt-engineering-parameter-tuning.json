@@ -1,0 +1,24 @@
+{
+    "id": "ai103-27-prompt-engineering-parameter-tuning",
+    "question": "A support-summarization feature currently produces inconsistent, overly creative summaries — the same ticket sometimes yields noticeably different-sounding summaries on repeated calls. Business stakeholders want summaries to be consistent and stick closely to the facts in the ticket.\n\nWhich change should you make first?",
+    "options": [
+        {
+            "text": "Lower the model's temperature (and/or top_p) parameter and tighten the system prompt to explicitly instruct concise, fact-only summarization.",
+            "correct": true
+        },
+        {
+            "text": "Raise the model's temperature to increase the variety of phrasing across calls.",
+            "correct": false
+        },
+        {
+            "text": "Switch to a larger, more capable model without changing any prompt or parameter.",
+            "correct": false
+        },
+        {
+            "text": "Increase the max_tokens parameter so the model can write longer summaries.",
+            "correct": false
+        }
+    ],
+    "explanation": "**Lowering temperature/top_p** reduces sampling randomness so repeated calls on the same input converge on similar, more deterministic output, and **tightening the prompt** to explicitly require concise, fact-based summarization directly targets both symptoms described (inconsistency and excess creativity) — this is standard prompt/parameter tuning, the cheapest and fastest lever to pull first.\n\n**Why not the other options:**\n- **Raising temperature** — Moves in exactly the wrong direction; higher temperature increases randomness and creative variation, worsening the inconsistency the stakeholders are complaining about.\n- **Switching to a larger model with no other change** — A bigger model can still be highly creative at default sampling settings; without addressing temperature or instructions, the same inconsistency is likely to persist, and it's a costlier change to try first.\n- **Increasing max_tokens** — Controls the maximum length of a response, not its creativity or factual adherence; longer summaries would not resolve inconsistency in tone or accuracy.",
+    "category": "Implement generative AI and agentic solutions"
+}

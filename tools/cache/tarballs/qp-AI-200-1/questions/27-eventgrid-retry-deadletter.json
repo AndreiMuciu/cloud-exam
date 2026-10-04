@@ -1,0 +1,24 @@
+{
+    "id": "ai200-27-eventgrid-retry-deadletter",
+    "question": "An Azure Event Grid subscription pushes custom `document.ingested` events to a webhook. During a recent 3-hour outage of the webhook, some events were silently lost after Event Grid gave up delivering them. You must guarantee that undeliverable events are captured for later reprocessing instead of being dropped.\n\nWhat should you configure on the event subscription?",
+    "options": [
+        {
+            "text": "A dead-letter destination pointing at an Azure Storage blob container, together with an appropriate retry policy (`maxDeliveryAttempts` and `eventTimeToLive`).",
+            "correct": true
+        },
+        {
+            "text": "Nothing — Event Grid retries failed deliveries indefinitely until the endpoint recovers, so no events are ever lost.",
+            "correct": false
+        },
+        {
+            "text": "An `advancedFilters` rule that matches failed events and routes them to a second webhook.",
+            "correct": false
+        },
+        {
+            "text": "A longer HTTP timeout on the webhook endpoint so Event Grid waits until the outage ends before marking the delivery failed.",
+            "correct": false
+        }
+    ],
+    "explanation": "Event Grid retries with exponential backoff, but only until either **`maxDeliveryAttempts`** (up to 30) or **`eventTimeToLive`** (up to 1440 minutes) is reached — after that, events are **dropped unless a dead-letter destination is configured**. Setting a blob container as the dead-letter destination makes Event Grid persist every expired or undeliverable event as a blob, so a remediation job can replay them after an outage. Dead-lettering is opt-in; that is exactly why the events were lost.\n\n**Why not the other options:**\n- **\"Retries indefinitely\"** — False. Retries are bounded by delivery attempts and event TTL; a 3-hour outage can easily exhaust either bound, and events without a dead-letter destination are discarded.\n- **`advancedFilters`** — Filters evaluate event *data and properties* at publish time to decide whether an event matches the subscription; they know nothing about delivery outcomes and cannot route \"failed\" deliveries.\n- **Longer webhook timeout** — The timeout is per-attempt behavior on the receiving side; Event Grid still fails the attempt when the endpoint is down and still enforces its retry bounds. It does not create any durable capture of expired events.",
+    "category": "Connect to and consume Azure services"
+}

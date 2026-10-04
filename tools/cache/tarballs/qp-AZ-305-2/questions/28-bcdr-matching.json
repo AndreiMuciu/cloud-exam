@@ -1,0 +1,28 @@
+{
+    "id": "az305-s2-bcdr-matching",
+    "type": "matching",
+    "question": "Match each resiliency requirement to the Azure capability designed to satisfy it.",
+    "sourceItems": [
+        "Protect a multi-VM application tier from host hardware and rack failures within a single datacenter",
+        "Keep a workload running when an entire datacenter within an Azure region fails",
+        "Orchestrate cross-region failover of IaaS workloads with recovery plans and test failovers",
+        "Recover a VM to an earlier point in time after data corruption or accidental deletion",
+        "Automatically replace unhealthy VM instances and scale capacity with demand"
+    ],
+    "targetSlots": [
+        "Availability sets",
+        "Availability zones",
+        "Azure Site Recovery",
+        "Azure Backup",
+        "Virtual Machine Scale Sets"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "explanation": "- **Availability sets** — Spread VMs across fault domains (racks with independent power and network) and update domains within a datacenter, protecting the tier from host and rack failures and from simultaneous maintenance reboots. They do *not* protect against datacenter-level failure\n- **Availability zones** — Physically separate datacenters within a region, each with independent power, cooling, and networking. Distributing instances across zones keeps the workload running when one datacenter fails, backed by the 99.99% multi-zone VM SLA\n- **Azure Site Recovery** — The disaster recovery orchestrator: continuous replication to another region plus recovery plans (ordered, scripted failover) and non-disruptive test failovers. Zones and sets keep you running *inside* a region; ASR is how you *leave* the region\n- **Azure Backup** — Point-in-time recovery points held in a vault. Replication and zones faithfully propagate corruption and deletions; only a backup lets you go back *in time* to before the damage\n- **Virtual Machine Scale Sets** — Provide automatic instance repairs (replacing unhealthy instances based on health signals) and autoscale rules that add or remove instances with demand — self-healing capacity rather than failure-domain placement alone",
+    "category": "Design Business Continuity Solutions"
+}

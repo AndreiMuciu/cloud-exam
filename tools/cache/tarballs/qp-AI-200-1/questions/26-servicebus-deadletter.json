@@ -1,0 +1,24 @@
+{
+    "id": "ai200-26-servicebus-deadletter",
+    "question": "A bug caused an Azure Service Bus queue to dead-letter several hundred order messages. The bug is now fixed, and you must inspect why each message failed and replay the recoverable ones. You are writing a Python remediation script with `azure-servicebus`.\n\nWhat should the script do?",
+    "options": [
+        {
+            "text": "Receive from the dead-letter sub-queue with `get_queue_receiver(queue_name, sub_queue=ServiceBusSubQueue.DEAD_LETTER)`, read each message's `dead_letter_reason`, and re-send recoverable messages to the main queue with a sender.",
+            "correct": true
+        },
+        {
+            "text": "Increase the queue's `max_delivery_count`; Service Bus then automatically moves the dead-lettered messages back to the main queue for redelivery.",
+            "correct": false
+        },
+        {
+            "text": "Call `receiver.renew_message_lock()` on the dead-lettered messages so they become available to the main queue's consumers again.",
+            "correct": false
+        },
+        {
+            "text": "Enable duplicate detection on the queue so the dead-lettered copies are reconciled with the originals and reprocessed.",
+            "correct": false
+        }
+    ],
+    "explanation": "The dead-letter queue is a **sub-queue** of the main queue; you access it by creating a receiver with `sub_queue=ServiceBusSubQueue.DEAD_LETTER`. Each dead-lettered message carries `dead_letter_reason` and `dead_letter_error_description`, which answer the *why* part of the task. Service Bus never moves messages out of the DLQ on its own, so replay is explicit: complete the DLQ message and re-send a copy to the main queue with a `ServiceBusSender` — exactly the receive-inspect-resubmit loop the script needs.\n\n**Why not the other options:**\n- **Raising `max_delivery_count`** — This setting controls how many delivery attempts happen *before* a message is dead-lettered in the future. It has no retroactive effect; already dead-lettered messages stay in the DLQ.\n- **`renew_message_lock()`** — Lock renewal extends the peek-lock on a message you are currently processing so it doesn't time out. It cannot move a message between sub-queues or make DLQ messages visible to main-queue consumers.\n- **Duplicate detection** — Deduplicates *sends* with the same `MessageId` within a time window. It has nothing to do with recovering dead-lettered messages, and enabling it cannot be done on an existing queue anyway.",
+    "category": "Connect to and consume Azure services"
+}

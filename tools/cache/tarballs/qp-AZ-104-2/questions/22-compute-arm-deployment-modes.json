@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-compute-arm-deployment-modes",
+    "type": "single",
+    "question": "Resource group **RG-App** contains a virtual machine and a storage account. You run the following Azure CLI command with an ARM template that defines **only a virtual network**:\n\n```\naz deployment group create \\\n  --resource-group RG-App \\\n  --template-file network.json \\\n  --mode Complete\n```\n\nWhat is the result?",
+    "options": [
+        { "text": "The virtual network is deployed, and the virtual machine and storage account are deleted from RG-App", "correct": true },
+        { "text": "The virtual network is added, and the existing resources are left unchanged", "correct": false },
+        { "text": "The deployment fails because the template does not include the resources that already exist in RG-App", "correct": false },
+        { "text": "The virtual network is deployed, and the existing resources are marked as non-compliant", "correct": false }
+    ],
+    "explanation": "In **Complete mode**, Azure Resource Manager treats the template as the *entire desired state* of the resource group: it deploys what the template defines and **deletes resources that exist in the resource group but are not in the template** (a small set of resource types is exempt, but VMs and storage accounts are not among them). Here, the VM and the storage account are absent from `network.json`, so both are removed — a classic and destructive mistake. Complete mode must be used deliberately, and `what-if` should be run first to preview deletions.\n\n**Why not the other options:**\n- **Existing resources left unchanged**: That describes **Incremental mode**, which is the *default* when `--mode` is omitted. Incremental adds/updates template resources and ignores everything else in the group.\n- **Deployment fails**: There is no validation requirement that a template enumerate existing resources. The deployment succeeds — that is precisely what makes Complete mode dangerous.\n- **Marked as non-compliant**: Compliance marking is an **Azure Policy** concept. Template deployments never flag resources as non-compliant; in Complete mode they simply delete the extras.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

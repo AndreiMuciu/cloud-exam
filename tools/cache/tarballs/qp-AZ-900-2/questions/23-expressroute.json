@@ -1,0 +1,24 @@
+{
+    "id": "az900-s2-23-expressroute",
+    "question": "A brokerage firm must connect its on-premises trading floor to Azure with a connection that does **not** traverse the public internet and offers consistent, predictable latency for market-data feeds. Which Azure connectivity option should it choose?",
+    "options": [
+        {
+            "text": "Azure ExpressRoute",
+            "correct": true
+        },
+        {
+            "text": "Site-to-site VPN",
+            "correct": false
+        },
+        {
+            "text": "Point-to-site VPN",
+            "correct": false
+        },
+        {
+            "text": "Virtual network peering",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure ExpressRoute** establishes a private, dedicated connection between on-premises infrastructure and Azure through a connectivity provider. Because traffic never touches the public internet, ExpressRoute delivers the higher bandwidth, stronger reliability, and consistent latency that latency-sensitive workloads like market-data feeds demand.\n\n**Why not the other options:**\n- **Site-to-site VPN** — Encrypts traffic, but the tunnel runs *over the public internet*, so latency is variable and the no-public-internet requirement is not met.\n- **Point-to-site VPN** — Connects *individual client devices* to a VNet, again over the public internet; it is meant for remote workers, not datacenter-to-Azure links.\n- **Virtual network peering** — Connects two *Azure* virtual networks to each other; it does not connect an on-premises site to Azure.",
+    "category": "Describe Azure Architecture and Services"
+}

@@ -1,0 +1,21 @@
+{
+    "id": "az800-36-hybrid-network-order",
+    "type": "ordering",
+    "question": "You are setting up a Site-to-Site VPN from scratch. Arrange the Azure objects in the order they must be created or configured.",
+    "items": [
+        "Virtual Network (VNet)",
+        "Gateway Subnet",
+        "Virtual Network Gateway",
+        "Local Network Gateway",
+        "Connection"
+    ],
+    "correctOrder": [
+        "Virtual Network (VNet)",
+        "Gateway Subnet",
+        "Local Network Gateway",
+        "Virtual Network Gateway",
+        "Connection"
+    ],
+    "explanation": "You start with the network (VNet) and its special subnet (Gateway Subnet). Then you define the 'other side' (Local Network Gateway). After that, you create the heavy resource (Virtual Network Gateway) and finally link them together with a Connection object.",
+    "category": "Implement and manage on-premises and hybrid networking"
+}

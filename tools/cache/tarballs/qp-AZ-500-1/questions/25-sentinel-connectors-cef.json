@@ -1,0 +1,24 @@
+{
+    "id": "az500-25-sentinel-connectors-cef",
+    "question": "You need to ingest security logs from an on-premises firewall that supports Common Event Format (CEF) over Syslog. Which component should you deploy on a Linux server to act as a bridge between the firewall and Microsoft Sentinel?",
+    "options": [
+        {
+            "text": "Azure ARC agent",
+            "correct": false
+        },
+        {
+            "text": "Log Analytics Gateway",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor Agent (AMA) with a CEF data connector",
+            "correct": true
+        },
+        {
+            "text": "Azure Function with an HTTP trigger",
+            "correct": false
+        }
+    ],
+    "explanation": "To ingest CEF/Syslog data into Sentinel, you deploy a Linux machine as a **log forwarder**. This machine runs the **Azure Monitor Agent (AMA)** and is configured with a Data Collection Rule (DCR) via the CEF data connector to receive and forward the events to the Log Analytics workspace.\n\n**Why not the other options:**\n- **Azure ARC** — Used for managing the server, but not specifically for log forwarding logic.\n- **Log Analytics Gateway** — Used as a proxy for servers without internet access, but doesn't handle CEF-to-Sentinel protocol translation natively.\n- **Azure Function** — Would require a custom-built solution, whereas the CEF connector is a native platform feature.",
+    "category": "Manage security operations"
+}

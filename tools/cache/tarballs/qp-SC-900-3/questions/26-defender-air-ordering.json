@@ -1,0 +1,19 @@
+{
+    "id": "sc900-s3-26-defender-air-ordering",
+    "type": "ordering",
+    "question": "Microsoft Defender for Endpoint supports automated investigation and remediation (AIR), which works like a virtual analyst to reduce alert volume for the security team. Arrange the stages of an automated investigation in the correct order, from first to last.",
+    "items": [
+        "The investigation reaches a verdict and queues remediation actions for the malicious artifacts it found",
+        "An alert on a device — for example, a suspicious file — triggers an automated investigation",
+        "Remediation actions run, either automatically or after the security team approves the pending actions",
+        "The automated investigation examines the device and its evidence, expanding to other devices where the same threat appears"
+    ],
+    "correctOrder": [
+        "An alert on a device — for example, a suspicious file — triggers an automated investigation",
+        "The automated investigation examines the device and its evidence, expanding to other devices where the same threat appears",
+        "The investigation reaches a verdict and queues remediation actions for the malicious artifacts it found",
+        "Remediation actions run, either automatically or after the security team approves the pending actions"
+    ],
+    "explanation": "Automated investigation and remediation follows a fixed sequence:\n\n1. **Trigger** — An alert (for instance, a suspicious file observed on a device) starts the automated investigation; nothing is examined until a detection raises the flag.\n2. **Investigate and expand** — The investigation inspects the device, files, processes, and related evidence, and automatically **widens its scope to other devices** where the same indicators appear, so the whole footprint of the threat is covered.\n3. **Verdict and pending actions** — Each piece of evidence receives a verdict (malicious, suspicious, or no threat found), and remediation actions — such as quarantining a file — are **queued** for the malicious findings.\n4. **Remediate** — Depending on the configured automation level, the queued actions **run automatically or wait for the security team's approval** before executing.\n\n**Why not the other options:** Any other sequence breaks a dependency — an investigation cannot examine evidence before an alert triggers it, a verdict cannot be reached before the evidence is examined, and remediation cannot run before actions have been queued by a verdict. Placing remediation earlier would mean acting on artifacts that have not yet been judged malicious.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

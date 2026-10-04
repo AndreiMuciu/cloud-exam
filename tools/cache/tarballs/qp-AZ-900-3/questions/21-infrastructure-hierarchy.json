@@ -1,0 +1,19 @@
+{
+    "id": "az900-s3-21-infrastructure-hierarchy",
+    "type": "ordering",
+    "question": "Arrange the physical building blocks of Azure's global infrastructure from the **smallest** unit to the **largest**.",
+    "items": [
+        "Geography",
+        "Datacenter",
+        "Azure region",
+        "Availability zone"
+    ],
+    "correctOrder": [
+        "Datacenter",
+        "Availability zone",
+        "Azure region",
+        "Geography"
+    ],
+    "explanation": "From smallest to largest, Azure's physical infrastructure is organized as:\n\n1. **Datacenter** — A single physical facility full of racks, servers, storage, and networking equipment.\n2. **Availability zone** — One or more datacenters within a region equipped with **independent power, cooling, and networking**, physically separated from the other zones so that a facility-level failure affects only one zone.\n3. **Azure region** — A geographical area containing one or more datacenters (which, in zone-enabled regions, are grouped into availability zones) connected by a low-latency network; the unit customers pick when deploying resources.\n4. **Geography** — A discrete market, typically containing **one or more regions**, that preserves data-residency and compliance boundaries — allowing customers with legal requirements to keep data within a specific area of the world.",
+    "category": "Describe Azure Architecture and Services"
+}

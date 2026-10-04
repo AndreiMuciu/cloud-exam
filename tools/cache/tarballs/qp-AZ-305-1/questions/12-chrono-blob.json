@@ -1,0 +1,20 @@
+{
+    "id": "gen-16-blob-access-revocable",
+    "type": "ordering",
+    "question": "You need to implement a solution for temporary, revocable access to a blob container using **Stored Access Policies**. Arrange the configuration steps in the correct order.",
+    "items": [
+        "Generate a Shared Access Signature (SAS) token linked to the policy identifier",
+        "Distribute the SAS URI to the client application",
+        "Create a Stored Access Policy on the blob container",
+        "Revoke access by deleting or modifying the Stored Access Policy"
+    ],
+    "correctOrder": [
+        "Create a Stored Access Policy on the blob container",
+        "Generate a Shared Access Signature (SAS) token linked to the policy identifier",
+        "Distribute the SAS URI to the client application",
+        "Revoke access by deleting or modifying the Stored Access Policy"
+    ],
+    "explanation": "The correct process for using Stored Access Policies is:\n\n1. **Create Policy**: Define the Stored Access Policy on the container level. This policy holds the start time, expiry time, and permissions.\n2. **Generate SAS**: Create the SAS token but DO NOT embed the expiry/permissions in the token itself; instead, reference the Policy ID (SignedIdentifier).\n3. **Distribute**: Give the SAS to the client.\n4. **Revoke**: If needed, you can simply delete or change the Stored Access Policy on the container. This immediately invalidates all SAS tokens linked to it without needing to rotate the storage account keys.",
+    "category": "Design Data Storage Solutions",
+    "caseStudy": "scenarios/case_study_monitoring_governance.json"
+}

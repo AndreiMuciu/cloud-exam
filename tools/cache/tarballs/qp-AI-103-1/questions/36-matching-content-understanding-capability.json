@@ -1,0 +1,25 @@
+{
+    "id": "ai103-36-matching-content-understanding-capability",
+    "type": "matching",
+    "question": "Match each extraction need to the Azure AI Content Understanding capability that best fits it.",
+    "sourceItems": [
+        "Extract a fixed set of named fields (invoice number, total, due date) from a single well-defined document type.",
+        "Produce a clean markdown representation of a long, mixed-layout document for an agent to reason over.",
+        "Run several different extraction and classification tasks over the same document in one coordinated pipeline.",
+        "Combine OCR, layout detection, and field extraction across scanned pages that mix printed text, tables, and handwriting."
+    ],
+    "targetSlots": [
+        "Single-task field extraction analyzer",
+        "Markdown-output analyzer for downstream reasoning",
+        "Pro-mode (multi-task) Content Understanding pipeline",
+        "Multimodal OCR + layout + field extraction pipeline"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **Single-task field extraction analyzer** — Built for one well-defined document type and a fixed schema of named fields, which is the simplest, most direct fit for an invoice-style extraction.\n- **Markdown-output analyzer** — Produces a clean, structured markdown representation specifically intended to be consumed by downstream reasoning components such as an agent or RAG pipeline.\n- **Pro-mode (multi-task) pipeline** — Coordinates several extraction/classification tasks together over the same document in a single pipeline, rather than requiring separate single-task runs stitched together manually.\n- **Multimodal OCR + layout + field extraction** — The general-purpose combination needed when scanned pages mix printed text, tables, and handwriting and you need both the raw text and its structural layout.\n\nPicking the single-task analyzer for the multi-task scenario (or vice versa) would either miss required outputs or force unnecessary custom orchestration that Content Understanding's pro mode already provides.",
+    "category": "Implement information extraction solutions"
+}

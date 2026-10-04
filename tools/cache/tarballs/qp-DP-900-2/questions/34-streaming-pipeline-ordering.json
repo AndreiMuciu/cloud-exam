@@ -1,0 +1,19 @@
+{
+    "id": "dp900-s2-34-streaming-pipeline-ordering",
+    "type": "ordering",
+    "question": "Torvane Utilities is designing a real-time streaming solution that turns live sensor events into an up-to-the-minute dashboard.\n\nPlace the stages of the streaming data flow in the correct order, from first to last.",
+    "items": [
+        "A stream processing engine filters and aggregates the events over time windows",
+        "Sensors and applications generate a continuous stream of event data",
+        "The processed results are pushed to a sink such as a real-time dashboard",
+        "An event ingestion service such as Azure Event Hubs captures and buffers the incoming events"
+    ],
+    "correctOrder": [
+        "Sensors and applications generate a continuous stream of event data",
+        "An event ingestion service such as Azure Event Hubs captures and buffers the incoming events",
+        "A stream processing engine filters and aggregates the events over time windows",
+        "The processed results are pushed to a sink such as a real-time dashboard"
+    ],
+    "explanation": "A real-time streaming architecture always follows the same **source → ingest → process → sink** flow:\n\n1. **Event generation** — Everything starts at the sources: sensors, devices, and applications continuously emit small event records as things happen.\n2. **Ingestion** — An event ingestion service (**Azure Event Hubs**, or IoT Hub for device scenarios) sits at the front door. It receives events at massive scale and buffers them reliably so downstream processing can consume them at its own pace.\n3. **Stream processing** — A processing engine (such as Azure Stream Analytics or Spark Structured Streaming) subscribes to the ingested stream and runs perpetual queries — filtering events and computing aggregates over temporal windows.\n4. **Sink / output** — The processed results land somewhere useful: a real-time Power BI dashboard for live monitoring, or a database or data lake for further analysis.\n\nThe order is fixed by dependency: nothing can be ingested before it is generated, nothing can be processed before it is ingested, and there are no results to display until processing has produced them.",
+    "category": "Describe an Analytics Workload on Azure"
+}

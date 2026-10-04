@@ -1,0 +1,24 @@
+{
+    "id": "az305-app-messaging-design",
+    "question": "You are designing an order processing system. When a customer places an order, the system must:\n\n1. Send a confirmation email\n2. Update the inventory database\n3. Notify the shipping service\n\nEach downstream service processes messages independently and at different speeds. If a service is temporarily unavailable, messages must not be lost.\n\nWhich Azure messaging service should you use to decouple the order service from the downstream consumers?",
+    "options": [
+        {
+            "text": "Azure Service Bus topics with separate subscriptions for each consumer",
+            "correct": true
+        },
+        {
+            "text": "Azure Event Grid with event subscriptions for each consumer",
+            "correct": false
+        },
+        {
+            "text": "Azure Queue Storage with separate queues and a polling mechanism",
+            "correct": false
+        },
+        {
+            "text": "Azure Event Hubs with consumer groups for each downstream service",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Service Bus topics with subscriptions** is the best fit:\n\n- **Publish-subscribe pattern** — The order service publishes a single message to a topic, and each downstream service has its own subscription that receives a copy\n- **Independent processing** — Each subscription maintains its own cursor, allowing consumers to process at different speeds\n- **Guaranteed delivery** — Service Bus provides at-least-once delivery with dead-letter queues for failed messages. Messages are persisted until processed\n- **Temporary unavailability** — Messages remain in the subscription until the consumer is back online\n\n**Why not the other options:**\n- **Event Grid** — Designed for reactive, event-driven architectures with push delivery. It retries delivery but doesn't persist messages long-term if a consumer is unavailable for extended periods\n- **Queue Storage** — Point-to-point messaging (one consumer per queue). To send to three consumers, you'd need three separate queues and the order service would need to publish to each one\n- **Event Hubs** — Designed for high-throughput event streaming and telemetry (millions of events/second). Overkill for transactional order processing and uses a pull model with time-based retention rather than message acknowledgment",
+    "category": "Design Infrastructure Solutions"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-35-purview-data-governance",
+    "question": "A company's data is scattered across on-premises SQL Server databases, Azure storage accounts, a competitor cloud's object storage, and SaaS applications. The chief data officer wants automated scanning that builds an up-to-date map of this entire data estate with classification applied, plus a searchable catalog with business-friendly terms so analysts can find and understand trusted data sources.\n\nWhich Microsoft Purview capability area addresses this need?",
+    "options": [
+        {
+            "text": "Unified data governance, using the Microsoft Purview Data Map and Data Catalog",
+            "correct": true
+        },
+        {
+            "text": "Content explorer in the Microsoft Purview compliance portal",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Purview Compliance Manager",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Defender for Cloud",
+            "correct": false
+        }
+    ],
+    "explanation": "Microsoft Purview's **unified data governance** capabilities are built for exactly this multicloud, hybrid sprawl. The **Data Map** is created by automated scanning of sources **across on-premises systems, Azure, other public clouds, and SaaS applications**, capturing metadata, applying classification, and tracking data lineage. On top of the map, the **Data Catalog** gives data consumers a searchable experience enriched with business glossary terms, so analysts can quickly find data assets and understand whether they can be trusted — while data officers get an estate-wide view of where data lives and how it moves.\n\n**Why not the other options:**\n- **Content explorer** — Content explorer shows a snapshot of *classified items within Microsoft 365 workloads* such as Exchange, SharePoint, and OneDrive. It does not scan on-premises databases, other clouds, or arbitrary SaaS sources, and it is not a data catalog.\n- **Microsoft Purview Compliance Manager** — Compliance Manager tracks regulatory assessment progress and improvement actions. It does not map or catalog the data estate.\n- **Microsoft Defender for Cloud** — Defender for Cloud assesses and protects the *security* of cloud workloads. It reports on misconfigurations and threats, not on data discovery, lineage, or business-glossary cataloging.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

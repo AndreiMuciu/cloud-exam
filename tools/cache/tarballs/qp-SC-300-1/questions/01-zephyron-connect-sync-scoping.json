@@ -1,0 +1,25 @@
+{
+    "id": "sc300-zephyron-connect-sync-scoping",
+    "question": "Zephyron Dynamics runs Microsoft Entra Connect Sync against its on-premises AD DS forest. You need to ensure that only user accounts in the **Engineering** and **Sales** organizational units (OUs) synchronize to Microsoft Entra ID, and that accounts in the **Contractors** OU never appear in the tenant, without writing any custom synchronization rules.\n\nWhat should you configure?",
+    "options": [
+        {
+            "text": "In the Microsoft Entra Connect Sync configuration wizard, set organizational unit filtering to include only the Engineering and Sales OUs",
+            "correct": true
+        },
+        {
+            "text": "Create a dynamic group in Microsoft Entra ID that excludes members whose on-premises distinguishedName contains \"Contractors\"",
+            "correct": false
+        },
+        {
+            "text": "Configure attribute-based filtering on the extensionAttribute15 value for each user account",
+            "correct": false
+        },
+        {
+            "text": "Enable staging mode on the Microsoft Entra Connect server and manually approve each synchronized object",
+            "correct": false
+        }
+    ],
+    "explanation": "**Organizational unit (domain and OU) filtering** is configured directly in the Microsoft Entra Connect Sync configuration wizard (or via `Set-ADSyncScopeFilter`/the OU picker). It lets an administrator select exactly which OUs are in scope for synchronization — objects in unselected OUs, such as Contractors, are never synchronized to Microsoft Entra ID. This is the built-in, no-custom-rule way to scope synchronization by OU.",
+    "category": "Implement and manage user identities",
+    "caseStudy": "scenarios/case_study_zephyron.json"
+}

@@ -1,0 +1,29 @@
+{
+    "id": "sc900-s2-23-key-vault-objects",
+    "type": "multi",
+    "question": "A platform team is centralizing sensitive material in Azure Key Vault. Which three of the following types of items is Azure Key Vault designed to store and manage? (Select three.)",
+    "options": [
+        {
+            "text": "Secrets, such as connection strings, API keys, and passwords used by applications",
+            "correct": true
+        },
+        {
+            "text": "Cryptographic keys used for encryption operations",
+            "correct": true
+        },
+        {
+            "text": "TLS/SSL certificates, including automated renewal with supported certificate authorities",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Entra user accounts and their group memberships",
+            "correct": false
+        },
+        {
+            "text": "Virtual machine disk snapshots and backups",
+            "correct": false
+        }
+    ],
+    "explanation": "Azure Key Vault is a centralized cloud service for safeguarding three kinds of objects, all behind access control and full usage logging:\n\n- **Secrets** — Arbitrary sensitive strings such as database connection strings, API keys, and application passwords, retrieved by applications at runtime instead of being hard-coded.\n- **Keys** — Cryptographic keys (including keys protected by hardware security modules) used for encryption, signing, and wrapping operations; the private key material never has to leave the vault.\n- **Certificates** — TLS/SSL certificates, with lifecycle features such as automated enrollment and renewal through supported public certificate authorities.\n\n**Why not the other options:**\n- **Microsoft Entra user accounts and group memberships** — Identities live in the Microsoft Entra ID directory, not in Key Vault. Key Vault stores secret *material*, not identity objects.\n- **Virtual machine disk snapshots and backups** — Snapshots and backups are handled by Azure managed disks, Azure Backup, and storage services. (Key Vault can hold the *encryption keys* protecting those disks, but not the disk data itself.)",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

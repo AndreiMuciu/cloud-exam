@@ -1,0 +1,25 @@
+{
+    "id": "sc900-04-ironvale-hybrid-identity",
+    "question": "Ironvale Manufacturing needs employees to sign in to Microsoft 365 with the same password they use in on-premises Active Directory. The solution must require the least possible additional server infrastructure, and cloud sign-in must continue to work even if the on-premises network is unavailable.\n\nWhich hybrid identity authentication method should Ironvale use?",
+    "options": [
+        {
+            "text": "Password hash synchronization",
+            "correct": true
+        },
+        {
+            "text": "Pass-through authentication",
+            "correct": false
+        },
+        {
+            "text": "Federation with Active Directory Federation Services (AD FS)",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra B2B collaboration",
+            "correct": false
+        }
+    ],
+    "explanation": "**Password hash synchronization** synchronizes a hash of each user's on-premises password hash to Microsoft Entra ID. Authentication then happens entirely in the cloud, so it needs no extra on-premises servers beyond the sync agent, and users can still sign in to cloud services when the on-premises environment is down — exactly matching both requirements.\n\n**Why not the other options:**\n- **Pass-through authentication** — Passwords are validated against on-premises AD DS through agents in real time, so cloud sign-in fails if the on-premises network or agents are unavailable.\n- **Federation with AD FS** — Federation requires deploying and maintaining a farm of AD FS and proxy servers (the most infrastructure of any option), and sign-in depends on the on-premises federation service being reachable.\n- **Microsoft Entra B2B collaboration** — B2B is for inviting external guest users from partner organizations; it is not a hybrid authentication method for the company's own employees.",
+    "category": "Describe the capabilities of Microsoft Entra",
+    "caseStudy": "scenarios/case_study_ironvale.json"
+}

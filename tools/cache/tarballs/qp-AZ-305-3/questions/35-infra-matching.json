@@ -1,0 +1,28 @@
+{
+    "id": "az305-s3-infra-matching",
+    "type": "matching",
+    "question": "Match each hosting requirement to the Azure compute platform designed to satisfy it.",
+    "sourceItems": [
+        "Move an inherited vSphere estate to Azure without re-platforming the VMs or retraining the VMware operations team",
+        "Guarantee that regulated workloads run on physical servers dedicated to the company, with visibility and control over host maintenance events",
+        "Provide pooled, multi-session Windows 11 desktops for 500 call-center agents",
+        "Run App Service workloads on dedicated hosts inside an isolated environment injected into the company's virtual network",
+        "Run a Linux container for a few minutes of burst processing on demand, without managing any cluster, server, or orchestrator"
+    ],
+    "targetSlots": [
+        "Azure VMware Solution",
+        "Azure Dedicated Host",
+        "Azure Virtual Desktop",
+        "App Service Environment v3",
+        "Azure Container Instances"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3,
+        4
+    ],
+    "explanation": "- **Azure VMware Solution (AVS)** — A private cloud of vSphere, vSAN, and NSX running on bare-metal Azure hosts. The estate migrates with tools like HCX and *stays* VMware: same hypervisor, same tooling, same operational skills — the lift-without-transform path for inherited vSphere workloads\n- **Azure Dedicated Host** — Physical servers reserved for a single customer, onto which the company places its own VMs. It answers host-level regulatory isolation (no other tenant ever shares the hardware) and provides **maintenance control**, letting the company view and schedule platform maintenance windows for the host\n- **Azure Virtual Desktop (AVD)** — The managed desktop-virtualization service and the only Azure platform licensed for **Windows 11 Enterprise multi-session**, letting many call-center agents share pooled session hosts for a dramatically lower per-user cost than one VM per agent\n- **App Service Environment v3** — A single-tenant App Service deployment **injected into the customer's VNet**: apps run on dedicated Isolated v2 workers with full network isolation and private inbound/outbound paths, for workloads that need App Service's PaaS model plus dedicated, network-contained hosting\n- **Azure Container Instances (ACI)** — Serverless containers: submit an image, get a running container in seconds, pay per second, and manage no VMs, clusters, or orchestrators — built for short-lived burst and task-style container work",
+    "category": "Design Infrastructure Solutions"
+}

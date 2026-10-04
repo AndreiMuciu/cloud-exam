@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-storage-account-failover",
+    "type": "multi",
+    "question": "A regional outage has made the primary region of a **GRS** general-purpose v2 storage account unavailable, and Microsoft has not initiated a failover. You perform a **customer-managed (unplanned) account failover** to the secondary region.\n\nWhich **two** statements describe the state of the account after the failover completes?",
+    "options": [
+        { "text": "The account is configured as LRS in the new primary region, and geo-redundancy must be re-enabled manually to resume geo-replication", "correct": true },
+        { "text": "Data written to the original primary after the Last Sync Time may be lost, because geo-replication is asynchronous", "correct": true },
+        { "text": "The account automatically fails back to the original region when the outage is resolved", "correct": false },
+        { "text": "The account remains GRS, with the original region immediately serving as the new secondary", "correct": false },
+        { "text": "The storage account endpoints change to new URLs that must be updated in every application", "correct": false }
+    ],
+    "explanation": "Two consequences of an unplanned account failover matter most to an administrator:\n\n- **Redundancy drops to LRS.** After failover, the former secondary becomes the primary and the account is **locally redundant (LRS)** in that region. If you want geo-redundancy again, you must **reconfigure the account to GRS/RA-GRS**, which starts a fresh replication of all data to the new secondary — a step (and cost) that is easy to forget.\n- **Possible data loss.** Geo-replication is **asynchronous**. The **Last Sync Time** property tells you the point up to which the secondary was consistent; anything written to the original primary after that timestamp may not have replicated and can be lost when you fail over. Checking Last Sync Time before failing over is how you estimate the damage.\n\n**Why not the other options:**\n- **Automatic failback**: there is no automatic failback. Returning to the original region is a second, deliberate failover that you initiate after re-enabling geo-redundancy and letting replication catch up.\n- **Remains GRS automatically**: the account does *not* stay geo-redundant — it lands as LRS in the new primary until you reconfigure it.\n- **New endpoint URLs**: the account's endpoints (for example `account.blob.core.windows.net`) are unchanged — DNS is repointed to the new primary region, which is precisely what lets applications keep working without connection-string changes.",
+    "category": "Implement and Manage Storage"
+}

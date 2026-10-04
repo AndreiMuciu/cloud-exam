@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-11-ludomara-cdn",
+    "question": "Players far from Ludomara's primary datacenter complain about slow downloads of game patches and asset packs, which are large static files. The studio wants these files cached at edge locations close to each player so repeated downloads do not travel back to the origin servers. Which type of Azure service addresses this?",
+    "options": [
+        {
+            "text": "A content delivery network (Azure CDN)",
+            "correct": true
+        },
+        {
+            "text": "Azure ExpressRoute",
+            "correct": false
+        },
+        {
+            "text": "A site-to-site VPN",
+            "correct": false
+        },
+        {
+            "text": "Zone-redundant storage (ZRS)",
+            "correct": false
+        }
+    ],
+    "explanation": "A **content delivery network (CDN)** caches copies of static content — such as game patches and asset packs — on **edge servers (points of presence) distributed around the world**. Players download from the edge location nearest to them, which slashes latency and download times, and cached files are served without repeatedly fetching them from the origin, reducing load and egress from the studio's primary servers.\n\n**Why not the other options:**\n- **Azure ExpressRoute** — A private circuit between an organization's *own* network and Azure. It cannot accelerate downloads for millions of players scattered across the public internet.\n- **A site-to-site VPN** — Connects one on-premises network to an Azure virtual network over an encrypted tunnel; like ExpressRoute, it is for the organization's own connectivity, not global content distribution to customers.\n- **Zone-redundant storage (ZRS)** — Replicates data across availability zones **within one region** for durability; it does not place content near players in other parts of the world or cache downloads at the edge.",
+    "category": "Describe Azure Architecture and Services",
+    "caseStudy": "scenarios/case_study_ludomara_studios.json"
+}

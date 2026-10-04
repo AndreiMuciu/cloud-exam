@@ -1,0 +1,29 @@
+{
+    "id": "ai200-24-multi-redis-caching",
+    "type": "multi",
+    "question": "Thornquay Travel caches LLM answers to frequently asked itinerary questions in Azure Managed Redis to cut model cost and latency. Answers must disappear automatically after 24 hours, identical questions must hit the same cache entry, and cached answers must be removed immediately when the underlying fare data changes.\n\nWhich three implementation choices are correct? (Select three.)",
+    "options": [
+        {
+            "text": "Write each answer with a 24-hour expiration, for example `SET <key> <answer> EX 86400`, so stale entries evict themselves.",
+            "correct": true
+        },
+        {
+            "text": "Derive the cache key from a hash of the normalized question text (lowercased, whitespace-collapsed) so identical questions map to the same key.",
+            "correct": true
+        },
+        {
+            "text": "When fare data changes, delete the affected entries with `DEL`/`UNLINK` using a key prefix per fare route, discovered via incremental `SCAN`.",
+            "correct": true
+        },
+        {
+            "text": "Store answers without expiration and rely on the `allkeys-lru` eviction policy to remove entries after roughly 24 hours.",
+            "correct": false
+        },
+        {
+            "text": "Use the `KEYS fare:*` command in the invalidation path to list matching keys in production.",
+            "correct": false
+        }
+    ],
+    "explanation": "The three correct choices map to the three requirements:\n- **`SET ... EX 86400`** — A per-key TTL is the Redis-native way to guarantee entries disappear after exactly 24 hours regardless of memory pressure.\n- **Hash of the normalized question** — Cache hits require deterministic keys; normalizing before hashing makes \"What's the fare to Oslo?\" and \"what's the fare to oslo\" share one entry instead of fragmenting the cache.\n- **Prefix-based delete with `SCAN` + `UNLINK`** — Event-driven invalidation removes stale answers *immediately* on data change; `SCAN` iterates keys in small non-blocking batches and `UNLINK` reclaims memory asynchronously.\n\n**Why not the other options:**\n- **Relying on `allkeys-lru`** — Eviction is driven by memory pressure and access recency, not wall-clock age. Entries can survive far past 24 hours (violating freshness) or be evicted within minutes; it is a memory-management backstop, not an expiration mechanism.\n- **`KEYS fare:*` in production** — `KEYS` is O(N) over the whole keyspace and blocks the server single-threadedly while it runs, stalling every other client; `SCAN` exists precisely to avoid this.",
+    "category": "Develop AI solutions by using Azure data management services"
+}

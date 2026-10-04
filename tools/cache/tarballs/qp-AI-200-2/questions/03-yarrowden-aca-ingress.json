@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-03-yarrowden-aca-ingress",
+    "question": "The external partner portal cannot reach the Yarrowden crop-health inference API: HTTPS requests from the internet time out. Internal services inside the `yagro-env` environment call the API successfully at `https://crop-inference.internal.<env-domain>`. The container listens on port 8000.\n\nWhat should you do?",
+    "options": [
+        {
+            "text": "Update the container app's ingress from internal to external, keeping the target port at 8000, for example `az containerapp ingress enable --type external --target-port 8000`.",
+            "correct": true
+        },
+        {
+            "text": "Add an HTTP scale rule so the app scales out when external requests arrive.",
+            "correct": false
+        },
+        {
+            "text": "Change the container to listen on port 443 instead of port 8000, because external ingress only forwards traffic to port 443.",
+            "correct": false
+        },
+        {
+            "text": "Create a second container app that proxies requests to the internal FQDN and give the partner its IP address.",
+            "correct": false
+        }
+    ],
+    "explanation": "The `internal` in the working FQDN is the giveaway: the app's **ingress is set to internal**, which publishes it only inside the Container Apps environment's virtual network. Switching ingress to **external** gives the app a public FQDN on the environment's default domain; the platform terminates HTTPS and forwards traffic to the configured **target port** (8000), so no application change is needed.\n\n**Why not the other options:**\n- **HTTP scale rule** — Scaling controls replica count under load; it has no effect on network exposure. Zero external requests are arriving because the endpoint is not publicly reachable, so there is nothing to scale on.\n- **Listening on port 443** — Ingress decouples the external port from the container port: the platform handles TLS on 443 externally and forwards to whatever `targetPort` is configured. The container can (and should) keep listening on 8000.\n- **Proxy app + IP address** — Adds a component to work around a one-line configuration change, and individual container app replicas do not get stable public IPs to hand out; exposure is via the ingress FQDN.",
+    "category": "Develop containerized solutions on Azure",
+    "caseStudy": "scenarios/case_study_yarrowden_agronomy.json"
+}

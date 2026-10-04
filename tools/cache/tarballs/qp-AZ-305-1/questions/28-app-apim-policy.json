@@ -1,0 +1,25 @@
+{
+    "id": "az305-app-apim-policy",
+    "type": "multi",
+    "question": "You are designing an API solution using Azure API Management (APIM). The APIs will be consumed by external partners and must meet the following requirements:\n\n- Rate limit each partner to 1,000 requests per minute\n- Cache GET responses for 60 seconds to reduce backend load\n- Return cached responses when available to avoid unnecessary backend calls\n\nWhich two APIM policy sections are required to implement these requirements? (Choose two.)",
+    "options": [
+        {
+            "text": "Inbound policy: rate-limit-by-key and cache-lookup",
+            "correct": true
+        },
+        {
+            "text": "Outbound policy: cache-store with duration of 60 seconds",
+            "correct": true
+        },
+        {
+            "text": "Backend policy: set-backend-service with circuit-breaker enabled",
+            "correct": false
+        },
+        {
+            "text": "On-error policy: retry with exponential backoff",
+            "correct": false
+        }
+    ],
+    "explanation": "APIM policies are applied in four sections: **inbound**, **backend**, **outbound**, and **on-error**.\n\n1. **Inbound policy** — The `rate-limit-by-key` policy throttles requests per partner (identified by subscription key) to 1,000/minute. The `cache-lookup` policy checks for a cached response before forwarding the request to the backend, returning the cached version immediately if available.\n\n2. **Outbound policy** — The `cache-store` policy caches the backend response for the specified duration (60 seconds). Together, `cache-lookup` (inbound) and `cache-store` (outbound) form the complete APIM caching pipeline.\n\n**Why not the other options:**\n- **Backend policy with circuit-breaker** — Controls how APIM communicates with the backend, not related to rate limiting or caching\n- **On-error policy with retry** — Handles errors after they occur; does not implement any of the three stated requirements\n\n**Note:** Subscription key validation is handled automatically by APIM when keys are required on a product or API — no explicit policy is needed for this.",
+    "category": "Design Infrastructure Solutions"
+}

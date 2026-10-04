@@ -1,0 +1,13 @@
+{
+    "id": "case_study_roskelly_outfitters",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Roskelly Outfitters** is an online retailer of outdoor apparel and camping equipment. The company runs its e-commerce platform on Microsoft Azure and uses Microsoft 365 for collaboration across its warehouse, customer service, and marketing teams.\n\n**Current Environment:**\n- Customer accounts, order history, and stored payment tokens are handled by the e-commerce platform.\n- Seasonal staff, remote customer-service agents, and third-party marketing contractors all connect from outside the office, often from personal devices.\n- Security spending has historically gone almost entirely into the office firewall and VPN concentrator."
+        },
+        {
+            "title": "Board Directives",
+            "content": "Following a security incident at a competitor, the Roskelly Outfitters board has issued the following directives:\n- **Formalize oversight**: Adopt a structured program covering how the organization is directed, how threats to the business are handled, and how external legal obligations are met.\n- **Plan for compromise**: Design security operations on the working assumption that an attacker may already have a foothold in the environment.\n- **Rethink the perimeter**: Recognize that staff and contractors now work from anywhere on many devices, and choose the control plane that security should be built around."
+        }
+    ]
+}

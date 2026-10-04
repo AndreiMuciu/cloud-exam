@@ -1,0 +1,25 @@
+{
+    "id": "az700-connectivity-expressroute-features-matching",
+    "type": "matching",
+    "question": "Match each ExpressRoute feature to what it provides.",
+    "sourceItems": [
+        "Bypasses the ExpressRoute virtual network gateway to improve data path performance between on-premises and a VNet",
+        "Links two ExpressRoute circuits so their on-premises sides can communicate directly over the Microsoft backbone",
+        "Lets a customer connect directly into Microsoft's global network at a peering location using a dedicated 100-Gbps or 10-Gbps port",
+        "A billing model with no metered charge for egress data on the circuit"
+    ],
+    "targetSlots": [
+        "ExpressRoute FastPath",
+        "ExpressRoute Global Reach",
+        "ExpressRoute Direct",
+        "Unlimited data plan"
+    ],
+    "correctMapping": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "explanation": "- **ExpressRoute FastPath**: Sends traffic directly between the on-premises network and virtual machines in the VNet, bypassing the ExpressRoute virtual network gateway for improved data path performance; it requires a gateway SKU that supports it (Ultra Performance/ErGw3AZ, or ErGwScale with sufficient scale units).\n- **ExpressRoute Global Reach**: Connects the on-premises networks of two separate ExpressRoute circuits to each other over the Microsoft backbone, without the traffic passing through either side's Azure VNet.\n- **ExpressRoute Direct**: Provides direct physical connectivity into Microsoft's network at a peering location through dedicated high-bandwidth ports, rather than connecting through a connectivity provider.\n- **Unlimited data plan**: A billing model for a circuit in which egress data transfer isn't charged separately, as opposed to a metered data plan.",
+    "category": "Design, Implement, and Manage Connectivity Services"
+}

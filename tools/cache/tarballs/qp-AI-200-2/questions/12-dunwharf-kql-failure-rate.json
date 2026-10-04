@@ -1,0 +1,25 @@
+{
+    "id": "ai200-s2-12-dunwharf-kql-failure-rate",
+    "question": "Dunwharf operators need the **percentage** of failed meter-ingestion requests in each 15-minute interval over the last 24 hours, from the `AppRequests` table.\n\nWhich KQL query should you use?",
+    "options": [
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(24h)\n| summarize FailureRate = 100.0 * countif(Success == false) / count() by bin(TimeGenerated, 15m)",
+            "correct": true
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(24h) and Success == false\n| summarize FailedCount = count() by bin(TimeGenerated, 15m)",
+            "correct": false
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(24h)\n| summarize avg(DurationMs) by Success, bin(TimeGenerated, 15m)",
+            "correct": false
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(24h) and Success == false\n| count",
+            "correct": false
+        }
+    ],
+    "explanation": "A failure **rate** needs both failures and total volume in the same aggregation. `countif(Success == false)` counts only failed rows while `count()` counts all rows in the same 15-minute bin, so `100.0 * countif(...) / count()` yields the percentage per interval. The `100.0` literal forces floating-point division (integer division would floor most rates to 0), and `bin(TimeGenerated, 15m)` provides the interval bucketing.\n\n**Why not the other options:**\n- **Failed count per bin** — An absolute count, not a percentage: 50 failures during a peak with 100,000 requests (0.05%) looks worse than 40 failures during a quiet night with 200 requests (20%). The requirement calls for a rate precisely because traffic fluctuates.\n- **`avg(DurationMs) by Success`** — Averages request *duration*, split by success flag; it says nothing about how many requests failed.\n- **`| count`** — Collapses the whole 24 hours into a single scalar of failed requests: no time axis, no denominator, no rate.",
+    "category": "Secure, monitor, and troubleshoot Azure solutions",
+    "caseStudy": "scenarios/case_study_dunwharf_energy.json"
+}

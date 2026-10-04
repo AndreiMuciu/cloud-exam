@@ -1,0 +1,25 @@
+{
+    "id": "ai200-05-aurelia-change-feed",
+    "question": "You must meet the Aurelia freshness requirement: when a clinician updates a guideline document in the `guidelines` container, its embedding must be regenerated within minutes, without rescanning the container.\n\nWhat should you implement?",
+    "options": [
+        {
+            "text": "A timer-scheduled job that runs every night and re-queries every document whose `_ts` value changed since the previous run.",
+            "correct": false
+        },
+        {
+            "text": "A change feed processor with a dedicated lease container, whose handler receives new and updated items and calls the embedding model for each changed document.",
+            "correct": true
+        },
+        {
+            "text": "A pre-trigger on the `guidelines` container that calls the embedding endpoint before each document is written.",
+            "correct": false
+        },
+        {
+            "text": "An Event Grid subscription on the Cosmos DB account's resource events that invokes an embedding function when documents change.",
+            "correct": false
+        }
+    ],
+    "explanation": "The **change feed processor** is the SDK-native way to react to inserts and updates in Cosmos DB for NoSQL. It reads the container's change feed incrementally, tracks progress in a **lease container**, distributes partitions across workers, and delivers changed items to your handler within seconds to minutes — no full scans. The handler can then regenerate the embedding for just the changed documents.\n\n**Why not the other options:**\n- **Nightly `_ts` query** — Violates the \"within minutes\" requirement and repeatedly queries the container, paying RU costs proportional to the scan instead of reading only changes.\n- **Pre-trigger** — Cosmos DB triggers are JavaScript that runs inside the database engine; they cannot call external HTTP endpoints such as an embedding model, and they must be explicitly requested per operation.\n- **Event Grid resource events** — Event Grid surfaces control-plane/account-level events for Cosmos DB, not per-item data changes in a NoSQL container; item updates would never arrive.",
+    "category": "Develop AI solutions by using Azure data management services",
+    "caseStudy": "scenarios/case_study_aurelia_health.json"
+}

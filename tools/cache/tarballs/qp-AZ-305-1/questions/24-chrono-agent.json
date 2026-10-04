@@ -1,0 +1,20 @@
+{
+    "id": "gen-21-azure-monitor-agent",
+    "question": "You need to implement Data Collection Rules (DCRs) to collect logs from Azure VMs. Which agent must be installed on the VMs?",
+    "options": [
+        {
+            "text": "Log Analytics agent (MMA)",
+            "correct": false
+        },
+        {
+            "text": "Azure Monitor agent (AMA)",
+            "correct": true
+        },
+        {
+            "text": "Azure Connected Machine agent",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Azure Monitor agent (AMA)**.\n\nThe Azure Monitor agent is the modern agent that supports Data Collection Rules. DCRs provide flexible configuration for data collection, allowing you to specify what data to collect and where to send it.\n\n- The Log Analytics agent (also known as MMA - Microsoft Monitoring Agent) is a legacy agent that does not support DCRs. Microsoft recommends migrating to AMA.\n- The Azure Connected Machine agent enables Azure Arc for on-premises/multi-cloud servers but doesn't directly collect monitoring data. AMA is still needed for log collection on Arc-enabled servers.",
+    "category": "Design Identity, Governance, and Monitoring"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "az800-16-storage-replica-types",
+    "question": "You need to implement disaster recovery between two Windows Server 2022 clusters located in different cities. You require zero data loss (RPO = 0) even in the event of a sudden site failure. Which type of Storage Replica should you use?",
+    "options": [
+        {
+            "text": "Synchronous replication",
+            "correct": true
+        },
+        {
+            "text": "Asynchronous replication",
+            "correct": false
+        },
+        {
+            "text": "Cloud Tiering",
+            "correct": false
+        },
+        {
+            "text": "DFS Replication",
+            "correct": false
+        }
+    ],
+    "explanation": "**Synchronous replication** ensures that data is written to both the local and remote sites before the application receives a 'write-complete' acknowledgment. this guarantees zero data loss (RPO = 0) at the cost of some latency.\n\n**Why not the other options:**\n- **Asynchronous** — Does not wait for the remote write to complete, so there is a risk of data loss during a failure.\n- **Cloud Tiering** — Part of Azure File Sync; not a block-level replication tool for clusters.\n- **DFS-R** — File-level replication; it is not synchronous and does not guarantee zero data loss.",
+    "category": "Manage storage and file services"
+}

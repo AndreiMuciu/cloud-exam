@@ -1,0 +1,16 @@
+{
+    "id": "az104-s3-storage-cmk-prerequisites",
+    "type": "multi",
+    "question": "Perrigold Foods' security team is finalizing the prerequisites for encrypting **stperrigoldqa** with a customer-managed key stored in the key vault **kv-perrigold-weu**, with automatic rotation to new key versions.\n\nWhich **three** of the following are required?",
+    "options": [
+        { "text": "Purge protection (in addition to soft delete) must be enabled on kv-perrigold-weu", "correct": true },
+        { "text": "A managed identity for the storage account must be granted access to use the key (wrap, unwrap, and get)", "correct": true },
+        { "text": "The key must be an RSA key of a supported size, such as 2048, 3072, or 4096 bits", "correct": true },
+        { "text": "The encryption key must be stored in the vault as a secret rather than as a key", "correct": false },
+        { "text": "kv-perrigold-weu and stperrigoldqa must be placed in the same Azure region", "correct": false },
+        { "text": "Soft delete must be disabled on the vault so that old key versions are removed immediately", "correct": false }
+    ],
+    "explanation": "Customer-managed keys (CMK) for Azure Storage have three pillars of prerequisites:\n\n- **Vault protection**: the key vault must have **soft delete and purge protection enabled**. Purge protection is the setting administrators typically still have to turn on, and it exists precisely for Perrigold's stated concern — it prevents the key from being permanently destroyed (purged), which would render the encrypted data unreadable.\n- **Identity and permissions**: Azure Storage accesses the vault by using a **managed identity** (system-assigned or user-assigned) associated with the storage account. That identity needs permission to perform the key operations the service uses — **wrapkey**, **unwrapkey**, and **get** — granted through an access policy or the corresponding Azure RBAC role for Key Vault.\n- **Key type**: the key must be an **RSA (or RSA-HSM) key** of a supported size — **2048, 3072, or 4096** bits.\n\nFor the automatic-rotation requirement, the storage account should reference the key **without a version** (a versionless key URI), so that the platform automatically rotates to new key versions — pairing naturally with a Key Vault rotation policy that creates those versions.\n\n**Why not the other options:**\n- **Store the key as a secret**: CMK requires a Key Vault **key** object, because the service performs cryptographic wrap/unwrap operations with it. A secret is just a stored string and cannot be used for CMK.\n- **Same region required**: the key vault and the storage account must be in the same **Microsoft Entra tenant**, but they **can be in different regions** — co-locating them is not a prerequisite.\n- **Disable soft delete**: exactly backwards — soft delete is **required** for CMK (and is enabled and non-disableable on current vaults). Removing deleted-key recoverability would create the very destruction risk the security standard is trying to eliminate.",
+    "category": "Implement and Manage Storage",
+    "caseStudy": "scenarios/case_study_perrigold.json"
+}

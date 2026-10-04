@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-01-plovermead-multicloud",
+    "question": "Plovermead Agritech runs its crop-advisory platform in Azure while its agronomy analytics team uses machine-learning services from a second public cloud provider, and the board wants to keep workloads running in both providers to avoid vendor lock-in. Which cloud strategy does this describe?",
+    "options": [
+        {
+            "text": "Hybrid cloud",
+            "correct": false
+        },
+        {
+            "text": "Multi-cloud",
+            "correct": true
+        },
+        {
+            "text": "Private cloud",
+            "correct": false
+        },
+        {
+            "text": "Community cloud",
+            "correct": false
+        }
+    ],
+    "explanation": "**Multi-cloud** describes using services from **two or more public cloud providers** at the same time — for example, running the core platform in Azure while consuming machine-learning services from another provider. Organizations adopt multi-cloud to avoid dependence on a single vendor, to pick best-of-breed services from each provider, or to satisfy customers who require a particular cloud. Tools such as Azure Arc can help manage resources that live in other clouds from a single control plane.\n\n**Why not the other options:**\n- **Hybrid cloud** — Combines a **private environment (on-premises or private cloud) with a public cloud**. Plovermead is combining two *public* clouds; no private or on-premises environment is involved.\n- **Private cloud** — A cloud environment dedicated to a single organization. Plovermead is consuming shared public cloud services from two providers, not operating dedicated infrastructure.\n- **Community cloud** — Infrastructure shared by a group of organizations with common concerns; it does not describe one company spreading workloads across multiple public providers.",
+    "category": "Describe Cloud Concepts",
+    "caseStudy": "scenarios/case_study_plovermead_agritech.json"
+}

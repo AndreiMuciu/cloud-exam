@@ -1,0 +1,24 @@
+{
+    "id": "sc900-s2-36-activity-explorer",
+    "question": "Six months after rolling out sensitivity labels and DLP policies, a compliance team wants to evaluate how they are working in practice. The team needs a historical, filterable view of what users are *doing* with labeled content — for example, how often labels are being downgraded or removed, and when labeled files are copied to removable media or a network share.\n\nWhich Microsoft Purview capability provides this view?",
+    "options": [
+        {
+            "text": "Activity explorer",
+            "correct": true
+        },
+        {
+            "text": "Content explorer",
+            "correct": false
+        },
+        {
+            "text": "Compliance Manager",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID Protection",
+            "correct": false
+        }
+    ],
+    "explanation": "**Activity explorer** provides a **historical view of activities on labeled and classified content** — the *what is being done with it* dimension of data classification. It collects activity signals such as **label applied, label changed (upgraded, downgraded, or removed)**, and **files copied to removable media or network shares**, and lets reviewers filter by date range, activity type, location, user, and label. That is precisely what a team needs to judge whether its labeling and DLP policies are effective or need tightening.\n\n**Why not the other options:**\n- **Content explorer** — Content explorer answers a different question: it shows a *current snapshot* of which items are classified or labeled and **where they reside**. It does not show the history of user actions performed on those items over time.\n- **Compliance Manager** — Compliance Manager measures progress against regulatory standards through assessments and improvement actions. It has no view of label activity on individual items.\n- **Microsoft Entra ID Protection** — ID Protection detects risky sign-ins and compromised identities. It is an identity security capability, unrelated to monitoring how labeled documents are handled.",
+    "category": "Describe the capabilities of Microsoft compliance solutions"
+}

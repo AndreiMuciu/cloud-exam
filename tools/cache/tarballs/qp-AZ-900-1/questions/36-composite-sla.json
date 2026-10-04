@@ -1,0 +1,24 @@
+{
+    "id": "az900-36-composite-sla",
+    "question": "An application consists of an Azure App Service that has an SLA of 99.95% and an Azure SQL Database that has an SLA of 99.99%. What is the outcome of the composite SLA for this application?",
+    "options": [
+        {
+            "text": "The composite SLA is equal to the lowest individual SLA (99.95%)",
+            "correct": false
+        },
+        {
+            "text": "The composite SLA is equal to the highest individual SLA (99.99%)",
+            "correct": false
+        },
+        {
+            "text": "The composite SLA is higher than 99.99% because of redundancy",
+            "correct": false
+        },
+        {
+            "text": "The composite SLA is lower than 99.95% (approx 99.94%)",
+            "correct": true
+        }
+    ],
+    "explanation": "To calculate a **composite SLA**, you multiply the individual SLAs together (0.9995 * 0.9999 = 0.9994). This means the composite SLA for a system of multiple components is always lower than the individual SLAs, as there are more points of failure.\n\n**Why not the other options:**\n- **Highest or Lowest** — Does not account for the fact that *both* must be available for the application to function.\n- **Higher than 99.99%** — Redundancy can increase an SLA, but only if components are in parallel (active-passive); serial dependencies (like a web app + DB) decrease the composite SLA.",
+    "category": "Describe Azure Management and Governance"
+}

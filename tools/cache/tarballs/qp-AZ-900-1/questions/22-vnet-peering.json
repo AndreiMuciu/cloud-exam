@@ -1,0 +1,24 @@
+{
+    "id": "az900-22-vnet-peering",
+    "question": "You have two Virtual Networks (VNets) in Azure, VNet1 and VNet2, and you want to allow them to communicate with each other using the private Microsoft backbone network without the traffic ever crossing the public internet. Which feature should you use?",
+    "options": [
+        {
+            "text": "Site-to-Site VPN",
+            "correct": false
+        },
+        {
+            "text": "Virtual Network Peering",
+            "correct": true
+        },
+        {
+            "text": "Azure ExpressRoute",
+            "correct": false
+        },
+        {
+            "text": "Network Security Group rules",
+            "correct": false
+        }
+    ],
+    "explanation": "**Virtual Network Peering** seamlessly connects two Azure virtual networks. Once peered, the VNets appear as one for connectivity purposes. Traffic between virtual machines in peered networks uses the Microsoft backbone infrastructure, not the public internet.\n\n**Why not the other options:**\n- **Site-to-Site VPN** — Creates a secure tunnel, but typically over the public internet (unless combined with other tech) and is generally used to connect on-premises to Azure.\n- **ExpressRoute** — A private connection between an on-premises network and Azure.\n- **NSG rules** — Used to filter traffic within a network or toward a network, but does not provide the underlying connectivity between two separate VNets.",
+    "category": "Describe Azure Architecture and Services"
+}

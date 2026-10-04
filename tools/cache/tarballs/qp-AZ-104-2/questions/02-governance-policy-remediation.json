@@ -1,0 +1,14 @@
+{
+    "id": "az104-s2-governance-policy-remediation",
+    "type": "single",
+    "question": "Fernhollow University requires every resource to carry a `Department` tag for chargeback reporting. Hundreds of resources were created before the tagging standard was introduced, and the compliance dashboards must reflect the standard within one week.\n\nYou need existing resources to be brought into compliance **automatically**, without redeploying them.\n\nWhat should you do?",
+    "options": [
+        { "text": "Assign a policy that uses the **Modify** effect to add the Department tag, grant the assignment a managed identity with permission to update tags, and create a remediation task for the existing resources", "correct": true },
+        { "text": "Assign a policy that uses the **Deny** effect to require the Department tag on every resource", "correct": false },
+        { "text": "Assign a policy that uses the **Audit** effect and email the list of non-compliant resources to each department's IT team", "correct": false },
+        { "text": "Assign a policy that uses the **Append** effect and wait for the next policy evaluation cycle to update the existing resources", "correct": false }
+    ],
+    "explanation": "The **Modify** effect can add, replace, or remove tags during resource create and update operations — and, crucially, it is one of only two effects (along with **deployIfNotExists**) that supports **remediation tasks**. A remediation task retroactively applies the tag change to resources that already exist, which is exactly what Fernhollow needs for the hundreds of pre-standard resources. Because remediation modifies resources, the policy assignment needs a managed identity with an appropriate role (for example, Tag Contributor) in the assignment's scope.\n\n**Why not the other options:**\n- **Deny**: Deny only blocks *new or updated* deployments that lack the tag. It does nothing to the hundreds of existing resources, so the compliance dashboard would still show them as non-compliant.\n- **Audit**: Audit only records non-compliance for reporting; it never changes any resource. Manually chasing departments to fix hundreds of resources will not meet the one-week deadline and is not automatic.\n- **Append**: Append adds fields only during create or update requests. Policy evaluation cycles re-assess compliance state but never alter existing resources, and the Append effect does not support remediation tasks.",
+    "category": "Manage Azure Identities and Governance",
+    "caseStudy": "scenarios/case_study_fernhollow.json"
+}

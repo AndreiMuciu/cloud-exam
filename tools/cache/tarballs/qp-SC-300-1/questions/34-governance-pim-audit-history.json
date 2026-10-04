@@ -1,0 +1,24 @@
+{
+    "id": "sc300-governance-pim-audit-history",
+    "question": "A security team suspects that one administrator is activating the eligible Global Administrator role far more often than expected, at unusual hours. They want a record of every activation request, its justification, its approver (if any), and its duration, over the last 90 days.\n\nWhere should the team look, and what should they do if they need to analyze it outside the portal?",
+    "options": [
+        {
+            "text": "Review the Privileged Identity Management (PIM) audit history for Microsoft Entra roles, and export it using Microsoft Graph or PowerShell for offline analysis",
+            "correct": true
+        },
+        {
+            "text": "Review the Microsoft Entra ID sign-in logs, which record every PIM role activation as a distinct, separately labeled event type",
+            "correct": false
+        },
+        {
+            "text": "Review the access reviews history, since access reviews automatically log every role activation performed through PIM",
+            "correct": false
+        },
+        {
+            "text": "Review the Identity Secure Score recommendations, which list each individual role activation event",
+            "correct": false
+        }
+    ],
+    "explanation": "**Privileged Identity Management's audit history** specifically records role activation requests, the justification provided, the approver and their decision (if approval was required), and the activation duration for both Microsoft Entra roles and Azure resource roles. This history can be reviewed in the Microsoft Entra admin center and also retrieved programmatically via Microsoft Graph or PowerShell for deeper offline analysis, filtering, or long-term retention.\n\n**Why not the other options:**\n- **Sign-in logs** — sign-in logs record authentication events (who signed in, from where, with what result); they are not the authoritative source for PIM-specific role activation details like justification text or approver decisions.\n- **Access reviews history** — access reviews record periodic recertification decisions (who was approved/denied to keep access during a review cycle); they do not log every individual PIM role activation as it happens.\n- **Identity Secure Score** — Secure Score provides aggregate security posture recommendations and a score, not a per-event audit log of individual role activations.",
+    "category": "Plan and automate identity governance"
+}

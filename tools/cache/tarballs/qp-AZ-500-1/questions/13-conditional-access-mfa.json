@@ -1,0 +1,24 @@
+{
+    "id": "az500-13-conditional-access-mfa",
+    "question": "You need to enforce Multi-Factor Authentication (MFA) for all users when they are accessing the Azure portal from outside the corporate network. Which specific signal should you use in your Microsoft Entra Conditional Access policy to identify 'outside the corporate network'?",
+    "options": [
+        {
+            "text": "Users and groups",
+            "correct": false
+        },
+        {
+            "text": "Cloud apps or actions",
+            "correct": false
+        },
+        {
+            "text": "Locations (Named Locations)",
+            "correct": true
+        },
+        {
+            "text": "Device platform",
+            "correct": false
+        }
+    ],
+    "explanation": "The **Locations** condition in Conditional Access allows you to specify IP ranges that represent your 'Trusted' or 'Named' locations (like corporate offices). You can then create a policy that targets 'All locations' but excludes the trusted ones to enforce MFA for 'outside' traffic.\n\n**Why not the other options:**\n- **Users and groups** — Defines *who* the policy applies to.\n- **Cloud apps** — Defines *what* application is being protected (e.g., Microsoft Azure Management).\n- **Device platform** — Filters based on the OS (e.g., iOS, Android, Windows).",
+    "category": "Manage identity and access"
+}

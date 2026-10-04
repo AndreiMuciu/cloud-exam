@@ -1,0 +1,24 @@
+{
+    "id": "az305-s2-infra-private-dns",
+    "question": "A company uses a hub-and-spoke network with 25 spoke VNets. Workloads in every spoke access Azure SQL and Storage through private endpoints. Name resolution must return the private IP addresses for these services from any spoke and from on-premises, and DNS management overhead must be minimized.\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "One shared Azure Private DNS zone per service (for example, privatelink.database.windows.net), linked to the hub and spoke VNets, with a DNS Private Resolver in the hub forwarding on-premises queries",
+            "correct": true
+        },
+        {
+            "text": "A separate copy of each privatelink DNS zone in every spoke VNet, each containing that spoke's endpoint records",
+            "correct": false
+        },
+        {
+            "text": "Public DNS CNAME records that point each service's hostname to its private IP address",
+            "correct": false
+        },
+        {
+            "text": "Custom hosts-file entries for the private endpoints, deployed to all VMs with a configuration management tool",
+            "correct": false
+        }
+    ],
+    "explanation": "The **centralized Private DNS zone** design is the Microsoft-recommended architecture for private endpoint DNS at scale:\n\n- **One zone per service** — A single `privatelink.database.windows.net` zone (and one per other service) holds the A records for *all* private endpoints of that service. Private endpoint DNS integration writes records into it automatically\n- **VNet links** — Linking the shared zones to the hub and every spoke means any workload in any spoke resolves the service FQDN to its private IP. Twenty-five spokes share the same zones instead of maintaining 25 copies\n- **On-premises resolution** — On-premises DNS servers cannot query Private DNS zones directly; a **DNS Private Resolver** inbound endpoint in the hub gives on-premises DNS a forwarding target inside Azure that *can* resolve the private zones — the managed replacement for running DNS forwarder VMs\n\n**Why not the other options:**\n- **Zone copies per spoke** — 25 duplicate zones per service must each be maintained; a workload in spoke A cannot resolve a private endpoint whose record only exists in spoke B's copy, breaking cross-spoke access through the hub, and automatic DNS integration can only target one zone per endpoint\n- **Public DNS CNAMEs to private IPs** — Publishing RFC 1918 addresses in public DNS leaks internal topology, breaks the platform's existing CNAME chain (Azure already redirects the public FQDN to the privatelink zone), and returns unroutable answers to any external resolver\n- **Hosts files** — Unmanageable at fleet scale, invisible to PaaS and container workloads, and silently wrong the moment an endpoint IP changes — configuration drift as a service",
+    "category": "Design Infrastructure Solutions"
+}

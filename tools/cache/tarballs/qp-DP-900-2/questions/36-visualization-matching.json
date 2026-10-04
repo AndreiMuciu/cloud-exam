@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s2-36-visualization-matching",
+    "type": "matching",
+    "question": "Match each Power BI visualization type to the analytical need it serves best.",
+    "sourceItems": [
+        "Card",
+        "Scatter chart",
+        "Map",
+        "Pie chart"
+    ],
+    "targetSlots": [
+        "Show the relationship between two numeric measures across many data points",
+        "Display a single important value, such as total revenue, at a glance",
+        "Show what proportion of a whole each of a few categories contributes",
+        "Compare values across geographic locations such as countries or cities"
+    ],
+    "correctMapping": [
+        1,
+        0,
+        3,
+        2
+    ],
+    "explanation": "- **Card** — Shows exactly **one headline number** (total revenue, order count, a KPI). It is the go-to visual when a single value matters more than any comparison.\n- **Scatter chart** — Plots each data point against **two numeric axes**, revealing the **relationship or correlation** between two measures (for example, marketing spend versus sales per region) and exposing clusters and outliers.\n- **Map** — Places values on **geography**, making it natural to compare measures across countries, states, or cities with location-encoded bubbles or shading.\n- **Pie chart** — Divides a circle into slices to show each category's **proportion of the whole**. It works best with only a handful of categories; with many slices, the comparisons become hard to read and a bar chart serves better.\n\nA quick way to choose on the exam: ask what the *question behind the visual* is — one number (card), relationship between measures (scatter), where (map), or share of the total (pie).",
+    "category": "Describe an Analytics Workload on Azure"
+}

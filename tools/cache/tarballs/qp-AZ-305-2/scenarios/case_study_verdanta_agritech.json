@@ -1,0 +1,13 @@
+{
+    "id": "case_study_verdanta_agritech",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Verdanta AgriTech** builds a precision-agriculture platform used by large farming cooperatives. Sensor stations installed across fields report soil moisture, temperature, and equipment telemetry to the cloud.\n\n**Current Environment:**\n- 400,000 sensor stations transmit readings every 30 seconds, producing roughly 2 TB of telemetry per day\n- An agronomy analytics team runs interactive dashboards that slice weeks of telemetry by time window, field, and sensor type, expecting sub-second responses\n- A separate customer-facing web API serves each cooperative's own field configuration documents (crop plans, irrigation schedules) — a read-heavy JSON workload with users in Europe, South America, and Australia"
+        },
+        {
+            "title": "Technical Requirements",
+            "content": "**Platform Requirements:**\n- Telemetry ingestion must sustain millions of events per minute without losing data during downstream slowdowns\n- Raw telemetry must be automatically archived to low-cost object storage for later batch reprocessing, without writing custom archiving code\n- The analytics store must be optimized for high-volume time-series ingestion and fast aggregations over time windows\n- The configuration document store must serve reads in each user geography with single-digit-millisecond latency\n- After a cooperative updates an irrigation schedule, that cooperative's own users must always see their change immediately (read-your-own-writes), but other regions may lag slightly\n- Operational overhead must be minimized — the platform team is small and prefers managed services"
+        }
+    ]
+}

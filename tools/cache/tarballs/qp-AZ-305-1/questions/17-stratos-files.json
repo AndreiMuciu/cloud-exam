@@ -1,0 +1,29 @@
+{
+    "id": "gen-17-azure-files-identity",
+    "type": "multi",
+    "question": "Users need to access Azure Files shares using their existing corporate identities from the on-premises Active Directory forest while ensuring the shares are not accessible over the public internet. Which two actions should you include in the recommendation? (Choose two.)",
+    "options": [
+        {
+            "text": "Enable Microsoft Entra Domain Services (Azure AD DS) for the virtual network",
+            "correct": true
+        },
+        {
+            "text": "Configure a Private Endpoint for the Azure Storage account",
+            "correct": true
+        },
+        {
+            "text": "Map the file shares using the storage account access key",
+            "correct": false
+        },
+        {
+            "text": "Enable Public Access on the storage account firewall",
+            "correct": false
+        },
+        {
+            "text": "Create local user accounts on the Azure File Sync agent",
+            "correct": false
+        }
+    ],
+    "explanation": "To meet the identity and security requirements:\n1. **Azure AD DS**: Azure Files supports identity-based authentication through Azure AD DS. This allows users to use their corporate credentials to access file shares via SMB. Note: On-premises AD DS (joining the storage account to the existing AD forest) is also a valid approach for organizations that already have domain controllers in Azure, but Azure AD DS simplifies management by providing a managed domain service without needing to maintain domain controllers.\n2. **Private Endpoint**: Using a Private Endpoint ensures that the storage account is only accessible from within the VNet (or over VPN/ExpressRoute), effectively disabling public internet access.\n\n- Using access keys is not identity-based and is less secure.\n- Enabling public access violates the security requirement.\n- Local accounts on a sync agent do not provide the unified corporate identity experience required.",
+    "category": "Design Data Storage Solutions"
+}

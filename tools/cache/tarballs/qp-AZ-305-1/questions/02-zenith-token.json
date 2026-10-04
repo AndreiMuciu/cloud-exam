@@ -1,0 +1,21 @@
+{
+    "id": "gen-09-token-endpoint",
+    "question": "The reporting application needs to obtain an access token to call Azure Resource Manager APIs. Which endpoint should the application use to retrieve the token?",
+    "options": [
+        {
+            "text": "Azure Instance Metadata Service (IMDS) endpoint",
+            "correct": false
+        },
+        {
+            "text": "Microsoft Entra ID OAuth 2.0 token endpoint",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Graph API endpoint",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Microsoft Entra ID OAuth 2.0 token endpoint**.\n\nApplications authenticate to Microsoft Entra ID by sending a token request to the OAuth 2.0 token endpoint (typically `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token`). This returns an access token for the requested resource.\n\n- The Instance Metadata Service (IMDS) is used by Azure VMs to retrieve tokens for managed identities, not for standard application authentication.\n- Microsoft Graph is an API for accessing Microsoft 365 data, not an authentication endpoint.",
+    "category": "Design Identity, Governance, and Monitoring",
+    "caseStudy": "scenarios/case_study_arm_reporting.json"
+}

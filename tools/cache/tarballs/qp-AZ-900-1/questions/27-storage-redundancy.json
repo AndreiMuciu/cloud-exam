@@ -1,0 +1,24 @@
+{
+    "id": "az900-27-storage-redundancy",
+    "question": "A company needs to store data in Azure with copies replicated to a secondary geographic region, and they must be able to read data from the secondary region even when the primary region is operating normally. Which Azure Storage redundancy option meets these requirements?",
+    "options": [
+        {
+            "text": "Locally Redundant Storage (LRS)",
+            "correct": false
+        },
+        {
+            "text": "Zone-Redundant Storage (ZRS)",
+            "correct": false
+        },
+        {
+            "text": "Geo-Redundant Storage (GRS)",
+            "correct": false
+        },
+        {
+            "text": "Read-Access Geo-Redundant Storage (RA-GRS)",
+            "correct": true
+        }
+    ],
+    "explanation": "**RA-GRS** replicates your data to a secondary geographic region (like GRS) AND provides read access to the data in the secondary region at all times, not just during a failover.\n\n**Why not the other options:**\n- **LRS** — Stores three copies of data within a single datacenter in the primary region; no geographic redundancy.\n- **ZRS** — Stores data across three availability zones in the primary region; provides zone-level redundancy but not geographic redundancy.\n- **GRS** — Replicates data to a secondary region, but the secondary region data is not readable during normal operation. Access requires initiating a failover (customer-managed or Microsoft-managed), and is not available for routine read operations.",
+    "category": "Describe Azure Architecture and Services"
+}

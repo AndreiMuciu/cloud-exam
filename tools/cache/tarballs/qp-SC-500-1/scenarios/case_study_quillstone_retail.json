@@ -1,0 +1,13 @@
+{
+    "id": "case_study_quillstone_retail",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Quillstone Retail Group** operates 240 stores and an e-commerce platform hosted in Azure. Customer order data is stored in an Azure SQL Database elastic pool, and product images, invoices, and data exports are kept in two general-purpose v2 storage accounts named `stqsorders` and `stqsmedia`.\n\n**Current Environment:**\n- Both storage accounts allow access from all networks and have shared key authorization enabled.\n- Partner logistics companies upload delivery manifests to a container in `stqsorders` by using SAS tokens that were generated ad hoc and never expire.\n- The Azure SQL logical server allows connections from all Azure services and has no auditing configured.\n- A recent incident involved a malware-infected file being uploaded to the `stqsmedia` account by a compromised partner workstation."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The security team has defined the following requirements:\n\n**Storage:**\n- Storage accounts must accept traffic only from the e-commerce virtual network and from the IP range of the corporate office (203.0.113.0/24).\n- Uploaded blobs must be scanned for malware in near real time, and findings must be visible in Microsoft Defender for Cloud.\n- Partner SAS tokens must be revocable without regenerating storage account keys, and their lifetime must be centrally controlled.\n\n**Databases:**\n- All database activity on the order database must be captured for a minimum of 180 days for forensic analysis.\n- Sensitive customer columns must be discovered and classified, and anomalous database access patterns (such as SQL injection attempts or access from unusual locations) must generate security alerts.\n- Database administrators must not be able to view customer payment card numbers in query results during routine troubleshooting."
+        }
+    ]
+}

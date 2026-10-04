@@ -1,0 +1,9 @@
+{
+    "id": "case_study_arm_reporting",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**ZenithWorks** has a rapidly growing Azure environment with multiple subscriptions managed by different development teams. The Cloud Governance team needs visibility into resource deployments across all subscriptions.\n\n**Governance Requirements:**\n- Generate a monthly report of all new Azure Resource Manager (ARM) resource deployments\n- The report generation process should be automated\n- The solution must capture deployment metadata including timestamps, resource types, and deployment principals\n- Sensitive API keys used by the reporting tool must be stored securely\n- The reporting application should authenticate to Azure resources without managing credentials manually\n\n**Database Requirements:**\n- ZenithWorks plans to migrate an existing high-priority inventory database to Azure\n- The database requires 99.99% availability SLA\n- The solution must support zone redundancy to survive datacenter failures\n- Automatic failover capability is required to minimize downtime\n\nWhat components should you include in the solution?"
+        }
+    ]
+}

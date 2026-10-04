@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-31-stream-analytics",
+    "question": "A utility company ingests smart-meter readings through Azure Event Hubs. It now needs a managed Azure service that runs a perpetual SQL-like query over the incoming stream — averaging each meter's readings over five-minute windows — and writes the results to Azure SQL Database and a real-time Power BI dashboard.\n\nWhich service should the company use to process the stream?",
+    "options": [
+        {
+            "text": "Azure Stream Analytics",
+            "correct": true
+        },
+        {
+            "text": "Azure Data Factory",
+            "correct": false
+        },
+        {
+            "text": "Azure Blob Storage",
+            "correct": false
+        },
+        {
+            "text": "Power BI Report Builder",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Stream Analytics** is Azure's managed **stream processing engine**. A Stream Analytics *job* reads from an input (Event Hubs, IoT Hub, or Blob Storage), applies a **perpetual SQL-like query** — including temporal **windowing functions** such as five-minute tumbling windows for per-meter averages — and writes results to sinks including Azure SQL Database, a data lake, or a **real-time Power BI dashboard**. Every element of the requirement (SQL-like query, time windows, those exact outputs) describes Stream Analytics.\n\n**Why not the other options:**\n- **Azure Data Factory** — An orchestration and data-integration service for **batch/scheduled pipelines** that copy and transform data at rest. It does not run continuous queries over live event streams.\n- **Azure Blob Storage** — A storage service. It could hold stream *output* (or serve as a source), but it has no query engine and performs no processing itself.\n- **Power BI Report Builder** — The authoring tool for **paginated reports**. It formats data for fixed-layout documents; it cannot aggregate a live event stream.",
+    "category": "Describe an Analytics Workload on Azure"
+}

@@ -1,0 +1,21 @@
+{
+    "id": "az800-35-file-sync-setup-order",
+    "type": "ordering",
+    "question": "Arrange the steps to configure Azure File Sync for the first time in the correct sequence.",
+    "items": [
+        "Create a Sync Group",
+        "Create an Azure File Share",
+        "Deploy the Storage Sync Service",
+        "Register the Windows Server",
+        "Add a Server Endpoint"
+    ],
+    "correctOrder": [
+        "Create an Azure File Share",
+        "Deploy the Storage Sync Service",
+        "Register the Windows Server",
+        "Create a Sync Group",
+        "Add a Server Endpoint"
+    ],
+    "explanation": "The process always starts with the storage resource (File Share), followed by the management service (Storage Sync Service). Then you must register the server to make it 'known' to the service. After that, you create the logical container (Sync Group) and finally point it at the local path (Server Endpoint).",
+    "category": "Manage storage and file services"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc500-01-vellmore-pim-activation",
+    "question": "You need to redesign privileged access for Vellmore Financial Group's Production subscription to meet the privileged access requirements. What should you configure in Microsoft Entra Privileged Identity Management (PIM)?",
+    "options": [
+        {
+            "text": "Convert the 14 administrators to eligible assignments, set a 4-hour maximum activation duration, and require approval for Owner role activation",
+            "correct": true
+        },
+        {
+            "text": "Keep the permanent assignments and create an access review that recertifies the 14 administrators every 90 days",
+            "correct": false
+        },
+        {
+            "text": "Move the 14 administrators into a security group and assign the group the Owner role permanently with a resource lock on the subscription",
+            "correct": false
+        },
+        {
+            "text": "Create a Conditional Access policy that requires the administrators to reauthenticate every 4 hours",
+            "correct": false
+        }
+    ],
+    "explanation": "The requirements call for just-in-time activation (roles active only when needed), a 4-hour cap, and approval for Owner activation. In PIM you achieve this by converting permanent assignments to **eligible assignments**, then editing the role settings to set the **maximum activation duration to 4 hours**, **require justification**, and **require approval** for the Owner role. All activations are recorded in the PIM audit history, satisfying auditability.\n\n**Why not the other options:**\n- **Permanent assignments + access review** — Access reviews periodically recertify access but do nothing to make roles just-in-time or time-boxed; the standing Owner rights remain.\n- **Group with permanent Owner + resource lock** — Resource locks prevent resource deletion/modification; they do not govern role activation and the assignment is still permanent.\n- **Conditional Access reauthentication** — Sign-in frequency controls session lifetime, not role assignment duration; the users would still hold standing privileged roles.",
+    "category": "Manage identity, access, and governance",
+    "caseStudy": "scenarios/case_study_vellmore_financial.json"
+}

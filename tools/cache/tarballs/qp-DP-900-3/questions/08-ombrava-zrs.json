@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-08-ombrava-zrs",
+    "question": "Ombrava Telecom's regulatory storage account must keep its data inside the home Azure region at all times, yet the data must survive the loss of an entire datacenter. Copies must be written synchronously to physically separated facilities.\n\nWhich redundancy setting fits these requirements?",
+    "options": [
+        {
+            "text": "Zone-redundant storage (ZRS)",
+            "correct": true
+        },
+        {
+            "text": "Locally redundant storage (LRS)",
+            "correct": false
+        },
+        {
+            "text": "Geo-redundant storage (GRS)",
+            "correct": false
+        },
+        {
+            "text": "Read-access geo-redundant storage (RA-GRS)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Zone-redundant storage (ZRS)** synchronously replicates data across three availability zones — physically separated datacenters with independent power, cooling, and networking — **within a single region**. If one entire datacenter is lost, the other zones still hold current copies, and no data ever leaves the home region, satisfying the residency rule.\n\n**Why not the other options:**\n- **Locally redundant storage (LRS)** — LRS keeps its three copies inside a single datacenter. A disaster that destroys that datacenter destroys all copies, so it fails the datacenter-loss requirement.\n- **Geo-redundant storage (GRS)** — GRS asynchronously copies the data to a secondary region hundreds of miles away. That second region is outside the home region, which violates the national data-residency requirement.\n- **Read-access geo-redundant storage (RA-GRS)** — RA-GRS is GRS plus read access to the secondary region; it has the same cross-region replication and therefore the same residency violation.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure",
+    "caseStudy": "scenarios/case_study_ombrava_telecom.json"
+}

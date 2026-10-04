@@ -1,0 +1,24 @@
+{
+    "id": "dp900-25-open-source-databases",
+    "question": "A company runs two on-premises open-source databases: a MySQL database behind its e-commerce site and a PostgreSQL database used by an internal geospatial application. The company wants to move both to Azure as fully managed PaaS services while keeping the same database engines.\n\nWhich pair of Azure services should the company use?",
+    "options": [
+        {
+            "text": "Azure Database for MySQL and Azure Database for PostgreSQL",
+            "correct": true
+        },
+        {
+            "text": "Azure SQL Database and Azure SQL Managed Instance",
+            "correct": false
+        },
+        {
+            "text": "SQL Server on Azure Virtual Machines for both databases",
+            "correct": false
+        },
+        {
+            "text": "Azure Cosmos DB for both databases",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Database for MySQL** and **Azure Database for PostgreSQL** are Azure's managed PaaS offerings for those exact open-source engines. The company keeps engine compatibility (so applications need little or no change) while Azure handles patching, backups, high availability, and scaling — precisely the \"managed service, same engine\" requirement.\n\n**Why not the other options:**\n- **Azure SQL Database and Azure SQL Managed Instance** — Both are built on the Microsoft SQL Server engine. Moving to them would mean changing database engines, which the company explicitly wants to avoid.\n- **SQL Server on Azure Virtual Machines** — This is an IaaS approach (and again the wrong engine). The company would still manage the operating system, patching, and backups itself, so it is not a fully managed PaaS solution.\n- **Azure Cosmos DB** — A non-relational (NoSQL) database service. It does not run the MySQL or PostgreSQL relational engines, so the existing relational applications could not be migrated as-is.",
+    "category": "Identify Considerations for Relational Data on Azure"
+}

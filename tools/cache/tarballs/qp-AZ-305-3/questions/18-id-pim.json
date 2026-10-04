@@ -1,0 +1,24 @@
+{
+    "id": "az305-s3-id-pim",
+    "question": "Eight platform engineers occasionally need the Contributor role on the production subscriptions to handle incidents. The security office mandates:\n\n- **No standing privileged access** — engineers must hold elevated rights only while actively working an incident\n- Elevation must require **multifactor authentication and an approval**, be **time-boxed** to a few hours, and require a documented justification\n- All elevations must be **audited**, and the list of engineers permitted to elevate must be **re-certified quarterly**\n\nWhat should you recommend?",
+    "options": [
+        {
+            "text": "Microsoft Entra Privileged Identity Management with eligible role assignments, activation requirements (MFA, approval, justification, maximum duration), and recurring access reviews",
+            "correct": true
+        },
+        {
+            "text": "Permanent Contributor assignments protected by a Conditional Access policy that requires MFA for the Azure management endpoint",
+            "correct": false
+        },
+        {
+            "text": "A shared emergency-access account whose password is stored in Azure Key Vault and retrieved when an incident starts",
+            "correct": false
+        },
+        {
+            "text": "A custom RBAC role containing a reduced set of write permissions, permanently assigned to the eight engineers",
+            "correct": false
+        }
+    ],
+    "explanation": "**Privileged Identity Management (PIM)** is Microsoft Entra's just-in-time privileged access service, and each mandate maps to a PIM feature:\n\n- **No standing access** — the engineers receive **eligible** (not active) assignments for Contributor on the production subscriptions; outside an activation they hold no write access at all\n- **Controlled elevation** — the role's activation settings enforce **MFA**, **approver sign-off**, a required **justification** (and optionally a ticket number), and a **maximum activation duration**, after which the role deactivates automatically\n- **Audit and re-certification** — every activation, approval, and denial lands in the PIM audit history, and **recurring access reviews** force an owner to re-certify each engineer's eligibility quarterly, removing those who no longer need it\n\n**Why not the other options:**\n- **Permanent Contributor + Conditional Access MFA** — MFA hardens the *sign-in*, but the engineers still hold Contributor 24×7: a compromised session or a mistaken command has full production write access at any time. This is precisely the standing access the mandate forbids, and there is no approval, time-box, or per-elevation justification\n- **Shared emergency-access account** — Shared credentials destroy individual accountability (the audit trail shows the account, not the person), password retrieval is not an approval workflow, and nothing deactivates access afterwards. Break-glass accounts exist for *identity-provider outages*, not routine incident response\n- **Custom RBAC role, permanently assigned** — Trimming the permission list reduces blast radius but is still permanent, standing privileged access with no MFA-on-elevation, no approval, no time-box, and no review cycle. It addresses a different problem (least privilege in role *content*, not role *timing*)",
+    "category": "Design Identity, Governance, and Monitoring"
+}

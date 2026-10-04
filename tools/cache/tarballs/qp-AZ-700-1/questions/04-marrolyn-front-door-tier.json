@@ -1,0 +1,25 @@
+{
+    "id": "az700-marrolyn-front-door-tier",
+    "question": "Marrolyn Retail is configuring Azure Front Door as the global entry point for its storefront. The requirements state that the Microsoft-managed WAF rule set, bot protection, and a fully private connection (using Azure Private Link) to one of the regional origins are all mandatory.\n\nWhich Azure Front Door tier should Marrolyn deploy?",
+    "options": [
+        {
+            "text": "Front Door Standard",
+            "correct": false
+        },
+        {
+            "text": "Front Door Premium",
+            "correct": true
+        },
+        {
+            "text": "Front Door (classic)",
+            "correct": false
+        },
+        {
+            "text": "Azure CDN Standard from Microsoft (classic)",
+            "correct": false
+        }
+    ],
+    "explanation": "**Front Door Premium** is the only current-generation tier that includes the Microsoft-managed WAF rule set, bot protection, and Private Link connectivity to an origin. Front Door Standard supports only custom WAF rules — it does not include the managed rule set, bot protection, or Private Link to origin. Since Marrolyn requires all three capabilities, Premium is the correct choice.\n\n**Why not the other options:**\n- **Front Door Standard** — Supports custom WAF rules but lacks the Microsoft-managed rule set, bot protection, and Private Link origin connectivity that Marrolyn requires.\n- **Front Door (classic)** — A legacy tier that no longer supports new domain or profile creation and is on a retirement path; it isn't the tier to deploy for a new requirement like this.\n- **Azure CDN Standard from Microsoft (classic)** — A content delivery network tier focused on static content delivery; it doesn't offer a WAF managed rule set, bot protection, or Private Link to origin, and is also on a retirement path.",
+    "category": "Design and Implement Application Delivery Services",
+    "caseStudy": "scenarios/case_study_marrolyn.json"
+}

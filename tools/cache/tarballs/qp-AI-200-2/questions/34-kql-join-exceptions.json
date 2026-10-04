@@ -1,0 +1,24 @@
+{
+    "id": "ai200-s2-34-kql-join-exceptions",
+    "question": "Application Insights stores request telemetry in `AppRequests` and exception telemetry in `AppExceptions`; rows from the same operation share an `OperationId`. For each **failed** request in the last hour, you need one result row showing the request name and result code **together with** the exception type that caused it.\n\nWhich KQL query should you use?",
+    "options": [
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(1h) and Success == false\n| join kind=inner (AppExceptions | project OperationId, ExceptionType, OuterMessage) on OperationId\n| project TimeGenerated, Name, ResultCode, ExceptionType, OuterMessage",
+            "correct": true
+        },
+        {
+            "text": "union AppRequests, AppExceptions\n| where TimeGenerated > ago(1h) and Success == false\n| project TimeGenerated, Name, ResultCode, ExceptionType",
+            "correct": false
+        },
+        {
+            "text": "AppExceptions\n| where TimeGenerated > ago(1h) and Success == false\n| project TimeGenerated, ExceptionType, OuterMessage",
+            "correct": false
+        },
+        {
+            "text": "AppRequests\n| where TimeGenerated > ago(1h) and Success == false\n| join kind=inner AppExceptions on TimeGenerated",
+            "correct": false
+        }
+    ],
+    "explanation": "Combining columns from two tables into **one row per match** is exactly what **`join`** does, and `OperationId` is the correlation key Application Insights writes to every telemetry item in the same operation. Filtering `AppRequests` to failures first keeps the join small, `kind=inner` keeps only failed requests that actually have a matching exception, and the final `project` shapes the requested columns from both tables.\n\n**Why not the other options:**\n- **`union`** — Appends the rows of both tables *vertically*: a request row and its exception remain two separate rows, with each other's columns empty. Union interleaves; it does not correlate.\n- **`AppExceptions` alone** — `AppExceptions` has no `Success` column (that lives on requests), so the filter is invalid — and even without it, the request name and result code are simply not in that table.\n- **Join on `TimeGenerated`** — Timestamps of a request and its exception differ by milliseconds and are never guaranteed equal, so an equi-join on time matches almost nothing (and anything it does match is coincidence, not causation).",
+    "category": "Secure, monitor, and troubleshoot Azure solutions"
+}

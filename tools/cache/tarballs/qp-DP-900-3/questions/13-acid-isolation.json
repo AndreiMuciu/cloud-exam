@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s3-13-acid-isolation",
+    "question": "Two warehouse clerks work in an inventory database at the same time. While one clerk's transaction is halfway through moving stock between two locations, the other clerk's transaction must never see the in-between state where the stock has left one location but not yet arrived at the other.\n\nWhich ACID property provides this guarantee?",
+    "options": [
+        {
+            "text": "Isolation",
+            "correct": true
+        },
+        {
+            "text": "Atomicity",
+            "correct": false
+        },
+        {
+            "text": "Consistency",
+            "correct": false
+        },
+        {
+            "text": "Durability",
+            "correct": false
+        }
+    ],
+    "explanation": "**Isolation** governs how concurrent transactions interact: each transaction behaves as if it were running alone, so no transaction can observe another transaction's uncommitted, intermediate changes. The second clerk's queries either see the stock entirely in the old location (before the first transaction commits) or entirely in the new one (after) — never the half-moved state.\n\n**Why not the other options:**\n- **Atomicity** — Atomicity guarantees that the stock move either fully happens or fully doesn't if something fails mid-way. It protects against partial *completion*, not against another concurrent transaction *seeing* the partial state while work is in progress.\n- **Consistency** — Consistency ensures each committed transaction leaves the database in a valid state that honors all defined rules; it does not control what concurrent transactions can observe mid-flight.\n- **Durability** — Durability ensures committed changes survive crashes and power loss; it has nothing to do with concurrent visibility.",
+    "category": "Describe Core Data Concepts"
+}

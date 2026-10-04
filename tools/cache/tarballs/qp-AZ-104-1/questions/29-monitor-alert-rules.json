@@ -1,0 +1,24 @@
+{
+    "id": "az104-monitor-alert-rules",
+    "question": "You are configuring Azure Monitor alerts for your organization. The company has a storage account named **stproddata01** with the following monitoring requirements:\n\n| Signal | Notification Target |\n|---|---|\n| Transactions exceeding 10,000/hour | ops-team@novabright.io |\n| Storage account availability drops below 99.9% | ops-team@novabright.io |\n| Used capacity exceeds 80% | storage-admin@novabright.io |\n| Blob read latency exceeds 100ms | dev-team@novabright.io |\n\nWhat is the **minimum** number of alert rules and action groups you need to create?",
+    "options": [
+        {
+            "text": "Alert rules: 2, Action groups: 1",
+            "correct": false
+        },
+        {
+            "text": "Alert rules: 4, Action groups: 2",
+            "correct": false
+        },
+        {
+            "text": "Alert rules: 4, Action groups: 3",
+            "correct": true
+        },
+        {
+            "text": "Alert rules: 3, Action groups: 3",
+            "correct": false
+        }
+    ],
+    "explanation": "**Alert rules:** Each signal/condition requires its own alert rule because each monitors a different metric with different thresholds. You need **4 alert rules** — one for each signal (transactions, availability, capacity, latency).\n\n**Action groups:** Action groups define who gets notified and how. Since there are **3 distinct notification targets**:\n1. ops-team@novabright.io (used by 2 alert rules)\n2. storage-admin@novabright.io (used by 1 alert rule)\n3. dev-team@novabright.io (used by 1 alert rule)\n\nYou need **3 action groups**. The ops-team action group is reused by both the transactions and availability alert rules, so it only needs to be created once.\n\nKey insight: Multiple alert rules can reference the **same** action group, so the number of action groups equals the number of unique notification targets, not the number of alert rules.",
+    "category": "Monitor and Maintain Azure Resources"
+}

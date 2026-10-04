@@ -1,0 +1,13 @@
+{
+    "id": "case_study_pellagrin_insurance",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Pellagrin Insurance** is a property-and-casualty insurer that processes claims in Azure. The company is subject to strict records-retention regulation and periodic external audits.\n\n**Current Environment:**\n- Finalized claim documents (scanned reports, settlement letters) are stored as blobs in a container named `claims-final` in a general-purpose v2 storage account.\n- Departmental file shares are being migrated from an on-premises Windows file server to Azure Files. Users work on Windows devices joined to the on-premises Active Directory Domain Services (AD DS) domain, and years of carefully maintained NTFS permissions must keep working after the migration.\n- The claims database is an Azure SQL database that stores national identification numbers and a `PaymentAdjustments` table that auditors examine for signs of manipulation.\n- Database administrators routinely connect to the production database for troubleshooting and can currently read every column."
+        },
+        {
+            "title": "Security Requirements",
+            "content": "The compliance and security teams have defined the following requirements:\n\n**Document Retention:**\n- Once written, documents in `claims-final` must be unmodifiable and undeletable for 7 years — including by storage account administrators — and this protection itself must not be removable.\n- Legal must be able to place an indefinite, case-based hold on specific documents involved in litigation, independent of the 7-year clock.\n\n**File Shares:**\n- Users must access the Azure file shares from their domain-joined devices using their existing AD DS identities, with the existing NTFS ACLs still enforced at file and folder level.\n- Storage account keys must not be distributed to end users.\n\n**Database Protection:**\n- National identification numbers must be readable only by the claims-fraud application; the plaintext values must never be exposed to database administrators, even in query results or memory dumps on the server.\n- The `PaymentAdjustments` table must provide cryptographic proof that historical rows have not been altered or deleted.\n- Data at rest must be encrypted with a key that Pellagrin controls in its own key vault and can revoke."
+        }
+    ]
+}

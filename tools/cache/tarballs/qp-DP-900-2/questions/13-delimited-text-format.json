@@ -1,0 +1,24 @@
+{
+    "id": "dp900-s2-13-delimited-text-format",
+    "question": "A finance team must send monthly expense data to several external partners. The partners require a plain-text file in which each line is one record, fields are separated by commas, and the file can be opened directly in any spreadsheet program.\n\nWhich file format meets these requirements?",
+    "options": [
+        {
+            "text": "Comma-separated values (CSV)",
+            "correct": true
+        },
+        {
+            "text": "Parquet",
+            "correct": false
+        },
+        {
+            "text": "Avro",
+            "correct": false
+        },
+        {
+            "text": "JSON",
+            "correct": false
+        }
+    ],
+    "explanation": "**CSV (comma-separated values)** is the classic **delimited text** format: plain, human-readable text in which **each line represents one record** and a comma separates the field values, usually with an optional header line naming the columns. Because it is simple text, virtually every spreadsheet program, database, and integration tool can read and write it, which is why it remains the default format for exchanging tabular data between organizations.\n\n**Why not the other options:**\n- **Parquet** — A **binary, columnar** format optimized for analytical queries over big data. It is not plain text, records are not stored line by line, and a spreadsheet cannot open it directly.\n- **Avro** — A **binary, row-based** serialization format with an embedded schema, used mainly in streaming and big-data pipelines — again not plain text and not spreadsheet-friendly.\n- **JSON** — Text, but it structures data as nested objects and arrays with braces and name/value pairs, not one comma-delimited record per line, and spreadsheets do not open it natively as a simple table.",
+    "category": "Describe Core Data Concepts"
+}

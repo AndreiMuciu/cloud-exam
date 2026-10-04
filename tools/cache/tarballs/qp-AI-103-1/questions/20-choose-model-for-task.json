@@ -1,0 +1,24 @@
+{
+    "id": "ai103-20-choose-model-for-task",
+    "question": "You need a model to run a classification task (routing a support ticket to one of six categories) directly on a resource-constrained edge device with no reliable internet connection. Accuracy requirements are modest and latency must be near-instant.\n\nWhich type of model should you choose?",
+    "options": [
+        {
+            "text": "A small language model (SLM) that can run locally on the device.",
+            "correct": true
+        },
+        {
+            "text": "A frontier large language model (LLM) accessed through a cloud API endpoint.",
+            "correct": false
+        },
+        {
+            "text": "A multimodal model that accepts image, audio, and text input.",
+            "correct": false
+        },
+        {
+            "text": "A video-generation model configured for text-only prompts.",
+            "correct": false
+        }
+    ],
+    "explanation": "A **small language model** is designed to run with a much smaller compute/memory footprint, including on-device, and is well suited to a narrow, modest-accuracy classification task — exactly matching the edge, offline, near-instant-latency constraints.\n\n**Why not the other options:**\n- **A cloud-hosted frontier LLM** — Requires a network round trip to a cloud endpoint, which directly violates the \"no reliable internet connection\" constraint, and is far more compute than a six-way ticket classification needs.\n- **A multimodal model** — Adds image/audio understanding capability the task doesn't require, at a cost and footprint the edge device likely can't support; the task is a plain text classification problem.\n- **A video-generation model** — Solves an entirely different problem (generating video); it has no relevance to classifying support tickets.",
+    "category": "Implement generative AI and agentic solutions"
+}

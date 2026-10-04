@@ -1,0 +1,29 @@
+{
+    "id": "sc900-s2-28-defender-endpoint-capabilities",
+    "type": "multi",
+    "question": "Which two of the following are capabilities of Microsoft Defender for Endpoint? (Select two.)",
+    "options": [
+        {
+            "text": "Attack surface reduction rules that harden devices by blocking risky behaviors, such as Office applications launching child processes",
+            "correct": true
+        },
+        {
+            "text": "Endpoint detection and response (EDR) with automated investigation and remediation of alerts on devices",
+            "correct": true
+        },
+        {
+            "text": "Detonating email attachments in a sandbox before they are delivered to Exchange Online mailboxes",
+            "correct": false
+        },
+        {
+            "text": "Applying sensitivity labels to documents stored in SharePoint Online",
+            "correct": false
+        },
+        {
+            "text": "Synchronizing on-premises Active Directory accounts to Microsoft Entra ID",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Defender for Endpoint** is an enterprise endpoint security platform for preventing, detecting, investigating, and responding to threats on devices (Windows, macOS, Linux, Android, iOS). Two of its signature capability areas are:\n\n- **Attack surface reduction** — Hardening controls that shrink the ways a device can be attacked, including attack surface reduction rules (for example, blocking Office apps from creating child processes), exploit protection, and network protection.\n- **Endpoint detection and response (EDR) with automated investigation and remediation** — Behavioral sensors surface advanced attacks, analysts get rich investigation tooling, and automated investigation can examine alerts and remediate at scale, reducing alert queues.\n\n**Why not the other options:**\n- **Detonating email attachments before delivery** — That is Safe Attachments in *Microsoft Defender for Office 365*, which protects the mail flow, not the endpoint.\n- **Applying sensitivity labels in SharePoint Online** — Classification and labeling belong to *Microsoft Purview Information Protection*, not endpoint security.\n- **Synchronizing AD accounts to Microsoft Entra ID** — Identity synchronization is performed by *Microsoft Entra Connect*; Defender for Endpoint manages device threats, not directories.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

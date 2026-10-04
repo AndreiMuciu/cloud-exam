@@ -1,0 +1,25 @@
+{
+    "id": "az700-palmsera-firewall-hub-spoke",
+    "question": "Palmsera Health needs all outbound internet traffic from every spoke VNet to pass through a single, centrally managed, stateful firewall in the hub VNet. The firewall must support FQDN-based application rules, and the security team wants to manage rules and policies for this firewall — and any future firewalls in other regions — from one central location.\n\nWhich combination should Palmsera implement?",
+    "options": [
+        {
+            "text": "An NSG on every spoke's subnet, each configured with an identical set of manually maintained rules",
+            "correct": false
+        },
+        {
+            "text": "Azure Firewall deployed in the hub VNet, centrally managed through Azure Firewall Manager policies",
+            "correct": true
+        },
+        {
+            "text": "Azure DDoS Network Protection enabled on the hub VNet",
+            "correct": false
+        },
+        {
+            "text": "A user-defined route on each spoke pointing 0.0.0.0/0 to Azure Bastion in the hub",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Firewall** is a stateful, centralized firewall-as-a-service that supports FQDN filtering through application rules, and is designed to sit in a hub VNet with spoke traffic routed to it via UDRs. **Azure Firewall Manager** layers centralized policy management on top of one or more Azure Firewall instances (including across regions), letting Palmsera author a policy once and apply or inherit it across every firewall — meeting both the centralization and multi-region manageability requirements.\n\n**Why not the other options:**\n- **Per-spoke NSGs with duplicated rules** — NSGs filter traffic at the subnet/NIC level and don't provide FQDN-based application filtering or a single management plane; every spoke's rule set would need to be maintained independently, which is the opposite of centralization.\n- **Azure DDoS Network Protection** — Protects against volumetric layer 3/4 denial-of-service attacks; it doesn't filter or inspect outbound traffic by FQDN and isn't a substitute for a firewall.\n- **UDR pointing to Azure Bastion** — Azure Bastion provides browser-based RDP/SSH access to VMs; it isn't a network virtual appliance and can't serve as a next hop for filtering general outbound internet traffic.",
+    "category": "Design and Implement Azure Network Security Services",
+    "caseStudy": "scenarios/case_study_palmsera.json"
+}

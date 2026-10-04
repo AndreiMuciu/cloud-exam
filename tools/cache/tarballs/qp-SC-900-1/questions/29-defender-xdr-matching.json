@@ -1,0 +1,20 @@
+{
+    "id": "sc900-29-defender-xdr-matching",
+    "type": "matching",
+    "question": "Match each Microsoft Defender XDR service to the protection it provides.",
+    "sourceItems": [
+        "Microsoft Defender for Office 365",
+        "Microsoft Defender for Endpoint",
+        "Microsoft Defender for Cloud Apps",
+        "Microsoft Defender for Identity"
+    ],
+    "targetSlots": [
+        "Safeguards against threats in email messages, links, and collaboration tools, such as phishing and malicious attachments",
+        "Protects devices with attack surface reduction, next-generation protection, and endpoint detection and response",
+        "Delivers visibility and control over the use of SaaS applications, acting as a cloud access security broker",
+        "Uses signals from on-premises Active Directory to identify and investigate compromised identities and insider threats"
+    ],
+    "correctMapping": [0, 1, 2, 3],
+    "explanation": "The Microsoft Defender XDR family provides coordinated protection across the main attack surfaces:\n\n- **Microsoft Defender for Office 365** — Protects email and collaboration tools (Exchange Online, Teams, SharePoint) against phishing, business email compromise, malicious links, and unsafe attachments, including Safe Links and Safe Attachments scanning.\n- **Microsoft Defender for Endpoint** — Protects Windows, macOS, Linux, Android, and iOS devices with attack surface reduction rules, next-generation antimalware, endpoint detection and response (EDR), and automated investigation.\n- **Microsoft Defender for Cloud Apps** — A cloud access security broker (CASB) plus SaaS security posture tool: it discovers shadow IT, assesses app risk, and controls how sanctioned and unsanctioned cloud apps are used.\n- **Microsoft Defender for Identity** — Monitors signals from on-premises Active Directory Domain Services (and AD FS/AD CS) to detect reconnaissance, compromised credentials, lateral movement, and domain dominance attacks.\n\nRemembering each product by its attack surface — email, endpoints, SaaS apps, and on-premises identity — keeps the four services distinct.",
+    "category": "Describe the capabilities of Microsoft security solutions"
+}

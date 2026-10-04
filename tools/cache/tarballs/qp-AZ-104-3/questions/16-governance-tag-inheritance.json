@@ -1,0 +1,13 @@
+{
+    "id": "az104-s3-governance-tag-inheritance",
+    "type": "single",
+    "question": "You apply the tag `CostCenter = 4410` to a resource group that contains 30 existing resources. Later, the finance team reports that cost reports filtered on the `CostCenter` tag show **none** of those 30 resources.\n\nWhat is the cause, and how should you fix it going forward?",
+    "options": [
+        { "text": "Resources do not inherit tags from their resource group; assign an Azure Policy with the Modify effect that copies the tag from the resource group to its resources", "correct": true },
+        { "text": "Tag inheritance is delayed; the resources will show the tag after the next nightly billing cycle", "correct": false },
+        { "text": "The tag name uses mixed case; tags must be lowercase to appear in cost reports", "correct": false },
+        { "text": "The resources were created before the tag was applied; only resources created afterwards inherit resource group tags", "correct": false }
+    ],
+    "explanation": "In Azure, **tags are not inherited** — a tag applied to a resource group (or subscription) exists only on that scope object, and the resources inside remain untagged. That is why cost analysis filtered on `CostCenter` finds nothing. The standard fix is governance automation: assign a built-in policy such as **\"Inherit a tag from the resource group\"**, which uses the **Modify** effect to stamp the tag onto resources at creation or update — and, combined with a **remediation task**, onto the 30 existing resources as well. (Cost Management also offers a billing-side option to roll subscription and resource group tags into cost data, but that only affects cost records — the resources themselves stay untagged.)\n\n**Why not the other options:**\n- **Delayed inheritance**: there is no delayed inheritance to wait for — no amount of time will propagate a resource group tag to its resources, because the platform simply does not inherit tags.\n- **Lowercase requirement**: tag names are handled case-insensitively for operations (and values are stored as provided); casing has nothing to do with the resources missing the tag.\n- **Only new resources inherit**: creation time is irrelevant — resources created after the tag was applied would be just as untagged as the existing ones, unless a Modify policy adds the tag during creation.",
+    "category": "Manage Azure Identities and Governance"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "az104-s2-compute-acr-georeplication",
+    "type": "single",
+    "question": "Your company's container images are stored in an Azure Container Registry named **acrimages** that uses the **Standard** SKU. Workloads in West Europe, East US, and Southeast Asia pull the images. The requirements are:\n\n- A **single registry name and login server** for all pipelines and workloads\n- Images automatically kept in sync so each region pulls from a **nearby replica**\n- One registry to manage (single set of permissions, webhooks, and content)\n\nWhat should you do?",
+    "options": [
+        { "text": "Upgrade acrimages to the Premium SKU and add geo-replications for East US and Southeast Asia", "correct": true },
+        { "text": "Create separate Standard SKU registries in each region and push images to all three from the CI pipeline", "correct": false },
+        { "text": "Enable zone redundancy on acrimages", "correct": false },
+        { "text": "Schedule a nightly az acr import job that copies new images between regional registries", "correct": false }
+    ],
+    "explanation": "**Geo-replication** is exactly this feature — and it is available **only in the Premium SKU**. A geo-replicated registry remains one logical registry with one login server name; Azure's Traffic Manager-backed routing sends each client's pull to the nearest replica, image data is synchronized automatically across the configured regions, and management (RBAC, webhooks per replica, content) stays unified. Regional pulls also avoid cross-region egress charges for the workloads.\n\n**Why not the other options:**\n- **Separate registries per region**: This breaks the single-name requirement (each registry has its own login server), triples the management surface (permissions, tokens, cleanup), and makes the CI pipeline responsible for keeping three registries consistent.\n- **Zone redundancy**: Zone redundancy protects a registry (or replica) across availability zones **within one region**. It does nothing for multi-region distribution or nearby pulls.\n- **Nightly az acr import**: `az acr import` copies images between *distinct* registries on demand — it is manual/scheduled synchronization with a sync lag, separate registry names, and no automatic routing. It solves none of the three requirements cleanly.",
+    "category": "Deploy and Manage Azure Compute Resources"
+}

@@ -1,0 +1,24 @@
+{
+    "id": "dp900-27-table-storage",
+    "question": "A developer is storing application data in Azure Table Storage.\n\nWhich two properties together uniquely identify each entity (row) in a table?",
+    "options": [
+        {
+            "text": "Partition key and row key",
+            "correct": true
+        },
+        {
+            "text": "Primary key and foreign key",
+            "correct": false
+        },
+        {
+            "text": "Table name and timestamp",
+            "correct": false
+        },
+        {
+            "text": "Document ID and collection name",
+            "correct": false
+        }
+    ],
+    "explanation": "In Azure Table Storage, every entity has a **partition key** and a **row key**, and the combination of the two must be unique within the table. The partition key groups related entities together for scalability and fast range queries, while the row key uniquely identifies an entity inside its partition. Beyond these two keys (and a system timestamp), entities are schemaless — different rows can hold different sets of properties.\n\n**Why not the other options:**\n- **Primary key and foreign key** — These are relational database concepts. Table Storage is a NoSQL key-value store; it has no foreign keys, joins, or referential integrity.\n- **Table name and timestamp** — The table name identifies the table, not a row within it, and the timestamp is a system property used for concurrency, not identification; many entities can share the same timestamp.\n- **Document ID and collection name** — These terms belong to document databases (such as Azure Cosmos DB for MongoDB), not to Azure Table Storage's partition/row key model.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

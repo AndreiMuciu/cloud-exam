@@ -1,0 +1,25 @@
+{
+  "id": "sc500-s2-22-trusted-launch-vm",
+  "type": "single",
+  "question": "A new fleet of Generation 2 Azure VMs must be hardened against boot-level threats. Requirements:\n\n- Only cryptographically signed, trusted boot loaders and OS kernels may execute — rootkits and boot kits must be blocked at start-up.\n- Boot measurements must be captured in a hardware-backed module and remotely attested, with failed boot-integrity checks surfaced as Defender for Cloud recommendations.\n- No requirement exists to encrypt data **in use** or to shield the VM's memory from the host.\n\nWhich VM security configuration should you choose?",
+  "options": [
+    {
+      "text": "Security type Trusted Launch, with secure boot and vTPM enabled, plus the integrity monitoring (guest attestation) feature",
+      "correct": true
+    },
+    {
+      "text": "Security type Confidential VM, because only hardware-based trusted execution environments can validate the boot chain",
+      "correct": false
+    },
+    {
+      "text": "Standard security type with Azure Disk Encryption on the OS disk, since an encrypted OS disk cannot be tampered with at boot",
+      "correct": false
+    },
+    {
+      "text": "Standard security type with Microsoft Defender for Endpoint deployed via Defender for Servers, which blocks unsigned kernels from loading",
+      "correct": false
+    }
+  ],
+  "explanation": "**Trusted Launch** is the VM security type built for exactly these boot-chain requirements. **Secure boot** verifies the signature of each component in the boot chain — firmware, boot loader, kernel — and refuses to run unsigned or tampered code, which is the direct countermeasure to boot kits and rootkits. The **virtual Trusted Platform Module (vTPM)** provides a dedicated, TPM-2.0-compliant vault where measured boot records the hashes of the boot sequence. Enabling **integrity monitoring** has the guest attestation extension send those measurements to Microsoft Azure Attestation, and Defender for Cloud raises recommendations when a VM's boot integrity cannot be attested. Trusted Launch adds these protections at no extra compute cost on supported Gen2 sizes.\n\n**Why not the other options:**\n- **Confidential VM** — Confidential VMs *include* the Trusted Launch capabilities but their defining feature is a hardware trusted execution environment that encrypts the VM's memory and shields data **in use** from the host — a requirement this scenario explicitly does not have. Choosing it restricts region and size availability and adds cost for a guarantee nobody asked for.\n- **Azure Disk Encryption** — encrypting the OS disk protects data at rest; it does not validate what executes at boot. A compromised boot component would simply be decrypted and run like everything else.\n- **Defender for Endpoint** — EDR detects and responds to threats from *inside* a running OS; it starts after the boot chain has already executed, so it cannot block a malicious boot loader, and it provides no hardware-backed measurement or remote attestation.",
+  "category": "Secure compute"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "sc500-s2-26-gcp-connector-order",
+  "type": "ordering",
+  "question": "Your organization runs workloads in Google Cloud Platform and must onboard them to Microsoft Defender for Cloud for security recommendations and workload protection. Arrange the steps of creating the GCP connector in the correct order.",
+  "items": [
+    "Run the generated gcloud script in the GCP Cloud Shell to enable the required APIs and create the workload identity pool, workload identity providers, and service accounts",
+    "In Defender for Cloud's environment settings, add a GCP environment and choose whether to onboard a single project or an entire organization",
+    "Verify that GCP resources appear in the asset inventory and that recommendations are generated for them",
+    "Select and configure the Defender plans to enable on the GCP resources, such as Defender CSPM, Defender for Servers, and Defender for Containers"
+  ],
+  "correctOrder": [
+    "In Defender for Cloud's environment settings, add a GCP environment and choose whether to onboard a single project or an entire organization",
+    "Select and configure the Defender plans to enable on the GCP resources, such as Defender CSPM, Defender for Servers, and Defender for Containers",
+    "Run the generated gcloud script in the GCP Cloud Shell to enable the required APIs and create the workload identity pool, workload identity providers, and service accounts",
+    "Verify that GCP resources appear in the asset inventory and that recommendations are generated for them"
+  ],
+  "explanation": "Onboarding GCP to Microsoft Defender for Cloud follows the connector wizard's own sequence:\n\n1. **Create the connector shell first.** In *Environment settings* you add a GCP environment, name the connector, pick the subscription and region that will host it, and decide the scope — one GCP project or a whole organization (organization onboarding auto-discovers new projects later).\n2. **Choose the Defender plans next.** The plans you select (Defender CSPM, Defender for Servers, Defender for Containers, Defender for Databases…) determine what the onboarding script must set up — each plan adds its own service accounts and API enablements — so this choice has to precede script generation.\n3. **Run the generated gcloud script in GCP.** Defender for Cloud generates a script tailored to your selections; executed in GCP Cloud Shell with sufficient permissions, it enables the required Google APIs and creates the workload identity pool, providers, and service accounts. This is the federation that lets Defender for Cloud authenticate to GCP without stored keys — Microsoft's side cannot connect until it exists.\n4. **Verify last.** After the connector completes, GCP resources should appear in the asset inventory and recommendations begin flowing (initial sync can take a while). Verification confirms the identity federation and plan configuration actually work.\n\nRunning the script before the connector exists is impossible (the script is generated *by* the connector wizard, tailored to the plan selection), and verifying before the script has created the GCP-side identities would show nothing.",
+  "category": "Manage and monitor security posture"
+}

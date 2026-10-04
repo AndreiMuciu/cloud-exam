@@ -1,0 +1,33 @@
+{
+    "id": "sc500-s3-15-app-registration-hygiene-multi",
+    "type": "multi",
+    "question": "A security review of your Microsoft Entra tenant finds three problems with application identity:\n\n1. Any employee can create new app registrations, and dozens of forgotten registrations exist.\n2. Several multi-tenant applications are protected only by client secrets, some set to never expire.\n3. An internal HR application can be signed into by every user in the tenant, although only the HR department should reach it.\n\nWhich three actions should you take? (Select three.)",
+    "options": [
+        {
+            "text": "Set 'Users can register applications' to No in the tenant's user settings and grant the developers who need it the Application Developer role (or an approved request process)",
+            "correct": true
+        },
+        {
+            "text": "Replace the client secrets with certificate credentials (or managed identities where the workload runs in Azure), and use app management policies to block new long-lived secrets",
+            "correct": true
+        },
+        {
+            "text": "On the HR application's enterprise application (service principal), enable 'Assignment required' and assign only the HR department's group",
+            "correct": true
+        },
+        {
+            "text": "Delete all existing app registrations and require teams to re-register the applications they still use",
+            "correct": false
+        },
+        {
+            "text": "Enable security defaults for the tenant to automatically clean up unused app registrations and expiring credentials",
+            "correct": false
+        },
+        {
+            "text": "Convert the multi-tenant applications to single-tenant so that client secrets are no longer required",
+            "correct": false
+        }
+    ],
+    "explanation": "Each correct action addresses one finding with the intended control. (1) Turning off **'Users can register applications'** stops the uncontrolled sprawl at its source; developers who legitimately need to register apps get the **Application Developer** role or go through a governed process — least privilege instead of tenant-wide capability. (2) **Certificate credentials** are much harder to leak and exfiltrate than client secrets, and **managed identities** eliminate stored credentials entirely for Azure-hosted workloads; **app management policies** can then enforce credential hygiene going forward (blocking new secrets or capping their lifetimes), fixing the 'never expires' problem structurally. (3) On the enterprise application, **'Assignment required'** makes Entra ID refuse token issuance to users who are not explicitly assigned; assigning the HR group scopes sign-in to exactly the intended population without touching the app's code.\n\n**Why not the other options:**\n- **Deleting all registrations** — a scorched-earth outage generator: production applications would break instantly. The correct path is inventorying and removing *unused* registrations, not everything.\n- **Security defaults** — a baseline bundle (MFA for admins, blocking legacy auth) for tenants without Conditional Access; it performs no app registration cleanup and no credential lifecycle management, and it cannot be combined with existing Conditional Access policies.\n- **Converting to single-tenant** — tenancy controls *which directories'* users can sign in; it has nothing to do with whether the app authenticates with a secret or a certificate. Single-tenant apps use client secrets just as often.",
+    "category": "Manage identity, access, and governance"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "az900-08-crestline-policy",
+    "question": "Crestline Financial Services needs to prevent resources from being deployed in unauthorized regions. Which Azure service should they use to enforce this?",
+    "options": [
+        {
+            "text": "Azure Monitor",
+            "correct": false
+        },
+        {
+            "text": "Azure Policy",
+            "correct": true
+        },
+        {
+            "text": "Azure Advisor",
+            "correct": false
+        },
+        {
+            "text": "Azure Service Health",
+            "correct": false
+        }
+    ],
+    "explanation": "**Azure Policy** is the correct service for enforcing organizational standards. A policy can be created to restrict resource deployments to specific locations (regions) only. If a user tries to deploy elsewhere, the request will be denied.\n\n**Why not the other options:**\n- **Azure Monitor** — Used for collecting and analyzing telemetry; it identifies issues but doesn't prevent unauthorized deployments.\n- **Azure Advisor** — Provides recommendations for best practices (cost, security, etc.) but does not enforce them.\n- **Azure Service Health** — Informs you about outages or maintenance affecting your services.",
+    "category": "Describe Azure Management and Governance",
+    "caseStudy": "scenarios/case_study_crestline_financial.json"
+}

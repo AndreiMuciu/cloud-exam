@@ -1,0 +1,13 @@
+{
+    "id": "case_study_galewind",
+    "tabs": [
+        {
+            "title": "Company Overview",
+            "content": "**Galewind Logistics** is a global shipping and freight forwarding company. They are migrating their shipment tracking and archival systems to Azure to improve scalability and reliability.\n\n**Current Environment:**\n- Primary focus on shipment document management and real-time tracking.\n- Hybrid cloud strategy with on-premises offices in Chicago and London.\n- Heavy use of Azure Storage for archival and VM-based workloads for processing."
+        },
+        {
+            "title": "IT Infrastructure",
+            "content": "**Compute:**\n- Approximately 40 virtual machines running Windows Server.\n- Use of Azure App Service for tracking APIs.\n- Deployment of VM Scale Sets for variable workloads.\n\n**Storage:**\n- Multiple StorageV2 accounts for hot and cool archival data.\n- Integration with on-premises file servers via Azure File Sync.\n- Extensive use of blob storage for shipment document scans and tracking images."
+        }
+    ]
+}

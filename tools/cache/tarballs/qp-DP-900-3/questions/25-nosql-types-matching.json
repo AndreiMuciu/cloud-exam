@@ -1,0 +1,25 @@
+{
+    "id": "dp900-s3-25-nosql-types-matching",
+    "type": "matching",
+    "question": "Match each type of non-relational (NoSQL) data store to the workload it fits best.",
+    "sourceItems": [
+        "Key/value store",
+        "Document database",
+        "Column-family database",
+        "Graph database"
+    ],
+    "targetSlots": [
+        "Store each product as a self-contained record with nested, varying attributes, queried by values inside the record",
+        "Find the shortest chain of professional connections between two people in a networking application",
+        "Cache each user's shopping-session state and retrieve it instantly by its session identifier",
+        "Store massive volumes of sensor rows in which related groups of columns are written and read together"
+    ],
+    "correctMapping": [
+        1,
+        3,
+        0,
+        2
+    ],
+    "explanation": "- **Key/value store → session cache** — The workload is a single-item lookup by a unique identifier with no queries into the value's contents; key/value stores are optimized for exactly this fast get/put-by-key pattern.\n- **Document database → product records** — Each product is a self-describing record whose attributes vary and nest, and queries filter on fields *inside* the record — the defining strengths of a document store.\n- **Column-family database → sensor rows** — Column-family stores group related columns into families that are physically stored and retrieved together, which suits massive, wide sensor datasets accessed a family at a time.\n- **Graph database → connection chains** — Finding the shortest path between two people is a multi-hop relationship traversal over nodes and edges, the query pattern graph databases exist for.\n\n**Why not the other options:**\n- A key/value store cannot query inside its opaque values, so it fails the product-catalog and sensor workloads, and it has no traversal capability for connection chains.\n- A document database could hold session data, but the scenario needs nothing but key-based retrieval, so the simpler key/value model is the better fit; documents also lack native multi-hop traversal for the networking case.\n- A column-family store is built for wide tabular data, not for nested varying documents or path-finding queries.\n- A graph database is overkill for key lookups and unsuited to bulk wide-row sensor storage.",
+    "category": "Describe Considerations for Working with Non-relational Data on Azure"
+}

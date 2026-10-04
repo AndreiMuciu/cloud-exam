@@ -1,0 +1,24 @@
+{
+    "id": "gen-13-managed-identities-comparison",
+    "question": "The reporting application consists of multiple Azure VMs and an Azure Automation account. You need to recommend an identity solution to allow all these resources to authenticate to the same Azure SQL Database while minimizing administrative overhead. What should you include in the recommendation?",
+    "options": [
+        {
+            "text": "Create a single service principal and store its secret in a shared storage account",
+            "correct": false
+        },
+        {
+            "text": "Enable System-Assigned Managed Identity for each VM and the Automation account separately",
+            "correct": false
+        },
+        {
+            "text": "Create a single User-Assigned Managed Identity and assign it to all VMs and the Automation account",
+            "correct": true
+        },
+        {
+            "text": "Use the built-in Microsoft Entra ID 'Contributor' role on the management group",
+            "correct": false
+        }
+    ],
+    "explanation": "The correct answer is **Create a single User-Assigned Managed Identity**. \n\n- **User-Assigned Managed Identities** are standalone Azure resources that can be assigned to multiple Azure resources. This is ideal when multiple resources (VMs, Automation accounts) need the same permissions (e.g., to SQL Database), as you only have to manage and grant permissions to one identity.\n- System-Assigned Identities are tied to a single resource and must be managed individually, increasing overhead in this scenario.\n- Service principals with secrets introduce credential-management risks.\n- Roles on management groups provide permissions but do not solve the authentication problem for the resources themselves.",
+    "category": "Design Identity, Governance, and Monitoring"
+}

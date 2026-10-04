@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-20-azure-regions",
+    "type": "multi",
+    "question": "A film-archive nonprofit is choosing where to deploy its first Azure resources and asks for the facts about Azure regions. Which **two** statements about Azure regions are accurate? (Select two.)",
+    "options": [
+        {
+            "text": "A region is a geographical area containing one or more datacenters that are nearby and networked together with a low-latency network",
+            "correct": true
+        },
+        {
+            "text": "Not every Azure service or virtual machine size is available in every region",
+            "correct": true
+        },
+        {
+            "text": "Every Azure region contains at least three availability zones",
+            "correct": false
+        },
+        {
+            "text": "Data placed in a region is automatically copied to a second region without any configuration",
+            "correct": false
+        }
+    ],
+    "explanation": "Two statements are correct:\n\n- **A region is a geographical area containing one or more nearby datacenters networked together with a low-latency network.** Azure groups its datacenters into regions so customers can place resources close to their users while Azure balances workloads appropriately within the region.\n- **Not every service or VM size is available in every region.** Services, features, and hardware generations roll out region by region, so region selection should always start with checking that the services you plan to use are offered there.\n\n**Why not the other options:**\n- **Every region contains at least three availability zones** — Many regions support availability zones (and zone-enabled regions have a minimum of three), but **not all regions offer availability zones**, so this statement is too strong.\n- **Data is automatically copied to a second region without configuration** — Cross-region copies happen only when the customer chooses a geo-redundant option (or configures replication); by default, placing data in a region does not replicate it to another one.",
+    "category": "Describe Azure Architecture and Services"
+}

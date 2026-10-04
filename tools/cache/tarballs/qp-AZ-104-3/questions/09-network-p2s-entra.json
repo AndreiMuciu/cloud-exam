@@ -1,0 +1,14 @@
+{
+    "id": "az104-s3-network-p2s-entra",
+    "type": "single",
+    "question": "Blythewater Marine must give field surveyors remote access to the Azure environment through **VGW-Hub**.\n\nRecall the requirements:\n\n- Surveyors use the **Azure VPN Client** on company Windows laptops\n- Sign-in must use **Microsoft Entra ID credentials** so Conditional Access and MFA apply — no client certificates to manage\n- Some vessel and port networks block classic IPsec/IKE ports, so the tunnel must work over standard outbound TLS (TCP 443)\n\nHow should you configure point-to-site VPN on VGW-Hub?",
+    "options": [
+        { "text": "Tunnel type OpenVPN (SSL) with Microsoft Entra ID authentication", "correct": true },
+        { "text": "Tunnel type IKEv2 with Microsoft Entra ID authentication", "correct": false },
+        { "text": "Tunnel type SSTP with Azure certificate authentication", "correct": false },
+        { "text": "Tunnel type OpenVPN (SSL) with RADIUS authentication against an on-premises NPS server", "correct": false }
+    ],
+    "explanation": "Point-to-site **Microsoft Entra ID authentication is supported only with the OpenVPN tunnel type**, and it is exactly what the requirements describe: surveyors sign in with their corporate Entra identities through the Azure VPN Client, so Conditional Access policies — including MFA — are enforced at connection time, and there are no client certificates to issue, distribute, or revoke. OpenVPN is an SSL/TLS-based protocol that can run over **TCP 443**, so it passes through vessel and port networks that block IPsec/IKE (UDP 500/4500) traffic.\n\n**Why not the other options:**\n- **IKEv2 with Entra ID authentication**: not a valid combination — Microsoft Entra ID authentication requires the OpenVPN tunnel type. IKEv2 also relies on UDP ports 500 and 4500, precisely the classic IPsec/IKE ports that some of the surveyors' networks block.\n- **SSTP with certificate authentication**: SSTP does traverse TCP 443, but certificate authentication means operating a certificate lifecycle (issuing and revoking client certificates) — explicitly ruled out — and it bypasses Entra ID, so Conditional Access and MFA never apply to the connection.\n- **OpenVPN with RADIUS/NPS**: the tunnel type is right, but authentication would be delegated to an on-premises RADIUS/NPS infrastructure instead of Microsoft Entra ID. Conditional Access on the VPN app and the no-extra-infrastructure spirit of the requirements both point to native Entra authentication.",
+    "category": "Implement and Manage Virtual Networking",
+    "caseStudy": "scenarios/case_study_blythewater.json"
+}

@@ -1,0 +1,25 @@
+{
+    "id": "sc900-12-solstice-insider-risk",
+    "question": "Solstice Financial Partners wants to identify potentially malicious or inadvertent data exfiltration by departing employees — for example, mass downloads before a resignation date — while keeping user identities pseudonymized during the initial investigation to protect employee privacy.\n\nWhich Microsoft Purview solution meets this requirement?",
+    "options": [
+        {
+            "text": "Communication compliance",
+            "correct": false
+        },
+        {
+            "text": "Insider risk management",
+            "correct": true
+        },
+        {
+            "text": "Audit (Premium)",
+            "correct": false
+        },
+        {
+            "text": "Information barriers",
+            "correct": false
+        }
+    ],
+    "explanation": "**Insider risk management** correlates signals such as file downloads, sharing activity, and HR events (like a submitted resignation) to detect risky insider behavior, including data theft by departing employees. It is built with privacy by design: users are **pseudonymized by default**, and role-based access controls and audit logs safeguard investigations.\n\n**Why not the other options:**\n- **Communication compliance** — This solution detects inappropriate or non-compliant *messages* (harassment, sensitive info in chat/email); it is not designed to detect file-exfiltration patterns by departing employees.\n- **Audit (Premium)** — Audit records and retains activity logs for investigations, but it does not correlate signals into risk indicators, score users, or pseudonymize identities in a dedicated triage workflow.\n- **Information barriers** — Information barriers restrict communication and collaboration between specific groups of users; they do not detect exfiltration behavior.",
+    "category": "Describe the capabilities of Microsoft compliance solutions",
+    "caseStudy": "scenarios/case_study_solstice_financial.json"
+}

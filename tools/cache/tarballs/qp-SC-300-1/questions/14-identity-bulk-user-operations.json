@@ -1,0 +1,24 @@
+{
+    "id": "sc300-identity-bulk-user-operations",
+    "question": "An administrator must create 400 new cloud-only Microsoft Entra ID user accounts from a spreadsheet of names, job titles, and departments, and wants to do this in a single repeatable operation rather than one user at a time in the portal.\n\nWhich approach satisfies this requirement?",
+    "options": [
+        {
+            "text": "Use the Microsoft Entra admin center's bulk create feature with a downloaded CSV template, or run a scripted loop with the Microsoft Graph PowerShell SDK's New-MgUser cmdlet",
+            "correct": true
+        },
+        {
+            "text": "Ask each of the 400 employees to self-register through the combined registration portal, which will automatically create their accounts",
+            "correct": false
+        },
+        {
+            "text": "Create one dynamic group with a membership rule matching the 400 job titles; Microsoft Entra ID will provision matching user accounts automatically",
+            "correct": false
+        },
+        {
+            "text": "Enable self-service sign-up for external users on the tenant, then have the 400 users sign up",
+            "correct": false
+        }
+    ],
+    "explanation": "The Microsoft Entra admin center provides a **bulk create** operation that accepts a CSV file matching a downloadable template for creating many users at once, and the **Microsoft Graph PowerShell SDK** (`New-MgUser`, looped over a CSV) provides the same bulk-operation capability scriptably — both are explicitly the supported \"automate bulk operations\" paths.\n\n**Why not the other options:**\n- **Self-registration through combined registration** — that portal is where existing users register their own MFA/SSPR methods; it does not create new user accounts from scratch.\n- **A dynamic group** — dynamic membership rules only evaluate and add *existing* directory objects to a group based on their attributes; they cannot create new user accounts that don't exist yet.\n- **Self-service sign-up for external users** — this feature lets external (not yet known) users sign themselves up as guests in supported user flows; it is not the mechanism for an admin to bulk-provision known, internal, cloud-only employee accounts.",
+    "category": "Implement and manage user identities"
+}

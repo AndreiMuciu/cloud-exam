@@ -1,0 +1,29 @@
+{
+    "id": "sc900-s3-20-entra-p2-features",
+    "question": "An IT director is comparing Microsoft Entra ID licensing tiers before an identity-security rollout. Which two of the following capabilities require Microsoft Entra ID P2 (they are not included in the P1 tier)? (Select two.)",
+    "type": "multi",
+    "options": [
+        {
+            "text": "Microsoft Entra ID Protection risk-based detection and remediation",
+            "correct": true
+        },
+        {
+            "text": "Privileged Identity Management (PIM) for just-in-time role activation",
+            "correct": true
+        },
+        {
+            "text": "Conditional Access policies",
+            "correct": false
+        },
+        {
+            "text": "Creating users and groups in the directory",
+            "correct": false
+        },
+        {
+            "text": "Self-service password reset for cloud users",
+            "correct": false
+        }
+    ],
+    "explanation": "**Microsoft Entra ID Protection** (risk-based detections such as leaked credentials and anomalous sign-ins, with automated remediation like risk-based Conditional Access) and **Privileged Identity Management** (just-in-time, time-bound, approval-gated activation of privileged roles) are **Microsoft Entra ID P2** capabilities. Organizations that need identity risk automation or JIT privileged access must license the P2 tier (also included in bundles that contain P2).\n\n**Why not the other options:**\n- **Conditional Access policies** — Custom Conditional Access is included from **Microsoft Entra ID P1**; P2 is not required unless the policies use ID Protection *risk* signals.\n- **Creating users and groups** — Basic directory objects, authentication, and core user/group management are part of the **free** Microsoft Entra ID tier that comes with Azure and Microsoft 365 subscriptions.\n- **Self-service password reset for cloud users** — SSPR for cloud-only users is available below P2 (cloud-user SSPR comes with free/Microsoft 365 tiers, and P1 adds hybrid write-back). It is not a P2-exclusive feature.",
+    "category": "Describe the capabilities of Microsoft Entra"
+}

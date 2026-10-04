@@ -1,0 +1,25 @@
+{
+    "id": "az900-s3-14-customer-responsibilities",
+    "type": "multi",
+    "question": "A veterinary clinic chain is reviewing the shared responsibility model before adopting a mix of IaaS, PaaS, and SaaS services. Which **three** responsibilities **always remain with the customer**, regardless of which cloud service type is used? (Select three.)",
+    "options": [
+        {
+            "text": "The information and data stored in the cloud",
+            "correct": true
+        },
+        {
+            "text": "The devices (computers, tablets, phones) used to connect to the cloud",
+            "correct": true
+        },
+        {
+            "text": "The accounts and identities of the people and services accessing the data",
+            "correct": true
+        },
+        {
+            "text": "The physical hosts, network, and datacenter facilities",
+            "correct": false
+        }
+    ],
+    "explanation": "In the shared responsibility model, some duties shift between customer and provider depending on the service type (IaaS, PaaS, SaaS) — but three things are **always the customer's responsibility**, in every model:\n\n- **Information and data** — The customer decides what data is stored, how it is classified, and who may see it; no cloud model transfers ownership of the data itself.\n- **Devices** — The laptops, tablets, and phones that connect to cloud services are owned, secured, and patched by the customer.\n- **Accounts and identities** — The customer creates and manages its users, credentials, and access rights.\n\n**Why not the other option:**\n- **The physical hosts, network, and datacenter facilities** — This is the mirror image: in *every* cloud service type these are **always the provider's responsibility**. Microsoft owns and secures the buildings, servers, and physical network in its datacenters.",
+    "category": "Describe Cloud Concepts"
+}

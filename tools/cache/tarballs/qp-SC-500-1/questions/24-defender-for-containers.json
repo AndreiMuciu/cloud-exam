@@ -1,0 +1,24 @@
+{
+    "id": "sc500-24-defender-for-containers",
+    "question": "Your platform team runs Azure Kubernetes Service (AKS) clusters with images stored in Azure Container Registry (ACR). You must (1) detect misconfigurations such as privileged containers and exposed dashboards, (2) get runtime threat detection for suspicious activity inside the clusters, and (3) get vulnerability assessments for the images in ACR — all from one Defender for Cloud plan. What should you enable?",
+    "options": [
+        {
+            "text": "Microsoft Defender for Containers on the subscription, which combines Kubernetes hardening recommendations, runtime threat detection via the Defender sensor, and agentless vulnerability assessment of registry images",
+            "correct": true
+        },
+        {
+            "text": "Microsoft Defender for Servers on the AKS node pools, since the nodes are just Linux VMs",
+            "correct": false
+        },
+        {
+            "text": "The Azure Policy add-on for AKS alone, which blocks non-compliant workloads at admission",
+            "correct": false
+        },
+        {
+            "text": "An open-source image scanner in the CI pipeline that scans every image before it is pushed to ACR",
+            "correct": false
+        }
+    ],
+    "explanation": "**Defender for Containers** is the single plan built for exactly these three needs: it provides **Kubernetes misconfiguration and hardening recommendations** (including admission-time enforcement through the Azure Policy for Kubernetes component), **runtime threat detection** for the cluster and workloads via the Defender sensor and Kubernetes audit-log analytics, and **agentless vulnerability assessment** for container images in ACR (powered by Microsoft Defender Vulnerability Management).\n\n**Why not the other options:**\n- **Defender for Servers on node pools** — It protects the node VMs at the OS level but has no Kubernetes context: no admission/misconfiguration recommendations for workloads, and no registry image scanning.\n- **Azure Policy add-on alone** — Admission control addresses misconfigurations only; it provides no runtime threat detection and no image vulnerability assessment.\n- **CI pipeline scanner** — Build-time scanning covers images before push only; it misses vulnerabilities disclosed after the push, images from other sources, all runtime threats, and cluster misconfigurations.",
+    "category": "Secure compute"
+}

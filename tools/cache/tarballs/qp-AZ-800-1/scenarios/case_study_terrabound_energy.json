@@ -1,0 +1,9 @@
+{
+    "id": "case_study_terrabound_energy",
+    "tabs": [
+        {
+            "title": "Scenario",
+            "content": "**TerraBound Energy** is a renewable energy provider with remote monitoring stations. They want to modernize their server management using Azure Arc-enabled servers.\n\n**Management Goals:**\n- Use the Azure portal to manage both Azure VMs and on-premises Windows Servers.\n- Implement consistent patching and compliance policies across all servers using Azure Automation Update Management.\n- Enable secure remote access to on-premises servers using Windows Admin Center in the Azure portal."
+        }
+    ]
+}
