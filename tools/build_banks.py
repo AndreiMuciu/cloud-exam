@@ -16,6 +16,7 @@ Question schema (one object per question):
     answer       ["B"] or ["A", "C"]
     multi        true when more than one answer is expected
     explanation  URL or plain text, or null
+    domain       exam-guide domain id (tools/domains), e.g. "security"
 """
 import argparse
 import html
@@ -28,6 +29,11 @@ import io
 import subprocess
 import tarfile
 from collections import Counter
+import difflib
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import dedupe  # noqa: E402
+import domains  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, 'cache')
@@ -238,11 +244,13 @@ def letters(n):
     return [chr(65 + i) for i in range(n)]
 
 
-def make(qid, q, options, answer, explanation=None, img=None):
+def make(qid, q, options, answer, explanation=None, img=None, hint=None):
+    """hint: the source's own domain/category label, if it has one (used by domains.classify, not written out)."""
     opts = [{'k': k, 't': t} for k, t in zip(letters(len(options)), options)]
     answer = sorted(set(answer))
     return {'id': qid, 'sources': [qid], 'q': q, **({'img': img} if img else {}),
-            'options': opts, 'answer': answer, 'multi': len(answer) > 1, 'explanation': explanation or None}
+            'options': opts, 'answer': answer, 'multi': len(answer) > 1, 'explanation': explanation or None,
+            **({'hint': hint} if hint else {})}
 
 
 # --------------------------------------------------------------------------- parsers
@@ -329,7 +337,7 @@ def parse_cloudcertprep(code, offline):
             ans = [remap[a] for a in it['answer'] if a in remap]
             if not ans:
                 warn(f'cc {code} {it["id"]}: no answer'); continue
-            out.append(make(f'cc:{it["id"]}', clean_md(it['question']), [clean_md(t) for t in texts], ans, (it.get('explanation') or '').strip() or None))
+            out.append(make(f'cc:{it["id"]}', clean_md(it['question']), [clean_md(t) for t in texts], ans, (it.get('explanation') or '').strip() or None, hint=f'd{d}'))
     return out
 
 
@@ -385,7 +393,7 @@ def parse_nosadaniel(offline):
         idx = it.get('correct')
         if not isinstance(idx, int) or idx >= len(it['options']):
             warn(f'nd {it["id"]}: bad answer'); continue
-        out.append(make(f'nd:{it["id"]}', clean_md(it['question']), [clean_md(o) for o in it['options']], [chr(65 + idx)], (it.get('explanation') or '').strip() or None))
+        out.append(make(f'nd:{it["id"]}', clean_md(it['question']), [clean_md(o) for o in it['options']], [chr(65 + idx)], (it.get('explanation') or '').strip() or None, hint=it.get('domain')))
     return out
 
 
@@ -398,7 +406,7 @@ def parse_meibraransari(offline):
             idxs = idx if isinstance(idx, list) else [idx]
             if not all(isinstance(i, int) and i < len(it['options']) for i in idxs):
                 warn(f'mb {it["id"]}: bad answer'); continue
-            out.append(make(f'mb:{it["id"]}', clean_md(it['question']), [clean_md(o) for o in it['options']], [chr(65 + i) for i in idxs], (it.get('explanation') or '').strip() or None))
+            out.append(make(f'mb:{it["id"]}', clean_md(it['question']), [clean_md(o) for o in it['options']], [chr(65 + i) for i in idxs], (it.get('explanation') or '').strip() or None, hint=it.get('domain')))
     return out
 
 
@@ -596,7 +604,7 @@ def parse_martin_az305(offline):
             warn(f'mm #{i}: bad answer'); continue
         q = it.get('scenario') or it.get('question') or ''
         expl = it.get('rationale') or ''
-        out.append(make(f'mm:{it.get("id", i)}', clean_md(q), [clean_md(o) for o in it['options']], [chr(65 + k) for k in idxs], clean_md(expl) or None))
+        out.append(make(f'mm:{it.get("id", i)}', clean_md(q), [clean_md(o) for o in it['options']], [chr(65 + k) for k in idxs], clean_md(expl) or None, hint=it.get('domain')))
     return out
 
 
@@ -837,7 +845,7 @@ def parse_ahmed_dop(offline):
         ans = [chr(65 + keys.index(a)) for a in it.get('correct', []) if a in keys]
         if not ans:
             warn(f'aa {it.get("id")}: no answer'); continue
-        out.append(make(f'aa:{it["id"]}', clean_md(it['stem']), [clean_md(o['text']) for o in it['options']], ans, clean_md(it.get('explanation') or '') or None))
+        out.append(make(f'aa:{it["id"]}', clean_md(it['stem']), [clean_md(o['text']) for o in it['options']], ans, clean_md(it.get('explanation') or '') or None, hint=f'd{it["domain"]}' if it.get('domain') else None))
     return out
 
 
@@ -978,35 +986,50 @@ def warn(msg):
     WARNINGS.append(msg)
 
 
+def absorb(exam, prev, q):
+    """q is the same question as prev (already kept): record q as another source of prev."""
+    # Same question: compare answers by option *text* since letters may differ between sources.
+    prev_ans = {o['t'].lower().rstrip('.') for o in prev['options'] if o['k'] in prev['answer']}
+    this_ans = {o['t'].lower().rstrip('.') for o in q['options'] if o['k'] in q['answer']}
+    if prev_ans != this_ans:
+        warn(f'{exam}: answer conflict {prev["id"]} {sorted(prev_ans)[:1]} vs {q["id"]} {sorted(this_ans)[:1]} (kept {prev["id"]})')
+        # Cosmetic differences ("RDS" vs "Amazon RDS") are not disputes; real ones are recorded so the UI can flag the item.
+        sim = difflib.SequenceMatcher(None, ' | '.join(sorted(prev_ans)), ' | '.join(sorted(this_ans))).ratio()
+        if sim < 0.6:
+            alt = [o['t'] for o in q['options'] if o['k'] in q['answer']]
+            prev.setdefault('disputed', []).append({'source': q['id'], 'answer': alt})
+    prev['sources'].extend(q['sources'])
+    if not prev['explanation'] and q['explanation']:
+        prev['explanation'] = q['explanation']
+    if not prev.get('img') and q.get('img'):
+        prev['img'] = q['img']
+    if not prev.get('hint') and q.get('hint'):
+        prev['hint'] = q['hint']
+
+
+NEAR_DUPES = Counter()
+
+
 def merge(exam, lists):
-    seen, out = {}, []
+    seen, by_opts, out = {}, {}, []
     for lst in lists:
         for q in lst:
             if q['id'] in SKIP_IDS:
                 continue
             if q['id'] in FIX_ANSWERS:
                 q['answer'] = FIX_ANSWERS[q['id']]; q['multi'] = len(q['answer']) > 1
-            key = qkey(q['q'], [o['t'] for o in q['options']])
-            if key in seen:
-                prev = seen[key]
-                # Same question: compare answers by option *text* since letters may differ between sources.
-                prev_ans = {o['t'].lower().rstrip('.') for o in prev['options'] if o['k'] in prev['answer']}
-                this_ans = {o['t'].lower().rstrip('.') for o in q['options'] if o['k'] in q['answer']}
-                if prev_ans != this_ans:
-                    warn(f'{exam}: answer conflict {prev["id"]} {sorted(prev_ans)[:1]} vs {q["id"]} {sorted(this_ans)[:1]} (kept {prev["id"]})')
-                    # Cosmetic differences ("RDS" vs "Amazon RDS") are not disputes; real ones are recorded so the UI can flag the item.
-                    import difflib
-                    sim = difflib.SequenceMatcher(None, ' | '.join(sorted(prev_ans)), ' | '.join(sorted(this_ans))).ratio()
-                    if sim < 0.6:
-                        alt = [o['t'] for o in q['options'] if o['k'] in q['answer']]
-                        prev.setdefault('disputed', []).append({'source': q['id'], 'answer': alt})
-                prev['sources'].append(q['id'])
-                if not prev['explanation'] and q['explanation']:
-                    prev['explanation'] = q['explanation']
-                if not prev.get('img') and q.get('img'):
-                    prev['img'] = q['img']
+            opts = [o['t'] for o in q['options']]
+            key, ok, w = dedupe.stem_key(q['q']), dedupe.opt_key(opts), dedupe.words(q['q'])
+            prev = next((c for c in seen.get(key, []) if dedupe.compatible(c, q)), None)
+            if prev is None:                                 # not identical: look for a typo-level variant with the same options
+                prev = next((c for c, cw in by_opts.get(ok, []) if dedupe.near_same(w, cw) and dedupe.compatible(c, q)), None)
+                if prev is not None:
+                    NEAR_DUPES[exam] += 1
+            if prev is not None:
+                absorb(exam, prev, q)
                 continue
-            seen[key] = q
+            seen.setdefault(key, []).append(q)
+            by_opts.setdefault(ok, []).append((q, w))
             out.append(q)
     return out
 
@@ -1026,6 +1049,8 @@ def write_js(path, header, var, value):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--offline', action='store_true')
+    ap.add_argument('--domain-report', action='store_true', help='print how well the domain classifier matches the sources that label domains')
+    ap.add_argument('--dump-raw', metavar='DIR', help='also write the merged banks, with source domain labels, as DIR/<CODE>.json')
     args = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
 
@@ -1055,11 +1080,32 @@ def main():
     print('TF-PRO'); banks['TF-PRO'] = merge_labs('TF-PRO', [parse_fphilippon_tfpro(args.offline)])
     print('TF-ASSOC'); banks['TF-ASSOC'] = merge('TF-ASSOC', [parse_ibutcat(args.offline), parse_sonuk(args.offline), parse_chojuninengu_tf(args.offline)])
 
+    if args.dump_raw:                                   # merged banks with source labels, for tools/domains/check.py
+        os.makedirs(args.dump_raw, exist_ok=True)
+        for code, qs in banks.items():
+            json.dump(qs, open(os.path.join(args.dump_raw, f'{code}.json'), 'w'), ensure_ascii=False)
+    report = {}
+    for code, qs in banks.items():
+        if args.domain_report and code in domains.TAXONOMY:
+            report[code] = domains.evaluate(domains.TAXONOMY[code], qs)
+        how = domains.classify(domains.TAXONOMY[code], qs) if code in domains.TAXONOMY else {}
+        for q in qs:
+            q.pop('hint', None)
+        if how:
+            print(f'{code:12} domains placed by {how}')
+    if args.domain_report:
+        print('\nDomain classifier vs source labels (keywords = no labels used; cv = 5-fold, other labels used):')
+        for code, r in report.items():
+            if r:
+                (n, k), (_, c) = r['keywords'], r['cv']
+                worst = [(a, b, x) for (a, b), x in r['confusion'].most_common() if a != b][:4]
+                print(f'  {code:12} n={n:5}  keywords {100 * k / n:3.0f}%  cv {100 * c / n:3.0f}%   keyword confusions: {worst}')
+
     index = {'generated': __import__('datetime').date.today().isoformat(), 'sources': SOURCES_META, 'exams': {}}
     for code, meta in EXAMS.items():
         qs = banks[code]
         src_counts = Counter(s.split(':')[0] for q in qs for s in q['sources'])
-        index['exams'][code] = {**meta, 'code': code, 'count': len(qs), 'multi': sum(q.get('multi', False) for q in qs), 'disputed': sum(1 for q in qs if q.get('disputed')),
+        index['exams'][code] = {**meta, **({'domains': domains.meta(domains.TAXONOMY[code], qs)} if code in domains.TAXONOMY else {}), 'code': code, 'count': len(qs), 'multi': sum(q.get('multi', False) for q in qs), 'disputed': sum(1 for q in qs if q.get('disputed')),
                                 'withExplanation': sum(1 for q in qs if q.get('explanation') or q.get('solution')), 'sources': dict(src_counts),
                                 'file': f'data/{code}.js'}
         write_js(os.path.join(OUT, f'{code}.js'),

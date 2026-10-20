@@ -8,43 +8,43 @@ open index.html            # macOS
 # or serve it: python3 -m http.server 8080  ->  http://localhost:8080
 ```
 
-## Exams included (35 exams, 13254 items)
+## Exams included (35 exams, 12998 items)
 
 | Vendor | Code | Exam | Level | Bank | Simulated as | Pass | Sources |
 | --- | --- | --- | --- | ---: | --- | ---: | --- |
 | AWS | AIF-C01 | AI Practitioner | Foundational | 1320 | 65 q / 90 min / 15 unscored | 700 | cloudcertprep, iamirtasam, AfsalMadathingal, darlantls |
-| AWS | CLF-C02 | Cloud Practitioner | Foundational | 1352 | 65 q / 90 min / 15 unscored | 700 | cloudcertprep, kananinirav, Ditectrev |
-| AWS | DEA-C01 | Data Engineer Associate | Associate | 340 | 65 q / 130 min / 15 unscored | 720 | LinanJ11 |
+| AWS | CLF-C02 | Cloud Practitioner | Foundational | 1115 | 65 q / 90 min / 15 unscored | 700 | cloudcertprep, kananinirav, Ditectrev |
+| AWS | DEA-C01 | Data Engineer Associate | Associate | 339 | 65 q / 130 min / 15 unscored | 720 | LinanJ11 |
 | AWS | DVA-C02 | Developer Associate | Associate | 386 | 65 q / 130 min / 15 unscored | 720 | Ditectrev |
-| AWS | SAA-C03 | Solutions Architect Associate | Associate | 771 | 65 q / 130 min / 15 unscored | 720 | Ditectrev |
+| AWS | SAA-C03 | Solutions Architect Associate | Associate | 769 | 65 q / 130 min / 15 unscored | 720 | Ditectrev |
 | AWS | SOA-C03 | CloudOps Engineer Associate | Associate | 395 | 65 q / 130 min / 15 unscored | 720 | Ditectrev |
 | AWS | DOP-C02 | DevOps Engineer Professional | Professional | 168 | 75 q / 180 min / 10 unscored | 750 | ahmedasmar |
-| AWS | SAP-C02 | Solutions Architect Professional | Professional | 540 | 75 q / 180 min / 10 unscored | 750 | Jeffrey-Xu, r3xakead0 |
+| AWS | SAP-C02 | Solutions Architect Professional | Professional | 529 | 75 q / 180 min / 10 unscored | 750 | Jeffrey-Xu, r3xakead0 |
 | AWS | ANS-C01 | Advanced Networking Specialty | Specialty | 91 | 65 q / 170 min / 15 unscored | 750 | Ditectrev |
 | AWS | DAS-C01 | Data Analytics Specialty (retired 2024-04-09) | Specialty | 83 | 65 q / 180 min / 15 unscored | 750 | Ditectrev |
 | AWS | DBS-C01 | Database Specialty (retired 2024-04-30) | Specialty | 168 | 65 q / 180 min / 15 unscored | 750 | Ditectrev |
 | AWS | MLS-C01 | Machine Learning Specialty (retired 2025-03-31) | Specialty | 136 | 65 q / 180 min / 15 unscored | 750 | Ditectrev, kiran-saikia |
-| AWS | SCS-C02 | Security Specialty | Specialty | 391 | 65 q / 170 min / 15 unscored | 750 | Ditectrev |
-| Azure | AZ-900 | Azure Fundamentals | Foundational | 578 | 40 q / 45 min / 0 unscored | 700 | Ditectrev, quizplay-io |
-| Azure | DP-900 | Azure Data Fundamentals | Foundational | 343 | 40 q / 45 min / 0 unscored | 700 | Ditectrev, quizplay-io |
-| Azure | SC-900 | Security, Compliance & Identity Fundamentals | Foundational | 307 | 40 q / 45 min / 0 unscored | 700 | Ditectrev, quizplay-io |
+| AWS | SCS-C02 | Security Specialty | Specialty | 390 | 65 q / 170 min / 15 unscored | 750 | Ditectrev |
+| Azure | AZ-900 | Azure Fundamentals | Foundational | 575 | 40 q / 45 min / 0 unscored | 700 | Ditectrev, quizplay-io |
+| Azure | DP-900 | Azure Data Fundamentals | Foundational | 346 | 40 q / 45 min / 0 unscored | 700 | Ditectrev, quizplay-io |
+| Azure | SC-900 | Security, Compliance & Identity Fundamentals | Foundational | 305 | 40 q / 45 min / 0 unscored | 700 | Ditectrev, quizplay-io |
 | Azure | AI-103 | Azure AI Apps and Agents Developer (AI-102 successor, beta) | Associate | 31 | 50 q / 100 min / 0 unscored | 700 | quizplay-io |
 | Azure | AI-200 | Developing AI Cloud Solutions on Azure (AZ-204 successor) | Associate | 96 | 50 q / 100 min / 0 unscored | 700 | quizplay-io |
-| Azure | AZ-104 | Azure Administrator | Associate | 347 | 50 q / 100 min / 0 unscored | 700 | Ditectrev, quizplay-io |
+| Azure | AZ-104 | Azure Administrator | Associate | 345 | 50 q / 100 min / 0 unscored | 700 | Ditectrev, quizplay-io |
 | Azure | AZ-204 | Developing Solutions for Azure | Associate | 255 | 50 q / 100 min / 0 unscored | 700 | Ditectrev, quizplay-io |
 | Azure | AZ-500 | Azure Security Engineer | Associate | 313 | 50 q / 100 min / 0 unscored | 700 | Ditectrev, quizplay-io |
 | Azure | AZ-700 | Azure Network Engineer Associate | Associate | 32 | 50 q / 100 min / 0 unscored | 700 | quizplay-io |
 | Azure | AZ-800 | Windows Server Hybrid Administrator | Associate | 178 | 50 q / 100 min / 0 unscored | 700 | Ditectrev, quizplay-io |
-| Azure | DP-203 | Azure Data Engineer (retired 2025-03-31) | Associate | 252 | 50 q / 100 min / 0 unscored | 700 | Ditectrev |
+| Azure | DP-203 | Azure Data Engineer (retired 2025-03-31) | Associate | 251 | 50 q / 100 min / 0 unscored | 700 | Ditectrev |
 | Azure | SC-300 | Identity and Access Administrator Associate | Associate | 31 | 50 q / 100 min / 0 unscored | 700 | quizplay-io |
 | Azure | SC-500 | End-to-End Security Controls for Cloud and AI Workloads (AZ-500 successor) | Associate | 93 | 50 q / 100 min / 0 unscored | 700 | quizplay-io |
-| Azure | AZ-305 | Azure Solutions Architect Expert | Professional | 285 | 50 q / 100 min / 0 unscored | 700 | Ditectrev, martinmichelca, quizplay-io |
-| Azure | AZ-400 | Azure DevOps Engineer Expert | Professional | 322 | 50 q / 100 min / 0 unscored | 700 | Ditectrev |
-| GCP | GCP-ACE | Associate Cloud Engineer | Associate | 1765 | 50 q / 120 min / 0 unscored | 700 | Ditectrev, calvinrodrigues500, slackwero |
+| Azure | AZ-305 | Azure Solutions Architect Expert | Professional | 287 | 50 q / 100 min / 0 unscored | 700 | Ditectrev, martinmichelca, quizplay-io |
+| Azure | AZ-400 | Azure DevOps Engineer Expert | Professional | 323 | 50 q / 100 min / 0 unscored | 700 | Ditectrev |
+| GCP | GCP-ACE | Associate Cloud Engineer | Associate | 1764 | 50 q / 120 min / 0 unscored | 700 | Ditectrev, calvinrodrigues500, slackwero |
 | Kubernetes | KCNA | Kubernetes and Cloud Native Associate | Foundational | 751 | 60 q / 90 min / 0 unscored | 75% | nosadaniel, msahihi study guides, tuladhar, meibraransari |
 | Kubernetes | KCSA | Kubernetes and Cloud Native Security Associate | Foundational | 269 | 60 q / 90 min / 0 unscored | 75% | msahihi study guides, tuladhar |
 | Kubernetes | CKA | Certified Kubernetes Administrator — hands-on tasks | Associate | 222 | 17 tasks / 120 min / 0 unscored | 66% | techwithmohamed, ziyad-tarek1, devopshubproject, chadmcrowell, alijahnas |
-| HashiCorp | TF-ASSOC | Terraform Associate (003/004) | Associate | 588 | 57 q / 60 min / 0 unscored | 70% | iButcat, sonukkushwaha0801, chojuninengu |
+| HashiCorp | TF-ASSOC | Terraform Associate (003/004) | Associate | 587 | 57 q / 60 min / 0 unscored | 70% | iButcat, sonukkushwaha0801, chojuninengu |
 | HashiCorp | VAULT-ASSOC | Vault Associate (002) | Associate | 51 | 60 q / 60 min / 0 unscored | 70% | therayy |
 | HashiCorp | TF-PRO | Terraform Authoring & Operations Professional — hands-on tasks | Professional | 4 | 4 tasks / 240 min / 0 unscored | 70% | fphilippon |
 
@@ -102,7 +102,12 @@ Sites such as ExamTopics, ITExams, VMExam, Whizlabs or Tutorials Dojo were delib
   Same timer / navigator / review as the rest; the review keeps your answer next to the reference. The Kubernetes-only
   tools (browser cluster, kubectl dry-run) appear only on Kubernetes exams; Terraform labs get the heuristic check
   (HCL blocks and `terraform` commands compared token by token) and the reference `.tf` files.
-- **Practice mode** – untimed, instant feedback per question, filter by source (for CLF-C02 also by kananinirav
+- **Exam domains** – every question is placed in one domain of its exam guide (e.g. CLF-C02: Cloud Concepts 24 %,
+  Security and Compliance 30 %, Cloud Technology and Services 34 %, Billing, Pricing and Support 12 %). Exam mode draws
+  the questions in those proportions (on by default, can be switched off; a domain with too few questions gives its share
+  to the others), the results page shows the score per domain, practice mode can filter by domain and the review shows
+  each question's domain. See *Exam domains* below for how the questions are classified.
+- **Practice mode** – untimed, instant feedback per question, filter by domain, by source (for CLF-C02 also by kananinirav
   practice exam number, e.g. *practice exam 14*) or *only questions I got wrong before*.
 - Exam picker grouped by vendor, flag questions, navigator grid, keyboard shortcuts
   (`A`–`E` / `1`–`7` select, `←` `→` navigate, `F` flag, `Enter` check/next in practice).
@@ -144,6 +149,36 @@ is not needed at runtime. Two things depend on where the page runs:
   http-from-https call entirely, in which case open the app from the helper (`http://127.0.0.1:8766/`) instead.
   Without a helper the button simply stays hidden; nothing else in the app depends on it.
 
+## Exam domains
+
+Domains and weights come from each vendor's exam guide / study guide and live in `tools/domains/{aws,azure,other}.py`
+(Microsoft publishes ranges: the midpoint is used). Caveats are shown in the app next to the domain list:
+SOA-C03 (2025 guide, verify), AI-103 / AI-200 / SC-500 (outline of the predecessor exam: AI-102 / AZ-204 / AZ-500),
+KCNA (5-domain curriculum), TF-ASSOC and VAULT-ASSOC (HashiCorp publishes no weights: objectives weighted equally).
+TF-PRO (4 labs) has no domains.
+
+The banks have no domain field upstream, so the build classifies every question:
+
+1. **Source labels** win where the source has them: cloudcertprep and iamirtasam (CLF-C02, AIF-C01), ahmedasmar
+   (DOP-C02), martinmichelca and quizplay ids (AZ-305, AZ-104, AZ-700, SC-300), tuladhar / meibraransari / nosadaniel
+   (KCNA, KCSA), sonukkushwaha (TF-ASSOC), alijahnas / chadmcrowell / techwithmohamed exercise names (CKA).
+   chadmcrowell's `storage-*` and `networking-*` files are mislabelled upstream (RBAC, node maintenance) and are mapped to
+   Cluster Architecture.
+2. **Keywords** per domain (services, features and phrases from the guide's task statements) score the stem, the correct
+   options and the other options.
+3. Questions without a clear keyword winner go to a **naive-Bayes model** trained on the questions placed by 1 and 2.
+
+Measured against the source labels (`python3 tools/build_banks.py --offline --domain-report`), keywords alone agree
+64–97 % depending on the exam (CLF-C02 86 %, AIF-C01 64 %, DOP-C02 82 %, KCNA 77 %, CKA 74 %, TF-ASSOC 77 %, AZ-305 89 %);
+part of the gap is the sources disagreeing with each other. Treat the per-domain score as a guide, not a verdict.
+The banks themselves are often skewed (CLF-C02 is 22 % billing against a 12 % weight; CKA has few troubleshooting
+tasks) — that skew is what the weighted draw corrects. To tune one exam without a full build:
+
+```bash
+python3 tools/build_banks.py --offline --dump-raw /tmp/raw
+python3 tools/domains/check.py /tmp/raw aws SAA-C03 --samples 8     # counts vs weights, accuracy, sample stems
+```
+
 ## Data layout
 
 ```
@@ -153,10 +188,14 @@ tools/build_banks.py   downloads every source, normalises, dedupes, writes data/
 tools/cache/       raw downloads (kept so the build can run offline)
 ```
 
-Question schema: `{id, sources[], q, img?, options[{k,t}], answer[], multi, explanation}`;
+Question schema: `{id, sources[], q, img?, options[{k,t}], answer[], multi, explanation, domain}`;
 hands-on task schema (CKA): `{id, sources[], kind: "lab", task, solution, weight?}` (markdown kept, rendered in-app).
 `id` is `<source>:<source-id>` (`kn:14-19` = kananinirav practice exam 14, question 19; `dt:87` = Ditectrev item 87).
-Duplicates inside an exam are merged by question text (plus options for short stems) and every occurrence is kept in
+Duplicates inside an exam are merged (`tools/dedupe.py`): same text once punctuation, "(Choose TWO)"-style suffixes,
+image placeholders and plural typos are normalised (short stems also need the same symbols and mostly the same option
+words), or the same options and a stem that differs by at most two typo-level words / two dropped words. Microsoft
+"series" items (same scenario, different solution sentence or VM1/VM2), items whose text lives in a different image of the
+same source and negation changes stay separate. Every occurrence is kept in
 `sources`, which is what the practice-mode source filter uses.
 
 ## Sources and licences

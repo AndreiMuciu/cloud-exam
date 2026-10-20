@@ -33,6 +33,45 @@
     return a;
   }
   function sample(arr, n) { return shuffle(arr).slice(0, Math.min(n, arr.length)); }
+  // Largest-remainder split of n over weights, never giving a key more than cap[key]; what a full key cannot take
+  // goes to the others in proportion to their weights.
+  function apportion(n, weights, cap) {
+    const out = {}; Object.keys(weights).forEach((k) => { out[k] = 0; });
+    let left = n;
+    while (left > 0) {
+      const open = Object.keys(weights).filter((k) => out[k] < cap[k] && weights[k] > 0);
+      if (!open.length) break;
+      const w = open.reduce((s, k) => s + weights[k], 0);
+      const share = open.map((k) => ({ k, exact: (left * weights[k]) / w }));
+      share.forEach((x) => { x.take = Math.min(Math.floor(x.exact), cap[x.k] - out[x.k]); });
+      let given = share.reduce((s, x) => s + x.take, 0);
+      share.slice().sort((a, b) => (b.exact - Math.floor(b.exact)) - (a.exact - Math.floor(a.exact)))
+        .forEach((x) => { if (given < left && out[x.k] + x.take < cap[x.k]) { x.take++; given++; } });
+      if (!given) break;
+      share.forEach((x) => { out[x.k] += x.take; });
+      left -= given;
+    }
+    return out;
+  }
+  // Draw n questions in the exam guide's domain proportions (EXAMS[code].domains), then shuffle the order.
+  function sampleByDomain(bank, n, dmeta) {
+    if (!dmeta || !dmeta.domains || !dmeta.domains.length) return sample(bank, n);
+    const pools = {}, weights = {}, cap = {};
+    dmeta.domains.forEach((d) => { pools[d.id] = []; weights[d.id] = d.weight; });
+    const rest = [];
+    bank.forEach((q) => { (pools[q.domain] || rest).push(q); });
+    Object.keys(pools).forEach((k) => { cap[k] = pools[k].length; });
+    const quota = apportion(Math.min(n, bank.length), weights, cap);
+    let picked = [];
+    Object.keys(quota).forEach((k) => { picked = picked.concat(sample(pools[k], quota[k])); });
+    if (picked.length < n) picked = picked.concat(sample(rest, n - picked.length));
+    return shuffle(picked);
+  }
+  function domainName(code, id) {
+    const dm = EXAMS[code] && EXAMS[code].domains;
+    const d = dm && dm.domains.find((x) => x.id === id);
+    return d ? d.name : null;
+  }
   function pad(n) { return String(n).padStart(2, '0'); }
   function fmtClock(sec) {
     sec = Math.max(0, Math.round(sec));
@@ -452,7 +491,7 @@
   function buildItems(questions, shuffleOptions) {
     return questions.map((q) => {
       if (q.kind === 'lab') {
-        return { id: q.id, kind: 'lab', q: q.task, solution: q.solution, weight: q.weight || null, sources: q.sources,
+        return { id: q.id, kind: 'lab', q: q.task, solution: q.solution, weight: q.weight || null, sources: q.sources, domain: q.domain || null,
                  options: [], correct: [], multi: false, selected: [], flagged: false, checked: false, revealed: false, grade: null, answerText: '', check: null };
       }
       const opts = shuffleOptions ? shuffle(q.options) : q.options;
@@ -460,7 +499,7 @@
       // Re-letter options so the displayed keys are always A, B, C… ; keep the original key to score.
       const options = opts.map((o, i) => ({ key: letters[i], text: o.t, orig: o.k }));
       const correct = options.filter((o) => q.answer.includes(o.orig)).map((o) => o.key);
-      return { id: q.id, q: q.q, img: q.img || null, options, correct, multi: q.multi, explanation: q.explanation, sources: q.sources,
+      return { id: q.id, q: q.q, img: q.img || null, options, correct, multi: q.multi, explanation: q.explanation, sources: q.sources, domain: q.domain || null,
                disputed: q.disputed || null, selected: [], flagged: false, checked: false };
     });
   }
@@ -474,7 +513,8 @@
     const count = clampInt($('opt-count').value, 10, bank.length, meta.questions);
     const minutes = clampInt($('opt-minutes').value, 5, 300, meta.minutes);
     const unscored = meta.kind === 'lab' ? 0 : clampInt($('opt-unscored').value, 0, count - 1, meta.unscored);
-    const items = buildItems(sample(bank, count), $('opt-shuffle').checked);
+    const byDomain = $('opt-domains').checked && meta.domains;
+    const items = buildItems(byDomain ? sampleByDomain(bank, count, meta.domains) : sample(bank, count), $('opt-shuffle').checked);
     session = {
       mode: 'exam', exam: currentExam, items, idx: 0, unscoredCount: unscored, passScaled: meta.pass, scoring: meta.scoring || 'scaled', passPct: meta.passPct || null,
       durationSec: minutes * 60, startedAt: Date.now(), pausedAccum: 0, pausedAt: null,
@@ -490,17 +530,19 @@
     try { bank = await loadBank(currentExam); } catch (e) { setBusy(false); openModal('Could not load questions', esc(e.message), null); return; }
     setBusy(false);
     let pool = bank;
+    // Ids are matched against every source of a question: a question merged as a duplicate after the id was saved
+    // still matches through its `sources`.
+    const inSet = (set) => (q) => set.has(q.id) || (q.sources || []).some((s) => set.has(s));
     if (customIds) {
-      const set = new Set(customIds); pool = bank.filter((q) => set.has(q.id));
+      pool = bank.filter(inSet(new Set(customIds)));
     } else {
       const src = $('prac-source').value;           // "all" | "kn" | "kn:14" | "dt" ...
       if (src !== 'all') {
         pool = pool.filter((q) => q.sources.some((s) => src.includes(':') ? s.startsWith(src + '-') : s.startsWith(src + ':')));
       }
-      if ($('prac-wrong-only').checked) {
-        const wrong = new Set(wrongPool(currentExam));
-        pool = pool.filter((q) => wrong.has(q.id));
-      }
+      const dom = $('prac-domain').value;
+      if (dom !== 'all') pool = pool.filter((q) => q.domain === dom);
+      if ($('prac-wrong-only').checked) pool = pool.filter(inSet(new Set(wrongPool(currentExam))));
     }
     if (!pool.length) { openModal('Nothing to practice', 'No questions match that filter yet.', null); return; }
     const count = customIds ? pool.length : clampInt($('prac-count').value, 1, pool.length, 30);
@@ -918,9 +960,30 @@
     $('res-unscored').parentElement.classList.toggle('hidden', !isExam);
     $('btn-retry-wrong').classList.toggle('hidden', !session.items.some((i) => !i.isCorrect));
 
+    renderDomainBreakdown(isExam);
     reviewFilter = 'all';
     document.querySelectorAll('#review-filters .chip').forEach((c) => c.classList.toggle('active', c.dataset.filter === 'all'));
     renderReview();
+  }
+
+  // Per-domain score, like the section breakdown on the real score report (scored items only in exam mode).
+  function renderDomainBreakdown(isExam) {
+    const box = $('res-domains');
+    const dm = (EXAMS[session.exam] || {}).domains;
+    const items = session.items.filter((i) => !(isExam && i.unscored));
+    if (!dm || !items.some((i) => i.domain)) { box.classList.add('hidden'); box.innerHTML = ''; return; }
+    const rows = dm.domains.map((d) => {
+      const mine = items.filter((i) => i.domain === d.id);
+      const got = Math.round(mine.reduce((a, i) => a + i.score, 0) * 10) / 10;
+      const p = mine.length ? pct(got, mine.length) : null;
+      const need = session.scoring === 'percent' ? session.passPct : Math.round(((session.passScaled - 100) / 900) * 100);
+      const cls = p == null ? '' : p >= need ? 'ok' : 'bad';
+      return `<tr><td>${esc(d.name)}</td><td class="num">${d.weight}%</td><td class="num">${mine.length}</td><td class="num">${mine.length ? got : '—'}</td>
+        <td class="bar-cell"><div class="dbar"><div class="dbar-fg ${cls}" style="width:${p || 0}%"></div></div><span class="num">${p == null ? '—' : p + '%'}</span></td></tr>`;
+    }).join('');
+    box.innerHTML = `<h3>By exam domain</h3><div class="table-scroll"><table class="domain-table"><thead><tr><th>Domain</th><th class="num">Guide</th><th class="num">Questions</th><th class="num">Correct</th><th>Score</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <p class="muted small">${isExam ? 'Scored questions only. ' : ''}Domains are assigned by keyword classification (source labels where the source has them), so treat this as a guide.</p>`;
+    box.classList.remove('hidden');
   }
 
   function renderReview() {
@@ -947,7 +1010,7 @@
         div.innerHTML = `
           <div class="review-head"><span class="pill">T${i + 1}</span><span class="pill badge-${g === 'correct' ? 'correct' : g === 'partial' ? 'unscored' : 'wrong'}">${label}</span>
             ${it.weight ? `<span class="pill pill-soft">weight ${it.weight}%</span>` : ''}${it.flagged ? '<span class="pill badge-flag">⚑ Flagged</span>' : ''}
-            <span class="pill pill-soft">${esc(sourcesLabel(it))}</span></div>
+            <span class="pill pill-soft">${esc(sourcesLabel(it))}</span>${domainName(session.exam, it.domain) ? `<span class="pill pill-soft">${esc(domainName(session.exam, it.domain))}</span>` : ''}</div>
           <div class="review-q md">${mdLite(it.q)}</div>
           ${it.answerText ? `<details class="expl"><summary>Your answer${it.check && it.check.checkable ? ` · check ${it.check.pct}%` : ''}</summary><div class="md"><pre><code>${esc(it.answerText)}</code></pre></div></details>` : ''}
           <details class="expl" open><summary>Reference solution</summary><div class="md">${mdLite(it.solution)}</div></details>`;
@@ -963,6 +1026,7 @@
         it.unscored ? '<span class="pill badge-unscored">Unscored</span>' : '',
         it.flagged ? '<span class="pill badge-flag">⚑ Flagged</span>' : '',
         `<span class="pill pill-soft">${esc(sourcesLabel(it))}</span>`,
+        domainName(session.exam, it.domain) ? `<span class="pill pill-soft">${esc(domainName(session.exam, it.domain))}</span>` : '',
         it.disputed ? '<span class="pill badge-unscored">⚠ disputed answer</span>' : '',
       ].join('');
       const opts = it.options.map((o) => {
@@ -1078,6 +1142,16 @@
     $('opt-shuffle').disabled = m.kind === 'lab';
     $('prac-count').max = m.count;
     $('prac-count').value = Math.min(m.kind === 'lab' ? m.questions : 30, m.count);
+    // exam domains: weighted draw + practice filter
+    const dm = m.domains;
+    $('opt-domains-row').classList.toggle('hidden', !dm);
+    $('domain-plan-box').classList.toggle('hidden', !dm);
+    $('domain-plan').innerHTML = dm ? `<div class="muted small">${esc(dm.guide)}${dm.note ? ` · ${esc(dm.note)}` : ''}</div><ul class="domain-plan">${dm.domains.map((d) =>
+      `<li><span>${esc(d.name)}</span><span class="num">${d.weight}%</span><span class="num muted">${d.count} in bank</span></li>`).join('')}</ul>` : '';
+    const dsel = $('prac-domain');
+    dsel.innerHTML = '<option value="all">All domains</option>';
+    (dm ? dm.domains : []).forEach((d) => { const o = document.createElement('option'); o.value = d.id; o.textContent = `${d.name} (${d.count})`; dsel.appendChild(o); });
+    dsel.parentElement.classList.toggle('hidden', !dm);
     // source filter
     const sel = $('prac-source');
     sel.innerHTML = '<option value="all">All sources</option>';

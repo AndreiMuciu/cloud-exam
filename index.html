@@ -60,6 +60,10 @@
           <label class="check"><input id="opt-shuffle" type="checkbox" checked> Shuffle answer order</label>
           <label class="check"><input id="opt-pause" type="checkbox"> Allow pausing (not allowed in the real exam)</label>
         </div>
+        <div class="form-row" id="opt-domains-row">
+          <label class="check"><input id="opt-domains" type="checkbox" checked> Draw questions in the exam guide's domain weights</label>
+        </div>
+        <details id="domain-plan-box" class="domain-plan-box"><summary>Exam domains</summary><div id="domain-plan"></div></details>
         <button id="btn-start-exam" class="btn btn-primary btn-lg">Start exam</button>
         <button id="btn-resume-exam" class="btn btn-ghost btn-lg hidden">Resume unfinished exam</button>
       </div>
@@ -72,6 +76,11 @@
           <label>Source
             <select id="prac-source">
               <option value="all">All sources</option>
+            </select>
+          </label>
+          <label>Domain
+            <select id="prac-domain">
+              <option value="all">All domains</option>
             </select>
           </label>
         </div>
@@ -168,6 +177,7 @@
           <div class="tile"><div class="tile-label">Time used</div><div id="res-time" class="tile-value">—</div><div id="res-time-sub" class="tile-sub"></div></div>
           <div class="tile"><div class="tile-label">Unscored items</div><div id="res-unscored" class="tile-value">—</div><div id="res-unscored-sub" class="tile-sub">picked at random</div></div>
         </div>
+        <div id="res-domains" class="res-domains hidden"></div>
         <div class="btn-row">
           <button id="btn-home" class="btn btn-ghost">← Home</button>
           <button id="btn-retry" class="btn btn-primary">New exam</button>

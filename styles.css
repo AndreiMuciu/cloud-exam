@@ -390,3 +390,20 @@ input:disabled { opacity: .5; }
 .help-steps pre { margin: 4px 0; padding: 8px 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-size: .85rem; }
 .md .md-h1, .md .md-h2 { font-size: 1.05em; margin-top: .4em; }
 .md .md-h3, .md .md-h4 { font-size: 1em; color: var(--muted); }
+
+/* exam domains: plan on the home card, breakdown on the results page */
+.domain-plan-box { margin: 4px 0 14px; font-size: .9rem; }
+.domain-plan-box summary { cursor: pointer; color: var(--muted); font-weight: 600; }
+.domain-plan { list-style: none; margin: 8px 0 0; padding: 0; }
+.domain-plan li { display: grid; grid-template-columns: 1fr auto 6.5rem; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--border); }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+th.num { text-align: right; }
+.res-domains { margin-top: 18px; }
+.res-domains h3 { margin: 0 0 6px; font-size: 1rem; }
+.res-domains .table-scroll { overflow-x: auto; }
+.domain-table td:first-child { white-space: normal; min-width: 12rem; }
+.domain-table .bar-cell { display: flex; align-items: center; gap: 8px; min-width: 9rem; }
+.dbar { flex: 1; height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.dbar-fg { height: 100%; background: var(--muted); }
+.dbar-fg.ok { background: var(--ok); }
+.dbar-fg.bad { background: var(--bad); }
